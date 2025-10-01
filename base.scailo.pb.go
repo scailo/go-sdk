@@ -261,6 +261,18 @@ const (
 	FORM_TYPE_FORM_TYPE_GOAL_FORM FORM_TYPE = 520
 	// The form type is "meeting-form"
 	FORM_TYPE_FORM_TYPE_MEETING_FORM FORM_TYPE = 530
+	// The form type is "product-form"
+	FORM_TYPE_FORM_TYPE_PRODUCT_FORM FORM_TYPE = 700
+	// The form type is "component-form"
+	FORM_TYPE_FORM_TYPE_COMPONENT_FORM FORM_TYPE = 710
+	// The form type is "feedstock-form"
+	FORM_TYPE_FORM_TYPE_FEEDSTOCK_FORM FORM_TYPE = 720
+	// The form type is "merchandise-form"
+	FORM_TYPE_FORM_TYPE_MERCHANDISE_FORM FORM_TYPE = 730
+	// The form type is "equipment-form"
+	FORM_TYPE_FORM_TYPE_EQUIPMENT_FORM FORM_TYPE = 740
+	// The form type is "infrastructure-form"
+	FORM_TYPE_FORM_TYPE_INFRASTRUCTURE_FORM FORM_TYPE = 750
 )
 
 // Enum value maps for FORM_TYPE.
@@ -320,6 +332,12 @@ var (
 		510: "FORM_TYPE_SKILL_GROUP_FORM",
 		520: "FORM_TYPE_GOAL_FORM",
 		530: "FORM_TYPE_MEETING_FORM",
+		700: "FORM_TYPE_PRODUCT_FORM",
+		710: "FORM_TYPE_COMPONENT_FORM",
+		720: "FORM_TYPE_FEEDSTOCK_FORM",
+		730: "FORM_TYPE_MERCHANDISE_FORM",
+		740: "FORM_TYPE_EQUIPMENT_FORM",
+		750: "FORM_TYPE_INFRASTRUCTURE_FORM",
 	}
 	FORM_TYPE_value = map[string]int32{
 		"FORM_TYPE_ANY_UNSPECIFIED":                             0,
@@ -376,6 +394,12 @@ var (
 		"FORM_TYPE_SKILL_GROUP_FORM":                            510,
 		"FORM_TYPE_GOAL_FORM":                                   520,
 		"FORM_TYPE_MEETING_FORM":                                530,
+		"FORM_TYPE_PRODUCT_FORM":                                700,
+		"FORM_TYPE_COMPONENT_FORM":                              710,
+		"FORM_TYPE_FEEDSTOCK_FORM":                              720,
+		"FORM_TYPE_MERCHANDISE_FORM":                            730,
+		"FORM_TYPE_EQUIPMENT_FORM":                              740,
+		"FORM_TYPE_INFRASTRUCTURE_FORM":                         750,
 	}
 )
 
@@ -4216,7 +4240,7 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\n" +
 	"\x06HALTED\x10\x06\x12\r\n" +
 	"\tCOMPLETED\x10\a\x12\r\n" +
-	"\tDISCARDED\x10\b*\xdd\x0e\n" +
+	"\tDISCARDED\x10\b*\x9c\x10\n" +
 	"\tFORM_TYPE\x12\x1d\n" +
 	"\x19FORM_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15FORM_TYPE_FAMILY_FORM\x10\x05\x12 \n" +
@@ -4272,7 +4296,13 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\x1aFORM_TYPE_SKILL_PARAM_FORM\x10\xf4\x03\x12\x1f\n" +
 	"\x1aFORM_TYPE_SKILL_GROUP_FORM\x10\xfe\x03\x12\x18\n" +
 	"\x13FORM_TYPE_GOAL_FORM\x10\x88\x04\x12\x1b\n" +
-	"\x16FORM_TYPE_MEETING_FORM\x10\x92\x04*\xd1\x02\n" +
+	"\x16FORM_TYPE_MEETING_FORM\x10\x92\x04\x12\x1b\n" +
+	"\x16FORM_TYPE_PRODUCT_FORM\x10\xbc\x05\x12\x1d\n" +
+	"\x18FORM_TYPE_COMPONENT_FORM\x10\xc6\x05\x12\x1d\n" +
+	"\x18FORM_TYPE_FEEDSTOCK_FORM\x10\xd0\x05\x12\x1f\n" +
+	"\x1aFORM_TYPE_MERCHANDISE_FORM\x10\xda\x05\x12\x1d\n" +
+	"\x18FORM_TYPE_EQUIPMENT_FORM\x10\xe4\x05\x12\"\n" +
+	"\x1dFORM_TYPE_INFRASTRUCTURE_FORM\x10\xee\x05*\xd1\x02\n" +
 	"\x12FORM_FIELD_ELEMENT\x12&\n" +
 	"\"FORM_FIELD_ELEMENT_ANY_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18FORM_FIELD_ELEMENT_INPUT\x10\n" +

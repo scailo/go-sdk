@@ -118,7 +118,9 @@ type ComponentsServiceCreateRequest struct {
 	// The location ID of where the item needs to be stored
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 	// The description of the component
-	Description   string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
+	// The list of dynamic forms
+	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -251,6 +253,13 @@ func (x *ComponentsServiceCreateRequest) GetDescription() string {
 	return ""
 }
 
+func (x *ComponentsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequest {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
+}
+
 // Describes the parameters necessary to update a record
 type ComponentsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -279,7 +288,9 @@ type ComponentsServiceUpdateRequest struct {
 	// Stores any applicable remaining dimensions as a string
 	RemainingDimensions string `protobuf:"bytes,55,opt,name=remaining_dimensions,json=remainingDimensions,proto3" json:"remaining_dimensions,omitempty"`
 	// The description of the component
-	Description   string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
+	// The list of dynamic forms
+	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -403,6 +414,13 @@ func (x *ComponentsServiceUpdateRequest) GetDescription() string {
 		return x.Description
 	}
 	return ""
+}
+
+func (x *ComponentsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequest {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
 }
 
 // Describes the parameters necessary to send a component to store
@@ -587,7 +605,9 @@ type Component struct {
 	// The description of the component
 	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
 	// The short URL of the item
-	ShortUrl      string `protobuf:"bytes,70,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	ShortUrl string `protobuf:"bytes,70,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	// The list of dynamic forms
+	FormData      []*FormFieldDatum `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -837,6 +857,13 @@ func (x *Component) GetShortUrl() string {
 		return x.ShortUrl
 	}
 	return ""
+}
+
+func (x *Component) GetFormData() []*FormFieldDatum {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
 }
 
 // Describes the message consisting of the list of records
@@ -1119,7 +1146,9 @@ type ComponentsServiceFilterReq struct {
 	// Filter by the location ID
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 	// Filter by the given vendor ID
-	VendorId      uint64 `protobuf:"varint,81,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"` // --------------------------------------------------
+	VendorId uint64 `protobuf:"varint,81,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"` // --------------------------------------------------
+	// The list of form data filters
+	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1392,6 +1421,13 @@ func (x *ComponentsServiceFilterReq) GetVendorId() uint64 {
 	return 0
 }
 
+func (x *ComponentsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
+}
+
 // Describes the base request payload of a count search
 type ComponentsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1454,7 +1490,9 @@ type ComponentsServiceCountReq struct {
 	// Filter by the location ID
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 	// Filter by the given vendor ID
-	VendorId      uint64 `protobuf:"varint,81,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"` // --------------------------------------------------
+	VendorId uint64 `protobuf:"varint,81,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"` // --------------------------------------------------
+	// The list of form data filters
+	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1699,6 +1737,13 @@ func (x *ComponentsServiceCountReq) GetVendorId() uint64 {
 	return 0
 }
 
+func (x *ComponentsServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
+}
+
 // Describes the request payload for performing a generic search operation on records
 type ComponentsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1893,7 +1938,7 @@ var File_components_scailo_proto protoreflect.FileDescriptor
 
 const file_components_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x17components.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x18magic_links.scailo.proto\"\xeb\x04\n" +
+	"\x17components.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xad\x05\n" +
 	"\x1eComponentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1910,7 +1955,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"\x12warranty_timestamp\x18* \x01(\x04R\x11warrantyTimestamp\x12(\n" +
 	"\vlocation_id\x186 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"locationId\x12 \n" +
-	"\vdescription\x18< \x01(\tR\vdescription\"\xbb\x04\n" +
+	"\vdescription\x18< \x01(\tR\vdescription\x12@\n" +
+	"\tform_data\x18P \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xfd\x04\n" +
 	"\x1eComponentsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
@@ -1925,7 +1971,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"storage_id\x183 \x01(\x04R\tstorageId\x12-\n" +
 	"\x13is_qc_report_public\x184 \x01(\bR\x10isQcReportPublic\x121\n" +
 	"\x14remaining_dimensions\x187 \x01(\tR\x13remainingDimensions\x12 \n" +
-	"\vdescription\x18< \x01(\tR\vdescription\"\x89\x03\n" +
+	"\vdescription\x18< \x01(\tR\vdescription\x12@\n" +
+	"\tform_data\x18P \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x89\x03\n" +
 	"#ComponentsServiceSendToStoreRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x120\n" +
@@ -1936,7 +1983,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"storage_id\x183 \x01(\x04R\tstorageId\x12-\n" +
 	"\x13is_qc_report_public\x184 \x01(\bR\x10isQcReportPublic\x121\n" +
 	"\x14remaining_dimensions\x187 \x01(\tR\x13remainingDimensions\x12 \n" +
-	"\vdescription\x18< \x01(\tR\vdescription\"\xdd\t\n" +
+	"\vdescription\x18< \x01(\tR\vdescription\"\x92\n" +
+	"\n" +
 	"\tComponent\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1972,7 +2020,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"locationId\x121\n" +
 	"\x14remaining_dimensions\x187 \x01(\tR\x13remainingDimensions\x12 \n" +
 	"\vdescription\x18< \x01(\tR\vdescription\x12\x1b\n" +
-	"\tshort_url\x18F \x01(\tR\bshortUrl\"7\n" +
+	"\tshort_url\x18F \x01(\tR\bshortUrl\x123\n" +
+	"\tform_data\x18P \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"7\n" +
 	"\x0eComponentsList\x12%\n" +
 	"\x04list\x18\x01 \x03(\v2\x11.Scailo.ComponentR\x04list\"\xb1\x02\n" +
 	"\x1eComponentsServicePaginationReq\x120\n" +
@@ -1987,7 +2036,7 @@ const file_components_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.ComponentR\apayload\"\x9e\f\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.ComponentR\apayload\"\xe1\f\n" +
 	"\x1aComponentsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -2027,8 +2076,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"\x13is_qc_report_public\x184 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x10isQcReportPublic\x12\x1f\n" +
 	"\vlocation_id\x186 \x01(\x04R\n" +
 	"locationId\x12\x1b\n" +
-	"\tvendor_id\x18Q \x01(\x04R\bvendorId\"\xea\n" +
-	"\n" +
+	"\tvendor_id\x18Q \x01(\x04R\bvendorId\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xad\v\n" +
 	"\x19ComponentsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
@@ -2063,7 +2112,8 @@ const file_components_scailo_proto_rawDesc = "" +
 	"\x13is_qc_report_public\x184 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x10isQcReportPublic\x12\x1f\n" +
 	"\vlocation_id\x186 \x01(\x04R\n" +
 	"locationId\x12\x1b\n" +
-	"\tvendor_id\x18Q \x01(\x04R\bvendorId\"\xd1\x05\n" +
+	"\tvendor_id\x18Q \x01(\x04R\bvendorId\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xd1\x05\n" +
 	"\x1dComponentsServiceSearchAllReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -2163,133 +2213,141 @@ var file_components_scailo_proto_goTypes = []any{
 	(*ComponentsServiceFilterReq)(nil),                        // 8: Scailo.ComponentsServiceFilterReq
 	(*ComponentsServiceCountReq)(nil),                         // 9: Scailo.ComponentsServiceCountReq
 	(*ComponentsServiceSearchAllReq)(nil),                     // 10: Scailo.ComponentsServiceSearchAllReq
-	(*EmployeeMetadata)(nil),                                  // 11: Scailo.EmployeeMetadata
-	(INVENTORY_LIFECYCLE)(0),                                  // 12: Scailo.INVENTORY_LIFECYCLE
-	(*LogbookLogInventoryLC)(nil),                             // 13: Scailo.LogbookLogInventoryLC
-	(BOOL_FILTER)(0),                                          // 14: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 15: Scailo.SORT_ORDER
-	(INVENTORY_SORT_KEY)(0),                                   // 16: Scailo.INVENTORY_SORT_KEY
-	(*IdentifierUUIDWithUserComment)(nil),                     // 17: Scailo.IdentifierUUIDWithUserComment
-	(*InventoryPartitionRequest)(nil),                         // 18: Scailo.InventoryPartitionRequest
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 19: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 20: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 21: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 22: Scailo.IdentifiersList
-	(*IdentifierUUIDsList)(nil),                               // 23: Scailo.IdentifierUUIDsList
-	(*ActiveStatus)(nil),                                      // 24: Scailo.ActiveStatus
-	(*IdentifierWithSearchKey)(nil),                           // 25: Scailo.IdentifierWithSearchKey
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 26: Scailo.FilterFamiliesReqForIdentifier
-	(*Empty)(nil),                                             // 27: Scailo.Empty
-	(*StandardFile)(nil),                                      // 28: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                // 29: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 30: Scailo.MagicLink
-	(*FamiliesList)(nil),                                      // 31: Scailo.FamiliesList
-	(*InventoryInteractionsList)(nil),                         // 32: Scailo.InventoryInteractionsList
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
+	(*FormFieldDatumCreateRequest)(nil),                       // 11: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                  // 12: Scailo.EmployeeMetadata
+	(INVENTORY_LIFECYCLE)(0),                                  // 13: Scailo.INVENTORY_LIFECYCLE
+	(*LogbookLogInventoryLC)(nil),                             // 14: Scailo.LogbookLogInventoryLC
+	(*FormFieldDatum)(nil),                                    // 15: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                          // 16: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 17: Scailo.SORT_ORDER
+	(INVENTORY_SORT_KEY)(0),                                   // 18: Scailo.INVENTORY_SORT_KEY
+	(*FormFieldDatumFilterRequest)(nil),                       // 19: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                     // 20: Scailo.IdentifierUUIDWithUserComment
+	(*InventoryPartitionRequest)(nil),                         // 21: Scailo.InventoryPartitionRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 23: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
+	(*IdentifierUUIDsList)(nil),                               // 26: Scailo.IdentifierUUIDsList
+	(*ActiveStatus)(nil),                                      // 27: Scailo.ActiveStatus
+	(*IdentifierWithSearchKey)(nil),                           // 28: Scailo.IdentifierWithSearchKey
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 29: Scailo.FilterFamiliesReqForIdentifier
+	(*Empty)(nil),                                             // 30: Scailo.Empty
+	(*StandardFile)(nil),                                      // 31: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                // 32: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 33: Scailo.MagicLink
+	(*FamiliesList)(nil),                                      // 34: Scailo.FamiliesList
+	(*InventoryInteractionsList)(nil),                         // 35: Scailo.InventoryInteractionsList
+	(*CountResponse)(nil),                                     // 36: Scailo.CountResponse
 }
 var file_components_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.ComponentsServiceCreateRequest.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
-	11, // 1: Scailo.Component.metadata:type_name -> Scailo.EmployeeMetadata
-	12, // 2: Scailo.Component.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	13, // 3: Scailo.Component.logs:type_name -> Scailo.LogbookLogInventoryLC
-	0,  // 4: Scailo.Component.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
-	4,  // 5: Scailo.ComponentsList.list:type_name -> Scailo.Component
-	14, // 6: Scailo.ComponentsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	15, // 7: Scailo.ComponentsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	16, // 8: Scailo.ComponentsServicePaginationReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	12, // 9: Scailo.ComponentsServicePaginationReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	4,  // 10: Scailo.ComponentsServicePaginationResponse.payload:type_name -> Scailo.Component
-	14, // 11: Scailo.ComponentsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	15, // 12: Scailo.ComponentsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	16, // 13: Scailo.ComponentsServiceFilterReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	12, // 14: Scailo.ComponentsServiceFilterReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	0,  // 15: Scailo.ComponentsServiceFilterReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
-	14, // 16: Scailo.ComponentsServiceFilterReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
-	14, // 17: Scailo.ComponentsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	12, // 18: Scailo.ComponentsServiceCountReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	0,  // 19: Scailo.ComponentsServiceCountReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
-	14, // 20: Scailo.ComponentsServiceCountReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
-	14, // 21: Scailo.ComponentsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	15, // 22: Scailo.ComponentsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	16, // 23: Scailo.ComponentsServiceSearchAllReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	12, // 24: Scailo.ComponentsServiceSearchAllReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	0,  // 25: Scailo.ComponentsServiceSearchAllReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
-	14, // 26: Scailo.ComponentsServiceSearchAllReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
-	1,  // 27: Scailo.ComponentsService.Create:input_type -> Scailo.ComponentsServiceCreateRequest
-	3,  // 28: Scailo.ComponentsService.SendToStore:input_type -> Scailo.ComponentsServiceSendToStoreRequest
-	2,  // 29: Scailo.ComponentsService.Update:input_type -> Scailo.ComponentsServiceUpdateRequest
-	17, // 30: Scailo.ComponentsService.SendForRework:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 31: Scailo.ComponentsService.SendForQC:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 32: Scailo.ComponentsService.SplitLot:input_type -> Scailo.IdentifierUUIDWithUserComment
-	18, // 33: Scailo.ComponentsService.Partition:input_type -> Scailo.InventoryPartitionRequest
-	17, // 34: Scailo.ComponentsService.Consume:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 35: Scailo.ComponentsService.Reject:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 36: Scailo.ComponentsService.Scrap:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 37: Scailo.ComponentsService.ReturnMaterial:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 38: Scailo.ComponentsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 39: Scailo.ComponentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	19, // 40: Scailo.ComponentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	20, // 41: Scailo.ComponentsService.ViewByID:input_type -> Scailo.Identifier
-	21, // 42: Scailo.ComponentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 43: Scailo.ComponentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	21, // 44: Scailo.ComponentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 45: Scailo.ComponentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 46: Scailo.ComponentsService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
-	24, // 47: Scailo.ComponentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	6,  // 48: Scailo.ComponentsService.ViewWithPagination:input_type -> Scailo.ComponentsServicePaginationReq
-	25, // 49: Scailo.ComponentsService.ViewFamiliesInProductionPlan:input_type -> Scailo.IdentifierWithSearchKey
-	26, // 50: Scailo.ComponentsService.FilterFamiliesInProductionPlan:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	20, // 51: Scailo.ComponentsService.DownloadQCReportByID:input_type -> Scailo.Identifier
-	21, // 52: Scailo.ComponentsService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 53: Scailo.ComponentsService.DownloadLabelByID:input_type -> Scailo.Identifier
-	21, // 54: Scailo.ComponentsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	21, // 55: Scailo.ComponentsService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
-	10, // 56: Scailo.ComponentsService.SearchAll:input_type -> Scailo.ComponentsServiceSearchAllReq
-	8,  // 57: Scailo.ComponentsService.Filter:input_type -> Scailo.ComponentsServiceFilterReq
-	9,  // 58: Scailo.ComponentsService.Count:input_type -> Scailo.ComponentsServiceCountReq
-	8,  // 59: Scailo.ComponentsService.DownloadAsCSV:input_type -> Scailo.ComponentsServiceFilterReq
-	27, // 60: Scailo.ComponentsService.DownloadImportTemplate:input_type -> Scailo.Empty
-	28, // 61: Scailo.ComponentsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	29, // 62: Scailo.ComponentsService.Create:output_type -> Scailo.IdentifierResponse
-	29, // 63: Scailo.ComponentsService.SendToStore:output_type -> Scailo.IdentifierResponse
-	29, // 64: Scailo.ComponentsService.Update:output_type -> Scailo.IdentifierResponse
-	29, // 65: Scailo.ComponentsService.SendForRework:output_type -> Scailo.IdentifierResponse
-	29, // 66: Scailo.ComponentsService.SendForQC:output_type -> Scailo.IdentifierResponse
-	29, // 67: Scailo.ComponentsService.SplitLot:output_type -> Scailo.IdentifierResponse
-	29, // 68: Scailo.ComponentsService.Partition:output_type -> Scailo.IdentifierResponse
-	29, // 69: Scailo.ComponentsService.Consume:output_type -> Scailo.IdentifierResponse
-	29, // 70: Scailo.ComponentsService.Reject:output_type -> Scailo.IdentifierResponse
-	29, // 71: Scailo.ComponentsService.Scrap:output_type -> Scailo.IdentifierResponse
-	29, // 72: Scailo.ComponentsService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
-	29, // 73: Scailo.ComponentsService.Discard:output_type -> Scailo.IdentifierResponse
-	29, // 74: Scailo.ComponentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	30, // 75: Scailo.ComponentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 76: Scailo.ComponentsService.ViewByID:output_type -> Scailo.Component
-	4,  // 77: Scailo.ComponentsService.ViewByUUID:output_type -> Scailo.Component
-	4,  // 78: Scailo.ComponentsService.ViewEssentialByID:output_type -> Scailo.Component
-	4,  // 79: Scailo.ComponentsService.ViewEssentialByUUID:output_type -> Scailo.Component
-	5,  // 80: Scailo.ComponentsService.ViewFromIDs:output_type -> Scailo.ComponentsList
-	5,  // 81: Scailo.ComponentsService.ViewFromUUIDs:output_type -> Scailo.ComponentsList
-	5,  // 82: Scailo.ComponentsService.ViewAll:output_type -> Scailo.ComponentsList
-	7,  // 83: Scailo.ComponentsService.ViewWithPagination:output_type -> Scailo.ComponentsServicePaginationResponse
-	31, // 84: Scailo.ComponentsService.ViewFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
-	31, // 85: Scailo.ComponentsService.FilterFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
-	28, // 86: Scailo.ComponentsService.DownloadQCReportByID:output_type -> Scailo.StandardFile
-	28, // 87: Scailo.ComponentsService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
-	28, // 88: Scailo.ComponentsService.DownloadLabelByID:output_type -> Scailo.StandardFile
-	28, // 89: Scailo.ComponentsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	32, // 90: Scailo.ComponentsService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
-	5,  // 91: Scailo.ComponentsService.SearchAll:output_type -> Scailo.ComponentsList
-	5,  // 92: Scailo.ComponentsService.Filter:output_type -> Scailo.ComponentsList
-	33, // 93: Scailo.ComponentsService.Count:output_type -> Scailo.CountResponse
-	28, // 94: Scailo.ComponentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	28, // 95: Scailo.ComponentsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
-	23, // 96: Scailo.ComponentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	62, // [62:97] is the sub-list for method output_type
-	27, // [27:62] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	11, // 1: Scailo.ComponentsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	11, // 2: Scailo.ComponentsServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	12, // 3: Scailo.Component.metadata:type_name -> Scailo.EmployeeMetadata
+	13, // 4: Scailo.Component.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	14, // 5: Scailo.Component.logs:type_name -> Scailo.LogbookLogInventoryLC
+	0,  // 6: Scailo.Component.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
+	15, // 7: Scailo.Component.form_data:type_name -> Scailo.FormFieldDatum
+	4,  // 8: Scailo.ComponentsList.list:type_name -> Scailo.Component
+	16, // 9: Scailo.ComponentsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	17, // 10: Scailo.ComponentsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	18, // 11: Scailo.ComponentsServicePaginationReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	13, // 12: Scailo.ComponentsServicePaginationReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	4,  // 13: Scailo.ComponentsServicePaginationResponse.payload:type_name -> Scailo.Component
+	16, // 14: Scailo.ComponentsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	17, // 15: Scailo.ComponentsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	18, // 16: Scailo.ComponentsServiceFilterReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	13, // 17: Scailo.ComponentsServiceFilterReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	0,  // 18: Scailo.ComponentsServiceFilterReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
+	16, // 19: Scailo.ComponentsServiceFilterReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	19, // 20: Scailo.ComponentsServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	16, // 21: Scailo.ComponentsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	13, // 22: Scailo.ComponentsServiceCountReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	0,  // 23: Scailo.ComponentsServiceCountReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
+	16, // 24: Scailo.ComponentsServiceCountReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	19, // 25: Scailo.ComponentsServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	16, // 26: Scailo.ComponentsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	17, // 27: Scailo.ComponentsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	18, // 28: Scailo.ComponentsServiceSearchAllReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	13, // 29: Scailo.ComponentsServiceSearchAllReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	0,  // 30: Scailo.ComponentsServiceSearchAllReq.ref_from:type_name -> Scailo.COMPONENT_REF_FROM
+	16, // 31: Scailo.ComponentsServiceSearchAllReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	1,  // 32: Scailo.ComponentsService.Create:input_type -> Scailo.ComponentsServiceCreateRequest
+	3,  // 33: Scailo.ComponentsService.SendToStore:input_type -> Scailo.ComponentsServiceSendToStoreRequest
+	2,  // 34: Scailo.ComponentsService.Update:input_type -> Scailo.ComponentsServiceUpdateRequest
+	20, // 35: Scailo.ComponentsService.SendForRework:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 36: Scailo.ComponentsService.SendForQC:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 37: Scailo.ComponentsService.SplitLot:input_type -> Scailo.IdentifierUUIDWithUserComment
+	21, // 38: Scailo.ComponentsService.Partition:input_type -> Scailo.InventoryPartitionRequest
+	20, // 39: Scailo.ComponentsService.Consume:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 40: Scailo.ComponentsService.Reject:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 41: Scailo.ComponentsService.Scrap:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 42: Scailo.ComponentsService.ReturnMaterial:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 43: Scailo.ComponentsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 44: Scailo.ComponentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	22, // 45: Scailo.ComponentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	23, // 46: Scailo.ComponentsService.ViewByID:input_type -> Scailo.Identifier
+	24, // 47: Scailo.ComponentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 48: Scailo.ComponentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	24, // 49: Scailo.ComponentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 50: Scailo.ComponentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	26, // 51: Scailo.ComponentsService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
+	27, // 52: Scailo.ComponentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	6,  // 53: Scailo.ComponentsService.ViewWithPagination:input_type -> Scailo.ComponentsServicePaginationReq
+	28, // 54: Scailo.ComponentsService.ViewFamiliesInProductionPlan:input_type -> Scailo.IdentifierWithSearchKey
+	29, // 55: Scailo.ComponentsService.FilterFamiliesInProductionPlan:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	23, // 56: Scailo.ComponentsService.DownloadQCReportByID:input_type -> Scailo.Identifier
+	24, // 57: Scailo.ComponentsService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 58: Scailo.ComponentsService.DownloadLabelByID:input_type -> Scailo.Identifier
+	24, // 59: Scailo.ComponentsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 60: Scailo.ComponentsService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
+	10, // 61: Scailo.ComponentsService.SearchAll:input_type -> Scailo.ComponentsServiceSearchAllReq
+	8,  // 62: Scailo.ComponentsService.Filter:input_type -> Scailo.ComponentsServiceFilterReq
+	9,  // 63: Scailo.ComponentsService.Count:input_type -> Scailo.ComponentsServiceCountReq
+	8,  // 64: Scailo.ComponentsService.DownloadAsCSV:input_type -> Scailo.ComponentsServiceFilterReq
+	30, // 65: Scailo.ComponentsService.DownloadImportTemplate:input_type -> Scailo.Empty
+	31, // 66: Scailo.ComponentsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	32, // 67: Scailo.ComponentsService.Create:output_type -> Scailo.IdentifierResponse
+	32, // 68: Scailo.ComponentsService.SendToStore:output_type -> Scailo.IdentifierResponse
+	32, // 69: Scailo.ComponentsService.Update:output_type -> Scailo.IdentifierResponse
+	32, // 70: Scailo.ComponentsService.SendForRework:output_type -> Scailo.IdentifierResponse
+	32, // 71: Scailo.ComponentsService.SendForQC:output_type -> Scailo.IdentifierResponse
+	32, // 72: Scailo.ComponentsService.SplitLot:output_type -> Scailo.IdentifierResponse
+	32, // 73: Scailo.ComponentsService.Partition:output_type -> Scailo.IdentifierResponse
+	32, // 74: Scailo.ComponentsService.Consume:output_type -> Scailo.IdentifierResponse
+	32, // 75: Scailo.ComponentsService.Reject:output_type -> Scailo.IdentifierResponse
+	32, // 76: Scailo.ComponentsService.Scrap:output_type -> Scailo.IdentifierResponse
+	32, // 77: Scailo.ComponentsService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
+	32, // 78: Scailo.ComponentsService.Discard:output_type -> Scailo.IdentifierResponse
+	32, // 79: Scailo.ComponentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	33, // 80: Scailo.ComponentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	4,  // 81: Scailo.ComponentsService.ViewByID:output_type -> Scailo.Component
+	4,  // 82: Scailo.ComponentsService.ViewByUUID:output_type -> Scailo.Component
+	4,  // 83: Scailo.ComponentsService.ViewEssentialByID:output_type -> Scailo.Component
+	4,  // 84: Scailo.ComponentsService.ViewEssentialByUUID:output_type -> Scailo.Component
+	5,  // 85: Scailo.ComponentsService.ViewFromIDs:output_type -> Scailo.ComponentsList
+	5,  // 86: Scailo.ComponentsService.ViewFromUUIDs:output_type -> Scailo.ComponentsList
+	5,  // 87: Scailo.ComponentsService.ViewAll:output_type -> Scailo.ComponentsList
+	7,  // 88: Scailo.ComponentsService.ViewWithPagination:output_type -> Scailo.ComponentsServicePaginationResponse
+	34, // 89: Scailo.ComponentsService.ViewFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
+	34, // 90: Scailo.ComponentsService.FilterFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
+	31, // 91: Scailo.ComponentsService.DownloadQCReportByID:output_type -> Scailo.StandardFile
+	31, // 92: Scailo.ComponentsService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
+	31, // 93: Scailo.ComponentsService.DownloadLabelByID:output_type -> Scailo.StandardFile
+	31, // 94: Scailo.ComponentsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	35, // 95: Scailo.ComponentsService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
+	5,  // 96: Scailo.ComponentsService.SearchAll:output_type -> Scailo.ComponentsList
+	5,  // 97: Scailo.ComponentsService.Filter:output_type -> Scailo.ComponentsList
+	36, // 98: Scailo.ComponentsService.Count:output_type -> Scailo.CountResponse
+	31, // 99: Scailo.ComponentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	31, // 100: Scailo.ComponentsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	26, // 101: Scailo.ComponentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	67, // [67:102] is the sub-list for method output_type
+	32, // [32:67] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_components_scailo_proto_init() }
@@ -2299,6 +2357,7 @@ func file_components_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_families_scailo_proto_init()
+	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
