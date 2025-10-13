@@ -931,6 +931,161 @@ func (x *GoodsDispatchesServiceItemCreateRequest) GetClientFamilyCode() string {
 	return ""
 }
 
+// Describes the parameters required to add an individual item as part of multiple item addition to a goods dispatch
+type GoodsDispatchesServiceMultipleItemsSingleton struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the family ID
+	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	// Stores the item hash to be dispatched
+	ItemHash string `protobuf:"bytes,12,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
+	// The quantity (in cents) being dispatched in internal unit of material
+	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
+	// Stores the ID of the client's unit of material
+	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
+	// Stores the quantity (in cents) being dispatched in client's unit of material
+	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
+	// Stores the family code as defined by the client
+	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) Reset() {
+	*x = GoodsDispatchesServiceMultipleItemsSingleton{}
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GoodsDispatchesServiceMultipleItemsSingleton) ProtoMessage() {}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) ProtoReflect() protoreflect.Message {
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GoodsDispatchesServiceMultipleItemsSingleton.ProtoReflect.Descriptor instead.
+func (*GoodsDispatchesServiceMultipleItemsSingleton) Descriptor() ([]byte, []int) {
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetFamilyId() uint64 {
+	if x != nil {
+		return x.FamilyId
+	}
+	return 0
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetItemHash() string {
+	if x != nil {
+		return x.ItemHash
+	}
+	return ""
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetInternalQuantity() uint64 {
+	if x != nil {
+		return x.InternalQuantity
+	}
+	return 0
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetClientUomId() uint64 {
+	if x != nil {
+		return x.ClientUomId
+	}
+	return 0
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetClientQuantity() uint64 {
+	if x != nil {
+		return x.ClientQuantity
+	}
+	return 0
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetClientFamilyCode() string {
+	if x != nil {
+		return x.ClientFamilyCode
+	}
+	return ""
+}
+
+// Describes the parameters required to add multiple items to a goods dispatch
+type GoodsDispatchesServiceMultipleItemsCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// Stores the goods dispatch ID
+	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
+	// List of items
+	List          []*GoodsDispatchesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) Reset() {
+	*x = GoodsDispatchesServiceMultipleItemsCreateRequest{}
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GoodsDispatchesServiceMultipleItemsCreateRequest) ProtoMessage() {}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GoodsDispatchesServiceMultipleItemsCreateRequest.ProtoReflect.Descriptor instead.
+func (*GoodsDispatchesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []int) {
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) GetGoodsDispatchId() uint64 {
+	if x != nil {
+		return x.GoodsDispatchId
+	}
+	return 0
+}
+
+func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) GetList() []*GoodsDispatchesServiceMultipleItemsSingleton {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters required to update an item in a goods dispatch
 type GoodsDispatchesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -954,7 +1109,7 @@ type GoodsDispatchesServiceItemUpdateRequest struct {
 
 func (x *GoodsDispatchesServiceItemUpdateRequest) Reset() {
 	*x = GoodsDispatchesServiceItemUpdateRequest{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[6]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -966,7 +1121,7 @@ func (x *GoodsDispatchesServiceItemUpdateRequest) String() string {
 func (*GoodsDispatchesServiceItemUpdateRequest) ProtoMessage() {}
 
 func (x *GoodsDispatchesServiceItemUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[6]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -979,7 +1134,7 @@ func (x *GoodsDispatchesServiceItemUpdateRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use GoodsDispatchesServiceItemUpdateRequest.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{6}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GoodsDispatchesServiceItemUpdateRequest) GetUserComment() string {
@@ -1064,7 +1219,7 @@ type GoodsDispatchItem struct {
 
 func (x *GoodsDispatchItem) Reset() {
 	*x = GoodsDispatchItem{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[7]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1076,7 +1231,7 @@ func (x *GoodsDispatchItem) String() string {
 func (*GoodsDispatchItem) ProtoMessage() {}
 
 func (x *GoodsDispatchItem) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[7]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1089,7 +1244,7 @@ func (x *GoodsDispatchItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchItem.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchItem) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{7}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GoodsDispatchItem) GetEntityUuid() string {
@@ -1187,7 +1342,7 @@ type GoodsDispatchesList struct {
 
 func (x *GoodsDispatchesList) Reset() {
 	*x = GoodsDispatchesList{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[8]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1199,7 +1354,7 @@ func (x *GoodsDispatchesList) String() string {
 func (*GoodsDispatchesList) ProtoMessage() {}
 
 func (x *GoodsDispatchesList) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[8]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1212,7 +1367,7 @@ func (x *GoodsDispatchesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchesList.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesList) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{8}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GoodsDispatchesList) GetList() []*GoodsDispatch {
@@ -1233,7 +1388,7 @@ type GoodsDispatchesItemsList struct {
 
 func (x *GoodsDispatchesItemsList) Reset() {
 	*x = GoodsDispatchesItemsList{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[9]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1245,7 +1400,7 @@ func (x *GoodsDispatchesItemsList) String() string {
 func (*GoodsDispatchesItemsList) ProtoMessage() {}
 
 func (x *GoodsDispatchesItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[9]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1258,7 +1413,7 @@ func (x *GoodsDispatchesItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchesItemsList.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesItemsList) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{9}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GoodsDispatchesItemsList) GetList() []*GoodsDispatchItem {
@@ -1281,7 +1436,7 @@ type GoodsDispatchItemHistoryRequest struct {
 
 func (x *GoodsDispatchItemHistoryRequest) Reset() {
 	*x = GoodsDispatchItemHistoryRequest{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[10]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1293,7 +1448,7 @@ func (x *GoodsDispatchItemHistoryRequest) String() string {
 func (*GoodsDispatchItemHistoryRequest) ProtoMessage() {}
 
 func (x *GoodsDispatchItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[10]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1306,7 +1461,7 @@ func (x *GoodsDispatchItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{10}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GoodsDispatchItemHistoryRequest) GetGoodsDispatchId() uint64 {
@@ -1336,7 +1491,7 @@ type GoodsDispatchItemProspectiveInfoRequest struct {
 
 func (x *GoodsDispatchItemProspectiveInfoRequest) Reset() {
 	*x = GoodsDispatchItemProspectiveInfoRequest{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[11]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1348,7 +1503,7 @@ func (x *GoodsDispatchItemProspectiveInfoRequest) String() string {
 func (*GoodsDispatchItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *GoodsDispatchItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[11]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1516,7 @@ func (x *GoodsDispatchItemProspectiveInfoRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use GoodsDispatchItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{11}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GoodsDispatchItemProspectiveInfoRequest) GetGoodsDispatchId() uint64 {
@@ -1421,7 +1576,7 @@ type GoodsDispatchItemsSearchRequest struct {
 
 func (x *GoodsDispatchItemsSearchRequest) Reset() {
 	*x = GoodsDispatchItemsSearchRequest{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[12]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1433,7 +1588,7 @@ func (x *GoodsDispatchItemsSearchRequest) String() string {
 func (*GoodsDispatchItemsSearchRequest) ProtoMessage() {}
 
 func (x *GoodsDispatchItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[12]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1446,7 +1601,7 @@ func (x *GoodsDispatchItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{12}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -1585,7 +1740,7 @@ type GoodsDispatchesServicePaginatedItemsResponse struct {
 
 func (x *GoodsDispatchesServicePaginatedItemsResponse) Reset() {
 	*x = GoodsDispatchesServicePaginatedItemsResponse{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[13]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1597,7 +1752,7 @@ func (x *GoodsDispatchesServicePaginatedItemsResponse) String() string {
 func (*GoodsDispatchesServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *GoodsDispatchesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[13]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1610,7 +1765,7 @@ func (x *GoodsDispatchesServicePaginatedItemsResponse) ProtoReflect() protorefle
 
 // Deprecated: Use GoodsDispatchesServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{13}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GoodsDispatchesServicePaginatedItemsResponse) GetCount() uint64 {
@@ -1656,7 +1811,7 @@ type GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest struct {
 
 func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) Reset() {
 	*x = GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[14]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1668,7 +1823,7 @@ func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) String() st
 func (*GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) ProtoMessage() {}
 
 func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[14]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1681,7 +1836,7 @@ func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflec
 
 // Deprecated: Use GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{14}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) GetRefFrom() GOODS_DISPATCH_REF_FROM {
@@ -1726,7 +1881,7 @@ type GoodsDispatchesServicePaginationReq struct {
 
 func (x *GoodsDispatchesServicePaginationReq) Reset() {
 	*x = GoodsDispatchesServicePaginationReq{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[15]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1738,7 +1893,7 @@ func (x *GoodsDispatchesServicePaginationReq) String() string {
 func (*GoodsDispatchesServicePaginationReq) ProtoMessage() {}
 
 func (x *GoodsDispatchesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[15]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1751,7 +1906,7 @@ func (x *GoodsDispatchesServicePaginationReq) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GoodsDispatchesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{15}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1813,7 +1968,7 @@ type GoodsDispatchesServicePaginationResponse struct {
 
 func (x *GoodsDispatchesServicePaginationResponse) Reset() {
 	*x = GoodsDispatchesServicePaginationResponse{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[16]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1825,7 +1980,7 @@ func (x *GoodsDispatchesServicePaginationResponse) String() string {
 func (*GoodsDispatchesServicePaginationResponse) ProtoMessage() {}
 
 func (x *GoodsDispatchesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[16]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1838,7 +1993,7 @@ func (x *GoodsDispatchesServicePaginationResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use GoodsDispatchesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{16}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GoodsDispatchesServicePaginationResponse) GetCount() uint64 {
@@ -1935,7 +2090,7 @@ type GoodsDispatchesServiceFilterReq struct {
 
 func (x *GoodsDispatchesServiceFilterReq) Reset() {
 	*x = GoodsDispatchesServiceFilterReq{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[17]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1947,7 +2102,7 @@ func (x *GoodsDispatchesServiceFilterReq) String() string {
 func (*GoodsDispatchesServiceFilterReq) ProtoMessage() {}
 
 func (x *GoodsDispatchesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[17]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1960,7 +2115,7 @@ func (x *GoodsDispatchesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{17}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2217,7 +2372,7 @@ type GoodsDispatchesServiceCountReq struct {
 
 func (x *GoodsDispatchesServiceCountReq) Reset() {
 	*x = GoodsDispatchesServiceCountReq{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[18]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2229,7 +2384,7 @@ func (x *GoodsDispatchesServiceCountReq) String() string {
 func (*GoodsDispatchesServiceCountReq) ProtoMessage() {}
 
 func (x *GoodsDispatchesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[18]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2242,7 +2397,7 @@ func (x *GoodsDispatchesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoodsDispatchesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{18}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2449,7 +2604,7 @@ type GoodsDispatchesServiceSearchAllReq struct {
 
 func (x *GoodsDispatchesServiceSearchAllReq) Reset() {
 	*x = GoodsDispatchesServiceSearchAllReq{}
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[19]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2461,7 +2616,7 @@ func (x *GoodsDispatchesServiceSearchAllReq) String() string {
 func (*GoodsDispatchesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *GoodsDispatchesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_goods_dispatches_scailo_proto_msgTypes[19]
+	mi := &file_goods_dispatches_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2474,7 +2629,7 @@ func (x *GoodsDispatchesServiceSearchAllReq) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GoodsDispatchesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*GoodsDispatchesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{19}
+	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2628,7 +2783,19 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
 	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\xd2\x02\n" +
+	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\xc1\x02\n" +
+	",GoodsDispatchesServiceMultipleItemsSingleton\x12$\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12(\n" +
+	"\titem_hash\x18\f \x01(\tB\v\xbaH\br\x06\x10\x80\x01\x18\x80\x01R\bitemHash\x124\n" +
+	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
+	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
+	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
+	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\xd4\x01\n" +
+	"0GoodsDispatchesServiceMultipleItemsCreateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x123\n" +
+	"\x11goods_dispatch_id\x18\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchId\x12H\n" +
+	"\x04list\x18\v \x03(\v24.Scailo.GoodsDispatchesServiceMultipleItemsSingletonR\x04list\"\xd2\x02\n" +
 	"'GoodsDispatchesServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12(\n" +
@@ -2824,7 +2991,7 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\x1dGOODS_DISPATCH_BILLING_STATUS\x121\n" +
 	"-GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED\x10\x00\x12(\n" +
 	"$GOODS_DISPATCH_BILLING_STATUS_BILLED\x10\x01\x12*\n" +
-	"&GOODS_DISPATCH_BILLING_STATUS_UNBILLED\x10\x022\xfe&\n" +
+	"&GOODS_DISPATCH_BILLING_STATUS_UNBILLED\x10\x022\xf5'\n" +
 	"\x16GoodsDispatchesService\x12Q\n" +
 	"\x06Create\x12+.Scailo.GoodsDispatchesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\x05Draft\x12+.Scailo.GoodsDispatchesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -2845,7 +3012,8 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\bAutofill\x12-.Scailo.GoodsDispatchesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12c\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12u\n" +
+	"\x1dAddMultipleGoodsDispatchItems\x128.Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12c\n" +
 	"\x14AddGoodsDispatchItem\x12/.Scailo.GoodsDispatchesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12f\n" +
 	"\x17ModifyGoodsDispatchItem\x12/.Scailo.GoodsDispatchesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x18ApproveGoodsDispatchItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -2903,7 +3071,7 @@ func file_goods_dispatches_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_goods_dispatches_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_goods_dispatches_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_goods_dispatches_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_goods_dispatches_scailo_proto_goTypes = []any{
 	(GOODS_DISPATCH_REF_FROM)(0),                                       // 0: Scailo.GOODS_DISPATCH_REF_FROM
 	(GOODS_DISPATCH_ITEM_SORT_KEY)(0),                                  // 1: Scailo.GOODS_DISPATCH_ITEM_SORT_KEY
@@ -2916,216 +3084,221 @@ var file_goods_dispatches_scailo_proto_goTypes = []any{
 	(*GoodsDispatchAncillaryParameters)(nil),                           // 8: Scailo.GoodsDispatchAncillaryParameters
 	(*GoodsDispatch)(nil),                                              // 9: Scailo.GoodsDispatch
 	(*GoodsDispatchesServiceItemCreateRequest)(nil),                    // 10: Scailo.GoodsDispatchesServiceItemCreateRequest
-	(*GoodsDispatchesServiceItemUpdateRequest)(nil),                    // 11: Scailo.GoodsDispatchesServiceItemUpdateRequest
-	(*GoodsDispatchItem)(nil),                                          // 12: Scailo.GoodsDispatchItem
-	(*GoodsDispatchesList)(nil),                                        // 13: Scailo.GoodsDispatchesList
-	(*GoodsDispatchesItemsList)(nil),                                   // 14: Scailo.GoodsDispatchesItemsList
-	(*GoodsDispatchItemHistoryRequest)(nil),                            // 15: Scailo.GoodsDispatchItemHistoryRequest
-	(*GoodsDispatchItemProspectiveInfoRequest)(nil),                    // 16: Scailo.GoodsDispatchItemProspectiveInfoRequest
-	(*GoodsDispatchItemsSearchRequest)(nil),                            // 17: Scailo.GoodsDispatchItemsSearchRequest
-	(*GoodsDispatchesServicePaginatedItemsResponse)(nil),               // 18: Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	(*GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 19: Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
-	(*GoodsDispatchesServicePaginationReq)(nil),                        // 20: Scailo.GoodsDispatchesServicePaginationReq
-	(*GoodsDispatchesServicePaginationResponse)(nil),                   // 21: Scailo.GoodsDispatchesServicePaginationResponse
-	(*GoodsDispatchesServiceFilterReq)(nil),                            // 22: Scailo.GoodsDispatchesServiceFilterReq
-	(*GoodsDispatchesServiceCountReq)(nil),                             // 23: Scailo.GoodsDispatchesServiceCountReq
-	(*GoodsDispatchesServiceSearchAllReq)(nil),                         // 24: Scailo.GoodsDispatchesServiceSearchAllReq
-	(*FormFieldDatumCreateRequest)(nil),                                // 25: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                           // 26: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                           // 27: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                                     // 28: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                                       // 29: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                             // 30: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                                   // 31: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                                    // 32: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                                // 33: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                              // 34: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                              // 35: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierUUID)(nil),                                             // 36: Scailo.IdentifierUUID
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 37: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                                  // 38: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                        // 39: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                 // 40: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                            // 41: Scailo.SimpleSearchReq
-	(*IdentifierWithSearchKey)(nil),                                    // 42: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                      // 43: Scailo.Empty
-	(*IdentifiersList)(nil),                                            // 44: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                               // 45: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                             // 46: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                    // 47: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                         // 48: Scailo.IdentifierResponse
-	(*BooleanResponse)(nil),                                            // 49: Scailo.BooleanResponse
-	(*MagicLink)(nil),                                                  // 50: Scailo.MagicLink
-	(*StandardFile)(nil),                                               // 51: Scailo.StandardFile
-	(*FamiliesList)(nil),                                               // 52: Scailo.FamiliesList
-	(*DualQuantitiesResponse)(nil),                                     // 53: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                              // 54: Scailo.CountResponse
+	(*GoodsDispatchesServiceMultipleItemsSingleton)(nil),               // 11: Scailo.GoodsDispatchesServiceMultipleItemsSingleton
+	(*GoodsDispatchesServiceMultipleItemsCreateRequest)(nil),           // 12: Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest
+	(*GoodsDispatchesServiceItemUpdateRequest)(nil),                    // 13: Scailo.GoodsDispatchesServiceItemUpdateRequest
+	(*GoodsDispatchItem)(nil),                                          // 14: Scailo.GoodsDispatchItem
+	(*GoodsDispatchesList)(nil),                                        // 15: Scailo.GoodsDispatchesList
+	(*GoodsDispatchesItemsList)(nil),                                   // 16: Scailo.GoodsDispatchesItemsList
+	(*GoodsDispatchItemHistoryRequest)(nil),                            // 17: Scailo.GoodsDispatchItemHistoryRequest
+	(*GoodsDispatchItemProspectiveInfoRequest)(nil),                    // 18: Scailo.GoodsDispatchItemProspectiveInfoRequest
+	(*GoodsDispatchItemsSearchRequest)(nil),                            // 19: Scailo.GoodsDispatchItemsSearchRequest
+	(*GoodsDispatchesServicePaginatedItemsResponse)(nil),               // 20: Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	(*GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 21: Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
+	(*GoodsDispatchesServicePaginationReq)(nil),                        // 22: Scailo.GoodsDispatchesServicePaginationReq
+	(*GoodsDispatchesServicePaginationResponse)(nil),                   // 23: Scailo.GoodsDispatchesServicePaginationResponse
+	(*GoodsDispatchesServiceFilterReq)(nil),                            // 24: Scailo.GoodsDispatchesServiceFilterReq
+	(*GoodsDispatchesServiceCountReq)(nil),                             // 25: Scailo.GoodsDispatchesServiceCountReq
+	(*GoodsDispatchesServiceSearchAllReq)(nil),                         // 26: Scailo.GoodsDispatchesServiceSearchAllReq
+	(*FormFieldDatumCreateRequest)(nil),                                // 27: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                           // 28: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                           // 29: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                                     // 30: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                                       // 31: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                             // 32: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                                   // 33: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                                    // 34: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                                // 35: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                              // 36: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                              // 37: Scailo.IdentifierWithEmailAttributes
+	(*IdentifierUUID)(nil),                                             // 38: Scailo.IdentifierUUID
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                                  // 40: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                        // 41: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                 // 42: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                            // 43: Scailo.SimpleSearchReq
+	(*IdentifierWithSearchKey)(nil),                                    // 44: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                      // 45: Scailo.Empty
+	(*IdentifiersList)(nil),                                            // 46: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                               // 47: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                             // 48: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                    // 49: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                         // 50: Scailo.IdentifierResponse
+	(*BooleanResponse)(nil),                                            // 51: Scailo.BooleanResponse
+	(*MagicLink)(nil),                                                  // 52: Scailo.MagicLink
+	(*StandardFile)(nil),                                               // 53: Scailo.StandardFile
+	(*FamiliesList)(nil),                                               // 54: Scailo.FamiliesList
+	(*DualQuantitiesResponse)(nil),                                     // 55: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                              // 56: Scailo.CountResponse
 }
 var file_goods_dispatches_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.GoodsDispatchesServiceCreateRequest.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	25,  // 1: Scailo.GoodsDispatchesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	25,  // 2: Scailo.GoodsDispatchesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	26,  // 3: Scailo.GoodsDispatch.metadata:type_name -> Scailo.EmployeeMetadata
-	27,  // 4: Scailo.GoodsDispatch.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	28,  // 5: Scailo.GoodsDispatch.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	29,  // 6: Scailo.GoodsDispatch.logs:type_name -> Scailo.LogbookLogConciseSLC
+	27,  // 1: Scailo.GoodsDispatchesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	27,  // 2: Scailo.GoodsDispatchesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	28,  // 3: Scailo.GoodsDispatch.metadata:type_name -> Scailo.EmployeeMetadata
+	29,  // 4: Scailo.GoodsDispatch.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	30,  // 5: Scailo.GoodsDispatch.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	31,  // 6: Scailo.GoodsDispatch.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 7: Scailo.GoodsDispatch.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	12,  // 8: Scailo.GoodsDispatch.list:type_name -> Scailo.GoodsDispatchItem
-	30,  // 9: Scailo.GoodsDispatch.form_data:type_name -> Scailo.FormFieldDatum
-	26,  // 10: Scailo.GoodsDispatchItem.metadata:type_name -> Scailo.EmployeeMetadata
-	27,  // 11: Scailo.GoodsDispatchItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	9,   // 12: Scailo.GoodsDispatchesList.list:type_name -> Scailo.GoodsDispatch
-	12,  // 13: Scailo.GoodsDispatchesItemsList.list:type_name -> Scailo.GoodsDispatchItem
-	31,  // 14: Scailo.GoodsDispatchItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 15: Scailo.GoodsDispatchItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	1,   // 16: Scailo.GoodsDispatchItemsSearchRequest.sort_key:type_name -> Scailo.GOODS_DISPATCH_ITEM_SORT_KEY
-	2,   // 17: Scailo.GoodsDispatchItemsSearchRequest.status:type_name -> Scailo.GOODS_DISPATCH_ITEM_STATUS
-	12,  // 18: Scailo.GoodsDispatchesServicePaginatedItemsResponse.payload:type_name -> Scailo.GoodsDispatchItem
-	0,   // 19: Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	31,  // 20: Scailo.GoodsDispatchesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 21: Scailo.GoodsDispatchesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 22: Scailo.GoodsDispatchesServicePaginationReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
-	28,  // 23: Scailo.GoodsDispatchesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	9,   // 24: Scailo.GoodsDispatchesServicePaginationResponse.payload:type_name -> Scailo.GoodsDispatch
-	31,  // 25: Scailo.GoodsDispatchesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 26: Scailo.GoodsDispatchesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 27: Scailo.GoodsDispatchesServiceFilterReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
-	28,  // 28: Scailo.GoodsDispatchesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 29: Scailo.GoodsDispatchesServiceFilterReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	4,   // 30: Scailo.GoodsDispatchesServiceFilterReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
-	33,  // 31: Scailo.GoodsDispatchesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	31,  // 32: Scailo.GoodsDispatchesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	28,  // 33: Scailo.GoodsDispatchesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 34: Scailo.GoodsDispatchesServiceCountReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	4,   // 35: Scailo.GoodsDispatchesServiceCountReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
-	33,  // 36: Scailo.GoodsDispatchesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	31,  // 37: Scailo.GoodsDispatchesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 38: Scailo.GoodsDispatchesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 39: Scailo.GoodsDispatchesServiceSearchAllReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
-	28,  // 40: Scailo.GoodsDispatchesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 41: Scailo.GoodsDispatchesServiceSearchAllReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
-	4,   // 42: Scailo.GoodsDispatchesServiceSearchAllReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
-	5,   // 43: Scailo.GoodsDispatchesService.Create:input_type -> Scailo.GoodsDispatchesServiceCreateRequest
-	5,   // 44: Scailo.GoodsDispatchesService.Draft:input_type -> Scailo.GoodsDispatchesServiceCreateRequest
-	6,   // 45: Scailo.GoodsDispatchesService.DraftUpdate:input_type -> Scailo.GoodsDispatchesServiceUpdateRequest
-	34,  // 46: Scailo.GoodsDispatchesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 47: Scailo.GoodsDispatchesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 48: Scailo.GoodsDispatchesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 49: Scailo.GoodsDispatchesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	6,   // 50: Scailo.GoodsDispatchesService.RevisionUpdate:input_type -> Scailo.GoodsDispatchesServiceUpdateRequest
-	34,  // 51: Scailo.GoodsDispatchesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 52: Scailo.GoodsDispatchesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 53: Scailo.GoodsDispatchesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 54: Scailo.GoodsDispatchesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 55: Scailo.GoodsDispatchesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 56: Scailo.GoodsDispatchesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34,  // 57: Scailo.GoodsDispatchesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	35,  // 58: Scailo.GoodsDispatchesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	7,   // 59: Scailo.GoodsDispatchesService.Autofill:input_type -> Scailo.GoodsDispatchesServiceAutofillRequest
-	36,  // 60: Scailo.GoodsDispatchesService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	37,  // 61: Scailo.GoodsDispatchesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	10,  // 62: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
-	11,  // 63: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemUpdateRequest
-	38,  // 64: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
-	38,  // 65: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
-	39,  // 66: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:input_type -> Scailo.ReorderItemsRequest
-	40,  // 67: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:input_type -> Scailo.Identifier
-	41,  // 68: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
-	42,  // 69: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
-	42,  // 70: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
-	15,  // 71: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:input_type -> Scailo.GoodsDispatchItemHistoryRequest
-	17,  // 72: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	17,  // 73: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	17,  // 74: Scailo.GoodsDispatchesService.SearchItemsWithPagination:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	36,  // 75: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	43,  // 76: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	40,  // 77: Scailo.GoodsDispatchesService.ViewByID:input_type -> Scailo.Identifier
-	36,  // 78: Scailo.GoodsDispatchesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	41,  // 79: Scailo.GoodsDispatchesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	40,  // 80: Scailo.GoodsDispatchesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	36,  // 81: Scailo.GoodsDispatchesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	44,  // 82: Scailo.GoodsDispatchesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	36,  // 83: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	45,  // 84: Scailo.GoodsDispatchesService.ViewAll:input_type -> Scailo.ActiveStatus
-	36,  // 85: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	20,  // 86: Scailo.GoodsDispatchesService.ViewWithPagination:input_type -> Scailo.GoodsDispatchesServicePaginationReq
-	42,  // 87: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	46,  // 88: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	16,  // 89: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:input_type -> Scailo.GoodsDispatchItemProspectiveInfoRequest
-	36,  // 90: Scailo.GoodsDispatchesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	36,  // 91: Scailo.GoodsDispatchesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	36,  // 92: Scailo.GoodsDispatchesService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	36,  // 93: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
-	36,  // 94: Scailo.GoodsDispatchesService.IsBilled:input_type -> Scailo.IdentifierUUID
-	19,  // 95: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
-	24,  // 96: Scailo.GoodsDispatchesService.SearchAll:input_type -> Scailo.GoodsDispatchesServiceSearchAllReq
-	22,  // 97: Scailo.GoodsDispatchesService.Filter:input_type -> Scailo.GoodsDispatchesServiceFilterReq
-	47,  // 98: Scailo.GoodsDispatchesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	23,  // 99: Scailo.GoodsDispatchesService.Count:input_type -> Scailo.GoodsDispatchesServiceCountReq
-	22,  // 100: Scailo.GoodsDispatchesService.DownloadAsCSV:input_type -> Scailo.GoodsDispatchesServiceFilterReq
-	48,  // 101: Scailo.GoodsDispatchesService.Create:output_type -> Scailo.IdentifierResponse
-	48,  // 102: Scailo.GoodsDispatchesService.Draft:output_type -> Scailo.IdentifierResponse
-	48,  // 103: Scailo.GoodsDispatchesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	48,  // 104: Scailo.GoodsDispatchesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	48,  // 105: Scailo.GoodsDispatchesService.Verify:output_type -> Scailo.IdentifierResponse
-	48,  // 106: Scailo.GoodsDispatchesService.Approve:output_type -> Scailo.IdentifierResponse
-	48,  // 107: Scailo.GoodsDispatchesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	48,  // 108: Scailo.GoodsDispatchesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	48,  // 109: Scailo.GoodsDispatchesService.Halt:output_type -> Scailo.IdentifierResponse
-	48,  // 110: Scailo.GoodsDispatchesService.Discard:output_type -> Scailo.IdentifierResponse
-	48,  // 111: Scailo.GoodsDispatchesService.Restore:output_type -> Scailo.IdentifierResponse
-	48,  // 112: Scailo.GoodsDispatchesService.Complete:output_type -> Scailo.IdentifierResponse
-	48,  // 113: Scailo.GoodsDispatchesService.Repeat:output_type -> Scailo.IdentifierResponse
-	48,  // 114: Scailo.GoodsDispatchesService.Reopen:output_type -> Scailo.IdentifierResponse
-	48,  // 115: Scailo.GoodsDispatchesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	48,  // 116: Scailo.GoodsDispatchesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	48,  // 117: Scailo.GoodsDispatchesService.Autofill:output_type -> Scailo.IdentifierResponse
-	49,  // 118: Scailo.GoodsDispatchesService.IsCompletable:output_type -> Scailo.BooleanResponse
-	50,  // 119: Scailo.GoodsDispatchesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	48,  // 120: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	48,  // 121: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	48,  // 122: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	48,  // 123: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	48,  // 124: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
-	12,  // 125: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:output_type -> Scailo.GoodsDispatchItem
-	12,  // 126: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:output_type -> Scailo.GoodsDispatchItem
-	14,  // 127: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
-	14,  // 128: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
-	14,  // 129: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:output_type -> Scailo.GoodsDispatchesItemsList
-	18,  // 130: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	18,  // 131: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	18,  // 132: Scailo.GoodsDispatchesService.SearchItemsWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	51,  // 133: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	51,  // 134: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	9,   // 135: Scailo.GoodsDispatchesService.ViewByID:output_type -> Scailo.GoodsDispatch
-	9,   // 136: Scailo.GoodsDispatchesService.ViewByUUID:output_type -> Scailo.GoodsDispatch
-	9,   // 137: Scailo.GoodsDispatchesService.ViewByReferenceID:output_type -> Scailo.GoodsDispatch
-	9,   // 138: Scailo.GoodsDispatchesService.ViewEssentialByID:output_type -> Scailo.GoodsDispatch
-	9,   // 139: Scailo.GoodsDispatchesService.ViewEssentialByUUID:output_type -> Scailo.GoodsDispatch
-	13,  // 140: Scailo.GoodsDispatchesService.ViewFromIDs:output_type -> Scailo.GoodsDispatchesList
-	8,   // 141: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:output_type -> Scailo.GoodsDispatchAncillaryParameters
-	13,  // 142: Scailo.GoodsDispatchesService.ViewAll:output_type -> Scailo.GoodsDispatchesList
-	13,  // 143: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:output_type -> Scailo.GoodsDispatchesList
-	21,  // 144: Scailo.GoodsDispatchesService.ViewWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginationResponse
-	52,  // 145: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	52,  // 146: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	10,  // 147: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:output_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
-	49,  // 148: Scailo.GoodsDispatchesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	51,  // 149: Scailo.GoodsDispatchesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	51,  // 150: Scailo.GoodsDispatchesService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	48,  // 151: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
-	49,  // 152: Scailo.GoodsDispatchesService.IsBilled:output_type -> Scailo.BooleanResponse
-	53,  // 153: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	13,  // 154: Scailo.GoodsDispatchesService.SearchAll:output_type -> Scailo.GoodsDispatchesList
-	13,  // 155: Scailo.GoodsDispatchesService.Filter:output_type -> Scailo.GoodsDispatchesList
-	54,  // 156: Scailo.GoodsDispatchesService.CountInStatus:output_type -> Scailo.CountResponse
-	54,  // 157: Scailo.GoodsDispatchesService.Count:output_type -> Scailo.CountResponse
-	51,  // 158: Scailo.GoodsDispatchesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	101, // [101:159] is the sub-list for method output_type
-	43,  // [43:101] is the sub-list for method input_type
-	43,  // [43:43] is the sub-list for extension type_name
-	43,  // [43:43] is the sub-list for extension extendee
-	0,   // [0:43] is the sub-list for field type_name
+	14,  // 8: Scailo.GoodsDispatch.list:type_name -> Scailo.GoodsDispatchItem
+	32,  // 9: Scailo.GoodsDispatch.form_data:type_name -> Scailo.FormFieldDatum
+	11,  // 10: Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest.list:type_name -> Scailo.GoodsDispatchesServiceMultipleItemsSingleton
+	28,  // 11: Scailo.GoodsDispatchItem.metadata:type_name -> Scailo.EmployeeMetadata
+	29,  // 12: Scailo.GoodsDispatchItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	9,   // 13: Scailo.GoodsDispatchesList.list:type_name -> Scailo.GoodsDispatch
+	14,  // 14: Scailo.GoodsDispatchesItemsList.list:type_name -> Scailo.GoodsDispatchItem
+	33,  // 15: Scailo.GoodsDispatchItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 16: Scailo.GoodsDispatchItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 17: Scailo.GoodsDispatchItemsSearchRequest.sort_key:type_name -> Scailo.GOODS_DISPATCH_ITEM_SORT_KEY
+	2,   // 18: Scailo.GoodsDispatchItemsSearchRequest.status:type_name -> Scailo.GOODS_DISPATCH_ITEM_STATUS
+	14,  // 19: Scailo.GoodsDispatchesServicePaginatedItemsResponse.payload:type_name -> Scailo.GoodsDispatchItem
+	0,   // 20: Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
+	33,  // 21: Scailo.GoodsDispatchesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 22: Scailo.GoodsDispatchesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 23: Scailo.GoodsDispatchesServicePaginationReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
+	30,  // 24: Scailo.GoodsDispatchesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	9,   // 25: Scailo.GoodsDispatchesServicePaginationResponse.payload:type_name -> Scailo.GoodsDispatch
+	33,  // 26: Scailo.GoodsDispatchesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 27: Scailo.GoodsDispatchesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 28: Scailo.GoodsDispatchesServiceFilterReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
+	30,  // 29: Scailo.GoodsDispatchesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 30: Scailo.GoodsDispatchesServiceFilterReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
+	4,   // 31: Scailo.GoodsDispatchesServiceFilterReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
+	35,  // 32: Scailo.GoodsDispatchesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	33,  // 33: Scailo.GoodsDispatchesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	30,  // 34: Scailo.GoodsDispatchesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 35: Scailo.GoodsDispatchesServiceCountReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
+	4,   // 36: Scailo.GoodsDispatchesServiceCountReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
+	35,  // 37: Scailo.GoodsDispatchesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	33,  // 38: Scailo.GoodsDispatchesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 39: Scailo.GoodsDispatchesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 40: Scailo.GoodsDispatchesServiceSearchAllReq.sort_key:type_name -> Scailo.GOODS_DISPATCH_SORT_KEY
+	30,  // 41: Scailo.GoodsDispatchesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 42: Scailo.GoodsDispatchesServiceSearchAllReq.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
+	4,   // 43: Scailo.GoodsDispatchesServiceSearchAllReq.billing_status:type_name -> Scailo.GOODS_DISPATCH_BILLING_STATUS
+	5,   // 44: Scailo.GoodsDispatchesService.Create:input_type -> Scailo.GoodsDispatchesServiceCreateRequest
+	5,   // 45: Scailo.GoodsDispatchesService.Draft:input_type -> Scailo.GoodsDispatchesServiceCreateRequest
+	6,   // 46: Scailo.GoodsDispatchesService.DraftUpdate:input_type -> Scailo.GoodsDispatchesServiceUpdateRequest
+	36,  // 47: Scailo.GoodsDispatchesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 48: Scailo.GoodsDispatchesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 49: Scailo.GoodsDispatchesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 50: Scailo.GoodsDispatchesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	6,   // 51: Scailo.GoodsDispatchesService.RevisionUpdate:input_type -> Scailo.GoodsDispatchesServiceUpdateRequest
+	36,  // 52: Scailo.GoodsDispatchesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 53: Scailo.GoodsDispatchesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 54: Scailo.GoodsDispatchesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 55: Scailo.GoodsDispatchesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 56: Scailo.GoodsDispatchesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 57: Scailo.GoodsDispatchesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 58: Scailo.GoodsDispatchesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 59: Scailo.GoodsDispatchesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	7,   // 60: Scailo.GoodsDispatchesService.Autofill:input_type -> Scailo.GoodsDispatchesServiceAutofillRequest
+	38,  // 61: Scailo.GoodsDispatchesService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	39,  // 62: Scailo.GoodsDispatchesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	12,  // 63: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:input_type -> Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest
+	10,  // 64: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
+	13,  // 65: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemUpdateRequest
+	40,  // 66: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
+	40,  // 67: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 68: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:input_type -> Scailo.ReorderItemsRequest
+	42,  // 69: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:input_type -> Scailo.Identifier
+	43,  // 70: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
+	44,  // 71: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
+	44,  // 72: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
+	17,  // 73: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:input_type -> Scailo.GoodsDispatchItemHistoryRequest
+	19,  // 74: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	19,  // 75: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	19,  // 76: Scailo.GoodsDispatchesService.SearchItemsWithPagination:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	38,  // 77: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	45,  // 78: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	42,  // 79: Scailo.GoodsDispatchesService.ViewByID:input_type -> Scailo.Identifier
+	38,  // 80: Scailo.GoodsDispatchesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	43,  // 81: Scailo.GoodsDispatchesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	42,  // 82: Scailo.GoodsDispatchesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	38,  // 83: Scailo.GoodsDispatchesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	46,  // 84: Scailo.GoodsDispatchesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	38,  // 85: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 86: Scailo.GoodsDispatchesService.ViewAll:input_type -> Scailo.ActiveStatus
+	38,  // 87: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	22,  // 88: Scailo.GoodsDispatchesService.ViewWithPagination:input_type -> Scailo.GoodsDispatchesServicePaginationReq
+	44,  // 89: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	48,  // 90: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	18,  // 91: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:input_type -> Scailo.GoodsDispatchItemProspectiveInfoRequest
+	38,  // 92: Scailo.GoodsDispatchesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	38,  // 93: Scailo.GoodsDispatchesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	38,  // 94: Scailo.GoodsDispatchesService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	38,  // 95: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
+	38,  // 96: Scailo.GoodsDispatchesService.IsBilled:input_type -> Scailo.IdentifierUUID
+	21,  // 97: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
+	26,  // 98: Scailo.GoodsDispatchesService.SearchAll:input_type -> Scailo.GoodsDispatchesServiceSearchAllReq
+	24,  // 99: Scailo.GoodsDispatchesService.Filter:input_type -> Scailo.GoodsDispatchesServiceFilterReq
+	49,  // 100: Scailo.GoodsDispatchesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	25,  // 101: Scailo.GoodsDispatchesService.Count:input_type -> Scailo.GoodsDispatchesServiceCountReq
+	24,  // 102: Scailo.GoodsDispatchesService.DownloadAsCSV:input_type -> Scailo.GoodsDispatchesServiceFilterReq
+	50,  // 103: Scailo.GoodsDispatchesService.Create:output_type -> Scailo.IdentifierResponse
+	50,  // 104: Scailo.GoodsDispatchesService.Draft:output_type -> Scailo.IdentifierResponse
+	50,  // 105: Scailo.GoodsDispatchesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	50,  // 106: Scailo.GoodsDispatchesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	50,  // 107: Scailo.GoodsDispatchesService.Verify:output_type -> Scailo.IdentifierResponse
+	50,  // 108: Scailo.GoodsDispatchesService.Approve:output_type -> Scailo.IdentifierResponse
+	50,  // 109: Scailo.GoodsDispatchesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	50,  // 110: Scailo.GoodsDispatchesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	50,  // 111: Scailo.GoodsDispatchesService.Halt:output_type -> Scailo.IdentifierResponse
+	50,  // 112: Scailo.GoodsDispatchesService.Discard:output_type -> Scailo.IdentifierResponse
+	50,  // 113: Scailo.GoodsDispatchesService.Restore:output_type -> Scailo.IdentifierResponse
+	50,  // 114: Scailo.GoodsDispatchesService.Complete:output_type -> Scailo.IdentifierResponse
+	50,  // 115: Scailo.GoodsDispatchesService.Repeat:output_type -> Scailo.IdentifierResponse
+	50,  // 116: Scailo.GoodsDispatchesService.Reopen:output_type -> Scailo.IdentifierResponse
+	50,  // 117: Scailo.GoodsDispatchesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	50,  // 118: Scailo.GoodsDispatchesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	50,  // 119: Scailo.GoodsDispatchesService.Autofill:output_type -> Scailo.IdentifierResponse
+	51,  // 120: Scailo.GoodsDispatchesService.IsCompletable:output_type -> Scailo.BooleanResponse
+	52,  // 121: Scailo.GoodsDispatchesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	50,  // 122: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
+	50,  // 123: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	50,  // 124: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	50,  // 125: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	50,  // 126: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	50,  // 127: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
+	14,  // 128: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:output_type -> Scailo.GoodsDispatchItem
+	14,  // 129: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:output_type -> Scailo.GoodsDispatchItem
+	16,  // 130: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
+	16,  // 131: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
+	16,  // 132: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:output_type -> Scailo.GoodsDispatchesItemsList
+	20,  // 133: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	20,  // 134: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	20,  // 135: Scailo.GoodsDispatchesService.SearchItemsWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	53,  // 136: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	53,  // 137: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	9,   // 138: Scailo.GoodsDispatchesService.ViewByID:output_type -> Scailo.GoodsDispatch
+	9,   // 139: Scailo.GoodsDispatchesService.ViewByUUID:output_type -> Scailo.GoodsDispatch
+	9,   // 140: Scailo.GoodsDispatchesService.ViewByReferenceID:output_type -> Scailo.GoodsDispatch
+	9,   // 141: Scailo.GoodsDispatchesService.ViewEssentialByID:output_type -> Scailo.GoodsDispatch
+	9,   // 142: Scailo.GoodsDispatchesService.ViewEssentialByUUID:output_type -> Scailo.GoodsDispatch
+	15,  // 143: Scailo.GoodsDispatchesService.ViewFromIDs:output_type -> Scailo.GoodsDispatchesList
+	8,   // 144: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:output_type -> Scailo.GoodsDispatchAncillaryParameters
+	15,  // 145: Scailo.GoodsDispatchesService.ViewAll:output_type -> Scailo.GoodsDispatchesList
+	15,  // 146: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:output_type -> Scailo.GoodsDispatchesList
+	23,  // 147: Scailo.GoodsDispatchesService.ViewWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginationResponse
+	54,  // 148: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	54,  // 149: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	10,  // 150: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:output_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
+	51,  // 151: Scailo.GoodsDispatchesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	53,  // 152: Scailo.GoodsDispatchesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	53,  // 153: Scailo.GoodsDispatchesService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	50,  // 154: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
+	51,  // 155: Scailo.GoodsDispatchesService.IsBilled:output_type -> Scailo.BooleanResponse
+	55,  // 156: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	15,  // 157: Scailo.GoodsDispatchesService.SearchAll:output_type -> Scailo.GoodsDispatchesList
+	15,  // 158: Scailo.GoodsDispatchesService.Filter:output_type -> Scailo.GoodsDispatchesList
+	56,  // 159: Scailo.GoodsDispatchesService.CountInStatus:output_type -> Scailo.CountResponse
+	56,  // 160: Scailo.GoodsDispatchesService.Count:output_type -> Scailo.CountResponse
+	53,  // 161: Scailo.GoodsDispatchesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	103, // [103:162] is the sub-list for method output_type
+	44,  // [44:103] is the sub-list for method input_type
+	44,  // [44:44] is the sub-list for extension type_name
+	44,  // [44:44] is the sub-list for extension extendee
+	0,   // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_goods_dispatches_scailo_proto_init() }
@@ -3143,7 +3316,7 @@ func file_goods_dispatches_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_goods_dispatches_scailo_proto_rawDesc), len(file_goods_dispatches_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

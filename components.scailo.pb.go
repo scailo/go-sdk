@@ -1119,7 +1119,7 @@ type ComponentsServiceFilterReq struct {
 	FamilyId uint64 `protobuf:"varint,33,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	// The auto generated code of the component
 	Code string `protobuf:"bytes,34,opt,name=code,proto3" json:"code,omitempty"`
-	// Stores the internal code (as given by user)
+	// Filter by the exact internal code
 	InternalItemCode string `protobuf:"bytes,35,opt,name=internal_item_code,json=internalItemCode,proto3" json:"internal_item_code,omitempty"`
 	// The computed hash of the component
 	Hash string `protobuf:"bytes,36,opt,name=hash,proto3" json:"hash,omitempty"`
@@ -1463,7 +1463,7 @@ type ComponentsServiceCountReq struct {
 	FamilyId uint64 `protobuf:"varint,33,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	// The auto generated code of the component
 	Code string `protobuf:"bytes,34,opt,name=code,proto3" json:"code,omitempty"`
-	// Stores the internal code (as given by user)
+	// Filter by the exact internal code
 	InternalItemCode string `protobuf:"bytes,35,opt,name=internal_item_code,json=internalItemCode,proto3" json:"internal_item_code,omitempty"`
 	// The computed hash of the component
 	Hash string `protobuf:"bytes,36,opt,name=hash,proto3" json:"hash,omitempty"`

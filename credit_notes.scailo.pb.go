@@ -1034,6 +1034,188 @@ func (x *CreditNotesServiceItemCreateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to add an individual item as part of multiple item addition to a credit note
+type CreditNotesServiceMultipleItemsSingleton struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the family ID
+	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	// The quantity (in cents) being supplied in internal unit of material
+	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
+	// Stores the ID of the client's unit of material
+	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
+	// Stores the quantity (in cents) being admitted in client's unit of material
+	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
+	// The family code as represented by the client
+	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	// The unit price of the item (as supplied to the client)
+	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
+	// The ID of the associated tax group
+	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
+	// The applicable round off amount (optional, and can be positive or negative)
+	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) Reset() {
+	*x = CreditNotesServiceMultipleItemsSingleton{}
+	mi := &file_credit_notes_scailo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditNotesServiceMultipleItemsSingleton) ProtoMessage() {}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) ProtoReflect() protoreflect.Message {
+	mi := &file_credit_notes_scailo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditNotesServiceMultipleItemsSingleton.ProtoReflect.Descriptor instead.
+func (*CreditNotesServiceMultipleItemsSingleton) Descriptor() ([]byte, []int) {
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetFamilyId() uint64 {
+	if x != nil {
+		return x.FamilyId
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetInternalQuantity() uint64 {
+	if x != nil {
+		return x.InternalQuantity
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetClientUomId() uint64 {
+	if x != nil {
+		return x.ClientUomId
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetClientQuantity() uint64 {
+	if x != nil {
+		return x.ClientQuantity
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetClientFamilyCode() string {
+	if x != nil {
+		return x.ClientFamilyCode
+	}
+	return ""
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetUnitPrice() uint64 {
+	if x != nil {
+		return x.UnitPrice
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
+	if x != nil {
+		return x.TaxGroupId
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetRoundOff() int64 {
+	if x != nil {
+		return x.RoundOff
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsSingleton) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
+// Describes the parameters required to add multiple items to a credit note
+type CreditNotesServiceMultipleItemsCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// Stores the credit note ID
+	CreditNoteId uint64 `protobuf:"varint,10,opt,name=credit_note_id,json=creditNoteId,proto3" json:"credit_note_id,omitempty"`
+	// List of items
+	List          []*CreditNotesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) Reset() {
+	*x = CreditNotesServiceMultipleItemsCreateRequest{}
+	mi := &file_credit_notes_scailo_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditNotesServiceMultipleItemsCreateRequest) ProtoMessage() {}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_credit_notes_scailo_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditNotesServiceMultipleItemsCreateRequest.ProtoReflect.Descriptor instead.
+func (*CreditNotesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []int) {
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) GetCreditNoteId() uint64 {
+	if x != nil {
+		return x.CreditNoteId
+	}
+	return 0
+}
+
+func (x *CreditNotesServiceMultipleItemsCreateRequest) GetList() []*CreditNotesServiceMultipleItemsSingleton {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters required to update an item in a credit note
 type CreditNotesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1063,7 +1245,7 @@ type CreditNotesServiceItemUpdateRequest struct {
 
 func (x *CreditNotesServiceItemUpdateRequest) Reset() {
 	*x = CreditNotesServiceItemUpdateRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[6]
+	mi := &file_credit_notes_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1075,7 +1257,7 @@ func (x *CreditNotesServiceItemUpdateRequest) String() string {
 func (*CreditNotesServiceItemUpdateRequest) ProtoMessage() {}
 
 func (x *CreditNotesServiceItemUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[6]
+	mi := &file_credit_notes_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1088,7 +1270,7 @@ func (x *CreditNotesServiceItemUpdateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CreditNotesServiceItemUpdateRequest.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{6}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreditNotesServiceItemUpdateRequest) GetUserComment() string {
@@ -1200,7 +1382,7 @@ type CreditNoteItem struct {
 
 func (x *CreditNoteItem) Reset() {
 	*x = CreditNoteItem{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[7]
+	mi := &file_credit_notes_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1212,7 +1394,7 @@ func (x *CreditNoteItem) String() string {
 func (*CreditNoteItem) ProtoMessage() {}
 
 func (x *CreditNoteItem) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[7]
+	mi := &file_credit_notes_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1225,7 +1407,7 @@ func (x *CreditNoteItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteItem.ProtoReflect.Descriptor instead.
 func (*CreditNoteItem) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{7}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreditNoteItem) GetEntityUuid() string {
@@ -1344,7 +1526,7 @@ type CreditNotesList struct {
 
 func (x *CreditNotesList) Reset() {
 	*x = CreditNotesList{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[8]
+	mi := &file_credit_notes_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1538,7 @@ func (x *CreditNotesList) String() string {
 func (*CreditNotesList) ProtoMessage() {}
 
 func (x *CreditNotesList) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[8]
+	mi := &file_credit_notes_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1551,7 @@ func (x *CreditNotesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNotesList.ProtoReflect.Descriptor instead.
 func (*CreditNotesList) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{8}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreditNotesList) GetList() []*CreditNote {
@@ -1390,7 +1572,7 @@ type CreditNoteItemsList struct {
 
 func (x *CreditNoteItemsList) Reset() {
 	*x = CreditNoteItemsList{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[9]
+	mi := &file_credit_notes_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1402,7 +1584,7 @@ func (x *CreditNoteItemsList) String() string {
 func (*CreditNoteItemsList) ProtoMessage() {}
 
 func (x *CreditNoteItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[9]
+	mi := &file_credit_notes_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1415,7 +1597,7 @@ func (x *CreditNoteItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteItemsList.ProtoReflect.Descriptor instead.
 func (*CreditNoteItemsList) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{9}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreditNoteItemsList) GetList() []*CreditNoteItem {
@@ -1438,7 +1620,7 @@ type CreditNoteItemHistoryRequest struct {
 
 func (x *CreditNoteItemHistoryRequest) Reset() {
 	*x = CreditNoteItemHistoryRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[10]
+	mi := &file_credit_notes_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1450,7 +1632,7 @@ func (x *CreditNoteItemHistoryRequest) String() string {
 func (*CreditNoteItemHistoryRequest) ProtoMessage() {}
 
 func (x *CreditNoteItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[10]
+	mi := &file_credit_notes_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1463,7 +1645,7 @@ func (x *CreditNoteItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*CreditNoteItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{10}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreditNoteItemHistoryRequest) GetCreditNoteId() uint64 {
@@ -1493,7 +1675,7 @@ type CreditNoteItemProspectiveInfoRequest struct {
 
 func (x *CreditNoteItemProspectiveInfoRequest) Reset() {
 	*x = CreditNoteItemProspectiveInfoRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[11]
+	mi := &file_credit_notes_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1505,7 +1687,7 @@ func (x *CreditNoteItemProspectiveInfoRequest) String() string {
 func (*CreditNoteItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *CreditNoteItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[11]
+	mi := &file_credit_notes_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1518,7 +1700,7 @@ func (x *CreditNoteItemProspectiveInfoRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CreditNoteItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*CreditNoteItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{11}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CreditNoteItemProspectiveInfoRequest) GetCreditNoteId() uint64 {
@@ -1550,7 +1732,7 @@ type CreditNotesServiceAlreadyAddedQuantityForSourceRequest struct {
 
 func (x *CreditNotesServiceAlreadyAddedQuantityForSourceRequest) Reset() {
 	*x = CreditNotesServiceAlreadyAddedQuantityForSourceRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[12]
+	mi := &file_credit_notes_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1562,7 +1744,7 @@ func (x *CreditNotesServiceAlreadyAddedQuantityForSourceRequest) String() string
 func (*CreditNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoMessage() {}
 
 func (x *CreditNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[12]
+	mi := &file_credit_notes_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1575,7 +1757,7 @@ func (x *CreditNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() 
 
 // Deprecated: Use CreditNotesServiceAlreadyAddedQuantityForSourceRequest.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceAlreadyAddedQuantityForSourceRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{12}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreditNotesServiceAlreadyAddedQuantityForSourceRequest) GetRefFrom() CREDIT_NOTE_REF_FROM {
@@ -1642,7 +1824,7 @@ type CreditNoteItemsSearchRequest struct {
 
 func (x *CreditNoteItemsSearchRequest) Reset() {
 	*x = CreditNoteItemsSearchRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[13]
+	mi := &file_credit_notes_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1654,7 +1836,7 @@ func (x *CreditNoteItemsSearchRequest) String() string {
 func (*CreditNoteItemsSearchRequest) ProtoMessage() {}
 
 func (x *CreditNoteItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[13]
+	mi := &file_credit_notes_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1667,7 +1849,7 @@ func (x *CreditNoteItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*CreditNoteItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{13}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreditNoteItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -1806,7 +1988,7 @@ type CreditNotesServicePaginatedItemsResponse struct {
 
 func (x *CreditNotesServicePaginatedItemsResponse) Reset() {
 	*x = CreditNotesServicePaginatedItemsResponse{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[14]
+	mi := &file_credit_notes_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1818,7 +2000,7 @@ func (x *CreditNotesServicePaginatedItemsResponse) String() string {
 func (*CreditNotesServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *CreditNotesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[14]
+	mi := &file_credit_notes_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1831,7 +2013,7 @@ func (x *CreditNotesServicePaginatedItemsResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CreditNotesServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*CreditNotesServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{14}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreditNotesServicePaginatedItemsResponse) GetCount() uint64 {
@@ -1883,7 +2065,7 @@ type CreditNotesServicePaginationReq struct {
 
 func (x *CreditNotesServicePaginationReq) Reset() {
 	*x = CreditNotesServicePaginationReq{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[15]
+	mi := &file_credit_notes_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1895,7 +2077,7 @@ func (x *CreditNotesServicePaginationReq) String() string {
 func (*CreditNotesServicePaginationReq) ProtoMessage() {}
 
 func (x *CreditNotesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[15]
+	mi := &file_credit_notes_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1908,7 +2090,7 @@ func (x *CreditNotesServicePaginationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNotesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*CreditNotesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{15}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreditNotesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1970,7 +2152,7 @@ type CreditNotesServicePaginationResponse struct {
 
 func (x *CreditNotesServicePaginationResponse) Reset() {
 	*x = CreditNotesServicePaginationResponse{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[16]
+	mi := &file_credit_notes_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1982,7 +2164,7 @@ func (x *CreditNotesServicePaginationResponse) String() string {
 func (*CreditNotesServicePaginationResponse) ProtoMessage() {}
 
 func (x *CreditNotesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[16]
+	mi := &file_credit_notes_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1995,7 +2177,7 @@ func (x *CreditNotesServicePaginationResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CreditNotesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*CreditNotesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{16}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreditNotesServicePaginationResponse) GetCount() uint64 {
@@ -2096,7 +2278,7 @@ type CreditNotesServiceFilterReq struct {
 
 func (x *CreditNotesServiceFilterReq) Reset() {
 	*x = CreditNotesServiceFilterReq{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[17]
+	mi := &file_credit_notes_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2108,7 +2290,7 @@ func (x *CreditNotesServiceFilterReq) String() string {
 func (*CreditNotesServiceFilterReq) ProtoMessage() {}
 
 func (x *CreditNotesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[17]
+	mi := &file_credit_notes_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2121,7 +2303,7 @@ func (x *CreditNotesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNotesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{17}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreditNotesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2396,7 +2578,7 @@ type CreditNotesServiceCountReq struct {
 
 func (x *CreditNotesServiceCountReq) Reset() {
 	*x = CreditNotesServiceCountReq{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[18]
+	mi := &file_credit_notes_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2408,7 +2590,7 @@ func (x *CreditNotesServiceCountReq) String() string {
 func (*CreditNotesServiceCountReq) ProtoMessage() {}
 
 func (x *CreditNotesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[18]
+	mi := &file_credit_notes_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2421,7 +2603,7 @@ func (x *CreditNotesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNotesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{18}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CreditNotesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2640,7 +2822,7 @@ type CreditNotesServiceSearchAllReq struct {
 
 func (x *CreditNotesServiceSearchAllReq) Reset() {
 	*x = CreditNotesServiceSearchAllReq{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[19]
+	mi := &file_credit_notes_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2652,7 +2834,7 @@ func (x *CreditNotesServiceSearchAllReq) String() string {
 func (*CreditNotesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *CreditNotesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[19]
+	mi := &file_credit_notes_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2665,7 +2847,7 @@ func (x *CreditNotesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNotesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{19}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CreditNotesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2767,7 +2949,7 @@ type CreditNotesServiceReferenceCreateRequest struct {
 
 func (x *CreditNotesServiceReferenceCreateRequest) Reset() {
 	*x = CreditNotesServiceReferenceCreateRequest{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[20]
+	mi := &file_credit_notes_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2779,7 +2961,7 @@ func (x *CreditNotesServiceReferenceCreateRequest) String() string {
 func (*CreditNotesServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *CreditNotesServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[20]
+	mi := &file_credit_notes_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2792,7 +2974,7 @@ func (x *CreditNotesServiceReferenceCreateRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CreditNotesServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*CreditNotesServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{20}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CreditNotesServiceReferenceCreateRequest) GetUserComment() string {
@@ -2839,7 +3021,7 @@ type CreditNoteReference struct {
 
 func (x *CreditNoteReference) Reset() {
 	*x = CreditNoteReference{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[21]
+	mi := &file_credit_notes_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2851,7 +3033,7 @@ func (x *CreditNoteReference) String() string {
 func (*CreditNoteReference) ProtoMessage() {}
 
 func (x *CreditNoteReference) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[21]
+	mi := &file_credit_notes_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2864,7 +3046,7 @@ func (x *CreditNoteReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteReference.ProtoReflect.Descriptor instead.
 func (*CreditNoteReference) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{21}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CreditNoteReference) GetEntityUuid() string {
@@ -2927,7 +3109,7 @@ type CreditNoteReferencesList struct {
 
 func (x *CreditNoteReferencesList) Reset() {
 	*x = CreditNoteReferencesList{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[22]
+	mi := &file_credit_notes_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2939,7 +3121,7 @@ func (x *CreditNoteReferencesList) String() string {
 func (*CreditNoteReferencesList) ProtoMessage() {}
 
 func (x *CreditNoteReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[22]
+	mi := &file_credit_notes_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2952,7 +3134,7 @@ func (x *CreditNoteReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteReferencesList.ProtoReflect.Descriptor instead.
 func (*CreditNoteReferencesList) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{22}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CreditNoteReferencesList) GetList() []*CreditNoteReference {
@@ -2977,7 +3159,7 @@ type CreditNoteReturnStatistics struct {
 
 func (x *CreditNoteReturnStatistics) Reset() {
 	*x = CreditNoteReturnStatistics{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[23]
+	mi := &file_credit_notes_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2989,7 +3171,7 @@ func (x *CreditNoteReturnStatistics) String() string {
 func (*CreditNoteReturnStatistics) ProtoMessage() {}
 
 func (x *CreditNoteReturnStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[23]
+	mi := &file_credit_notes_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3002,7 +3184,7 @@ func (x *CreditNoteReturnStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteReturnStatistics.ProtoReflect.Descriptor instead.
 func (*CreditNoteReturnStatistics) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{23}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CreditNoteReturnStatistics) GetFamilyId() uint64 {
@@ -3036,7 +3218,7 @@ type CreditNoteReturnStatisticsList struct {
 
 func (x *CreditNoteReturnStatisticsList) Reset() {
 	*x = CreditNoteReturnStatisticsList{}
-	mi := &file_credit_notes_scailo_proto_msgTypes[24]
+	mi := &file_credit_notes_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3048,7 +3230,7 @@ func (x *CreditNoteReturnStatisticsList) String() string {
 func (*CreditNoteReturnStatisticsList) ProtoMessage() {}
 
 func (x *CreditNoteReturnStatisticsList) ProtoReflect() protoreflect.Message {
-	mi := &file_credit_notes_scailo_proto_msgTypes[24]
+	mi := &file_credit_notes_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3061,7 +3243,7 @@ func (x *CreditNoteReturnStatisticsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditNoteReturnStatisticsList.ProtoReflect.Descriptor instead.
 func (*CreditNoteReturnStatisticsList) Descriptor() ([]byte, []int) {
-	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{24}
+	return file_credit_notes_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CreditNoteReturnStatisticsList) GetList() []*CreditNoteReturnStatistics {
@@ -3151,7 +3333,24 @@ const file_credit_notes_scailo_proto_rawDesc = "" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1b\n" +
 	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xbc\x03\n" +
+	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xab\x03\n" +
+	"(CreditNotesServiceMultipleItemsSingleton\x12$\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
+	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
+	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
+	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\n" +
+	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
+	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"taxGroupId\x12\x1b\n" +
+	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
+	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xc6\x01\n" +
+	",CreditNotesServiceMultipleItemsCreateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12-\n" +
+	"\x0ecredit_note_id\x18\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\fcreditNoteId\x12D\n" +
+	"\x04list\x18\v \x03(\v20.Scailo.CreditNotesServiceMultipleItemsSingletonR\x04list\"\xbc\x03\n" +
 	"#CreditNotesServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
@@ -3383,7 +3582,7 @@ const file_credit_notes_scailo_proto_rawDesc = "" +
 	"!CREDIT_NOTE_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12)\n" +
 	"%CREDIT_NOTE_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12$\n" +
-	" CREDIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\x87(\n" +
+	" CREDIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\xf7(\n" +
 	"\x12CreditNotesService\x12M\n" +
 	"\x06Create\x12'.Scailo.CreditNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.CreditNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -3403,7 +3602,8 @@ const file_credit_notes_scailo_proto_rawDesc = "" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
 	"\bAutofill\x12).Scailo.CreditNotesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12\\\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12n\n" +
+	"\x1aAddMultipleCreditNoteItems\x124.Scailo.CreditNotesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\\\n" +
 	"\x11AddCreditNoteItem\x12+.Scailo.CreditNotesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x14ModifyCreditNoteItem\x12+.Scailo.CreditNotesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x15ApproveCreditNoteItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
@@ -3465,7 +3665,7 @@ func file_credit_notes_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_credit_notes_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_credit_notes_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_credit_notes_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_credit_notes_scailo_proto_goTypes = []any{
 	(CREDIT_NOTE_REF_FROM)(0),                                      // 0: Scailo.CREDIT_NOTE_REF_FROM
 	(CREDIT_NOTE_ITEM_SORT_KEY)(0),                                 // 1: Scailo.CREDIT_NOTE_ITEM_SORT_KEY
@@ -3477,230 +3677,235 @@ var file_credit_notes_scailo_proto_goTypes = []any{
 	(*CreditNoteAncillaryParameters)(nil),                          // 7: Scailo.CreditNoteAncillaryParameters
 	(*CreditNote)(nil),                                             // 8: Scailo.CreditNote
 	(*CreditNotesServiceItemCreateRequest)(nil),                    // 9: Scailo.CreditNotesServiceItemCreateRequest
-	(*CreditNotesServiceItemUpdateRequest)(nil),                    // 10: Scailo.CreditNotesServiceItemUpdateRequest
-	(*CreditNoteItem)(nil),                                         // 11: Scailo.CreditNoteItem
-	(*CreditNotesList)(nil),                                        // 12: Scailo.CreditNotesList
-	(*CreditNoteItemsList)(nil),                                    // 13: Scailo.CreditNoteItemsList
-	(*CreditNoteItemHistoryRequest)(nil),                           // 14: Scailo.CreditNoteItemHistoryRequest
-	(*CreditNoteItemProspectiveInfoRequest)(nil),                   // 15: Scailo.CreditNoteItemProspectiveInfoRequest
-	(*CreditNotesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 16: Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest
-	(*CreditNoteItemsSearchRequest)(nil),                           // 17: Scailo.CreditNoteItemsSearchRequest
-	(*CreditNotesServicePaginatedItemsResponse)(nil),               // 18: Scailo.CreditNotesServicePaginatedItemsResponse
-	(*CreditNotesServicePaginationReq)(nil),                        // 19: Scailo.CreditNotesServicePaginationReq
-	(*CreditNotesServicePaginationResponse)(nil),                   // 20: Scailo.CreditNotesServicePaginationResponse
-	(*CreditNotesServiceFilterReq)(nil),                            // 21: Scailo.CreditNotesServiceFilterReq
-	(*CreditNotesServiceCountReq)(nil),                             // 22: Scailo.CreditNotesServiceCountReq
-	(*CreditNotesServiceSearchAllReq)(nil),                         // 23: Scailo.CreditNotesServiceSearchAllReq
-	(*CreditNotesServiceReferenceCreateRequest)(nil),               // 24: Scailo.CreditNotesServiceReferenceCreateRequest
-	(*CreditNoteReference)(nil),                                    // 25: Scailo.CreditNoteReference
-	(*CreditNoteReferencesList)(nil),                               // 26: Scailo.CreditNoteReferencesList
-	(*CreditNoteReturnStatistics)(nil),                             // 27: Scailo.CreditNoteReturnStatistics
-	(*CreditNoteReturnStatisticsList)(nil),                         // 28: Scailo.CreditNoteReturnStatisticsList
-	(*FormFieldDatumCreateRequest)(nil),                            // 29: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                       // 30: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                       // 31: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                                 // 32: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                                   // 33: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                         // 34: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                               // 35: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                                // 36: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                            // 37: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                          // 38: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                          // 39: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),      // 40: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                              // 41: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                    // 42: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                             // 43: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                // 44: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                         // 45: Scailo.IdentifierUUID
-	(*Empty)(nil),                                                  // 46: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                 // 47: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                        // 48: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                        // 49: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                           // 50: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                         // 51: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                // 52: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                     // 53: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                              // 54: Scailo.MagicLink
-	(*StandardFile)(nil),                                           // 55: Scailo.StandardFile
-	(*FamiliesList)(nil),                                           // 56: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                        // 57: Scailo.BooleanResponse
-	(*DualQuantitiesResponse)(nil),                                 // 58: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                          // 59: Scailo.CountResponse
-	(*SumResponse)(nil),                                            // 60: Scailo.SumResponse
+	(*CreditNotesServiceMultipleItemsSingleton)(nil),               // 10: Scailo.CreditNotesServiceMultipleItemsSingleton
+	(*CreditNotesServiceMultipleItemsCreateRequest)(nil),           // 11: Scailo.CreditNotesServiceMultipleItemsCreateRequest
+	(*CreditNotesServiceItemUpdateRequest)(nil),                    // 12: Scailo.CreditNotesServiceItemUpdateRequest
+	(*CreditNoteItem)(nil),                                         // 13: Scailo.CreditNoteItem
+	(*CreditNotesList)(nil),                                        // 14: Scailo.CreditNotesList
+	(*CreditNoteItemsList)(nil),                                    // 15: Scailo.CreditNoteItemsList
+	(*CreditNoteItemHistoryRequest)(nil),                           // 16: Scailo.CreditNoteItemHistoryRequest
+	(*CreditNoteItemProspectiveInfoRequest)(nil),                   // 17: Scailo.CreditNoteItemProspectiveInfoRequest
+	(*CreditNotesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 18: Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest
+	(*CreditNoteItemsSearchRequest)(nil),                           // 19: Scailo.CreditNoteItemsSearchRequest
+	(*CreditNotesServicePaginatedItemsResponse)(nil),               // 20: Scailo.CreditNotesServicePaginatedItemsResponse
+	(*CreditNotesServicePaginationReq)(nil),                        // 21: Scailo.CreditNotesServicePaginationReq
+	(*CreditNotesServicePaginationResponse)(nil),                   // 22: Scailo.CreditNotesServicePaginationResponse
+	(*CreditNotesServiceFilterReq)(nil),                            // 23: Scailo.CreditNotesServiceFilterReq
+	(*CreditNotesServiceCountReq)(nil),                             // 24: Scailo.CreditNotesServiceCountReq
+	(*CreditNotesServiceSearchAllReq)(nil),                         // 25: Scailo.CreditNotesServiceSearchAllReq
+	(*CreditNotesServiceReferenceCreateRequest)(nil),               // 26: Scailo.CreditNotesServiceReferenceCreateRequest
+	(*CreditNoteReference)(nil),                                    // 27: Scailo.CreditNoteReference
+	(*CreditNoteReferencesList)(nil),                               // 28: Scailo.CreditNoteReferencesList
+	(*CreditNoteReturnStatistics)(nil),                             // 29: Scailo.CreditNoteReturnStatistics
+	(*CreditNoteReturnStatisticsList)(nil),                         // 30: Scailo.CreditNoteReturnStatisticsList
+	(*FormFieldDatumCreateRequest)(nil),                            // 31: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                       // 32: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                       // 33: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                                 // 34: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                                   // 35: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                         // 36: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                               // 37: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                                // 38: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                            // 39: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                          // 40: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                          // 41: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),      // 42: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                              // 43: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                    // 44: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                             // 45: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                // 46: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                         // 47: Scailo.IdentifierUUID
+	(*Empty)(nil),                                                  // 48: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                 // 49: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                        // 50: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                        // 51: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                           // 52: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                         // 53: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                // 54: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                     // 55: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                              // 56: Scailo.MagicLink
+	(*StandardFile)(nil),                                           // 57: Scailo.StandardFile
+	(*FamiliesList)(nil),                                           // 58: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                        // 59: Scailo.BooleanResponse
+	(*DualQuantitiesResponse)(nil),                                 // 60: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                          // 61: Scailo.CountResponse
+	(*SumResponse)(nil),                                            // 62: Scailo.SumResponse
 }
 var file_credit_notes_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.CreditNotesServiceCreateRequest.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	29,  // 1: Scailo.CreditNotesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	29,  // 2: Scailo.CreditNotesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	30,  // 3: Scailo.CreditNote.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 4: Scailo.CreditNote.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	32,  // 5: Scailo.CreditNote.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	33,  // 6: Scailo.CreditNote.logs:type_name -> Scailo.LogbookLogConciseSLC
+	31,  // 1: Scailo.CreditNotesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	31,  // 2: Scailo.CreditNotesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	32,  // 3: Scailo.CreditNote.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 4: Scailo.CreditNote.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	34,  // 5: Scailo.CreditNote.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 6: Scailo.CreditNote.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 7: Scailo.CreditNote.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	11,  // 8: Scailo.CreditNote.list:type_name -> Scailo.CreditNoteItem
-	34,  // 9: Scailo.CreditNote.form_data:type_name -> Scailo.FormFieldDatum
-	30,  // 10: Scailo.CreditNoteItem.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 11: Scailo.CreditNoteItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	8,   // 12: Scailo.CreditNotesList.list:type_name -> Scailo.CreditNote
-	11,  // 13: Scailo.CreditNoteItemsList.list:type_name -> Scailo.CreditNoteItem
-	0,   // 14: Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	35,  // 15: Scailo.CreditNoteItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 16: Scailo.CreditNoteItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	1,   // 17: Scailo.CreditNoteItemsSearchRequest.sort_key:type_name -> Scailo.CREDIT_NOTE_ITEM_SORT_KEY
-	2,   // 18: Scailo.CreditNoteItemsSearchRequest.status:type_name -> Scailo.CREDIT_NOTE_ITEM_STATUS
-	11,  // 19: Scailo.CreditNotesServicePaginatedItemsResponse.payload:type_name -> Scailo.CreditNoteItem
-	35,  // 20: Scailo.CreditNotesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 21: Scailo.CreditNotesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 22: Scailo.CreditNotesServicePaginationReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
-	32,  // 23: Scailo.CreditNotesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	8,   // 24: Scailo.CreditNotesServicePaginationResponse.payload:type_name -> Scailo.CreditNote
-	35,  // 25: Scailo.CreditNotesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 26: Scailo.CreditNotesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 27: Scailo.CreditNotesServiceFilterReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
-	32,  // 28: Scailo.CreditNotesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 29: Scailo.CreditNotesServiceFilterReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	37,  // 30: Scailo.CreditNotesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 31: Scailo.CreditNotesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 32: Scailo.CreditNotesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 33: Scailo.CreditNotesServiceCountReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	37,  // 34: Scailo.CreditNotesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 35: Scailo.CreditNotesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 36: Scailo.CreditNotesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 37: Scailo.CreditNotesServiceSearchAllReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
-	32,  // 38: Scailo.CreditNotesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 39: Scailo.CreditNotesServiceSearchAllReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
-	30,  // 40: Scailo.CreditNoteReference.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 41: Scailo.CreditNoteReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	25,  // 42: Scailo.CreditNoteReferencesList.list:type_name -> Scailo.CreditNoteReference
-	27,  // 43: Scailo.CreditNoteReturnStatisticsList.list:type_name -> Scailo.CreditNoteReturnStatistics
-	4,   // 44: Scailo.CreditNotesService.Create:input_type -> Scailo.CreditNotesServiceCreateRequest
-	4,   // 45: Scailo.CreditNotesService.Draft:input_type -> Scailo.CreditNotesServiceCreateRequest
-	5,   // 46: Scailo.CreditNotesService.DraftUpdate:input_type -> Scailo.CreditNotesServiceUpdateRequest
-	38,  // 47: Scailo.CreditNotesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 48: Scailo.CreditNotesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 49: Scailo.CreditNotesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 50: Scailo.CreditNotesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	5,   // 51: Scailo.CreditNotesService.RevisionUpdate:input_type -> Scailo.CreditNotesServiceUpdateRequest
-	38,  // 52: Scailo.CreditNotesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 53: Scailo.CreditNotesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 54: Scailo.CreditNotesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 55: Scailo.CreditNotesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 56: Scailo.CreditNotesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 57: Scailo.CreditNotesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 58: Scailo.CreditNotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	39,  // 59: Scailo.CreditNotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	6,   // 60: Scailo.CreditNotesService.Autofill:input_type -> Scailo.CreditNotesServiceAutofillRequest
-	40,  // 61: Scailo.CreditNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	9,   // 62: Scailo.CreditNotesService.AddCreditNoteItem:input_type -> Scailo.CreditNotesServiceItemCreateRequest
-	10,  // 63: Scailo.CreditNotesService.ModifyCreditNoteItem:input_type -> Scailo.CreditNotesServiceItemUpdateRequest
-	41,  // 64: Scailo.CreditNotesService.ApproveCreditNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 65: Scailo.CreditNotesService.DeleteCreditNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	42,  // 66: Scailo.CreditNotesService.ReorderCreditNoteItems:input_type -> Scailo.ReorderItemsRequest
-	43,  // 67: Scailo.CreditNotesService.ViewCreditNoteItemByID:input_type -> Scailo.Identifier
-	44,  // 68: Scailo.CreditNotesService.ViewApprovedCreditNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	44,  // 69: Scailo.CreditNotesService.ViewUnapprovedCreditNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	14,  // 70: Scailo.CreditNotesService.ViewCreditNoteItemHistory:input_type -> Scailo.CreditNoteItemHistoryRequest
-	17,  // 71: Scailo.CreditNotesService.ViewPaginatedApprovedCreditNoteItems:input_type -> Scailo.CreditNoteItemsSearchRequest
-	17,  // 72: Scailo.CreditNotesService.ViewPaginatedUnapprovedCreditNoteItems:input_type -> Scailo.CreditNoteItemsSearchRequest
-	17,  // 73: Scailo.CreditNotesService.SearchItemsWithPagination:input_type -> Scailo.CreditNoteItemsSearchRequest
-	45,  // 74: Scailo.CreditNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	46,  // 75: Scailo.CreditNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	47,  // 76: Scailo.CreditNotesService.UploadCreditNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
-	24,  // 77: Scailo.CreditNotesService.AddCreditNoteReference:input_type -> Scailo.CreditNotesServiceReferenceCreateRequest
-	41,  // 78: Scailo.CreditNotesService.ApproveCreditNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 79: Scailo.CreditNotesService.DeleteCreditNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	43,  // 80: Scailo.CreditNotesService.ViewCreditNoteReferenceByID:input_type -> Scailo.Identifier
-	43,  // 81: Scailo.CreditNotesService.ViewCreditNoteReferences:input_type -> Scailo.Identifier
-	43,  // 82: Scailo.CreditNotesService.ViewByID:input_type -> Scailo.Identifier
-	45,  // 83: Scailo.CreditNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	48,  // 84: Scailo.CreditNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	43,  // 85: Scailo.CreditNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	45,  // 86: Scailo.CreditNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	49,  // 87: Scailo.CreditNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	45,  // 88: Scailo.CreditNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	50,  // 89: Scailo.CreditNotesService.ViewAll:input_type -> Scailo.ActiveStatus
-	45,  // 90: Scailo.CreditNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 91: Scailo.CreditNotesService.ViewWithPagination:input_type -> Scailo.CreditNotesServicePaginationReq
-	44,  // 92: Scailo.CreditNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	51,  // 93: Scailo.CreditNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15,  // 94: Scailo.CreditNotesService.ViewProspectiveCreditNoteItem:input_type -> Scailo.CreditNoteItemProspectiveInfoRequest
-	45,  // 95: Scailo.CreditNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
-	45,  // 96: Scailo.CreditNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	45,  // 97: Scailo.CreditNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	16,  // 98: Scailo.CreditNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest
-	23,  // 99: Scailo.CreditNotesService.SearchAll:input_type -> Scailo.CreditNotesServiceSearchAllReq
-	21,  // 100: Scailo.CreditNotesService.Filter:input_type -> Scailo.CreditNotesServiceFilterReq
-	52,  // 101: Scailo.CreditNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 102: Scailo.CreditNotesService.Count:input_type -> Scailo.CreditNotesServiceCountReq
-	22,  // 103: Scailo.CreditNotesService.AccruedValue:input_type -> Scailo.CreditNotesServiceCountReq
-	21,  // 104: Scailo.CreditNotesService.DownloadAsCSV:input_type -> Scailo.CreditNotesServiceFilterReq
-	53,  // 105: Scailo.CreditNotesService.Create:output_type -> Scailo.IdentifierResponse
-	53,  // 106: Scailo.CreditNotesService.Draft:output_type -> Scailo.IdentifierResponse
-	53,  // 107: Scailo.CreditNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	53,  // 108: Scailo.CreditNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	53,  // 109: Scailo.CreditNotesService.Verify:output_type -> Scailo.IdentifierResponse
-	53,  // 110: Scailo.CreditNotesService.Approve:output_type -> Scailo.IdentifierResponse
-	53,  // 111: Scailo.CreditNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	53,  // 112: Scailo.CreditNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	53,  // 113: Scailo.CreditNotesService.Halt:output_type -> Scailo.IdentifierResponse
-	53,  // 114: Scailo.CreditNotesService.Discard:output_type -> Scailo.IdentifierResponse
-	53,  // 115: Scailo.CreditNotesService.Restore:output_type -> Scailo.IdentifierResponse
-	53,  // 116: Scailo.CreditNotesService.Complete:output_type -> Scailo.IdentifierResponse
-	53,  // 117: Scailo.CreditNotesService.Repeat:output_type -> Scailo.IdentifierResponse
-	53,  // 118: Scailo.CreditNotesService.Reopen:output_type -> Scailo.IdentifierResponse
-	53,  // 119: Scailo.CreditNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	53,  // 120: Scailo.CreditNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	53,  // 121: Scailo.CreditNotesService.Autofill:output_type -> Scailo.IdentifierResponse
-	54,  // 122: Scailo.CreditNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	53,  // 123: Scailo.CreditNotesService.AddCreditNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 124: Scailo.CreditNotesService.ModifyCreditNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 125: Scailo.CreditNotesService.ApproveCreditNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 126: Scailo.CreditNotesService.DeleteCreditNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 127: Scailo.CreditNotesService.ReorderCreditNoteItems:output_type -> Scailo.IdentifierResponse
-	11,  // 128: Scailo.CreditNotesService.ViewCreditNoteItemByID:output_type -> Scailo.CreditNoteItem
-	13,  // 129: Scailo.CreditNotesService.ViewApprovedCreditNoteItems:output_type -> Scailo.CreditNoteItemsList
-	13,  // 130: Scailo.CreditNotesService.ViewUnapprovedCreditNoteItems:output_type -> Scailo.CreditNoteItemsList
-	13,  // 131: Scailo.CreditNotesService.ViewCreditNoteItemHistory:output_type -> Scailo.CreditNoteItemsList
-	18,  // 132: Scailo.CreditNotesService.ViewPaginatedApprovedCreditNoteItems:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
-	18,  // 133: Scailo.CreditNotesService.ViewPaginatedUnapprovedCreditNoteItems:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
-	18,  // 134: Scailo.CreditNotesService.SearchItemsWithPagination:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
-	55,  // 135: Scailo.CreditNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	55,  // 136: Scailo.CreditNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	49,  // 137: Scailo.CreditNotesService.UploadCreditNoteItems:output_type -> Scailo.IdentifiersList
-	53,  // 138: Scailo.CreditNotesService.AddCreditNoteReference:output_type -> Scailo.IdentifierResponse
-	53,  // 139: Scailo.CreditNotesService.ApproveCreditNoteReference:output_type -> Scailo.IdentifierResponse
-	53,  // 140: Scailo.CreditNotesService.DeleteCreditNoteReference:output_type -> Scailo.IdentifierResponse
-	25,  // 141: Scailo.CreditNotesService.ViewCreditNoteReferenceByID:output_type -> Scailo.CreditNoteReference
-	26,  // 142: Scailo.CreditNotesService.ViewCreditNoteReferences:output_type -> Scailo.CreditNoteReferencesList
-	8,   // 143: Scailo.CreditNotesService.ViewByID:output_type -> Scailo.CreditNote
-	8,   // 144: Scailo.CreditNotesService.ViewByUUID:output_type -> Scailo.CreditNote
-	8,   // 145: Scailo.CreditNotesService.ViewByReferenceID:output_type -> Scailo.CreditNote
-	8,   // 146: Scailo.CreditNotesService.ViewEssentialByID:output_type -> Scailo.CreditNote
-	8,   // 147: Scailo.CreditNotesService.ViewEssentialByUUID:output_type -> Scailo.CreditNote
-	12,  // 148: Scailo.CreditNotesService.ViewFromIDs:output_type -> Scailo.CreditNotesList
-	7,   // 149: Scailo.CreditNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.CreditNoteAncillaryParameters
-	12,  // 150: Scailo.CreditNotesService.ViewAll:output_type -> Scailo.CreditNotesList
-	12,  // 151: Scailo.CreditNotesService.ViewAllForEntityUUID:output_type -> Scailo.CreditNotesList
-	20,  // 152: Scailo.CreditNotesService.ViewWithPagination:output_type -> Scailo.CreditNotesServicePaginationResponse
-	56,  // 153: Scailo.CreditNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	56,  // 154: Scailo.CreditNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 155: Scailo.CreditNotesService.ViewProspectiveCreditNoteItem:output_type -> Scailo.CreditNotesServiceItemCreateRequest
-	28,  // 156: Scailo.CreditNotesService.ViewReturnedStatistics:output_type -> Scailo.CreditNoteReturnStatisticsList
-	57,  // 157: Scailo.CreditNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	55,  // 158: Scailo.CreditNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	58,  // 159: Scailo.CreditNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	12,  // 160: Scailo.CreditNotesService.SearchAll:output_type -> Scailo.CreditNotesList
-	12,  // 161: Scailo.CreditNotesService.Filter:output_type -> Scailo.CreditNotesList
-	59,  // 162: Scailo.CreditNotesService.CountInStatus:output_type -> Scailo.CountResponse
-	59,  // 163: Scailo.CreditNotesService.Count:output_type -> Scailo.CountResponse
-	60,  // 164: Scailo.CreditNotesService.AccruedValue:output_type -> Scailo.SumResponse
-	55,  // 165: Scailo.CreditNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	105, // [105:166] is the sub-list for method output_type
-	44,  // [44:105] is the sub-list for method input_type
-	44,  // [44:44] is the sub-list for extension type_name
-	44,  // [44:44] is the sub-list for extension extendee
-	0,   // [0:44] is the sub-list for field type_name
+	13,  // 8: Scailo.CreditNote.list:type_name -> Scailo.CreditNoteItem
+	36,  // 9: Scailo.CreditNote.form_data:type_name -> Scailo.FormFieldDatum
+	10,  // 10: Scailo.CreditNotesServiceMultipleItemsCreateRequest.list:type_name -> Scailo.CreditNotesServiceMultipleItemsSingleton
+	32,  // 11: Scailo.CreditNoteItem.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 12: Scailo.CreditNoteItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	8,   // 13: Scailo.CreditNotesList.list:type_name -> Scailo.CreditNote
+	13,  // 14: Scailo.CreditNoteItemsList.list:type_name -> Scailo.CreditNoteItem
+	0,   // 15: Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
+	37,  // 16: Scailo.CreditNoteItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 17: Scailo.CreditNoteItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 18: Scailo.CreditNoteItemsSearchRequest.sort_key:type_name -> Scailo.CREDIT_NOTE_ITEM_SORT_KEY
+	2,   // 19: Scailo.CreditNoteItemsSearchRequest.status:type_name -> Scailo.CREDIT_NOTE_ITEM_STATUS
+	13,  // 20: Scailo.CreditNotesServicePaginatedItemsResponse.payload:type_name -> Scailo.CreditNoteItem
+	37,  // 21: Scailo.CreditNotesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 22: Scailo.CreditNotesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 23: Scailo.CreditNotesServicePaginationReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
+	34,  // 24: Scailo.CreditNotesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	8,   // 25: Scailo.CreditNotesServicePaginationResponse.payload:type_name -> Scailo.CreditNote
+	37,  // 26: Scailo.CreditNotesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 27: Scailo.CreditNotesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 28: Scailo.CreditNotesServiceFilterReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
+	34,  // 29: Scailo.CreditNotesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 30: Scailo.CreditNotesServiceFilterReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
+	39,  // 31: Scailo.CreditNotesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 32: Scailo.CreditNotesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 33: Scailo.CreditNotesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 34: Scailo.CreditNotesServiceCountReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
+	39,  // 35: Scailo.CreditNotesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 36: Scailo.CreditNotesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 37: Scailo.CreditNotesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 38: Scailo.CreditNotesServiceSearchAllReq.sort_key:type_name -> Scailo.CREDIT_NOTE_SORT_KEY
+	34,  // 39: Scailo.CreditNotesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 40: Scailo.CreditNotesServiceSearchAllReq.ref_from:type_name -> Scailo.CREDIT_NOTE_REF_FROM
+	32,  // 41: Scailo.CreditNoteReference.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 42: Scailo.CreditNoteReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	27,  // 43: Scailo.CreditNoteReferencesList.list:type_name -> Scailo.CreditNoteReference
+	29,  // 44: Scailo.CreditNoteReturnStatisticsList.list:type_name -> Scailo.CreditNoteReturnStatistics
+	4,   // 45: Scailo.CreditNotesService.Create:input_type -> Scailo.CreditNotesServiceCreateRequest
+	4,   // 46: Scailo.CreditNotesService.Draft:input_type -> Scailo.CreditNotesServiceCreateRequest
+	5,   // 47: Scailo.CreditNotesService.DraftUpdate:input_type -> Scailo.CreditNotesServiceUpdateRequest
+	40,  // 48: Scailo.CreditNotesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 49: Scailo.CreditNotesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 50: Scailo.CreditNotesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 51: Scailo.CreditNotesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	5,   // 52: Scailo.CreditNotesService.RevisionUpdate:input_type -> Scailo.CreditNotesServiceUpdateRequest
+	40,  // 53: Scailo.CreditNotesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 54: Scailo.CreditNotesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 55: Scailo.CreditNotesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 56: Scailo.CreditNotesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 57: Scailo.CreditNotesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 58: Scailo.CreditNotesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 59: Scailo.CreditNotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 60: Scailo.CreditNotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	6,   // 61: Scailo.CreditNotesService.Autofill:input_type -> Scailo.CreditNotesServiceAutofillRequest
+	42,  // 62: Scailo.CreditNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	11,  // 63: Scailo.CreditNotesService.AddMultipleCreditNoteItems:input_type -> Scailo.CreditNotesServiceMultipleItemsCreateRequest
+	9,   // 64: Scailo.CreditNotesService.AddCreditNoteItem:input_type -> Scailo.CreditNotesServiceItemCreateRequest
+	12,  // 65: Scailo.CreditNotesService.ModifyCreditNoteItem:input_type -> Scailo.CreditNotesServiceItemUpdateRequest
+	43,  // 66: Scailo.CreditNotesService.ApproveCreditNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	43,  // 67: Scailo.CreditNotesService.DeleteCreditNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 68: Scailo.CreditNotesService.ReorderCreditNoteItems:input_type -> Scailo.ReorderItemsRequest
+	45,  // 69: Scailo.CreditNotesService.ViewCreditNoteItemByID:input_type -> Scailo.Identifier
+	46,  // 70: Scailo.CreditNotesService.ViewApprovedCreditNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	46,  // 71: Scailo.CreditNotesService.ViewUnapprovedCreditNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	16,  // 72: Scailo.CreditNotesService.ViewCreditNoteItemHistory:input_type -> Scailo.CreditNoteItemHistoryRequest
+	19,  // 73: Scailo.CreditNotesService.ViewPaginatedApprovedCreditNoteItems:input_type -> Scailo.CreditNoteItemsSearchRequest
+	19,  // 74: Scailo.CreditNotesService.ViewPaginatedUnapprovedCreditNoteItems:input_type -> Scailo.CreditNoteItemsSearchRequest
+	19,  // 75: Scailo.CreditNotesService.SearchItemsWithPagination:input_type -> Scailo.CreditNoteItemsSearchRequest
+	47,  // 76: Scailo.CreditNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	48,  // 77: Scailo.CreditNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	49,  // 78: Scailo.CreditNotesService.UploadCreditNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
+	26,  // 79: Scailo.CreditNotesService.AddCreditNoteReference:input_type -> Scailo.CreditNotesServiceReferenceCreateRequest
+	43,  // 80: Scailo.CreditNotesService.ApproveCreditNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	43,  // 81: Scailo.CreditNotesService.DeleteCreditNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 82: Scailo.CreditNotesService.ViewCreditNoteReferenceByID:input_type -> Scailo.Identifier
+	45,  // 83: Scailo.CreditNotesService.ViewCreditNoteReferences:input_type -> Scailo.Identifier
+	45,  // 84: Scailo.CreditNotesService.ViewByID:input_type -> Scailo.Identifier
+	47,  // 85: Scailo.CreditNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	50,  // 86: Scailo.CreditNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	45,  // 87: Scailo.CreditNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	47,  // 88: Scailo.CreditNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	51,  // 89: Scailo.CreditNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	47,  // 90: Scailo.CreditNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	52,  // 91: Scailo.CreditNotesService.ViewAll:input_type -> Scailo.ActiveStatus
+	47,  // 92: Scailo.CreditNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	21,  // 93: Scailo.CreditNotesService.ViewWithPagination:input_type -> Scailo.CreditNotesServicePaginationReq
+	46,  // 94: Scailo.CreditNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	53,  // 95: Scailo.CreditNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	17,  // 96: Scailo.CreditNotesService.ViewProspectiveCreditNoteItem:input_type -> Scailo.CreditNoteItemProspectiveInfoRequest
+	47,  // 97: Scailo.CreditNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
+	47,  // 98: Scailo.CreditNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	47,  // 99: Scailo.CreditNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18,  // 100: Scailo.CreditNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.CreditNotesServiceAlreadyAddedQuantityForSourceRequest
+	25,  // 101: Scailo.CreditNotesService.SearchAll:input_type -> Scailo.CreditNotesServiceSearchAllReq
+	23,  // 102: Scailo.CreditNotesService.Filter:input_type -> Scailo.CreditNotesServiceFilterReq
+	54,  // 103: Scailo.CreditNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	24,  // 104: Scailo.CreditNotesService.Count:input_type -> Scailo.CreditNotesServiceCountReq
+	24,  // 105: Scailo.CreditNotesService.AccruedValue:input_type -> Scailo.CreditNotesServiceCountReq
+	23,  // 106: Scailo.CreditNotesService.DownloadAsCSV:input_type -> Scailo.CreditNotesServiceFilterReq
+	55,  // 107: Scailo.CreditNotesService.Create:output_type -> Scailo.IdentifierResponse
+	55,  // 108: Scailo.CreditNotesService.Draft:output_type -> Scailo.IdentifierResponse
+	55,  // 109: Scailo.CreditNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	55,  // 110: Scailo.CreditNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	55,  // 111: Scailo.CreditNotesService.Verify:output_type -> Scailo.IdentifierResponse
+	55,  // 112: Scailo.CreditNotesService.Approve:output_type -> Scailo.IdentifierResponse
+	55,  // 113: Scailo.CreditNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	55,  // 114: Scailo.CreditNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	55,  // 115: Scailo.CreditNotesService.Halt:output_type -> Scailo.IdentifierResponse
+	55,  // 116: Scailo.CreditNotesService.Discard:output_type -> Scailo.IdentifierResponse
+	55,  // 117: Scailo.CreditNotesService.Restore:output_type -> Scailo.IdentifierResponse
+	55,  // 118: Scailo.CreditNotesService.Complete:output_type -> Scailo.IdentifierResponse
+	55,  // 119: Scailo.CreditNotesService.Repeat:output_type -> Scailo.IdentifierResponse
+	55,  // 120: Scailo.CreditNotesService.Reopen:output_type -> Scailo.IdentifierResponse
+	55,  // 121: Scailo.CreditNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	55,  // 122: Scailo.CreditNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	55,  // 123: Scailo.CreditNotesService.Autofill:output_type -> Scailo.IdentifierResponse
+	56,  // 124: Scailo.CreditNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	55,  // 125: Scailo.CreditNotesService.AddMultipleCreditNoteItems:output_type -> Scailo.IdentifierResponse
+	55,  // 126: Scailo.CreditNotesService.AddCreditNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 127: Scailo.CreditNotesService.ModifyCreditNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 128: Scailo.CreditNotesService.ApproveCreditNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 129: Scailo.CreditNotesService.DeleteCreditNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 130: Scailo.CreditNotesService.ReorderCreditNoteItems:output_type -> Scailo.IdentifierResponse
+	13,  // 131: Scailo.CreditNotesService.ViewCreditNoteItemByID:output_type -> Scailo.CreditNoteItem
+	15,  // 132: Scailo.CreditNotesService.ViewApprovedCreditNoteItems:output_type -> Scailo.CreditNoteItemsList
+	15,  // 133: Scailo.CreditNotesService.ViewUnapprovedCreditNoteItems:output_type -> Scailo.CreditNoteItemsList
+	15,  // 134: Scailo.CreditNotesService.ViewCreditNoteItemHistory:output_type -> Scailo.CreditNoteItemsList
+	20,  // 135: Scailo.CreditNotesService.ViewPaginatedApprovedCreditNoteItems:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
+	20,  // 136: Scailo.CreditNotesService.ViewPaginatedUnapprovedCreditNoteItems:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
+	20,  // 137: Scailo.CreditNotesService.SearchItemsWithPagination:output_type -> Scailo.CreditNotesServicePaginatedItemsResponse
+	57,  // 138: Scailo.CreditNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	57,  // 139: Scailo.CreditNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	51,  // 140: Scailo.CreditNotesService.UploadCreditNoteItems:output_type -> Scailo.IdentifiersList
+	55,  // 141: Scailo.CreditNotesService.AddCreditNoteReference:output_type -> Scailo.IdentifierResponse
+	55,  // 142: Scailo.CreditNotesService.ApproveCreditNoteReference:output_type -> Scailo.IdentifierResponse
+	55,  // 143: Scailo.CreditNotesService.DeleteCreditNoteReference:output_type -> Scailo.IdentifierResponse
+	27,  // 144: Scailo.CreditNotesService.ViewCreditNoteReferenceByID:output_type -> Scailo.CreditNoteReference
+	28,  // 145: Scailo.CreditNotesService.ViewCreditNoteReferences:output_type -> Scailo.CreditNoteReferencesList
+	8,   // 146: Scailo.CreditNotesService.ViewByID:output_type -> Scailo.CreditNote
+	8,   // 147: Scailo.CreditNotesService.ViewByUUID:output_type -> Scailo.CreditNote
+	8,   // 148: Scailo.CreditNotesService.ViewByReferenceID:output_type -> Scailo.CreditNote
+	8,   // 149: Scailo.CreditNotesService.ViewEssentialByID:output_type -> Scailo.CreditNote
+	8,   // 150: Scailo.CreditNotesService.ViewEssentialByUUID:output_type -> Scailo.CreditNote
+	14,  // 151: Scailo.CreditNotesService.ViewFromIDs:output_type -> Scailo.CreditNotesList
+	7,   // 152: Scailo.CreditNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.CreditNoteAncillaryParameters
+	14,  // 153: Scailo.CreditNotesService.ViewAll:output_type -> Scailo.CreditNotesList
+	14,  // 154: Scailo.CreditNotesService.ViewAllForEntityUUID:output_type -> Scailo.CreditNotesList
+	22,  // 155: Scailo.CreditNotesService.ViewWithPagination:output_type -> Scailo.CreditNotesServicePaginationResponse
+	58,  // 156: Scailo.CreditNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	58,  // 157: Scailo.CreditNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 158: Scailo.CreditNotesService.ViewProspectiveCreditNoteItem:output_type -> Scailo.CreditNotesServiceItemCreateRequest
+	30,  // 159: Scailo.CreditNotesService.ViewReturnedStatistics:output_type -> Scailo.CreditNoteReturnStatisticsList
+	59,  // 160: Scailo.CreditNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	57,  // 161: Scailo.CreditNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	60,  // 162: Scailo.CreditNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	14,  // 163: Scailo.CreditNotesService.SearchAll:output_type -> Scailo.CreditNotesList
+	14,  // 164: Scailo.CreditNotesService.Filter:output_type -> Scailo.CreditNotesList
+	61,  // 165: Scailo.CreditNotesService.CountInStatus:output_type -> Scailo.CountResponse
+	61,  // 166: Scailo.CreditNotesService.Count:output_type -> Scailo.CountResponse
+	62,  // 167: Scailo.CreditNotesService.AccruedValue:output_type -> Scailo.SumResponse
+	57,  // 168: Scailo.CreditNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	107, // [107:169] is the sub-list for method output_type
+	45,  // [45:107] is the sub-list for method input_type
+	45,  // [45:45] is the sub-list for extension type_name
+	45,  // [45:45] is the sub-list for extension extendee
+	0,   // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_credit_notes_scailo_proto_init() }
@@ -3718,7 +3923,7 @@ func file_credit_notes_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_credit_notes_scailo_proto_rawDesc), len(file_credit_notes_scailo_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   25,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

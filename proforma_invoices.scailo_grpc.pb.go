@@ -37,6 +37,7 @@ const (
 	ProformaInvoicesService_Autofill_FullMethodName                                    = "/Scailo.ProformaInvoicesService/Autofill"
 	ProformaInvoicesService_Amend_FullMethodName                                       = "/Scailo.ProformaInvoicesService/Amend"
 	ProformaInvoicesService_CreateMagicLink_FullMethodName                             = "/Scailo.ProformaInvoicesService/CreateMagicLink"
+	ProformaInvoicesService_AddMultipleProformaInvoiceItems_FullMethodName             = "/Scailo.ProformaInvoicesService/AddMultipleProformaInvoiceItems"
 	ProformaInvoicesService_AddProformaInvoiceItem_FullMethodName                      = "/Scailo.ProformaInvoicesService/AddProformaInvoiceItem"
 	ProformaInvoicesService_ModifyProformaInvoiceItem_FullMethodName                   = "/Scailo.ProformaInvoicesService/ModifyProformaInvoiceItem"
 	ProformaInvoicesService_ApproveProformaInvoiceItem_FullMethodName                  = "/Scailo.ProformaInvoicesService/ApproveProformaInvoiceItem"
@@ -123,6 +124,8 @@ type ProformaInvoicesServiceClient interface {
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a proforma invoice
+	AddMultipleProformaInvoiceItems(ctx context.Context, in *ProformaInvoicesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a proforma invoice
 	AddProformaInvoiceItem(ctx context.Context, in *ProformaInvoicesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a proforma invoice
@@ -399,6 +402,16 @@ func (c *proformaInvoicesServiceClient) CreateMagicLink(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, ProformaInvoicesService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proformaInvoicesServiceClient) AddMultipleProformaInvoiceItems(ctx context.Context, in *ProformaInvoicesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, ProformaInvoicesService_AddMultipleProformaInvoiceItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

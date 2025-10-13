@@ -1634,7 +1634,7 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xdf\x06\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xc5\x06\n" +
 	"\x1eAssociatesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1654,12 +1654,12 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\tjob_title\x18\x10 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\bjobTitle\x128\n" +
 	"\n" +
 	"department\x18\x11 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\n" +
-	"department\x125\n" +
+	"department\x12(\n" +
 	"\n" +
-	"work_phone\x18\x12 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$R\tworkPhone\x12\x1d\n" +
+	"work_phone\x18\x12 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14R\tworkPhone\x12\x1d\n" +
 	"\n" +
-	"work_email\x18\x13 \x01(\tR\tworkEmail\x12=\n" +
-	"\x0epersonal_phone\x18\x14 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$R\rpersonalPhone\x12%\n" +
+	"work_email\x18\x13 \x01(\tR\tworkEmail\x120\n" +
+	"\x0epersonal_phone\x18\x14 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14R\rpersonalPhone\x12%\n" +
 	"\x0epersonal_email\x18\x15 \x01(\tR\rpersonalEmail\x12\x1a\n" +
 	"\bbirthday\x18\x16 \x01(\tR\bbirthday\x12 \n" +
 	"\vanniversary\x18\x17 \x01(\tR\vanniversary\x12 \n" +

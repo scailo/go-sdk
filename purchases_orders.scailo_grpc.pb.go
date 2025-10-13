@@ -37,6 +37,7 @@ const (
 	PurchasesOrdersService_Autofill_FullMethodName                                  = "/Scailo.PurchasesOrdersService/Autofill"
 	PurchasesOrdersService_Amend_FullMethodName                                     = "/Scailo.PurchasesOrdersService/Amend"
 	PurchasesOrdersService_CreateMagicLink_FullMethodName                           = "/Scailo.PurchasesOrdersService/CreateMagicLink"
+	PurchasesOrdersService_AddMultiplePurchaseOrderItems_FullMethodName             = "/Scailo.PurchasesOrdersService/AddMultiplePurchaseOrderItems"
 	PurchasesOrdersService_AddPurchaseOrderItem_FullMethodName                      = "/Scailo.PurchasesOrdersService/AddPurchaseOrderItem"
 	PurchasesOrdersService_ModifyPurchaseOrderItem_FullMethodName                   = "/Scailo.PurchasesOrdersService/ModifyPurchaseOrderItem"
 	PurchasesOrdersService_ApprovePurchaseOrderItem_FullMethodName                  = "/Scailo.PurchasesOrdersService/ApprovePurchaseOrderItem"
@@ -135,6 +136,8 @@ type PurchasesOrdersServiceClient interface {
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a purchase order
+	AddMultiplePurchaseOrderItems(ctx context.Context, in *PurchasesOrdersServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a purchase order
 	AddPurchaseOrderItem(ctx context.Context, in *PurchasesOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a purchase order
@@ -435,6 +438,16 @@ func (c *purchasesOrdersServiceClient) CreateMagicLink(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, PurchasesOrdersService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesOrdersServiceClient) AddMultiplePurchaseOrderItems(ctx context.Context, in *PurchasesOrdersServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesOrdersService_AddMultiplePurchaseOrderItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

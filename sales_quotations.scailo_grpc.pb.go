@@ -37,6 +37,7 @@ const (
 	SalesQuotationsService_Autofill_FullMethodName                                   = "/Scailo.SalesQuotationsService/Autofill"
 	SalesQuotationsService_Amend_FullMethodName                                      = "/Scailo.SalesQuotationsService/Amend"
 	SalesQuotationsService_CreateMagicLink_FullMethodName                            = "/Scailo.SalesQuotationsService/CreateMagicLink"
+	SalesQuotationsService_AddMultipleSalesQuotationItems_FullMethodName             = "/Scailo.SalesQuotationsService/AddMultipleSalesQuotationItems"
 	SalesQuotationsService_AddSalesQuotationItem_FullMethodName                      = "/Scailo.SalesQuotationsService/AddSalesQuotationItem"
 	SalesQuotationsService_ModifySalesQuotationItem_FullMethodName                   = "/Scailo.SalesQuotationsService/ModifySalesQuotationItem"
 	SalesQuotationsService_ApproveSalesQuotationItem_FullMethodName                  = "/Scailo.SalesQuotationsService/ApproveSalesQuotationItem"
@@ -130,6 +131,8 @@ type SalesQuotationsServiceClient interface {
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a sales quotation
+	AddMultipleSalesQuotationItems(ctx context.Context, in *SalesQuotationsServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a sales quotation
 	AddSalesQuotationItem(ctx context.Context, in *SalesQuotationsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
 	// Modify an item in a sales quotation
@@ -421,6 +424,16 @@ func (c *salesQuotationsServiceClient) CreateMagicLink(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, SalesQuotationsService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesQuotationsServiceClient) AddMultipleSalesQuotationItems(ctx context.Context, in *SalesQuotationsServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesQuotationsService_AddMultipleSalesQuotationItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

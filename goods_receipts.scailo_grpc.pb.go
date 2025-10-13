@@ -37,6 +37,7 @@ const (
 	GoodsReceiptsService_Autofill_FullMethodName                                 = "/Scailo.GoodsReceiptsService/Autofill"
 	GoodsReceiptsService_IsCompletable_FullMethodName                            = "/Scailo.GoodsReceiptsService/IsCompletable"
 	GoodsReceiptsService_CreateMagicLink_FullMethodName                          = "/Scailo.GoodsReceiptsService/CreateMagicLink"
+	GoodsReceiptsService_AddMultipleGoodsReceiptItems_FullMethodName             = "/Scailo.GoodsReceiptsService/AddMultipleGoodsReceiptItems"
 	GoodsReceiptsService_AddGoodsReceiptItem_FullMethodName                      = "/Scailo.GoodsReceiptsService/AddGoodsReceiptItem"
 	GoodsReceiptsService_ModifyGoodsReceiptItem_FullMethodName                   = "/Scailo.GoodsReceiptsService/ModifyGoodsReceiptItem"
 	GoodsReceiptsService_ApproveGoodsReceiptItem_FullMethodName                  = "/Scailo.GoodsReceiptsService/ApproveGoodsReceiptItem"
@@ -122,6 +123,8 @@ type GoodsReceiptsServiceClient interface {
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a goods receipt
+	AddMultipleGoodsReceiptItems(ctx context.Context, in *GoodsReceiptsServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a goods receipt
 	AddGoodsReceiptItem(ctx context.Context, in *GoodsReceiptsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a goods receipt
@@ -396,6 +399,16 @@ func (c *goodsReceiptsServiceClient) CreateMagicLink(ctx context.Context, in *Ma
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, GoodsReceiptsService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *goodsReceiptsServiceClient) AddMultipleGoodsReceiptItems(ctx context.Context, in *GoodsReceiptsServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, GoodsReceiptsService_AddMultipleGoodsReceiptItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

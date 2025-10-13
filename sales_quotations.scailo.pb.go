@@ -1171,6 +1171,197 @@ func (x *SalesQuotationsServiceItemCreateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to add an individual item as part of multiple item addition to a sales quotation
+type SalesQuotationsServiceMultipleItemsSingleton struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the family ID
+	FamilyId uint64 `protobuf:"varint,12,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	// The quantity (in cents) being quotationed in internal unit of material
+	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
+	// Stores the ID of the client's unit of material
+	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
+	// Stores the quantity (in cents) being quotationed in client's unit of material
+	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
+	// Stores the family code as given by the client
+	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	// The unit price of the item
+	UnitPrice uint64 `protobuf:"varint,17,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
+	// The ID of the associated tax group
+	TaxGroupId uint64 `protobuf:"varint,18,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
+	// The applicable discount percentage (in cents)
+	Discount uint64 `protobuf:"varint,19,opt,name=discount,proto3" json:"discount,omitempty"`
+	// The delivery date of the item
+	DeliveryDate string `protobuf:"bytes,20,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) Reset() {
+	*x = SalesQuotationsServiceMultipleItemsSingleton{}
+	mi := &file_sales_quotations_scailo_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SalesQuotationsServiceMultipleItemsSingleton) ProtoMessage() {}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) ProtoReflect() protoreflect.Message {
+	mi := &file_sales_quotations_scailo_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SalesQuotationsServiceMultipleItemsSingleton.ProtoReflect.Descriptor instead.
+func (*SalesQuotationsServiceMultipleItemsSingleton) Descriptor() ([]byte, []int) {
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetFamilyId() uint64 {
+	if x != nil {
+		return x.FamilyId
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetInternalQuantity() uint64 {
+	if x != nil {
+		return x.InternalQuantity
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetClientUomId() uint64 {
+	if x != nil {
+		return x.ClientUomId
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetClientQuantity() uint64 {
+	if x != nil {
+		return x.ClientQuantity
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetClientFamilyCode() string {
+	if x != nil {
+		return x.ClientFamilyCode
+	}
+	return ""
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetUnitPrice() uint64 {
+	if x != nil {
+		return x.UnitPrice
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
+	if x != nil {
+		return x.TaxGroupId
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetDiscount() uint64 {
+	if x != nil {
+		return x.Discount
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetDeliveryDate() string {
+	if x != nil {
+		return x.DeliveryDate
+	}
+	return ""
+}
+
+func (x *SalesQuotationsServiceMultipleItemsSingleton) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
+// Describes the parameters required to add multiple items to a sales quotation
+type SalesQuotationsServiceMultipleItemsCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// Stores the sales quotation ID
+	SalesQuotationId uint64 `protobuf:"varint,10,opt,name=sales_quotation_id,json=salesQuotationId,proto3" json:"sales_quotation_id,omitempty"`
+	// List of items
+	List          []*SalesQuotationsServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) Reset() {
+	*x = SalesQuotationsServiceMultipleItemsCreateRequest{}
+	mi := &file_sales_quotations_scailo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SalesQuotationsServiceMultipleItemsCreateRequest) ProtoMessage() {}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sales_quotations_scailo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SalesQuotationsServiceMultipleItemsCreateRequest.ProtoReflect.Descriptor instead.
+func (*SalesQuotationsServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []int) {
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) GetSalesQuotationId() uint64 {
+	if x != nil {
+		return x.SalesQuotationId
+	}
+	return 0
+}
+
+func (x *SalesQuotationsServiceMultipleItemsCreateRequest) GetList() []*SalesQuotationsServiceMultipleItemsSingleton {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters required to update an item in a sales quotation
 type SalesQuotationsServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1202,7 +1393,7 @@ type SalesQuotationsServiceItemUpdateRequest struct {
 
 func (x *SalesQuotationsServiceItemUpdateRequest) Reset() {
 	*x = SalesQuotationsServiceItemUpdateRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[5]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1214,7 +1405,7 @@ func (x *SalesQuotationsServiceItemUpdateRequest) String() string {
 func (*SalesQuotationsServiceItemUpdateRequest) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceItemUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[5]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1227,7 +1418,7 @@ func (x *SalesQuotationsServiceItemUpdateRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use SalesQuotationsServiceItemUpdateRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{5}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SalesQuotationsServiceItemUpdateRequest) GetUserComment() string {
@@ -1352,7 +1543,7 @@ type SalesQuotationItem struct {
 
 func (x *SalesQuotationItem) Reset() {
 	*x = SalesQuotationItem{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[6]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1364,7 +1555,7 @@ func (x *SalesQuotationItem) String() string {
 func (*SalesQuotationItem) ProtoMessage() {}
 
 func (x *SalesQuotationItem) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[6]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1377,7 +1568,7 @@ func (x *SalesQuotationItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationItem.ProtoReflect.Descriptor instead.
 func (*SalesQuotationItem) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{6}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SalesQuotationItem) GetEntityUuid() string {
@@ -1517,7 +1708,7 @@ type SalesQuotationsList struct {
 
 func (x *SalesQuotationsList) Reset() {
 	*x = SalesQuotationsList{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[7]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1529,7 +1720,7 @@ func (x *SalesQuotationsList) String() string {
 func (*SalesQuotationsList) ProtoMessage() {}
 
 func (x *SalesQuotationsList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[7]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1542,7 +1733,7 @@ func (x *SalesQuotationsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationsList.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsList) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{7}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SalesQuotationsList) GetList() []*SalesQuotation {
@@ -1563,7 +1754,7 @@ type SalesQuotationItemsList struct {
 
 func (x *SalesQuotationItemsList) Reset() {
 	*x = SalesQuotationItemsList{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[8]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1575,7 +1766,7 @@ func (x *SalesQuotationItemsList) String() string {
 func (*SalesQuotationItemsList) ProtoMessage() {}
 
 func (x *SalesQuotationItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[8]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1588,7 +1779,7 @@ func (x *SalesQuotationItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationItemsList.ProtoReflect.Descriptor instead.
 func (*SalesQuotationItemsList) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{8}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SalesQuotationItemsList) GetList() []*SalesQuotationItem {
@@ -1611,7 +1802,7 @@ type SalesQuotationItemHistoryRequest struct {
 
 func (x *SalesQuotationItemHistoryRequest) Reset() {
 	*x = SalesQuotationItemHistoryRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[9]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1623,7 +1814,7 @@ func (x *SalesQuotationItemHistoryRequest) String() string {
 func (*SalesQuotationItemHistoryRequest) ProtoMessage() {}
 
 func (x *SalesQuotationItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[9]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1636,7 +1827,7 @@ func (x *SalesQuotationItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{9}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SalesQuotationItemHistoryRequest) GetSalesQuotationId() uint64 {
@@ -1668,7 +1859,7 @@ type SalesQuotationItemProspectiveInfoRequest struct {
 
 func (x *SalesQuotationItemProspectiveInfoRequest) Reset() {
 	*x = SalesQuotationItemProspectiveInfoRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[10]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1680,7 +1871,7 @@ func (x *SalesQuotationItemProspectiveInfoRequest) String() string {
 func (*SalesQuotationItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *SalesQuotationItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[10]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1693,7 +1884,7 @@ func (x *SalesQuotationItemProspectiveInfoRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use SalesQuotationItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{10}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SalesQuotationItemProspectiveInfoRequest) GetSalesQuotationId() uint64 {
@@ -1738,7 +1929,7 @@ type SalesQuotationsServicePaginationReq struct {
 
 func (x *SalesQuotationsServicePaginationReq) Reset() {
 	*x = SalesQuotationsServicePaginationReq{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[11]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1750,7 +1941,7 @@ func (x *SalesQuotationsServicePaginationReq) String() string {
 func (*SalesQuotationsServicePaginationReq) ProtoMessage() {}
 
 func (x *SalesQuotationsServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[11]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1763,7 +1954,7 @@ func (x *SalesQuotationsServicePaginationReq) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use SalesQuotationsServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{11}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SalesQuotationsServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1825,7 +2016,7 @@ type SalesQuotationsServicePaginationResponse struct {
 
 func (x *SalesQuotationsServicePaginationResponse) Reset() {
 	*x = SalesQuotationsServicePaginationResponse{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[12]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1837,7 +2028,7 @@ func (x *SalesQuotationsServicePaginationResponse) String() string {
 func (*SalesQuotationsServicePaginationResponse) ProtoMessage() {}
 
 func (x *SalesQuotationsServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[12]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1850,7 +2041,7 @@ func (x *SalesQuotationsServicePaginationResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use SalesQuotationsServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{12}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SalesQuotationsServicePaginationResponse) GetCount() uint64 {
@@ -1948,7 +2139,7 @@ type SalesQuotationsServiceFilterReq struct {
 
 func (x *SalesQuotationsServiceFilterReq) Reset() {
 	*x = SalesQuotationsServiceFilterReq{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[13]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1960,7 +2151,7 @@ func (x *SalesQuotationsServiceFilterReq) String() string {
 func (*SalesQuotationsServiceFilterReq) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[13]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1973,7 +2164,7 @@ func (x *SalesQuotationsServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationsServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{13}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SalesQuotationsServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2238,7 +2429,7 @@ type SalesQuotationsServiceCountReq struct {
 
 func (x *SalesQuotationsServiceCountReq) Reset() {
 	*x = SalesQuotationsServiceCountReq{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[14]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2250,7 +2441,7 @@ func (x *SalesQuotationsServiceCountReq) String() string {
 func (*SalesQuotationsServiceCountReq) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[14]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2263,7 +2454,7 @@ func (x *SalesQuotationsServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationsServiceCountReq.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{14}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SalesQuotationsServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2476,7 +2667,7 @@ type SalesQuotationsServiceSearchAllReq struct {
 
 func (x *SalesQuotationsServiceSearchAllReq) Reset() {
 	*x = SalesQuotationsServiceSearchAllReq{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[15]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2488,7 +2679,7 @@ func (x *SalesQuotationsServiceSearchAllReq) String() string {
 func (*SalesQuotationsServiceSearchAllReq) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[15]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2501,7 +2692,7 @@ func (x *SalesQuotationsServiceSearchAllReq) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use SalesQuotationsServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{15}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SalesQuotationsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2614,7 +2805,7 @@ type SalesQuotationsServiceReferenceCreateRequest struct {
 
 func (x *SalesQuotationsServiceReferenceCreateRequest) Reset() {
 	*x = SalesQuotationsServiceReferenceCreateRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[16]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2626,7 +2817,7 @@ func (x *SalesQuotationsServiceReferenceCreateRequest) String() string {
 func (*SalesQuotationsServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[16]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2639,7 +2830,7 @@ func (x *SalesQuotationsServiceReferenceCreateRequest) ProtoReflect() protorefle
 
 // Deprecated: Use SalesQuotationsServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{16}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SalesQuotationsServiceReferenceCreateRequest) GetUserComment() string {
@@ -2704,7 +2895,7 @@ type SalesQuotationReference struct {
 
 func (x *SalesQuotationReference) Reset() {
 	*x = SalesQuotationReference{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[17]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2716,7 +2907,7 @@ func (x *SalesQuotationReference) String() string {
 func (*SalesQuotationReference) ProtoMessage() {}
 
 func (x *SalesQuotationReference) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[17]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2729,7 +2920,7 @@ func (x *SalesQuotationReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationReference.ProtoReflect.Descriptor instead.
 func (*SalesQuotationReference) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{17}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SalesQuotationReference) GetEntityUuid() string {
@@ -2806,7 +2997,7 @@ type SalesQuotationReferencesList struct {
 
 func (x *SalesQuotationReferencesList) Reset() {
 	*x = SalesQuotationReferencesList{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[18]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2818,7 +3009,7 @@ func (x *SalesQuotationReferencesList) String() string {
 func (*SalesQuotationReferencesList) ProtoMessage() {}
 
 func (x *SalesQuotationReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[18]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2831,7 +3022,7 @@ func (x *SalesQuotationReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationReferencesList.ProtoReflect.Descriptor instead.
 func (*SalesQuotationReferencesList) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{18}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SalesQuotationReferencesList) GetList() []*SalesQuotationReference {
@@ -2892,7 +3083,7 @@ type SalesQuotationItemsSearchRequest struct {
 
 func (x *SalesQuotationItemsSearchRequest) Reset() {
 	*x = SalesQuotationItemsSearchRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[19]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2904,7 +3095,7 @@ func (x *SalesQuotationItemsSearchRequest) String() string {
 func (*SalesQuotationItemsSearchRequest) ProtoMessage() {}
 
 func (x *SalesQuotationItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[19]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2917,7 +3108,7 @@ func (x *SalesQuotationItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{19}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SalesQuotationItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -3084,7 +3275,7 @@ type SalesQuotationsServicePaginatedItemsResponse struct {
 
 func (x *SalesQuotationsServicePaginatedItemsResponse) Reset() {
 	*x = SalesQuotationsServicePaginatedItemsResponse{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[20]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3096,7 +3287,7 @@ func (x *SalesQuotationsServicePaginatedItemsResponse) String() string {
 func (*SalesQuotationsServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *SalesQuotationsServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[20]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3109,7 +3300,7 @@ func (x *SalesQuotationsServicePaginatedItemsResponse) ProtoReflect() protorefle
 
 // Deprecated: Use SalesQuotationsServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{20}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *SalesQuotationsServicePaginatedItemsResponse) GetCount() uint64 {
@@ -3155,7 +3346,7 @@ type SalesQuotationsServiceContactCreateRequest struct {
 
 func (x *SalesQuotationsServiceContactCreateRequest) Reset() {
 	*x = SalesQuotationsServiceContactCreateRequest{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[21]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3167,7 +3358,7 @@ func (x *SalesQuotationsServiceContactCreateRequest) String() string {
 func (*SalesQuotationsServiceContactCreateRequest) ProtoMessage() {}
 
 func (x *SalesQuotationsServiceContactCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[21]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3180,7 +3371,7 @@ func (x *SalesQuotationsServiceContactCreateRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use SalesQuotationsServiceContactCreateRequest.ProtoReflect.Descriptor instead.
 func (*SalesQuotationsServiceContactCreateRequest) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{21}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *SalesQuotationsServiceContactCreateRequest) GetUserComment() string {
@@ -3229,7 +3420,7 @@ type SalesQuotationContact struct {
 
 func (x *SalesQuotationContact) Reset() {
 	*x = SalesQuotationContact{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[22]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3241,7 +3432,7 @@ func (x *SalesQuotationContact) String() string {
 func (*SalesQuotationContact) ProtoMessage() {}
 
 func (x *SalesQuotationContact) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[22]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3254,7 +3445,7 @@ func (x *SalesQuotationContact) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationContact.ProtoReflect.Descriptor instead.
 func (*SalesQuotationContact) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{22}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SalesQuotationContact) GetEntityUuid() string {
@@ -3324,7 +3515,7 @@ type SalesQuotationContactsList struct {
 
 func (x *SalesQuotationContactsList) Reset() {
 	*x = SalesQuotationContactsList{}
-	mi := &file_sales_quotations_scailo_proto_msgTypes[23]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3336,7 +3527,7 @@ func (x *SalesQuotationContactsList) String() string {
 func (*SalesQuotationContactsList) ProtoMessage() {}
 
 func (x *SalesQuotationContactsList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_quotations_scailo_proto_msgTypes[23]
+	mi := &file_sales_quotations_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3349,7 +3540,7 @@ func (x *SalesQuotationContactsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesQuotationContactsList.ProtoReflect.Descriptor instead.
 func (*SalesQuotationContactsList) Descriptor() ([]byte, []int) {
-	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{23}
+	return file_sales_quotations_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *SalesQuotationContactsList) GetList() []*SalesQuotationContact {
@@ -3452,7 +3643,25 @@ const file_sales_quotations_scailo_proto_rawDesc = "" +
 	"taxGroupId\x12#\n" +
 	"\bdiscount\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12,\n" +
 	"\rdelivery_date\x18\x14 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
-	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xf6\x03\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xe5\x03\n" +
+	",SalesQuotationsServiceMultipleItemsSingleton\x12$\n" +
+	"\tfamily_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
+	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
+	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
+	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
+	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\n" +
+	"unit_price\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
+	"\ftax_group_id\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"taxGroupId\x12#\n" +
+	"\bdiscount\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12,\n" +
+	"\rdelivery_date\x18\x14 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xd6\x01\n" +
+	"0SalesQuotationsServiceMultipleItemsCreateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x125\n" +
+	"\x12sales_quotation_id\x18\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x10salesQuotationId\x12H\n" +
+	"\x04list\x18\v \x03(\v24.Scailo.SalesQuotationsServiceMultipleItemsSingletonR\x04list\"\xf6\x03\n" +
 	"'SalesQuotationsServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
@@ -3720,7 +3929,7 @@ const file_sales_quotations_scailo_proto_rawDesc = "" +
 	"\x1bSALES_QUOTATION_ITEM_STATUS\x12/\n" +
 	"+SALES_QUOTATION_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12(\n" +
 	"$SALES_QUOTATION_ITEM_STATUS_APPROVED\x10\x01\x12*\n" +
-	"&SALES_QUOTATION_ITEM_STATUS_UNAPPROVED\x10\x022\xf5,\n" +
+	"&SALES_QUOTATION_ITEM_STATUS_UNAPPROVED\x10\x022\xed-\n" +
 	"\x16SalesQuotationsService\x12Q\n" +
 	"\x06Create\x12+.Scailo.SalesQuotationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\x05Draft\x12+.Scailo.SalesQuotationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -3741,7 +3950,8 @@ const file_sales_quotations_scailo_proto_rawDesc = "" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\bAutofill\x12-.Scailo.SalesQuotationsServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12a\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12v\n" +
+	"\x1eAddMultipleSalesQuotationItems\x128.Scailo.SalesQuotationsServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12a\n" +
 	"\x15AddSalesQuotationItem\x12/.Scailo.SalesQuotationsServiceItemCreateRequest\x1a\x17.Scailo.IdentifiersList\x12d\n" +
 	"\x18ModifySalesQuotationItem\x12/.Scailo.SalesQuotationsServiceItemUpdateRequest\x1a\x17.Scailo.IdentifiersList\x12Z\n" +
 	"\x19ApproveSalesQuotationItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
@@ -3807,7 +4017,7 @@ func file_sales_quotations_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_sales_quotations_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_sales_quotations_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_sales_quotations_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_sales_quotations_scailo_proto_goTypes = []any{
 	(SALES_QUOTATION_SORT_KEY)(0),                             // 0: Scailo.SALES_QUOTATION_SORT_KEY
 	(SALES_QUOTATION_REFERENCE_CONTEXT)(0),                    // 1: Scailo.SALES_QUOTATION_REFERENCE_CONTEXT
@@ -3819,241 +4029,246 @@ var file_sales_quotations_scailo_proto_goTypes = []any{
 	(*SalesQuotationsServiceAutofillRequest)(nil),             // 7: Scailo.SalesQuotationsServiceAutofillRequest
 	(*SalesQuotation)(nil),                                    // 8: Scailo.SalesQuotation
 	(*SalesQuotationsServiceItemCreateRequest)(nil),           // 9: Scailo.SalesQuotationsServiceItemCreateRequest
-	(*SalesQuotationsServiceItemUpdateRequest)(nil),           // 10: Scailo.SalesQuotationsServiceItemUpdateRequest
-	(*SalesQuotationItem)(nil),                                // 11: Scailo.SalesQuotationItem
-	(*SalesQuotationsList)(nil),                               // 12: Scailo.SalesQuotationsList
-	(*SalesQuotationItemsList)(nil),                           // 13: Scailo.SalesQuotationItemsList
-	(*SalesQuotationItemHistoryRequest)(nil),                  // 14: Scailo.SalesQuotationItemHistoryRequest
-	(*SalesQuotationItemProspectiveInfoRequest)(nil),          // 15: Scailo.SalesQuotationItemProspectiveInfoRequest
-	(*SalesQuotationsServicePaginationReq)(nil),               // 16: Scailo.SalesQuotationsServicePaginationReq
-	(*SalesQuotationsServicePaginationResponse)(nil),          // 17: Scailo.SalesQuotationsServicePaginationResponse
-	(*SalesQuotationsServiceFilterReq)(nil),                   // 18: Scailo.SalesQuotationsServiceFilterReq
-	(*SalesQuotationsServiceCountReq)(nil),                    // 19: Scailo.SalesQuotationsServiceCountReq
-	(*SalesQuotationsServiceSearchAllReq)(nil),                // 20: Scailo.SalesQuotationsServiceSearchAllReq
-	(*SalesQuotationsServiceReferenceCreateRequest)(nil),      // 21: Scailo.SalesQuotationsServiceReferenceCreateRequest
-	(*SalesQuotationReference)(nil),                           // 22: Scailo.SalesQuotationReference
-	(*SalesQuotationReferencesList)(nil),                      // 23: Scailo.SalesQuotationReferencesList
-	(*SalesQuotationItemsSearchRequest)(nil),                  // 24: Scailo.SalesQuotationItemsSearchRequest
-	(*SalesQuotationsServicePaginatedItemsResponse)(nil),      // 25: Scailo.SalesQuotationsServicePaginatedItemsResponse
-	(*SalesQuotationsServiceContactCreateRequest)(nil),        // 26: Scailo.SalesQuotationsServiceContactCreateRequest
-	(*SalesQuotationContact)(nil),                             // 27: Scailo.SalesQuotationContact
-	(*SalesQuotationContactsList)(nil),                        // 28: Scailo.SalesQuotationContactsList
-	(*FormFieldDatumCreateRequest)(nil),                       // 29: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                  // 30: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 31: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 32: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 33: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                    // 34: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                          // 35: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 36: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                       // 37: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                     // 38: Scailo.IdentifierUUIDWithUserComment
-	(*RepeatWithDeliveryDate)(nil),                            // 39: Scailo.RepeatWithDeliveryDate
-	(*IdentifierWithEmailAttributes)(nil),                     // 40: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 41: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 42: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 43: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 44: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 45: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 46: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 47: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 48: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 49: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 50: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 51: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 52: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 53: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 54: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 55: Scailo.MagicLink
-	(*PriceResponse)(nil),                                     // 56: Scailo.PriceResponse
-	(*StandardFile)(nil),                                      // 57: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 58: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                      // 59: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                   // 60: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 61: Scailo.CountResponse
+	(*SalesQuotationsServiceMultipleItemsSingleton)(nil),      // 10: Scailo.SalesQuotationsServiceMultipleItemsSingleton
+	(*SalesQuotationsServiceMultipleItemsCreateRequest)(nil),  // 11: Scailo.SalesQuotationsServiceMultipleItemsCreateRequest
+	(*SalesQuotationsServiceItemUpdateRequest)(nil),           // 12: Scailo.SalesQuotationsServiceItemUpdateRequest
+	(*SalesQuotationItem)(nil),                                // 13: Scailo.SalesQuotationItem
+	(*SalesQuotationsList)(nil),                               // 14: Scailo.SalesQuotationsList
+	(*SalesQuotationItemsList)(nil),                           // 15: Scailo.SalesQuotationItemsList
+	(*SalesQuotationItemHistoryRequest)(nil),                  // 16: Scailo.SalesQuotationItemHistoryRequest
+	(*SalesQuotationItemProspectiveInfoRequest)(nil),          // 17: Scailo.SalesQuotationItemProspectiveInfoRequest
+	(*SalesQuotationsServicePaginationReq)(nil),               // 18: Scailo.SalesQuotationsServicePaginationReq
+	(*SalesQuotationsServicePaginationResponse)(nil),          // 19: Scailo.SalesQuotationsServicePaginationResponse
+	(*SalesQuotationsServiceFilterReq)(nil),                   // 20: Scailo.SalesQuotationsServiceFilterReq
+	(*SalesQuotationsServiceCountReq)(nil),                    // 21: Scailo.SalesQuotationsServiceCountReq
+	(*SalesQuotationsServiceSearchAllReq)(nil),                // 22: Scailo.SalesQuotationsServiceSearchAllReq
+	(*SalesQuotationsServiceReferenceCreateRequest)(nil),      // 23: Scailo.SalesQuotationsServiceReferenceCreateRequest
+	(*SalesQuotationReference)(nil),                           // 24: Scailo.SalesQuotationReference
+	(*SalesQuotationReferencesList)(nil),                      // 25: Scailo.SalesQuotationReferencesList
+	(*SalesQuotationItemsSearchRequest)(nil),                  // 26: Scailo.SalesQuotationItemsSearchRequest
+	(*SalesQuotationsServicePaginatedItemsResponse)(nil),      // 27: Scailo.SalesQuotationsServicePaginatedItemsResponse
+	(*SalesQuotationsServiceContactCreateRequest)(nil),        // 28: Scailo.SalesQuotationsServiceContactCreateRequest
+	(*SalesQuotationContact)(nil),                             // 29: Scailo.SalesQuotationContact
+	(*SalesQuotationContactsList)(nil),                        // 30: Scailo.SalesQuotationContactsList
+	(*FormFieldDatumCreateRequest)(nil),                       // 31: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                  // 32: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 33: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 34: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 35: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                    // 36: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                          // 37: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 38: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                       // 39: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                     // 40: Scailo.IdentifierUUIDWithUserComment
+	(*RepeatWithDeliveryDate)(nil),                            // 41: Scailo.RepeatWithDeliveryDate
+	(*IdentifierWithEmailAttributes)(nil),                     // 42: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 43: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 44: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 45: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 46: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 47: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 48: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 49: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 50: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 51: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 52: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 53: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 54: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 55: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 56: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 57: Scailo.MagicLink
+	(*PriceResponse)(nil),                                     // 58: Scailo.PriceResponse
+	(*StandardFile)(nil),                                      // 59: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 60: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                      // 61: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                   // 62: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 63: Scailo.CountResponse
 }
 var file_sales_quotations_scailo_proto_depIdxs = []int32{
-	29,  // 0: Scailo.SalesQuotationsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	29,  // 1: Scailo.SalesQuotationsServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	30,  // 2: Scailo.SalesQuotation.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 3: Scailo.SalesQuotation.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	32,  // 4: Scailo.SalesQuotation.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	33,  // 5: Scailo.SalesQuotation.logs:type_name -> Scailo.LogbookLogConciseSLC
-	11,  // 6: Scailo.SalesQuotation.list:type_name -> Scailo.SalesQuotationItem
-	34,  // 7: Scailo.SalesQuotation.form_data:type_name -> Scailo.FormFieldDatum
-	30,  // 8: Scailo.SalesQuotationItem.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 9: Scailo.SalesQuotationItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	8,   // 10: Scailo.SalesQuotationsList.list:type_name -> Scailo.SalesQuotation
-	11,  // 11: Scailo.SalesQuotationItemsList.list:type_name -> Scailo.SalesQuotationItem
-	35,  // 12: Scailo.SalesQuotationsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 13: Scailo.SalesQuotationsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 14: Scailo.SalesQuotationsServicePaginationReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
-	32,  // 15: Scailo.SalesQuotationsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	8,   // 16: Scailo.SalesQuotationsServicePaginationResponse.payload:type_name -> Scailo.SalesQuotation
-	35,  // 17: Scailo.SalesQuotationsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 18: Scailo.SalesQuotationsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 19: Scailo.SalesQuotationsServiceFilterReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
-	32,  // 20: Scailo.SalesQuotationsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	37,  // 21: Scailo.SalesQuotationsServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 22: Scailo.SalesQuotationsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 23: Scailo.SalesQuotationsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	37,  // 24: Scailo.SalesQuotationsServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 25: Scailo.SalesQuotationsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 26: Scailo.SalesQuotationsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 27: Scailo.SalesQuotationsServiceSearchAllReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
-	32,  // 28: Scailo.SalesQuotationsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	1,   // 29: Scailo.SalesQuotationsServiceReferenceCreateRequest.context:type_name -> Scailo.SALES_QUOTATION_REFERENCE_CONTEXT
-	2,   // 30: Scailo.SalesQuotationsServiceReferenceCreateRequest.ref_from:type_name -> Scailo.SALES_QUOTATION_REFERENCE_REF_FROM
-	30,  // 31: Scailo.SalesQuotationReference.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 32: Scailo.SalesQuotationReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	1,   // 33: Scailo.SalesQuotationReference.context:type_name -> Scailo.SALES_QUOTATION_REFERENCE_CONTEXT
-	2,   // 34: Scailo.SalesQuotationReference.ref_from:type_name -> Scailo.SALES_QUOTATION_REFERENCE_REF_FROM
-	22,  // 35: Scailo.SalesQuotationReferencesList.list:type_name -> Scailo.SalesQuotationReference
-	35,  // 36: Scailo.SalesQuotationItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 37: Scailo.SalesQuotationItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 38: Scailo.SalesQuotationItemsSearchRequest.sort_key:type_name -> Scailo.SALES_QUOTATION_ITEM_SORT_KEY
-	4,   // 39: Scailo.SalesQuotationItemsSearchRequest.status:type_name -> Scailo.SALES_QUOTATION_ITEM_STATUS
-	11,  // 40: Scailo.SalesQuotationsServicePaginatedItemsResponse.payload:type_name -> Scailo.SalesQuotationItem
-	30,  // 41: Scailo.SalesQuotationContact.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 42: Scailo.SalesQuotationContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	27,  // 43: Scailo.SalesQuotationContactsList.list:type_name -> Scailo.SalesQuotationContact
-	5,   // 44: Scailo.SalesQuotationsService.Create:input_type -> Scailo.SalesQuotationsServiceCreateRequest
-	5,   // 45: Scailo.SalesQuotationsService.Draft:input_type -> Scailo.SalesQuotationsServiceCreateRequest
-	6,   // 46: Scailo.SalesQuotationsService.DraftUpdate:input_type -> Scailo.SalesQuotationsServiceUpdateRequest
-	38,  // 47: Scailo.SalesQuotationsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 48: Scailo.SalesQuotationsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 49: Scailo.SalesQuotationsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 50: Scailo.SalesQuotationsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	6,   // 51: Scailo.SalesQuotationsService.RevisionUpdate:input_type -> Scailo.SalesQuotationsServiceUpdateRequest
-	38,  // 52: Scailo.SalesQuotationsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 53: Scailo.SalesQuotationsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 54: Scailo.SalesQuotationsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 55: Scailo.SalesQuotationsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	39,  // 56: Scailo.SalesQuotationsService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
-	38,  // 57: Scailo.SalesQuotationsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 58: Scailo.SalesQuotationsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 59: Scailo.SalesQuotationsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	7,   // 60: Scailo.SalesQuotationsService.Autofill:input_type -> Scailo.SalesQuotationsServiceAutofillRequest
-	38,  // 61: Scailo.SalesQuotationsService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	41,  // 62: Scailo.SalesQuotationsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	9,   // 63: Scailo.SalesQuotationsService.AddSalesQuotationItem:input_type -> Scailo.SalesQuotationsServiceItemCreateRequest
-	10,  // 64: Scailo.SalesQuotationsService.ModifySalesQuotationItem:input_type -> Scailo.SalesQuotationsServiceItemUpdateRequest
-	42,  // 65: Scailo.SalesQuotationsService.ApproveSalesQuotationItem:input_type -> Scailo.IdentifierWithUserComment
-	42,  // 66: Scailo.SalesQuotationsService.DeleteSalesQuotationItem:input_type -> Scailo.IdentifierWithUserComment
-	43,  // 67: Scailo.SalesQuotationsService.ReorderSalesQuotationItems:input_type -> Scailo.ReorderItemsRequest
-	44,  // 68: Scailo.SalesQuotationsService.ViewSalesQuotationItemByID:input_type -> Scailo.Identifier
-	15,  // 69: Scailo.SalesQuotationsService.ViewSalesQuotationItemPrice:input_type -> Scailo.SalesQuotationItemProspectiveInfoRequest
-	45,  // 70: Scailo.SalesQuotationsService.ViewApprovedSalesQuotationItems:input_type -> Scailo.IdentifierWithSearchKey
-	45,  // 71: Scailo.SalesQuotationsService.ViewUnapprovedSalesQuotationItems:input_type -> Scailo.IdentifierWithSearchKey
-	14,  // 72: Scailo.SalesQuotationsService.ViewSalesQuotationItemHistory:input_type -> Scailo.SalesQuotationItemHistoryRequest
-	24,  // 73: Scailo.SalesQuotationsService.ViewPaginatedApprovedSalesQuotationItems:input_type -> Scailo.SalesQuotationItemsSearchRequest
-	24,  // 74: Scailo.SalesQuotationsService.ViewPaginatedUnapprovedSalesQuotationItems:input_type -> Scailo.SalesQuotationItemsSearchRequest
-	24,  // 75: Scailo.SalesQuotationsService.SearchItemsWithPagination:input_type -> Scailo.SalesQuotationItemsSearchRequest
-	46,  // 76: Scailo.SalesQuotationsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	47,  // 77: Scailo.SalesQuotationsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	48,  // 78: Scailo.SalesQuotationsService.UploadSalesQuotationItems:input_type -> Scailo.IdentifierUUIDWithFile
-	26,  // 79: Scailo.SalesQuotationsService.AddSalesQuotationContact:input_type -> Scailo.SalesQuotationsServiceContactCreateRequest
-	42,  // 80: Scailo.SalesQuotationsService.ApproveSalesQuotationContact:input_type -> Scailo.IdentifierWithUserComment
-	42,  // 81: Scailo.SalesQuotationsService.DeleteSalesQuotationContact:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 82: Scailo.SalesQuotationsService.ViewSalesQuotationContactByID:input_type -> Scailo.Identifier
-	46,  // 83: Scailo.SalesQuotationsService.ViewSalesQuotationContacts:input_type -> Scailo.IdentifierUUID
-	21,  // 84: Scailo.SalesQuotationsService.AddSalesQuotationReference:input_type -> Scailo.SalesQuotationsServiceReferenceCreateRequest
-	42,  // 85: Scailo.SalesQuotationsService.ApproveSalesQuotationReference:input_type -> Scailo.IdentifierWithUserComment
-	42,  // 86: Scailo.SalesQuotationsService.DeleteSalesQuotationReference:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 87: Scailo.SalesQuotationsService.ViewSalesQuotationReferenceByID:input_type -> Scailo.Identifier
-	44,  // 88: Scailo.SalesQuotationsService.ViewSalesQuotationReferences:input_type -> Scailo.Identifier
-	44,  // 89: Scailo.SalesQuotationsService.ViewByID:input_type -> Scailo.Identifier
-	46,  // 90: Scailo.SalesQuotationsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	49,  // 91: Scailo.SalesQuotationsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	44,  // 92: Scailo.SalesQuotationsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	46,  // 93: Scailo.SalesQuotationsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	50,  // 94: Scailo.SalesQuotationsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	51,  // 95: Scailo.SalesQuotationsService.ViewAll:input_type -> Scailo.ActiveStatus
-	46,  // 96: Scailo.SalesQuotationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	16,  // 97: Scailo.SalesQuotationsService.ViewWithPagination:input_type -> Scailo.SalesQuotationsServicePaginationReq
-	44,  // 98: Scailo.SalesQuotationsService.ViewAmendments:input_type -> Scailo.Identifier
-	45,  // 99: Scailo.SalesQuotationsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	52,  // 100: Scailo.SalesQuotationsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15,  // 101: Scailo.SalesQuotationsService.ViewProspectiveSalesQuotationItem:input_type -> Scailo.SalesQuotationItemProspectiveInfoRequest
-	44,  // 102: Scailo.SalesQuotationsService.ViewAssociatedSalesOrdersIDs:input_type -> Scailo.Identifier
-	46,  // 103: Scailo.SalesQuotationsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	46,  // 104: Scailo.SalesQuotationsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	20,  // 105: Scailo.SalesQuotationsService.SearchAll:input_type -> Scailo.SalesQuotationsServiceSearchAllReq
-	18,  // 106: Scailo.SalesQuotationsService.Filter:input_type -> Scailo.SalesQuotationsServiceFilterReq
-	53,  // 107: Scailo.SalesQuotationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	19,  // 108: Scailo.SalesQuotationsService.Count:input_type -> Scailo.SalesQuotationsServiceCountReq
-	18,  // 109: Scailo.SalesQuotationsService.DownloadAsCSV:input_type -> Scailo.SalesQuotationsServiceFilterReq
-	54,  // 110: Scailo.SalesQuotationsService.Create:output_type -> Scailo.IdentifierResponse
-	54,  // 111: Scailo.SalesQuotationsService.Draft:output_type -> Scailo.IdentifierResponse
-	54,  // 112: Scailo.SalesQuotationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	54,  // 113: Scailo.SalesQuotationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	54,  // 114: Scailo.SalesQuotationsService.Verify:output_type -> Scailo.IdentifierResponse
-	54,  // 115: Scailo.SalesQuotationsService.Approve:output_type -> Scailo.IdentifierResponse
-	54,  // 116: Scailo.SalesQuotationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	54,  // 117: Scailo.SalesQuotationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	54,  // 118: Scailo.SalesQuotationsService.Halt:output_type -> Scailo.IdentifierResponse
-	54,  // 119: Scailo.SalesQuotationsService.Discard:output_type -> Scailo.IdentifierResponse
-	54,  // 120: Scailo.SalesQuotationsService.Restore:output_type -> Scailo.IdentifierResponse
-	54,  // 121: Scailo.SalesQuotationsService.Complete:output_type -> Scailo.IdentifierResponse
-	54,  // 122: Scailo.SalesQuotationsService.Repeat:output_type -> Scailo.IdentifierResponse
-	54,  // 123: Scailo.SalesQuotationsService.Reopen:output_type -> Scailo.IdentifierResponse
-	54,  // 124: Scailo.SalesQuotationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	54,  // 125: Scailo.SalesQuotationsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	54,  // 126: Scailo.SalesQuotationsService.Autofill:output_type -> Scailo.IdentifierResponse
-	54,  // 127: Scailo.SalesQuotationsService.Amend:output_type -> Scailo.IdentifierResponse
-	55,  // 128: Scailo.SalesQuotationsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	50,  // 129: Scailo.SalesQuotationsService.AddSalesQuotationItem:output_type -> Scailo.IdentifiersList
-	50,  // 130: Scailo.SalesQuotationsService.ModifySalesQuotationItem:output_type -> Scailo.IdentifiersList
-	54,  // 131: Scailo.SalesQuotationsService.ApproveSalesQuotationItem:output_type -> Scailo.IdentifierResponse
-	54,  // 132: Scailo.SalesQuotationsService.DeleteSalesQuotationItem:output_type -> Scailo.IdentifierResponse
-	54,  // 133: Scailo.SalesQuotationsService.ReorderSalesQuotationItems:output_type -> Scailo.IdentifierResponse
-	11,  // 134: Scailo.SalesQuotationsService.ViewSalesQuotationItemByID:output_type -> Scailo.SalesQuotationItem
-	56,  // 135: Scailo.SalesQuotationsService.ViewSalesQuotationItemPrice:output_type -> Scailo.PriceResponse
-	13,  // 136: Scailo.SalesQuotationsService.ViewApprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationItemsList
-	13,  // 137: Scailo.SalesQuotationsService.ViewUnapprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationItemsList
-	13,  // 138: Scailo.SalesQuotationsService.ViewSalesQuotationItemHistory:output_type -> Scailo.SalesQuotationItemsList
-	25,  // 139: Scailo.SalesQuotationsService.ViewPaginatedApprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
-	25,  // 140: Scailo.SalesQuotationsService.ViewPaginatedUnapprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
-	25,  // 141: Scailo.SalesQuotationsService.SearchItemsWithPagination:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
-	57,  // 142: Scailo.SalesQuotationsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	57,  // 143: Scailo.SalesQuotationsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	50,  // 144: Scailo.SalesQuotationsService.UploadSalesQuotationItems:output_type -> Scailo.IdentifiersList
-	54,  // 145: Scailo.SalesQuotationsService.AddSalesQuotationContact:output_type -> Scailo.IdentifierResponse
-	54,  // 146: Scailo.SalesQuotationsService.ApproveSalesQuotationContact:output_type -> Scailo.IdentifierResponse
-	54,  // 147: Scailo.SalesQuotationsService.DeleteSalesQuotationContact:output_type -> Scailo.IdentifierResponse
-	27,  // 148: Scailo.SalesQuotationsService.ViewSalesQuotationContactByID:output_type -> Scailo.SalesQuotationContact
-	28,  // 149: Scailo.SalesQuotationsService.ViewSalesQuotationContacts:output_type -> Scailo.SalesQuotationContactsList
-	54,  // 150: Scailo.SalesQuotationsService.AddSalesQuotationReference:output_type -> Scailo.IdentifierResponse
-	54,  // 151: Scailo.SalesQuotationsService.ApproveSalesQuotationReference:output_type -> Scailo.IdentifierResponse
-	54,  // 152: Scailo.SalesQuotationsService.DeleteSalesQuotationReference:output_type -> Scailo.IdentifierResponse
-	22,  // 153: Scailo.SalesQuotationsService.ViewSalesQuotationReferenceByID:output_type -> Scailo.SalesQuotationReference
-	23,  // 154: Scailo.SalesQuotationsService.ViewSalesQuotationReferences:output_type -> Scailo.SalesQuotationReferencesList
-	8,   // 155: Scailo.SalesQuotationsService.ViewByID:output_type -> Scailo.SalesQuotation
-	8,   // 156: Scailo.SalesQuotationsService.ViewByUUID:output_type -> Scailo.SalesQuotation
-	8,   // 157: Scailo.SalesQuotationsService.ViewByReferenceID:output_type -> Scailo.SalesQuotation
-	8,   // 158: Scailo.SalesQuotationsService.ViewEssentialByID:output_type -> Scailo.SalesQuotation
-	8,   // 159: Scailo.SalesQuotationsService.ViewEssentialByUUID:output_type -> Scailo.SalesQuotation
-	12,  // 160: Scailo.SalesQuotationsService.ViewFromIDs:output_type -> Scailo.SalesQuotationsList
-	12,  // 161: Scailo.SalesQuotationsService.ViewAll:output_type -> Scailo.SalesQuotationsList
-	12,  // 162: Scailo.SalesQuotationsService.ViewAllForEntityUUID:output_type -> Scailo.SalesQuotationsList
-	17,  // 163: Scailo.SalesQuotationsService.ViewWithPagination:output_type -> Scailo.SalesQuotationsServicePaginationResponse
-	58,  // 164: Scailo.SalesQuotationsService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	59,  // 165: Scailo.SalesQuotationsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	59,  // 166: Scailo.SalesQuotationsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 167: Scailo.SalesQuotationsService.ViewProspectiveSalesQuotationItem:output_type -> Scailo.SalesQuotationsServiceItemCreateRequest
-	50,  // 168: Scailo.SalesQuotationsService.ViewAssociatedSalesOrdersIDs:output_type -> Scailo.IdentifiersList
-	60,  // 169: Scailo.SalesQuotationsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	57,  // 170: Scailo.SalesQuotationsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	12,  // 171: Scailo.SalesQuotationsService.SearchAll:output_type -> Scailo.SalesQuotationsList
-	12,  // 172: Scailo.SalesQuotationsService.Filter:output_type -> Scailo.SalesQuotationsList
-	61,  // 173: Scailo.SalesQuotationsService.CountInStatus:output_type -> Scailo.CountResponse
-	61,  // 174: Scailo.SalesQuotationsService.Count:output_type -> Scailo.CountResponse
-	57,  // 175: Scailo.SalesQuotationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	110, // [110:176] is the sub-list for method output_type
-	44,  // [44:110] is the sub-list for method input_type
-	44,  // [44:44] is the sub-list for extension type_name
-	44,  // [44:44] is the sub-list for extension extendee
-	0,   // [0:44] is the sub-list for field type_name
+	31,  // 0: Scailo.SalesQuotationsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	31,  // 1: Scailo.SalesQuotationsServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	32,  // 2: Scailo.SalesQuotation.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 3: Scailo.SalesQuotation.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	34,  // 4: Scailo.SalesQuotation.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 5: Scailo.SalesQuotation.logs:type_name -> Scailo.LogbookLogConciseSLC
+	13,  // 6: Scailo.SalesQuotation.list:type_name -> Scailo.SalesQuotationItem
+	36,  // 7: Scailo.SalesQuotation.form_data:type_name -> Scailo.FormFieldDatum
+	10,  // 8: Scailo.SalesQuotationsServiceMultipleItemsCreateRequest.list:type_name -> Scailo.SalesQuotationsServiceMultipleItemsSingleton
+	32,  // 9: Scailo.SalesQuotationItem.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 10: Scailo.SalesQuotationItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	8,   // 11: Scailo.SalesQuotationsList.list:type_name -> Scailo.SalesQuotation
+	13,  // 12: Scailo.SalesQuotationItemsList.list:type_name -> Scailo.SalesQuotationItem
+	37,  // 13: Scailo.SalesQuotationsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 14: Scailo.SalesQuotationsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 15: Scailo.SalesQuotationsServicePaginationReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
+	34,  // 16: Scailo.SalesQuotationsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	8,   // 17: Scailo.SalesQuotationsServicePaginationResponse.payload:type_name -> Scailo.SalesQuotation
+	37,  // 18: Scailo.SalesQuotationsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 19: Scailo.SalesQuotationsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 20: Scailo.SalesQuotationsServiceFilterReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
+	34,  // 21: Scailo.SalesQuotationsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	39,  // 22: Scailo.SalesQuotationsServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 23: Scailo.SalesQuotationsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 24: Scailo.SalesQuotationsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	39,  // 25: Scailo.SalesQuotationsServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 26: Scailo.SalesQuotationsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 27: Scailo.SalesQuotationsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 28: Scailo.SalesQuotationsServiceSearchAllReq.sort_key:type_name -> Scailo.SALES_QUOTATION_SORT_KEY
+	34,  // 29: Scailo.SalesQuotationsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	1,   // 30: Scailo.SalesQuotationsServiceReferenceCreateRequest.context:type_name -> Scailo.SALES_QUOTATION_REFERENCE_CONTEXT
+	2,   // 31: Scailo.SalesQuotationsServiceReferenceCreateRequest.ref_from:type_name -> Scailo.SALES_QUOTATION_REFERENCE_REF_FROM
+	32,  // 32: Scailo.SalesQuotationReference.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 33: Scailo.SalesQuotationReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	1,   // 34: Scailo.SalesQuotationReference.context:type_name -> Scailo.SALES_QUOTATION_REFERENCE_CONTEXT
+	2,   // 35: Scailo.SalesQuotationReference.ref_from:type_name -> Scailo.SALES_QUOTATION_REFERENCE_REF_FROM
+	24,  // 36: Scailo.SalesQuotationReferencesList.list:type_name -> Scailo.SalesQuotationReference
+	37,  // 37: Scailo.SalesQuotationItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 38: Scailo.SalesQuotationItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 39: Scailo.SalesQuotationItemsSearchRequest.sort_key:type_name -> Scailo.SALES_QUOTATION_ITEM_SORT_KEY
+	4,   // 40: Scailo.SalesQuotationItemsSearchRequest.status:type_name -> Scailo.SALES_QUOTATION_ITEM_STATUS
+	13,  // 41: Scailo.SalesQuotationsServicePaginatedItemsResponse.payload:type_name -> Scailo.SalesQuotationItem
+	32,  // 42: Scailo.SalesQuotationContact.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 43: Scailo.SalesQuotationContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	29,  // 44: Scailo.SalesQuotationContactsList.list:type_name -> Scailo.SalesQuotationContact
+	5,   // 45: Scailo.SalesQuotationsService.Create:input_type -> Scailo.SalesQuotationsServiceCreateRequest
+	5,   // 46: Scailo.SalesQuotationsService.Draft:input_type -> Scailo.SalesQuotationsServiceCreateRequest
+	6,   // 47: Scailo.SalesQuotationsService.DraftUpdate:input_type -> Scailo.SalesQuotationsServiceUpdateRequest
+	40,  // 48: Scailo.SalesQuotationsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 49: Scailo.SalesQuotationsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 50: Scailo.SalesQuotationsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 51: Scailo.SalesQuotationsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	6,   // 52: Scailo.SalesQuotationsService.RevisionUpdate:input_type -> Scailo.SalesQuotationsServiceUpdateRequest
+	40,  // 53: Scailo.SalesQuotationsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 54: Scailo.SalesQuotationsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 55: Scailo.SalesQuotationsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 56: Scailo.SalesQuotationsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 57: Scailo.SalesQuotationsService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
+	40,  // 58: Scailo.SalesQuotationsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 59: Scailo.SalesQuotationsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	42,  // 60: Scailo.SalesQuotationsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	7,   // 61: Scailo.SalesQuotationsService.Autofill:input_type -> Scailo.SalesQuotationsServiceAutofillRequest
+	40,  // 62: Scailo.SalesQuotationsService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 63: Scailo.SalesQuotationsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	11,  // 64: Scailo.SalesQuotationsService.AddMultipleSalesQuotationItems:input_type -> Scailo.SalesQuotationsServiceMultipleItemsCreateRequest
+	9,   // 65: Scailo.SalesQuotationsService.AddSalesQuotationItem:input_type -> Scailo.SalesQuotationsServiceItemCreateRequest
+	12,  // 66: Scailo.SalesQuotationsService.ModifySalesQuotationItem:input_type -> Scailo.SalesQuotationsServiceItemUpdateRequest
+	44,  // 67: Scailo.SalesQuotationsService.ApproveSalesQuotationItem:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 68: Scailo.SalesQuotationsService.DeleteSalesQuotationItem:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 69: Scailo.SalesQuotationsService.ReorderSalesQuotationItems:input_type -> Scailo.ReorderItemsRequest
+	46,  // 70: Scailo.SalesQuotationsService.ViewSalesQuotationItemByID:input_type -> Scailo.Identifier
+	17,  // 71: Scailo.SalesQuotationsService.ViewSalesQuotationItemPrice:input_type -> Scailo.SalesQuotationItemProspectiveInfoRequest
+	47,  // 72: Scailo.SalesQuotationsService.ViewApprovedSalesQuotationItems:input_type -> Scailo.IdentifierWithSearchKey
+	47,  // 73: Scailo.SalesQuotationsService.ViewUnapprovedSalesQuotationItems:input_type -> Scailo.IdentifierWithSearchKey
+	16,  // 74: Scailo.SalesQuotationsService.ViewSalesQuotationItemHistory:input_type -> Scailo.SalesQuotationItemHistoryRequest
+	26,  // 75: Scailo.SalesQuotationsService.ViewPaginatedApprovedSalesQuotationItems:input_type -> Scailo.SalesQuotationItemsSearchRequest
+	26,  // 76: Scailo.SalesQuotationsService.ViewPaginatedUnapprovedSalesQuotationItems:input_type -> Scailo.SalesQuotationItemsSearchRequest
+	26,  // 77: Scailo.SalesQuotationsService.SearchItemsWithPagination:input_type -> Scailo.SalesQuotationItemsSearchRequest
+	48,  // 78: Scailo.SalesQuotationsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	49,  // 79: Scailo.SalesQuotationsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	50,  // 80: Scailo.SalesQuotationsService.UploadSalesQuotationItems:input_type -> Scailo.IdentifierUUIDWithFile
+	28,  // 81: Scailo.SalesQuotationsService.AddSalesQuotationContact:input_type -> Scailo.SalesQuotationsServiceContactCreateRequest
+	44,  // 82: Scailo.SalesQuotationsService.ApproveSalesQuotationContact:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 83: Scailo.SalesQuotationsService.DeleteSalesQuotationContact:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 84: Scailo.SalesQuotationsService.ViewSalesQuotationContactByID:input_type -> Scailo.Identifier
+	48,  // 85: Scailo.SalesQuotationsService.ViewSalesQuotationContacts:input_type -> Scailo.IdentifierUUID
+	23,  // 86: Scailo.SalesQuotationsService.AddSalesQuotationReference:input_type -> Scailo.SalesQuotationsServiceReferenceCreateRequest
+	44,  // 87: Scailo.SalesQuotationsService.ApproveSalesQuotationReference:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 88: Scailo.SalesQuotationsService.DeleteSalesQuotationReference:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 89: Scailo.SalesQuotationsService.ViewSalesQuotationReferenceByID:input_type -> Scailo.Identifier
+	46,  // 90: Scailo.SalesQuotationsService.ViewSalesQuotationReferences:input_type -> Scailo.Identifier
+	46,  // 91: Scailo.SalesQuotationsService.ViewByID:input_type -> Scailo.Identifier
+	48,  // 92: Scailo.SalesQuotationsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	51,  // 93: Scailo.SalesQuotationsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	46,  // 94: Scailo.SalesQuotationsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	48,  // 95: Scailo.SalesQuotationsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	52,  // 96: Scailo.SalesQuotationsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	53,  // 97: Scailo.SalesQuotationsService.ViewAll:input_type -> Scailo.ActiveStatus
+	48,  // 98: Scailo.SalesQuotationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	18,  // 99: Scailo.SalesQuotationsService.ViewWithPagination:input_type -> Scailo.SalesQuotationsServicePaginationReq
+	46,  // 100: Scailo.SalesQuotationsService.ViewAmendments:input_type -> Scailo.Identifier
+	47,  // 101: Scailo.SalesQuotationsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	54,  // 102: Scailo.SalesQuotationsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	17,  // 103: Scailo.SalesQuotationsService.ViewProspectiveSalesQuotationItem:input_type -> Scailo.SalesQuotationItemProspectiveInfoRequest
+	46,  // 104: Scailo.SalesQuotationsService.ViewAssociatedSalesOrdersIDs:input_type -> Scailo.Identifier
+	48,  // 105: Scailo.SalesQuotationsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	48,  // 106: Scailo.SalesQuotationsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	22,  // 107: Scailo.SalesQuotationsService.SearchAll:input_type -> Scailo.SalesQuotationsServiceSearchAllReq
+	20,  // 108: Scailo.SalesQuotationsService.Filter:input_type -> Scailo.SalesQuotationsServiceFilterReq
+	55,  // 109: Scailo.SalesQuotationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	21,  // 110: Scailo.SalesQuotationsService.Count:input_type -> Scailo.SalesQuotationsServiceCountReq
+	20,  // 111: Scailo.SalesQuotationsService.DownloadAsCSV:input_type -> Scailo.SalesQuotationsServiceFilterReq
+	56,  // 112: Scailo.SalesQuotationsService.Create:output_type -> Scailo.IdentifierResponse
+	56,  // 113: Scailo.SalesQuotationsService.Draft:output_type -> Scailo.IdentifierResponse
+	56,  // 114: Scailo.SalesQuotationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 115: Scailo.SalesQuotationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	56,  // 116: Scailo.SalesQuotationsService.Verify:output_type -> Scailo.IdentifierResponse
+	56,  // 117: Scailo.SalesQuotationsService.Approve:output_type -> Scailo.IdentifierResponse
+	56,  // 118: Scailo.SalesQuotationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	56,  // 119: Scailo.SalesQuotationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 120: Scailo.SalesQuotationsService.Halt:output_type -> Scailo.IdentifierResponse
+	56,  // 121: Scailo.SalesQuotationsService.Discard:output_type -> Scailo.IdentifierResponse
+	56,  // 122: Scailo.SalesQuotationsService.Restore:output_type -> Scailo.IdentifierResponse
+	56,  // 123: Scailo.SalesQuotationsService.Complete:output_type -> Scailo.IdentifierResponse
+	56,  // 124: Scailo.SalesQuotationsService.Repeat:output_type -> Scailo.IdentifierResponse
+	56,  // 125: Scailo.SalesQuotationsService.Reopen:output_type -> Scailo.IdentifierResponse
+	56,  // 126: Scailo.SalesQuotationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	56,  // 127: Scailo.SalesQuotationsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	56,  // 128: Scailo.SalesQuotationsService.Autofill:output_type -> Scailo.IdentifierResponse
+	56,  // 129: Scailo.SalesQuotationsService.Amend:output_type -> Scailo.IdentifierResponse
+	57,  // 130: Scailo.SalesQuotationsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	56,  // 131: Scailo.SalesQuotationsService.AddMultipleSalesQuotationItems:output_type -> Scailo.IdentifierResponse
+	52,  // 132: Scailo.SalesQuotationsService.AddSalesQuotationItem:output_type -> Scailo.IdentifiersList
+	52,  // 133: Scailo.SalesQuotationsService.ModifySalesQuotationItem:output_type -> Scailo.IdentifiersList
+	56,  // 134: Scailo.SalesQuotationsService.ApproveSalesQuotationItem:output_type -> Scailo.IdentifierResponse
+	56,  // 135: Scailo.SalesQuotationsService.DeleteSalesQuotationItem:output_type -> Scailo.IdentifierResponse
+	56,  // 136: Scailo.SalesQuotationsService.ReorderSalesQuotationItems:output_type -> Scailo.IdentifierResponse
+	13,  // 137: Scailo.SalesQuotationsService.ViewSalesQuotationItemByID:output_type -> Scailo.SalesQuotationItem
+	58,  // 138: Scailo.SalesQuotationsService.ViewSalesQuotationItemPrice:output_type -> Scailo.PriceResponse
+	15,  // 139: Scailo.SalesQuotationsService.ViewApprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationItemsList
+	15,  // 140: Scailo.SalesQuotationsService.ViewUnapprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationItemsList
+	15,  // 141: Scailo.SalesQuotationsService.ViewSalesQuotationItemHistory:output_type -> Scailo.SalesQuotationItemsList
+	27,  // 142: Scailo.SalesQuotationsService.ViewPaginatedApprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
+	27,  // 143: Scailo.SalesQuotationsService.ViewPaginatedUnapprovedSalesQuotationItems:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
+	27,  // 144: Scailo.SalesQuotationsService.SearchItemsWithPagination:output_type -> Scailo.SalesQuotationsServicePaginatedItemsResponse
+	59,  // 145: Scailo.SalesQuotationsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	59,  // 146: Scailo.SalesQuotationsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	52,  // 147: Scailo.SalesQuotationsService.UploadSalesQuotationItems:output_type -> Scailo.IdentifiersList
+	56,  // 148: Scailo.SalesQuotationsService.AddSalesQuotationContact:output_type -> Scailo.IdentifierResponse
+	56,  // 149: Scailo.SalesQuotationsService.ApproveSalesQuotationContact:output_type -> Scailo.IdentifierResponse
+	56,  // 150: Scailo.SalesQuotationsService.DeleteSalesQuotationContact:output_type -> Scailo.IdentifierResponse
+	29,  // 151: Scailo.SalesQuotationsService.ViewSalesQuotationContactByID:output_type -> Scailo.SalesQuotationContact
+	30,  // 152: Scailo.SalesQuotationsService.ViewSalesQuotationContacts:output_type -> Scailo.SalesQuotationContactsList
+	56,  // 153: Scailo.SalesQuotationsService.AddSalesQuotationReference:output_type -> Scailo.IdentifierResponse
+	56,  // 154: Scailo.SalesQuotationsService.ApproveSalesQuotationReference:output_type -> Scailo.IdentifierResponse
+	56,  // 155: Scailo.SalesQuotationsService.DeleteSalesQuotationReference:output_type -> Scailo.IdentifierResponse
+	24,  // 156: Scailo.SalesQuotationsService.ViewSalesQuotationReferenceByID:output_type -> Scailo.SalesQuotationReference
+	25,  // 157: Scailo.SalesQuotationsService.ViewSalesQuotationReferences:output_type -> Scailo.SalesQuotationReferencesList
+	8,   // 158: Scailo.SalesQuotationsService.ViewByID:output_type -> Scailo.SalesQuotation
+	8,   // 159: Scailo.SalesQuotationsService.ViewByUUID:output_type -> Scailo.SalesQuotation
+	8,   // 160: Scailo.SalesQuotationsService.ViewByReferenceID:output_type -> Scailo.SalesQuotation
+	8,   // 161: Scailo.SalesQuotationsService.ViewEssentialByID:output_type -> Scailo.SalesQuotation
+	8,   // 162: Scailo.SalesQuotationsService.ViewEssentialByUUID:output_type -> Scailo.SalesQuotation
+	14,  // 163: Scailo.SalesQuotationsService.ViewFromIDs:output_type -> Scailo.SalesQuotationsList
+	14,  // 164: Scailo.SalesQuotationsService.ViewAll:output_type -> Scailo.SalesQuotationsList
+	14,  // 165: Scailo.SalesQuotationsService.ViewAllForEntityUUID:output_type -> Scailo.SalesQuotationsList
+	19,  // 166: Scailo.SalesQuotationsService.ViewWithPagination:output_type -> Scailo.SalesQuotationsServicePaginationResponse
+	60,  // 167: Scailo.SalesQuotationsService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	61,  // 168: Scailo.SalesQuotationsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	61,  // 169: Scailo.SalesQuotationsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 170: Scailo.SalesQuotationsService.ViewProspectiveSalesQuotationItem:output_type -> Scailo.SalesQuotationsServiceItemCreateRequest
+	52,  // 171: Scailo.SalesQuotationsService.ViewAssociatedSalesOrdersIDs:output_type -> Scailo.IdentifiersList
+	62,  // 172: Scailo.SalesQuotationsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	59,  // 173: Scailo.SalesQuotationsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	14,  // 174: Scailo.SalesQuotationsService.SearchAll:output_type -> Scailo.SalesQuotationsList
+	14,  // 175: Scailo.SalesQuotationsService.Filter:output_type -> Scailo.SalesQuotationsList
+	63,  // 176: Scailo.SalesQuotationsService.CountInStatus:output_type -> Scailo.CountResponse
+	63,  // 177: Scailo.SalesQuotationsService.Count:output_type -> Scailo.CountResponse
+	59,  // 178: Scailo.SalesQuotationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	112, // [112:179] is the sub-list for method output_type
+	45,  // [45:112] is the sub-list for method input_type
+	45,  // [45:45] is the sub-list for extension type_name
+	45,  // [45:45] is the sub-list for extension extendee
+	0,   // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_sales_quotations_scailo_proto_init() }
@@ -4071,7 +4286,7 @@ func file_sales_quotations_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sales_quotations_scailo_proto_rawDesc), len(file_sales_quotations_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -37,6 +37,7 @@ const (
 	VendorInvoicesService_Autofill_FullMethodName                                  = "/Scailo.VendorInvoicesService/Autofill"
 	VendorInvoicesService_IsAdmittedToStore_FullMethodName                         = "/Scailo.VendorInvoicesService/IsAdmittedToStore"
 	VendorInvoicesService_CreateMagicLink_FullMethodName                           = "/Scailo.VendorInvoicesService/CreateMagicLink"
+	VendorInvoicesService_AddMultipleVendorInvoiceItems_FullMethodName             = "/Scailo.VendorInvoicesService/AddMultipleVendorInvoiceItems"
 	VendorInvoicesService_AddVendorInvoiceItem_FullMethodName                      = "/Scailo.VendorInvoicesService/AddVendorInvoiceItem"
 	VendorInvoicesService_ModifyVendorInvoiceItem_FullMethodName                   = "/Scailo.VendorInvoicesService/ModifyVendorInvoiceItem"
 	VendorInvoicesService_ApproveVendorInvoiceItem_FullMethodName                  = "/Scailo.VendorInvoicesService/ApproveVendorInvoiceItem"
@@ -126,6 +127,8 @@ type VendorInvoicesServiceClient interface {
 	IsAdmittedToStore(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a vendor invoice
+	AddMultipleVendorInvoiceItems(ctx context.Context, in *VendorInvoicesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a vendor invoice
 	AddVendorInvoiceItem(ctx context.Context, in *VendorInvoicesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a vendor invoice
@@ -408,6 +411,16 @@ func (c *vendorInvoicesServiceClient) CreateMagicLink(ctx context.Context, in *M
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, VendorInvoicesService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vendorInvoicesServiceClient) AddMultipleVendorInvoiceItems(ctx context.Context, in *VendorInvoicesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VendorInvoicesService_AddMultipleVendorInvoiceItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

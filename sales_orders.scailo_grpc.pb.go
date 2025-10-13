@@ -37,6 +37,7 @@ const (
 	SalesOrdersService_Autofill_FullMethodName                               = "/Scailo.SalesOrdersService/Autofill"
 	SalesOrdersService_Amend_FullMethodName                                  = "/Scailo.SalesOrdersService/Amend"
 	SalesOrdersService_CreateMagicLink_FullMethodName                        = "/Scailo.SalesOrdersService/CreateMagicLink"
+	SalesOrdersService_AddMultipleSalesOrderItems_FullMethodName             = "/Scailo.SalesOrdersService/AddMultipleSalesOrderItems"
 	SalesOrdersService_AddSalesOrderItem_FullMethodName                      = "/Scailo.SalesOrdersService/AddSalesOrderItem"
 	SalesOrdersService_ModifySalesOrderItem_FullMethodName                   = "/Scailo.SalesOrdersService/ModifySalesOrderItem"
 	SalesOrdersService_ApproveSalesOrderItem_FullMethodName                  = "/Scailo.SalesOrdersService/ApproveSalesOrderItem"
@@ -135,6 +136,8 @@ type SalesOrdersServiceClient interface {
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a sales order
+	AddMultipleSalesOrderItems(ctx context.Context, in *SalesOrdersServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a sales order
 	AddSalesOrderItem(ctx context.Context, in *SalesOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
 	// Modify an item in a sales order
@@ -435,6 +438,16 @@ func (c *salesOrdersServiceClient) CreateMagicLink(ctx context.Context, in *Magi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, SalesOrdersService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesOrdersServiceClient) AddMultipleSalesOrderItems(ctx context.Context, in *SalesOrdersServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesOrdersService_AddMultipleSalesOrderItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

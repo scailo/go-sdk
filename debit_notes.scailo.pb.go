@@ -994,6 +994,179 @@ func (x *DebitNotesServiceItemCreateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to add an individual item as part of multiple item addition to a debit note
+type DebitNotesServiceMultipleItemsSingleton struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the family ID
+	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	// The quantity (in cents) being admitted in internal unit of material
+	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
+	// Stores the ID of the vendor's unit of material
+	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
+	// Stores the quantity (in cents) being admitted in vendor's unit of material
+	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// The unit price of the item (as supplied by the vendor)
+	VendorUnitPrice uint64 `protobuf:"varint,15,opt,name=vendor_unit_price,json=vendorUnitPrice,proto3" json:"vendor_unit_price,omitempty"`
+	// The ID of the associated tax group
+	TaxGroupId uint64 `protobuf:"varint,16,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
+	// The applicable round off amount (optional, and can be positive or negative)
+	RoundOff int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,18,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) Reset() {
+	*x = DebitNotesServiceMultipleItemsSingleton{}
+	mi := &file_debit_notes_scailo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DebitNotesServiceMultipleItemsSingleton) ProtoMessage() {}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) ProtoReflect() protoreflect.Message {
+	mi := &file_debit_notes_scailo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DebitNotesServiceMultipleItemsSingleton.ProtoReflect.Descriptor instead.
+func (*DebitNotesServiceMultipleItemsSingleton) Descriptor() ([]byte, []int) {
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetFamilyId() uint64 {
+	if x != nil {
+		return x.FamilyId
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetInternalQuantity() uint64 {
+	if x != nil {
+		return x.InternalQuantity
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetVendorUomId() uint64 {
+	if x != nil {
+		return x.VendorUomId
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetVendorQuantity() uint64 {
+	if x != nil {
+		return x.VendorQuantity
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetVendorUnitPrice() uint64 {
+	if x != nil {
+		return x.VendorUnitPrice
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
+	if x != nil {
+		return x.TaxGroupId
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetRoundOff() int64 {
+	if x != nil {
+		return x.RoundOff
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsSingleton) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
+// Describes the parameters required to add multiple items to a debit note
+type DebitNotesServiceMultipleItemsCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// Stores the debit note ID
+	DebitNoteId uint64 `protobuf:"varint,10,opt,name=debit_note_id,json=debitNoteId,proto3" json:"debit_note_id,omitempty"`
+	// List of items
+	List          []*DebitNotesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) Reset() {
+	*x = DebitNotesServiceMultipleItemsCreateRequest{}
+	mi := &file_debit_notes_scailo_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DebitNotesServiceMultipleItemsCreateRequest) ProtoMessage() {}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_debit_notes_scailo_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DebitNotesServiceMultipleItemsCreateRequest.ProtoReflect.Descriptor instead.
+func (*DebitNotesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []int) {
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) GetDebitNoteId() uint64 {
+	if x != nil {
+		return x.DebitNoteId
+	}
+	return 0
+}
+
+func (x *DebitNotesServiceMultipleItemsCreateRequest) GetList() []*DebitNotesServiceMultipleItemsSingleton {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters required to update an item in a debit note
 type DebitNotesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1021,7 +1194,7 @@ type DebitNotesServiceItemUpdateRequest struct {
 
 func (x *DebitNotesServiceItemUpdateRequest) Reset() {
 	*x = DebitNotesServiceItemUpdateRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[6]
+	mi := &file_debit_notes_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1033,7 +1206,7 @@ func (x *DebitNotesServiceItemUpdateRequest) String() string {
 func (*DebitNotesServiceItemUpdateRequest) ProtoMessage() {}
 
 func (x *DebitNotesServiceItemUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[6]
+	mi := &file_debit_notes_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1046,7 +1219,7 @@ func (x *DebitNotesServiceItemUpdateRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use DebitNotesServiceItemUpdateRequest.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{6}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DebitNotesServiceItemUpdateRequest) GetUserComment() string {
@@ -1149,7 +1322,7 @@ type DebitNoteItem struct {
 
 func (x *DebitNoteItem) Reset() {
 	*x = DebitNoteItem{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[7]
+	mi := &file_debit_notes_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1161,7 +1334,7 @@ func (x *DebitNoteItem) String() string {
 func (*DebitNoteItem) ProtoMessage() {}
 
 func (x *DebitNoteItem) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[7]
+	mi := &file_debit_notes_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1174,7 +1347,7 @@ func (x *DebitNoteItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteItem.ProtoReflect.Descriptor instead.
 func (*DebitNoteItem) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{7}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DebitNoteItem) GetEntityUuid() string {
@@ -1286,7 +1459,7 @@ type DebitNotesList struct {
 
 func (x *DebitNotesList) Reset() {
 	*x = DebitNotesList{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[8]
+	mi := &file_debit_notes_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1298,7 +1471,7 @@ func (x *DebitNotesList) String() string {
 func (*DebitNotesList) ProtoMessage() {}
 
 func (x *DebitNotesList) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[8]
+	mi := &file_debit_notes_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1311,7 +1484,7 @@ func (x *DebitNotesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNotesList.ProtoReflect.Descriptor instead.
 func (*DebitNotesList) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{8}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DebitNotesList) GetList() []*DebitNote {
@@ -1332,7 +1505,7 @@ type DebitNoteItemsList struct {
 
 func (x *DebitNoteItemsList) Reset() {
 	*x = DebitNoteItemsList{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[9]
+	mi := &file_debit_notes_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1344,7 +1517,7 @@ func (x *DebitNoteItemsList) String() string {
 func (*DebitNoteItemsList) ProtoMessage() {}
 
 func (x *DebitNoteItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[9]
+	mi := &file_debit_notes_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1357,7 +1530,7 @@ func (x *DebitNoteItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteItemsList.ProtoReflect.Descriptor instead.
 func (*DebitNoteItemsList) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{9}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DebitNoteItemsList) GetList() []*DebitNoteItem {
@@ -1380,7 +1553,7 @@ type DebitNoteItemHistoryRequest struct {
 
 func (x *DebitNoteItemHistoryRequest) Reset() {
 	*x = DebitNoteItemHistoryRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[10]
+	mi := &file_debit_notes_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1392,7 +1565,7 @@ func (x *DebitNoteItemHistoryRequest) String() string {
 func (*DebitNoteItemHistoryRequest) ProtoMessage() {}
 
 func (x *DebitNoteItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[10]
+	mi := &file_debit_notes_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1405,7 +1578,7 @@ func (x *DebitNoteItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*DebitNoteItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{10}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DebitNoteItemHistoryRequest) GetDebitNoteId() uint64 {
@@ -1435,7 +1608,7 @@ type DebitNoteItemProspectiveInfoRequest struct {
 
 func (x *DebitNoteItemProspectiveInfoRequest) Reset() {
 	*x = DebitNoteItemProspectiveInfoRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[11]
+	mi := &file_debit_notes_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1447,7 +1620,7 @@ func (x *DebitNoteItemProspectiveInfoRequest) String() string {
 func (*DebitNoteItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *DebitNoteItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[11]
+	mi := &file_debit_notes_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1460,7 +1633,7 @@ func (x *DebitNoteItemProspectiveInfoRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use DebitNoteItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*DebitNoteItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{11}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DebitNoteItemProspectiveInfoRequest) GetDebitNoteId() uint64 {
@@ -1492,7 +1665,7 @@ type DebitNotesServiceAlreadyAddedQuantityForSourceRequest struct {
 
 func (x *DebitNotesServiceAlreadyAddedQuantityForSourceRequest) Reset() {
 	*x = DebitNotesServiceAlreadyAddedQuantityForSourceRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[12]
+	mi := &file_debit_notes_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1504,7 +1677,7 @@ func (x *DebitNotesServiceAlreadyAddedQuantityForSourceRequest) String() string 
 func (*DebitNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoMessage() {}
 
 func (x *DebitNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[12]
+	mi := &file_debit_notes_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1517,7 +1690,7 @@ func (x *DebitNotesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() p
 
 // Deprecated: Use DebitNotesServiceAlreadyAddedQuantityForSourceRequest.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceAlreadyAddedQuantityForSourceRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{12}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DebitNotesServiceAlreadyAddedQuantityForSourceRequest) GetRefFrom() DEBIT_NOTE_REF_FROM {
@@ -1582,7 +1755,7 @@ type DebitNoteItemsSearchRequest struct {
 
 func (x *DebitNoteItemsSearchRequest) Reset() {
 	*x = DebitNoteItemsSearchRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[13]
+	mi := &file_debit_notes_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1594,7 +1767,7 @@ func (x *DebitNoteItemsSearchRequest) String() string {
 func (*DebitNoteItemsSearchRequest) ProtoMessage() {}
 
 func (x *DebitNoteItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[13]
+	mi := &file_debit_notes_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1607,7 +1780,7 @@ func (x *DebitNoteItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*DebitNoteItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{13}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DebitNoteItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -1739,7 +1912,7 @@ type DebitNotesServicePaginatedItemsResponse struct {
 
 func (x *DebitNotesServicePaginatedItemsResponse) Reset() {
 	*x = DebitNotesServicePaginatedItemsResponse{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[14]
+	mi := &file_debit_notes_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1751,7 +1924,7 @@ func (x *DebitNotesServicePaginatedItemsResponse) String() string {
 func (*DebitNotesServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *DebitNotesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[14]
+	mi := &file_debit_notes_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1764,7 +1937,7 @@ func (x *DebitNotesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use DebitNotesServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*DebitNotesServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{14}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DebitNotesServicePaginatedItemsResponse) GetCount() uint64 {
@@ -1816,7 +1989,7 @@ type DebitNotesServicePaginationReq struct {
 
 func (x *DebitNotesServicePaginationReq) Reset() {
 	*x = DebitNotesServicePaginationReq{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[15]
+	mi := &file_debit_notes_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1828,7 +2001,7 @@ func (x *DebitNotesServicePaginationReq) String() string {
 func (*DebitNotesServicePaginationReq) ProtoMessage() {}
 
 func (x *DebitNotesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[15]
+	mi := &file_debit_notes_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1841,7 +2014,7 @@ func (x *DebitNotesServicePaginationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNotesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*DebitNotesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{15}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DebitNotesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1903,7 +2076,7 @@ type DebitNotesServicePaginationResponse struct {
 
 func (x *DebitNotesServicePaginationResponse) Reset() {
 	*x = DebitNotesServicePaginationResponse{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[16]
+	mi := &file_debit_notes_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1915,7 +2088,7 @@ func (x *DebitNotesServicePaginationResponse) String() string {
 func (*DebitNotesServicePaginationResponse) ProtoMessage() {}
 
 func (x *DebitNotesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[16]
+	mi := &file_debit_notes_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1928,7 +2101,7 @@ func (x *DebitNotesServicePaginationResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use DebitNotesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*DebitNotesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{16}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DebitNotesServicePaginationResponse) GetCount() uint64 {
@@ -2024,7 +2197,7 @@ type DebitNotesServiceFilterReq struct {
 
 func (x *DebitNotesServiceFilterReq) Reset() {
 	*x = DebitNotesServiceFilterReq{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[17]
+	mi := &file_debit_notes_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2036,7 +2209,7 @@ func (x *DebitNotesServiceFilterReq) String() string {
 func (*DebitNotesServiceFilterReq) ProtoMessage() {}
 
 func (x *DebitNotesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[17]
+	mi := &file_debit_notes_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2049,7 +2222,7 @@ func (x *DebitNotesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNotesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{17}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DebitNotesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2305,7 +2478,7 @@ type DebitNotesServiceCountReq struct {
 
 func (x *DebitNotesServiceCountReq) Reset() {
 	*x = DebitNotesServiceCountReq{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[18]
+	mi := &file_debit_notes_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2317,7 +2490,7 @@ func (x *DebitNotesServiceCountReq) String() string {
 func (*DebitNotesServiceCountReq) ProtoMessage() {}
 
 func (x *DebitNotesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[18]
+	mi := &file_debit_notes_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2330,7 +2503,7 @@ func (x *DebitNotesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNotesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{18}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DebitNotesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2532,7 +2705,7 @@ type DebitNotesServiceSearchAllReq struct {
 
 func (x *DebitNotesServiceSearchAllReq) Reset() {
 	*x = DebitNotesServiceSearchAllReq{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[19]
+	mi := &file_debit_notes_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2544,7 +2717,7 @@ func (x *DebitNotesServiceSearchAllReq) String() string {
 func (*DebitNotesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *DebitNotesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[19]
+	mi := &file_debit_notes_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2557,7 +2730,7 @@ func (x *DebitNotesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNotesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{19}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DebitNotesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2652,7 +2825,7 @@ type DebitNotesServiceReferenceCreateRequest struct {
 
 func (x *DebitNotesServiceReferenceCreateRequest) Reset() {
 	*x = DebitNotesServiceReferenceCreateRequest{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[20]
+	mi := &file_debit_notes_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2664,7 +2837,7 @@ func (x *DebitNotesServiceReferenceCreateRequest) String() string {
 func (*DebitNotesServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *DebitNotesServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[20]
+	mi := &file_debit_notes_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2677,7 +2850,7 @@ func (x *DebitNotesServiceReferenceCreateRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use DebitNotesServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*DebitNotesServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{20}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DebitNotesServiceReferenceCreateRequest) GetUserComment() string {
@@ -2724,7 +2897,7 @@ type DebitNoteReference struct {
 
 func (x *DebitNoteReference) Reset() {
 	*x = DebitNoteReference{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[21]
+	mi := &file_debit_notes_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2736,7 +2909,7 @@ func (x *DebitNoteReference) String() string {
 func (*DebitNoteReference) ProtoMessage() {}
 
 func (x *DebitNoteReference) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[21]
+	mi := &file_debit_notes_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2749,7 +2922,7 @@ func (x *DebitNoteReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteReference.ProtoReflect.Descriptor instead.
 func (*DebitNoteReference) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{21}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DebitNoteReference) GetEntityUuid() string {
@@ -2812,7 +2985,7 @@ type DebitNoteReferencesList struct {
 
 func (x *DebitNoteReferencesList) Reset() {
 	*x = DebitNoteReferencesList{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[22]
+	mi := &file_debit_notes_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2824,7 +2997,7 @@ func (x *DebitNoteReferencesList) String() string {
 func (*DebitNoteReferencesList) ProtoMessage() {}
 
 func (x *DebitNoteReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[22]
+	mi := &file_debit_notes_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2837,7 +3010,7 @@ func (x *DebitNoteReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteReferencesList.ProtoReflect.Descriptor instead.
 func (*DebitNoteReferencesList) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{22}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DebitNoteReferencesList) GetList() []*DebitNoteReference {
@@ -2862,7 +3035,7 @@ type DebitNoteReturnStatistics struct {
 
 func (x *DebitNoteReturnStatistics) Reset() {
 	*x = DebitNoteReturnStatistics{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[23]
+	mi := &file_debit_notes_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2874,7 +3047,7 @@ func (x *DebitNoteReturnStatistics) String() string {
 func (*DebitNoteReturnStatistics) ProtoMessage() {}
 
 func (x *DebitNoteReturnStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[23]
+	mi := &file_debit_notes_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2887,7 +3060,7 @@ func (x *DebitNoteReturnStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteReturnStatistics.ProtoReflect.Descriptor instead.
 func (*DebitNoteReturnStatistics) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{23}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *DebitNoteReturnStatistics) GetFamilyId() uint64 {
@@ -2921,7 +3094,7 @@ type DebitNoteReturnStatisticsList struct {
 
 func (x *DebitNoteReturnStatisticsList) Reset() {
 	*x = DebitNoteReturnStatisticsList{}
-	mi := &file_debit_notes_scailo_proto_msgTypes[24]
+	mi := &file_debit_notes_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2933,7 +3106,7 @@ func (x *DebitNoteReturnStatisticsList) String() string {
 func (*DebitNoteReturnStatisticsList) ProtoMessage() {}
 
 func (x *DebitNoteReturnStatisticsList) ProtoReflect() protoreflect.Message {
-	mi := &file_debit_notes_scailo_proto_msgTypes[24]
+	mi := &file_debit_notes_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2946,7 +3119,7 @@ func (x *DebitNoteReturnStatisticsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitNoteReturnStatisticsList.ProtoReflect.Descriptor instead.
 func (*DebitNoteReturnStatisticsList) Descriptor() ([]byte, []int) {
-	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{24}
+	return file_debit_notes_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DebitNoteReturnStatisticsList) GetList() []*DebitNoteReturnStatistics {
@@ -3030,7 +3203,22 @@ const file_debit_notes_scailo_proto_rawDesc = "" +
 	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1b\n" +
 	"\tround_off\x18\x11 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\x9a\x03\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\x89\x03\n" +
+	"'DebitNotesServiceMultipleItemsSingleton\x12$\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
+	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
+	"\rvendor_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vvendorUomId\x120\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\x123\n" +
+	"\x11vendor_unit_price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fvendorUnitPrice\x12)\n" +
+	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"taxGroupId\x12\x1b\n" +
+	"\tround_off\x18\x11 \x01(\x03R\broundOff\x12&\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\xc2\x01\n" +
+	"+DebitNotesServiceMultipleItemsCreateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12+\n" +
+	"\rdebit_note_id\x18\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\vdebitNoteId\x12C\n" +
+	"\x04list\x18\v \x03(\v2/.Scailo.DebitNotesServiceMultipleItemsSingletonR\x04list\"\x9a\x03\n" +
 	"\"DebitNotesServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
@@ -3250,7 +3438,7 @@ const file_debit_notes_scailo_proto_rawDesc = "" +
 	" DEBIT_NOTE_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12(\n" +
 	"$DEBIT_NOTE_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12#\n" +
-	"\x1fDEBIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\xc8'\n" +
+	"\x1fDEBIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\xb6(\n" +
 	"\x11DebitNotesService\x12L\n" +
 	"\x06Create\x12&.Scailo.DebitNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x05Draft\x12&.Scailo.DebitNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -3270,7 +3458,8 @@ const file_debit_notes_scailo_proto_rawDesc = "" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\bAutofill\x12(.Scailo.DebitNotesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12Z\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12l\n" +
+	"\x19AddMultipleDebitNoteItems\x123.Scailo.DebitNotesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
 	"\x10AddDebitNoteItem\x12*.Scailo.DebitNotesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12]\n" +
 	"\x13ModifyDebitNoteItem\x12*.Scailo.DebitNotesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\x14ApproveDebitNoteItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -3332,7 +3521,7 @@ func file_debit_notes_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_debit_notes_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_debit_notes_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_debit_notes_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_debit_notes_scailo_proto_goTypes = []any{
 	(DEBIT_NOTE_REF_FROM)(0),                                      // 0: Scailo.DEBIT_NOTE_REF_FROM
 	(DEBIT_NOTE_ITEM_SORT_KEY)(0),                                 // 1: Scailo.DEBIT_NOTE_ITEM_SORT_KEY
@@ -3344,230 +3533,235 @@ var file_debit_notes_scailo_proto_goTypes = []any{
 	(*DebitNoteAncillaryParameters)(nil),                          // 7: Scailo.DebitNoteAncillaryParameters
 	(*DebitNote)(nil),                                             // 8: Scailo.DebitNote
 	(*DebitNotesServiceItemCreateRequest)(nil),                    // 9: Scailo.DebitNotesServiceItemCreateRequest
-	(*DebitNotesServiceItemUpdateRequest)(nil),                    // 10: Scailo.DebitNotesServiceItemUpdateRequest
-	(*DebitNoteItem)(nil),                                         // 11: Scailo.DebitNoteItem
-	(*DebitNotesList)(nil),                                        // 12: Scailo.DebitNotesList
-	(*DebitNoteItemsList)(nil),                                    // 13: Scailo.DebitNoteItemsList
-	(*DebitNoteItemHistoryRequest)(nil),                           // 14: Scailo.DebitNoteItemHistoryRequest
-	(*DebitNoteItemProspectiveInfoRequest)(nil),                   // 15: Scailo.DebitNoteItemProspectiveInfoRequest
-	(*DebitNotesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 16: Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
-	(*DebitNoteItemsSearchRequest)(nil),                           // 17: Scailo.DebitNoteItemsSearchRequest
-	(*DebitNotesServicePaginatedItemsResponse)(nil),               // 18: Scailo.DebitNotesServicePaginatedItemsResponse
-	(*DebitNotesServicePaginationReq)(nil),                        // 19: Scailo.DebitNotesServicePaginationReq
-	(*DebitNotesServicePaginationResponse)(nil),                   // 20: Scailo.DebitNotesServicePaginationResponse
-	(*DebitNotesServiceFilterReq)(nil),                            // 21: Scailo.DebitNotesServiceFilterReq
-	(*DebitNotesServiceCountReq)(nil),                             // 22: Scailo.DebitNotesServiceCountReq
-	(*DebitNotesServiceSearchAllReq)(nil),                         // 23: Scailo.DebitNotesServiceSearchAllReq
-	(*DebitNotesServiceReferenceCreateRequest)(nil),               // 24: Scailo.DebitNotesServiceReferenceCreateRequest
-	(*DebitNoteReference)(nil),                                    // 25: Scailo.DebitNoteReference
-	(*DebitNoteReferencesList)(nil),                               // 26: Scailo.DebitNoteReferencesList
-	(*DebitNoteReturnStatistics)(nil),                             // 27: Scailo.DebitNoteReturnStatistics
-	(*DebitNoteReturnStatisticsList)(nil),                         // 28: Scailo.DebitNoteReturnStatisticsList
-	(*FormFieldDatumCreateRequest)(nil),                           // 29: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                      // 30: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                      // 31: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                                // 32: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                                  // 33: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                        // 34: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                              // 35: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                               // 36: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                           // 37: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                         // 38: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                         // 39: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),     // 40: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                             // 41: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                   // 42: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                            // 43: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                               // 44: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                        // 45: Scailo.IdentifierUUID
-	(*Empty)(nil),                                                 // 46: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                // 47: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                       // 48: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                       // 49: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                          // 50: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                        // 51: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                               // 52: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                    // 53: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                             // 54: Scailo.MagicLink
-	(*StandardFile)(nil),                                          // 55: Scailo.StandardFile
-	(*FamiliesList)(nil),                                          // 56: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                       // 57: Scailo.BooleanResponse
-	(*DualQuantitiesResponse)(nil),                                // 58: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                         // 59: Scailo.CountResponse
-	(*SumResponse)(nil),                                           // 60: Scailo.SumResponse
+	(*DebitNotesServiceMultipleItemsSingleton)(nil),               // 10: Scailo.DebitNotesServiceMultipleItemsSingleton
+	(*DebitNotesServiceMultipleItemsCreateRequest)(nil),           // 11: Scailo.DebitNotesServiceMultipleItemsCreateRequest
+	(*DebitNotesServiceItemUpdateRequest)(nil),                    // 12: Scailo.DebitNotesServiceItemUpdateRequest
+	(*DebitNoteItem)(nil),                                         // 13: Scailo.DebitNoteItem
+	(*DebitNotesList)(nil),                                        // 14: Scailo.DebitNotesList
+	(*DebitNoteItemsList)(nil),                                    // 15: Scailo.DebitNoteItemsList
+	(*DebitNoteItemHistoryRequest)(nil),                           // 16: Scailo.DebitNoteItemHistoryRequest
+	(*DebitNoteItemProspectiveInfoRequest)(nil),                   // 17: Scailo.DebitNoteItemProspectiveInfoRequest
+	(*DebitNotesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 18: Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
+	(*DebitNoteItemsSearchRequest)(nil),                           // 19: Scailo.DebitNoteItemsSearchRequest
+	(*DebitNotesServicePaginatedItemsResponse)(nil),               // 20: Scailo.DebitNotesServicePaginatedItemsResponse
+	(*DebitNotesServicePaginationReq)(nil),                        // 21: Scailo.DebitNotesServicePaginationReq
+	(*DebitNotesServicePaginationResponse)(nil),                   // 22: Scailo.DebitNotesServicePaginationResponse
+	(*DebitNotesServiceFilterReq)(nil),                            // 23: Scailo.DebitNotesServiceFilterReq
+	(*DebitNotesServiceCountReq)(nil),                             // 24: Scailo.DebitNotesServiceCountReq
+	(*DebitNotesServiceSearchAllReq)(nil),                         // 25: Scailo.DebitNotesServiceSearchAllReq
+	(*DebitNotesServiceReferenceCreateRequest)(nil),               // 26: Scailo.DebitNotesServiceReferenceCreateRequest
+	(*DebitNoteReference)(nil),                                    // 27: Scailo.DebitNoteReference
+	(*DebitNoteReferencesList)(nil),                               // 28: Scailo.DebitNoteReferencesList
+	(*DebitNoteReturnStatistics)(nil),                             // 29: Scailo.DebitNoteReturnStatistics
+	(*DebitNoteReturnStatisticsList)(nil),                         // 30: Scailo.DebitNoteReturnStatisticsList
+	(*FormFieldDatumCreateRequest)(nil),                           // 31: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                      // 32: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                      // 33: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                                // 34: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                                  // 35: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                        // 36: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                              // 37: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                               // 38: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                           // 39: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                         // 40: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                         // 41: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),     // 42: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                             // 43: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                   // 44: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                            // 45: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                               // 46: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                        // 47: Scailo.IdentifierUUID
+	(*Empty)(nil),                                                 // 48: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                // 49: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                       // 50: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                       // 51: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                          // 52: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                        // 53: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                               // 54: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                    // 55: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                             // 56: Scailo.MagicLink
+	(*StandardFile)(nil),                                          // 57: Scailo.StandardFile
+	(*FamiliesList)(nil),                                          // 58: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                       // 59: Scailo.BooleanResponse
+	(*DualQuantitiesResponse)(nil),                                // 60: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                         // 61: Scailo.CountResponse
+	(*SumResponse)(nil),                                           // 62: Scailo.SumResponse
 }
 var file_debit_notes_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.DebitNotesServiceCreateRequest.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	29,  // 1: Scailo.DebitNotesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	29,  // 2: Scailo.DebitNotesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	30,  // 3: Scailo.DebitNote.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 4: Scailo.DebitNote.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	32,  // 5: Scailo.DebitNote.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	33,  // 6: Scailo.DebitNote.logs:type_name -> Scailo.LogbookLogConciseSLC
+	31,  // 1: Scailo.DebitNotesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	31,  // 2: Scailo.DebitNotesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	32,  // 3: Scailo.DebitNote.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 4: Scailo.DebitNote.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	34,  // 5: Scailo.DebitNote.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 6: Scailo.DebitNote.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 7: Scailo.DebitNote.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	11,  // 8: Scailo.DebitNote.list:type_name -> Scailo.DebitNoteItem
-	34,  // 9: Scailo.DebitNote.form_data:type_name -> Scailo.FormFieldDatum
-	30,  // 10: Scailo.DebitNoteItem.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 11: Scailo.DebitNoteItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	8,   // 12: Scailo.DebitNotesList.list:type_name -> Scailo.DebitNote
-	11,  // 13: Scailo.DebitNoteItemsList.list:type_name -> Scailo.DebitNoteItem
-	0,   // 14: Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	35,  // 15: Scailo.DebitNoteItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 16: Scailo.DebitNoteItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	1,   // 17: Scailo.DebitNoteItemsSearchRequest.sort_key:type_name -> Scailo.DEBIT_NOTE_ITEM_SORT_KEY
-	2,   // 18: Scailo.DebitNoteItemsSearchRequest.status:type_name -> Scailo.DEBIT_NOTE_ITEM_STATUS
-	11,  // 19: Scailo.DebitNotesServicePaginatedItemsResponse.payload:type_name -> Scailo.DebitNoteItem
-	35,  // 20: Scailo.DebitNotesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 21: Scailo.DebitNotesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 22: Scailo.DebitNotesServicePaginationReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
-	32,  // 23: Scailo.DebitNotesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	8,   // 24: Scailo.DebitNotesServicePaginationResponse.payload:type_name -> Scailo.DebitNote
-	35,  // 25: Scailo.DebitNotesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 26: Scailo.DebitNotesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 27: Scailo.DebitNotesServiceFilterReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
-	32,  // 28: Scailo.DebitNotesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 29: Scailo.DebitNotesServiceFilterReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	37,  // 30: Scailo.DebitNotesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 31: Scailo.DebitNotesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32,  // 32: Scailo.DebitNotesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 33: Scailo.DebitNotesServiceCountReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	37,  // 34: Scailo.DebitNotesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	35,  // 35: Scailo.DebitNotesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 36: Scailo.DebitNotesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 37: Scailo.DebitNotesServiceSearchAllReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
-	32,  // 38: Scailo.DebitNotesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,   // 39: Scailo.DebitNotesServiceSearchAllReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
-	30,  // 40: Scailo.DebitNoteReference.metadata:type_name -> Scailo.EmployeeMetadata
-	31,  // 41: Scailo.DebitNoteReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	25,  // 42: Scailo.DebitNoteReferencesList.list:type_name -> Scailo.DebitNoteReference
-	27,  // 43: Scailo.DebitNoteReturnStatisticsList.list:type_name -> Scailo.DebitNoteReturnStatistics
-	4,   // 44: Scailo.DebitNotesService.Create:input_type -> Scailo.DebitNotesServiceCreateRequest
-	4,   // 45: Scailo.DebitNotesService.Draft:input_type -> Scailo.DebitNotesServiceCreateRequest
-	5,   // 46: Scailo.DebitNotesService.DraftUpdate:input_type -> Scailo.DebitNotesServiceUpdateRequest
-	38,  // 47: Scailo.DebitNotesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 48: Scailo.DebitNotesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 49: Scailo.DebitNotesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 50: Scailo.DebitNotesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	5,   // 51: Scailo.DebitNotesService.RevisionUpdate:input_type -> Scailo.DebitNotesServiceUpdateRequest
-	38,  // 52: Scailo.DebitNotesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 53: Scailo.DebitNotesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 54: Scailo.DebitNotesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 55: Scailo.DebitNotesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 56: Scailo.DebitNotesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 57: Scailo.DebitNotesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 58: Scailo.DebitNotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	39,  // 59: Scailo.DebitNotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	6,   // 60: Scailo.DebitNotesService.Autofill:input_type -> Scailo.DebitNotesServiceAutofillRequest
-	40,  // 61: Scailo.DebitNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	9,   // 62: Scailo.DebitNotesService.AddDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemCreateRequest
-	10,  // 63: Scailo.DebitNotesService.ModifyDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemUpdateRequest
-	41,  // 64: Scailo.DebitNotesService.ApproveDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 65: Scailo.DebitNotesService.DeleteDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	42,  // 66: Scailo.DebitNotesService.ReorderDebitNoteItems:input_type -> Scailo.ReorderItemsRequest
-	43,  // 67: Scailo.DebitNotesService.ViewDebitNoteItemByID:input_type -> Scailo.Identifier
-	44,  // 68: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	44,  // 69: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	14,  // 70: Scailo.DebitNotesService.ViewDebitNoteItemHistory:input_type -> Scailo.DebitNoteItemHistoryRequest
-	17,  // 71: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
-	17,  // 72: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
-	17,  // 73: Scailo.DebitNotesService.SearchItemsWithPagination:input_type -> Scailo.DebitNoteItemsSearchRequest
-	45,  // 74: Scailo.DebitNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	46,  // 75: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	47,  // 76: Scailo.DebitNotesService.UploadDebitNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
-	24,  // 77: Scailo.DebitNotesService.AddDebitNoteReference:input_type -> Scailo.DebitNotesServiceReferenceCreateRequest
-	41,  // 78: Scailo.DebitNotesService.ApproveDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 79: Scailo.DebitNotesService.DeleteDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	43,  // 80: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:input_type -> Scailo.Identifier
-	43,  // 81: Scailo.DebitNotesService.ViewDebitNoteReferences:input_type -> Scailo.Identifier
-	43,  // 82: Scailo.DebitNotesService.ViewByID:input_type -> Scailo.Identifier
-	45,  // 83: Scailo.DebitNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	48,  // 84: Scailo.DebitNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	43,  // 85: Scailo.DebitNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	45,  // 86: Scailo.DebitNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	49,  // 87: Scailo.DebitNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	45,  // 88: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	50,  // 89: Scailo.DebitNotesService.ViewAll:input_type -> Scailo.ActiveStatus
-	45,  // 90: Scailo.DebitNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 91: Scailo.DebitNotesService.ViewWithPagination:input_type -> Scailo.DebitNotesServicePaginationReq
-	44,  // 92: Scailo.DebitNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	51,  // 93: Scailo.DebitNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15,  // 94: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:input_type -> Scailo.DebitNoteItemProspectiveInfoRequest
-	45,  // 95: Scailo.DebitNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
-	45,  // 96: Scailo.DebitNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	45,  // 97: Scailo.DebitNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	16,  // 98: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
-	23,  // 99: Scailo.DebitNotesService.SearchAll:input_type -> Scailo.DebitNotesServiceSearchAllReq
-	21,  // 100: Scailo.DebitNotesService.Filter:input_type -> Scailo.DebitNotesServiceFilterReq
-	52,  // 101: Scailo.DebitNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 102: Scailo.DebitNotesService.Count:input_type -> Scailo.DebitNotesServiceCountReq
-	22,  // 103: Scailo.DebitNotesService.AccruedValue:input_type -> Scailo.DebitNotesServiceCountReq
-	21,  // 104: Scailo.DebitNotesService.DownloadAsCSV:input_type -> Scailo.DebitNotesServiceFilterReq
-	53,  // 105: Scailo.DebitNotesService.Create:output_type -> Scailo.IdentifierResponse
-	53,  // 106: Scailo.DebitNotesService.Draft:output_type -> Scailo.IdentifierResponse
-	53,  // 107: Scailo.DebitNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	53,  // 108: Scailo.DebitNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	53,  // 109: Scailo.DebitNotesService.Verify:output_type -> Scailo.IdentifierResponse
-	53,  // 110: Scailo.DebitNotesService.Approve:output_type -> Scailo.IdentifierResponse
-	53,  // 111: Scailo.DebitNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	53,  // 112: Scailo.DebitNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	53,  // 113: Scailo.DebitNotesService.Halt:output_type -> Scailo.IdentifierResponse
-	53,  // 114: Scailo.DebitNotesService.Discard:output_type -> Scailo.IdentifierResponse
-	53,  // 115: Scailo.DebitNotesService.Restore:output_type -> Scailo.IdentifierResponse
-	53,  // 116: Scailo.DebitNotesService.Complete:output_type -> Scailo.IdentifierResponse
-	53,  // 117: Scailo.DebitNotesService.Repeat:output_type -> Scailo.IdentifierResponse
-	53,  // 118: Scailo.DebitNotesService.Reopen:output_type -> Scailo.IdentifierResponse
-	53,  // 119: Scailo.DebitNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	53,  // 120: Scailo.DebitNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	53,  // 121: Scailo.DebitNotesService.Autofill:output_type -> Scailo.IdentifierResponse
-	54,  // 122: Scailo.DebitNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	53,  // 123: Scailo.DebitNotesService.AddDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 124: Scailo.DebitNotesService.ModifyDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 125: Scailo.DebitNotesService.ApproveDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 126: Scailo.DebitNotesService.DeleteDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	53,  // 127: Scailo.DebitNotesService.ReorderDebitNoteItems:output_type -> Scailo.IdentifierResponse
-	11,  // 128: Scailo.DebitNotesService.ViewDebitNoteItemByID:output_type -> Scailo.DebitNoteItem
-	13,  // 129: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
-	13,  // 130: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
-	13,  // 131: Scailo.DebitNotesService.ViewDebitNoteItemHistory:output_type -> Scailo.DebitNoteItemsList
-	18,  // 132: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	18,  // 133: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	18,  // 134: Scailo.DebitNotesService.SearchItemsWithPagination:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	55,  // 135: Scailo.DebitNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	55,  // 136: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	49,  // 137: Scailo.DebitNotesService.UploadDebitNoteItems:output_type -> Scailo.IdentifiersList
-	53,  // 138: Scailo.DebitNotesService.AddDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	53,  // 139: Scailo.DebitNotesService.ApproveDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	53,  // 140: Scailo.DebitNotesService.DeleteDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	25,  // 141: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:output_type -> Scailo.DebitNoteReference
-	26,  // 142: Scailo.DebitNotesService.ViewDebitNoteReferences:output_type -> Scailo.DebitNoteReferencesList
-	8,   // 143: Scailo.DebitNotesService.ViewByID:output_type -> Scailo.DebitNote
-	8,   // 144: Scailo.DebitNotesService.ViewByUUID:output_type -> Scailo.DebitNote
-	8,   // 145: Scailo.DebitNotesService.ViewByReferenceID:output_type -> Scailo.DebitNote
-	8,   // 146: Scailo.DebitNotesService.ViewEssentialByID:output_type -> Scailo.DebitNote
-	8,   // 147: Scailo.DebitNotesService.ViewEssentialByUUID:output_type -> Scailo.DebitNote
-	12,  // 148: Scailo.DebitNotesService.ViewFromIDs:output_type -> Scailo.DebitNotesList
-	7,   // 149: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.DebitNoteAncillaryParameters
-	12,  // 150: Scailo.DebitNotesService.ViewAll:output_type -> Scailo.DebitNotesList
-	12,  // 151: Scailo.DebitNotesService.ViewAllForEntityUUID:output_type -> Scailo.DebitNotesList
-	20,  // 152: Scailo.DebitNotesService.ViewWithPagination:output_type -> Scailo.DebitNotesServicePaginationResponse
-	56,  // 153: Scailo.DebitNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	56,  // 154: Scailo.DebitNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 155: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:output_type -> Scailo.DebitNotesServiceItemCreateRequest
-	28,  // 156: Scailo.DebitNotesService.ViewReturnedStatistics:output_type -> Scailo.DebitNoteReturnStatisticsList
-	57,  // 157: Scailo.DebitNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	55,  // 158: Scailo.DebitNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	58,  // 159: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	12,  // 160: Scailo.DebitNotesService.SearchAll:output_type -> Scailo.DebitNotesList
-	12,  // 161: Scailo.DebitNotesService.Filter:output_type -> Scailo.DebitNotesList
-	59,  // 162: Scailo.DebitNotesService.CountInStatus:output_type -> Scailo.CountResponse
-	59,  // 163: Scailo.DebitNotesService.Count:output_type -> Scailo.CountResponse
-	60,  // 164: Scailo.DebitNotesService.AccruedValue:output_type -> Scailo.SumResponse
-	55,  // 165: Scailo.DebitNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	105, // [105:166] is the sub-list for method output_type
-	44,  // [44:105] is the sub-list for method input_type
-	44,  // [44:44] is the sub-list for extension type_name
-	44,  // [44:44] is the sub-list for extension extendee
-	0,   // [0:44] is the sub-list for field type_name
+	13,  // 8: Scailo.DebitNote.list:type_name -> Scailo.DebitNoteItem
+	36,  // 9: Scailo.DebitNote.form_data:type_name -> Scailo.FormFieldDatum
+	10,  // 10: Scailo.DebitNotesServiceMultipleItemsCreateRequest.list:type_name -> Scailo.DebitNotesServiceMultipleItemsSingleton
+	32,  // 11: Scailo.DebitNoteItem.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 12: Scailo.DebitNoteItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	8,   // 13: Scailo.DebitNotesList.list:type_name -> Scailo.DebitNote
+	13,  // 14: Scailo.DebitNoteItemsList.list:type_name -> Scailo.DebitNoteItem
+	0,   // 15: Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
+	37,  // 16: Scailo.DebitNoteItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 17: Scailo.DebitNoteItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 18: Scailo.DebitNoteItemsSearchRequest.sort_key:type_name -> Scailo.DEBIT_NOTE_ITEM_SORT_KEY
+	2,   // 19: Scailo.DebitNoteItemsSearchRequest.status:type_name -> Scailo.DEBIT_NOTE_ITEM_STATUS
+	13,  // 20: Scailo.DebitNotesServicePaginatedItemsResponse.payload:type_name -> Scailo.DebitNoteItem
+	37,  // 21: Scailo.DebitNotesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 22: Scailo.DebitNotesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 23: Scailo.DebitNotesServicePaginationReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
+	34,  // 24: Scailo.DebitNotesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	8,   // 25: Scailo.DebitNotesServicePaginationResponse.payload:type_name -> Scailo.DebitNote
+	37,  // 26: Scailo.DebitNotesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 27: Scailo.DebitNotesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 28: Scailo.DebitNotesServiceFilterReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
+	34,  // 29: Scailo.DebitNotesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 30: Scailo.DebitNotesServiceFilterReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
+	39,  // 31: Scailo.DebitNotesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 32: Scailo.DebitNotesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 33: Scailo.DebitNotesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 34: Scailo.DebitNotesServiceCountReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
+	39,  // 35: Scailo.DebitNotesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	37,  // 36: Scailo.DebitNotesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38,  // 37: Scailo.DebitNotesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 38: Scailo.DebitNotesServiceSearchAllReq.sort_key:type_name -> Scailo.DEBIT_NOTE_SORT_KEY
+	34,  // 39: Scailo.DebitNotesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 40: Scailo.DebitNotesServiceSearchAllReq.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
+	32,  // 41: Scailo.DebitNoteReference.metadata:type_name -> Scailo.EmployeeMetadata
+	33,  // 42: Scailo.DebitNoteReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	27,  // 43: Scailo.DebitNoteReferencesList.list:type_name -> Scailo.DebitNoteReference
+	29,  // 44: Scailo.DebitNoteReturnStatisticsList.list:type_name -> Scailo.DebitNoteReturnStatistics
+	4,   // 45: Scailo.DebitNotesService.Create:input_type -> Scailo.DebitNotesServiceCreateRequest
+	4,   // 46: Scailo.DebitNotesService.Draft:input_type -> Scailo.DebitNotesServiceCreateRequest
+	5,   // 47: Scailo.DebitNotesService.DraftUpdate:input_type -> Scailo.DebitNotesServiceUpdateRequest
+	40,  // 48: Scailo.DebitNotesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 49: Scailo.DebitNotesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 50: Scailo.DebitNotesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 51: Scailo.DebitNotesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	5,   // 52: Scailo.DebitNotesService.RevisionUpdate:input_type -> Scailo.DebitNotesServiceUpdateRequest
+	40,  // 53: Scailo.DebitNotesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 54: Scailo.DebitNotesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 55: Scailo.DebitNotesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 56: Scailo.DebitNotesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 57: Scailo.DebitNotesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 58: Scailo.DebitNotesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	40,  // 59: Scailo.DebitNotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 60: Scailo.DebitNotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	6,   // 61: Scailo.DebitNotesService.Autofill:input_type -> Scailo.DebitNotesServiceAutofillRequest
+	42,  // 62: Scailo.DebitNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	11,  // 63: Scailo.DebitNotesService.AddMultipleDebitNoteItems:input_type -> Scailo.DebitNotesServiceMultipleItemsCreateRequest
+	9,   // 64: Scailo.DebitNotesService.AddDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemCreateRequest
+	12,  // 65: Scailo.DebitNotesService.ModifyDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemUpdateRequest
+	43,  // 66: Scailo.DebitNotesService.ApproveDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	43,  // 67: Scailo.DebitNotesService.DeleteDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 68: Scailo.DebitNotesService.ReorderDebitNoteItems:input_type -> Scailo.ReorderItemsRequest
+	45,  // 69: Scailo.DebitNotesService.ViewDebitNoteItemByID:input_type -> Scailo.Identifier
+	46,  // 70: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	46,  // 71: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	16,  // 72: Scailo.DebitNotesService.ViewDebitNoteItemHistory:input_type -> Scailo.DebitNoteItemHistoryRequest
+	19,  // 73: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
+	19,  // 74: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
+	19,  // 75: Scailo.DebitNotesService.SearchItemsWithPagination:input_type -> Scailo.DebitNoteItemsSearchRequest
+	47,  // 76: Scailo.DebitNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	48,  // 77: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	49,  // 78: Scailo.DebitNotesService.UploadDebitNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
+	26,  // 79: Scailo.DebitNotesService.AddDebitNoteReference:input_type -> Scailo.DebitNotesServiceReferenceCreateRequest
+	43,  // 80: Scailo.DebitNotesService.ApproveDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	43,  // 81: Scailo.DebitNotesService.DeleteDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 82: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:input_type -> Scailo.Identifier
+	45,  // 83: Scailo.DebitNotesService.ViewDebitNoteReferences:input_type -> Scailo.Identifier
+	45,  // 84: Scailo.DebitNotesService.ViewByID:input_type -> Scailo.Identifier
+	47,  // 85: Scailo.DebitNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	50,  // 86: Scailo.DebitNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	45,  // 87: Scailo.DebitNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	47,  // 88: Scailo.DebitNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	51,  // 89: Scailo.DebitNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	47,  // 90: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	52,  // 91: Scailo.DebitNotesService.ViewAll:input_type -> Scailo.ActiveStatus
+	47,  // 92: Scailo.DebitNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	21,  // 93: Scailo.DebitNotesService.ViewWithPagination:input_type -> Scailo.DebitNotesServicePaginationReq
+	46,  // 94: Scailo.DebitNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	53,  // 95: Scailo.DebitNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	17,  // 96: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:input_type -> Scailo.DebitNoteItemProspectiveInfoRequest
+	47,  // 97: Scailo.DebitNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
+	47,  // 98: Scailo.DebitNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	47,  // 99: Scailo.DebitNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18,  // 100: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
+	25,  // 101: Scailo.DebitNotesService.SearchAll:input_type -> Scailo.DebitNotesServiceSearchAllReq
+	23,  // 102: Scailo.DebitNotesService.Filter:input_type -> Scailo.DebitNotesServiceFilterReq
+	54,  // 103: Scailo.DebitNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	24,  // 104: Scailo.DebitNotesService.Count:input_type -> Scailo.DebitNotesServiceCountReq
+	24,  // 105: Scailo.DebitNotesService.AccruedValue:input_type -> Scailo.DebitNotesServiceCountReq
+	23,  // 106: Scailo.DebitNotesService.DownloadAsCSV:input_type -> Scailo.DebitNotesServiceFilterReq
+	55,  // 107: Scailo.DebitNotesService.Create:output_type -> Scailo.IdentifierResponse
+	55,  // 108: Scailo.DebitNotesService.Draft:output_type -> Scailo.IdentifierResponse
+	55,  // 109: Scailo.DebitNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	55,  // 110: Scailo.DebitNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	55,  // 111: Scailo.DebitNotesService.Verify:output_type -> Scailo.IdentifierResponse
+	55,  // 112: Scailo.DebitNotesService.Approve:output_type -> Scailo.IdentifierResponse
+	55,  // 113: Scailo.DebitNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	55,  // 114: Scailo.DebitNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	55,  // 115: Scailo.DebitNotesService.Halt:output_type -> Scailo.IdentifierResponse
+	55,  // 116: Scailo.DebitNotesService.Discard:output_type -> Scailo.IdentifierResponse
+	55,  // 117: Scailo.DebitNotesService.Restore:output_type -> Scailo.IdentifierResponse
+	55,  // 118: Scailo.DebitNotesService.Complete:output_type -> Scailo.IdentifierResponse
+	55,  // 119: Scailo.DebitNotesService.Repeat:output_type -> Scailo.IdentifierResponse
+	55,  // 120: Scailo.DebitNotesService.Reopen:output_type -> Scailo.IdentifierResponse
+	55,  // 121: Scailo.DebitNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	55,  // 122: Scailo.DebitNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	55,  // 123: Scailo.DebitNotesService.Autofill:output_type -> Scailo.IdentifierResponse
+	56,  // 124: Scailo.DebitNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	55,  // 125: Scailo.DebitNotesService.AddMultipleDebitNoteItems:output_type -> Scailo.IdentifierResponse
+	55,  // 126: Scailo.DebitNotesService.AddDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 127: Scailo.DebitNotesService.ModifyDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 128: Scailo.DebitNotesService.ApproveDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 129: Scailo.DebitNotesService.DeleteDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	55,  // 130: Scailo.DebitNotesService.ReorderDebitNoteItems:output_type -> Scailo.IdentifierResponse
+	13,  // 131: Scailo.DebitNotesService.ViewDebitNoteItemByID:output_type -> Scailo.DebitNoteItem
+	15,  // 132: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
+	15,  // 133: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
+	15,  // 134: Scailo.DebitNotesService.ViewDebitNoteItemHistory:output_type -> Scailo.DebitNoteItemsList
+	20,  // 135: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	20,  // 136: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	20,  // 137: Scailo.DebitNotesService.SearchItemsWithPagination:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	57,  // 138: Scailo.DebitNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	57,  // 139: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	51,  // 140: Scailo.DebitNotesService.UploadDebitNoteItems:output_type -> Scailo.IdentifiersList
+	55,  // 141: Scailo.DebitNotesService.AddDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	55,  // 142: Scailo.DebitNotesService.ApproveDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	55,  // 143: Scailo.DebitNotesService.DeleteDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	27,  // 144: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:output_type -> Scailo.DebitNoteReference
+	28,  // 145: Scailo.DebitNotesService.ViewDebitNoteReferences:output_type -> Scailo.DebitNoteReferencesList
+	8,   // 146: Scailo.DebitNotesService.ViewByID:output_type -> Scailo.DebitNote
+	8,   // 147: Scailo.DebitNotesService.ViewByUUID:output_type -> Scailo.DebitNote
+	8,   // 148: Scailo.DebitNotesService.ViewByReferenceID:output_type -> Scailo.DebitNote
+	8,   // 149: Scailo.DebitNotesService.ViewEssentialByID:output_type -> Scailo.DebitNote
+	8,   // 150: Scailo.DebitNotesService.ViewEssentialByUUID:output_type -> Scailo.DebitNote
+	14,  // 151: Scailo.DebitNotesService.ViewFromIDs:output_type -> Scailo.DebitNotesList
+	7,   // 152: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.DebitNoteAncillaryParameters
+	14,  // 153: Scailo.DebitNotesService.ViewAll:output_type -> Scailo.DebitNotesList
+	14,  // 154: Scailo.DebitNotesService.ViewAllForEntityUUID:output_type -> Scailo.DebitNotesList
+	22,  // 155: Scailo.DebitNotesService.ViewWithPagination:output_type -> Scailo.DebitNotesServicePaginationResponse
+	58,  // 156: Scailo.DebitNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	58,  // 157: Scailo.DebitNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 158: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:output_type -> Scailo.DebitNotesServiceItemCreateRequest
+	30,  // 159: Scailo.DebitNotesService.ViewReturnedStatistics:output_type -> Scailo.DebitNoteReturnStatisticsList
+	59,  // 160: Scailo.DebitNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	57,  // 161: Scailo.DebitNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	60,  // 162: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	14,  // 163: Scailo.DebitNotesService.SearchAll:output_type -> Scailo.DebitNotesList
+	14,  // 164: Scailo.DebitNotesService.Filter:output_type -> Scailo.DebitNotesList
+	61,  // 165: Scailo.DebitNotesService.CountInStatus:output_type -> Scailo.CountResponse
+	61,  // 166: Scailo.DebitNotesService.Count:output_type -> Scailo.CountResponse
+	62,  // 167: Scailo.DebitNotesService.AccruedValue:output_type -> Scailo.SumResponse
+	57,  // 168: Scailo.DebitNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	107, // [107:169] is the sub-list for method output_type
+	45,  // [45:107] is the sub-list for method input_type
+	45,  // [45:45] is the sub-list for extension type_name
+	45,  // [45:45] is the sub-list for extension extendee
+	0,   // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_debit_notes_scailo_proto_init() }
@@ -3585,7 +3779,7 @@ func file_debit_notes_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_debit_notes_scailo_proto_rawDesc), len(file_debit_notes_scailo_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   25,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -37,6 +37,7 @@ const (
 	GoodsDispatchesService_Autofill_FullMethodName                                  = "/Scailo.GoodsDispatchesService/Autofill"
 	GoodsDispatchesService_IsCompletable_FullMethodName                             = "/Scailo.GoodsDispatchesService/IsCompletable"
 	GoodsDispatchesService_CreateMagicLink_FullMethodName                           = "/Scailo.GoodsDispatchesService/CreateMagicLink"
+	GoodsDispatchesService_AddMultipleGoodsDispatchItems_FullMethodName             = "/Scailo.GoodsDispatchesService/AddMultipleGoodsDispatchItems"
 	GoodsDispatchesService_AddGoodsDispatchItem_FullMethodName                      = "/Scailo.GoodsDispatchesService/AddGoodsDispatchItem"
 	GoodsDispatchesService_ModifyGoodsDispatchItem_FullMethodName                   = "/Scailo.GoodsDispatchesService/ModifyGoodsDispatchItem"
 	GoodsDispatchesService_ApproveGoodsDispatchItem_FullMethodName                  = "/Scailo.GoodsDispatchesService/ApproveGoodsDispatchItem"
@@ -122,6 +123,8 @@ type GoodsDispatchesServiceClient interface {
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a goods dispatch
+	AddMultipleGoodsDispatchItems(ctx context.Context, in *GoodsDispatchesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a goods dispatch
 	AddGoodsDispatchItem(ctx context.Context, in *GoodsDispatchesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a goods dispatch
@@ -396,6 +399,16 @@ func (c *goodsDispatchesServiceClient) CreateMagicLink(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, GoodsDispatchesService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *goodsDispatchesServiceClient) AddMultipleGoodsDispatchItems(ctx context.Context, in *GoodsDispatchesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, GoodsDispatchesService_AddMultipleGoodsDispatchItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

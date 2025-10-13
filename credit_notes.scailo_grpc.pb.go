@@ -36,6 +36,7 @@ const (
 	CreditNotesService_SendEmail_FullMethodName                              = "/Scailo.CreditNotesService/SendEmail"
 	CreditNotesService_Autofill_FullMethodName                               = "/Scailo.CreditNotesService/Autofill"
 	CreditNotesService_CreateMagicLink_FullMethodName                        = "/Scailo.CreditNotesService/CreateMagicLink"
+	CreditNotesService_AddMultipleCreditNoteItems_FullMethodName             = "/Scailo.CreditNotesService/AddMultipleCreditNoteItems"
 	CreditNotesService_AddCreditNoteItem_FullMethodName                      = "/Scailo.CreditNotesService/AddCreditNoteItem"
 	CreditNotesService_ModifyCreditNoteItem_FullMethodName                   = "/Scailo.CreditNotesService/ModifyCreditNoteItem"
 	CreditNotesService_ApproveCreditNoteItem_FullMethodName                  = "/Scailo.CreditNotesService/ApproveCreditNoteItem"
@@ -123,6 +124,8 @@ type CreditNotesServiceClient interface {
 	Autofill(ctx context.Context, in *CreditNotesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a credit note
+	AddMultipleCreditNoteItems(ctx context.Context, in *CreditNotesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a credit note
 	AddCreditNoteItem(ctx context.Context, in *CreditNotesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a credit note
@@ -395,6 +398,16 @@ func (c *creditNotesServiceClient) CreateMagicLink(ctx context.Context, in *Magi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, CreditNotesService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *creditNotesServiceClient) AddMultipleCreditNoteItems(ctx context.Context, in *CreditNotesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, CreditNotesService_AddMultipleCreditNoteItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

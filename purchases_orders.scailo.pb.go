@@ -1269,6 +1269,188 @@ func (x *PurchasesOrdersServiceItemCreateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to add an individual item as part of multiple item addition to a purchase order
+type PurchasesOrdersServiceMultipleItemsSingleton struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the family ID
+	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	// The quantity (in cents) being ordered in internal unit of material
+	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
+	// Stores the ID of the vendor's unit of material
+	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
+	// Stores the quantity (in cents) being ordered in vendor's unit of material
+	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// The unit price of the item (as supplied by the vendor)
+	VendorUnitPrice uint64 `protobuf:"varint,15,opt,name=vendor_unit_price,json=vendorUnitPrice,proto3" json:"vendor_unit_price,omitempty"`
+	// The ID of the associated tax group
+	TaxGroupId uint64 `protobuf:"varint,16,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
+	// The applicable discount percentage (in cents)
+	Discount uint64 `protobuf:"varint,17,opt,name=discount,proto3" json:"discount,omitempty"`
+	// The delivery date of the item
+	DeliveryDate string `protobuf:"bytes,18,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) Reset() {
+	*x = PurchasesOrdersServiceMultipleItemsSingleton{}
+	mi := &file_purchases_orders_scailo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PurchasesOrdersServiceMultipleItemsSingleton) ProtoMessage() {}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) ProtoReflect() protoreflect.Message {
+	mi := &file_purchases_orders_scailo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PurchasesOrdersServiceMultipleItemsSingleton.ProtoReflect.Descriptor instead.
+func (*PurchasesOrdersServiceMultipleItemsSingleton) Descriptor() ([]byte, []int) {
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetFamilyId() uint64 {
+	if x != nil {
+		return x.FamilyId
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetInternalQuantity() uint64 {
+	if x != nil {
+		return x.InternalQuantity
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetVendorUomId() uint64 {
+	if x != nil {
+		return x.VendorUomId
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetVendorQuantity() uint64 {
+	if x != nil {
+		return x.VendorQuantity
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetVendorUnitPrice() uint64 {
+	if x != nil {
+		return x.VendorUnitPrice
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
+	if x != nil {
+		return x.TaxGroupId
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetDiscount() uint64 {
+	if x != nil {
+		return x.Discount
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetDeliveryDate() string {
+	if x != nil {
+		return x.DeliveryDate
+	}
+	return ""
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsSingleton) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
+// Describes the parameters required to add multiple items to a purchase order
+type PurchasesOrdersServiceMultipleItemsCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// Stores the purchase order ID
+	PurchaseOrderId uint64 `protobuf:"varint,10,opt,name=purchase_order_id,json=purchaseOrderId,proto3" json:"purchase_order_id,omitempty"`
+	// List of items
+	List          []*PurchasesOrdersServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) Reset() {
+	*x = PurchasesOrdersServiceMultipleItemsCreateRequest{}
+	mi := &file_purchases_orders_scailo_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PurchasesOrdersServiceMultipleItemsCreateRequest) ProtoMessage() {}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_purchases_orders_scailo_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PurchasesOrdersServiceMultipleItemsCreateRequest.ProtoReflect.Descriptor instead.
+func (*PurchasesOrdersServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []int) {
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) GetPurchaseOrderId() uint64 {
+	if x != nil {
+		return x.PurchaseOrderId
+	}
+	return 0
+}
+
+func (x *PurchasesOrdersServiceMultipleItemsCreateRequest) GetList() []*PurchasesOrdersServiceMultipleItemsSingleton {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters required to update an item in a purchase order
 type PurchasesOrdersServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1298,7 +1480,7 @@ type PurchasesOrdersServiceItemUpdateRequest struct {
 
 func (x *PurchasesOrdersServiceItemUpdateRequest) Reset() {
 	*x = PurchasesOrdersServiceItemUpdateRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[6]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1310,7 +1492,7 @@ func (x *PurchasesOrdersServiceItemUpdateRequest) String() string {
 func (*PurchasesOrdersServiceItemUpdateRequest) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceItemUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[6]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1323,7 +1505,7 @@ func (x *PurchasesOrdersServiceItemUpdateRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use PurchasesOrdersServiceItemUpdateRequest.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{6}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PurchasesOrdersServiceItemUpdateRequest) GetUserComment() string {
@@ -1442,7 +1624,7 @@ type PurchaseOrderItem struct {
 
 func (x *PurchaseOrderItem) Reset() {
 	*x = PurchaseOrderItem{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[7]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1454,7 +1636,7 @@ func (x *PurchaseOrderItem) String() string {
 func (*PurchaseOrderItem) ProtoMessage() {}
 
 func (x *PurchaseOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[7]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1467,7 +1649,7 @@ func (x *PurchaseOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderItem.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderItem) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{7}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PurchaseOrderItem) GetEntityUuid() string {
@@ -1607,7 +1789,7 @@ type PurchasesOrdersList struct {
 
 func (x *PurchasesOrdersList) Reset() {
 	*x = PurchasesOrdersList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[8]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1619,7 +1801,7 @@ func (x *PurchasesOrdersList) String() string {
 func (*PurchasesOrdersList) ProtoMessage() {}
 
 func (x *PurchasesOrdersList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[8]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1632,7 +1814,7 @@ func (x *PurchasesOrdersList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchasesOrdersList.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{8}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PurchasesOrdersList) GetList() []*PurchaseOrder {
@@ -1653,7 +1835,7 @@ type PurchaseOrderItemsList struct {
 
 func (x *PurchaseOrderItemsList) Reset() {
 	*x = PurchaseOrderItemsList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[9]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1665,7 +1847,7 @@ func (x *PurchaseOrderItemsList) String() string {
 func (*PurchaseOrderItemsList) ProtoMessage() {}
 
 func (x *PurchaseOrderItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[9]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1678,7 +1860,7 @@ func (x *PurchaseOrderItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderItemsList.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderItemsList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{9}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *PurchaseOrderItemsList) GetList() []*PurchaseOrderItem {
@@ -1701,7 +1883,7 @@ type PurchaseOrderItemHistoryRequest struct {
 
 func (x *PurchaseOrderItemHistoryRequest) Reset() {
 	*x = PurchaseOrderItemHistoryRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[10]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1713,7 +1895,7 @@ func (x *PurchaseOrderItemHistoryRequest) String() string {
 func (*PurchaseOrderItemHistoryRequest) ProtoMessage() {}
 
 func (x *PurchaseOrderItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[10]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1726,7 +1908,7 @@ func (x *PurchaseOrderItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{10}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *PurchaseOrderItemHistoryRequest) GetPurchaseOrderId() uint64 {
@@ -1758,7 +1940,7 @@ type PurchaseOrderItemProspectiveInfoRequest struct {
 
 func (x *PurchaseOrderItemProspectiveInfoRequest) Reset() {
 	*x = PurchaseOrderItemProspectiveInfoRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[11]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1770,7 +1952,7 @@ func (x *PurchaseOrderItemProspectiveInfoRequest) String() string {
 func (*PurchaseOrderItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *PurchaseOrderItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[11]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1783,7 +1965,7 @@ func (x *PurchaseOrderItemProspectiveInfoRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use PurchaseOrderItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{11}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PurchaseOrderItemProspectiveInfoRequest) GetPurchaseOrderId() uint64 {
@@ -1828,7 +2010,7 @@ type PurchasesOrdersServicePaginationReq struct {
 
 func (x *PurchasesOrdersServicePaginationReq) Reset() {
 	*x = PurchasesOrdersServicePaginationReq{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[12]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1840,7 +2022,7 @@ func (x *PurchasesOrdersServicePaginationReq) String() string {
 func (*PurchasesOrdersServicePaginationReq) ProtoMessage() {}
 
 func (x *PurchasesOrdersServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[12]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1853,7 +2035,7 @@ func (x *PurchasesOrdersServicePaginationReq) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use PurchasesOrdersServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{12}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PurchasesOrdersServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1915,7 +2097,7 @@ type PurchasesOrdersServicePaginationResponse struct {
 
 func (x *PurchasesOrdersServicePaginationResponse) Reset() {
 	*x = PurchasesOrdersServicePaginationResponse{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[13]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1927,7 +2109,7 @@ func (x *PurchasesOrdersServicePaginationResponse) String() string {
 func (*PurchasesOrdersServicePaginationResponse) ProtoMessage() {}
 
 func (x *PurchasesOrdersServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[13]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1940,7 +2122,7 @@ func (x *PurchasesOrdersServicePaginationResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use PurchasesOrdersServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{13}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PurchasesOrdersServicePaginationResponse) GetCount() uint64 {
@@ -2042,7 +2224,7 @@ type PurchasesOrdersServiceFilterReq struct {
 
 func (x *PurchasesOrdersServiceFilterReq) Reset() {
 	*x = PurchasesOrdersServiceFilterReq{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[14]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2054,7 +2236,7 @@ func (x *PurchasesOrdersServiceFilterReq) String() string {
 func (*PurchasesOrdersServiceFilterReq) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[14]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2067,7 +2249,7 @@ func (x *PurchasesOrdersServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchasesOrdersServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{14}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *PurchasesOrdersServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2350,7 +2532,7 @@ type PurchasesOrdersServiceCountReq struct {
 
 func (x *PurchasesOrdersServiceCountReq) Reset() {
 	*x = PurchasesOrdersServiceCountReq{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[15]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2362,7 +2544,7 @@ func (x *PurchasesOrdersServiceCountReq) String() string {
 func (*PurchasesOrdersServiceCountReq) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[15]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2375,7 +2557,7 @@ func (x *PurchasesOrdersServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchasesOrdersServiceCountReq.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{15}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *PurchasesOrdersServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2602,7 +2784,7 @@ type PurchasesOrdersServiceSearchAllReq struct {
 
 func (x *PurchasesOrdersServiceSearchAllReq) Reset() {
 	*x = PurchasesOrdersServiceSearchAllReq{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[16]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2614,7 +2796,7 @@ func (x *PurchasesOrdersServiceSearchAllReq) String() string {
 func (*PurchasesOrdersServiceSearchAllReq) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[16]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2627,7 +2809,7 @@ func (x *PurchasesOrdersServiceSearchAllReq) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use PurchasesOrdersServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{16}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PurchasesOrdersServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2740,7 +2922,7 @@ type PurchasesOrdersServiceReferenceCreateRequest struct {
 
 func (x *PurchasesOrdersServiceReferenceCreateRequest) Reset() {
 	*x = PurchasesOrdersServiceReferenceCreateRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[17]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2752,7 +2934,7 @@ func (x *PurchasesOrdersServiceReferenceCreateRequest) String() string {
 func (*PurchasesOrdersServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[17]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2765,7 +2947,7 @@ func (x *PurchasesOrdersServiceReferenceCreateRequest) ProtoReflect() protorefle
 
 // Deprecated: Use PurchasesOrdersServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{17}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *PurchasesOrdersServiceReferenceCreateRequest) GetUserComment() string {
@@ -2830,7 +3012,7 @@ type PurchaseOrderReference struct {
 
 func (x *PurchaseOrderReference) Reset() {
 	*x = PurchaseOrderReference{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[18]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2842,7 +3024,7 @@ func (x *PurchaseOrderReference) String() string {
 func (*PurchaseOrderReference) ProtoMessage() {}
 
 func (x *PurchaseOrderReference) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[18]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2855,7 +3037,7 @@ func (x *PurchaseOrderReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderReference.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderReference) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{18}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PurchaseOrderReference) GetEntityUuid() string {
@@ -2932,7 +3114,7 @@ type PurchaseOrderReferencesList struct {
 
 func (x *PurchaseOrderReferencesList) Reset() {
 	*x = PurchaseOrderReferencesList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[19]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2944,7 +3126,7 @@ func (x *PurchaseOrderReferencesList) String() string {
 func (*PurchaseOrderReferencesList) ProtoMessage() {}
 
 func (x *PurchaseOrderReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[19]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2957,7 +3139,7 @@ func (x *PurchaseOrderReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderReferencesList.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderReferencesList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{19}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PurchaseOrderReferencesList) GetList() []*PurchaseOrderReference {
@@ -3018,7 +3200,7 @@ type PurchaseOrderItemsSearchRequest struct {
 
 func (x *PurchaseOrderItemsSearchRequest) Reset() {
 	*x = PurchaseOrderItemsSearchRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[20]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3030,7 +3212,7 @@ func (x *PurchaseOrderItemsSearchRequest) String() string {
 func (*PurchaseOrderItemsSearchRequest) ProtoMessage() {}
 
 func (x *PurchaseOrderItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[20]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3043,7 +3225,7 @@ func (x *PurchaseOrderItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{20}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PurchaseOrderItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -3203,7 +3385,7 @@ type PurchasesOrdersServicePaginatedItemsResponse struct {
 
 func (x *PurchasesOrdersServicePaginatedItemsResponse) Reset() {
 	*x = PurchasesOrdersServicePaginatedItemsResponse{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[21]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3215,7 +3397,7 @@ func (x *PurchasesOrdersServicePaginatedItemsResponse) String() string {
 func (*PurchasesOrdersServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *PurchasesOrdersServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[21]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3228,7 +3410,7 @@ func (x *PurchasesOrdersServicePaginatedItemsResponse) ProtoReflect() protorefle
 
 // Deprecated: Use PurchasesOrdersServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{21}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *PurchasesOrdersServicePaginatedItemsResponse) GetCount() uint64 {
@@ -3274,7 +3456,7 @@ type PurchasesOrdersServiceContactCreateRequest struct {
 
 func (x *PurchasesOrdersServiceContactCreateRequest) Reset() {
 	*x = PurchasesOrdersServiceContactCreateRequest{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[22]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3286,7 +3468,7 @@ func (x *PurchasesOrdersServiceContactCreateRequest) String() string {
 func (*PurchasesOrdersServiceContactCreateRequest) ProtoMessage() {}
 
 func (x *PurchasesOrdersServiceContactCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[22]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3299,7 +3481,7 @@ func (x *PurchasesOrdersServiceContactCreateRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use PurchasesOrdersServiceContactCreateRequest.ProtoReflect.Descriptor instead.
 func (*PurchasesOrdersServiceContactCreateRequest) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{22}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *PurchasesOrdersServiceContactCreateRequest) GetUserComment() string {
@@ -3348,7 +3530,7 @@ type PurchaseOrderContact struct {
 
 func (x *PurchaseOrderContact) Reset() {
 	*x = PurchaseOrderContact{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[23]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3360,7 +3542,7 @@ func (x *PurchaseOrderContact) String() string {
 func (*PurchaseOrderContact) ProtoMessage() {}
 
 func (x *PurchaseOrderContact) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[23]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3373,7 +3555,7 @@ func (x *PurchaseOrderContact) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderContact.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderContact) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{23}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *PurchaseOrderContact) GetEntityUuid() string {
@@ -3443,7 +3625,7 @@ type PurchaseOrderContactsList struct {
 
 func (x *PurchaseOrderContactsList) Reset() {
 	*x = PurchaseOrderContactsList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[24]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3455,7 +3637,7 @@ func (x *PurchaseOrderContactsList) String() string {
 func (*PurchaseOrderContactsList) ProtoMessage() {}
 
 func (x *PurchaseOrderContactsList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[24]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3468,7 +3650,7 @@ func (x *PurchaseOrderContactsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderContactsList.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderContactsList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{24}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *PurchaseOrderContactsList) GetList() []*PurchaseOrderContact {
@@ -3493,7 +3675,7 @@ type PurchaseOrderInventoryStatistics struct {
 
 func (x *PurchaseOrderInventoryStatistics) Reset() {
 	*x = PurchaseOrderInventoryStatistics{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[25]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3505,7 +3687,7 @@ func (x *PurchaseOrderInventoryStatistics) String() string {
 func (*PurchaseOrderInventoryStatistics) ProtoMessage() {}
 
 func (x *PurchaseOrderInventoryStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[25]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3518,7 +3700,7 @@ func (x *PurchaseOrderInventoryStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderInventoryStatistics.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderInventoryStatistics) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{25}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *PurchaseOrderInventoryStatistics) GetOrdered() uint64 {
@@ -3557,7 +3739,7 @@ type PurchaseOrderBillingStatistics struct {
 
 func (x *PurchaseOrderBillingStatistics) Reset() {
 	*x = PurchaseOrderBillingStatistics{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[26]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3569,7 +3751,7 @@ func (x *PurchaseOrderBillingStatistics) String() string {
 func (*PurchaseOrderBillingStatistics) ProtoMessage() {}
 
 func (x *PurchaseOrderBillingStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[26]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3582,7 +3764,7 @@ func (x *PurchaseOrderBillingStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderBillingStatistics.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderBillingStatistics) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{26}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *PurchaseOrderBillingStatistics) GetOrdered() uint64 {
@@ -3639,7 +3821,7 @@ type PurchaseOrderInventoryMatch struct {
 
 func (x *PurchaseOrderInventoryMatch) Reset() {
 	*x = PurchaseOrderInventoryMatch{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[27]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3651,7 +3833,7 @@ func (x *PurchaseOrderInventoryMatch) String() string {
 func (*PurchaseOrderInventoryMatch) ProtoMessage() {}
 
 func (x *PurchaseOrderInventoryMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[27]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3664,7 +3846,7 @@ func (x *PurchaseOrderInventoryMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderInventoryMatch.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderInventoryMatch) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{27}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *PurchaseOrderInventoryMatch) GetFamilyId() uint64 {
@@ -3762,7 +3944,7 @@ type PurchaseOrderInventoryMatchList struct {
 
 func (x *PurchaseOrderInventoryMatchList) Reset() {
 	*x = PurchaseOrderInventoryMatchList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[28]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3774,7 +3956,7 @@ func (x *PurchaseOrderInventoryMatchList) String() string {
 func (*PurchaseOrderInventoryMatchList) ProtoMessage() {}
 
 func (x *PurchaseOrderInventoryMatchList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[28]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3787,7 +3969,7 @@ func (x *PurchaseOrderInventoryMatchList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderInventoryMatchList.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderInventoryMatchList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{28}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *PurchaseOrderInventoryMatchList) GetList() []*PurchaseOrderInventoryMatch {
@@ -3828,7 +4010,7 @@ type PurchaseOrderPriceMatch struct {
 
 func (x *PurchaseOrderPriceMatch) Reset() {
 	*x = PurchaseOrderPriceMatch{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[29]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3840,7 +4022,7 @@ func (x *PurchaseOrderPriceMatch) String() string {
 func (*PurchaseOrderPriceMatch) ProtoMessage() {}
 
 func (x *PurchaseOrderPriceMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[29]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3853,7 +4035,7 @@ func (x *PurchaseOrderPriceMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderPriceMatch.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderPriceMatch) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{29}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *PurchaseOrderPriceMatch) GetFamilyId() uint64 {
@@ -3944,7 +4126,7 @@ type PurchaseOrderPriceMatchList struct {
 
 func (x *PurchaseOrderPriceMatchList) Reset() {
 	*x = PurchaseOrderPriceMatchList{}
-	mi := &file_purchases_orders_scailo_proto_msgTypes[30]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3956,7 +4138,7 @@ func (x *PurchaseOrderPriceMatchList) String() string {
 func (*PurchaseOrderPriceMatchList) ProtoMessage() {}
 
 func (x *PurchaseOrderPriceMatchList) ProtoReflect() protoreflect.Message {
-	mi := &file_purchases_orders_scailo_proto_msgTypes[30]
+	mi := &file_purchases_orders_scailo_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3969,7 +4151,7 @@ func (x *PurchaseOrderPriceMatchList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseOrderPriceMatchList.ProtoReflect.Descriptor instead.
 func (*PurchaseOrderPriceMatchList) Descriptor() ([]byte, []int) {
-	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{30}
+	return file_purchases_orders_scailo_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *PurchaseOrderPriceMatchList) GetList() []*PurchaseOrderPriceMatch {
@@ -4076,7 +4258,23 @@ const file_purchases_orders_scailo_proto_rawDesc = "" +
 	"taxGroupId\x12#\n" +
 	"\bdiscount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12,\n" +
 	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xd5\x03\n" +
+	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xc4\x03\n" +
+	",PurchasesOrdersServiceMultipleItemsSingleton\x12$\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
+	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
+	"\rvendor_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vvendorUomId\x120\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\x123\n" +
+	"\x11vendor_unit_price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fvendorUnitPrice\x12)\n" +
+	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"taxGroupId\x12#\n" +
+	"\bdiscount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12,\n" +
+	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
+	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xd4\x01\n" +
+	"0PurchasesOrdersServiceMultipleItemsCreateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x123\n" +
+	"\x11purchase_order_id\x18\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fpurchaseOrderId\x12H\n" +
+	"\x04list\x18\v \x03(\v24.Scailo.PurchasesOrdersServiceMultipleItemsSingletonR\x04list\"\xd5\x03\n" +
 	"'PurchasesOrdersServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
@@ -4387,7 +4585,7 @@ const file_purchases_orders_scailo_proto_rawDesc = "" +
 	"\x1aPURCHASE_ORDER_ITEM_STATUS\x12.\n" +
 	"*PURCHASE_ORDER_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12'\n" +
 	"#PURCHASE_ORDER_ITEM_STATUS_APPROVED\x10\x01\x12)\n" +
-	"%PURCHASE_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\x8f0\n" +
+	"%PURCHASE_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\x861\n" +
 	"\x16PurchasesOrdersService\x12Q\n" +
 	"\x06Create\x12+.Scailo.PurchasesOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\x05Draft\x12+.Scailo.PurchasesOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -4408,7 +4606,8 @@ const file_purchases_orders_scailo_proto_rawDesc = "" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\bAutofill\x12-.Scailo.PurchasesOrdersServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12c\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12u\n" +
+	"\x1dAddMultiplePurchaseOrderItems\x128.Scailo.PurchasesOrdersServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12c\n" +
 	"\x14AddPurchaseOrderItem\x12/.Scailo.PurchasesOrdersServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12f\n" +
 	"\x17ModifyPurchaseOrderItem\x12/.Scailo.PurchasesOrdersServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x18ApprovePurchaseOrderItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -4479,7 +4678,7 @@ func file_purchases_orders_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_purchases_orders_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_purchases_orders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_purchases_orders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_purchases_orders_scailo_proto_goTypes = []any{
 	(PURCHASE_ORDER_SORT_KEY)(0),                              // 0: Scailo.PURCHASE_ORDER_SORT_KEY
 	(PURCHASE_ORDER_REFERENCE_CONTEXT)(0),                     // 1: Scailo.PURCHASE_ORDER_REFERENCE_CONTEXT
@@ -4492,260 +4691,265 @@ var file_purchases_orders_scailo_proto_goTypes = []any{
 	(*PurchaseOrderAncillaryParameters)(nil),                  // 8: Scailo.PurchaseOrderAncillaryParameters
 	(*PurchaseOrder)(nil),                                     // 9: Scailo.PurchaseOrder
 	(*PurchasesOrdersServiceItemCreateRequest)(nil),           // 10: Scailo.PurchasesOrdersServiceItemCreateRequest
-	(*PurchasesOrdersServiceItemUpdateRequest)(nil),           // 11: Scailo.PurchasesOrdersServiceItemUpdateRequest
-	(*PurchaseOrderItem)(nil),                                 // 12: Scailo.PurchaseOrderItem
-	(*PurchasesOrdersList)(nil),                               // 13: Scailo.PurchasesOrdersList
-	(*PurchaseOrderItemsList)(nil),                            // 14: Scailo.PurchaseOrderItemsList
-	(*PurchaseOrderItemHistoryRequest)(nil),                   // 15: Scailo.PurchaseOrderItemHistoryRequest
-	(*PurchaseOrderItemProspectiveInfoRequest)(nil),           // 16: Scailo.PurchaseOrderItemProspectiveInfoRequest
-	(*PurchasesOrdersServicePaginationReq)(nil),               // 17: Scailo.PurchasesOrdersServicePaginationReq
-	(*PurchasesOrdersServicePaginationResponse)(nil),          // 18: Scailo.PurchasesOrdersServicePaginationResponse
-	(*PurchasesOrdersServiceFilterReq)(nil),                   // 19: Scailo.PurchasesOrdersServiceFilterReq
-	(*PurchasesOrdersServiceCountReq)(nil),                    // 20: Scailo.PurchasesOrdersServiceCountReq
-	(*PurchasesOrdersServiceSearchAllReq)(nil),                // 21: Scailo.PurchasesOrdersServiceSearchAllReq
-	(*PurchasesOrdersServiceReferenceCreateRequest)(nil),      // 22: Scailo.PurchasesOrdersServiceReferenceCreateRequest
-	(*PurchaseOrderReference)(nil),                            // 23: Scailo.PurchaseOrderReference
-	(*PurchaseOrderReferencesList)(nil),                       // 24: Scailo.PurchaseOrderReferencesList
-	(*PurchaseOrderItemsSearchRequest)(nil),                   // 25: Scailo.PurchaseOrderItemsSearchRequest
-	(*PurchasesOrdersServicePaginatedItemsResponse)(nil),      // 26: Scailo.PurchasesOrdersServicePaginatedItemsResponse
-	(*PurchasesOrdersServiceContactCreateRequest)(nil),        // 27: Scailo.PurchasesOrdersServiceContactCreateRequest
-	(*PurchaseOrderContact)(nil),                              // 28: Scailo.PurchaseOrderContact
-	(*PurchaseOrderContactsList)(nil),                         // 29: Scailo.PurchaseOrderContactsList
-	(*PurchaseOrderInventoryStatistics)(nil),                  // 30: Scailo.PurchaseOrderInventoryStatistics
-	(*PurchaseOrderBillingStatistics)(nil),                    // 31: Scailo.PurchaseOrderBillingStatistics
-	(*PurchaseOrderInventoryMatch)(nil),                       // 32: Scailo.PurchaseOrderInventoryMatch
-	(*PurchaseOrderInventoryMatchList)(nil),                   // 33: Scailo.PurchaseOrderInventoryMatchList
-	(*PurchaseOrderPriceMatch)(nil),                           // 34: Scailo.PurchaseOrderPriceMatch
-	(*PurchaseOrderPriceMatchList)(nil),                       // 35: Scailo.PurchaseOrderPriceMatchList
-	(*FormFieldDatumCreateRequest)(nil),                       // 36: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                  // 37: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 38: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 39: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 40: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                    // 41: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                          // 42: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 43: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                       // 44: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                     // 45: Scailo.IdentifierUUIDWithUserComment
-	(*RepeatWithDeliveryDate)(nil),                            // 46: Scailo.RepeatWithDeliveryDate
-	(*IdentifierWithEmailAttributes)(nil),                     // 47: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 48: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 49: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 50: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 51: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 52: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 53: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 54: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 55: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 56: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 57: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 58: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 59: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 60: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 61: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 62: Scailo.MagicLink
-	(*PriceResponse)(nil),                                     // 63: Scailo.PriceResponse
-	(*StandardFile)(nil),                                      // 64: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 65: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                      // 66: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                   // 67: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 68: Scailo.CountResponse
-	(*SumResponse)(nil),                                       // 69: Scailo.SumResponse
+	(*PurchasesOrdersServiceMultipleItemsSingleton)(nil),      // 11: Scailo.PurchasesOrdersServiceMultipleItemsSingleton
+	(*PurchasesOrdersServiceMultipleItemsCreateRequest)(nil),  // 12: Scailo.PurchasesOrdersServiceMultipleItemsCreateRequest
+	(*PurchasesOrdersServiceItemUpdateRequest)(nil),           // 13: Scailo.PurchasesOrdersServiceItemUpdateRequest
+	(*PurchaseOrderItem)(nil),                                 // 14: Scailo.PurchaseOrderItem
+	(*PurchasesOrdersList)(nil),                               // 15: Scailo.PurchasesOrdersList
+	(*PurchaseOrderItemsList)(nil),                            // 16: Scailo.PurchaseOrderItemsList
+	(*PurchaseOrderItemHistoryRequest)(nil),                   // 17: Scailo.PurchaseOrderItemHistoryRequest
+	(*PurchaseOrderItemProspectiveInfoRequest)(nil),           // 18: Scailo.PurchaseOrderItemProspectiveInfoRequest
+	(*PurchasesOrdersServicePaginationReq)(nil),               // 19: Scailo.PurchasesOrdersServicePaginationReq
+	(*PurchasesOrdersServicePaginationResponse)(nil),          // 20: Scailo.PurchasesOrdersServicePaginationResponse
+	(*PurchasesOrdersServiceFilterReq)(nil),                   // 21: Scailo.PurchasesOrdersServiceFilterReq
+	(*PurchasesOrdersServiceCountReq)(nil),                    // 22: Scailo.PurchasesOrdersServiceCountReq
+	(*PurchasesOrdersServiceSearchAllReq)(nil),                // 23: Scailo.PurchasesOrdersServiceSearchAllReq
+	(*PurchasesOrdersServiceReferenceCreateRequest)(nil),      // 24: Scailo.PurchasesOrdersServiceReferenceCreateRequest
+	(*PurchaseOrderReference)(nil),                            // 25: Scailo.PurchaseOrderReference
+	(*PurchaseOrderReferencesList)(nil),                       // 26: Scailo.PurchaseOrderReferencesList
+	(*PurchaseOrderItemsSearchRequest)(nil),                   // 27: Scailo.PurchaseOrderItemsSearchRequest
+	(*PurchasesOrdersServicePaginatedItemsResponse)(nil),      // 28: Scailo.PurchasesOrdersServicePaginatedItemsResponse
+	(*PurchasesOrdersServiceContactCreateRequest)(nil),        // 29: Scailo.PurchasesOrdersServiceContactCreateRequest
+	(*PurchaseOrderContact)(nil),                              // 30: Scailo.PurchaseOrderContact
+	(*PurchaseOrderContactsList)(nil),                         // 31: Scailo.PurchaseOrderContactsList
+	(*PurchaseOrderInventoryStatistics)(nil),                  // 32: Scailo.PurchaseOrderInventoryStatistics
+	(*PurchaseOrderBillingStatistics)(nil),                    // 33: Scailo.PurchaseOrderBillingStatistics
+	(*PurchaseOrderInventoryMatch)(nil),                       // 34: Scailo.PurchaseOrderInventoryMatch
+	(*PurchaseOrderInventoryMatchList)(nil),                   // 35: Scailo.PurchaseOrderInventoryMatchList
+	(*PurchaseOrderPriceMatch)(nil),                           // 36: Scailo.PurchaseOrderPriceMatch
+	(*PurchaseOrderPriceMatchList)(nil),                       // 37: Scailo.PurchaseOrderPriceMatchList
+	(*FormFieldDatumCreateRequest)(nil),                       // 38: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                  // 39: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 40: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 41: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 42: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                    // 43: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                          // 44: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 45: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                       // 46: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                     // 47: Scailo.IdentifierUUIDWithUserComment
+	(*RepeatWithDeliveryDate)(nil),                            // 48: Scailo.RepeatWithDeliveryDate
+	(*IdentifierWithEmailAttributes)(nil),                     // 49: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 50: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 51: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 52: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 53: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 54: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 55: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 56: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 57: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 58: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 59: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 60: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 61: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 62: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 63: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 64: Scailo.MagicLink
+	(*PriceResponse)(nil),                                     // 65: Scailo.PriceResponse
+	(*StandardFile)(nil),                                      // 66: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 67: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                      // 68: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                   // 69: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 70: Scailo.CountResponse
+	(*SumResponse)(nil),                                       // 71: Scailo.SumResponse
 }
 var file_purchases_orders_scailo_proto_depIdxs = []int32{
-	36,  // 0: Scailo.PurchasesOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	36,  // 1: Scailo.PurchasesOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	37,  // 2: Scailo.PurchaseOrder.metadata:type_name -> Scailo.EmployeeMetadata
-	38,  // 3: Scailo.PurchaseOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	39,  // 4: Scailo.PurchaseOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	40,  // 5: Scailo.PurchaseOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
-	12,  // 6: Scailo.PurchaseOrder.list:type_name -> Scailo.PurchaseOrderItem
-	41,  // 7: Scailo.PurchaseOrder.form_data:type_name -> Scailo.FormFieldDatum
-	37,  // 8: Scailo.PurchaseOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
-	38,  // 9: Scailo.PurchaseOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	9,   // 10: Scailo.PurchasesOrdersList.list:type_name -> Scailo.PurchaseOrder
-	12,  // 11: Scailo.PurchaseOrderItemsList.list:type_name -> Scailo.PurchaseOrderItem
-	42,  // 12: Scailo.PurchasesOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	43,  // 13: Scailo.PurchasesOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 14: Scailo.PurchasesOrdersServicePaginationReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
-	39,  // 15: Scailo.PurchasesOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	9,   // 16: Scailo.PurchasesOrdersServicePaginationResponse.payload:type_name -> Scailo.PurchaseOrder
-	42,  // 17: Scailo.PurchasesOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	43,  // 18: Scailo.PurchasesOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 19: Scailo.PurchasesOrdersServiceFilterReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
-	39,  // 20: Scailo.PurchasesOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	44,  // 21: Scailo.PurchasesOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	42,  // 22: Scailo.PurchasesOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	39,  // 23: Scailo.PurchasesOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	44,  // 24: Scailo.PurchasesOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	42,  // 25: Scailo.PurchasesOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	43,  // 26: Scailo.PurchasesOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,   // 27: Scailo.PurchasesOrdersServiceSearchAllReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
-	39,  // 28: Scailo.PurchasesOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	1,   // 29: Scailo.PurchasesOrdersServiceReferenceCreateRequest.context:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_CONTEXT
-	2,   // 30: Scailo.PurchasesOrdersServiceReferenceCreateRequest.ref_from:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_REF_FROM
-	37,  // 31: Scailo.PurchaseOrderReference.metadata:type_name -> Scailo.EmployeeMetadata
-	38,  // 32: Scailo.PurchaseOrderReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	1,   // 33: Scailo.PurchaseOrderReference.context:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_CONTEXT
-	2,   // 34: Scailo.PurchaseOrderReference.ref_from:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_REF_FROM
-	23,  // 35: Scailo.PurchaseOrderReferencesList.list:type_name -> Scailo.PurchaseOrderReference
-	42,  // 36: Scailo.PurchaseOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	43,  // 37: Scailo.PurchaseOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	3,   // 38: Scailo.PurchaseOrderItemsSearchRequest.sort_key:type_name -> Scailo.PURCHASE_ORDER_ITEM_SORT_KEY
-	4,   // 39: Scailo.PurchaseOrderItemsSearchRequest.status:type_name -> Scailo.PURCHASE_ORDER_ITEM_STATUS
-	12,  // 40: Scailo.PurchasesOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.PurchaseOrderItem
-	37,  // 41: Scailo.PurchaseOrderContact.metadata:type_name -> Scailo.EmployeeMetadata
-	38,  // 42: Scailo.PurchaseOrderContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	28,  // 43: Scailo.PurchaseOrderContactsList.list:type_name -> Scailo.PurchaseOrderContact
-	32,  // 44: Scailo.PurchaseOrderInventoryMatchList.list:type_name -> Scailo.PurchaseOrderInventoryMatch
-	34,  // 45: Scailo.PurchaseOrderPriceMatchList.list:type_name -> Scailo.PurchaseOrderPriceMatch
-	5,   // 46: Scailo.PurchasesOrdersService.Create:input_type -> Scailo.PurchasesOrdersServiceCreateRequest
-	5,   // 47: Scailo.PurchasesOrdersService.Draft:input_type -> Scailo.PurchasesOrdersServiceCreateRequest
-	6,   // 48: Scailo.PurchasesOrdersService.DraftUpdate:input_type -> Scailo.PurchasesOrdersServiceUpdateRequest
-	45,  // 49: Scailo.PurchasesOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 50: Scailo.PurchasesOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 51: Scailo.PurchasesOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 52: Scailo.PurchasesOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	6,   // 53: Scailo.PurchasesOrdersService.RevisionUpdate:input_type -> Scailo.PurchasesOrdersServiceUpdateRequest
-	45,  // 54: Scailo.PurchasesOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 55: Scailo.PurchasesOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 56: Scailo.PurchasesOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 57: Scailo.PurchasesOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	46,  // 58: Scailo.PurchasesOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
-	45,  // 59: Scailo.PurchasesOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	45,  // 60: Scailo.PurchasesOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 61: Scailo.PurchasesOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	7,   // 62: Scailo.PurchasesOrdersService.Autofill:input_type -> Scailo.PurchasesOrdersServiceAutofillRequest
-	45,  // 63: Scailo.PurchasesOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	48,  // 64: Scailo.PurchasesOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	10,  // 65: Scailo.PurchasesOrdersService.AddPurchaseOrderItem:input_type -> Scailo.PurchasesOrdersServiceItemCreateRequest
-	11,  // 66: Scailo.PurchasesOrdersService.ModifyPurchaseOrderItem:input_type -> Scailo.PurchasesOrdersServiceItemUpdateRequest
-	49,  // 67: Scailo.PurchasesOrdersService.ApprovePurchaseOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	49,  // 68: Scailo.PurchasesOrdersService.DeletePurchaseOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	50,  // 69: Scailo.PurchasesOrdersService.ReorderPurchaseOrderItems:input_type -> Scailo.ReorderItemsRequest
-	51,  // 70: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemByID:input_type -> Scailo.Identifier
-	16,  // 71: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemPrice:input_type -> Scailo.PurchaseOrderItemProspectiveInfoRequest
-	52,  // 72: Scailo.PurchasesOrdersService.ViewApprovedPurchaseOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	52,  // 73: Scailo.PurchasesOrdersService.ViewUnapprovedPurchaseOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	15,  // 74: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemHistory:input_type -> Scailo.PurchaseOrderItemHistoryRequest
-	25,  // 75: Scailo.PurchasesOrdersService.ViewPaginatedApprovedPurchaseOrderItems:input_type -> Scailo.PurchaseOrderItemsSearchRequest
-	25,  // 76: Scailo.PurchasesOrdersService.ViewPaginatedUnapprovedPurchaseOrderItems:input_type -> Scailo.PurchaseOrderItemsSearchRequest
-	25,  // 77: Scailo.PurchasesOrdersService.SearchItemsWithPagination:input_type -> Scailo.PurchaseOrderItemsSearchRequest
-	53,  // 78: Scailo.PurchasesOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	54,  // 79: Scailo.PurchasesOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	55,  // 80: Scailo.PurchasesOrdersService.UploadPurchaseOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
-	27,  // 81: Scailo.PurchasesOrdersService.AddPurchaseOrderContact:input_type -> Scailo.PurchasesOrdersServiceContactCreateRequest
-	49,  // 82: Scailo.PurchasesOrdersService.ApprovePurchaseOrderContact:input_type -> Scailo.IdentifierWithUserComment
-	49,  // 83: Scailo.PurchasesOrdersService.DeletePurchaseOrderContact:input_type -> Scailo.IdentifierWithUserComment
-	51,  // 84: Scailo.PurchasesOrdersService.ViewPurchaseOrderContactByID:input_type -> Scailo.Identifier
-	53,  // 85: Scailo.PurchasesOrdersService.ViewPurchaseOrderContacts:input_type -> Scailo.IdentifierUUID
-	22,  // 86: Scailo.PurchasesOrdersService.AddPurchaseOrderReference:input_type -> Scailo.PurchasesOrdersServiceReferenceCreateRequest
-	49,  // 87: Scailo.PurchasesOrdersService.ApprovePurchaseOrderReference:input_type -> Scailo.IdentifierWithUserComment
-	49,  // 88: Scailo.PurchasesOrdersService.DeletePurchaseOrderReference:input_type -> Scailo.IdentifierWithUserComment
-	51,  // 89: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferenceByID:input_type -> Scailo.Identifier
-	51,  // 90: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferences:input_type -> Scailo.Identifier
-	51,  // 91: Scailo.PurchasesOrdersService.ViewByID:input_type -> Scailo.Identifier
-	53,  // 92: Scailo.PurchasesOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	56,  // 93: Scailo.PurchasesOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	51,  // 94: Scailo.PurchasesOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	53,  // 95: Scailo.PurchasesOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	57,  // 96: Scailo.PurchasesOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	53,  // 97: Scailo.PurchasesOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	58,  // 98: Scailo.PurchasesOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
-	53,  // 99: Scailo.PurchasesOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	17,  // 100: Scailo.PurchasesOrdersService.ViewWithPagination:input_type -> Scailo.PurchasesOrdersServicePaginationReq
-	51,  // 101: Scailo.PurchasesOrdersService.ViewAmendments:input_type -> Scailo.Identifier
-	53,  // 102: Scailo.PurchasesOrdersService.ViewInventoryStatistics:input_type -> Scailo.IdentifierUUID
-	53,  // 103: Scailo.PurchasesOrdersService.ViewBillingStatistics:input_type -> Scailo.IdentifierUUID
-	53,  // 104: Scailo.PurchasesOrdersService.ViewInventoryMatch:input_type -> Scailo.IdentifierUUID
-	53,  // 105: Scailo.PurchasesOrdersService.ViewPriceMatch:input_type -> Scailo.IdentifierUUID
-	52,  // 106: Scailo.PurchasesOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	59,  // 107: Scailo.PurchasesOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	16,  // 108: Scailo.PurchasesOrdersService.ViewProspectivePurchaseOrderItem:input_type -> Scailo.PurchaseOrderItemProspectiveInfoRequest
-	53,  // 109: Scailo.PurchasesOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	53,  // 110: Scailo.PurchasesOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	21,  // 111: Scailo.PurchasesOrdersService.SearchAll:input_type -> Scailo.PurchasesOrdersServiceSearchAllReq
-	19,  // 112: Scailo.PurchasesOrdersService.Filter:input_type -> Scailo.PurchasesOrdersServiceFilterReq
-	60,  // 113: Scailo.PurchasesOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	20,  // 114: Scailo.PurchasesOrdersService.Count:input_type -> Scailo.PurchasesOrdersServiceCountReq
-	20,  // 115: Scailo.PurchasesOrdersService.AccruedValue:input_type -> Scailo.PurchasesOrdersServiceCountReq
-	19,  // 116: Scailo.PurchasesOrdersService.DownloadAsCSV:input_type -> Scailo.PurchasesOrdersServiceFilterReq
-	61,  // 117: Scailo.PurchasesOrdersService.Create:output_type -> Scailo.IdentifierResponse
-	61,  // 118: Scailo.PurchasesOrdersService.Draft:output_type -> Scailo.IdentifierResponse
-	61,  // 119: Scailo.PurchasesOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	61,  // 120: Scailo.PurchasesOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	61,  // 121: Scailo.PurchasesOrdersService.Verify:output_type -> Scailo.IdentifierResponse
-	61,  // 122: Scailo.PurchasesOrdersService.Approve:output_type -> Scailo.IdentifierResponse
-	61,  // 123: Scailo.PurchasesOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	61,  // 124: Scailo.PurchasesOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	61,  // 125: Scailo.PurchasesOrdersService.Halt:output_type -> Scailo.IdentifierResponse
-	61,  // 126: Scailo.PurchasesOrdersService.Discard:output_type -> Scailo.IdentifierResponse
-	61,  // 127: Scailo.PurchasesOrdersService.Restore:output_type -> Scailo.IdentifierResponse
-	61,  // 128: Scailo.PurchasesOrdersService.Complete:output_type -> Scailo.IdentifierResponse
-	61,  // 129: Scailo.PurchasesOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
-	61,  // 130: Scailo.PurchasesOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
-	61,  // 131: Scailo.PurchasesOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	61,  // 132: Scailo.PurchasesOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
-	61,  // 133: Scailo.PurchasesOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
-	61,  // 134: Scailo.PurchasesOrdersService.Amend:output_type -> Scailo.IdentifierResponse
-	62,  // 135: Scailo.PurchasesOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
-	61,  // 136: Scailo.PurchasesOrdersService.AddPurchaseOrderItem:output_type -> Scailo.IdentifierResponse
-	61,  // 137: Scailo.PurchasesOrdersService.ModifyPurchaseOrderItem:output_type -> Scailo.IdentifierResponse
-	61,  // 138: Scailo.PurchasesOrdersService.ApprovePurchaseOrderItem:output_type -> Scailo.IdentifierResponse
-	61,  // 139: Scailo.PurchasesOrdersService.DeletePurchaseOrderItem:output_type -> Scailo.IdentifierResponse
-	61,  // 140: Scailo.PurchasesOrdersService.ReorderPurchaseOrderItems:output_type -> Scailo.IdentifierResponse
-	12,  // 141: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemByID:output_type -> Scailo.PurchaseOrderItem
-	63,  // 142: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemPrice:output_type -> Scailo.PriceResponse
-	14,  // 143: Scailo.PurchasesOrdersService.ViewApprovedPurchaseOrderItems:output_type -> Scailo.PurchaseOrderItemsList
-	14,  // 144: Scailo.PurchasesOrdersService.ViewUnapprovedPurchaseOrderItems:output_type -> Scailo.PurchaseOrderItemsList
-	14,  // 145: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemHistory:output_type -> Scailo.PurchaseOrderItemsList
-	26,  // 146: Scailo.PurchasesOrdersService.ViewPaginatedApprovedPurchaseOrderItems:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
-	26,  // 147: Scailo.PurchasesOrdersService.ViewPaginatedUnapprovedPurchaseOrderItems:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
-	26,  // 148: Scailo.PurchasesOrdersService.SearchItemsWithPagination:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
-	64,  // 149: Scailo.PurchasesOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	64,  // 150: Scailo.PurchasesOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	57,  // 151: Scailo.PurchasesOrdersService.UploadPurchaseOrderItems:output_type -> Scailo.IdentifiersList
-	61,  // 152: Scailo.PurchasesOrdersService.AddPurchaseOrderContact:output_type -> Scailo.IdentifierResponse
-	61,  // 153: Scailo.PurchasesOrdersService.ApprovePurchaseOrderContact:output_type -> Scailo.IdentifierResponse
-	61,  // 154: Scailo.PurchasesOrdersService.DeletePurchaseOrderContact:output_type -> Scailo.IdentifierResponse
-	28,  // 155: Scailo.PurchasesOrdersService.ViewPurchaseOrderContactByID:output_type -> Scailo.PurchaseOrderContact
-	29,  // 156: Scailo.PurchasesOrdersService.ViewPurchaseOrderContacts:output_type -> Scailo.PurchaseOrderContactsList
-	61,  // 157: Scailo.PurchasesOrdersService.AddPurchaseOrderReference:output_type -> Scailo.IdentifierResponse
-	61,  // 158: Scailo.PurchasesOrdersService.ApprovePurchaseOrderReference:output_type -> Scailo.IdentifierResponse
-	61,  // 159: Scailo.PurchasesOrdersService.DeletePurchaseOrderReference:output_type -> Scailo.IdentifierResponse
-	23,  // 160: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferenceByID:output_type -> Scailo.PurchaseOrderReference
-	24,  // 161: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferences:output_type -> Scailo.PurchaseOrderReferencesList
-	9,   // 162: Scailo.PurchasesOrdersService.ViewByID:output_type -> Scailo.PurchaseOrder
-	9,   // 163: Scailo.PurchasesOrdersService.ViewByUUID:output_type -> Scailo.PurchaseOrder
-	9,   // 164: Scailo.PurchasesOrdersService.ViewByReferenceID:output_type -> Scailo.PurchaseOrder
-	9,   // 165: Scailo.PurchasesOrdersService.ViewEssentialByID:output_type -> Scailo.PurchaseOrder
-	9,   // 166: Scailo.PurchasesOrdersService.ViewEssentialByUUID:output_type -> Scailo.PurchaseOrder
-	13,  // 167: Scailo.PurchasesOrdersService.ViewFromIDs:output_type -> Scailo.PurchasesOrdersList
-	8,   // 168: Scailo.PurchasesOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchaseOrderAncillaryParameters
-	13,  // 169: Scailo.PurchasesOrdersService.ViewAll:output_type -> Scailo.PurchasesOrdersList
-	13,  // 170: Scailo.PurchasesOrdersService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesOrdersList
-	18,  // 171: Scailo.PurchasesOrdersService.ViewWithPagination:output_type -> Scailo.PurchasesOrdersServicePaginationResponse
-	65,  // 172: Scailo.PurchasesOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	30,  // 173: Scailo.PurchasesOrdersService.ViewInventoryStatistics:output_type -> Scailo.PurchaseOrderInventoryStatistics
-	31,  // 174: Scailo.PurchasesOrdersService.ViewBillingStatistics:output_type -> Scailo.PurchaseOrderBillingStatistics
-	33,  // 175: Scailo.PurchasesOrdersService.ViewInventoryMatch:output_type -> Scailo.PurchaseOrderInventoryMatchList
-	35,  // 176: Scailo.PurchasesOrdersService.ViewPriceMatch:output_type -> Scailo.PurchaseOrderPriceMatchList
-	66,  // 177: Scailo.PurchasesOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	66,  // 178: Scailo.PurchasesOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	10,  // 179: Scailo.PurchasesOrdersService.ViewProspectivePurchaseOrderItem:output_type -> Scailo.PurchasesOrdersServiceItemCreateRequest
-	67,  // 180: Scailo.PurchasesOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	64,  // 181: Scailo.PurchasesOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
-	13,  // 182: Scailo.PurchasesOrdersService.SearchAll:output_type -> Scailo.PurchasesOrdersList
-	13,  // 183: Scailo.PurchasesOrdersService.Filter:output_type -> Scailo.PurchasesOrdersList
-	68,  // 184: Scailo.PurchasesOrdersService.CountInStatus:output_type -> Scailo.CountResponse
-	68,  // 185: Scailo.PurchasesOrdersService.Count:output_type -> Scailo.CountResponse
-	69,  // 186: Scailo.PurchasesOrdersService.AccruedValue:output_type -> Scailo.SumResponse
-	64,  // 187: Scailo.PurchasesOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	117, // [117:188] is the sub-list for method output_type
-	46,  // [46:117] is the sub-list for method input_type
-	46,  // [46:46] is the sub-list for extension type_name
-	46,  // [46:46] is the sub-list for extension extendee
-	0,   // [0:46] is the sub-list for field type_name
+	38,  // 0: Scailo.PurchasesOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	38,  // 1: Scailo.PurchasesOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	39,  // 2: Scailo.PurchaseOrder.metadata:type_name -> Scailo.EmployeeMetadata
+	40,  // 3: Scailo.PurchaseOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	41,  // 4: Scailo.PurchaseOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	42,  // 5: Scailo.PurchaseOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
+	14,  // 6: Scailo.PurchaseOrder.list:type_name -> Scailo.PurchaseOrderItem
+	43,  // 7: Scailo.PurchaseOrder.form_data:type_name -> Scailo.FormFieldDatum
+	11,  // 8: Scailo.PurchasesOrdersServiceMultipleItemsCreateRequest.list:type_name -> Scailo.PurchasesOrdersServiceMultipleItemsSingleton
+	39,  // 9: Scailo.PurchaseOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
+	40,  // 10: Scailo.PurchaseOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	9,   // 11: Scailo.PurchasesOrdersList.list:type_name -> Scailo.PurchaseOrder
+	14,  // 12: Scailo.PurchaseOrderItemsList.list:type_name -> Scailo.PurchaseOrderItem
+	44,  // 13: Scailo.PurchasesOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45,  // 14: Scailo.PurchasesOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 15: Scailo.PurchasesOrdersServicePaginationReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
+	41,  // 16: Scailo.PurchasesOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	9,   // 17: Scailo.PurchasesOrdersServicePaginationResponse.payload:type_name -> Scailo.PurchaseOrder
+	44,  // 18: Scailo.PurchasesOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45,  // 19: Scailo.PurchasesOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 20: Scailo.PurchasesOrdersServiceFilterReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
+	41,  // 21: Scailo.PurchasesOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	46,  // 22: Scailo.PurchasesOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	44,  // 23: Scailo.PurchasesOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41,  // 24: Scailo.PurchasesOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	46,  // 25: Scailo.PurchasesOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	44,  // 26: Scailo.PurchasesOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45,  // 27: Scailo.PurchasesOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	0,   // 28: Scailo.PurchasesOrdersServiceSearchAllReq.sort_key:type_name -> Scailo.PURCHASE_ORDER_SORT_KEY
+	41,  // 29: Scailo.PurchasesOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	1,   // 30: Scailo.PurchasesOrdersServiceReferenceCreateRequest.context:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_CONTEXT
+	2,   // 31: Scailo.PurchasesOrdersServiceReferenceCreateRequest.ref_from:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_REF_FROM
+	39,  // 32: Scailo.PurchaseOrderReference.metadata:type_name -> Scailo.EmployeeMetadata
+	40,  // 33: Scailo.PurchaseOrderReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	1,   // 34: Scailo.PurchaseOrderReference.context:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_CONTEXT
+	2,   // 35: Scailo.PurchaseOrderReference.ref_from:type_name -> Scailo.PURCHASE_ORDER_REFERENCE_REF_FROM
+	25,  // 36: Scailo.PurchaseOrderReferencesList.list:type_name -> Scailo.PurchaseOrderReference
+	44,  // 37: Scailo.PurchaseOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	45,  // 38: Scailo.PurchaseOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	3,   // 39: Scailo.PurchaseOrderItemsSearchRequest.sort_key:type_name -> Scailo.PURCHASE_ORDER_ITEM_SORT_KEY
+	4,   // 40: Scailo.PurchaseOrderItemsSearchRequest.status:type_name -> Scailo.PURCHASE_ORDER_ITEM_STATUS
+	14,  // 41: Scailo.PurchasesOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.PurchaseOrderItem
+	39,  // 42: Scailo.PurchaseOrderContact.metadata:type_name -> Scailo.EmployeeMetadata
+	40,  // 43: Scailo.PurchaseOrderContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	30,  // 44: Scailo.PurchaseOrderContactsList.list:type_name -> Scailo.PurchaseOrderContact
+	34,  // 45: Scailo.PurchaseOrderInventoryMatchList.list:type_name -> Scailo.PurchaseOrderInventoryMatch
+	36,  // 46: Scailo.PurchaseOrderPriceMatchList.list:type_name -> Scailo.PurchaseOrderPriceMatch
+	5,   // 47: Scailo.PurchasesOrdersService.Create:input_type -> Scailo.PurchasesOrdersServiceCreateRequest
+	5,   // 48: Scailo.PurchasesOrdersService.Draft:input_type -> Scailo.PurchasesOrdersServiceCreateRequest
+	6,   // 49: Scailo.PurchasesOrdersService.DraftUpdate:input_type -> Scailo.PurchasesOrdersServiceUpdateRequest
+	47,  // 50: Scailo.PurchasesOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 51: Scailo.PurchasesOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 52: Scailo.PurchasesOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 53: Scailo.PurchasesOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	6,   // 54: Scailo.PurchasesOrdersService.RevisionUpdate:input_type -> Scailo.PurchasesOrdersServiceUpdateRequest
+	47,  // 55: Scailo.PurchasesOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 56: Scailo.PurchasesOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 57: Scailo.PurchasesOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 58: Scailo.PurchasesOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 59: Scailo.PurchasesOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
+	47,  // 60: Scailo.PurchasesOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	47,  // 61: Scailo.PurchasesOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	49,  // 62: Scailo.PurchasesOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	7,   // 63: Scailo.PurchasesOrdersService.Autofill:input_type -> Scailo.PurchasesOrdersServiceAutofillRequest
+	47,  // 64: Scailo.PurchasesOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	50,  // 65: Scailo.PurchasesOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	12,  // 66: Scailo.PurchasesOrdersService.AddMultiplePurchaseOrderItems:input_type -> Scailo.PurchasesOrdersServiceMultipleItemsCreateRequest
+	10,  // 67: Scailo.PurchasesOrdersService.AddPurchaseOrderItem:input_type -> Scailo.PurchasesOrdersServiceItemCreateRequest
+	13,  // 68: Scailo.PurchasesOrdersService.ModifyPurchaseOrderItem:input_type -> Scailo.PurchasesOrdersServiceItemUpdateRequest
+	51,  // 69: Scailo.PurchasesOrdersService.ApprovePurchaseOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	51,  // 70: Scailo.PurchasesOrdersService.DeletePurchaseOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	52,  // 71: Scailo.PurchasesOrdersService.ReorderPurchaseOrderItems:input_type -> Scailo.ReorderItemsRequest
+	53,  // 72: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemByID:input_type -> Scailo.Identifier
+	18,  // 73: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemPrice:input_type -> Scailo.PurchaseOrderItemProspectiveInfoRequest
+	54,  // 74: Scailo.PurchasesOrdersService.ViewApprovedPurchaseOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	54,  // 75: Scailo.PurchasesOrdersService.ViewUnapprovedPurchaseOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	17,  // 76: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemHistory:input_type -> Scailo.PurchaseOrderItemHistoryRequest
+	27,  // 77: Scailo.PurchasesOrdersService.ViewPaginatedApprovedPurchaseOrderItems:input_type -> Scailo.PurchaseOrderItemsSearchRequest
+	27,  // 78: Scailo.PurchasesOrdersService.ViewPaginatedUnapprovedPurchaseOrderItems:input_type -> Scailo.PurchaseOrderItemsSearchRequest
+	27,  // 79: Scailo.PurchasesOrdersService.SearchItemsWithPagination:input_type -> Scailo.PurchaseOrderItemsSearchRequest
+	55,  // 80: Scailo.PurchasesOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	56,  // 81: Scailo.PurchasesOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	57,  // 82: Scailo.PurchasesOrdersService.UploadPurchaseOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
+	29,  // 83: Scailo.PurchasesOrdersService.AddPurchaseOrderContact:input_type -> Scailo.PurchasesOrdersServiceContactCreateRequest
+	51,  // 84: Scailo.PurchasesOrdersService.ApprovePurchaseOrderContact:input_type -> Scailo.IdentifierWithUserComment
+	51,  // 85: Scailo.PurchasesOrdersService.DeletePurchaseOrderContact:input_type -> Scailo.IdentifierWithUserComment
+	53,  // 86: Scailo.PurchasesOrdersService.ViewPurchaseOrderContactByID:input_type -> Scailo.Identifier
+	55,  // 87: Scailo.PurchasesOrdersService.ViewPurchaseOrderContacts:input_type -> Scailo.IdentifierUUID
+	24,  // 88: Scailo.PurchasesOrdersService.AddPurchaseOrderReference:input_type -> Scailo.PurchasesOrdersServiceReferenceCreateRequest
+	51,  // 89: Scailo.PurchasesOrdersService.ApprovePurchaseOrderReference:input_type -> Scailo.IdentifierWithUserComment
+	51,  // 90: Scailo.PurchasesOrdersService.DeletePurchaseOrderReference:input_type -> Scailo.IdentifierWithUserComment
+	53,  // 91: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferenceByID:input_type -> Scailo.Identifier
+	53,  // 92: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferences:input_type -> Scailo.Identifier
+	53,  // 93: Scailo.PurchasesOrdersService.ViewByID:input_type -> Scailo.Identifier
+	55,  // 94: Scailo.PurchasesOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	58,  // 95: Scailo.PurchasesOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	53,  // 96: Scailo.PurchasesOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	55,  // 97: Scailo.PurchasesOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	59,  // 98: Scailo.PurchasesOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	55,  // 99: Scailo.PurchasesOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	60,  // 100: Scailo.PurchasesOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
+	55,  // 101: Scailo.PurchasesOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	19,  // 102: Scailo.PurchasesOrdersService.ViewWithPagination:input_type -> Scailo.PurchasesOrdersServicePaginationReq
+	53,  // 103: Scailo.PurchasesOrdersService.ViewAmendments:input_type -> Scailo.Identifier
+	55,  // 104: Scailo.PurchasesOrdersService.ViewInventoryStatistics:input_type -> Scailo.IdentifierUUID
+	55,  // 105: Scailo.PurchasesOrdersService.ViewBillingStatistics:input_type -> Scailo.IdentifierUUID
+	55,  // 106: Scailo.PurchasesOrdersService.ViewInventoryMatch:input_type -> Scailo.IdentifierUUID
+	55,  // 107: Scailo.PurchasesOrdersService.ViewPriceMatch:input_type -> Scailo.IdentifierUUID
+	54,  // 108: Scailo.PurchasesOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	61,  // 109: Scailo.PurchasesOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	18,  // 110: Scailo.PurchasesOrdersService.ViewProspectivePurchaseOrderItem:input_type -> Scailo.PurchaseOrderItemProspectiveInfoRequest
+	55,  // 111: Scailo.PurchasesOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	55,  // 112: Scailo.PurchasesOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	23,  // 113: Scailo.PurchasesOrdersService.SearchAll:input_type -> Scailo.PurchasesOrdersServiceSearchAllReq
+	21,  // 114: Scailo.PurchasesOrdersService.Filter:input_type -> Scailo.PurchasesOrdersServiceFilterReq
+	62,  // 115: Scailo.PurchasesOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	22,  // 116: Scailo.PurchasesOrdersService.Count:input_type -> Scailo.PurchasesOrdersServiceCountReq
+	22,  // 117: Scailo.PurchasesOrdersService.AccruedValue:input_type -> Scailo.PurchasesOrdersServiceCountReq
+	21,  // 118: Scailo.PurchasesOrdersService.DownloadAsCSV:input_type -> Scailo.PurchasesOrdersServiceFilterReq
+	63,  // 119: Scailo.PurchasesOrdersService.Create:output_type -> Scailo.IdentifierResponse
+	63,  // 120: Scailo.PurchasesOrdersService.Draft:output_type -> Scailo.IdentifierResponse
+	63,  // 121: Scailo.PurchasesOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	63,  // 122: Scailo.PurchasesOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	63,  // 123: Scailo.PurchasesOrdersService.Verify:output_type -> Scailo.IdentifierResponse
+	63,  // 124: Scailo.PurchasesOrdersService.Approve:output_type -> Scailo.IdentifierResponse
+	63,  // 125: Scailo.PurchasesOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	63,  // 126: Scailo.PurchasesOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	63,  // 127: Scailo.PurchasesOrdersService.Halt:output_type -> Scailo.IdentifierResponse
+	63,  // 128: Scailo.PurchasesOrdersService.Discard:output_type -> Scailo.IdentifierResponse
+	63,  // 129: Scailo.PurchasesOrdersService.Restore:output_type -> Scailo.IdentifierResponse
+	63,  // 130: Scailo.PurchasesOrdersService.Complete:output_type -> Scailo.IdentifierResponse
+	63,  // 131: Scailo.PurchasesOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
+	63,  // 132: Scailo.PurchasesOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
+	63,  // 133: Scailo.PurchasesOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	63,  // 134: Scailo.PurchasesOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
+	63,  // 135: Scailo.PurchasesOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
+	63,  // 136: Scailo.PurchasesOrdersService.Amend:output_type -> Scailo.IdentifierResponse
+	64,  // 137: Scailo.PurchasesOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
+	63,  // 138: Scailo.PurchasesOrdersService.AddMultiplePurchaseOrderItems:output_type -> Scailo.IdentifierResponse
+	63,  // 139: Scailo.PurchasesOrdersService.AddPurchaseOrderItem:output_type -> Scailo.IdentifierResponse
+	63,  // 140: Scailo.PurchasesOrdersService.ModifyPurchaseOrderItem:output_type -> Scailo.IdentifierResponse
+	63,  // 141: Scailo.PurchasesOrdersService.ApprovePurchaseOrderItem:output_type -> Scailo.IdentifierResponse
+	63,  // 142: Scailo.PurchasesOrdersService.DeletePurchaseOrderItem:output_type -> Scailo.IdentifierResponse
+	63,  // 143: Scailo.PurchasesOrdersService.ReorderPurchaseOrderItems:output_type -> Scailo.IdentifierResponse
+	14,  // 144: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemByID:output_type -> Scailo.PurchaseOrderItem
+	65,  // 145: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemPrice:output_type -> Scailo.PriceResponse
+	16,  // 146: Scailo.PurchasesOrdersService.ViewApprovedPurchaseOrderItems:output_type -> Scailo.PurchaseOrderItemsList
+	16,  // 147: Scailo.PurchasesOrdersService.ViewUnapprovedPurchaseOrderItems:output_type -> Scailo.PurchaseOrderItemsList
+	16,  // 148: Scailo.PurchasesOrdersService.ViewPurchaseOrderItemHistory:output_type -> Scailo.PurchaseOrderItemsList
+	28,  // 149: Scailo.PurchasesOrdersService.ViewPaginatedApprovedPurchaseOrderItems:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
+	28,  // 150: Scailo.PurchasesOrdersService.ViewPaginatedUnapprovedPurchaseOrderItems:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
+	28,  // 151: Scailo.PurchasesOrdersService.SearchItemsWithPagination:output_type -> Scailo.PurchasesOrdersServicePaginatedItemsResponse
+	66,  // 152: Scailo.PurchasesOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	66,  // 153: Scailo.PurchasesOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	59,  // 154: Scailo.PurchasesOrdersService.UploadPurchaseOrderItems:output_type -> Scailo.IdentifiersList
+	63,  // 155: Scailo.PurchasesOrdersService.AddPurchaseOrderContact:output_type -> Scailo.IdentifierResponse
+	63,  // 156: Scailo.PurchasesOrdersService.ApprovePurchaseOrderContact:output_type -> Scailo.IdentifierResponse
+	63,  // 157: Scailo.PurchasesOrdersService.DeletePurchaseOrderContact:output_type -> Scailo.IdentifierResponse
+	30,  // 158: Scailo.PurchasesOrdersService.ViewPurchaseOrderContactByID:output_type -> Scailo.PurchaseOrderContact
+	31,  // 159: Scailo.PurchasesOrdersService.ViewPurchaseOrderContacts:output_type -> Scailo.PurchaseOrderContactsList
+	63,  // 160: Scailo.PurchasesOrdersService.AddPurchaseOrderReference:output_type -> Scailo.IdentifierResponse
+	63,  // 161: Scailo.PurchasesOrdersService.ApprovePurchaseOrderReference:output_type -> Scailo.IdentifierResponse
+	63,  // 162: Scailo.PurchasesOrdersService.DeletePurchaseOrderReference:output_type -> Scailo.IdentifierResponse
+	25,  // 163: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferenceByID:output_type -> Scailo.PurchaseOrderReference
+	26,  // 164: Scailo.PurchasesOrdersService.ViewPurchaseOrderReferences:output_type -> Scailo.PurchaseOrderReferencesList
+	9,   // 165: Scailo.PurchasesOrdersService.ViewByID:output_type -> Scailo.PurchaseOrder
+	9,   // 166: Scailo.PurchasesOrdersService.ViewByUUID:output_type -> Scailo.PurchaseOrder
+	9,   // 167: Scailo.PurchasesOrdersService.ViewByReferenceID:output_type -> Scailo.PurchaseOrder
+	9,   // 168: Scailo.PurchasesOrdersService.ViewEssentialByID:output_type -> Scailo.PurchaseOrder
+	9,   // 169: Scailo.PurchasesOrdersService.ViewEssentialByUUID:output_type -> Scailo.PurchaseOrder
+	15,  // 170: Scailo.PurchasesOrdersService.ViewFromIDs:output_type -> Scailo.PurchasesOrdersList
+	8,   // 171: Scailo.PurchasesOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchaseOrderAncillaryParameters
+	15,  // 172: Scailo.PurchasesOrdersService.ViewAll:output_type -> Scailo.PurchasesOrdersList
+	15,  // 173: Scailo.PurchasesOrdersService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesOrdersList
+	20,  // 174: Scailo.PurchasesOrdersService.ViewWithPagination:output_type -> Scailo.PurchasesOrdersServicePaginationResponse
+	67,  // 175: Scailo.PurchasesOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	32,  // 176: Scailo.PurchasesOrdersService.ViewInventoryStatistics:output_type -> Scailo.PurchaseOrderInventoryStatistics
+	33,  // 177: Scailo.PurchasesOrdersService.ViewBillingStatistics:output_type -> Scailo.PurchaseOrderBillingStatistics
+	35,  // 178: Scailo.PurchasesOrdersService.ViewInventoryMatch:output_type -> Scailo.PurchaseOrderInventoryMatchList
+	37,  // 179: Scailo.PurchasesOrdersService.ViewPriceMatch:output_type -> Scailo.PurchaseOrderPriceMatchList
+	68,  // 180: Scailo.PurchasesOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	68,  // 181: Scailo.PurchasesOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	10,  // 182: Scailo.PurchasesOrdersService.ViewProspectivePurchaseOrderItem:output_type -> Scailo.PurchasesOrdersServiceItemCreateRequest
+	69,  // 183: Scailo.PurchasesOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	66,  // 184: Scailo.PurchasesOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
+	15,  // 185: Scailo.PurchasesOrdersService.SearchAll:output_type -> Scailo.PurchasesOrdersList
+	15,  // 186: Scailo.PurchasesOrdersService.Filter:output_type -> Scailo.PurchasesOrdersList
+	70,  // 187: Scailo.PurchasesOrdersService.CountInStatus:output_type -> Scailo.CountResponse
+	70,  // 188: Scailo.PurchasesOrdersService.Count:output_type -> Scailo.CountResponse
+	71,  // 189: Scailo.PurchasesOrdersService.AccruedValue:output_type -> Scailo.SumResponse
+	66,  // 190: Scailo.PurchasesOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	119, // [119:191] is the sub-list for method output_type
+	47,  // [47:119] is the sub-list for method input_type
+	47,  // [47:47] is the sub-list for extension type_name
+	47,  // [47:47] is the sub-list for extension extendee
+	0,   // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_purchases_orders_scailo_proto_init() }
@@ -4763,7 +4967,7 @@ func file_purchases_orders_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_purchases_orders_scailo_proto_rawDesc), len(file_purchases_orders_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   31,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

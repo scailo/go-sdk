@@ -36,6 +36,7 @@ const (
 	DebitNotesService_SendEmail_FullMethodName                             = "/Scailo.DebitNotesService/SendEmail"
 	DebitNotesService_Autofill_FullMethodName                              = "/Scailo.DebitNotesService/Autofill"
 	DebitNotesService_CreateMagicLink_FullMethodName                       = "/Scailo.DebitNotesService/CreateMagicLink"
+	DebitNotesService_AddMultipleDebitNoteItems_FullMethodName             = "/Scailo.DebitNotesService/AddMultipleDebitNoteItems"
 	DebitNotesService_AddDebitNoteItem_FullMethodName                      = "/Scailo.DebitNotesService/AddDebitNoteItem"
 	DebitNotesService_ModifyDebitNoteItem_FullMethodName                   = "/Scailo.DebitNotesService/ModifyDebitNoteItem"
 	DebitNotesService_ApproveDebitNoteItem_FullMethodName                  = "/Scailo.DebitNotesService/ApproveDebitNoteItem"
@@ -123,6 +124,8 @@ type DebitNotesServiceClient interface {
 	Autofill(ctx context.Context, in *DebitNotesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
+	// Add multiple items to a debit note
+	AddMultipleDebitNoteItems(ctx context.Context, in *DebitNotesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a debit note
 	AddDebitNoteItem(ctx context.Context, in *DebitNotesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a debit note
@@ -395,6 +398,16 @@ func (c *debitNotesServiceClient) CreateMagicLink(ctx context.Context, in *Magic
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
 	err := c.cc.Invoke(ctx, DebitNotesService_CreateMagicLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *debitNotesServiceClient) AddMultipleDebitNoteItems(ctx context.Context, in *DebitNotesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, DebitNotesService_AddMultipleDebitNoteItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
