@@ -371,18 +371,18 @@ const file_vault_scailo_proto_rawDesc = "" +
 	"\afolders\x18\x02 \x03(\v2\x13.Scailo.VaultFolderR\afolders\"L\n" +
 	"\x0eGiXRelayHeader\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
-	"\x05value\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\"\xc2\x02\n" +
+	"\x05value\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\"\xd3\x02\n" +
 	"\x16GiXRelayReqWithoutBody\x12\x1c\n" +
 	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12]\n" +
-	"\x19relay_content_type_header\x18\x04 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x16relayContentTypeHeader\x12R\n" +
-	"\x13relay_accept_header\x18\x05 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x11relayAcceptHeader\x12;\n" +
+	"\x19relay_content_type_header\x18\x04 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x16relayContentTypeHeader\x12c\n" +
+	"\x13relay_accept_header\x18\x05 \x01(\tB3\xbaH0r.R\x10application/jsonR\x0fapplication/pdfR\ttext/htmlR\x11relayAcceptHeader\x12;\n" +
 	"\rrelay_headers\x18\n" +
 	" \x03(\v2\x16.Scailo.GiXRelayHeaderR\frelayHeaders\x12\x1a\n" +
-	"\x03url\x18\x14 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\"\xd3\x02\n" +
+	"\x03url\x18\x14 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\"\xe4\x02\n" +
 	"\x13GiXRelayReqWithBody\x12\x1c\n" +
 	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12]\n" +
-	"\x19relay_content_type_header\x18\x04 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x16relayContentTypeHeader\x12R\n" +
-	"\x13relay_accept_header\x18\x05 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x11relayAcceptHeader\x12;\n" +
+	"\x19relay_content_type_header\x18\x04 \x01(\tB\"\xbaH\x1fr\x1dR\x10application/jsonR\ttext/htmlR\x16relayContentTypeHeader\x12c\n" +
+	"\x13relay_accept_header\x18\x05 \x01(\tB3\xbaH0r.R\x10application/jsonR\x0fapplication/pdfR\ttext/htmlR\x11relayAcceptHeader\x12;\n" +
 	"\rrelay_headers\x18\n" +
 	" \x03(\v2\x16.Scailo.GiXRelayHeaderR\frelayHeaders\x12\x1a\n" +
 	"\x03url\x18\x14 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12\x12\n" +

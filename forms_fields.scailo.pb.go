@@ -113,10 +113,12 @@ type FormField struct {
 	Regex string `protobuf:"bytes,16,opt,name=regex,proto3" json:"regex,omitempty"`
 	// The possible values that are applicable on the form field (in case of dropdowns, radio buttons, checkboxes)
 	DefinedValues []string `protobuf:"bytes,17,rep,name=defined_values,json=definedValues,proto3" json:"defined_values,omitempty"`
-	// Stores if the form field is printable
-	Printable bool `protobuf:"varint,18,opt,name=printable,proto3" json:"printable,omitempty"`
-	// Stores the the form field needs to be highlighted
-	Highlightable bool `protobuf:"varint,19,opt,name=highlightable,proto3" json:"highlightable,omitempty"`
+	// Denotes if the field is readonly (changes shall not be allowed to be made on the UI). Any changes will still be made through the API
+	IsReadonly bool `protobuf:"varint,30,opt,name=is_readonly,json=isReadonly,proto3" json:"is_readonly,omitempty"`
+	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
+	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
+	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -228,16 +230,23 @@ func (x *FormField) GetDefinedValues() []string {
 	return nil
 }
 
-func (x *FormField) GetPrintable() bool {
+func (x *FormField) GetIsReadonly() bool {
 	if x != nil {
-		return x.Printable
+		return x.IsReadonly
 	}
 	return false
 }
 
-func (x *FormField) GetHighlightable() bool {
+func (x *FormField) GetIsHidden() bool {
 	if x != nil {
-		return x.Highlightable
+		return x.IsHidden
+	}
+	return false
+}
+
+func (x *FormField) GetIsSearchable() bool {
+	if x != nil {
+		return x.IsSearchable
 	}
 	return false
 }
@@ -386,10 +395,12 @@ type FormsFieldsServiceCreateRequest struct {
 	Regex string `protobuf:"bytes,16,opt,name=regex,proto3" json:"regex,omitempty"`
 	// The possible values that are applicable on the form field (in case of dropdowns, radio buttons, checkboxes)
 	DefinedValues []string `protobuf:"bytes,17,rep,name=defined_values,json=definedValues,proto3" json:"defined_values,omitempty"`
-	// Stores if the form field is printable
-	Printable bool `protobuf:"varint,18,opt,name=printable,proto3" json:"printable,omitempty"`
-	// Stores the the form field needs to be highlighted
-	Highlightable bool `protobuf:"varint,19,opt,name=highlightable,proto3" json:"highlightable,omitempty"`
+	// Denotes if the field is readonly (changes shall not be allowed to be made on the UI). Any changes will still be made through the API
+	IsReadonly bool `protobuf:"varint,30,opt,name=is_readonly,json=isReadonly,proto3" json:"is_readonly,omitempty"`
+	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
+	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
+	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -501,16 +512,23 @@ func (x *FormsFieldsServiceCreateRequest) GetDefinedValues() []string {
 	return nil
 }
 
-func (x *FormsFieldsServiceCreateRequest) GetPrintable() bool {
+func (x *FormsFieldsServiceCreateRequest) GetIsReadonly() bool {
 	if x != nil {
-		return x.Printable
+		return x.IsReadonly
 	}
 	return false
 }
 
-func (x *FormsFieldsServiceCreateRequest) GetHighlightable() bool {
+func (x *FormsFieldsServiceCreateRequest) GetIsHidden() bool {
 	if x != nil {
-		return x.Highlightable
+		return x.IsHidden
+	}
+	return false
+}
+
+func (x *FormsFieldsServiceCreateRequest) GetIsSearchable() bool {
+	if x != nil {
+		return x.IsSearchable
 	}
 	return false
 }
@@ -536,10 +554,12 @@ type FormsFieldsServiceUpdateRequest struct {
 	Regex string `protobuf:"bytes,16,opt,name=regex,proto3" json:"regex,omitempty"`
 	// The possible values that are applicable on the form field (in case of dropdowns, radio buttons, checkboxes)
 	DefinedValues []string `protobuf:"bytes,17,rep,name=defined_values,json=definedValues,proto3" json:"defined_values,omitempty"`
-	// Stores if the form field is printable
-	Printable bool `protobuf:"varint,18,opt,name=printable,proto3" json:"printable,omitempty"`
-	// Stores the the form field needs to be highlighted
-	Highlightable bool `protobuf:"varint,19,opt,name=highlightable,proto3" json:"highlightable,omitempty"`
+	// Denotes if the field is readonly (changes shall not be allowed to be made on the UI). Any changes will still be made through the API
+	IsReadonly bool `protobuf:"varint,30,opt,name=is_readonly,json=isReadonly,proto3" json:"is_readonly,omitempty"`
+	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
+	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
+	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -637,16 +657,23 @@ func (x *FormsFieldsServiceUpdateRequest) GetDefinedValues() []string {
 	return nil
 }
 
-func (x *FormsFieldsServiceUpdateRequest) GetPrintable() bool {
+func (x *FormsFieldsServiceUpdateRequest) GetIsReadonly() bool {
 	if x != nil {
-		return x.Printable
+		return x.IsReadonly
 	}
 	return false
 }
 
-func (x *FormsFieldsServiceUpdateRequest) GetHighlightable() bool {
+func (x *FormsFieldsServiceUpdateRequest) GetIsHidden() bool {
 	if x != nil {
-		return x.Highlightable
+		return x.IsHidden
+	}
+	return false
+}
+
+func (x *FormsFieldsServiceUpdateRequest) GetIsSearchable() bool {
+	if x != nil {
+		return x.IsSearchable
 	}
 	return false
 }
@@ -1145,7 +1172,7 @@ var File_forms_fields_scailo_proto protoreflect.FileDescriptor
 
 const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x19forms_fields.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xbf\x03\n" +
+	"\x19forms_fields.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xde\x03\n" +
 	"\tFormField\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1160,16 +1187,18 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\aelement\x18\x0e \x01(\x0e2\x1a.Scailo.FORM_FIELD_ELEMENTR\aelement\x12 \n" +
 	"\vplaceholder\x18\x0f \x01(\tR\vplaceholder\x12\x14\n" +
 	"\x05regex\x18\x10 \x01(\tR\x05regex\x12%\n" +
-	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1c\n" +
-	"\tprintable\x18\x12 \x01(\bR\tprintable\x12$\n" +
-	"\rhighlightable\x18\x13 \x01(\bR\rhighlightable\"8\n" +
+	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1f\n" +
+	"\vis_readonly\x18\x1e \x01(\bR\n" +
+	"isReadonly\x12\x1b\n" +
+	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\"8\n" +
 	"\x0fFormsFieldsList\x12%\n" +
 	"\x04list\x18\x01 \x03(\v2\x11.Scailo.FormFieldR\x04list\"\x8a\x01\n" +
 	"\x17FormFieldPaginationResp\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.FormFieldR\apayload\"\xe2\x03\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.FormFieldR\apayload\"\x81\x04\n" +
 	"\x1fFormsFieldsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1184,9 +1213,11 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\aelement\x18\x0e \x01(\x0e2\x1a.Scailo.FORM_FIELD_ELEMENTR\aelement\x12 \n" +
 	"\vplaceholder\x18\x0f \x01(\tR\vplaceholder\x12\x14\n" +
 	"\x05regex\x18\x10 \x01(\tR\x05regex\x12%\n" +
-	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1c\n" +
-	"\tprintable\x18\x12 \x01(\bR\tprintable\x12$\n" +
-	"\rhighlightable\x18\x13 \x01(\bR\rhighlightable\"\xfd\x02\n" +
+	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1f\n" +
+	"\vis_readonly\x18\x1e \x01(\bR\n" +
+	"isReadonly\x12\x1b\n" +
+	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\"\x9c\x03\n" +
 	"\x1fFormsFieldsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12 \n" +
@@ -1198,9 +1229,11 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\x05width\x18\r \x01(\tR\x05width\x12 \n" +
 	"\vplaceholder\x18\x0f \x01(\tR\vplaceholder\x12\x14\n" +
 	"\x05regex\x18\x10 \x01(\tR\x05regex\x12%\n" +
-	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1c\n" +
-	"\tprintable\x18\x12 \x01(\bR\tprintable\x12$\n" +
-	"\rhighlightable\x18\x13 \x01(\bR\rhighlightable\"\xfe\x01\n" +
+	"\x0edefined_values\x18\x11 \x03(\tR\rdefinedValues\x12\x1f\n" +
+	"\vis_readonly\x18\x1e \x01(\bR\n" +
+	"isReadonly\x12\x1b\n" +
+	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\"\xfe\x01\n" +
 	"\x1fFormsFieldsServicePaginationReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
 	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
