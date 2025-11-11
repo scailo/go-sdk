@@ -18,26 +18,35 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GeneralSettingsService_UpdateSettings_FullMethodName         = "/Scailo.GeneralSettingsService/UpdateSettings"
-	GeneralSettingsService_ViewSettings_FullMethodName           = "/Scailo.GeneralSettingsService/ViewSettings"
+	GeneralSettingsService_Create_FullMethodName                 = "/Scailo.GeneralSettingsService/Create"
 	GeneralSettingsService_UpdateOrganizationLogo_FullMethodName = "/Scailo.GeneralSettingsService/UpdateOrganizationLogo"
 	GeneralSettingsService_ViewOrganizationLogo_FullMethodName   = "/Scailo.GeneralSettingsService/ViewOrganizationLogo"
+	GeneralSettingsService_ViewSettings_FullMethodName           = "/Scailo.GeneralSettingsService/ViewSettings"
+	GeneralSettingsService_DownloadImportTemplate_FullMethodName = "/Scailo.GeneralSettingsService/DownloadImportTemplate"
+	GeneralSettingsService_ImportFromCSV_FullMethodName          = "/Scailo.GeneralSettingsService/ImportFromCSV"
 )
 
 // GeneralSettingsServiceClient is the client API for GeneralSettingsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on general settings
+// Describes the methods applicable on each general settings
 type GeneralSettingsServiceClient interface {
-	// Update General Settings
-	UpdateSettings(ctx context.Context, in *GeneralSettingsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View the current settings
-	ViewSettings(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GeneralSettings, error)
+	// Create a general settings
+	Create(ctx context.Context, in *GeneralSettingsServiceCreateRequest, opts ...grpc.CallOption) (*GeneralSettings, error)
 	// Update the logo of the organization
 	UpdateOrganizationLogo(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// View current logo of the organization
 	ViewOrganizationLogo(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ImageResponse, error)
+	// ------------------------------------------------------
+	// All view operations are listed below
+	// View the current settings
+	ViewSettings(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GeneralSettings, error)
+	// CSV operations
+	// Download the CSV template that could be used to upload records
+	DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
+	// Import records using a CSV file
+	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 
 type generalSettingsServiceClient struct {
@@ -48,20 +57,10 @@ func NewGeneralSettingsServiceClient(cc grpc.ClientConnInterface) GeneralSetting
 	return &generalSettingsServiceClient{cc}
 }
 
-func (c *generalSettingsServiceClient) UpdateSettings(ctx context.Context, in *GeneralSettingsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IdentifierResponse)
-	err := c.cc.Invoke(ctx, GeneralSettingsService_UpdateSettings_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *generalSettingsServiceClient) ViewSettings(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GeneralSettings, error) {
+func (c *generalSettingsServiceClient) Create(ctx context.Context, in *GeneralSettingsServiceCreateRequest, opts ...grpc.CallOption) (*GeneralSettings, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GeneralSettings)
-	err := c.cc.Invoke(ctx, GeneralSettingsService_ViewSettings_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GeneralSettingsService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -82,6 +81,36 @@ func (c *generalSettingsServiceClient) ViewOrganizationLogo(ctx context.Context,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ImageResponse)
 	err := c.cc.Invoke(ctx, GeneralSettingsService_ViewOrganizationLogo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *generalSettingsServiceClient) ViewSettings(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GeneralSettings, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GeneralSettings)
+	err := c.cc.Invoke(ctx, GeneralSettingsService_ViewSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *generalSettingsServiceClient) DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, GeneralSettingsService_DownloadImportTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *generalSettingsServiceClient) ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierUUIDsList)
+	err := c.cc.Invoke(ctx, GeneralSettingsService_ImportFromCSV_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

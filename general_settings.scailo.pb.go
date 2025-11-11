@@ -23,269 +23,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the parameters necessary to update the general settings for the organization
-type GeneralSettingsUpdateRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The name of the organization
-	CompanyName string `protobuf:"bytes,10,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
-	// The phone number of the organization
-	Phone string `protobuf:"bytes,11,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The email of the organization
-	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The address of the organization
-	Address string `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
-	// The city of the organization
-	City string `protobuf:"bytes,14,opt,name=city,proto3" json:"city,omitempty"`
-	// The state of the organization
-	State string `protobuf:"bytes,15,opt,name=state,proto3" json:"state,omitempty"`
-	// The pin code of the organization
-	PinCode string `protobuf:"bytes,16,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
-	// The country of the organization
-	Country string `protobuf:"bytes,17,opt,name=country,proto3" json:"country,omitempty"`
-	// The Company Identification Number
-	Cin string `protobuf:"bytes,18,opt,name=cin,proto3" json:"cin,omitempty"`
-	// The PAN number of the organization
-	Pan string `protobuf:"bytes,19,opt,name=pan,proto3" json:"pan,omitempty"`
-	// The GSTIN of the organization
-	Gstin string `protobuf:"bytes,20,opt,name=gstin,proto3" json:"gstin,omitempty"`
-	// The name of the domain under which this application is run
-	DomainName string `protobuf:"bytes,40,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
-	// The name of the domain using which users can access records without logging in
-	AuthlessAccessDomain string `protobuf:"bytes,41,opt,name=authless_access_domain,json=authlessAccessDomain,proto3" json:"authless_access_domain,omitempty"`
-	// The email address from which purchase orders will be sent
-	PurchaseOrderSenderEmail string `protobuf:"bytes,50,opt,name=purchase_order_sender_email,json=purchaseOrderSenderEmail,proto3" json:"purchase_order_sender_email,omitempty"`
-	// The email address from which sales enquiries will be sent
-	SalesEnquirySenderEmail string `protobuf:"bytes,51,opt,name=sales_enquiry_sender_email,json=salesEnquirySenderEmail,proto3" json:"sales_enquiry_sender_email,omitempty"`
-	// The email address from which sales orders will be sent
-	SalesOrderSenderEmail string `protobuf:"bytes,52,opt,name=sales_order_sender_email,json=salesOrderSenderEmail,proto3" json:"sales_order_sender_email,omitempty"`
-	// The email address from which sales invoices will be sent
-	SalesInvoiceSenderEmail string `protobuf:"bytes,53,opt,name=sales_invoice_sender_email,json=salesInvoiceSenderEmail,proto3" json:"sales_invoice_sender_email,omitempty"`
-	// The email address from which sales quotations will be sent
-	SalesQuotationSenderEmail string `protobuf:"bytes,54,opt,name=sales_quotation_sender_email,json=salesQuotationSenderEmail,proto3" json:"sales_quotation_sender_email,omitempty"`
-	// The email address from which vendor invoices will be sent
-	VendorInvoiceSenderEmail string `protobuf:"bytes,55,opt,name=vendor_invoice_sender_email,json=vendorInvoiceSenderEmail,proto3" json:"vendor_invoice_sender_email,omitempty"`
-	// The email address from which work orders will be sent
-	WorkOrderSenderEmail string `protobuf:"bytes,56,opt,name=work_order_sender_email,json=workOrderSenderEmail,proto3" json:"work_order_sender_email,omitempty"`
-	// The email address from which expenses will be sent
-	ExpenseSenderEmail string `protobuf:"bytes,57,opt,name=expense_sender_email,json=expenseSenderEmail,proto3" json:"expense_sender_email,omitempty"`
-	// Stores if vendor invoices should not be created with bill date that is after the approval of a purchase order
-	DisableViCreationWithBillDateAfterPoApproval bool `protobuf:"varint,70,opt,name=disable_vi_creation_with_bill_date_after_po_approval,json=disableViCreationWithBillDateAfterPoApproval,proto3" json:"disable_vi_creation_with_bill_date_after_po_approval,omitempty"`
-	// Stores if MFA is required for record approval
-	RequireMfaForRecordApproval bool `protobuf:"varint,71,opt,name=require_mfa_for_record_approval,json=requireMfaForRecordApproval,proto3" json:"require_mfa_for_record_approval,omitempty"`
-	// Stores if attendances should be automatically sent for verification on exit record
-	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
-}
-
-func (x *GeneralSettingsUpdateRequest) Reset() {
-	*x = GeneralSettingsUpdateRequest{}
-	mi := &file_general_settings_scailo_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GeneralSettingsUpdateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GeneralSettingsUpdateRequest) ProtoMessage() {}
-
-func (x *GeneralSettingsUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_general_settings_scailo_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GeneralSettingsUpdateRequest.ProtoReflect.Descriptor instead.
-func (*GeneralSettingsUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_general_settings_scailo_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *GeneralSettingsUpdateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetCompanyName() string {
-	if x != nil {
-		return x.CompanyName
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetPhone() string {
-	if x != nil {
-		return x.Phone
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetCity() string {
-	if x != nil {
-		return x.City
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetState() string {
-	if x != nil {
-		return x.State
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetPinCode() string {
-	if x != nil {
-		return x.PinCode
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetCin() string {
-	if x != nil {
-		return x.Cin
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetPan() string {
-	if x != nil {
-		return x.Pan
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetGstin() string {
-	if x != nil {
-		return x.Gstin
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetDomainName() string {
-	if x != nil {
-		return x.DomainName
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetAuthlessAccessDomain() string {
-	if x != nil {
-		return x.AuthlessAccessDomain
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetPurchaseOrderSenderEmail() string {
-	if x != nil {
-		return x.PurchaseOrderSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetSalesEnquirySenderEmail() string {
-	if x != nil {
-		return x.SalesEnquirySenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetSalesOrderSenderEmail() string {
-	if x != nil {
-		return x.SalesOrderSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetSalesInvoiceSenderEmail() string {
-	if x != nil {
-		return x.SalesInvoiceSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetSalesQuotationSenderEmail() string {
-	if x != nil {
-		return x.SalesQuotationSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetVendorInvoiceSenderEmail() string {
-	if x != nil {
-		return x.VendorInvoiceSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetWorkOrderSenderEmail() string {
-	if x != nil {
-		return x.WorkOrderSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetExpenseSenderEmail() string {
-	if x != nil {
-		return x.ExpenseSenderEmail
-	}
-	return ""
-}
-
-func (x *GeneralSettingsUpdateRequest) GetDisableViCreationWithBillDateAfterPoApproval() bool {
-	if x != nil {
-		return x.DisableViCreationWithBillDateAfterPoApproval
-	}
-	return false
-}
-
-func (x *GeneralSettingsUpdateRequest) GetRequireMfaForRecordApproval() bool {
-	if x != nil {
-		return x.RequireMfaForRecordApproval
-	}
-	return false
-}
-
-func (x *GeneralSettingsUpdateRequest) GetAutoReqVerifyOnExitRecordEntry() bool {
-	if x != nil {
-		return x.AutoReqVerifyOnExitRecordEntry
-	}
-	return false
-}
-
-// Describes the available general settings
+// Describes the data structure of general settings on the platform
 type GeneralSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores a globally unique entity UUID. This will be set at the organization level
@@ -341,14 +79,16 @@ type GeneralSettings struct {
 	// Stores if attendances should be automatically sent for verification on exit record
 	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
 	// Stores the name of the organization that holds the license
-	LicensedTo    string `protobuf:"bytes,100,opt,name=licensed_to,json=licensedTo,proto3" json:"licensed_to,omitempty"`
+	LicensedTo string `protobuf:"bytes,100,opt,name=licensed_to,json=licensedTo,proto3" json:"licensed_to,omitempty"`
+	// The list of dynamic forms
+	FormData      []*FormFieldDatum `protobuf:"bytes,200,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GeneralSettings) Reset() {
 	*x = GeneralSettings{}
-	mi := &file_general_settings_scailo_proto_msgTypes[1]
+	mi := &file_general_settings_scailo_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -360,7 +100,7 @@ func (x *GeneralSettings) String() string {
 func (*GeneralSettings) ProtoMessage() {}
 
 func (x *GeneralSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_general_settings_scailo_proto_msgTypes[1]
+	mi := &file_general_settings_scailo_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,7 +113,7 @@ func (x *GeneralSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeneralSettings.ProtoReflect.Descriptor instead.
 func (*GeneralSettings) Descriptor() ([]byte, []int) {
-	return file_general_settings_scailo_proto_rawDescGZIP(), []int{1}
+	return file_general_settings_scailo_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GeneralSettings) GetEntityUuid() string {
@@ -565,40 +305,289 @@ func (x *GeneralSettings) GetLicensedTo() string {
 	return ""
 }
 
+func (x *GeneralSettings) GetFormData() []*FormFieldDatum {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
+}
+
+// Describes the necessary data structure during creation of a general settings
+type GeneralSettingsServiceCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores a globally unique entity UUID. This will be set at the organization level
+	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	// The name of the organization
+	CompanyName string `protobuf:"bytes,10,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// The phone number of the organization
+	Phone string `protobuf:"bytes,11,opt,name=phone,proto3" json:"phone,omitempty"`
+	// The email of the organization
+	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
+	// The address of the organization
+	Address string `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
+	// The city of the organization
+	City string `protobuf:"bytes,14,opt,name=city,proto3" json:"city,omitempty"`
+	// The state of the organization
+	State string `protobuf:"bytes,15,opt,name=state,proto3" json:"state,omitempty"`
+	// The pin code of the organization
+	PinCode string `protobuf:"bytes,16,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
+	// The country of the organization
+	Country string `protobuf:"bytes,17,opt,name=country,proto3" json:"country,omitempty"`
+	// The Company Identification Number
+	Cin string `protobuf:"bytes,18,opt,name=cin,proto3" json:"cin,omitempty"`
+	// The PAN number of the organization
+	Pan string `protobuf:"bytes,19,opt,name=pan,proto3" json:"pan,omitempty"`
+	// The GSTIN of the organization
+	Gstin string `protobuf:"bytes,20,opt,name=gstin,proto3" json:"gstin,omitempty"`
+	// The name of the domain under which this application is run
+	DomainName string `protobuf:"bytes,40,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
+	// The name of the domain using which users can access records without logging in
+	AuthlessAccessDomain string `protobuf:"bytes,41,opt,name=authless_access_domain,json=authlessAccessDomain,proto3" json:"authless_access_domain,omitempty"`
+	// The email address from which purchase orders will be sent
+	PurchaseOrderSenderEmail string `protobuf:"bytes,50,opt,name=purchase_order_sender_email,json=purchaseOrderSenderEmail,proto3" json:"purchase_order_sender_email,omitempty"`
+	// The email address from which sales enquiries will be sent
+	SalesEnquirySenderEmail string `protobuf:"bytes,51,opt,name=sales_enquiry_sender_email,json=salesEnquirySenderEmail,proto3" json:"sales_enquiry_sender_email,omitempty"`
+	// The email address from which sales orders will be sent
+	SalesOrderSenderEmail string `protobuf:"bytes,52,opt,name=sales_order_sender_email,json=salesOrderSenderEmail,proto3" json:"sales_order_sender_email,omitempty"`
+	// The email address from which sales invoices will be sent
+	SalesInvoiceSenderEmail string `protobuf:"bytes,53,opt,name=sales_invoice_sender_email,json=salesInvoiceSenderEmail,proto3" json:"sales_invoice_sender_email,omitempty"`
+	// The email address from which sales quotations will be sent
+	SalesQuotationSenderEmail string `protobuf:"bytes,54,opt,name=sales_quotation_sender_email,json=salesQuotationSenderEmail,proto3" json:"sales_quotation_sender_email,omitempty"`
+	// The email address from which vendor invoices will be sent
+	VendorInvoiceSenderEmail string `protobuf:"bytes,55,opt,name=vendor_invoice_sender_email,json=vendorInvoiceSenderEmail,proto3" json:"vendor_invoice_sender_email,omitempty"`
+	// The email address from which work orders will be sent
+	WorkOrderSenderEmail string `protobuf:"bytes,56,opt,name=work_order_sender_email,json=workOrderSenderEmail,proto3" json:"work_order_sender_email,omitempty"`
+	// The email address from which expenses will be sent
+	ExpenseSenderEmail string `protobuf:"bytes,57,opt,name=expense_sender_email,json=expenseSenderEmail,proto3" json:"expense_sender_email,omitempty"`
+	// Stores if vendor invoices should not be created with bill date that is after the approval of a purchase order
+	DisableViCreationWithBillDateAfterPoApproval bool `protobuf:"varint,70,opt,name=disable_vi_creation_with_bill_date_after_po_approval,json=disableViCreationWithBillDateAfterPoApproval,proto3" json:"disable_vi_creation_with_bill_date_after_po_approval,omitempty"`
+	// Stores if MFA is required for record approval
+	RequireMfaForRecordApproval bool `protobuf:"varint,71,opt,name=require_mfa_for_record_approval,json=requireMfaForRecordApproval,proto3" json:"require_mfa_for_record_approval,omitempty"`
+	// Stores if attendances should be automatically sent for verification on exit record
+	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
+	// The list of dynamic forms
+	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,200,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GeneralSettingsServiceCreateRequest) Reset() {
+	*x = GeneralSettingsServiceCreateRequest{}
+	mi := &file_general_settings_scailo_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GeneralSettingsServiceCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GeneralSettingsServiceCreateRequest) ProtoMessage() {}
+
+func (x *GeneralSettingsServiceCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_general_settings_scailo_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GeneralSettingsServiceCreateRequest.ProtoReflect.Descriptor instead.
+func (*GeneralSettingsServiceCreateRequest) Descriptor() ([]byte, []int) {
+	return file_general_settings_scailo_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetEntityUuid() string {
+	if x != nil {
+		return x.EntityUuid
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetPinCode() string {
+	if x != nil {
+		return x.PinCode
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetCin() string {
+	if x != nil {
+		return x.Cin
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetPan() string {
+	if x != nil {
+		return x.Pan
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetGstin() string {
+	if x != nil {
+		return x.Gstin
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetDomainName() string {
+	if x != nil {
+		return x.DomainName
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetAuthlessAccessDomain() string {
+	if x != nil {
+		return x.AuthlessAccessDomain
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetPurchaseOrderSenderEmail() string {
+	if x != nil {
+		return x.PurchaseOrderSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetSalesEnquirySenderEmail() string {
+	if x != nil {
+		return x.SalesEnquirySenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetSalesOrderSenderEmail() string {
+	if x != nil {
+		return x.SalesOrderSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetSalesInvoiceSenderEmail() string {
+	if x != nil {
+		return x.SalesInvoiceSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetSalesQuotationSenderEmail() string {
+	if x != nil {
+		return x.SalesQuotationSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetVendorInvoiceSenderEmail() string {
+	if x != nil {
+		return x.VendorInvoiceSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetWorkOrderSenderEmail() string {
+	if x != nil {
+		return x.WorkOrderSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetExpenseSenderEmail() string {
+	if x != nil {
+		return x.ExpenseSenderEmail
+	}
+	return ""
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetDisableViCreationWithBillDateAfterPoApproval() bool {
+	if x != nil {
+		return x.DisableViCreationWithBillDateAfterPoApproval
+	}
+	return false
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetRequireMfaForRecordApproval() bool {
+	if x != nil {
+		return x.RequireMfaForRecordApproval
+	}
+	return false
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetAutoReqVerifyOnExitRecordEntry() bool {
+	if x != nil {
+		return x.AutoReqVerifyOnExitRecordEntry
+	}
+	return false
+}
+
+func (x *GeneralSettingsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequest {
+	if x != nil {
+		return x.FormData
+	}
+	return nil
+}
+
 var File_general_settings_scailo_proto protoreflect.FileDescriptor
 
 const file_general_settings_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1dgeneral_settings.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xfc\b\n" +
-	"\x1cGeneralSettingsUpdateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12*\n" +
-	"\fcompany_name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vcompanyName\x12\x14\n" +
-	"\x05phone\x18\v \x01(\tR\x05phone\x12\x14\n" +
-	"\x05email\x18\f \x01(\tR\x05email\x12\x18\n" +
-	"\aaddress\x18\r \x01(\tR\aaddress\x12\x12\n" +
-	"\x04city\x18\x0e \x01(\tR\x04city\x12\x14\n" +
-	"\x05state\x18\x0f \x01(\tR\x05state\x12\x19\n" +
-	"\bpin_code\x18\x10 \x01(\tR\apinCode\x12\x18\n" +
-	"\acountry\x18\x11 \x01(\tR\acountry\x12\x10\n" +
-	"\x03cin\x18\x12 \x01(\tR\x03cin\x12\x10\n" +
-	"\x03pan\x18\x13 \x01(\tR\x03pan\x12\x14\n" +
-	"\x05gstin\x18\x14 \x01(\tR\x05gstin\x12\x1f\n" +
-	"\vdomain_name\x18( \x01(\tR\n" +
-	"domainName\x124\n" +
-	"\x16authless_access_domain\x18) \x01(\tR\x14authlessAccessDomain\x12=\n" +
-	"\x1bpurchase_order_sender_email\x182 \x01(\tR\x18purchaseOrderSenderEmail\x12;\n" +
-	"\x1asales_enquiry_sender_email\x183 \x01(\tR\x17salesEnquirySenderEmail\x127\n" +
-	"\x18sales_order_sender_email\x184 \x01(\tR\x15salesOrderSenderEmail\x12;\n" +
-	"\x1asales_invoice_sender_email\x185 \x01(\tR\x17salesInvoiceSenderEmail\x12?\n" +
-	"\x1csales_quotation_sender_email\x186 \x01(\tR\x19salesQuotationSenderEmail\x12=\n" +
-	"\x1bvendor_invoice_sender_email\x187 \x01(\tR\x18vendorInvoiceSenderEmail\x125\n" +
-	"\x17work_order_sender_email\x188 \x01(\tR\x14workOrderSenderEmail\x120\n" +
-	"\x14expense_sender_email\x189 \x01(\tR\x12expenseSenderEmail\x12j\n" +
-	"4disable_vi_creation_with_bill_date_after_po_approval\x18F \x01(\bR,disableViCreationWithBillDateAfterPoApproval\x12D\n" +
-	"\x1frequire_mfa_for_record_approval\x18G \x01(\bR\x1brequireMfaForRecordApproval\x12L\n" +
-	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\"\xc6\t\n" +
+	"\x1dgeneral_settings.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xfc\t\n" +
 	"\x0fGeneralSettings\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -630,12 +619,45 @@ const file_general_settings_scailo_proto_rawDesc = "" +
 	"\x1frequire_mfa_for_record_approval\x18G \x01(\bR\x1brequireMfaForRecordApproval\x12L\n" +
 	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\x12\x1f\n" +
 	"\vlicensed_to\x18d \x01(\tR\n" +
-	"licensedTo2\xae\x02\n" +
-	"\x16GeneralSettingsService\x12R\n" +
-	"\x0eUpdateSettings\x12$.Scailo.GeneralSettingsUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x126\n" +
-	"\fViewSettings\x12\r.Scailo.Empty\x1a\x17.Scailo.GeneralSettings\x12J\n" +
+	"licensedTo\x124\n" +
+	"\tform_data\x18\xc8\x01 \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xc6\t\n" +
+	"#GeneralSettingsServiceCreateRequest\x12\x1f\n" +
+	"\ventity_uuid\x18\x01 \x01(\tR\n" +
+	"entityUuid\x12*\n" +
+	"\fcompany_name\x18\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vcompanyName\x12\x14\n" +
+	"\x05phone\x18\v \x01(\tR\x05phone\x12\x14\n" +
+	"\x05email\x18\f \x01(\tR\x05email\x12\x18\n" +
+	"\aaddress\x18\r \x01(\tR\aaddress\x12\x12\n" +
+	"\x04city\x18\x0e \x01(\tR\x04city\x12\x14\n" +
+	"\x05state\x18\x0f \x01(\tR\x05state\x12\x19\n" +
+	"\bpin_code\x18\x10 \x01(\tR\apinCode\x12\x18\n" +
+	"\acountry\x18\x11 \x01(\tR\acountry\x12\x10\n" +
+	"\x03cin\x18\x12 \x01(\tR\x03cin\x12\x10\n" +
+	"\x03pan\x18\x13 \x01(\tR\x03pan\x12\x14\n" +
+	"\x05gstin\x18\x14 \x01(\tR\x05gstin\x12\x1f\n" +
+	"\vdomain_name\x18( \x01(\tR\n" +
+	"domainName\x124\n" +
+	"\x16authless_access_domain\x18) \x01(\tR\x14authlessAccessDomain\x12=\n" +
+	"\x1bpurchase_order_sender_email\x182 \x01(\tR\x18purchaseOrderSenderEmail\x12;\n" +
+	"\x1asales_enquiry_sender_email\x183 \x01(\tR\x17salesEnquirySenderEmail\x127\n" +
+	"\x18sales_order_sender_email\x184 \x01(\tR\x15salesOrderSenderEmail\x12;\n" +
+	"\x1asales_invoice_sender_email\x185 \x01(\tR\x17salesInvoiceSenderEmail\x12?\n" +
+	"\x1csales_quotation_sender_email\x186 \x01(\tR\x19salesQuotationSenderEmail\x12=\n" +
+	"\x1bvendor_invoice_sender_email\x187 \x01(\tR\x18vendorInvoiceSenderEmail\x125\n" +
+	"\x17work_order_sender_email\x188 \x01(\tR\x14workOrderSenderEmail\x120\n" +
+	"\x14expense_sender_email\x189 \x01(\tR\x12expenseSenderEmail\x12j\n" +
+	"4disable_vi_creation_with_bill_date_after_po_approval\x18F \x01(\bR,disableViCreationWithBillDateAfterPoApproval\x12D\n" +
+	"\x1frequire_mfa_for_record_approval\x18G \x01(\bR\x1brequireMfaForRecordApproval\x12L\n" +
+	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\x12A\n" +
+	"\tform_data\x18\xc8\x01 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData2\xad\x03\n" +
+	"\x16GeneralSettingsService\x12N\n" +
+	"\x06Create\x12+.Scailo.GeneralSettingsServiceCreateRequest\x1a\x17.Scailo.GeneralSettings\x12J\n" +
 	"\x16UpdateOrganizationLogo\x12\x14.Scailo.StandardFile\x1a\x1a.Scailo.IdentifierResponse\x12<\n" +
-	"\x14ViewOrganizationLogo\x12\r.Scailo.Empty\x1a\x15.Scailo.ImageResponseBl\n" +
+	"\x14ViewOrganizationLogo\x12\r.Scailo.Empty\x1a\x15.Scailo.ImageResponse\x126\n" +
+	"\fViewSettings\x12\r.Scailo.Empty\x1a\x17.Scailo.GeneralSettings\x12=\n" +
+	"\x16DownloadImportTemplate\x12\r.Scailo.Empty\x1a\x14.Scailo.StandardFile\x12B\n" +
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBl\n" +
 	"\n" +
 	"com.ScailoB\x1aGeneralSettingsScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -654,29 +676,38 @@ func file_general_settings_scailo_proto_rawDescGZIP() []byte {
 
 var file_general_settings_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_general_settings_scailo_proto_goTypes = []any{
-	(*GeneralSettingsUpdateRequest)(nil), // 0: Scailo.GeneralSettingsUpdateRequest
-	(*GeneralSettings)(nil),              // 1: Scailo.GeneralSettings
-	(*EmployeeMetadata)(nil),             // 2: Scailo.EmployeeMetadata
-	(*Empty)(nil),                        // 3: Scailo.Empty
-	(*StandardFile)(nil),                 // 4: Scailo.StandardFile
-	(*IdentifierResponse)(nil),           // 5: Scailo.IdentifierResponse
-	(*ImageResponse)(nil),                // 6: Scailo.ImageResponse
+	(*GeneralSettings)(nil),                     // 0: Scailo.GeneralSettings
+	(*GeneralSettingsServiceCreateRequest)(nil), // 1: Scailo.GeneralSettingsServiceCreateRequest
+	(*EmployeeMetadata)(nil),                    // 2: Scailo.EmployeeMetadata
+	(*FormFieldDatum)(nil),                      // 3: Scailo.FormFieldDatum
+	(*FormFieldDatumCreateRequest)(nil),         // 4: Scailo.FormFieldDatumCreateRequest
+	(*StandardFile)(nil),                        // 5: Scailo.StandardFile
+	(*Empty)(nil),                               // 6: Scailo.Empty
+	(*IdentifierResponse)(nil),                  // 7: Scailo.IdentifierResponse
+	(*ImageResponse)(nil),                       // 8: Scailo.ImageResponse
+	(*IdentifierUUIDsList)(nil),                 // 9: Scailo.IdentifierUUIDsList
 }
 var file_general_settings_scailo_proto_depIdxs = []int32{
 	2, // 0: Scailo.GeneralSettings.metadata:type_name -> Scailo.EmployeeMetadata
-	0, // 1: Scailo.GeneralSettingsService.UpdateSettings:input_type -> Scailo.GeneralSettingsUpdateRequest
-	3, // 2: Scailo.GeneralSettingsService.ViewSettings:input_type -> Scailo.Empty
-	4, // 3: Scailo.GeneralSettingsService.UpdateOrganizationLogo:input_type -> Scailo.StandardFile
-	3, // 4: Scailo.GeneralSettingsService.ViewOrganizationLogo:input_type -> Scailo.Empty
-	5, // 5: Scailo.GeneralSettingsService.UpdateSettings:output_type -> Scailo.IdentifierResponse
-	1, // 6: Scailo.GeneralSettingsService.ViewSettings:output_type -> Scailo.GeneralSettings
-	5, // 7: Scailo.GeneralSettingsService.UpdateOrganizationLogo:output_type -> Scailo.IdentifierResponse
-	6, // 8: Scailo.GeneralSettingsService.ViewOrganizationLogo:output_type -> Scailo.ImageResponse
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 1: Scailo.GeneralSettings.form_data:type_name -> Scailo.FormFieldDatum
+	4, // 2: Scailo.GeneralSettingsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	1, // 3: Scailo.GeneralSettingsService.Create:input_type -> Scailo.GeneralSettingsServiceCreateRequest
+	5, // 4: Scailo.GeneralSettingsService.UpdateOrganizationLogo:input_type -> Scailo.StandardFile
+	6, // 5: Scailo.GeneralSettingsService.ViewOrganizationLogo:input_type -> Scailo.Empty
+	6, // 6: Scailo.GeneralSettingsService.ViewSettings:input_type -> Scailo.Empty
+	6, // 7: Scailo.GeneralSettingsService.DownloadImportTemplate:input_type -> Scailo.Empty
+	5, // 8: Scailo.GeneralSettingsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	0, // 9: Scailo.GeneralSettingsService.Create:output_type -> Scailo.GeneralSettings
+	7, // 10: Scailo.GeneralSettingsService.UpdateOrganizationLogo:output_type -> Scailo.IdentifierResponse
+	8, // 11: Scailo.GeneralSettingsService.ViewOrganizationLogo:output_type -> Scailo.ImageResponse
+	0, // 12: Scailo.GeneralSettingsService.ViewSettings:output_type -> Scailo.GeneralSettings
+	5, // 13: Scailo.GeneralSettingsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	9, // 14: Scailo.GeneralSettingsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	9, // [9:15] is the sub-list for method output_type
+	3, // [3:9] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_general_settings_scailo_proto_init() }
@@ -685,6 +716,7 @@ func file_general_settings_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_forms_fields_data_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
