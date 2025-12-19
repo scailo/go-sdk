@@ -1472,6 +1472,70 @@ func (x *ProformaInvoicesServiceItemUpdateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to update the specifications of an item in a proforma invoice
+type ProformaInvoicesServiceItemSpecificationsUpdateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// The UUID of the record
+	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	// The specifications that should be updated
+	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) Reset() {
+	*x = ProformaInvoicesServiceItemSpecificationsUpdateRequest{}
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProformaInvoicesServiceItemSpecificationsUpdateRequest) ProtoMessage() {}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProformaInvoicesServiceItemSpecificationsUpdateRequest.ProtoReflect.Descriptor instead.
+func (*ProformaInvoicesServiceItemSpecificationsUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
 // Describes the parameters that constitute an item associated to a proforma invoice
 type ProformaInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1511,7 +1575,7 @@ type ProformaInvoiceItem struct {
 
 func (x *ProformaInvoiceItem) Reset() {
 	*x = ProformaInvoiceItem{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[9]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1523,7 +1587,7 @@ func (x *ProformaInvoiceItem) String() string {
 func (*ProformaInvoiceItem) ProtoMessage() {}
 
 func (x *ProformaInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[9]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1536,7 +1600,7 @@ func (x *ProformaInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaInvoiceItem.ProtoReflect.Descriptor instead.
 func (*ProformaInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{9}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProformaInvoiceItem) GetEntityUuid() string {
@@ -1655,7 +1719,7 @@ type ProformaInvoicesList struct {
 
 func (x *ProformaInvoicesList) Reset() {
 	*x = ProformaInvoicesList{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[10]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1667,7 +1731,7 @@ func (x *ProformaInvoicesList) String() string {
 func (*ProformaInvoicesList) ProtoMessage() {}
 
 func (x *ProformaInvoicesList) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[10]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1680,7 +1744,7 @@ func (x *ProformaInvoicesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaInvoicesList.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesList) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{10}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ProformaInvoicesList) GetList() []*ProformaInvoice {
@@ -1701,7 +1765,7 @@ type ProformaInvoiceItemsList struct {
 
 func (x *ProformaInvoiceItemsList) Reset() {
 	*x = ProformaInvoiceItemsList{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[11]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1713,7 +1777,7 @@ func (x *ProformaInvoiceItemsList) String() string {
 func (*ProformaInvoiceItemsList) ProtoMessage() {}
 
 func (x *ProformaInvoiceItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[11]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1726,7 +1790,7 @@ func (x *ProformaInvoiceItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaInvoiceItemsList.ProtoReflect.Descriptor instead.
 func (*ProformaInvoiceItemsList) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{11}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProformaInvoiceItemsList) GetList() []*ProformaInvoiceItem {
@@ -1749,7 +1813,7 @@ type ProformaInvoiceItemHistoryRequest struct {
 
 func (x *ProformaInvoiceItemHistoryRequest) Reset() {
 	*x = ProformaInvoiceItemHistoryRequest{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[12]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1761,7 +1825,7 @@ func (x *ProformaInvoiceItemHistoryRequest) String() string {
 func (*ProformaInvoiceItemHistoryRequest) ProtoMessage() {}
 
 func (x *ProformaInvoiceItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[12]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1774,7 +1838,7 @@ func (x *ProformaInvoiceItemHistoryRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ProformaInvoiceItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*ProformaInvoiceItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{12}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ProformaInvoiceItemHistoryRequest) GetProformaInvoiceId() uint64 {
@@ -1804,7 +1868,7 @@ type ProformaInvoiceItemProspectiveInfoRequest struct {
 
 func (x *ProformaInvoiceItemProspectiveInfoRequest) Reset() {
 	*x = ProformaInvoiceItemProspectiveInfoRequest{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[13]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1816,7 +1880,7 @@ func (x *ProformaInvoiceItemProspectiveInfoRequest) String() string {
 func (*ProformaInvoiceItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *ProformaInvoiceItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[13]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1829,7 +1893,7 @@ func (x *ProformaInvoiceItemProspectiveInfoRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use ProformaInvoiceItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*ProformaInvoiceItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{13}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ProformaInvoiceItemProspectiveInfoRequest) GetProformaInvoiceId() uint64 {
@@ -1861,7 +1925,7 @@ type ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest struct {
 
 func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) Reset() {
 	*x = ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[14]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1873,7 +1937,7 @@ func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) String() s
 func (*ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoMessage() {}
 
 func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[14]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1886,7 +1950,7 @@ func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoRefle
 
 // Deprecated: Use ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{14}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) GetRefFrom() PROFORMA_INVOICE_REF_FROM {
@@ -1931,7 +1995,7 @@ type ProformaInvoicesServicePaginationReq struct {
 
 func (x *ProformaInvoicesServicePaginationReq) Reset() {
 	*x = ProformaInvoicesServicePaginationReq{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[15]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1943,7 +2007,7 @@ func (x *ProformaInvoicesServicePaginationReq) String() string {
 func (*ProformaInvoicesServicePaginationReq) ProtoMessage() {}
 
 func (x *ProformaInvoicesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[15]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1956,7 +2020,7 @@ func (x *ProformaInvoicesServicePaginationReq) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ProformaInvoicesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{15}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -2018,7 +2082,7 @@ type ProformaInvoicesServicePaginationResponse struct {
 
 func (x *ProformaInvoicesServicePaginationResponse) Reset() {
 	*x = ProformaInvoicesServicePaginationResponse{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[16]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2030,7 +2094,7 @@ func (x *ProformaInvoicesServicePaginationResponse) String() string {
 func (*ProformaInvoicesServicePaginationResponse) ProtoMessage() {}
 
 func (x *ProformaInvoicesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[16]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2043,7 +2107,7 @@ func (x *ProformaInvoicesServicePaginationResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use ProformaInvoicesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{16}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ProformaInvoicesServicePaginationResponse) GetCount() uint64 {
@@ -2146,7 +2210,7 @@ type ProformaInvoicesServiceFilterReq struct {
 
 func (x *ProformaInvoicesServiceFilterReq) Reset() {
 	*x = ProformaInvoicesServiceFilterReq{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[17]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2158,7 +2222,7 @@ func (x *ProformaInvoicesServiceFilterReq) String() string {
 func (*ProformaInvoicesServiceFilterReq) ProtoMessage() {}
 
 func (x *ProformaInvoicesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[17]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2171,7 +2235,7 @@ func (x *ProformaInvoicesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaInvoicesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{17}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2455,7 +2519,7 @@ type ProformaInvoicesServiceCountReq struct {
 
 func (x *ProformaInvoicesServiceCountReq) Reset() {
 	*x = ProformaInvoicesServiceCountReq{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[18]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2467,7 +2531,7 @@ func (x *ProformaInvoicesServiceCountReq) String() string {
 func (*ProformaInvoicesServiceCountReq) ProtoMessage() {}
 
 func (x *ProformaInvoicesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[18]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2480,7 +2544,7 @@ func (x *ProformaInvoicesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaInvoicesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{18}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2708,7 +2772,7 @@ type ProformaInvoicesServiceSearchAllReq struct {
 
 func (x *ProformaInvoicesServiceSearchAllReq) Reset() {
 	*x = ProformaInvoicesServiceSearchAllReq{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[19]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2720,7 +2784,7 @@ func (x *ProformaInvoicesServiceSearchAllReq) String() string {
 func (*ProformaInvoicesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *ProformaInvoicesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[19]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2733,7 +2797,7 @@ func (x *ProformaInvoicesServiceSearchAllReq) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ProformaInvoicesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{19}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2870,7 +2934,7 @@ type ProformaInvoiceItemsSearchRequest struct {
 
 func (x *ProformaInvoiceItemsSearchRequest) Reset() {
 	*x = ProformaInvoiceItemsSearchRequest{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[20]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2882,7 +2946,7 @@ func (x *ProformaInvoiceItemsSearchRequest) String() string {
 func (*ProformaInvoiceItemsSearchRequest) ProtoMessage() {}
 
 func (x *ProformaInvoiceItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[20]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2895,7 +2959,7 @@ func (x *ProformaInvoiceItemsSearchRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ProformaInvoiceItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*ProformaInvoiceItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{20}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -3034,7 +3098,7 @@ type ProformaInvoicesServicePaginatedItemsResponse struct {
 
 func (x *ProformaInvoicesServicePaginatedItemsResponse) Reset() {
 	*x = ProformaInvoicesServicePaginatedItemsResponse{}
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[21]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3046,7 +3110,7 @@ func (x *ProformaInvoicesServicePaginatedItemsResponse) String() string {
 func (*ProformaInvoicesServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *ProformaInvoicesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proforma_invoices_scailo_proto_msgTypes[21]
+	mi := &file_proforma_invoices_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3059,7 +3123,7 @@ func (x *ProformaInvoicesServicePaginatedItemsResponse) ProtoReflect() protorefl
 
 // Deprecated: Use ProformaInvoicesServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*ProformaInvoicesServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{21}
+	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ProformaInvoicesServicePaginatedItemsResponse) GetCount() uint64 {
@@ -3208,7 +3272,11 @@ const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1b\n" +
 	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xf6\x04\n" +
+	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xa1\x01\n" +
+	"6ProformaInvoicesServiceItemSpecificationsUpdateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12&\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xf6\x04\n" +
 	"\x13ProformaInvoiceItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3412,7 +3480,7 @@ const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	"\x1cPROFORMA_INVOICE_ITEM_STATUS\x120\n" +
 	",PROFORMA_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12)\n" +
 	"%PROFORMA_INVOICE_ITEM_STATUS_APPROVED\x10\x01\x12+\n" +
-	"'PROFORMA_INVOICE_ITEM_STATUS_UNAPPROVED\x10\x022\x8f)\n" +
+	"'PROFORMA_INVOICE_ITEM_STATUS_UNAPPROVED\x10\x022\x97*\n" +
 	"\x17ProformaInvoicesService\x12R\n" +
 	"\x06Create\x12,.Scailo.ProformaInvoicesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
 	"\x05Draft\x12,.Scailo.ProformaInvoicesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12W\n" +
@@ -3436,7 +3504,8 @@ const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12x\n" +
 	"\x1fAddMultipleProformaInvoiceItems\x129.Scailo.ProformaInvoicesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12f\n" +
 	"\x16AddProformaInvoiceItem\x120.Scailo.ProformaInvoicesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
-	"\x19ModifyProformaInvoiceItem\x120.Scailo.ProformaInvoicesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12[\n" +
+	"\x19ModifyProformaInvoiceItem\x120.Scailo.ProformaInvoicesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\x85\x01\n" +
+	"'UpdateProformaInvoiceItemSpecifications\x12>.Scailo.ProformaInvoicesServiceItemSpecificationsUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12[\n" +
 	"\x1aApproveProformaInvoiceItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
 	"\x19DeleteProformaInvoiceItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x1bReorderProformaInvoiceItems\x12\x1b.Scailo.ReorderItemsRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
@@ -3493,7 +3562,7 @@ func file_proforma_invoices_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_proforma_invoices_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_proforma_invoices_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_proforma_invoices_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_proforma_invoices_scailo_proto_goTypes = []any{
 	(PROFORMA_INVOICE_REF_FROM)(0),                                      // 0: Scailo.PROFORMA_INVOICE_REF_FROM
 	(PROFORMA_INVOICE_SORT_KEY)(0),                                      // 1: Scailo.PROFORMA_INVOICE_SORT_KEY
@@ -3509,220 +3578,223 @@ var file_proforma_invoices_scailo_proto_goTypes = []any{
 	(*ProformaInvoicesServiceMultipleItemsSingleton)(nil),               // 11: Scailo.ProformaInvoicesServiceMultipleItemsSingleton
 	(*ProformaInvoicesServiceMultipleItemsCreateRequest)(nil),           // 12: Scailo.ProformaInvoicesServiceMultipleItemsCreateRequest
 	(*ProformaInvoicesServiceItemUpdateRequest)(nil),                    // 13: Scailo.ProformaInvoicesServiceItemUpdateRequest
-	(*ProformaInvoiceItem)(nil),                                         // 14: Scailo.ProformaInvoiceItem
-	(*ProformaInvoicesList)(nil),                                        // 15: Scailo.ProformaInvoicesList
-	(*ProformaInvoiceItemsList)(nil),                                    // 16: Scailo.ProformaInvoiceItemsList
-	(*ProformaInvoiceItemHistoryRequest)(nil),                           // 17: Scailo.ProformaInvoiceItemHistoryRequest
-	(*ProformaInvoiceItemProspectiveInfoRequest)(nil),                   // 18: Scailo.ProformaInvoiceItemProspectiveInfoRequest
-	(*ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 19: Scailo.ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest
-	(*ProformaInvoicesServicePaginationReq)(nil),                        // 20: Scailo.ProformaInvoicesServicePaginationReq
-	(*ProformaInvoicesServicePaginationResponse)(nil),                   // 21: Scailo.ProformaInvoicesServicePaginationResponse
-	(*ProformaInvoicesServiceFilterReq)(nil),                            // 22: Scailo.ProformaInvoicesServiceFilterReq
-	(*ProformaInvoicesServiceCountReq)(nil),                             // 23: Scailo.ProformaInvoicesServiceCountReq
-	(*ProformaInvoicesServiceSearchAllReq)(nil),                         // 24: Scailo.ProformaInvoicesServiceSearchAllReq
-	(*ProformaInvoiceItemsSearchRequest)(nil),                           // 25: Scailo.ProformaInvoiceItemsSearchRequest
-	(*ProformaInvoicesServicePaginatedItemsResponse)(nil),               // 26: Scailo.ProformaInvoicesServicePaginatedItemsResponse
-	(*FormFieldDatumCreateRequest)(nil),                                 // 27: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                            // 28: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                            // 29: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                                      // 30: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                                        // 31: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                              // 32: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                                    // 33: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                                     // 34: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                                 // 35: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                               // 36: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                               // 37: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),           // 38: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                                   // 39: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                         // 40: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                  // 41: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                     // 42: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                              // 43: Scailo.IdentifierUUID
-	(*Empty)(nil),                                                       // 44: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                      // 45: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                             // 46: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                             // 47: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                                // 48: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                              // 49: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                     // 50: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                          // 51: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                                   // 52: Scailo.MagicLink
-	(*StandardFile)(nil),                                                // 53: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                           // 54: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                                // 55: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                             // 56: Scailo.BooleanResponse
-	(*DualQuantitiesResponse)(nil),                                      // 57: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                               // 58: Scailo.CountResponse
-	(*SumResponse)(nil),                                                 // 59: Scailo.SumResponse
+	(*ProformaInvoicesServiceItemSpecificationsUpdateRequest)(nil),      // 14: Scailo.ProformaInvoicesServiceItemSpecificationsUpdateRequest
+	(*ProformaInvoiceItem)(nil),                                         // 15: Scailo.ProformaInvoiceItem
+	(*ProformaInvoicesList)(nil),                                        // 16: Scailo.ProformaInvoicesList
+	(*ProformaInvoiceItemsList)(nil),                                    // 17: Scailo.ProformaInvoiceItemsList
+	(*ProformaInvoiceItemHistoryRequest)(nil),                           // 18: Scailo.ProformaInvoiceItemHistoryRequest
+	(*ProformaInvoiceItemProspectiveInfoRequest)(nil),                   // 19: Scailo.ProformaInvoiceItemProspectiveInfoRequest
+	(*ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 20: Scailo.ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest
+	(*ProformaInvoicesServicePaginationReq)(nil),                        // 21: Scailo.ProformaInvoicesServicePaginationReq
+	(*ProformaInvoicesServicePaginationResponse)(nil),                   // 22: Scailo.ProformaInvoicesServicePaginationResponse
+	(*ProformaInvoicesServiceFilterReq)(nil),                            // 23: Scailo.ProformaInvoicesServiceFilterReq
+	(*ProformaInvoicesServiceCountReq)(nil),                             // 24: Scailo.ProformaInvoicesServiceCountReq
+	(*ProformaInvoicesServiceSearchAllReq)(nil),                         // 25: Scailo.ProformaInvoicesServiceSearchAllReq
+	(*ProformaInvoiceItemsSearchRequest)(nil),                           // 26: Scailo.ProformaInvoiceItemsSearchRequest
+	(*ProformaInvoicesServicePaginatedItemsResponse)(nil),               // 27: Scailo.ProformaInvoicesServicePaginatedItemsResponse
+	(*FormFieldDatumCreateRequest)(nil),                                 // 28: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                            // 29: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                            // 30: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                                      // 31: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                                        // 32: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                              // 33: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                                    // 34: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                                     // 35: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                                 // 36: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                               // 37: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                               // 38: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),           // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                                   // 40: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                         // 41: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                  // 42: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                     // 43: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                              // 44: Scailo.IdentifierUUID
+	(*Empty)(nil),                                                       // 45: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                      // 46: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                             // 47: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                             // 48: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                                // 49: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                              // 50: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                     // 51: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                          // 52: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                                   // 53: Scailo.MagicLink
+	(*StandardFile)(nil),                                                // 54: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                           // 55: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                                // 56: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                             // 57: Scailo.BooleanResponse
+	(*DualQuantitiesResponse)(nil),                                      // 58: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                               // 59: Scailo.CountResponse
+	(*SumResponse)(nil),                                                 // 60: Scailo.SumResponse
 }
 var file_proforma_invoices_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.ProformaInvoicesServiceCreateRequest.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
-	27,  // 1: Scailo.ProformaInvoicesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	27,  // 2: Scailo.ProformaInvoicesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	28,  // 3: Scailo.ProformaInvoice.metadata:type_name -> Scailo.EmployeeMetadata
-	29,  // 4: Scailo.ProformaInvoice.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	30,  // 5: Scailo.ProformaInvoice.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	31,  // 6: Scailo.ProformaInvoice.logs:type_name -> Scailo.LogbookLogConciseSLC
+	28,  // 1: Scailo.ProformaInvoicesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	28,  // 2: Scailo.ProformaInvoicesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	29,  // 3: Scailo.ProformaInvoice.metadata:type_name -> Scailo.EmployeeMetadata
+	30,  // 4: Scailo.ProformaInvoice.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	31,  // 5: Scailo.ProformaInvoice.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	32,  // 6: Scailo.ProformaInvoice.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 7: Scailo.ProformaInvoice.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
-	14,  // 8: Scailo.ProformaInvoice.list:type_name -> Scailo.ProformaInvoiceItem
-	32,  // 9: Scailo.ProformaInvoice.form_data:type_name -> Scailo.FormFieldDatum
+	15,  // 8: Scailo.ProformaInvoice.list:type_name -> Scailo.ProformaInvoiceItem
+	33,  // 9: Scailo.ProformaInvoice.form_data:type_name -> Scailo.FormFieldDatum
 	11,  // 10: Scailo.ProformaInvoicesServiceMultipleItemsCreateRequest.list:type_name -> Scailo.ProformaInvoicesServiceMultipleItemsSingleton
-	28,  // 11: Scailo.ProformaInvoiceItem.metadata:type_name -> Scailo.EmployeeMetadata
-	29,  // 12: Scailo.ProformaInvoiceItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	29,  // 11: Scailo.ProformaInvoiceItem.metadata:type_name -> Scailo.EmployeeMetadata
+	30,  // 12: Scailo.ProformaInvoiceItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
 	9,   // 13: Scailo.ProformaInvoicesList.list:type_name -> Scailo.ProformaInvoice
-	14,  // 14: Scailo.ProformaInvoiceItemsList.list:type_name -> Scailo.ProformaInvoiceItem
+	15,  // 14: Scailo.ProformaInvoiceItemsList.list:type_name -> Scailo.ProformaInvoiceItem
 	0,   // 15: Scailo.ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
-	33,  // 16: Scailo.ProformaInvoicesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34,  // 17: Scailo.ProformaInvoicesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	34,  // 16: Scailo.ProformaInvoicesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 17: Scailo.ProformaInvoicesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 18: Scailo.ProformaInvoicesServicePaginationReq.sort_key:type_name -> Scailo.PROFORMA_INVOICE_SORT_KEY
-	30,  // 19: Scailo.ProformaInvoicesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	31,  // 19: Scailo.ProformaInvoicesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	9,   // 20: Scailo.ProformaInvoicesServicePaginationResponse.payload:type_name -> Scailo.ProformaInvoice
-	33,  // 21: Scailo.ProformaInvoicesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34,  // 22: Scailo.ProformaInvoicesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	34,  // 21: Scailo.ProformaInvoicesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 22: Scailo.ProformaInvoicesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 23: Scailo.ProformaInvoicesServiceFilterReq.sort_key:type_name -> Scailo.PROFORMA_INVOICE_SORT_KEY
-	30,  // 24: Scailo.ProformaInvoicesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	31,  // 24: Scailo.ProformaInvoicesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 25: Scailo.ProformaInvoicesServiceFilterReq.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
 	2,   // 26: Scailo.ProformaInvoicesServiceFilterReq.billing_status:type_name -> Scailo.PROFORMA_INVOICE_BILLING_STATUS
-	35,  // 27: Scailo.ProformaInvoicesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	33,  // 28: Scailo.ProformaInvoicesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	30,  // 29: Scailo.ProformaInvoicesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	36,  // 27: Scailo.ProformaInvoicesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	34,  // 28: Scailo.ProformaInvoicesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	31,  // 29: Scailo.ProformaInvoicesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 30: Scailo.ProformaInvoicesServiceCountReq.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
 	2,   // 31: Scailo.ProformaInvoicesServiceCountReq.billing_status:type_name -> Scailo.PROFORMA_INVOICE_BILLING_STATUS
-	35,  // 32: Scailo.ProformaInvoicesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	33,  // 33: Scailo.ProformaInvoicesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34,  // 34: Scailo.ProformaInvoicesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	36,  // 32: Scailo.ProformaInvoicesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	34,  // 33: Scailo.ProformaInvoicesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 34: Scailo.ProformaInvoicesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 35: Scailo.ProformaInvoicesServiceSearchAllReq.sort_key:type_name -> Scailo.PROFORMA_INVOICE_SORT_KEY
-	30,  // 36: Scailo.ProformaInvoicesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	31,  // 36: Scailo.ProformaInvoicesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 37: Scailo.ProformaInvoicesServiceSearchAllReq.ref_from:type_name -> Scailo.PROFORMA_INVOICE_REF_FROM
 	2,   // 38: Scailo.ProformaInvoicesServiceSearchAllReq.billing_status:type_name -> Scailo.PROFORMA_INVOICE_BILLING_STATUS
-	33,  // 39: Scailo.ProformaInvoiceItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	34,  // 40: Scailo.ProformaInvoiceItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	34,  // 39: Scailo.ProformaInvoiceItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 40: Scailo.ProformaInvoiceItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
 	3,   // 41: Scailo.ProformaInvoiceItemsSearchRequest.sort_key:type_name -> Scailo.PROFORMA_INVOICE_ITEM_SORT_KEY
 	4,   // 42: Scailo.ProformaInvoiceItemsSearchRequest.status:type_name -> Scailo.PROFORMA_INVOICE_ITEM_STATUS
-	14,  // 43: Scailo.ProformaInvoicesServicePaginatedItemsResponse.payload:type_name -> Scailo.ProformaInvoiceItem
+	15,  // 43: Scailo.ProformaInvoicesServicePaginatedItemsResponse.payload:type_name -> Scailo.ProformaInvoiceItem
 	5,   // 44: Scailo.ProformaInvoicesService.Create:input_type -> Scailo.ProformaInvoicesServiceCreateRequest
 	5,   // 45: Scailo.ProformaInvoicesService.Draft:input_type -> Scailo.ProformaInvoicesServiceCreateRequest
 	6,   // 46: Scailo.ProformaInvoicesService.DraftUpdate:input_type -> Scailo.ProformaInvoicesServiceUpdateRequest
-	36,  // 47: Scailo.ProformaInvoicesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 48: Scailo.ProformaInvoicesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 49: Scailo.ProformaInvoicesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 50: Scailo.ProformaInvoicesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 47: Scailo.ProformaInvoicesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 48: Scailo.ProformaInvoicesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 49: Scailo.ProformaInvoicesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 50: Scailo.ProformaInvoicesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
 	6,   // 51: Scailo.ProformaInvoicesService.RevisionUpdate:input_type -> Scailo.ProformaInvoicesServiceUpdateRequest
-	36,  // 52: Scailo.ProformaInvoicesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 53: Scailo.ProformaInvoicesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 54: Scailo.ProformaInvoicesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 55: Scailo.ProformaInvoicesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 56: Scailo.ProformaInvoicesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 57: Scailo.ProformaInvoicesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36,  // 58: Scailo.ProformaInvoicesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37,  // 59: Scailo.ProformaInvoicesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	37,  // 52: Scailo.ProformaInvoicesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 53: Scailo.ProformaInvoicesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 54: Scailo.ProformaInvoicesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 55: Scailo.ProformaInvoicesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 56: Scailo.ProformaInvoicesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 57: Scailo.ProformaInvoicesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 58: Scailo.ProformaInvoicesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	38,  // 59: Scailo.ProformaInvoicesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
 	7,   // 60: Scailo.ProformaInvoicesService.Autofill:input_type -> Scailo.ProformaInvoicesServiceAutofillRequest
-	36,  // 61: Scailo.ProformaInvoicesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38,  // 62: Scailo.ProformaInvoicesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	37,  // 61: Scailo.ProformaInvoicesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	39,  // 62: Scailo.ProformaInvoicesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
 	12,  // 63: Scailo.ProformaInvoicesService.AddMultipleProformaInvoiceItems:input_type -> Scailo.ProformaInvoicesServiceMultipleItemsCreateRequest
 	10,  // 64: Scailo.ProformaInvoicesService.AddProformaInvoiceItem:input_type -> Scailo.ProformaInvoicesServiceItemCreateRequest
 	13,  // 65: Scailo.ProformaInvoicesService.ModifyProformaInvoiceItem:input_type -> Scailo.ProformaInvoicesServiceItemUpdateRequest
-	39,  // 66: Scailo.ProformaInvoicesService.ApproveProformaInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
-	39,  // 67: Scailo.ProformaInvoicesService.DeleteProformaInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
-	40,  // 68: Scailo.ProformaInvoicesService.ReorderProformaInvoiceItems:input_type -> Scailo.ReorderItemsRequest
-	41,  // 69: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemByID:input_type -> Scailo.Identifier
-	42,  // 70: Scailo.ProformaInvoicesService.ViewApprovedProformaInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
-	42,  // 71: Scailo.ProformaInvoicesService.ViewUnapprovedProformaInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
-	17,  // 72: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemHistory:input_type -> Scailo.ProformaInvoiceItemHistoryRequest
-	25,  // 73: Scailo.ProformaInvoicesService.ViewPaginatedApprovedProformaInvoiceItems:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
-	25,  // 74: Scailo.ProformaInvoicesService.ViewPaginatedUnapprovedProformaInvoiceItems:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
-	25,  // 75: Scailo.ProformaInvoicesService.SearchItemsWithPagination:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
-	43,  // 76: Scailo.ProformaInvoicesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	44,  // 77: Scailo.ProformaInvoicesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	45,  // 78: Scailo.ProformaInvoicesService.UploadProformaInvoiceItems:input_type -> Scailo.IdentifierUUIDWithFile
-	41,  // 79: Scailo.ProformaInvoicesService.ViewByID:input_type -> Scailo.Identifier
-	43,  // 80: Scailo.ProformaInvoicesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	46,  // 81: Scailo.ProformaInvoicesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	41,  // 82: Scailo.ProformaInvoicesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	43,  // 83: Scailo.ProformaInvoicesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	47,  // 84: Scailo.ProformaInvoicesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	43,  // 85: Scailo.ProformaInvoicesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	48,  // 86: Scailo.ProformaInvoicesService.ViewAll:input_type -> Scailo.ActiveStatus
-	43,  // 87: Scailo.ProformaInvoicesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	20,  // 88: Scailo.ProformaInvoicesService.ViewWithPagination:input_type -> Scailo.ProformaInvoicesServicePaginationReq
-	41,  // 89: Scailo.ProformaInvoicesService.ViewAmendments:input_type -> Scailo.Identifier
-	42,  // 90: Scailo.ProformaInvoicesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	49,  // 91: Scailo.ProformaInvoicesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	18,  // 92: Scailo.ProformaInvoicesService.ViewProspectiveProformaInvoiceItem:input_type -> Scailo.ProformaInvoiceItemProspectiveInfoRequest
-	43,  // 93: Scailo.ProformaInvoicesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	43,  // 94: Scailo.ProformaInvoicesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	43,  // 95: Scailo.ProformaInvoicesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
-	43,  // 96: Scailo.ProformaInvoicesService.IsBilled:input_type -> Scailo.IdentifierUUID
-	19,  // 97: Scailo.ProformaInvoicesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest
-	24,  // 98: Scailo.ProformaInvoicesService.SearchAll:input_type -> Scailo.ProformaInvoicesServiceSearchAllReq
-	22,  // 99: Scailo.ProformaInvoicesService.Filter:input_type -> Scailo.ProformaInvoicesServiceFilterReq
-	50,  // 100: Scailo.ProformaInvoicesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	23,  // 101: Scailo.ProformaInvoicesService.Count:input_type -> Scailo.ProformaInvoicesServiceCountReq
-	23,  // 102: Scailo.ProformaInvoicesService.AccruedValue:input_type -> Scailo.ProformaInvoicesServiceCountReq
-	22,  // 103: Scailo.ProformaInvoicesService.DownloadAsCSV:input_type -> Scailo.ProformaInvoicesServiceFilterReq
-	51,  // 104: Scailo.ProformaInvoicesService.Create:output_type -> Scailo.IdentifierResponse
-	51,  // 105: Scailo.ProformaInvoicesService.Draft:output_type -> Scailo.IdentifierResponse
-	51,  // 106: Scailo.ProformaInvoicesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 107: Scailo.ProformaInvoicesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	51,  // 108: Scailo.ProformaInvoicesService.Verify:output_type -> Scailo.IdentifierResponse
-	51,  // 109: Scailo.ProformaInvoicesService.Approve:output_type -> Scailo.IdentifierResponse
-	51,  // 110: Scailo.ProformaInvoicesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	51,  // 111: Scailo.ProformaInvoicesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 112: Scailo.ProformaInvoicesService.Halt:output_type -> Scailo.IdentifierResponse
-	51,  // 113: Scailo.ProformaInvoicesService.Discard:output_type -> Scailo.IdentifierResponse
-	51,  // 114: Scailo.ProformaInvoicesService.Restore:output_type -> Scailo.IdentifierResponse
-	51,  // 115: Scailo.ProformaInvoicesService.Complete:output_type -> Scailo.IdentifierResponse
-	51,  // 116: Scailo.ProformaInvoicesService.Repeat:output_type -> Scailo.IdentifierResponse
-	51,  // 117: Scailo.ProformaInvoicesService.Reopen:output_type -> Scailo.IdentifierResponse
-	51,  // 118: Scailo.ProformaInvoicesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	51,  // 119: Scailo.ProformaInvoicesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	51,  // 120: Scailo.ProformaInvoicesService.Autofill:output_type -> Scailo.IdentifierResponse
-	51,  // 121: Scailo.ProformaInvoicesService.Amend:output_type -> Scailo.IdentifierResponse
-	52,  // 122: Scailo.ProformaInvoicesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	51,  // 123: Scailo.ProformaInvoicesService.AddMultipleProformaInvoiceItems:output_type -> Scailo.IdentifierResponse
-	51,  // 124: Scailo.ProformaInvoicesService.AddProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
-	51,  // 125: Scailo.ProformaInvoicesService.ModifyProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
-	51,  // 126: Scailo.ProformaInvoicesService.ApproveProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
-	51,  // 127: Scailo.ProformaInvoicesService.DeleteProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
-	51,  // 128: Scailo.ProformaInvoicesService.ReorderProformaInvoiceItems:output_type -> Scailo.IdentifierResponse
-	14,  // 129: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemByID:output_type -> Scailo.ProformaInvoiceItem
-	16,  // 130: Scailo.ProformaInvoicesService.ViewApprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoiceItemsList
-	16,  // 131: Scailo.ProformaInvoicesService.ViewUnapprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoiceItemsList
-	16,  // 132: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemHistory:output_type -> Scailo.ProformaInvoiceItemsList
-	26,  // 133: Scailo.ProformaInvoicesService.ViewPaginatedApprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
-	26,  // 134: Scailo.ProformaInvoicesService.ViewPaginatedUnapprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
-	26,  // 135: Scailo.ProformaInvoicesService.SearchItemsWithPagination:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
-	53,  // 136: Scailo.ProformaInvoicesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	53,  // 137: Scailo.ProformaInvoicesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	47,  // 138: Scailo.ProformaInvoicesService.UploadProformaInvoiceItems:output_type -> Scailo.IdentifiersList
-	9,   // 139: Scailo.ProformaInvoicesService.ViewByID:output_type -> Scailo.ProformaInvoice
-	9,   // 140: Scailo.ProformaInvoicesService.ViewByUUID:output_type -> Scailo.ProformaInvoice
-	9,   // 141: Scailo.ProformaInvoicesService.ViewByReferenceID:output_type -> Scailo.ProformaInvoice
-	9,   // 142: Scailo.ProformaInvoicesService.ViewEssentialByID:output_type -> Scailo.ProformaInvoice
-	9,   // 143: Scailo.ProformaInvoicesService.ViewEssentialByUUID:output_type -> Scailo.ProformaInvoice
-	15,  // 144: Scailo.ProformaInvoicesService.ViewFromIDs:output_type -> Scailo.ProformaInvoicesList
-	8,   // 145: Scailo.ProformaInvoicesService.ViewAncillaryParametersByUUID:output_type -> Scailo.ProformaInvoiceAncillaryParameters
-	15,  // 146: Scailo.ProformaInvoicesService.ViewAll:output_type -> Scailo.ProformaInvoicesList
-	15,  // 147: Scailo.ProformaInvoicesService.ViewAllForEntityUUID:output_type -> Scailo.ProformaInvoicesList
-	21,  // 148: Scailo.ProformaInvoicesService.ViewWithPagination:output_type -> Scailo.ProformaInvoicesServicePaginationResponse
-	54,  // 149: Scailo.ProformaInvoicesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	55,  // 150: Scailo.ProformaInvoicesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	55,  // 151: Scailo.ProformaInvoicesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	10,  // 152: Scailo.ProformaInvoicesService.ViewProspectiveProformaInvoiceItem:output_type -> Scailo.ProformaInvoicesServiceItemCreateRequest
-	56,  // 153: Scailo.ProformaInvoicesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	53,  // 154: Scailo.ProformaInvoicesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	51,  // 155: Scailo.ProformaInvoicesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
-	56,  // 156: Scailo.ProformaInvoicesService.IsBilled:output_type -> Scailo.BooleanResponse
-	57,  // 157: Scailo.ProformaInvoicesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	15,  // 158: Scailo.ProformaInvoicesService.SearchAll:output_type -> Scailo.ProformaInvoicesList
-	15,  // 159: Scailo.ProformaInvoicesService.Filter:output_type -> Scailo.ProformaInvoicesList
-	58,  // 160: Scailo.ProformaInvoicesService.CountInStatus:output_type -> Scailo.CountResponse
-	58,  // 161: Scailo.ProformaInvoicesService.Count:output_type -> Scailo.CountResponse
-	59,  // 162: Scailo.ProformaInvoicesService.AccruedValue:output_type -> Scailo.SumResponse
-	53,  // 163: Scailo.ProformaInvoicesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	104, // [104:164] is the sub-list for method output_type
-	44,  // [44:104] is the sub-list for method input_type
+	14,  // 66: Scailo.ProformaInvoicesService.UpdateProformaInvoiceItemSpecifications:input_type -> Scailo.ProformaInvoicesServiceItemSpecificationsUpdateRequest
+	40,  // 67: Scailo.ProformaInvoicesService.ApproveProformaInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
+	40,  // 68: Scailo.ProformaInvoicesService.DeleteProformaInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 69: Scailo.ProformaInvoicesService.ReorderProformaInvoiceItems:input_type -> Scailo.ReorderItemsRequest
+	42,  // 70: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemByID:input_type -> Scailo.Identifier
+	43,  // 71: Scailo.ProformaInvoicesService.ViewApprovedProformaInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
+	43,  // 72: Scailo.ProformaInvoicesService.ViewUnapprovedProformaInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
+	18,  // 73: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemHistory:input_type -> Scailo.ProformaInvoiceItemHistoryRequest
+	26,  // 74: Scailo.ProformaInvoicesService.ViewPaginatedApprovedProformaInvoiceItems:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
+	26,  // 75: Scailo.ProformaInvoicesService.ViewPaginatedUnapprovedProformaInvoiceItems:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
+	26,  // 76: Scailo.ProformaInvoicesService.SearchItemsWithPagination:input_type -> Scailo.ProformaInvoiceItemsSearchRequest
+	44,  // 77: Scailo.ProformaInvoicesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	45,  // 78: Scailo.ProformaInvoicesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	46,  // 79: Scailo.ProformaInvoicesService.UploadProformaInvoiceItems:input_type -> Scailo.IdentifierUUIDWithFile
+	42,  // 80: Scailo.ProformaInvoicesService.ViewByID:input_type -> Scailo.Identifier
+	44,  // 81: Scailo.ProformaInvoicesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 82: Scailo.ProformaInvoicesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	42,  // 83: Scailo.ProformaInvoicesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	44,  // 84: Scailo.ProformaInvoicesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	48,  // 85: Scailo.ProformaInvoicesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	44,  // 86: Scailo.ProformaInvoicesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	49,  // 87: Scailo.ProformaInvoicesService.ViewAll:input_type -> Scailo.ActiveStatus
+	44,  // 88: Scailo.ProformaInvoicesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	21,  // 89: Scailo.ProformaInvoicesService.ViewWithPagination:input_type -> Scailo.ProformaInvoicesServicePaginationReq
+	42,  // 90: Scailo.ProformaInvoicesService.ViewAmendments:input_type -> Scailo.Identifier
+	43,  // 91: Scailo.ProformaInvoicesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	50,  // 92: Scailo.ProformaInvoicesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	19,  // 93: Scailo.ProformaInvoicesService.ViewProspectiveProformaInvoiceItem:input_type -> Scailo.ProformaInvoiceItemProspectiveInfoRequest
+	44,  // 94: Scailo.ProformaInvoicesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	44,  // 95: Scailo.ProformaInvoicesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	44,  // 96: Scailo.ProformaInvoicesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
+	44,  // 97: Scailo.ProformaInvoicesService.IsBilled:input_type -> Scailo.IdentifierUUID
+	20,  // 98: Scailo.ProformaInvoicesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest
+	25,  // 99: Scailo.ProformaInvoicesService.SearchAll:input_type -> Scailo.ProformaInvoicesServiceSearchAllReq
+	23,  // 100: Scailo.ProformaInvoicesService.Filter:input_type -> Scailo.ProformaInvoicesServiceFilterReq
+	51,  // 101: Scailo.ProformaInvoicesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	24,  // 102: Scailo.ProformaInvoicesService.Count:input_type -> Scailo.ProformaInvoicesServiceCountReq
+	24,  // 103: Scailo.ProformaInvoicesService.AccruedValue:input_type -> Scailo.ProformaInvoicesServiceCountReq
+	23,  // 104: Scailo.ProformaInvoicesService.DownloadAsCSV:input_type -> Scailo.ProformaInvoicesServiceFilterReq
+	52,  // 105: Scailo.ProformaInvoicesService.Create:output_type -> Scailo.IdentifierResponse
+	52,  // 106: Scailo.ProformaInvoicesService.Draft:output_type -> Scailo.IdentifierResponse
+	52,  // 107: Scailo.ProformaInvoicesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 108: Scailo.ProformaInvoicesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	52,  // 109: Scailo.ProformaInvoicesService.Verify:output_type -> Scailo.IdentifierResponse
+	52,  // 110: Scailo.ProformaInvoicesService.Approve:output_type -> Scailo.IdentifierResponse
+	52,  // 111: Scailo.ProformaInvoicesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	52,  // 112: Scailo.ProformaInvoicesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 113: Scailo.ProformaInvoicesService.Halt:output_type -> Scailo.IdentifierResponse
+	52,  // 114: Scailo.ProformaInvoicesService.Discard:output_type -> Scailo.IdentifierResponse
+	52,  // 115: Scailo.ProformaInvoicesService.Restore:output_type -> Scailo.IdentifierResponse
+	52,  // 116: Scailo.ProformaInvoicesService.Complete:output_type -> Scailo.IdentifierResponse
+	52,  // 117: Scailo.ProformaInvoicesService.Repeat:output_type -> Scailo.IdentifierResponse
+	52,  // 118: Scailo.ProformaInvoicesService.Reopen:output_type -> Scailo.IdentifierResponse
+	52,  // 119: Scailo.ProformaInvoicesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	52,  // 120: Scailo.ProformaInvoicesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	52,  // 121: Scailo.ProformaInvoicesService.Autofill:output_type -> Scailo.IdentifierResponse
+	52,  // 122: Scailo.ProformaInvoicesService.Amend:output_type -> Scailo.IdentifierResponse
+	53,  // 123: Scailo.ProformaInvoicesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	52,  // 124: Scailo.ProformaInvoicesService.AddMultipleProformaInvoiceItems:output_type -> Scailo.IdentifierResponse
+	52,  // 125: Scailo.ProformaInvoicesService.AddProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
+	52,  // 126: Scailo.ProformaInvoicesService.ModifyProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
+	52,  // 127: Scailo.ProformaInvoicesService.UpdateProformaInvoiceItemSpecifications:output_type -> Scailo.IdentifierResponse
+	52,  // 128: Scailo.ProformaInvoicesService.ApproveProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
+	52,  // 129: Scailo.ProformaInvoicesService.DeleteProformaInvoiceItem:output_type -> Scailo.IdentifierResponse
+	52,  // 130: Scailo.ProformaInvoicesService.ReorderProformaInvoiceItems:output_type -> Scailo.IdentifierResponse
+	15,  // 131: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemByID:output_type -> Scailo.ProformaInvoiceItem
+	17,  // 132: Scailo.ProformaInvoicesService.ViewApprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoiceItemsList
+	17,  // 133: Scailo.ProformaInvoicesService.ViewUnapprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoiceItemsList
+	17,  // 134: Scailo.ProformaInvoicesService.ViewProformaInvoiceItemHistory:output_type -> Scailo.ProformaInvoiceItemsList
+	27,  // 135: Scailo.ProformaInvoicesService.ViewPaginatedApprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
+	27,  // 136: Scailo.ProformaInvoicesService.ViewPaginatedUnapprovedProformaInvoiceItems:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
+	27,  // 137: Scailo.ProformaInvoicesService.SearchItemsWithPagination:output_type -> Scailo.ProformaInvoicesServicePaginatedItemsResponse
+	54,  // 138: Scailo.ProformaInvoicesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	54,  // 139: Scailo.ProformaInvoicesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	48,  // 140: Scailo.ProformaInvoicesService.UploadProformaInvoiceItems:output_type -> Scailo.IdentifiersList
+	9,   // 141: Scailo.ProformaInvoicesService.ViewByID:output_type -> Scailo.ProformaInvoice
+	9,   // 142: Scailo.ProformaInvoicesService.ViewByUUID:output_type -> Scailo.ProformaInvoice
+	9,   // 143: Scailo.ProformaInvoicesService.ViewByReferenceID:output_type -> Scailo.ProformaInvoice
+	9,   // 144: Scailo.ProformaInvoicesService.ViewEssentialByID:output_type -> Scailo.ProformaInvoice
+	9,   // 145: Scailo.ProformaInvoicesService.ViewEssentialByUUID:output_type -> Scailo.ProformaInvoice
+	16,  // 146: Scailo.ProformaInvoicesService.ViewFromIDs:output_type -> Scailo.ProformaInvoicesList
+	8,   // 147: Scailo.ProformaInvoicesService.ViewAncillaryParametersByUUID:output_type -> Scailo.ProformaInvoiceAncillaryParameters
+	16,  // 148: Scailo.ProformaInvoicesService.ViewAll:output_type -> Scailo.ProformaInvoicesList
+	16,  // 149: Scailo.ProformaInvoicesService.ViewAllForEntityUUID:output_type -> Scailo.ProformaInvoicesList
+	22,  // 150: Scailo.ProformaInvoicesService.ViewWithPagination:output_type -> Scailo.ProformaInvoicesServicePaginationResponse
+	55,  // 151: Scailo.ProformaInvoicesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	56,  // 152: Scailo.ProformaInvoicesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	56,  // 153: Scailo.ProformaInvoicesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	10,  // 154: Scailo.ProformaInvoicesService.ViewProspectiveProformaInvoiceItem:output_type -> Scailo.ProformaInvoicesServiceItemCreateRequest
+	57,  // 155: Scailo.ProformaInvoicesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	54,  // 156: Scailo.ProformaInvoicesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	52,  // 157: Scailo.ProformaInvoicesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
+	57,  // 158: Scailo.ProformaInvoicesService.IsBilled:output_type -> Scailo.BooleanResponse
+	58,  // 159: Scailo.ProformaInvoicesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	16,  // 160: Scailo.ProformaInvoicesService.SearchAll:output_type -> Scailo.ProformaInvoicesList
+	16,  // 161: Scailo.ProformaInvoicesService.Filter:output_type -> Scailo.ProformaInvoicesList
+	59,  // 162: Scailo.ProformaInvoicesService.CountInStatus:output_type -> Scailo.CountResponse
+	59,  // 163: Scailo.ProformaInvoicesService.Count:output_type -> Scailo.CountResponse
+	60,  // 164: Scailo.ProformaInvoicesService.AccruedValue:output_type -> Scailo.SumResponse
+	54,  // 165: Scailo.ProformaInvoicesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	105, // [105:166] is the sub-list for method output_type
+	44,  // [44:105] is the sub-list for method input_type
 	44,  // [44:44] is the sub-list for extension type_name
 	44,  // [44:44] is the sub-list for extension extendee
 	0,   // [0:44] is the sub-list for field type_name
@@ -3743,7 +3815,7 @@ func file_proforma_invoices_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proforma_invoices_scailo_proto_rawDesc), len(file_proforma_invoices_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

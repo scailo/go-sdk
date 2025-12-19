@@ -40,6 +40,7 @@ const (
 	PurchasesOrdersService_AddMultiplePurchaseOrderItems_FullMethodName             = "/Scailo.PurchasesOrdersService/AddMultiplePurchaseOrderItems"
 	PurchasesOrdersService_AddPurchaseOrderItem_FullMethodName                      = "/Scailo.PurchasesOrdersService/AddPurchaseOrderItem"
 	PurchasesOrdersService_ModifyPurchaseOrderItem_FullMethodName                   = "/Scailo.PurchasesOrdersService/ModifyPurchaseOrderItem"
+	PurchasesOrdersService_UpdatePurchaseOrderItemSpecifications_FullMethodName     = "/Scailo.PurchasesOrdersService/UpdatePurchaseOrderItemSpecifications"
 	PurchasesOrdersService_ApprovePurchaseOrderItem_FullMethodName                  = "/Scailo.PurchasesOrdersService/ApprovePurchaseOrderItem"
 	PurchasesOrdersService_DeletePurchaseOrderItem_FullMethodName                   = "/Scailo.PurchasesOrdersService/DeletePurchaseOrderItem"
 	PurchasesOrdersService_ReorderPurchaseOrderItems_FullMethodName                 = "/Scailo.PurchasesOrdersService/ReorderPurchaseOrderItems"
@@ -142,6 +143,8 @@ type PurchasesOrdersServiceClient interface {
 	AddPurchaseOrderItem(ctx context.Context, in *PurchasesOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a purchase order
 	ModifyPurchaseOrderItem(ctx context.Context, in *PurchasesOrdersServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Update specifications of an item in a purchase order
+	UpdatePurchaseOrderItemSpecifications(ctx context.Context, in *PurchasesOrdersServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a purchase order
 	ApprovePurchaseOrderItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Delete an item in a purchase order
@@ -468,6 +471,16 @@ func (c *purchasesOrdersServiceClient) ModifyPurchaseOrderItem(ctx context.Conte
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, PurchasesOrdersService_ModifyPurchaseOrderItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesOrdersServiceClient) UpdatePurchaseOrderItemSpecifications(ctx context.Context, in *PurchasesOrdersServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesOrdersService_UpdatePurchaseOrderItemSpecifications_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

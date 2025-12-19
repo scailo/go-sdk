@@ -1607,6 +1607,70 @@ func (x *SalesOrdersServiceItemUpdateRequest) GetIsInvoiceable() bool {
 	return false
 }
 
+// Describes the parameters required to update the specifications of an item in a sales order
+type SalesOrdersServiceItemSpecificationsUpdateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// The UUID of the record
+	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	// The specifications that should be updated
+	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) Reset() {
+	*x = SalesOrdersServiceItemSpecificationsUpdateRequest{}
+	mi := &file_sales_orders_scailo_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SalesOrdersServiceItemSpecificationsUpdateRequest) ProtoMessage() {}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sales_orders_scailo_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SalesOrdersServiceItemSpecificationsUpdateRequest.ProtoReflect.Descriptor instead.
+func (*SalesOrdersServiceItemSpecificationsUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *SalesOrdersServiceItemSpecificationsUpdateRequest) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
 // Describes the parameters that constitute an item associated to a sales order
 type SalesOrderItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1654,7 +1718,7 @@ type SalesOrderItem struct {
 
 func (x *SalesOrderItem) Reset() {
 	*x = SalesOrderItem{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[9]
+	mi := &file_sales_orders_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1666,7 +1730,7 @@ func (x *SalesOrderItem) String() string {
 func (*SalesOrderItem) ProtoMessage() {}
 
 func (x *SalesOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[9]
+	mi := &file_sales_orders_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1679,7 +1743,7 @@ func (x *SalesOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderItem.ProtoReflect.Descriptor instead.
 func (*SalesOrderItem) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{9}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SalesOrderItem) GetEntityUuid() string {
@@ -1826,7 +1890,7 @@ type SalesOrdersList struct {
 
 func (x *SalesOrdersList) Reset() {
 	*x = SalesOrdersList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[10]
+	mi := &file_sales_orders_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1838,7 +1902,7 @@ func (x *SalesOrdersList) String() string {
 func (*SalesOrdersList) ProtoMessage() {}
 
 func (x *SalesOrdersList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[10]
+	mi := &file_sales_orders_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1851,7 +1915,7 @@ func (x *SalesOrdersList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrdersList.ProtoReflect.Descriptor instead.
 func (*SalesOrdersList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{10}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SalesOrdersList) GetList() []*SalesOrder {
@@ -1872,7 +1936,7 @@ type SalesOrderItemsList struct {
 
 func (x *SalesOrderItemsList) Reset() {
 	*x = SalesOrderItemsList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[11]
+	mi := &file_sales_orders_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1884,7 +1948,7 @@ func (x *SalesOrderItemsList) String() string {
 func (*SalesOrderItemsList) ProtoMessage() {}
 
 func (x *SalesOrderItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[11]
+	mi := &file_sales_orders_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1897,7 +1961,7 @@ func (x *SalesOrderItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderItemsList.ProtoReflect.Descriptor instead.
 func (*SalesOrderItemsList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{11}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SalesOrderItemsList) GetList() []*SalesOrderItem {
@@ -1920,7 +1984,7 @@ type SalesOrderItemHistoryRequest struct {
 
 func (x *SalesOrderItemHistoryRequest) Reset() {
 	*x = SalesOrderItemHistoryRequest{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[12]
+	mi := &file_sales_orders_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +1996,7 @@ func (x *SalesOrderItemHistoryRequest) String() string {
 func (*SalesOrderItemHistoryRequest) ProtoMessage() {}
 
 func (x *SalesOrderItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[12]
+	mi := &file_sales_orders_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1945,7 +2009,7 @@ func (x *SalesOrderItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*SalesOrderItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{12}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SalesOrderItemHistoryRequest) GetSalesOrderId() uint64 {
@@ -1977,7 +2041,7 @@ type SalesOrderItemProspectiveInfoRequest struct {
 
 func (x *SalesOrderItemProspectiveInfoRequest) Reset() {
 	*x = SalesOrderItemProspectiveInfoRequest{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[13]
+	mi := &file_sales_orders_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1989,7 +2053,7 @@ func (x *SalesOrderItemProspectiveInfoRequest) String() string {
 func (*SalesOrderItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *SalesOrderItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[13]
+	mi := &file_sales_orders_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2002,7 +2066,7 @@ func (x *SalesOrderItemProspectiveInfoRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SalesOrderItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*SalesOrderItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{13}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SalesOrderItemProspectiveInfoRequest) GetSalesOrderId() uint64 {
@@ -2047,7 +2111,7 @@ type SalesOrdersServicePaginationReq struct {
 
 func (x *SalesOrdersServicePaginationReq) Reset() {
 	*x = SalesOrdersServicePaginationReq{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[14]
+	mi := &file_sales_orders_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2059,7 +2123,7 @@ func (x *SalesOrdersServicePaginationReq) String() string {
 func (*SalesOrdersServicePaginationReq) ProtoMessage() {}
 
 func (x *SalesOrdersServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[14]
+	mi := &file_sales_orders_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2072,7 +2136,7 @@ func (x *SalesOrdersServicePaginationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrdersServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{14}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SalesOrdersServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -2134,7 +2198,7 @@ type SalesOrdersServicePaginationResponse struct {
 
 func (x *SalesOrdersServicePaginationResponse) Reset() {
 	*x = SalesOrdersServicePaginationResponse{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[15]
+	mi := &file_sales_orders_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2146,7 +2210,7 @@ func (x *SalesOrdersServicePaginationResponse) String() string {
 func (*SalesOrdersServicePaginationResponse) ProtoMessage() {}
 
 func (x *SalesOrdersServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[15]
+	mi := &file_sales_orders_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2159,7 +2223,7 @@ func (x *SalesOrdersServicePaginationResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SalesOrdersServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{15}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SalesOrdersServicePaginationResponse) GetCount() uint64 {
@@ -2261,7 +2325,7 @@ type SalesOrdersServiceFilterReq struct {
 
 func (x *SalesOrdersServiceFilterReq) Reset() {
 	*x = SalesOrdersServiceFilterReq{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[16]
+	mi := &file_sales_orders_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2273,7 +2337,7 @@ func (x *SalesOrdersServiceFilterReq) String() string {
 func (*SalesOrdersServiceFilterReq) ProtoMessage() {}
 
 func (x *SalesOrdersServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[16]
+	mi := &file_sales_orders_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2286,7 +2350,7 @@ func (x *SalesOrdersServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrdersServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{16}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SalesOrdersServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2569,7 +2633,7 @@ type SalesOrdersServiceCountReq struct {
 
 func (x *SalesOrdersServiceCountReq) Reset() {
 	*x = SalesOrdersServiceCountReq{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[17]
+	mi := &file_sales_orders_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2581,7 +2645,7 @@ func (x *SalesOrdersServiceCountReq) String() string {
 func (*SalesOrdersServiceCountReq) ProtoMessage() {}
 
 func (x *SalesOrdersServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[17]
+	mi := &file_sales_orders_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2594,7 +2658,7 @@ func (x *SalesOrdersServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrdersServiceCountReq.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{17}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SalesOrdersServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2821,7 +2885,7 @@ type SalesOrdersServiceSearchAllReq struct {
 
 func (x *SalesOrdersServiceSearchAllReq) Reset() {
 	*x = SalesOrdersServiceSearchAllReq{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[18]
+	mi := &file_sales_orders_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2833,7 +2897,7 @@ func (x *SalesOrdersServiceSearchAllReq) String() string {
 func (*SalesOrdersServiceSearchAllReq) ProtoMessage() {}
 
 func (x *SalesOrdersServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[18]
+	mi := &file_sales_orders_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2846,7 +2910,7 @@ func (x *SalesOrdersServiceSearchAllReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrdersServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{18}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SalesOrdersServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2959,7 +3023,7 @@ type SalesOrdersServiceReferenceCreateRequest struct {
 
 func (x *SalesOrdersServiceReferenceCreateRequest) Reset() {
 	*x = SalesOrdersServiceReferenceCreateRequest{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[19]
+	mi := &file_sales_orders_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2971,7 +3035,7 @@ func (x *SalesOrdersServiceReferenceCreateRequest) String() string {
 func (*SalesOrdersServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *SalesOrdersServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[19]
+	mi := &file_sales_orders_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2984,7 +3048,7 @@ func (x *SalesOrdersServiceReferenceCreateRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use SalesOrdersServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{19}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SalesOrdersServiceReferenceCreateRequest) GetUserComment() string {
@@ -3049,7 +3113,7 @@ type SalesOrderReference struct {
 
 func (x *SalesOrderReference) Reset() {
 	*x = SalesOrderReference{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[20]
+	mi := &file_sales_orders_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3061,7 +3125,7 @@ func (x *SalesOrderReference) String() string {
 func (*SalesOrderReference) ProtoMessage() {}
 
 func (x *SalesOrderReference) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[20]
+	mi := &file_sales_orders_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3074,7 +3138,7 @@ func (x *SalesOrderReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderReference.ProtoReflect.Descriptor instead.
 func (*SalesOrderReference) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{20}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SalesOrderReference) GetEntityUuid() string {
@@ -3151,7 +3215,7 @@ type SalesOrderReferencesList struct {
 
 func (x *SalesOrderReferencesList) Reset() {
 	*x = SalesOrderReferencesList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[21]
+	mi := &file_sales_orders_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3163,7 +3227,7 @@ func (x *SalesOrderReferencesList) String() string {
 func (*SalesOrderReferencesList) ProtoMessage() {}
 
 func (x *SalesOrderReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[21]
+	mi := &file_sales_orders_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3176,7 +3240,7 @@ func (x *SalesOrderReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderReferencesList.ProtoReflect.Descriptor instead.
 func (*SalesOrderReferencesList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{21}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *SalesOrderReferencesList) GetList() []*SalesOrderReference {
@@ -3237,7 +3301,7 @@ type SalesOrderItemsSearchRequest struct {
 
 func (x *SalesOrderItemsSearchRequest) Reset() {
 	*x = SalesOrderItemsSearchRequest{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[22]
+	mi := &file_sales_orders_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3249,7 +3313,7 @@ func (x *SalesOrderItemsSearchRequest) String() string {
 func (*SalesOrderItemsSearchRequest) ProtoMessage() {}
 
 func (x *SalesOrderItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[22]
+	mi := &file_sales_orders_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3262,7 +3326,7 @@ func (x *SalesOrderItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*SalesOrderItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{22}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *SalesOrderItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -3429,7 +3493,7 @@ type SalesOrdersServicePaginatedItemsResponse struct {
 
 func (x *SalesOrdersServicePaginatedItemsResponse) Reset() {
 	*x = SalesOrdersServicePaginatedItemsResponse{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[23]
+	mi := &file_sales_orders_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3441,7 +3505,7 @@ func (x *SalesOrdersServicePaginatedItemsResponse) String() string {
 func (*SalesOrdersServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *SalesOrdersServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[23]
+	mi := &file_sales_orders_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3454,7 +3518,7 @@ func (x *SalesOrdersServicePaginatedItemsResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use SalesOrdersServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{23}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SalesOrdersServicePaginatedItemsResponse) GetCount() uint64 {
@@ -3500,7 +3564,7 @@ type SalesOrdersServiceContactCreateRequest struct {
 
 func (x *SalesOrdersServiceContactCreateRequest) Reset() {
 	*x = SalesOrdersServiceContactCreateRequest{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[24]
+	mi := &file_sales_orders_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3512,7 +3576,7 @@ func (x *SalesOrdersServiceContactCreateRequest) String() string {
 func (*SalesOrdersServiceContactCreateRequest) ProtoMessage() {}
 
 func (x *SalesOrdersServiceContactCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[24]
+	mi := &file_sales_orders_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3525,7 +3589,7 @@ func (x *SalesOrdersServiceContactCreateRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use SalesOrdersServiceContactCreateRequest.ProtoReflect.Descriptor instead.
 func (*SalesOrdersServiceContactCreateRequest) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{24}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *SalesOrdersServiceContactCreateRequest) GetUserComment() string {
@@ -3574,7 +3638,7 @@ type SalesOrderContact struct {
 
 func (x *SalesOrderContact) Reset() {
 	*x = SalesOrderContact{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[25]
+	mi := &file_sales_orders_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3586,7 +3650,7 @@ func (x *SalesOrderContact) String() string {
 func (*SalesOrderContact) ProtoMessage() {}
 
 func (x *SalesOrderContact) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[25]
+	mi := &file_sales_orders_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3599,7 +3663,7 @@ func (x *SalesOrderContact) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderContact.ProtoReflect.Descriptor instead.
 func (*SalesOrderContact) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{25}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *SalesOrderContact) GetEntityUuid() string {
@@ -3669,7 +3733,7 @@ type SalesOrderContactsList struct {
 
 func (x *SalesOrderContactsList) Reset() {
 	*x = SalesOrderContactsList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[26]
+	mi := &file_sales_orders_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3681,7 +3745,7 @@ func (x *SalesOrderContactsList) String() string {
 func (*SalesOrderContactsList) ProtoMessage() {}
 
 func (x *SalesOrderContactsList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[26]
+	mi := &file_sales_orders_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3694,7 +3758,7 @@ func (x *SalesOrderContactsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderContactsList.ProtoReflect.Descriptor instead.
 func (*SalesOrderContactsList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{26}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *SalesOrderContactsList) GetList() []*SalesOrderContact {
@@ -3719,7 +3783,7 @@ type SalesOrderInventoryStatistics struct {
 
 func (x *SalesOrderInventoryStatistics) Reset() {
 	*x = SalesOrderInventoryStatistics{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[27]
+	mi := &file_sales_orders_scailo_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3731,7 +3795,7 @@ func (x *SalesOrderInventoryStatistics) String() string {
 func (*SalesOrderInventoryStatistics) ProtoMessage() {}
 
 func (x *SalesOrderInventoryStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[27]
+	mi := &file_sales_orders_scailo_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3744,7 +3808,7 @@ func (x *SalesOrderInventoryStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderInventoryStatistics.ProtoReflect.Descriptor instead.
 func (*SalesOrderInventoryStatistics) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{27}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *SalesOrderInventoryStatistics) GetOrdered() uint64 {
@@ -3783,7 +3847,7 @@ type SalesOrderBillingStatistics struct {
 
 func (x *SalesOrderBillingStatistics) Reset() {
 	*x = SalesOrderBillingStatistics{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[28]
+	mi := &file_sales_orders_scailo_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3795,7 +3859,7 @@ func (x *SalesOrderBillingStatistics) String() string {
 func (*SalesOrderBillingStatistics) ProtoMessage() {}
 
 func (x *SalesOrderBillingStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[28]
+	mi := &file_sales_orders_scailo_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3808,7 +3872,7 @@ func (x *SalesOrderBillingStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderBillingStatistics.ProtoReflect.Descriptor instead.
 func (*SalesOrderBillingStatistics) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{28}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *SalesOrderBillingStatistics) GetOrdered() uint64 {
@@ -3865,7 +3929,7 @@ type SalesOrderInventoryMatch struct {
 
 func (x *SalesOrderInventoryMatch) Reset() {
 	*x = SalesOrderInventoryMatch{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[29]
+	mi := &file_sales_orders_scailo_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3877,7 +3941,7 @@ func (x *SalesOrderInventoryMatch) String() string {
 func (*SalesOrderInventoryMatch) ProtoMessage() {}
 
 func (x *SalesOrderInventoryMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[29]
+	mi := &file_sales_orders_scailo_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3890,7 +3954,7 @@ func (x *SalesOrderInventoryMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderInventoryMatch.ProtoReflect.Descriptor instead.
 func (*SalesOrderInventoryMatch) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{29}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *SalesOrderInventoryMatch) GetFamilyId() uint64 {
@@ -3988,7 +4052,7 @@ type SalesOrderInventoryMatchList struct {
 
 func (x *SalesOrderInventoryMatchList) Reset() {
 	*x = SalesOrderInventoryMatchList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[30]
+	mi := &file_sales_orders_scailo_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4000,7 +4064,7 @@ func (x *SalesOrderInventoryMatchList) String() string {
 func (*SalesOrderInventoryMatchList) ProtoMessage() {}
 
 func (x *SalesOrderInventoryMatchList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[30]
+	mi := &file_sales_orders_scailo_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4013,7 +4077,7 @@ func (x *SalesOrderInventoryMatchList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderInventoryMatchList.ProtoReflect.Descriptor instead.
 func (*SalesOrderInventoryMatchList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{30}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *SalesOrderInventoryMatchList) GetList() []*SalesOrderInventoryMatch {
@@ -4054,7 +4118,7 @@ type SalesOrderPriceMatch struct {
 
 func (x *SalesOrderPriceMatch) Reset() {
 	*x = SalesOrderPriceMatch{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[31]
+	mi := &file_sales_orders_scailo_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4066,7 +4130,7 @@ func (x *SalesOrderPriceMatch) String() string {
 func (*SalesOrderPriceMatch) ProtoMessage() {}
 
 func (x *SalesOrderPriceMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[31]
+	mi := &file_sales_orders_scailo_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4079,7 +4143,7 @@ func (x *SalesOrderPriceMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderPriceMatch.ProtoReflect.Descriptor instead.
 func (*SalesOrderPriceMatch) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{31}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *SalesOrderPriceMatch) GetFamilyId() uint64 {
@@ -4170,7 +4234,7 @@ type SalesOrderPriceMatchList struct {
 
 func (x *SalesOrderPriceMatchList) Reset() {
 	*x = SalesOrderPriceMatchList{}
-	mi := &file_sales_orders_scailo_proto_msgTypes[32]
+	mi := &file_sales_orders_scailo_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4182,7 +4246,7 @@ func (x *SalesOrderPriceMatchList) String() string {
 func (*SalesOrderPriceMatchList) ProtoMessage() {}
 
 func (x *SalesOrderPriceMatchList) ProtoReflect() protoreflect.Message {
-	mi := &file_sales_orders_scailo_proto_msgTypes[32]
+	mi := &file_sales_orders_scailo_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4195,7 +4259,7 @@ func (x *SalesOrderPriceMatchList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SalesOrderPriceMatchList.ProtoReflect.Descriptor instead.
 func (*SalesOrderPriceMatchList) Descriptor() ([]byte, []int) {
-	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{32}
+	return file_sales_orders_scailo_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *SalesOrderPriceMatchList) GetList() []*SalesOrderPriceMatch {
@@ -4339,7 +4403,11 @@ const file_sales_orders_scailo_proto_rawDesc = "" +
 	"\bdiscount\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12,\n" +
 	"\rdelivery_date\x18\x14 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
 	"\x0especifications\x18\x15 \x01(\tR\x0especifications\x12%\n" +
-	"\x0eis_invoiceable\x18\x16 \x01(\bR\risInvoiceable\"\x8e\x06\n" +
+	"\x0eis_invoiceable\x18\x16 \x01(\bR\risInvoiceable\"\x9c\x01\n" +
+	"1SalesOrdersServiceItemSpecificationsUpdateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12&\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\x8e\x06\n" +
 	"\x0eSalesOrderItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4641,7 +4709,7 @@ const file_sales_orders_scailo_proto_rawDesc = "" +
 	"\x17SALES_ORDER_ITEM_STATUS\x12+\n" +
 	"'SALES_ORDER_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12$\n" +
 	" SALES_ORDER_ITEM_STATUS_APPROVED\x10\x01\x12&\n" +
-	"\"SALES_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\xff.\n" +
+	"\"SALES_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\xfc/\n" +
 	"\x12SalesOrdersService\x12M\n" +
 	"\x06Create\x12'.Scailo.SalesOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.SalesOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -4665,7 +4733,8 @@ const file_sales_orders_scailo_proto_rawDesc = "" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12n\n" +
 	"\x1aAddMultipleSalesOrderItems\x124.Scailo.SalesOrdersServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x11AddSalesOrderItem\x12+.Scailo.SalesOrdersServiceItemCreateRequest\x1a\x17.Scailo.IdentifiersList\x12\\\n" +
-	"\x14ModifySalesOrderItem\x12+.Scailo.SalesOrdersServiceItemUpdateRequest\x1a\x17.Scailo.IdentifiersList\x12V\n" +
+	"\x14ModifySalesOrderItem\x12+.Scailo.SalesOrdersServiceItemUpdateRequest\x1a\x17.Scailo.IdentifiersList\x12{\n" +
+	"\"UpdateSalesOrderItemSpecifications\x129.Scailo.SalesOrdersServiceItemSpecificationsUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x15ApproveSalesOrderItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\x14DeleteSalesOrderItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
 	"\x16ReorderSalesOrderItems\x12\x1b.Scailo.ReorderItemsRequest\x1a\x1a.Scailo.IdentifierResponse\x12D\n" +
@@ -4734,7 +4803,7 @@ func file_sales_orders_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_sales_orders_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_sales_orders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_sales_orders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_sales_orders_scailo_proto_goTypes = []any{
 	(SALES_ORDER_SORT_KEY)(0),                                 // 0: Scailo.SALES_ORDER_SORT_KEY
 	(SALES_ORDER_REFERENCE_CONTEXT)(0),                        // 1: Scailo.SALES_ORDER_REFERENCE_CONTEXT
@@ -4750,259 +4819,262 @@ var file_sales_orders_scailo_proto_goTypes = []any{
 	(*SalesOrdersServiceMultipleItemsSingleton)(nil),          // 11: Scailo.SalesOrdersServiceMultipleItemsSingleton
 	(*SalesOrdersServiceMultipleItemsCreateRequest)(nil),      // 12: Scailo.SalesOrdersServiceMultipleItemsCreateRequest
 	(*SalesOrdersServiceItemUpdateRequest)(nil),               // 13: Scailo.SalesOrdersServiceItemUpdateRequest
-	(*SalesOrderItem)(nil),                                    // 14: Scailo.SalesOrderItem
-	(*SalesOrdersList)(nil),                                   // 15: Scailo.SalesOrdersList
-	(*SalesOrderItemsList)(nil),                               // 16: Scailo.SalesOrderItemsList
-	(*SalesOrderItemHistoryRequest)(nil),                      // 17: Scailo.SalesOrderItemHistoryRequest
-	(*SalesOrderItemProspectiveInfoRequest)(nil),              // 18: Scailo.SalesOrderItemProspectiveInfoRequest
-	(*SalesOrdersServicePaginationReq)(nil),                   // 19: Scailo.SalesOrdersServicePaginationReq
-	(*SalesOrdersServicePaginationResponse)(nil),              // 20: Scailo.SalesOrdersServicePaginationResponse
-	(*SalesOrdersServiceFilterReq)(nil),                       // 21: Scailo.SalesOrdersServiceFilterReq
-	(*SalesOrdersServiceCountReq)(nil),                        // 22: Scailo.SalesOrdersServiceCountReq
-	(*SalesOrdersServiceSearchAllReq)(nil),                    // 23: Scailo.SalesOrdersServiceSearchAllReq
-	(*SalesOrdersServiceReferenceCreateRequest)(nil),          // 24: Scailo.SalesOrdersServiceReferenceCreateRequest
-	(*SalesOrderReference)(nil),                               // 25: Scailo.SalesOrderReference
-	(*SalesOrderReferencesList)(nil),                          // 26: Scailo.SalesOrderReferencesList
-	(*SalesOrderItemsSearchRequest)(nil),                      // 27: Scailo.SalesOrderItemsSearchRequest
-	(*SalesOrdersServicePaginatedItemsResponse)(nil),          // 28: Scailo.SalesOrdersServicePaginatedItemsResponse
-	(*SalesOrdersServiceContactCreateRequest)(nil),            // 29: Scailo.SalesOrdersServiceContactCreateRequest
-	(*SalesOrderContact)(nil),                                 // 30: Scailo.SalesOrderContact
-	(*SalesOrderContactsList)(nil),                            // 31: Scailo.SalesOrderContactsList
-	(*SalesOrderInventoryStatistics)(nil),                     // 32: Scailo.SalesOrderInventoryStatistics
-	(*SalesOrderBillingStatistics)(nil),                       // 33: Scailo.SalesOrderBillingStatistics
-	(*SalesOrderInventoryMatch)(nil),                          // 34: Scailo.SalesOrderInventoryMatch
-	(*SalesOrderInventoryMatchList)(nil),                      // 35: Scailo.SalesOrderInventoryMatchList
-	(*SalesOrderPriceMatch)(nil),                              // 36: Scailo.SalesOrderPriceMatch
-	(*SalesOrderPriceMatchList)(nil),                          // 37: Scailo.SalesOrderPriceMatchList
-	(*FormFieldDatumCreateRequest)(nil),                       // 38: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                  // 39: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 40: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 41: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 42: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                    // 43: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                          // 44: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 45: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                       // 46: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                     // 47: Scailo.IdentifierUUIDWithUserComment
-	(*RepeatWithDeliveryDate)(nil),                            // 48: Scailo.RepeatWithDeliveryDate
-	(*IdentifierWithEmailAttributes)(nil),                     // 49: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 50: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 51: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 52: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 53: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 54: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 55: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 56: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 57: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 58: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 59: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 60: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 61: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 62: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 63: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 64: Scailo.MagicLink
-	(*PriceResponse)(nil),                                     // 65: Scailo.PriceResponse
-	(*StandardFile)(nil),                                      // 66: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 67: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                      // 68: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                   // 69: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 70: Scailo.CountResponse
-	(*SumResponse)(nil),                                       // 71: Scailo.SumResponse
+	(*SalesOrdersServiceItemSpecificationsUpdateRequest)(nil), // 14: Scailo.SalesOrdersServiceItemSpecificationsUpdateRequest
+	(*SalesOrderItem)(nil),                                    // 15: Scailo.SalesOrderItem
+	(*SalesOrdersList)(nil),                                   // 16: Scailo.SalesOrdersList
+	(*SalesOrderItemsList)(nil),                               // 17: Scailo.SalesOrderItemsList
+	(*SalesOrderItemHistoryRequest)(nil),                      // 18: Scailo.SalesOrderItemHistoryRequest
+	(*SalesOrderItemProspectiveInfoRequest)(nil),              // 19: Scailo.SalesOrderItemProspectiveInfoRequest
+	(*SalesOrdersServicePaginationReq)(nil),                   // 20: Scailo.SalesOrdersServicePaginationReq
+	(*SalesOrdersServicePaginationResponse)(nil),              // 21: Scailo.SalesOrdersServicePaginationResponse
+	(*SalesOrdersServiceFilterReq)(nil),                       // 22: Scailo.SalesOrdersServiceFilterReq
+	(*SalesOrdersServiceCountReq)(nil),                        // 23: Scailo.SalesOrdersServiceCountReq
+	(*SalesOrdersServiceSearchAllReq)(nil),                    // 24: Scailo.SalesOrdersServiceSearchAllReq
+	(*SalesOrdersServiceReferenceCreateRequest)(nil),          // 25: Scailo.SalesOrdersServiceReferenceCreateRequest
+	(*SalesOrderReference)(nil),                               // 26: Scailo.SalesOrderReference
+	(*SalesOrderReferencesList)(nil),                          // 27: Scailo.SalesOrderReferencesList
+	(*SalesOrderItemsSearchRequest)(nil),                      // 28: Scailo.SalesOrderItemsSearchRequest
+	(*SalesOrdersServicePaginatedItemsResponse)(nil),          // 29: Scailo.SalesOrdersServicePaginatedItemsResponse
+	(*SalesOrdersServiceContactCreateRequest)(nil),            // 30: Scailo.SalesOrdersServiceContactCreateRequest
+	(*SalesOrderContact)(nil),                                 // 31: Scailo.SalesOrderContact
+	(*SalesOrderContactsList)(nil),                            // 32: Scailo.SalesOrderContactsList
+	(*SalesOrderInventoryStatistics)(nil),                     // 33: Scailo.SalesOrderInventoryStatistics
+	(*SalesOrderBillingStatistics)(nil),                       // 34: Scailo.SalesOrderBillingStatistics
+	(*SalesOrderInventoryMatch)(nil),                          // 35: Scailo.SalesOrderInventoryMatch
+	(*SalesOrderInventoryMatchList)(nil),                      // 36: Scailo.SalesOrderInventoryMatchList
+	(*SalesOrderPriceMatch)(nil),                              // 37: Scailo.SalesOrderPriceMatch
+	(*SalesOrderPriceMatchList)(nil),                          // 38: Scailo.SalesOrderPriceMatchList
+	(*FormFieldDatumCreateRequest)(nil),                       // 39: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                  // 40: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 41: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 42: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 43: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                    // 44: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                          // 45: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 46: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                       // 47: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                     // 48: Scailo.IdentifierUUIDWithUserComment
+	(*RepeatWithDeliveryDate)(nil),                            // 49: Scailo.RepeatWithDeliveryDate
+	(*IdentifierWithEmailAttributes)(nil),                     // 50: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 51: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 52: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 53: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 54: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 55: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 56: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 57: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 58: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 59: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 60: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 61: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 62: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 63: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 64: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 65: Scailo.MagicLink
+	(*PriceResponse)(nil),                                     // 66: Scailo.PriceResponse
+	(*StandardFile)(nil),                                      // 67: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 68: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                      // 69: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                   // 70: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 71: Scailo.CountResponse
+	(*SumResponse)(nil),                                       // 72: Scailo.SumResponse
 }
 var file_sales_orders_scailo_proto_depIdxs = []int32{
-	38,  // 0: Scailo.SalesOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	38,  // 1: Scailo.SalesOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	39,  // 2: Scailo.SalesOrder.metadata:type_name -> Scailo.EmployeeMetadata
-	40,  // 3: Scailo.SalesOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	41,  // 4: Scailo.SalesOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	42,  // 5: Scailo.SalesOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
-	14,  // 6: Scailo.SalesOrder.list:type_name -> Scailo.SalesOrderItem
-	43,  // 7: Scailo.SalesOrder.form_data:type_name -> Scailo.FormFieldDatum
+	39,  // 0: Scailo.SalesOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	39,  // 1: Scailo.SalesOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	40,  // 2: Scailo.SalesOrder.metadata:type_name -> Scailo.EmployeeMetadata
+	41,  // 3: Scailo.SalesOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	42,  // 4: Scailo.SalesOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	43,  // 5: Scailo.SalesOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
+	15,  // 6: Scailo.SalesOrder.list:type_name -> Scailo.SalesOrderItem
+	44,  // 7: Scailo.SalesOrder.form_data:type_name -> Scailo.FormFieldDatum
 	11,  // 8: Scailo.SalesOrdersServiceMultipleItemsCreateRequest.list:type_name -> Scailo.SalesOrdersServiceMultipleItemsSingleton
-	39,  // 9: Scailo.SalesOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
-	40,  // 10: Scailo.SalesOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	40,  // 9: Scailo.SalesOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
+	41,  // 10: Scailo.SalesOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
 	9,   // 11: Scailo.SalesOrdersList.list:type_name -> Scailo.SalesOrder
-	14,  // 12: Scailo.SalesOrderItemsList.list:type_name -> Scailo.SalesOrderItem
-	44,  // 13: Scailo.SalesOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	45,  // 14: Scailo.SalesOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	15,  // 12: Scailo.SalesOrderItemsList.list:type_name -> Scailo.SalesOrderItem
+	45,  // 13: Scailo.SalesOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	46,  // 14: Scailo.SalesOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	0,   // 15: Scailo.SalesOrdersServicePaginationReq.sort_key:type_name -> Scailo.SALES_ORDER_SORT_KEY
-	41,  // 16: Scailo.SalesOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	42,  // 16: Scailo.SalesOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	9,   // 17: Scailo.SalesOrdersServicePaginationResponse.payload:type_name -> Scailo.SalesOrder
-	44,  // 18: Scailo.SalesOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	45,  // 19: Scailo.SalesOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	45,  // 18: Scailo.SalesOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	46,  // 19: Scailo.SalesOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	0,   // 20: Scailo.SalesOrdersServiceFilterReq.sort_key:type_name -> Scailo.SALES_ORDER_SORT_KEY
-	41,  // 21: Scailo.SalesOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	46,  // 22: Scailo.SalesOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	44,  // 23: Scailo.SalesOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	41,  // 24: Scailo.SalesOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	46,  // 25: Scailo.SalesOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	44,  // 26: Scailo.SalesOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	45,  // 27: Scailo.SalesOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	42,  // 21: Scailo.SalesOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	47,  // 22: Scailo.SalesOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	45,  // 23: Scailo.SalesOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	42,  // 24: Scailo.SalesOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	47,  // 25: Scailo.SalesOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	45,  // 26: Scailo.SalesOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	46,  // 27: Scailo.SalesOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	0,   // 28: Scailo.SalesOrdersServiceSearchAllReq.sort_key:type_name -> Scailo.SALES_ORDER_SORT_KEY
-	41,  // 29: Scailo.SalesOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	42,  // 29: Scailo.SalesOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	1,   // 30: Scailo.SalesOrdersServiceReferenceCreateRequest.context:type_name -> Scailo.SALES_ORDER_REFERENCE_CONTEXT
 	2,   // 31: Scailo.SalesOrdersServiceReferenceCreateRequest.ref_from:type_name -> Scailo.SALES_ORDER_REFERENCE_REF_FROM
-	39,  // 32: Scailo.SalesOrderReference.metadata:type_name -> Scailo.EmployeeMetadata
-	40,  // 33: Scailo.SalesOrderReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	40,  // 32: Scailo.SalesOrderReference.metadata:type_name -> Scailo.EmployeeMetadata
+	41,  // 33: Scailo.SalesOrderReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
 	1,   // 34: Scailo.SalesOrderReference.context:type_name -> Scailo.SALES_ORDER_REFERENCE_CONTEXT
 	2,   // 35: Scailo.SalesOrderReference.ref_from:type_name -> Scailo.SALES_ORDER_REFERENCE_REF_FROM
-	25,  // 36: Scailo.SalesOrderReferencesList.list:type_name -> Scailo.SalesOrderReference
-	44,  // 37: Scailo.SalesOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	45,  // 38: Scailo.SalesOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	26,  // 36: Scailo.SalesOrderReferencesList.list:type_name -> Scailo.SalesOrderReference
+	45,  // 37: Scailo.SalesOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	46,  // 38: Scailo.SalesOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
 	3,   // 39: Scailo.SalesOrderItemsSearchRequest.sort_key:type_name -> Scailo.SALES_ORDER_ITEM_SORT_KEY
 	4,   // 40: Scailo.SalesOrderItemsSearchRequest.status:type_name -> Scailo.SALES_ORDER_ITEM_STATUS
-	14,  // 41: Scailo.SalesOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.SalesOrderItem
-	39,  // 42: Scailo.SalesOrderContact.metadata:type_name -> Scailo.EmployeeMetadata
-	40,  // 43: Scailo.SalesOrderContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	30,  // 44: Scailo.SalesOrderContactsList.list:type_name -> Scailo.SalesOrderContact
-	34,  // 45: Scailo.SalesOrderInventoryMatchList.list:type_name -> Scailo.SalesOrderInventoryMatch
-	36,  // 46: Scailo.SalesOrderPriceMatchList.list:type_name -> Scailo.SalesOrderPriceMatch
+	15,  // 41: Scailo.SalesOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.SalesOrderItem
+	40,  // 42: Scailo.SalesOrderContact.metadata:type_name -> Scailo.EmployeeMetadata
+	41,  // 43: Scailo.SalesOrderContact.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	31,  // 44: Scailo.SalesOrderContactsList.list:type_name -> Scailo.SalesOrderContact
+	35,  // 45: Scailo.SalesOrderInventoryMatchList.list:type_name -> Scailo.SalesOrderInventoryMatch
+	37,  // 46: Scailo.SalesOrderPriceMatchList.list:type_name -> Scailo.SalesOrderPriceMatch
 	5,   // 47: Scailo.SalesOrdersService.Create:input_type -> Scailo.SalesOrdersServiceCreateRequest
 	5,   // 48: Scailo.SalesOrdersService.Draft:input_type -> Scailo.SalesOrdersServiceCreateRequest
 	6,   // 49: Scailo.SalesOrdersService.DraftUpdate:input_type -> Scailo.SalesOrdersServiceUpdateRequest
-	47,  // 50: Scailo.SalesOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 51: Scailo.SalesOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 52: Scailo.SalesOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 53: Scailo.SalesOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 50: Scailo.SalesOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 51: Scailo.SalesOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 52: Scailo.SalesOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 53: Scailo.SalesOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
 	6,   // 54: Scailo.SalesOrdersService.RevisionUpdate:input_type -> Scailo.SalesOrdersServiceUpdateRequest
-	47,  // 55: Scailo.SalesOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 56: Scailo.SalesOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 57: Scailo.SalesOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 58: Scailo.SalesOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	48,  // 59: Scailo.SalesOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
-	47,  // 60: Scailo.SalesOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	47,  // 61: Scailo.SalesOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	49,  // 62: Scailo.SalesOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	48,  // 55: Scailo.SalesOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 56: Scailo.SalesOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 57: Scailo.SalesOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 58: Scailo.SalesOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	49,  // 59: Scailo.SalesOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
+	48,  // 60: Scailo.SalesOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	48,  // 61: Scailo.SalesOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	50,  // 62: Scailo.SalesOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
 	7,   // 63: Scailo.SalesOrdersService.Autofill:input_type -> Scailo.SalesOrdersServiceAutofillRequest
-	47,  // 64: Scailo.SalesOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	50,  // 65: Scailo.SalesOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	48,  // 64: Scailo.SalesOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	51,  // 65: Scailo.SalesOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
 	12,  // 66: Scailo.SalesOrdersService.AddMultipleSalesOrderItems:input_type -> Scailo.SalesOrdersServiceMultipleItemsCreateRequest
 	10,  // 67: Scailo.SalesOrdersService.AddSalesOrderItem:input_type -> Scailo.SalesOrdersServiceItemCreateRequest
 	13,  // 68: Scailo.SalesOrdersService.ModifySalesOrderItem:input_type -> Scailo.SalesOrdersServiceItemUpdateRequest
-	51,  // 69: Scailo.SalesOrdersService.ApproveSalesOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	51,  // 70: Scailo.SalesOrdersService.DeleteSalesOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	52,  // 71: Scailo.SalesOrdersService.ReorderSalesOrderItems:input_type -> Scailo.ReorderItemsRequest
-	53,  // 72: Scailo.SalesOrdersService.ViewSalesOrderItemByID:input_type -> Scailo.Identifier
-	18,  // 73: Scailo.SalesOrdersService.ViewSalesOrderItemPrice:input_type -> Scailo.SalesOrderItemProspectiveInfoRequest
-	54,  // 74: Scailo.SalesOrdersService.ViewApprovedSalesOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	54,  // 75: Scailo.SalesOrdersService.ViewUnapprovedSalesOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	17,  // 76: Scailo.SalesOrdersService.ViewSalesOrderItemHistory:input_type -> Scailo.SalesOrderItemHistoryRequest
-	27,  // 77: Scailo.SalesOrdersService.ViewPaginatedApprovedSalesOrderItems:input_type -> Scailo.SalesOrderItemsSearchRequest
-	27,  // 78: Scailo.SalesOrdersService.ViewPaginatedUnapprovedSalesOrderItems:input_type -> Scailo.SalesOrderItemsSearchRequest
-	27,  // 79: Scailo.SalesOrdersService.SearchItemsWithPagination:input_type -> Scailo.SalesOrderItemsSearchRequest
-	55,  // 80: Scailo.SalesOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	56,  // 81: Scailo.SalesOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	57,  // 82: Scailo.SalesOrdersService.UploadSalesOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
-	29,  // 83: Scailo.SalesOrdersService.AddSalesOrderContact:input_type -> Scailo.SalesOrdersServiceContactCreateRequest
-	51,  // 84: Scailo.SalesOrdersService.ApproveSalesOrderContact:input_type -> Scailo.IdentifierWithUserComment
-	51,  // 85: Scailo.SalesOrdersService.DeleteSalesOrderContact:input_type -> Scailo.IdentifierWithUserComment
-	53,  // 86: Scailo.SalesOrdersService.ViewSalesOrderContactByID:input_type -> Scailo.Identifier
-	55,  // 87: Scailo.SalesOrdersService.ViewSalesOrderContacts:input_type -> Scailo.IdentifierUUID
-	24,  // 88: Scailo.SalesOrdersService.AddSalesOrderReference:input_type -> Scailo.SalesOrdersServiceReferenceCreateRequest
-	51,  // 89: Scailo.SalesOrdersService.ApproveSalesOrderReference:input_type -> Scailo.IdentifierWithUserComment
-	51,  // 90: Scailo.SalesOrdersService.DeleteSalesOrderReference:input_type -> Scailo.IdentifierWithUserComment
-	53,  // 91: Scailo.SalesOrdersService.ViewSalesOrderReferenceByID:input_type -> Scailo.Identifier
-	53,  // 92: Scailo.SalesOrdersService.ViewSalesOrderReferences:input_type -> Scailo.Identifier
-	53,  // 93: Scailo.SalesOrdersService.ViewByID:input_type -> Scailo.Identifier
-	55,  // 94: Scailo.SalesOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	58,  // 95: Scailo.SalesOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	53,  // 96: Scailo.SalesOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	55,  // 97: Scailo.SalesOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	59,  // 98: Scailo.SalesOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	55,  // 99: Scailo.SalesOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	60,  // 100: Scailo.SalesOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
-	55,  // 101: Scailo.SalesOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 102: Scailo.SalesOrdersService.ViewWithPagination:input_type -> Scailo.SalesOrdersServicePaginationReq
-	53,  // 103: Scailo.SalesOrdersService.ViewAmendments:input_type -> Scailo.Identifier
-	55,  // 104: Scailo.SalesOrdersService.ViewInventoryStatistics:input_type -> Scailo.IdentifierUUID
-	55,  // 105: Scailo.SalesOrdersService.ViewBillingStatistics:input_type -> Scailo.IdentifierUUID
-	55,  // 106: Scailo.SalesOrdersService.ViewInventoryMatch:input_type -> Scailo.IdentifierUUID
-	55,  // 107: Scailo.SalesOrdersService.ViewPriceMatch:input_type -> Scailo.IdentifierUUID
-	54,  // 108: Scailo.SalesOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	61,  // 109: Scailo.SalesOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	18,  // 110: Scailo.SalesOrdersService.ViewProspectiveSalesOrderItem:input_type -> Scailo.SalesOrderItemProspectiveInfoRequest
-	55,  // 111: Scailo.SalesOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	55,  // 112: Scailo.SalesOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	23,  // 113: Scailo.SalesOrdersService.SearchAll:input_type -> Scailo.SalesOrdersServiceSearchAllReq
-	21,  // 114: Scailo.SalesOrdersService.Filter:input_type -> Scailo.SalesOrdersServiceFilterReq
-	62,  // 115: Scailo.SalesOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 116: Scailo.SalesOrdersService.Count:input_type -> Scailo.SalesOrdersServiceCountReq
-	22,  // 117: Scailo.SalesOrdersService.AccruedValue:input_type -> Scailo.SalesOrdersServiceCountReq
-	21,  // 118: Scailo.SalesOrdersService.DownloadAsCSV:input_type -> Scailo.SalesOrdersServiceFilterReq
-	63,  // 119: Scailo.SalesOrdersService.Create:output_type -> Scailo.IdentifierResponse
-	63,  // 120: Scailo.SalesOrdersService.Draft:output_type -> Scailo.IdentifierResponse
-	63,  // 121: Scailo.SalesOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	63,  // 122: Scailo.SalesOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	63,  // 123: Scailo.SalesOrdersService.Verify:output_type -> Scailo.IdentifierResponse
-	63,  // 124: Scailo.SalesOrdersService.Approve:output_type -> Scailo.IdentifierResponse
-	63,  // 125: Scailo.SalesOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	63,  // 126: Scailo.SalesOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	63,  // 127: Scailo.SalesOrdersService.Halt:output_type -> Scailo.IdentifierResponse
-	63,  // 128: Scailo.SalesOrdersService.Discard:output_type -> Scailo.IdentifierResponse
-	63,  // 129: Scailo.SalesOrdersService.Restore:output_type -> Scailo.IdentifierResponse
-	63,  // 130: Scailo.SalesOrdersService.Complete:output_type -> Scailo.IdentifierResponse
-	63,  // 131: Scailo.SalesOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
-	63,  // 132: Scailo.SalesOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
-	63,  // 133: Scailo.SalesOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	63,  // 134: Scailo.SalesOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
-	63,  // 135: Scailo.SalesOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
-	63,  // 136: Scailo.SalesOrdersService.Amend:output_type -> Scailo.IdentifierResponse
-	64,  // 137: Scailo.SalesOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
-	63,  // 138: Scailo.SalesOrdersService.AddMultipleSalesOrderItems:output_type -> Scailo.IdentifierResponse
-	59,  // 139: Scailo.SalesOrdersService.AddSalesOrderItem:output_type -> Scailo.IdentifiersList
-	59,  // 140: Scailo.SalesOrdersService.ModifySalesOrderItem:output_type -> Scailo.IdentifiersList
-	63,  // 141: Scailo.SalesOrdersService.ApproveSalesOrderItem:output_type -> Scailo.IdentifierResponse
-	63,  // 142: Scailo.SalesOrdersService.DeleteSalesOrderItem:output_type -> Scailo.IdentifierResponse
-	63,  // 143: Scailo.SalesOrdersService.ReorderSalesOrderItems:output_type -> Scailo.IdentifierResponse
-	14,  // 144: Scailo.SalesOrdersService.ViewSalesOrderItemByID:output_type -> Scailo.SalesOrderItem
-	65,  // 145: Scailo.SalesOrdersService.ViewSalesOrderItemPrice:output_type -> Scailo.PriceResponse
-	16,  // 146: Scailo.SalesOrdersService.ViewApprovedSalesOrderItems:output_type -> Scailo.SalesOrderItemsList
-	16,  // 147: Scailo.SalesOrdersService.ViewUnapprovedSalesOrderItems:output_type -> Scailo.SalesOrderItemsList
-	16,  // 148: Scailo.SalesOrdersService.ViewSalesOrderItemHistory:output_type -> Scailo.SalesOrderItemsList
-	28,  // 149: Scailo.SalesOrdersService.ViewPaginatedApprovedSalesOrderItems:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
-	28,  // 150: Scailo.SalesOrdersService.ViewPaginatedUnapprovedSalesOrderItems:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
-	28,  // 151: Scailo.SalesOrdersService.SearchItemsWithPagination:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
-	66,  // 152: Scailo.SalesOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	66,  // 153: Scailo.SalesOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	59,  // 154: Scailo.SalesOrdersService.UploadSalesOrderItems:output_type -> Scailo.IdentifiersList
-	63,  // 155: Scailo.SalesOrdersService.AddSalesOrderContact:output_type -> Scailo.IdentifierResponse
-	63,  // 156: Scailo.SalesOrdersService.ApproveSalesOrderContact:output_type -> Scailo.IdentifierResponse
-	63,  // 157: Scailo.SalesOrdersService.DeleteSalesOrderContact:output_type -> Scailo.IdentifierResponse
-	30,  // 158: Scailo.SalesOrdersService.ViewSalesOrderContactByID:output_type -> Scailo.SalesOrderContact
-	31,  // 159: Scailo.SalesOrdersService.ViewSalesOrderContacts:output_type -> Scailo.SalesOrderContactsList
-	63,  // 160: Scailo.SalesOrdersService.AddSalesOrderReference:output_type -> Scailo.IdentifierResponse
-	63,  // 161: Scailo.SalesOrdersService.ApproveSalesOrderReference:output_type -> Scailo.IdentifierResponse
-	63,  // 162: Scailo.SalesOrdersService.DeleteSalesOrderReference:output_type -> Scailo.IdentifierResponse
-	25,  // 163: Scailo.SalesOrdersService.ViewSalesOrderReferenceByID:output_type -> Scailo.SalesOrderReference
-	26,  // 164: Scailo.SalesOrdersService.ViewSalesOrderReferences:output_type -> Scailo.SalesOrderReferencesList
-	9,   // 165: Scailo.SalesOrdersService.ViewByID:output_type -> Scailo.SalesOrder
-	9,   // 166: Scailo.SalesOrdersService.ViewByUUID:output_type -> Scailo.SalesOrder
-	9,   // 167: Scailo.SalesOrdersService.ViewByReferenceID:output_type -> Scailo.SalesOrder
-	9,   // 168: Scailo.SalesOrdersService.ViewEssentialByID:output_type -> Scailo.SalesOrder
-	9,   // 169: Scailo.SalesOrdersService.ViewEssentialByUUID:output_type -> Scailo.SalesOrder
-	15,  // 170: Scailo.SalesOrdersService.ViewFromIDs:output_type -> Scailo.SalesOrdersList
-	8,   // 171: Scailo.SalesOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesOrderAncillaryParameters
-	15,  // 172: Scailo.SalesOrdersService.ViewAll:output_type -> Scailo.SalesOrdersList
-	15,  // 173: Scailo.SalesOrdersService.ViewAllForEntityUUID:output_type -> Scailo.SalesOrdersList
-	20,  // 174: Scailo.SalesOrdersService.ViewWithPagination:output_type -> Scailo.SalesOrdersServicePaginationResponse
-	67,  // 175: Scailo.SalesOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	32,  // 176: Scailo.SalesOrdersService.ViewInventoryStatistics:output_type -> Scailo.SalesOrderInventoryStatistics
-	33,  // 177: Scailo.SalesOrdersService.ViewBillingStatistics:output_type -> Scailo.SalesOrderBillingStatistics
-	35,  // 178: Scailo.SalesOrdersService.ViewInventoryMatch:output_type -> Scailo.SalesOrderInventoryMatchList
-	37,  // 179: Scailo.SalesOrdersService.ViewPriceMatch:output_type -> Scailo.SalesOrderPriceMatchList
-	68,  // 180: Scailo.SalesOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	68,  // 181: Scailo.SalesOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	10,  // 182: Scailo.SalesOrdersService.ViewProspectiveSalesOrderItem:output_type -> Scailo.SalesOrdersServiceItemCreateRequest
-	69,  // 183: Scailo.SalesOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	66,  // 184: Scailo.SalesOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
-	15,  // 185: Scailo.SalesOrdersService.SearchAll:output_type -> Scailo.SalesOrdersList
-	15,  // 186: Scailo.SalesOrdersService.Filter:output_type -> Scailo.SalesOrdersList
-	70,  // 187: Scailo.SalesOrdersService.CountInStatus:output_type -> Scailo.CountResponse
-	70,  // 188: Scailo.SalesOrdersService.Count:output_type -> Scailo.CountResponse
-	71,  // 189: Scailo.SalesOrdersService.AccruedValue:output_type -> Scailo.SumResponse
-	66,  // 190: Scailo.SalesOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	119, // [119:191] is the sub-list for method output_type
-	47,  // [47:119] is the sub-list for method input_type
+	14,  // 69: Scailo.SalesOrdersService.UpdateSalesOrderItemSpecifications:input_type -> Scailo.SalesOrdersServiceItemSpecificationsUpdateRequest
+	52,  // 70: Scailo.SalesOrdersService.ApproveSalesOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	52,  // 71: Scailo.SalesOrdersService.DeleteSalesOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	53,  // 72: Scailo.SalesOrdersService.ReorderSalesOrderItems:input_type -> Scailo.ReorderItemsRequest
+	54,  // 73: Scailo.SalesOrdersService.ViewSalesOrderItemByID:input_type -> Scailo.Identifier
+	19,  // 74: Scailo.SalesOrdersService.ViewSalesOrderItemPrice:input_type -> Scailo.SalesOrderItemProspectiveInfoRequest
+	55,  // 75: Scailo.SalesOrdersService.ViewApprovedSalesOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	55,  // 76: Scailo.SalesOrdersService.ViewUnapprovedSalesOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	18,  // 77: Scailo.SalesOrdersService.ViewSalesOrderItemHistory:input_type -> Scailo.SalesOrderItemHistoryRequest
+	28,  // 78: Scailo.SalesOrdersService.ViewPaginatedApprovedSalesOrderItems:input_type -> Scailo.SalesOrderItemsSearchRequest
+	28,  // 79: Scailo.SalesOrdersService.ViewPaginatedUnapprovedSalesOrderItems:input_type -> Scailo.SalesOrderItemsSearchRequest
+	28,  // 80: Scailo.SalesOrdersService.SearchItemsWithPagination:input_type -> Scailo.SalesOrderItemsSearchRequest
+	56,  // 81: Scailo.SalesOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	57,  // 82: Scailo.SalesOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	58,  // 83: Scailo.SalesOrdersService.UploadSalesOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
+	30,  // 84: Scailo.SalesOrdersService.AddSalesOrderContact:input_type -> Scailo.SalesOrdersServiceContactCreateRequest
+	52,  // 85: Scailo.SalesOrdersService.ApproveSalesOrderContact:input_type -> Scailo.IdentifierWithUserComment
+	52,  // 86: Scailo.SalesOrdersService.DeleteSalesOrderContact:input_type -> Scailo.IdentifierWithUserComment
+	54,  // 87: Scailo.SalesOrdersService.ViewSalesOrderContactByID:input_type -> Scailo.Identifier
+	56,  // 88: Scailo.SalesOrdersService.ViewSalesOrderContacts:input_type -> Scailo.IdentifierUUID
+	25,  // 89: Scailo.SalesOrdersService.AddSalesOrderReference:input_type -> Scailo.SalesOrdersServiceReferenceCreateRequest
+	52,  // 90: Scailo.SalesOrdersService.ApproveSalesOrderReference:input_type -> Scailo.IdentifierWithUserComment
+	52,  // 91: Scailo.SalesOrdersService.DeleteSalesOrderReference:input_type -> Scailo.IdentifierWithUserComment
+	54,  // 92: Scailo.SalesOrdersService.ViewSalesOrderReferenceByID:input_type -> Scailo.Identifier
+	54,  // 93: Scailo.SalesOrdersService.ViewSalesOrderReferences:input_type -> Scailo.Identifier
+	54,  // 94: Scailo.SalesOrdersService.ViewByID:input_type -> Scailo.Identifier
+	56,  // 95: Scailo.SalesOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	59,  // 96: Scailo.SalesOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	54,  // 97: Scailo.SalesOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	56,  // 98: Scailo.SalesOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	60,  // 99: Scailo.SalesOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	56,  // 100: Scailo.SalesOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	61,  // 101: Scailo.SalesOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
+	56,  // 102: Scailo.SalesOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	20,  // 103: Scailo.SalesOrdersService.ViewWithPagination:input_type -> Scailo.SalesOrdersServicePaginationReq
+	54,  // 104: Scailo.SalesOrdersService.ViewAmendments:input_type -> Scailo.Identifier
+	56,  // 105: Scailo.SalesOrdersService.ViewInventoryStatistics:input_type -> Scailo.IdentifierUUID
+	56,  // 106: Scailo.SalesOrdersService.ViewBillingStatistics:input_type -> Scailo.IdentifierUUID
+	56,  // 107: Scailo.SalesOrdersService.ViewInventoryMatch:input_type -> Scailo.IdentifierUUID
+	56,  // 108: Scailo.SalesOrdersService.ViewPriceMatch:input_type -> Scailo.IdentifierUUID
+	55,  // 109: Scailo.SalesOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	62,  // 110: Scailo.SalesOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	19,  // 111: Scailo.SalesOrdersService.ViewProspectiveSalesOrderItem:input_type -> Scailo.SalesOrderItemProspectiveInfoRequest
+	56,  // 112: Scailo.SalesOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	56,  // 113: Scailo.SalesOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	24,  // 114: Scailo.SalesOrdersService.SearchAll:input_type -> Scailo.SalesOrdersServiceSearchAllReq
+	22,  // 115: Scailo.SalesOrdersService.Filter:input_type -> Scailo.SalesOrdersServiceFilterReq
+	63,  // 116: Scailo.SalesOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	23,  // 117: Scailo.SalesOrdersService.Count:input_type -> Scailo.SalesOrdersServiceCountReq
+	23,  // 118: Scailo.SalesOrdersService.AccruedValue:input_type -> Scailo.SalesOrdersServiceCountReq
+	22,  // 119: Scailo.SalesOrdersService.DownloadAsCSV:input_type -> Scailo.SalesOrdersServiceFilterReq
+	64,  // 120: Scailo.SalesOrdersService.Create:output_type -> Scailo.IdentifierResponse
+	64,  // 121: Scailo.SalesOrdersService.Draft:output_type -> Scailo.IdentifierResponse
+	64,  // 122: Scailo.SalesOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	64,  // 123: Scailo.SalesOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	64,  // 124: Scailo.SalesOrdersService.Verify:output_type -> Scailo.IdentifierResponse
+	64,  // 125: Scailo.SalesOrdersService.Approve:output_type -> Scailo.IdentifierResponse
+	64,  // 126: Scailo.SalesOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	64,  // 127: Scailo.SalesOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	64,  // 128: Scailo.SalesOrdersService.Halt:output_type -> Scailo.IdentifierResponse
+	64,  // 129: Scailo.SalesOrdersService.Discard:output_type -> Scailo.IdentifierResponse
+	64,  // 130: Scailo.SalesOrdersService.Restore:output_type -> Scailo.IdentifierResponse
+	64,  // 131: Scailo.SalesOrdersService.Complete:output_type -> Scailo.IdentifierResponse
+	64,  // 132: Scailo.SalesOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
+	64,  // 133: Scailo.SalesOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
+	64,  // 134: Scailo.SalesOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	64,  // 135: Scailo.SalesOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
+	64,  // 136: Scailo.SalesOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
+	64,  // 137: Scailo.SalesOrdersService.Amend:output_type -> Scailo.IdentifierResponse
+	65,  // 138: Scailo.SalesOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
+	64,  // 139: Scailo.SalesOrdersService.AddMultipleSalesOrderItems:output_type -> Scailo.IdentifierResponse
+	60,  // 140: Scailo.SalesOrdersService.AddSalesOrderItem:output_type -> Scailo.IdentifiersList
+	60,  // 141: Scailo.SalesOrdersService.ModifySalesOrderItem:output_type -> Scailo.IdentifiersList
+	64,  // 142: Scailo.SalesOrdersService.UpdateSalesOrderItemSpecifications:output_type -> Scailo.IdentifierResponse
+	64,  // 143: Scailo.SalesOrdersService.ApproveSalesOrderItem:output_type -> Scailo.IdentifierResponse
+	64,  // 144: Scailo.SalesOrdersService.DeleteSalesOrderItem:output_type -> Scailo.IdentifierResponse
+	64,  // 145: Scailo.SalesOrdersService.ReorderSalesOrderItems:output_type -> Scailo.IdentifierResponse
+	15,  // 146: Scailo.SalesOrdersService.ViewSalesOrderItemByID:output_type -> Scailo.SalesOrderItem
+	66,  // 147: Scailo.SalesOrdersService.ViewSalesOrderItemPrice:output_type -> Scailo.PriceResponse
+	17,  // 148: Scailo.SalesOrdersService.ViewApprovedSalesOrderItems:output_type -> Scailo.SalesOrderItemsList
+	17,  // 149: Scailo.SalesOrdersService.ViewUnapprovedSalesOrderItems:output_type -> Scailo.SalesOrderItemsList
+	17,  // 150: Scailo.SalesOrdersService.ViewSalesOrderItemHistory:output_type -> Scailo.SalesOrderItemsList
+	29,  // 151: Scailo.SalesOrdersService.ViewPaginatedApprovedSalesOrderItems:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
+	29,  // 152: Scailo.SalesOrdersService.ViewPaginatedUnapprovedSalesOrderItems:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
+	29,  // 153: Scailo.SalesOrdersService.SearchItemsWithPagination:output_type -> Scailo.SalesOrdersServicePaginatedItemsResponse
+	67,  // 154: Scailo.SalesOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	67,  // 155: Scailo.SalesOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	60,  // 156: Scailo.SalesOrdersService.UploadSalesOrderItems:output_type -> Scailo.IdentifiersList
+	64,  // 157: Scailo.SalesOrdersService.AddSalesOrderContact:output_type -> Scailo.IdentifierResponse
+	64,  // 158: Scailo.SalesOrdersService.ApproveSalesOrderContact:output_type -> Scailo.IdentifierResponse
+	64,  // 159: Scailo.SalesOrdersService.DeleteSalesOrderContact:output_type -> Scailo.IdentifierResponse
+	31,  // 160: Scailo.SalesOrdersService.ViewSalesOrderContactByID:output_type -> Scailo.SalesOrderContact
+	32,  // 161: Scailo.SalesOrdersService.ViewSalesOrderContacts:output_type -> Scailo.SalesOrderContactsList
+	64,  // 162: Scailo.SalesOrdersService.AddSalesOrderReference:output_type -> Scailo.IdentifierResponse
+	64,  // 163: Scailo.SalesOrdersService.ApproveSalesOrderReference:output_type -> Scailo.IdentifierResponse
+	64,  // 164: Scailo.SalesOrdersService.DeleteSalesOrderReference:output_type -> Scailo.IdentifierResponse
+	26,  // 165: Scailo.SalesOrdersService.ViewSalesOrderReferenceByID:output_type -> Scailo.SalesOrderReference
+	27,  // 166: Scailo.SalesOrdersService.ViewSalesOrderReferences:output_type -> Scailo.SalesOrderReferencesList
+	9,   // 167: Scailo.SalesOrdersService.ViewByID:output_type -> Scailo.SalesOrder
+	9,   // 168: Scailo.SalesOrdersService.ViewByUUID:output_type -> Scailo.SalesOrder
+	9,   // 169: Scailo.SalesOrdersService.ViewByReferenceID:output_type -> Scailo.SalesOrder
+	9,   // 170: Scailo.SalesOrdersService.ViewEssentialByID:output_type -> Scailo.SalesOrder
+	9,   // 171: Scailo.SalesOrdersService.ViewEssentialByUUID:output_type -> Scailo.SalesOrder
+	16,  // 172: Scailo.SalesOrdersService.ViewFromIDs:output_type -> Scailo.SalesOrdersList
+	8,   // 173: Scailo.SalesOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesOrderAncillaryParameters
+	16,  // 174: Scailo.SalesOrdersService.ViewAll:output_type -> Scailo.SalesOrdersList
+	16,  // 175: Scailo.SalesOrdersService.ViewAllForEntityUUID:output_type -> Scailo.SalesOrdersList
+	21,  // 176: Scailo.SalesOrdersService.ViewWithPagination:output_type -> Scailo.SalesOrdersServicePaginationResponse
+	68,  // 177: Scailo.SalesOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	33,  // 178: Scailo.SalesOrdersService.ViewInventoryStatistics:output_type -> Scailo.SalesOrderInventoryStatistics
+	34,  // 179: Scailo.SalesOrdersService.ViewBillingStatistics:output_type -> Scailo.SalesOrderBillingStatistics
+	36,  // 180: Scailo.SalesOrdersService.ViewInventoryMatch:output_type -> Scailo.SalesOrderInventoryMatchList
+	38,  // 181: Scailo.SalesOrdersService.ViewPriceMatch:output_type -> Scailo.SalesOrderPriceMatchList
+	69,  // 182: Scailo.SalesOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	69,  // 183: Scailo.SalesOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	10,  // 184: Scailo.SalesOrdersService.ViewProspectiveSalesOrderItem:output_type -> Scailo.SalesOrdersServiceItemCreateRequest
+	70,  // 185: Scailo.SalesOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	67,  // 186: Scailo.SalesOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
+	16,  // 187: Scailo.SalesOrdersService.SearchAll:output_type -> Scailo.SalesOrdersList
+	16,  // 188: Scailo.SalesOrdersService.Filter:output_type -> Scailo.SalesOrdersList
+	71,  // 189: Scailo.SalesOrdersService.CountInStatus:output_type -> Scailo.CountResponse
+	71,  // 190: Scailo.SalesOrdersService.Count:output_type -> Scailo.CountResponse
+	72,  // 191: Scailo.SalesOrdersService.AccruedValue:output_type -> Scailo.SumResponse
+	67,  // 192: Scailo.SalesOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	120, // [120:193] is the sub-list for method output_type
+	47,  // [47:120] is the sub-list for method input_type
 	47,  // [47:47] is the sub-list for extension type_name
 	47,  // [47:47] is the sub-list for extension extendee
 	0,   // [0:47] is the sub-list for field type_name
@@ -5023,7 +5095,7 @@ func file_sales_orders_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sales_orders_scailo_proto_rawDesc), len(file_sales_orders_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   33,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

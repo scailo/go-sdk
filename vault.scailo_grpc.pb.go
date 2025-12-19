@@ -18,57 +18,67 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VaultService_InitiateFile_FullMethodName                    = "/Scailo.VaultService/InitiateFile"
-	VaultService_AddFileChunk_FullMethodName                    = "/Scailo.VaultService/AddFileChunk"
-	VaultService_CompleteFile_FullMethodName                    = "/Scailo.VaultService/CompleteFile"
-	VaultService_RenameFile_FullMethodName                      = "/Scailo.VaultService/RenameFile"
-	VaultService_UnzipFile_FullMethodName                       = "/Scailo.VaultService/UnzipFile"
-	VaultService_PersistFile_FullMethodName                     = "/Scailo.VaultService/PersistFile"
-	VaultService_MoveFile_FullMethodName                        = "/Scailo.VaultService/MoveFile"
-	VaultService_DeleteFile_FullMethodName                      = "/Scailo.VaultService/DeleteFile"
-	VaultService_AddFilePermission_FullMethodName               = "/Scailo.VaultService/AddFilePermission"
-	VaultService_ModifyFilePermission_FullMethodName            = "/Scailo.VaultService/ModifyFilePermission"
-	VaultService_DeleteFilePermission_FullMethodName            = "/Scailo.VaultService/DeleteFilePermission"
-	VaultService_DownloadFile_FullMethodName                    = "/Scailo.VaultService/DownloadFile"
-	VaultService_DownloadFileVersion_FullMethodName             = "/Scailo.VaultService/DownloadFileVersion"
-	VaultService_ViewFileLogo_FullMethodName                    = "/Scailo.VaultService/ViewFileLogo"
-	VaultService_ViewFileByUUID_FullMethodName                  = "/Scailo.VaultService/ViewFileByUUID"
-	VaultService_ViewFileByID_FullMethodName                    = "/Scailo.VaultService/ViewFileByID"
-	VaultService_ViewFileChunk_FullMethodName                   = "/Scailo.VaultService/ViewFileChunk"
-	VaultService_ViewFileChunkMetadata_FullMethodName           = "/Scailo.VaultService/ViewFileChunkMetadata"
-	VaultService_ViewFilePermission_FullMethodName              = "/Scailo.VaultService/ViewFilePermission"
-	VaultService_DoesFileExist_FullMethodName                   = "/Scailo.VaultService/DoesFileExist"
-	VaultService_ViewFileVersions_FullMethodName                = "/Scailo.VaultService/ViewFileVersions"
-	VaultService_ViewFileAccessLogs_FullMethodName              = "/Scailo.VaultService/ViewFileAccessLogs"
-	VaultService_AddFolder_FullMethodName                       = "/Scailo.VaultService/AddFolder"
-	VaultService_MoveFolder_FullMethodName                      = "/Scailo.VaultService/MoveFolder"
-	VaultService_RenameFolder_FullMethodName                    = "/Scailo.VaultService/RenameFolder"
-	VaultService_DeleteFolder_FullMethodName                    = "/Scailo.VaultService/DeleteFolder"
-	VaultService_ZipFolder_FullMethodName                       = "/Scailo.VaultService/ZipFolder"
-	VaultService_AddFolderPermission_FullMethodName             = "/Scailo.VaultService/AddFolderPermission"
-	VaultService_ModifyFolderPermission_FullMethodName          = "/Scailo.VaultService/ModifyFolderPermission"
-	VaultService_DeleteFolderPermission_FullMethodName          = "/Scailo.VaultService/DeleteFolderPermission"
-	VaultService_ViewFolderByID_FullMethodName                  = "/Scailo.VaultService/ViewFolderByID"
-	VaultService_ViewFolderByUUID_FullMethodName                = "/Scailo.VaultService/ViewFolderByUUID"
-	VaultService_ViewFolderDownloadStatus_FullMethodName        = "/Scailo.VaultService/ViewFolderDownloadStatus"
-	VaultService_DownloadFolder_FullMethodName                  = "/Scailo.VaultService/DownloadFolder"
-	VaultService_ViewAccessibleFilesInFolder_FullMethodName     = "/Scailo.VaultService/ViewAccessibleFilesInFolder"
-	VaultService_ViewAccessibleFoldersInFolder_FullMethodName   = "/Scailo.VaultService/ViewAccessibleFoldersInFolder"
-	VaultService_ViewAccessibleResourcesInFolder_FullMethodName = "/Scailo.VaultService/ViewAccessibleResourcesInFolder"
-	VaultService_ViewFolderPermission_FullMethodName            = "/Scailo.VaultService/ViewFolderPermission"
-	VaultService_DoesFolderExist_FullMethodName                 = "/Scailo.VaultService/DoesFolderExist"
-	VaultService_ViewFolderAccessLogs_FullMethodName            = "/Scailo.VaultService/ViewFolderAccessLogs"
-	VaultService_ViewPassthroughRolesForFolder_FullMethodName   = "/Scailo.VaultService/ViewPassthroughRolesForFolder"
-	VaultService_Search_FullMethodName                          = "/Scailo.VaultService/Search"
-	VaultService_SetupGiX_FullMethodName                        = "/Scailo.VaultService/SetupGiX"
-	VaultService_GiXRelayDELETE_FullMethodName                  = "/Scailo.VaultService/GiXRelayDELETE"
-	VaultService_GiXRelayGET_FullMethodName                     = "/Scailo.VaultService/GiXRelayGET"
-	VaultService_GiXRelayHEAD_FullMethodName                    = "/Scailo.VaultService/GiXRelayHEAD"
-	VaultService_GiXRelayPATCH_FullMethodName                   = "/Scailo.VaultService/GiXRelayPATCH"
-	VaultService_GiXRelayPOST_FullMethodName                    = "/Scailo.VaultService/GiXRelayPOST"
-	VaultService_GiXRelayPUT_FullMethodName                     = "/Scailo.VaultService/GiXRelayPUT"
-	VaultService_GiXFilter_FullMethodName                       = "/Scailo.VaultService/GiXFilter"
-	VaultService_GiXCount_FullMethodName                        = "/Scailo.VaultService/GiXCount"
+	VaultService_InitiateFile_FullMethodName                       = "/Scailo.VaultService/InitiateFile"
+	VaultService_AddFileChunk_FullMethodName                       = "/Scailo.VaultService/AddFileChunk"
+	VaultService_CompleteFile_FullMethodName                       = "/Scailo.VaultService/CompleteFile"
+	VaultService_RenameFile_FullMethodName                         = "/Scailo.VaultService/RenameFile"
+	VaultService_UnzipFile_FullMethodName                          = "/Scailo.VaultService/UnzipFile"
+	VaultService_PersistFile_FullMethodName                        = "/Scailo.VaultService/PersistFile"
+	VaultService_MoveFile_FullMethodName                           = "/Scailo.VaultService/MoveFile"
+	VaultService_DeleteFile_FullMethodName                         = "/Scailo.VaultService/DeleteFile"
+	VaultService_AddFilePermission_FullMethodName                  = "/Scailo.VaultService/AddFilePermission"
+	VaultService_ModifyFilePermission_FullMethodName               = "/Scailo.VaultService/ModifyFilePermission"
+	VaultService_DeleteFilePermission_FullMethodName               = "/Scailo.VaultService/DeleteFilePermission"
+	VaultService_DownloadFile_FullMethodName                       = "/Scailo.VaultService/DownloadFile"
+	VaultService_DownloadFileVersion_FullMethodName                = "/Scailo.VaultService/DownloadFileVersion"
+	VaultService_ViewFileLogo_FullMethodName                       = "/Scailo.VaultService/ViewFileLogo"
+	VaultService_ViewFileByUUID_FullMethodName                     = "/Scailo.VaultService/ViewFileByUUID"
+	VaultService_ViewFileByID_FullMethodName                       = "/Scailo.VaultService/ViewFileByID"
+	VaultService_ViewFileChunk_FullMethodName                      = "/Scailo.VaultService/ViewFileChunk"
+	VaultService_ViewFileChunkMetadata_FullMethodName              = "/Scailo.VaultService/ViewFileChunkMetadata"
+	VaultService_ViewFilePermission_FullMethodName                 = "/Scailo.VaultService/ViewFilePermission"
+	VaultService_DoesFileExist_FullMethodName                      = "/Scailo.VaultService/DoesFileExist"
+	VaultService_ViewFileVersions_FullMethodName                   = "/Scailo.VaultService/ViewFileVersions"
+	VaultService_ViewFileAccessLogs_FullMethodName                 = "/Scailo.VaultService/ViewFileAccessLogs"
+	VaultService_AddFolder_FullMethodName                          = "/Scailo.VaultService/AddFolder"
+	VaultService_MoveFolder_FullMethodName                         = "/Scailo.VaultService/MoveFolder"
+	VaultService_RenameFolder_FullMethodName                       = "/Scailo.VaultService/RenameFolder"
+	VaultService_DeleteFolder_FullMethodName                       = "/Scailo.VaultService/DeleteFolder"
+	VaultService_ZipFolder_FullMethodName                          = "/Scailo.VaultService/ZipFolder"
+	VaultService_AddFolderPermission_FullMethodName                = "/Scailo.VaultService/AddFolderPermission"
+	VaultService_ModifyFolderPermission_FullMethodName             = "/Scailo.VaultService/ModifyFolderPermission"
+	VaultService_DeleteFolderPermission_FullMethodName             = "/Scailo.VaultService/DeleteFolderPermission"
+	VaultService_ViewFolderByID_FullMethodName                     = "/Scailo.VaultService/ViewFolderByID"
+	VaultService_ViewFolderByUUID_FullMethodName                   = "/Scailo.VaultService/ViewFolderByUUID"
+	VaultService_ViewFolderDownloadStatus_FullMethodName           = "/Scailo.VaultService/ViewFolderDownloadStatus"
+	VaultService_DownloadFolder_FullMethodName                     = "/Scailo.VaultService/DownloadFolder"
+	VaultService_ViewAccessibleFilesInFolder_FullMethodName        = "/Scailo.VaultService/ViewAccessibleFilesInFolder"
+	VaultService_ViewAccessibleFoldersInFolder_FullMethodName      = "/Scailo.VaultService/ViewAccessibleFoldersInFolder"
+	VaultService_ViewAccessibleResourcesInFolder_FullMethodName    = "/Scailo.VaultService/ViewAccessibleResourcesInFolder"
+	VaultService_ViewFolderPermission_FullMethodName               = "/Scailo.VaultService/ViewFolderPermission"
+	VaultService_DoesFolderExist_FullMethodName                    = "/Scailo.VaultService/DoesFolderExist"
+	VaultService_ViewFolderAccessLogs_FullMethodName               = "/Scailo.VaultService/ViewFolderAccessLogs"
+	VaultService_ViewPassthroughRolesForFolder_FullMethodName      = "/Scailo.VaultService/ViewPassthroughRolesForFolder"
+	VaultService_Search_FullMethodName                             = "/Scailo.VaultService/Search"
+	VaultService_SetupGiX_FullMethodName                           = "/Scailo.VaultService/SetupGiX"
+	VaultService_GiXRelayDELETE_FullMethodName                     = "/Scailo.VaultService/GiXRelayDELETE"
+	VaultService_GiXRelayGET_FullMethodName                        = "/Scailo.VaultService/GiXRelayGET"
+	VaultService_GiXRelayHEAD_FullMethodName                       = "/Scailo.VaultService/GiXRelayHEAD"
+	VaultService_GiXRelayPATCH_FullMethodName                      = "/Scailo.VaultService/GiXRelayPATCH"
+	VaultService_GiXRelayPOST_FullMethodName                       = "/Scailo.VaultService/GiXRelayPOST"
+	VaultService_GiXRelayPUT_FullMethodName                        = "/Scailo.VaultService/GiXRelayPUT"
+	VaultService_GiXFilter_FullMethodName                          = "/Scailo.VaultService/GiXFilter"
+	VaultService_GiXCount_FullMethodName                           = "/Scailo.VaultService/GiXCount"
+	VaultService_ReconfigureEnclave_FullMethodName                 = "/Scailo.VaultService/ReconfigureEnclave"
+	VaultService_SetupEnclaveIngress_FullMethodName                = "/Scailo.VaultService/SetupEnclaveIngress"
+	VaultService_FilterEnclaveIngresses_FullMethodName             = "/Scailo.VaultService/FilterEnclaveIngresses"
+	VaultService_CountEnclaveIngresses_FullMethodName              = "/Scailo.VaultService/CountEnclaveIngresses"
+	VaultService_VerifyEnclaveIngress_FullMethodName               = "/Scailo.VaultService/VerifyEnclaveIngress"
+	VaultService_AddEnclaveEnvironmentVariable_FullMethodName      = "/Scailo.VaultService/AddEnclaveEnvironmentVariable"
+	VaultService_UpdateEnclaveEnvironmentVariable_FullMethodName   = "/Scailo.VaultService/UpdateEnclaveEnvironmentVariable"
+	VaultService_DeleteEnclaveEnvironmentVariable_FullMethodName   = "/Scailo.VaultService/DeleteEnclaveEnvironmentVariable"
+	VaultService_ViewEnclaveEnvironmentVariable_FullMethodName     = "/Scailo.VaultService/ViewEnclaveEnvironmentVariable"
+	VaultService_ViewAllEnclaveEnvironmentVariables_FullMethodName = "/Scailo.VaultService/ViewAllEnclaveEnvironmentVariables"
 )
 
 // VaultServiceClient is the client API for VaultService service.
@@ -182,6 +192,26 @@ type VaultServiceClient interface {
 	GiXFilter(ctx context.Context, in *GiXAppRunFilterReq, opts ...grpc.CallOption) (*GiXAppRunsList, error)
 	// Count all runs that match the given filter criteria
 	GiXCount(ctx context.Context, in *GiXAppRunCountReq, opts ...grpc.CallOption) (*CountResponse, error)
+	// Reconfigures the enclave (redeploys the enclave)
+	ReconfigureEnclave(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierUUID, error)
+	// Setup Enclave Ingress
+	SetupEnclaveIngress(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveIngress, error)
+	// View all enclave ingresses that match the given filter criteria
+	FilterEnclaveIngresses(ctx context.Context, in *EnclaveIngressFilterReq, opts ...grpc.CallOption) (*EnclaveIngressesList, error)
+	// Count all enclave ingresses that match the given filter criteria
+	CountEnclaveIngresses(ctx context.Context, in *EnclaveIngressCountReq, opts ...grpc.CallOption) (*CountResponse, error)
+	// Verifies the enclave ingress and returns the necessary information for subsequent requests
+	VerifyEnclaveIngress(ctx context.Context, in *VerifyEnclaveIngressRequest, opts ...grpc.CallOption) (*VerifyEnclaveIngressResponse, error)
+	// Add environment variable to enclave
+	AddEnclaveEnvironmentVariable(ctx context.Context, in *EnclaveEnvironmentVariableAddRequest, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error)
+	// Update environment variable in enclave
+	UpdateEnclaveEnvironmentVariable(ctx context.Context, in *EnclaveEnvironmentVariableUpdateRequest, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error)
+	// Delete environment variable in enclave
+	DeleteEnclaveEnvironmentVariable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// View environment variable in enclave represented by the Identifier
+	ViewEnclaveEnvironmentVariable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error)
+	// View all environment variables in enclave for the enclave represented by the Identifier
+	ViewAllEnclaveEnvironmentVariables(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariablesList, error)
 }
 
 type vaultServiceClient struct {
@@ -696,6 +726,106 @@ func (c *vaultServiceClient) GiXCount(ctx context.Context, in *GiXAppRunCountReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CountResponse)
 	err := c.cc.Invoke(ctx, VaultService_GiXCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ReconfigureEnclave(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierUUID, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierUUID)
+	err := c.cc.Invoke(ctx, VaultService_ReconfigureEnclave_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) SetupEnclaveIngress(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveIngress, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveIngress)
+	err := c.cc.Invoke(ctx, VaultService_SetupEnclaveIngress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) FilterEnclaveIngresses(ctx context.Context, in *EnclaveIngressFilterReq, opts ...grpc.CallOption) (*EnclaveIngressesList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveIngressesList)
+	err := c.cc.Invoke(ctx, VaultService_FilterEnclaveIngresses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) CountEnclaveIngresses(ctx context.Context, in *EnclaveIngressCountReq, opts ...grpc.CallOption) (*CountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CountResponse)
+	err := c.cc.Invoke(ctx, VaultService_CountEnclaveIngresses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) VerifyEnclaveIngress(ctx context.Context, in *VerifyEnclaveIngressRequest, opts ...grpc.CallOption) (*VerifyEnclaveIngressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifyEnclaveIngressResponse)
+	err := c.cc.Invoke(ctx, VaultService_VerifyEnclaveIngress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) AddEnclaveEnvironmentVariable(ctx context.Context, in *EnclaveEnvironmentVariableAddRequest, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveEnvironmentVariable)
+	err := c.cc.Invoke(ctx, VaultService_AddEnclaveEnvironmentVariable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) UpdateEnclaveEnvironmentVariable(ctx context.Context, in *EnclaveEnvironmentVariableUpdateRequest, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveEnvironmentVariable)
+	err := c.cc.Invoke(ctx, VaultService_UpdateEnclaveEnvironmentVariable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) DeleteEnclaveEnvironmentVariable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VaultService_DeleteEnclaveEnvironmentVariable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewEnclaveEnvironmentVariable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveEnvironmentVariable)
+	err := c.cc.Invoke(ctx, VaultService_ViewEnclaveEnvironmentVariable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewAllEnclaveEnvironmentVariables(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariablesList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveEnvironmentVariablesList)
+	err := c.cc.Invoke(ctx, VaultService_ViewAllEnclaveEnvironmentVariables_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

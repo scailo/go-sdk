@@ -1402,6 +1402,70 @@ func (x *VendorInvoicesServiceItemUpdateRequest) GetSpecifications() string {
 	return ""
 }
 
+// Describes the parameters required to update the specifications of an item in a vendor invoice
+type VendorInvoicesServiceItemSpecificationsUpdateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// The UUID of the record
+	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	// The specifications that should be updated
+	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) Reset() {
+	*x = VendorInvoicesServiceItemSpecificationsUpdateRequest{}
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VendorInvoicesServiceItemSpecificationsUpdateRequest) ProtoMessage() {}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VendorInvoicesServiceItemSpecificationsUpdateRequest.ProtoReflect.Descriptor instead.
+func (*VendorInvoicesServiceItemSpecificationsUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *VendorInvoicesServiceItemSpecificationsUpdateRequest) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
 // Describes the parameters that constitute an item associated to a vendor invoice
 type VendorInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1444,7 +1508,7 @@ type VendorInvoiceItem struct {
 
 func (x *VendorInvoiceItem) Reset() {
 	*x = VendorInvoiceItem{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[9]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1456,7 +1520,7 @@ func (x *VendorInvoiceItem) String() string {
 func (*VendorInvoiceItem) ProtoMessage() {}
 
 func (x *VendorInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[9]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1469,7 +1533,7 @@ func (x *VendorInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceItem.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{9}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *VendorInvoiceItem) GetEntityUuid() string {
@@ -1595,7 +1659,7 @@ type VendorInvoicesList struct {
 
 func (x *VendorInvoicesList) Reset() {
 	*x = VendorInvoicesList{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[10]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1607,7 +1671,7 @@ func (x *VendorInvoicesList) String() string {
 func (*VendorInvoicesList) ProtoMessage() {}
 
 func (x *VendorInvoicesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[10]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1620,7 +1684,7 @@ func (x *VendorInvoicesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoicesList.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesList) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{10}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *VendorInvoicesList) GetList() []*VendorInvoice {
@@ -1641,7 +1705,7 @@ type VendorInvoiceItemsList struct {
 
 func (x *VendorInvoiceItemsList) Reset() {
 	*x = VendorInvoiceItemsList{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[11]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1653,7 +1717,7 @@ func (x *VendorInvoiceItemsList) String() string {
 func (*VendorInvoiceItemsList) ProtoMessage() {}
 
 func (x *VendorInvoiceItemsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[11]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1666,7 +1730,7 @@ func (x *VendorInvoiceItemsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceItemsList.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceItemsList) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{11}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *VendorInvoiceItemsList) GetList() []*VendorInvoiceItem {
@@ -1689,7 +1753,7 @@ type VendorInvoiceItemHistoryRequest struct {
 
 func (x *VendorInvoiceItemHistoryRequest) Reset() {
 	*x = VendorInvoiceItemHistoryRequest{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[12]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1701,7 +1765,7 @@ func (x *VendorInvoiceItemHistoryRequest) String() string {
 func (*VendorInvoiceItemHistoryRequest) ProtoMessage() {}
 
 func (x *VendorInvoiceItemHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[12]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1714,7 +1778,7 @@ func (x *VendorInvoiceItemHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceItemHistoryRequest.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceItemHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{12}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *VendorInvoiceItemHistoryRequest) GetVendorInvoiceId() uint64 {
@@ -1744,7 +1808,7 @@ type VendorInvoiceItemProspectiveInfoRequest struct {
 
 func (x *VendorInvoiceItemProspectiveInfoRequest) Reset() {
 	*x = VendorInvoiceItemProspectiveInfoRequest{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[13]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1756,7 +1820,7 @@ func (x *VendorInvoiceItemProspectiveInfoRequest) String() string {
 func (*VendorInvoiceItemProspectiveInfoRequest) ProtoMessage() {}
 
 func (x *VendorInvoiceItemProspectiveInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[13]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1769,7 +1833,7 @@ func (x *VendorInvoiceItemProspectiveInfoRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use VendorInvoiceItemProspectiveInfoRequest.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceItemProspectiveInfoRequest) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{13}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *VendorInvoiceItemProspectiveInfoRequest) GetVendorInvoiceId() uint64 {
@@ -1801,7 +1865,7 @@ type VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest struct {
 
 func (x *VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) Reset() {
 	*x = VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[14]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1813,7 +1877,7 @@ func (x *VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) String() str
 func (*VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoMessage() {}
 
 func (x *VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[14]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1890,7 @@ func (x *VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) ProtoReflect
 
 // Deprecated: Use VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{14}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest) GetRefFrom() VENDOR_INVOICE_REF_FROM {
@@ -1871,7 +1935,7 @@ type VendorInvoicesServicePaginationReq struct {
 
 func (x *VendorInvoicesServicePaginationReq) Reset() {
 	*x = VendorInvoicesServicePaginationReq{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[15]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1883,7 +1947,7 @@ func (x *VendorInvoicesServicePaginationReq) String() string {
 func (*VendorInvoicesServicePaginationReq) ProtoMessage() {}
 
 func (x *VendorInvoicesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[15]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1896,7 +1960,7 @@ func (x *VendorInvoicesServicePaginationReq) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use VendorInvoicesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{15}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *VendorInvoicesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1958,7 +2022,7 @@ type VendorInvoicesServicePaginationResponse struct {
 
 func (x *VendorInvoicesServicePaginationResponse) Reset() {
 	*x = VendorInvoicesServicePaginationResponse{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[16]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1970,7 +2034,7 @@ func (x *VendorInvoicesServicePaginationResponse) String() string {
 func (*VendorInvoicesServicePaginationResponse) ProtoMessage() {}
 
 func (x *VendorInvoicesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[16]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1983,7 +2047,7 @@ func (x *VendorInvoicesServicePaginationResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use VendorInvoicesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{16}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *VendorInvoicesServicePaginationResponse) GetCount() uint64 {
@@ -2087,7 +2151,7 @@ type VendorInvoicesServiceFilterReq struct {
 
 func (x *VendorInvoicesServiceFilterReq) Reset() {
 	*x = VendorInvoicesServiceFilterReq{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[17]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2099,7 +2163,7 @@ func (x *VendorInvoicesServiceFilterReq) String() string {
 func (*VendorInvoicesServiceFilterReq) ProtoMessage() {}
 
 func (x *VendorInvoicesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[17]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2112,7 +2176,7 @@ func (x *VendorInvoicesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoicesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{17}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *VendorInvoicesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -2404,7 +2468,7 @@ type VendorInvoicesServiceCountReq struct {
 
 func (x *VendorInvoicesServiceCountReq) Reset() {
 	*x = VendorInvoicesServiceCountReq{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[18]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2416,7 +2480,7 @@ func (x *VendorInvoicesServiceCountReq) String() string {
 func (*VendorInvoicesServiceCountReq) ProtoMessage() {}
 
 func (x *VendorInvoicesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[18]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2429,7 +2493,7 @@ func (x *VendorInvoicesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoicesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{18}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *VendorInvoicesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2659,7 +2723,7 @@ type VendorInvoicesServiceSearchAllReq struct {
 
 func (x *VendorInvoicesServiceSearchAllReq) Reset() {
 	*x = VendorInvoicesServiceSearchAllReq{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[19]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2671,7 +2735,7 @@ func (x *VendorInvoicesServiceSearchAllReq) String() string {
 func (*VendorInvoicesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *VendorInvoicesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[19]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2684,7 +2748,7 @@ func (x *VendorInvoicesServiceSearchAllReq) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use VendorInvoicesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{19}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *VendorInvoicesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2779,7 +2843,7 @@ type VendorInvoicesServiceReferenceCreateRequest struct {
 
 func (x *VendorInvoicesServiceReferenceCreateRequest) Reset() {
 	*x = VendorInvoicesServiceReferenceCreateRequest{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[20]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2791,7 +2855,7 @@ func (x *VendorInvoicesServiceReferenceCreateRequest) String() string {
 func (*VendorInvoicesServiceReferenceCreateRequest) ProtoMessage() {}
 
 func (x *VendorInvoicesServiceReferenceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[20]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2804,7 +2868,7 @@ func (x *VendorInvoicesServiceReferenceCreateRequest) ProtoReflect() protoreflec
 
 // Deprecated: Use VendorInvoicesServiceReferenceCreateRequest.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServiceReferenceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{20}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *VendorInvoicesServiceReferenceCreateRequest) GetUserComment() string {
@@ -2851,7 +2915,7 @@ type VendorInvoiceReference struct {
 
 func (x *VendorInvoiceReference) Reset() {
 	*x = VendorInvoiceReference{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[21]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2863,7 +2927,7 @@ func (x *VendorInvoiceReference) String() string {
 func (*VendorInvoiceReference) ProtoMessage() {}
 
 func (x *VendorInvoiceReference) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[21]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2876,7 +2940,7 @@ func (x *VendorInvoiceReference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceReference.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceReference) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{21}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *VendorInvoiceReference) GetEntityUuid() string {
@@ -2939,7 +3003,7 @@ type VendorInvoiceReferencesList struct {
 
 func (x *VendorInvoiceReferencesList) Reset() {
 	*x = VendorInvoiceReferencesList{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[22]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2951,7 +3015,7 @@ func (x *VendorInvoiceReferencesList) String() string {
 func (*VendorInvoiceReferencesList) ProtoMessage() {}
 
 func (x *VendorInvoiceReferencesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[22]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2964,7 +3028,7 @@ func (x *VendorInvoiceReferencesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceReferencesList.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceReferencesList) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{22}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *VendorInvoiceReferencesList) GetList() []*VendorInvoiceReference {
@@ -3019,7 +3083,7 @@ type VendorInvoiceItemsSearchRequest struct {
 
 func (x *VendorInvoiceItemsSearchRequest) Reset() {
 	*x = VendorInvoiceItemsSearchRequest{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[23]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3031,7 +3095,7 @@ func (x *VendorInvoiceItemsSearchRequest) String() string {
 func (*VendorInvoiceItemsSearchRequest) ProtoMessage() {}
 
 func (x *VendorInvoiceItemsSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[23]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3044,7 +3108,7 @@ func (x *VendorInvoiceItemsSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceItemsSearchRequest.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceItemsSearchRequest) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{23}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *VendorInvoiceItemsSearchRequest) GetIsActive() BOOL_FILTER {
@@ -3183,7 +3247,7 @@ type VendorInvoicesServicePaginatedItemsResponse struct {
 
 func (x *VendorInvoicesServicePaginatedItemsResponse) Reset() {
 	*x = VendorInvoicesServicePaginatedItemsResponse{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[24]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3195,7 +3259,7 @@ func (x *VendorInvoicesServicePaginatedItemsResponse) String() string {
 func (*VendorInvoicesServicePaginatedItemsResponse) ProtoMessage() {}
 
 func (x *VendorInvoicesServicePaginatedItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[24]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3208,7 +3272,7 @@ func (x *VendorInvoicesServicePaginatedItemsResponse) ProtoReflect() protoreflec
 
 // Deprecated: Use VendorInvoicesServicePaginatedItemsResponse.ProtoReflect.Descriptor instead.
 func (*VendorInvoicesServicePaginatedItemsResponse) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{24}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *VendorInvoicesServicePaginatedItemsResponse) GetCount() uint64 {
@@ -3254,7 +3318,7 @@ type VendorInvoiceReceiptStatistics struct {
 
 func (x *VendorInvoiceReceiptStatistics) Reset() {
 	*x = VendorInvoiceReceiptStatistics{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[25]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3266,7 +3330,7 @@ func (x *VendorInvoiceReceiptStatistics) String() string {
 func (*VendorInvoiceReceiptStatistics) ProtoMessage() {}
 
 func (x *VendorInvoiceReceiptStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[25]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3279,7 +3343,7 @@ func (x *VendorInvoiceReceiptStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VendorInvoiceReceiptStatistics.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceReceiptStatistics) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{25}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *VendorInvoiceReceiptStatistics) GetFamilyId() uint64 {
@@ -3313,7 +3377,7 @@ type VendorInvoiceReceiptStatisticsList struct {
 
 func (x *VendorInvoiceReceiptStatisticsList) Reset() {
 	*x = VendorInvoiceReceiptStatisticsList{}
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[26]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3325,7 +3389,7 @@ func (x *VendorInvoiceReceiptStatisticsList) String() string {
 func (*VendorInvoiceReceiptStatisticsList) ProtoMessage() {}
 
 func (x *VendorInvoiceReceiptStatisticsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vendor_invoices_scailo_proto_msgTypes[26]
+	mi := &file_vendor_invoices_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3338,7 +3402,7 @@ func (x *VendorInvoiceReceiptStatisticsList) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use VendorInvoiceReceiptStatisticsList.ProtoReflect.Descriptor instead.
 func (*VendorInvoiceReceiptStatisticsList) Descriptor() ([]byte, []int) {
-	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{26}
+	return file_vendor_invoices_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *VendorInvoiceReceiptStatisticsList) GetList() []*VendorInvoiceReceiptStatistics {
@@ -3462,7 +3526,11 @@ const file_vendor_invoices_scailo_proto_rawDesc = "" +
 	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1b\n" +
 	"\tround_off\x18\x11 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\xa0\x05\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\x9f\x01\n" +
+	"4VendorInvoicesServiceItemSpecificationsUpdateRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12&\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xa0\x05\n" +
 	"\x11VendorInvoiceItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3684,7 +3752,7 @@ const file_vendor_invoices_scailo_proto_rawDesc = "" +
 	"\x1aVENDOR_INVOICE_ITEM_STATUS\x12.\n" +
 	"*VENDOR_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12'\n" +
 	"#VENDOR_INVOICE_ITEM_STATUS_APPROVED\x10\x01\x12)\n" +
-	"%VENDOR_INVOICE_ITEM_STATUS_UNAPPROVED\x10\x022\xff*\n" +
+	"%VENDOR_INVOICE_ITEM_STATUS_UNAPPROVED\x10\x022\x83,\n" +
 	"\x15VendorInvoicesService\x12P\n" +
 	"\x06Create\x12*.Scailo.VendorInvoicesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\x05Draft\x12*.Scailo.VendorInvoicesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
@@ -3708,7 +3776,8 @@ const file_vendor_invoices_scailo_proto_rawDesc = "" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12t\n" +
 	"\x1dAddMultipleVendorInvoiceItems\x127.Scailo.VendorInvoicesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12b\n" +
 	"\x14AddVendorInvoiceItem\x12..Scailo.VendorInvoicesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12e\n" +
-	"\x17ModifyVendorInvoiceItem\x12..Scailo.VendorInvoicesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
+	"\x17ModifyVendorInvoiceItem\x12..Scailo.VendorInvoicesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\x81\x01\n" +
+	"%UpdateVendorInvoiceItemSpecifications\x12<.Scailo.VendorInvoicesServiceItemSpecificationsUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x18ApproveVendorInvoiceItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
 	"\x17DeleteVendorInvoiceItem\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\x19ReorderVendorInvoiceItems\x12\x1b.Scailo.ReorderItemsRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
@@ -3768,7 +3837,7 @@ func file_vendor_invoices_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_vendor_invoices_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_vendor_invoices_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_vendor_invoices_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_vendor_invoices_scailo_proto_goTypes = []any{
 	(VENDOR_INVOICE_REF_FROM)(0),                                      // 0: Scailo.VENDOR_INVOICE_REF_FROM
 	(VENDOR_INVOICE_SORT_KEY)(0),                                      // 1: Scailo.VENDOR_INVOICE_SORT_KEY
@@ -3783,231 +3852,234 @@ var file_vendor_invoices_scailo_proto_goTypes = []any{
 	(*VendorInvoicesServiceMultipleItemsSingleton)(nil),               // 10: Scailo.VendorInvoicesServiceMultipleItemsSingleton
 	(*VendorInvoicesServiceMultipleItemsCreateRequest)(nil),           // 11: Scailo.VendorInvoicesServiceMultipleItemsCreateRequest
 	(*VendorInvoicesServiceItemUpdateRequest)(nil),                    // 12: Scailo.VendorInvoicesServiceItemUpdateRequest
-	(*VendorInvoiceItem)(nil),                                         // 13: Scailo.VendorInvoiceItem
-	(*VendorInvoicesList)(nil),                                        // 14: Scailo.VendorInvoicesList
-	(*VendorInvoiceItemsList)(nil),                                    // 15: Scailo.VendorInvoiceItemsList
-	(*VendorInvoiceItemHistoryRequest)(nil),                           // 16: Scailo.VendorInvoiceItemHistoryRequest
-	(*VendorInvoiceItemProspectiveInfoRequest)(nil),                   // 17: Scailo.VendorInvoiceItemProspectiveInfoRequest
-	(*VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 18: Scailo.VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest
-	(*VendorInvoicesServicePaginationReq)(nil),                        // 19: Scailo.VendorInvoicesServicePaginationReq
-	(*VendorInvoicesServicePaginationResponse)(nil),                   // 20: Scailo.VendorInvoicesServicePaginationResponse
-	(*VendorInvoicesServiceFilterReq)(nil),                            // 21: Scailo.VendorInvoicesServiceFilterReq
-	(*VendorInvoicesServiceCountReq)(nil),                             // 22: Scailo.VendorInvoicesServiceCountReq
-	(*VendorInvoicesServiceSearchAllReq)(nil),                         // 23: Scailo.VendorInvoicesServiceSearchAllReq
-	(*VendorInvoicesServiceReferenceCreateRequest)(nil),               // 24: Scailo.VendorInvoicesServiceReferenceCreateRequest
-	(*VendorInvoiceReference)(nil),                                    // 25: Scailo.VendorInvoiceReference
-	(*VendorInvoiceReferencesList)(nil),                               // 26: Scailo.VendorInvoiceReferencesList
-	(*VendorInvoiceItemsSearchRequest)(nil),                           // 27: Scailo.VendorInvoiceItemsSearchRequest
-	(*VendorInvoicesServicePaginatedItemsResponse)(nil),               // 28: Scailo.VendorInvoicesServicePaginatedItemsResponse
-	(*VendorInvoiceReceiptStatistics)(nil),                            // 29: Scailo.VendorInvoiceReceiptStatistics
-	(*VendorInvoiceReceiptStatisticsList)(nil),                        // 30: Scailo.VendorInvoiceReceiptStatisticsList
-	(*FormFieldDatumCreateRequest)(nil),                               // 31: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                          // 32: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                          // 33: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                                    // 34: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                                      // 35: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                            // 36: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                                  // 37: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                                   // 38: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                               // 39: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                             // 40: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                             // 41: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierUUID)(nil),                                            // 42: Scailo.IdentifierUUID
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),         // 43: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                                 // 44: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                       // 45: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                // 46: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                   // 47: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                     // 48: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                    // 49: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                           // 50: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                           // 51: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                              // 52: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                            // 53: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                   // 54: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                        // 55: Scailo.IdentifierResponse
-	(*BooleanResponse)(nil),                                           // 56: Scailo.BooleanResponse
-	(*MagicLink)(nil),                                                 // 57: Scailo.MagicLink
-	(*StandardFile)(nil),                                              // 58: Scailo.StandardFile
-	(*FamiliesList)(nil),                                              // 59: Scailo.FamiliesList
-	(*DualQuantitiesResponse)(nil),                                    // 60: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                             // 61: Scailo.CountResponse
-	(*SumResponse)(nil),                                               // 62: Scailo.SumResponse
+	(*VendorInvoicesServiceItemSpecificationsUpdateRequest)(nil),      // 13: Scailo.VendorInvoicesServiceItemSpecificationsUpdateRequest
+	(*VendorInvoiceItem)(nil),                                         // 14: Scailo.VendorInvoiceItem
+	(*VendorInvoicesList)(nil),                                        // 15: Scailo.VendorInvoicesList
+	(*VendorInvoiceItemsList)(nil),                                    // 16: Scailo.VendorInvoiceItemsList
+	(*VendorInvoiceItemHistoryRequest)(nil),                           // 17: Scailo.VendorInvoiceItemHistoryRequest
+	(*VendorInvoiceItemProspectiveInfoRequest)(nil),                   // 18: Scailo.VendorInvoiceItemProspectiveInfoRequest
+	(*VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest)(nil), // 19: Scailo.VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest
+	(*VendorInvoicesServicePaginationReq)(nil),                        // 20: Scailo.VendorInvoicesServicePaginationReq
+	(*VendorInvoicesServicePaginationResponse)(nil),                   // 21: Scailo.VendorInvoicesServicePaginationResponse
+	(*VendorInvoicesServiceFilterReq)(nil),                            // 22: Scailo.VendorInvoicesServiceFilterReq
+	(*VendorInvoicesServiceCountReq)(nil),                             // 23: Scailo.VendorInvoicesServiceCountReq
+	(*VendorInvoicesServiceSearchAllReq)(nil),                         // 24: Scailo.VendorInvoicesServiceSearchAllReq
+	(*VendorInvoicesServiceReferenceCreateRequest)(nil),               // 25: Scailo.VendorInvoicesServiceReferenceCreateRequest
+	(*VendorInvoiceReference)(nil),                                    // 26: Scailo.VendorInvoiceReference
+	(*VendorInvoiceReferencesList)(nil),                               // 27: Scailo.VendorInvoiceReferencesList
+	(*VendorInvoiceItemsSearchRequest)(nil),                           // 28: Scailo.VendorInvoiceItemsSearchRequest
+	(*VendorInvoicesServicePaginatedItemsResponse)(nil),               // 29: Scailo.VendorInvoicesServicePaginatedItemsResponse
+	(*VendorInvoiceReceiptStatistics)(nil),                            // 30: Scailo.VendorInvoiceReceiptStatistics
+	(*VendorInvoiceReceiptStatisticsList)(nil),                        // 31: Scailo.VendorInvoiceReceiptStatisticsList
+	(*FormFieldDatumCreateRequest)(nil),                               // 32: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                          // 33: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                          // 34: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                                    // 35: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                                      // 36: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                            // 37: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                                  // 38: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                                   // 39: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                               // 40: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                             // 41: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                             // 42: Scailo.IdentifierWithEmailAttributes
+	(*IdentifierUUID)(nil),                                            // 43: Scailo.IdentifierUUID
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),         // 44: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                                 // 45: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                       // 46: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                // 47: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                   // 48: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                     // 49: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                    // 50: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                           // 51: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                           // 52: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                              // 53: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                            // 54: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                   // 55: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                        // 56: Scailo.IdentifierResponse
+	(*BooleanResponse)(nil),                                           // 57: Scailo.BooleanResponse
+	(*MagicLink)(nil),                                                 // 58: Scailo.MagicLink
+	(*StandardFile)(nil),                                              // 59: Scailo.StandardFile
+	(*FamiliesList)(nil),                                              // 60: Scailo.FamiliesList
+	(*DualQuantitiesResponse)(nil),                                    // 61: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                             // 62: Scailo.CountResponse
+	(*SumResponse)(nil),                                               // 63: Scailo.SumResponse
 }
 var file_vendor_invoices_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.VendorInvoicesServiceCreateRequest.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	31,  // 1: Scailo.VendorInvoicesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	31,  // 2: Scailo.VendorInvoicesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	32,  // 3: Scailo.VendorInvoice.metadata:type_name -> Scailo.EmployeeMetadata
-	33,  // 4: Scailo.VendorInvoice.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	34,  // 5: Scailo.VendorInvoice.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	35,  // 6: Scailo.VendorInvoice.logs:type_name -> Scailo.LogbookLogConciseSLC
+	32,  // 1: Scailo.VendorInvoicesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	32,  // 2: Scailo.VendorInvoicesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	33,  // 3: Scailo.VendorInvoice.metadata:type_name -> Scailo.EmployeeMetadata
+	34,  // 4: Scailo.VendorInvoice.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	35,  // 5: Scailo.VendorInvoice.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	36,  // 6: Scailo.VendorInvoice.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 7: Scailo.VendorInvoice.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	13,  // 8: Scailo.VendorInvoice.list:type_name -> Scailo.VendorInvoiceItem
-	36,  // 9: Scailo.VendorInvoice.form_data:type_name -> Scailo.FormFieldDatum
+	14,  // 8: Scailo.VendorInvoice.list:type_name -> Scailo.VendorInvoiceItem
+	37,  // 9: Scailo.VendorInvoice.form_data:type_name -> Scailo.FormFieldDatum
 	10,  // 10: Scailo.VendorInvoicesServiceMultipleItemsCreateRequest.list:type_name -> Scailo.VendorInvoicesServiceMultipleItemsSingleton
-	32,  // 11: Scailo.VendorInvoiceItem.metadata:type_name -> Scailo.EmployeeMetadata
-	33,  // 12: Scailo.VendorInvoiceItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	33,  // 11: Scailo.VendorInvoiceItem.metadata:type_name -> Scailo.EmployeeMetadata
+	34,  // 12: Scailo.VendorInvoiceItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
 	8,   // 13: Scailo.VendorInvoicesList.list:type_name -> Scailo.VendorInvoice
-	13,  // 14: Scailo.VendorInvoiceItemsList.list:type_name -> Scailo.VendorInvoiceItem
+	14,  // 14: Scailo.VendorInvoiceItemsList.list:type_name -> Scailo.VendorInvoiceItem
 	0,   // 15: Scailo.VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	37,  // 16: Scailo.VendorInvoicesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	38,  // 17: Scailo.VendorInvoicesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	38,  // 16: Scailo.VendorInvoicesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39,  // 17: Scailo.VendorInvoicesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 18: Scailo.VendorInvoicesServicePaginationReq.sort_key:type_name -> Scailo.VENDOR_INVOICE_SORT_KEY
-	34,  // 19: Scailo.VendorInvoicesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 19: Scailo.VendorInvoicesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	8,   // 20: Scailo.VendorInvoicesServicePaginationResponse.payload:type_name -> Scailo.VendorInvoice
-	37,  // 21: Scailo.VendorInvoicesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	38,  // 22: Scailo.VendorInvoicesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	38,  // 21: Scailo.VendorInvoicesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39,  // 22: Scailo.VendorInvoicesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 23: Scailo.VendorInvoicesServiceFilterReq.sort_key:type_name -> Scailo.VENDOR_INVOICE_SORT_KEY
-	34,  // 24: Scailo.VendorInvoicesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 24: Scailo.VendorInvoicesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 25: Scailo.VendorInvoicesServiceFilterReq.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	39,  // 26: Scailo.VendorInvoicesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	37,  // 27: Scailo.VendorInvoicesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34,  // 28: Scailo.VendorInvoicesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	40,  // 26: Scailo.VendorInvoicesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	38,  // 27: Scailo.VendorInvoicesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 28: Scailo.VendorInvoicesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 29: Scailo.VendorInvoicesServiceCountReq.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	39,  // 30: Scailo.VendorInvoicesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	37,  // 31: Scailo.VendorInvoicesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	38,  // 32: Scailo.VendorInvoicesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	40,  // 30: Scailo.VendorInvoicesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	38,  // 31: Scailo.VendorInvoicesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39,  // 32: Scailo.VendorInvoicesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,   // 33: Scailo.VendorInvoicesServiceSearchAllReq.sort_key:type_name -> Scailo.VENDOR_INVOICE_SORT_KEY
-	34,  // 34: Scailo.VendorInvoicesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	35,  // 34: Scailo.VendorInvoicesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 35: Scailo.VendorInvoicesServiceSearchAllReq.ref_from:type_name -> Scailo.VENDOR_INVOICE_REF_FROM
-	32,  // 36: Scailo.VendorInvoiceReference.metadata:type_name -> Scailo.EmployeeMetadata
-	33,  // 37: Scailo.VendorInvoiceReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	25,  // 38: Scailo.VendorInvoiceReferencesList.list:type_name -> Scailo.VendorInvoiceReference
-	37,  // 39: Scailo.VendorInvoiceItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	38,  // 40: Scailo.VendorInvoiceItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	33,  // 36: Scailo.VendorInvoiceReference.metadata:type_name -> Scailo.EmployeeMetadata
+	34,  // 37: Scailo.VendorInvoiceReference.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	26,  // 38: Scailo.VendorInvoiceReferencesList.list:type_name -> Scailo.VendorInvoiceReference
+	38,  // 39: Scailo.VendorInvoiceItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	39,  // 40: Scailo.VendorInvoiceItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
 	2,   // 41: Scailo.VendorInvoiceItemsSearchRequest.sort_key:type_name -> Scailo.VENDOR_INVOICE_ITEM_SORT_KEY
 	3,   // 42: Scailo.VendorInvoiceItemsSearchRequest.status:type_name -> Scailo.VENDOR_INVOICE_ITEM_STATUS
-	13,  // 43: Scailo.VendorInvoicesServicePaginatedItemsResponse.payload:type_name -> Scailo.VendorInvoiceItem
-	29,  // 44: Scailo.VendorInvoiceReceiptStatisticsList.list:type_name -> Scailo.VendorInvoiceReceiptStatistics
+	14,  // 43: Scailo.VendorInvoicesServicePaginatedItemsResponse.payload:type_name -> Scailo.VendorInvoiceItem
+	30,  // 44: Scailo.VendorInvoiceReceiptStatisticsList.list:type_name -> Scailo.VendorInvoiceReceiptStatistics
 	4,   // 45: Scailo.VendorInvoicesService.Create:input_type -> Scailo.VendorInvoicesServiceCreateRequest
 	4,   // 46: Scailo.VendorInvoicesService.Draft:input_type -> Scailo.VendorInvoicesServiceCreateRequest
 	5,   // 47: Scailo.VendorInvoicesService.DraftUpdate:input_type -> Scailo.VendorInvoicesServiceUpdateRequest
-	40,  // 48: Scailo.VendorInvoicesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 49: Scailo.VendorInvoicesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 50: Scailo.VendorInvoicesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 51: Scailo.VendorInvoicesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 48: Scailo.VendorInvoicesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 49: Scailo.VendorInvoicesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 50: Scailo.VendorInvoicesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 51: Scailo.VendorInvoicesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
 	5,   // 52: Scailo.VendorInvoicesService.RevisionUpdate:input_type -> Scailo.VendorInvoicesServiceUpdateRequest
-	40,  // 53: Scailo.VendorInvoicesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 54: Scailo.VendorInvoicesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 55: Scailo.VendorInvoicesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 56: Scailo.VendorInvoicesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 57: Scailo.VendorInvoicesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 58: Scailo.VendorInvoicesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40,  // 59: Scailo.VendorInvoicesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	41,  // 60: Scailo.VendorInvoicesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	41,  // 53: Scailo.VendorInvoicesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 54: Scailo.VendorInvoicesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 55: Scailo.VendorInvoicesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 56: Scailo.VendorInvoicesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 57: Scailo.VendorInvoicesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 58: Scailo.VendorInvoicesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 59: Scailo.VendorInvoicesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	42,  // 60: Scailo.VendorInvoicesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
 	6,   // 61: Scailo.VendorInvoicesService.Autofill:input_type -> Scailo.VendorInvoicesServiceAutofillRequest
-	42,  // 62: Scailo.VendorInvoicesService.IsAdmittedToStore:input_type -> Scailo.IdentifierUUID
-	43,  // 63: Scailo.VendorInvoicesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	43,  // 62: Scailo.VendorInvoicesService.IsAdmittedToStore:input_type -> Scailo.IdentifierUUID
+	44,  // 63: Scailo.VendorInvoicesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
 	11,  // 64: Scailo.VendorInvoicesService.AddMultipleVendorInvoiceItems:input_type -> Scailo.VendorInvoicesServiceMultipleItemsCreateRequest
 	9,   // 65: Scailo.VendorInvoicesService.AddVendorInvoiceItem:input_type -> Scailo.VendorInvoicesServiceItemCreateRequest
 	12,  // 66: Scailo.VendorInvoicesService.ModifyVendorInvoiceItem:input_type -> Scailo.VendorInvoicesServiceItemUpdateRequest
-	44,  // 67: Scailo.VendorInvoicesService.ApproveVendorInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 68: Scailo.VendorInvoicesService.DeleteVendorInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 69: Scailo.VendorInvoicesService.ReorderVendorInvoiceItems:input_type -> Scailo.ReorderItemsRequest
-	46,  // 70: Scailo.VendorInvoicesService.ViewVendorInvoiceItemByID:input_type -> Scailo.Identifier
-	47,  // 71: Scailo.VendorInvoicesService.ViewApprovedVendorInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
-	47,  // 72: Scailo.VendorInvoicesService.ViewUnapprovedVendorInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
-	16,  // 73: Scailo.VendorInvoicesService.ViewVendorInvoiceItemHistory:input_type -> Scailo.VendorInvoiceItemHistoryRequest
-	27,  // 74: Scailo.VendorInvoicesService.ViewPaginatedApprovedVendorInvoiceItems:input_type -> Scailo.VendorInvoiceItemsSearchRequest
-	27,  // 75: Scailo.VendorInvoicesService.ViewPaginatedUnapprovedVendorInvoiceItems:input_type -> Scailo.VendorInvoiceItemsSearchRequest
-	27,  // 76: Scailo.VendorInvoicesService.SearchItemsWithPagination:input_type -> Scailo.VendorInvoiceItemsSearchRequest
-	42,  // 77: Scailo.VendorInvoicesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	48,  // 78: Scailo.VendorInvoicesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	49,  // 79: Scailo.VendorInvoicesService.UploadVendorInvoiceItems:input_type -> Scailo.IdentifierUUIDWithFile
-	24,  // 80: Scailo.VendorInvoicesService.AddVendorInvoiceReference:input_type -> Scailo.VendorInvoicesServiceReferenceCreateRequest
-	44,  // 81: Scailo.VendorInvoicesService.ApproveVendorInvoiceReference:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 82: Scailo.VendorInvoicesService.DeleteVendorInvoiceReference:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 83: Scailo.VendorInvoicesService.ViewVendorInvoiceReferenceByID:input_type -> Scailo.Identifier
-	46,  // 84: Scailo.VendorInvoicesService.ViewVendorInvoiceReferences:input_type -> Scailo.Identifier
-	46,  // 85: Scailo.VendorInvoicesService.ViewByID:input_type -> Scailo.Identifier
-	42,  // 86: Scailo.VendorInvoicesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	50,  // 87: Scailo.VendorInvoicesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	46,  // 88: Scailo.VendorInvoicesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	42,  // 89: Scailo.VendorInvoicesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	51,  // 90: Scailo.VendorInvoicesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	42,  // 91: Scailo.VendorInvoicesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	52,  // 92: Scailo.VendorInvoicesService.ViewAll:input_type -> Scailo.ActiveStatus
-	42,  // 93: Scailo.VendorInvoicesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 94: Scailo.VendorInvoicesService.ViewWithPagination:input_type -> Scailo.VendorInvoicesServicePaginationReq
-	47,  // 95: Scailo.VendorInvoicesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	53,  // 96: Scailo.VendorInvoicesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	17,  // 97: Scailo.VendorInvoicesService.ViewProspectiveVendorInvoiceItem:input_type -> Scailo.VendorInvoiceItemProspectiveInfoRequest
-	42,  // 98: Scailo.VendorInvoicesService.ViewReceiptStatistics:input_type -> Scailo.IdentifierUUID
-	18,  // 99: Scailo.VendorInvoicesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest
-	42,  // 100: Scailo.VendorInvoicesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	42,  // 101: Scailo.VendorInvoicesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	23,  // 102: Scailo.VendorInvoicesService.SearchAll:input_type -> Scailo.VendorInvoicesServiceSearchAllReq
-	21,  // 103: Scailo.VendorInvoicesService.Filter:input_type -> Scailo.VendorInvoicesServiceFilterReq
-	54,  // 104: Scailo.VendorInvoicesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 105: Scailo.VendorInvoicesService.Count:input_type -> Scailo.VendorInvoicesServiceCountReq
-	22,  // 106: Scailo.VendorInvoicesService.AccruedValue:input_type -> Scailo.VendorInvoicesServiceCountReq
-	21,  // 107: Scailo.VendorInvoicesService.DownloadAsCSV:input_type -> Scailo.VendorInvoicesServiceFilterReq
-	55,  // 108: Scailo.VendorInvoicesService.Create:output_type -> Scailo.IdentifierResponse
-	55,  // 109: Scailo.VendorInvoicesService.Draft:output_type -> Scailo.IdentifierResponse
-	55,  // 110: Scailo.VendorInvoicesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	55,  // 111: Scailo.VendorInvoicesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	55,  // 112: Scailo.VendorInvoicesService.Verify:output_type -> Scailo.IdentifierResponse
-	55,  // 113: Scailo.VendorInvoicesService.Approve:output_type -> Scailo.IdentifierResponse
-	55,  // 114: Scailo.VendorInvoicesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	55,  // 115: Scailo.VendorInvoicesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	55,  // 116: Scailo.VendorInvoicesService.Halt:output_type -> Scailo.IdentifierResponse
-	55,  // 117: Scailo.VendorInvoicesService.Discard:output_type -> Scailo.IdentifierResponse
-	55,  // 118: Scailo.VendorInvoicesService.Restore:output_type -> Scailo.IdentifierResponse
-	55,  // 119: Scailo.VendorInvoicesService.Complete:output_type -> Scailo.IdentifierResponse
-	55,  // 120: Scailo.VendorInvoicesService.Repeat:output_type -> Scailo.IdentifierResponse
-	55,  // 121: Scailo.VendorInvoicesService.Reopen:output_type -> Scailo.IdentifierResponse
-	55,  // 122: Scailo.VendorInvoicesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	55,  // 123: Scailo.VendorInvoicesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	55,  // 124: Scailo.VendorInvoicesService.Autofill:output_type -> Scailo.IdentifierResponse
-	56,  // 125: Scailo.VendorInvoicesService.IsAdmittedToStore:output_type -> Scailo.BooleanResponse
-	57,  // 126: Scailo.VendorInvoicesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	55,  // 127: Scailo.VendorInvoicesService.AddMultipleVendorInvoiceItems:output_type -> Scailo.IdentifierResponse
-	55,  // 128: Scailo.VendorInvoicesService.AddVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
-	55,  // 129: Scailo.VendorInvoicesService.ModifyVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
-	55,  // 130: Scailo.VendorInvoicesService.ApproveVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
-	55,  // 131: Scailo.VendorInvoicesService.DeleteVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
-	55,  // 132: Scailo.VendorInvoicesService.ReorderVendorInvoiceItems:output_type -> Scailo.IdentifierResponse
-	13,  // 133: Scailo.VendorInvoicesService.ViewVendorInvoiceItemByID:output_type -> Scailo.VendorInvoiceItem
-	15,  // 134: Scailo.VendorInvoicesService.ViewApprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoiceItemsList
-	15,  // 135: Scailo.VendorInvoicesService.ViewUnapprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoiceItemsList
-	15,  // 136: Scailo.VendorInvoicesService.ViewVendorInvoiceItemHistory:output_type -> Scailo.VendorInvoiceItemsList
-	28,  // 137: Scailo.VendorInvoicesService.ViewPaginatedApprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
-	28,  // 138: Scailo.VendorInvoicesService.ViewPaginatedUnapprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
-	28,  // 139: Scailo.VendorInvoicesService.SearchItemsWithPagination:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
-	58,  // 140: Scailo.VendorInvoicesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	58,  // 141: Scailo.VendorInvoicesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	51,  // 142: Scailo.VendorInvoicesService.UploadVendorInvoiceItems:output_type -> Scailo.IdentifiersList
-	55,  // 143: Scailo.VendorInvoicesService.AddVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
-	55,  // 144: Scailo.VendorInvoicesService.ApproveVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
-	55,  // 145: Scailo.VendorInvoicesService.DeleteVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
-	25,  // 146: Scailo.VendorInvoicesService.ViewVendorInvoiceReferenceByID:output_type -> Scailo.VendorInvoiceReference
-	26,  // 147: Scailo.VendorInvoicesService.ViewVendorInvoiceReferences:output_type -> Scailo.VendorInvoiceReferencesList
-	8,   // 148: Scailo.VendorInvoicesService.ViewByID:output_type -> Scailo.VendorInvoice
-	8,   // 149: Scailo.VendorInvoicesService.ViewByUUID:output_type -> Scailo.VendorInvoice
-	8,   // 150: Scailo.VendorInvoicesService.ViewByReferenceID:output_type -> Scailo.VendorInvoice
-	8,   // 151: Scailo.VendorInvoicesService.ViewEssentialByID:output_type -> Scailo.VendorInvoice
-	8,   // 152: Scailo.VendorInvoicesService.ViewEssentialByUUID:output_type -> Scailo.VendorInvoice
-	14,  // 153: Scailo.VendorInvoicesService.ViewFromIDs:output_type -> Scailo.VendorInvoicesList
-	7,   // 154: Scailo.VendorInvoicesService.ViewAncillaryParametersByUUID:output_type -> Scailo.VendorInvoiceAncillaryParameters
-	14,  // 155: Scailo.VendorInvoicesService.ViewAll:output_type -> Scailo.VendorInvoicesList
-	14,  // 156: Scailo.VendorInvoicesService.ViewAllForEntityUUID:output_type -> Scailo.VendorInvoicesList
-	20,  // 157: Scailo.VendorInvoicesService.ViewWithPagination:output_type -> Scailo.VendorInvoicesServicePaginationResponse
-	59,  // 158: Scailo.VendorInvoicesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	59,  // 159: Scailo.VendorInvoicesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 160: Scailo.VendorInvoicesService.ViewProspectiveVendorInvoiceItem:output_type -> Scailo.VendorInvoicesServiceItemCreateRequest
-	30,  // 161: Scailo.VendorInvoicesService.ViewReceiptStatistics:output_type -> Scailo.VendorInvoiceReceiptStatisticsList
-	60,  // 162: Scailo.VendorInvoicesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	56,  // 163: Scailo.VendorInvoicesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	58,  // 164: Scailo.VendorInvoicesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	14,  // 165: Scailo.VendorInvoicesService.SearchAll:output_type -> Scailo.VendorInvoicesList
-	14,  // 166: Scailo.VendorInvoicesService.Filter:output_type -> Scailo.VendorInvoicesList
-	61,  // 167: Scailo.VendorInvoicesService.CountInStatus:output_type -> Scailo.CountResponse
-	61,  // 168: Scailo.VendorInvoicesService.Count:output_type -> Scailo.CountResponse
-	62,  // 169: Scailo.VendorInvoicesService.AccruedValue:output_type -> Scailo.SumResponse
-	58,  // 170: Scailo.VendorInvoicesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	108, // [108:171] is the sub-list for method output_type
-	45,  // [45:108] is the sub-list for method input_type
+	13,  // 67: Scailo.VendorInvoicesService.UpdateVendorInvoiceItemSpecifications:input_type -> Scailo.VendorInvoicesServiceItemSpecificationsUpdateRequest
+	45,  // 68: Scailo.VendorInvoicesService.ApproveVendorInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 69: Scailo.VendorInvoicesService.DeleteVendorInvoiceItem:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 70: Scailo.VendorInvoicesService.ReorderVendorInvoiceItems:input_type -> Scailo.ReorderItemsRequest
+	47,  // 71: Scailo.VendorInvoicesService.ViewVendorInvoiceItemByID:input_type -> Scailo.Identifier
+	48,  // 72: Scailo.VendorInvoicesService.ViewApprovedVendorInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
+	48,  // 73: Scailo.VendorInvoicesService.ViewUnapprovedVendorInvoiceItems:input_type -> Scailo.IdentifierWithSearchKey
+	17,  // 74: Scailo.VendorInvoicesService.ViewVendorInvoiceItemHistory:input_type -> Scailo.VendorInvoiceItemHistoryRequest
+	28,  // 75: Scailo.VendorInvoicesService.ViewPaginatedApprovedVendorInvoiceItems:input_type -> Scailo.VendorInvoiceItemsSearchRequest
+	28,  // 76: Scailo.VendorInvoicesService.ViewPaginatedUnapprovedVendorInvoiceItems:input_type -> Scailo.VendorInvoiceItemsSearchRequest
+	28,  // 77: Scailo.VendorInvoicesService.SearchItemsWithPagination:input_type -> Scailo.VendorInvoiceItemsSearchRequest
+	43,  // 78: Scailo.VendorInvoicesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	49,  // 79: Scailo.VendorInvoicesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	50,  // 80: Scailo.VendorInvoicesService.UploadVendorInvoiceItems:input_type -> Scailo.IdentifierUUIDWithFile
+	25,  // 81: Scailo.VendorInvoicesService.AddVendorInvoiceReference:input_type -> Scailo.VendorInvoicesServiceReferenceCreateRequest
+	45,  // 82: Scailo.VendorInvoicesService.ApproveVendorInvoiceReference:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 83: Scailo.VendorInvoicesService.DeleteVendorInvoiceReference:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 84: Scailo.VendorInvoicesService.ViewVendorInvoiceReferenceByID:input_type -> Scailo.Identifier
+	47,  // 85: Scailo.VendorInvoicesService.ViewVendorInvoiceReferences:input_type -> Scailo.Identifier
+	47,  // 86: Scailo.VendorInvoicesService.ViewByID:input_type -> Scailo.Identifier
+	43,  // 87: Scailo.VendorInvoicesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	51,  // 88: Scailo.VendorInvoicesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	47,  // 89: Scailo.VendorInvoicesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	43,  // 90: Scailo.VendorInvoicesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	52,  // 91: Scailo.VendorInvoicesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	43,  // 92: Scailo.VendorInvoicesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	53,  // 93: Scailo.VendorInvoicesService.ViewAll:input_type -> Scailo.ActiveStatus
+	43,  // 94: Scailo.VendorInvoicesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	20,  // 95: Scailo.VendorInvoicesService.ViewWithPagination:input_type -> Scailo.VendorInvoicesServicePaginationReq
+	48,  // 96: Scailo.VendorInvoicesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	54,  // 97: Scailo.VendorInvoicesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	18,  // 98: Scailo.VendorInvoicesService.ViewProspectiveVendorInvoiceItem:input_type -> Scailo.VendorInvoiceItemProspectiveInfoRequest
+	43,  // 99: Scailo.VendorInvoicesService.ViewReceiptStatistics:input_type -> Scailo.IdentifierUUID
+	19,  // 100: Scailo.VendorInvoicesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.VendorInvoicesServiceAlreadyAddedQuantityForSourceRequest
+	43,  // 101: Scailo.VendorInvoicesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	43,  // 102: Scailo.VendorInvoicesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	24,  // 103: Scailo.VendorInvoicesService.SearchAll:input_type -> Scailo.VendorInvoicesServiceSearchAllReq
+	22,  // 104: Scailo.VendorInvoicesService.Filter:input_type -> Scailo.VendorInvoicesServiceFilterReq
+	55,  // 105: Scailo.VendorInvoicesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	23,  // 106: Scailo.VendorInvoicesService.Count:input_type -> Scailo.VendorInvoicesServiceCountReq
+	23,  // 107: Scailo.VendorInvoicesService.AccruedValue:input_type -> Scailo.VendorInvoicesServiceCountReq
+	22,  // 108: Scailo.VendorInvoicesService.DownloadAsCSV:input_type -> Scailo.VendorInvoicesServiceFilterReq
+	56,  // 109: Scailo.VendorInvoicesService.Create:output_type -> Scailo.IdentifierResponse
+	56,  // 110: Scailo.VendorInvoicesService.Draft:output_type -> Scailo.IdentifierResponse
+	56,  // 111: Scailo.VendorInvoicesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 112: Scailo.VendorInvoicesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	56,  // 113: Scailo.VendorInvoicesService.Verify:output_type -> Scailo.IdentifierResponse
+	56,  // 114: Scailo.VendorInvoicesService.Approve:output_type -> Scailo.IdentifierResponse
+	56,  // 115: Scailo.VendorInvoicesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	56,  // 116: Scailo.VendorInvoicesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 117: Scailo.VendorInvoicesService.Halt:output_type -> Scailo.IdentifierResponse
+	56,  // 118: Scailo.VendorInvoicesService.Discard:output_type -> Scailo.IdentifierResponse
+	56,  // 119: Scailo.VendorInvoicesService.Restore:output_type -> Scailo.IdentifierResponse
+	56,  // 120: Scailo.VendorInvoicesService.Complete:output_type -> Scailo.IdentifierResponse
+	56,  // 121: Scailo.VendorInvoicesService.Repeat:output_type -> Scailo.IdentifierResponse
+	56,  // 122: Scailo.VendorInvoicesService.Reopen:output_type -> Scailo.IdentifierResponse
+	56,  // 123: Scailo.VendorInvoicesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	56,  // 124: Scailo.VendorInvoicesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	56,  // 125: Scailo.VendorInvoicesService.Autofill:output_type -> Scailo.IdentifierResponse
+	57,  // 126: Scailo.VendorInvoicesService.IsAdmittedToStore:output_type -> Scailo.BooleanResponse
+	58,  // 127: Scailo.VendorInvoicesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	56,  // 128: Scailo.VendorInvoicesService.AddMultipleVendorInvoiceItems:output_type -> Scailo.IdentifierResponse
+	56,  // 129: Scailo.VendorInvoicesService.AddVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
+	56,  // 130: Scailo.VendorInvoicesService.ModifyVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
+	56,  // 131: Scailo.VendorInvoicesService.UpdateVendorInvoiceItemSpecifications:output_type -> Scailo.IdentifierResponse
+	56,  // 132: Scailo.VendorInvoicesService.ApproveVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
+	56,  // 133: Scailo.VendorInvoicesService.DeleteVendorInvoiceItem:output_type -> Scailo.IdentifierResponse
+	56,  // 134: Scailo.VendorInvoicesService.ReorderVendorInvoiceItems:output_type -> Scailo.IdentifierResponse
+	14,  // 135: Scailo.VendorInvoicesService.ViewVendorInvoiceItemByID:output_type -> Scailo.VendorInvoiceItem
+	16,  // 136: Scailo.VendorInvoicesService.ViewApprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoiceItemsList
+	16,  // 137: Scailo.VendorInvoicesService.ViewUnapprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoiceItemsList
+	16,  // 138: Scailo.VendorInvoicesService.ViewVendorInvoiceItemHistory:output_type -> Scailo.VendorInvoiceItemsList
+	29,  // 139: Scailo.VendorInvoicesService.ViewPaginatedApprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
+	29,  // 140: Scailo.VendorInvoicesService.ViewPaginatedUnapprovedVendorInvoiceItems:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
+	29,  // 141: Scailo.VendorInvoicesService.SearchItemsWithPagination:output_type -> Scailo.VendorInvoicesServicePaginatedItemsResponse
+	59,  // 142: Scailo.VendorInvoicesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	59,  // 143: Scailo.VendorInvoicesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	52,  // 144: Scailo.VendorInvoicesService.UploadVendorInvoiceItems:output_type -> Scailo.IdentifiersList
+	56,  // 145: Scailo.VendorInvoicesService.AddVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
+	56,  // 146: Scailo.VendorInvoicesService.ApproveVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
+	56,  // 147: Scailo.VendorInvoicesService.DeleteVendorInvoiceReference:output_type -> Scailo.IdentifierResponse
+	26,  // 148: Scailo.VendorInvoicesService.ViewVendorInvoiceReferenceByID:output_type -> Scailo.VendorInvoiceReference
+	27,  // 149: Scailo.VendorInvoicesService.ViewVendorInvoiceReferences:output_type -> Scailo.VendorInvoiceReferencesList
+	8,   // 150: Scailo.VendorInvoicesService.ViewByID:output_type -> Scailo.VendorInvoice
+	8,   // 151: Scailo.VendorInvoicesService.ViewByUUID:output_type -> Scailo.VendorInvoice
+	8,   // 152: Scailo.VendorInvoicesService.ViewByReferenceID:output_type -> Scailo.VendorInvoice
+	8,   // 153: Scailo.VendorInvoicesService.ViewEssentialByID:output_type -> Scailo.VendorInvoice
+	8,   // 154: Scailo.VendorInvoicesService.ViewEssentialByUUID:output_type -> Scailo.VendorInvoice
+	15,  // 155: Scailo.VendorInvoicesService.ViewFromIDs:output_type -> Scailo.VendorInvoicesList
+	7,   // 156: Scailo.VendorInvoicesService.ViewAncillaryParametersByUUID:output_type -> Scailo.VendorInvoiceAncillaryParameters
+	15,  // 157: Scailo.VendorInvoicesService.ViewAll:output_type -> Scailo.VendorInvoicesList
+	15,  // 158: Scailo.VendorInvoicesService.ViewAllForEntityUUID:output_type -> Scailo.VendorInvoicesList
+	21,  // 159: Scailo.VendorInvoicesService.ViewWithPagination:output_type -> Scailo.VendorInvoicesServicePaginationResponse
+	60,  // 160: Scailo.VendorInvoicesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	60,  // 161: Scailo.VendorInvoicesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 162: Scailo.VendorInvoicesService.ViewProspectiveVendorInvoiceItem:output_type -> Scailo.VendorInvoicesServiceItemCreateRequest
+	31,  // 163: Scailo.VendorInvoicesService.ViewReceiptStatistics:output_type -> Scailo.VendorInvoiceReceiptStatisticsList
+	61,  // 164: Scailo.VendorInvoicesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	57,  // 165: Scailo.VendorInvoicesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	59,  // 166: Scailo.VendorInvoicesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	15,  // 167: Scailo.VendorInvoicesService.SearchAll:output_type -> Scailo.VendorInvoicesList
+	15,  // 168: Scailo.VendorInvoicesService.Filter:output_type -> Scailo.VendorInvoicesList
+	62,  // 169: Scailo.VendorInvoicesService.CountInStatus:output_type -> Scailo.CountResponse
+	62,  // 170: Scailo.VendorInvoicesService.Count:output_type -> Scailo.CountResponse
+	63,  // 171: Scailo.VendorInvoicesService.AccruedValue:output_type -> Scailo.SumResponse
+	59,  // 172: Scailo.VendorInvoicesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	109, // [109:173] is the sub-list for method output_type
+	45,  // [45:109] is the sub-list for method input_type
 	45,  // [45:45] is the sub-list for extension type_name
 	45,  // [45:45] is the sub-list for extension extendee
 	0,   // [0:45] is the sub-list for field type_name
@@ -4028,7 +4100,7 @@ func file_vendor_invoices_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vendor_invoices_scailo_proto_rawDesc), len(file_vendor_invoices_scailo_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   27,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -40,6 +40,7 @@ const (
 	VendorInvoicesService_AddMultipleVendorInvoiceItems_FullMethodName             = "/Scailo.VendorInvoicesService/AddMultipleVendorInvoiceItems"
 	VendorInvoicesService_AddVendorInvoiceItem_FullMethodName                      = "/Scailo.VendorInvoicesService/AddVendorInvoiceItem"
 	VendorInvoicesService_ModifyVendorInvoiceItem_FullMethodName                   = "/Scailo.VendorInvoicesService/ModifyVendorInvoiceItem"
+	VendorInvoicesService_UpdateVendorInvoiceItemSpecifications_FullMethodName     = "/Scailo.VendorInvoicesService/UpdateVendorInvoiceItemSpecifications"
 	VendorInvoicesService_ApproveVendorInvoiceItem_FullMethodName                  = "/Scailo.VendorInvoicesService/ApproveVendorInvoiceItem"
 	VendorInvoicesService_DeleteVendorInvoiceItem_FullMethodName                   = "/Scailo.VendorInvoicesService/DeleteVendorInvoiceItem"
 	VendorInvoicesService_ReorderVendorInvoiceItems_FullMethodName                 = "/Scailo.VendorInvoicesService/ReorderVendorInvoiceItems"
@@ -133,6 +134,8 @@ type VendorInvoicesServiceClient interface {
 	AddVendorInvoiceItem(ctx context.Context, in *VendorInvoicesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a vendor invoice
 	ModifyVendorInvoiceItem(ctx context.Context, in *VendorInvoicesServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Update specifications of an item in a vendor invoice
+	UpdateVendorInvoiceItemSpecifications(ctx context.Context, in *VendorInvoicesServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a vendor invoice
 	ApproveVendorInvoiceItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Delete an item in a vendor invoice
@@ -441,6 +444,16 @@ func (c *vendorInvoicesServiceClient) ModifyVendorInvoiceItem(ctx context.Contex
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, VendorInvoicesService_ModifyVendorInvoiceItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vendorInvoicesServiceClient) UpdateVendorInvoiceItemSpecifications(ctx context.Context, in *VendorInvoicesServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VendorInvoicesService_UpdateVendorInvoiceItemSpecifications_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

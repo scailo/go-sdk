@@ -40,6 +40,7 @@ const (
 	ProformaInvoicesService_AddMultipleProformaInvoiceItems_FullMethodName             = "/Scailo.ProformaInvoicesService/AddMultipleProformaInvoiceItems"
 	ProformaInvoicesService_AddProformaInvoiceItem_FullMethodName                      = "/Scailo.ProformaInvoicesService/AddProformaInvoiceItem"
 	ProformaInvoicesService_ModifyProformaInvoiceItem_FullMethodName                   = "/Scailo.ProformaInvoicesService/ModifyProformaInvoiceItem"
+	ProformaInvoicesService_UpdateProformaInvoiceItemSpecifications_FullMethodName     = "/Scailo.ProformaInvoicesService/UpdateProformaInvoiceItemSpecifications"
 	ProformaInvoicesService_ApproveProformaInvoiceItem_FullMethodName                  = "/Scailo.ProformaInvoicesService/ApproveProformaInvoiceItem"
 	ProformaInvoicesService_DeleteProformaInvoiceItem_FullMethodName                   = "/Scailo.ProformaInvoicesService/DeleteProformaInvoiceItem"
 	ProformaInvoicesService_ReorderProformaInvoiceItems_FullMethodName                 = "/Scailo.ProformaInvoicesService/ReorderProformaInvoiceItems"
@@ -130,6 +131,8 @@ type ProformaInvoicesServiceClient interface {
 	AddProformaInvoiceItem(ctx context.Context, in *ProformaInvoicesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a proforma invoice
 	ModifyProformaInvoiceItem(ctx context.Context, in *ProformaInvoicesServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Update specifications of an item in a proforma invoice
+	UpdateProformaInvoiceItemSpecifications(ctx context.Context, in *ProformaInvoicesServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a proforma invoice
 	ApproveProformaInvoiceItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Delete an item in a proforma invoice
@@ -432,6 +435,16 @@ func (c *proformaInvoicesServiceClient) ModifyProformaInvoiceItem(ctx context.Co
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, ProformaInvoicesService_ModifyProformaInvoiceItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proformaInvoicesServiceClient) UpdateProformaInvoiceItemSpecifications(ctx context.Context, in *ProformaInvoicesServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, ProformaInvoicesService_UpdateProformaInvoiceItemSpecifications_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -365,6 +365,8 @@ type GeneralSettingsServiceCreateRequest struct {
 	RequireMfaForRecordApproval bool `protobuf:"varint,71,opt,name=require_mfa_for_record_approval,json=requireMfaForRecordApproval,proto3" json:"require_mfa_for_record_approval,omitempty"`
 	// Stores if attendances should be automatically sent for verification on exit record
 	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
+	// Stores the base64 encoded logo of the organization
+	Logo string `protobuf:"bytes,80,opt,name=logo,proto3" json:"logo,omitempty"`
 	// The list of dynamic forms
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,200,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -576,6 +578,13 @@ func (x *GeneralSettingsServiceCreateRequest) GetAutoReqVerifyOnExitRecordEntry(
 	return false
 }
 
+func (x *GeneralSettingsServiceCreateRequest) GetLogo() string {
+	if x != nil {
+		return x.Logo
+	}
+	return ""
+}
+
 func (x *GeneralSettingsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequest {
 	if x != nil {
 		return x.FormData
@@ -620,7 +629,7 @@ const file_general_settings_scailo_proto_rawDesc = "" +
 	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\x12\x1f\n" +
 	"\vlicensed_to\x18d \x01(\tR\n" +
 	"licensedTo\x124\n" +
-	"\tform_data\x18\xc8\x01 \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xc6\t\n" +
+	"\tform_data\x18\xc8\x01 \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xda\t\n" +
 	"#GeneralSettingsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12*\n" +
@@ -649,7 +658,8 @@ const file_general_settings_scailo_proto_rawDesc = "" +
 	"\x14expense_sender_email\x189 \x01(\tR\x12expenseSenderEmail\x12j\n" +
 	"4disable_vi_creation_with_bill_date_after_po_approval\x18F \x01(\bR,disableViCreationWithBillDateAfterPoApproval\x12D\n" +
 	"\x1frequire_mfa_for_record_approval\x18G \x01(\bR\x1brequireMfaForRecordApproval\x12L\n" +
-	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\x12A\n" +
+	"$auto_req_verify_on_exit_record_entry\x18H \x01(\bR\x1eautoReqVerifyOnExitRecordEntry\x12\x12\n" +
+	"\x04logo\x18P \x01(\tR\x04logo\x12A\n" +
 	"\tform_data\x18\xc8\x01 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData2\xad\x03\n" +
 	"\x16GeneralSettingsService\x12N\n" +
 	"\x06Create\x12+.Scailo.GeneralSettingsServiceCreateRequest\x1a\x17.Scailo.GeneralSettings\x12J\n" +

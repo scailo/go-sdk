@@ -40,6 +40,7 @@ const (
 	PurchasesIndentsService_AddMultiplePurchaseIndentItems_FullMethodName             = "/Scailo.PurchasesIndentsService/AddMultiplePurchaseIndentItems"
 	PurchasesIndentsService_AddPurchaseIndentItem_FullMethodName                      = "/Scailo.PurchasesIndentsService/AddPurchaseIndentItem"
 	PurchasesIndentsService_ModifyPurchaseIndentItem_FullMethodName                   = "/Scailo.PurchasesIndentsService/ModifyPurchaseIndentItem"
+	PurchasesIndentsService_UpdatePurchaseIndentItemSpecifications_FullMethodName     = "/Scailo.PurchasesIndentsService/UpdatePurchaseIndentItemSpecifications"
 	PurchasesIndentsService_ApprovePurchaseIndentItem_FullMethodName                  = "/Scailo.PurchasesIndentsService/ApprovePurchaseIndentItem"
 	PurchasesIndentsService_DeletePurchaseIndentItem_FullMethodName                   = "/Scailo.PurchasesIndentsService/DeletePurchaseIndentItem"
 	PurchasesIndentsService_ReorderPurchaseIndentItems_FullMethodName                 = "/Scailo.PurchasesIndentsService/ReorderPurchaseIndentItems"
@@ -126,6 +127,8 @@ type PurchasesIndentsServiceClient interface {
 	AddPurchaseIndentItem(ctx context.Context, in *PurchasesIndentsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Modify an item in a purchase indent
 	ModifyPurchaseIndentItem(ctx context.Context, in *PurchasesIndentsServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Update specifications of an item in a purchase indent
+	UpdatePurchaseIndentItemSpecifications(ctx context.Context, in *PurchasesIndentsServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a purchase indent
 	ApprovePurchaseIndentItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Delete an item in a purchase indent
@@ -420,6 +423,16 @@ func (c *purchasesIndentsServiceClient) ModifyPurchaseIndentItem(ctx context.Con
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, PurchasesIndentsService_ModifyPurchaseIndentItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesIndentsServiceClient) UpdatePurchaseIndentItemSpecifications(ctx context.Context, in *PurchasesIndentsServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesIndentsService_UpdatePurchaseIndentItemSpecifications_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

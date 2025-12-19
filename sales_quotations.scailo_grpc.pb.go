@@ -40,6 +40,7 @@ const (
 	SalesQuotationsService_AddMultipleSalesQuotationItems_FullMethodName             = "/Scailo.SalesQuotationsService/AddMultipleSalesQuotationItems"
 	SalesQuotationsService_AddSalesQuotationItem_FullMethodName                      = "/Scailo.SalesQuotationsService/AddSalesQuotationItem"
 	SalesQuotationsService_ModifySalesQuotationItem_FullMethodName                   = "/Scailo.SalesQuotationsService/ModifySalesQuotationItem"
+	SalesQuotationsService_UpdateSalesQuotationItemSpecifications_FullMethodName     = "/Scailo.SalesQuotationsService/UpdateSalesQuotationItemSpecifications"
 	SalesQuotationsService_ApproveSalesQuotationItem_FullMethodName                  = "/Scailo.SalesQuotationsService/ApproveSalesQuotationItem"
 	SalesQuotationsService_DeleteSalesQuotationItem_FullMethodName                   = "/Scailo.SalesQuotationsService/DeleteSalesQuotationItem"
 	SalesQuotationsService_ReorderSalesQuotationItems_FullMethodName                 = "/Scailo.SalesQuotationsService/ReorderSalesQuotationItems"
@@ -137,6 +138,8 @@ type SalesQuotationsServiceClient interface {
 	AddSalesQuotationItem(ctx context.Context, in *SalesQuotationsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
 	// Modify an item in a sales quotation
 	ModifySalesQuotationItem(ctx context.Context, in *SalesQuotationsServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
+	// Update specifications of an item in a sales quotation
+	UpdateSalesQuotationItemSpecifications(ctx context.Context, in *SalesQuotationsServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a sales quotation
 	ApproveSalesQuotationItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Delete an item in a sales quotation
@@ -454,6 +457,16 @@ func (c *salesQuotationsServiceClient) ModifySalesQuotationItem(ctx context.Cont
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifiersList)
 	err := c.cc.Invoke(ctx, SalesQuotationsService_ModifySalesQuotationItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesQuotationsServiceClient) UpdateSalesQuotationItemSpecifications(ctx context.Context, in *SalesQuotationsServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesQuotationsService_UpdateSalesQuotationItemSpecifications_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
