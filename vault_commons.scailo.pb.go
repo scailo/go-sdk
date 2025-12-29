@@ -149,6 +149,59 @@ func (VAULT_PERMISSION_CODE) EnumDescriptor() ([]byte, []int) {
 	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{1}
 }
 
+// Describes the available sort keys for enclave domains
+type ENCLAVE_DOMAIN_SORT_KEY int32
+
+const (
+	// Fetch ordered results by id
+	ENCLAVE_DOMAIN_SORT_KEY_ENCLAVE_DOMAIN_SORT_KEY_ID_UNSPECIFIED ENCLAVE_DOMAIN_SORT_KEY = 0
+	// Fetch ordered results by the creation timestamp
+	ENCLAVE_DOMAIN_SORT_KEY_ENCLAVE_DOMAIN_SORT_KEY_CREATED_AT ENCLAVE_DOMAIN_SORT_KEY = 1
+	// Fetch ordered results by the domain
+	ENCLAVE_DOMAIN_SORT_KEY_ENCLAVE_DOMAIN_SORT_KEY_DOMAIN ENCLAVE_DOMAIN_SORT_KEY = 10
+)
+
+// Enum value maps for ENCLAVE_DOMAIN_SORT_KEY.
+var (
+	ENCLAVE_DOMAIN_SORT_KEY_name = map[int32]string{
+		0:  "ENCLAVE_DOMAIN_SORT_KEY_ID_UNSPECIFIED",
+		1:  "ENCLAVE_DOMAIN_SORT_KEY_CREATED_AT",
+		10: "ENCLAVE_DOMAIN_SORT_KEY_DOMAIN",
+	}
+	ENCLAVE_DOMAIN_SORT_KEY_value = map[string]int32{
+		"ENCLAVE_DOMAIN_SORT_KEY_ID_UNSPECIFIED": 0,
+		"ENCLAVE_DOMAIN_SORT_KEY_CREATED_AT":     1,
+		"ENCLAVE_DOMAIN_SORT_KEY_DOMAIN":         10,
+	}
+)
+
+func (x ENCLAVE_DOMAIN_SORT_KEY) Enum() *ENCLAVE_DOMAIN_SORT_KEY {
+	p := new(ENCLAVE_DOMAIN_SORT_KEY)
+	*p = x
+	return p
+}
+
+func (x ENCLAVE_DOMAIN_SORT_KEY) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ENCLAVE_DOMAIN_SORT_KEY) Descriptor() protoreflect.EnumDescriptor {
+	return file_vault_commons_scailo_proto_enumTypes[2].Descriptor()
+}
+
+func (ENCLAVE_DOMAIN_SORT_KEY) Type() protoreflect.EnumType {
+	return &file_vault_commons_scailo_proto_enumTypes[2]
+}
+
+func (x ENCLAVE_DOMAIN_SORT_KEY) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ENCLAVE_DOMAIN_SORT_KEY.Descriptor instead.
+func (ENCLAVE_DOMAIN_SORT_KEY) EnumDescriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{2}
+}
+
 // Describes the available sort keys
 type VAULT_SORT_KEY int32
 
@@ -190,11 +243,11 @@ func (x VAULT_SORT_KEY) String() string {
 }
 
 func (VAULT_SORT_KEY) Descriptor() protoreflect.EnumDescriptor {
-	return file_vault_commons_scailo_proto_enumTypes[2].Descriptor()
+	return file_vault_commons_scailo_proto_enumTypes[3].Descriptor()
 }
 
 func (VAULT_SORT_KEY) Type() protoreflect.EnumType {
-	return &file_vault_commons_scailo_proto_enumTypes[2]
+	return &file_vault_commons_scailo_proto_enumTypes[3]
 }
 
 func (x VAULT_SORT_KEY) Number() protoreflect.EnumNumber {
@@ -203,7 +256,7 @@ func (x VAULT_SORT_KEY) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VAULT_SORT_KEY.Descriptor instead.
 func (VAULT_SORT_KEY) EnumDescriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{2}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{3}
 }
 
 // Describes the available access log operations
@@ -275,11 +328,11 @@ func (x VAULT_ACCESS_LOG_OPERATION) String() string {
 }
 
 func (VAULT_ACCESS_LOG_OPERATION) Descriptor() protoreflect.EnumDescriptor {
-	return file_vault_commons_scailo_proto_enumTypes[3].Descriptor()
+	return file_vault_commons_scailo_proto_enumTypes[4].Descriptor()
 }
 
 func (VAULT_ACCESS_LOG_OPERATION) Type() protoreflect.EnumType {
-	return &file_vault_commons_scailo_proto_enumTypes[3]
+	return &file_vault_commons_scailo_proto_enumTypes[4]
 }
 
 func (x VAULT_ACCESS_LOG_OPERATION) Number() protoreflect.EnumNumber {
@@ -288,7 +341,7 @@ func (x VAULT_ACCESS_LOG_OPERATION) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VAULT_ACCESS_LOG_OPERATION.Descriptor instead.
 func (VAULT_ACCESS_LOG_OPERATION) EnumDescriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{3}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{4}
 }
 
 // Describes the parameters of a permission related to a vault file or folder
@@ -2121,6 +2174,334 @@ func (x *EnclaveEnvironmentVariablesList) GetList() []*EnclaveEnvironmentVariabl
 	return nil
 }
 
+// Stores the payload that is necessary to create a custom domain for an enclave
+type EnclaveDomainAddRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The UUID of the enclave file that will be updated with the given domain
+	FileUuid string `protobuf:"bytes,1,opt,name=file_uuid,json=fileUuid,proto3" json:"file_uuid,omitempty"`
+	// The domain that points to the enclave
+	Domain        string `protobuf:"bytes,11,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveDomainAddRequest) Reset() {
+	*x = EnclaveDomainAddRequest{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveDomainAddRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveDomainAddRequest) ProtoMessage() {}
+
+func (x *EnclaveDomainAddRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveDomainAddRequest.ProtoReflect.Descriptor instead.
+func (*EnclaveDomainAddRequest) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *EnclaveDomainAddRequest) GetFileUuid() string {
+	if x != nil {
+		return x.FileUuid
+	}
+	return ""
+}
+
+func (x *EnclaveDomainAddRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+// Denotes an individual domain that is part of an enclave
+type EnclaveDomain struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores a globally unique entity UUID. This will be set at the organization level
+	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	// Stores the metadata of this user
+	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Stores the ID of the file that the domain belongs to
+	VaultFileId uint64 `protobuf:"varint,10,opt,name=vault_file_id,json=vaultFileId,proto3" json:"vault_file_id,omitempty"`
+	// The domain that points to the enclave
+	Domain string `protobuf:"bytes,11,opt,name=domain,proto3" json:"domain,omitempty"`
+	// The internal address of the service that the domain points to
+	ServiceAddr   string `protobuf:"bytes,12,opt,name=service_addr,json=serviceAddr,proto3" json:"service_addr,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveDomain) Reset() {
+	*x = EnclaveDomain{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveDomain) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveDomain) ProtoMessage() {}
+
+func (x *EnclaveDomain) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveDomain.ProtoReflect.Descriptor instead.
+func (*EnclaveDomain) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *EnclaveDomain) GetEntityUuid() string {
+	if x != nil {
+		return x.EntityUuid
+	}
+	return ""
+}
+
+func (x *EnclaveDomain) GetMetadata() *EmployeeMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *EnclaveDomain) GetVaultFileId() uint64 {
+	if x != nil {
+		return x.VaultFileId
+	}
+	return 0
+}
+
+func (x *EnclaveDomain) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *EnclaveDomain) GetServiceAddr() string {
+	if x != nil {
+		return x.ServiceAddr
+	}
+	return ""
+}
+
+// Describes the request payload of a enclave domains filter search
+type EnclaveDomainsFilterReq struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// If true, then returns only active records. If false, then returns only inactive records
+	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	// The number that need to be offset by before fetching the records
+	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	// The sort order that is to be used to fetch the pagination response
+	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	// The sort key that is to be used to fetch the pagination response
+	SortKey ENCLAVE_DOMAIN_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ENCLAVE_DOMAIN_SORT_KEY" json:"sort_key,omitempty"`
+	// The minimum timestamp that needs to be considered to filter by creation
+	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	// The maximum timestamp that needs to be considered to filter by creation
+	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	// The minimum timestamp that needs to be considered to filter by modification
+	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	// The maximum timestamp that needs to be considered to filter by modification
+	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	// The entity UUID that is to be used to filter records
+	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	// The domain that points to the enclave
+	Domain string `protobuf:"bytes,11,opt,name=domain,proto3" json:"domain,omitempty"`
+	// The internal address of the service that the domain points to
+	ServiceAddr   string `protobuf:"bytes,12,opt,name=service_addr,json=serviceAddr,proto3" json:"service_addr,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveDomainsFilterReq) Reset() {
+	*x = EnclaveDomainsFilterReq{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveDomainsFilterReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveDomainsFilterReq) ProtoMessage() {}
+
+func (x *EnclaveDomainsFilterReq) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveDomainsFilterReq.ProtoReflect.Descriptor instead.
+func (*EnclaveDomainsFilterReq) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *EnclaveDomainsFilterReq) GetIsActive() BOOL_FILTER {
+	if x != nil {
+		return x.IsActive
+	}
+	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
+}
+
+func (x *EnclaveDomainsFilterReq) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetOffset() uint64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetSortOrder() SORT_ORDER {
+	if x != nil {
+		return x.SortOrder
+	}
+	return SORT_ORDER_ASCENDING_UNSPECIFIED
+}
+
+func (x *EnclaveDomainsFilterReq) GetSortKey() ENCLAVE_DOMAIN_SORT_KEY {
+	if x != nil {
+		return x.SortKey
+	}
+	return ENCLAVE_DOMAIN_SORT_KEY_ENCLAVE_DOMAIN_SORT_KEY_ID_UNSPECIFIED
+}
+
+func (x *EnclaveDomainsFilterReq) GetCreationTimestampStart() uint64 {
+	if x != nil {
+		return x.CreationTimestampStart
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetCreationTimestampEnd() uint64 {
+	if x != nil {
+		return x.CreationTimestampEnd
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetModificationTimestampStart() uint64 {
+	if x != nil {
+		return x.ModificationTimestampStart
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetModificationTimestampEnd() uint64 {
+	if x != nil {
+		return x.ModificationTimestampEnd
+	}
+	return 0
+}
+
+func (x *EnclaveDomainsFilterReq) GetEntityUuid() string {
+	if x != nil {
+		return x.EntityUuid
+	}
+	return ""
+}
+
+func (x *EnclaveDomainsFilterReq) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *EnclaveDomainsFilterReq) GetServiceAddr() string {
+	if x != nil {
+		return x.ServiceAddr
+	}
+	return ""
+}
+
+// Denotes the list of domains that are part of an enclave
+type EnclaveDomainsList struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of domains
+	List          []*EnclaveDomain `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveDomainsList) Reset() {
+	*x = EnclaveDomainsList{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveDomainsList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveDomainsList) ProtoMessage() {}
+
+func (x *EnclaveDomainsList) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveDomainsList.ProtoReflect.Descriptor instead.
+func (*EnclaveDomainsList) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EnclaveDomainsList) GetList() []*EnclaveDomain {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 type VaultSearchReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// If true, then returns only active records. If false, then returns only inactive records
@@ -2155,7 +2536,7 @@ type VaultSearchReq struct {
 
 func (x *VaultSearchReq) Reset() {
 	*x = VaultSearchReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	mi := &file_vault_commons_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2167,7 +2548,7 @@ func (x *VaultSearchReq) String() string {
 func (*VaultSearchReq) ProtoMessage() {}
 
 func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	mi := &file_vault_commons_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2180,7 +2561,7 @@ func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchReq.ProtoReflect.Descriptor instead.
 func (*VaultSearchReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{21}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *VaultSearchReq) GetIsActive() BOOL_FILTER {
@@ -2295,7 +2676,7 @@ type VaultSearchResponse struct {
 
 func (x *VaultSearchResponse) Reset() {
 	*x = VaultSearchResponse{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	mi := &file_vault_commons_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2307,7 +2688,7 @@ func (x *VaultSearchResponse) String() string {
 func (*VaultSearchResponse) ProtoMessage() {}
 
 func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	mi := &file_vault_commons_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2320,7 +2701,7 @@ func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponse.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponse) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{22}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *VaultSearchResponse) GetName() string {
@@ -2376,7 +2757,7 @@ type VaultSearchResponsesList struct {
 
 func (x *VaultSearchResponsesList) Reset() {
 	*x = VaultSearchResponsesList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2388,7 +2769,7 @@ func (x *VaultSearchResponsesList) String() string {
 func (*VaultSearchResponsesList) ProtoMessage() {}
 
 func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2401,7 +2782,7 @@ func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponsesList.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponsesList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{23}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *VaultSearchResponsesList) GetList() []*VaultSearchResponse {
@@ -2424,7 +2805,7 @@ type VaultDuplicateCheckReq struct {
 
 func (x *VaultDuplicateCheckReq) Reset() {
 	*x = VaultDuplicateCheckReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2436,7 +2817,7 @@ func (x *VaultDuplicateCheckReq) String() string {
 func (*VaultDuplicateCheckReq) ProtoMessage() {}
 
 func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2449,7 +2830,7 @@ func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultDuplicateCheckReq.ProtoReflect.Descriptor instead.
 func (*VaultDuplicateCheckReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{24}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *VaultDuplicateCheckReq) GetName() string {
@@ -2491,7 +2872,7 @@ type VaultAccessLog struct {
 
 func (x *VaultAccessLog) Reset() {
 	*x = VaultAccessLog{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[25]
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2503,7 +2884,7 @@ func (x *VaultAccessLog) String() string {
 func (*VaultAccessLog) ProtoMessage() {}
 
 func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[25]
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2516,7 +2897,7 @@ func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLog.ProtoReflect.Descriptor instead.
 func (*VaultAccessLog) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{25}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *VaultAccessLog) GetEntityUuid() string {
@@ -2598,7 +2979,7 @@ type VaultAccessLogCreateRequest struct {
 
 func (x *VaultAccessLogCreateRequest) Reset() {
 	*x = VaultAccessLogCreateRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[26]
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2610,7 +2991,7 @@ func (x *VaultAccessLogCreateRequest) String() string {
 func (*VaultAccessLogCreateRequest) ProtoMessage() {}
 
 func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[26]
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2623,7 +3004,7 @@ func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogCreateRequest.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogCreateRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{26}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *VaultAccessLogCreateRequest) GetEntityUuid() string {
@@ -2686,7 +3067,7 @@ type VaultAccessLogsList struct {
 
 func (x *VaultAccessLogsList) Reset() {
 	*x = VaultAccessLogsList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2698,7 +3079,7 @@ func (x *VaultAccessLogsList) String() string {
 func (*VaultAccessLogsList) ProtoMessage() {}
 
 func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2711,7 +3092,7 @@ func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogsList.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogsList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *VaultAccessLogsList) GetList() []*VaultAccessLog {
@@ -2881,7 +3262,35 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x05value\x18\f \x01(\tR\x05value\x12\x1b\n" +
 	"\tis_secret\x18\r \x01(\bR\bisSecret\"Y\n" +
 	"\x1fEnclaveEnvironmentVariablesList\x126\n" +
-	"\x04list\x18\x01 \x03(\v2\".Scailo.EnclaveEnvironmentVariableR\x04list\"\xf2\x04\n" +
+	"\x04list\x18\x01 \x03(\v2\".Scailo.EnclaveEnvironmentVariableR\x04list\"a\n" +
+	"\x17EnclaveDomainAddRequest\x12%\n" +
+	"\tfile_uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bfileUuid\x12\x1f\n" +
+	"\x06domain\x18\v \x01(\tB\a\xbaH\x04r\x02h\x01R\x06domain\"\xd7\x01\n" +
+	"\rEnclaveDomain\x12\x1f\n" +
+	"\ventity_uuid\x18\x01 \x01(\tR\n" +
+	"entityUuid\x124\n" +
+	"\bmetadata\x18\x02 \x01(\v2\x18.Scailo.EmployeeMetadataR\bmetadata\x12\"\n" +
+	"\rvault_file_id\x18\n" +
+	" \x01(\x04R\vvaultFileId\x12\x1f\n" +
+	"\x06domain\x18\v \x01(\tB\a\xbaH\x04r\x02h\x01R\x06domain\x12*\n" +
+	"\fservice_addr\x18\f \x01(\tB\a\xbaH\x04r\x02h\x01R\vserviceAddr\"\xcf\x04\n" +
+	"\x17EnclaveDomainsFilterReq\x120\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12:\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.ENCLAVE_DOMAIN_SORT_KEYR\asortKey\x128\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
+	"\ventity_uuid\x18\b \x01(\tR\n" +
+	"entityUuid\x12\x16\n" +
+	"\x06domain\x18\v \x01(\tR\x06domain\x12!\n" +
+	"\fservice_addr\x18\f \x01(\tR\vserviceAddr\"?\n" +
+	"\x12EnclaveDomainsList\x12)\n" +
+	"\x04list\x18\x01 \x03(\v2\x15.Scailo.EnclaveDomainR\x04list\"\xf2\x04\n" +
 	"\x0eVaultSearchReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -2951,7 +3360,12 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x19VAULT_PERMISSION_CODE_ADD\x10\b\x12 \n" +
 	"\x1cVAULT_PERMISSION_CODE_DELETE\x10\x10\x12!\n" +
 	"\x1dVAULT_PERMISSION_CODE_EXECUTE\x10 \x12\x1d\n" +
-	"\x19VAULT_PERMISSION_CODE_ALL\x10?*\x8b\x01\n" +
+	"\x19VAULT_PERMISSION_CODE_ALL\x10?*\x91\x01\n" +
+	"\x17ENCLAVE_DOMAIN_SORT_KEY\x12*\n" +
+	"&ENCLAVE_DOMAIN_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12&\n" +
+	"\"ENCLAVE_DOMAIN_SORT_KEY_CREATED_AT\x10\x01\x12\"\n" +
+	"\x1eENCLAVE_DOMAIN_SORT_KEY_DOMAIN\x10\n" +
+	"*\x8b\x01\n" +
 	"\x0eVAULT_SORT_KEY\x12!\n" +
 	"\x1dVAULT_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19VAULT_SORT_KEY_CREATED_AT\x10\x01\x12\x1e\n" +
@@ -2987,78 +3401,88 @@ func file_vault_commons_scailo_proto_rawDescGZIP() []byte {
 	return file_vault_commons_scailo_proto_rawDescData
 }
 
-var file_vault_commons_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_vault_commons_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_vault_commons_scailo_proto_goTypes = []any{
 	(VAULT_REF_FOR)(0),                              // 0: Scailo.VAULT_REF_FOR
 	(VAULT_PERMISSION_CODE)(0),                      // 1: Scailo.VAULT_PERMISSION_CODE
-	(VAULT_SORT_KEY)(0),                             // 2: Scailo.VAULT_SORT_KEY
-	(VAULT_ACCESS_LOG_OPERATION)(0),                 // 3: Scailo.VAULT_ACCESS_LOG_OPERATION
-	(*VaultPermission)(nil),                         // 4: Scailo.VaultPermission
-	(*VaultPermissionAddRequest)(nil),               // 5: Scailo.VaultPermissionAddRequest
-	(*VaultPermissionModifyRequest)(nil),            // 6: Scailo.VaultPermissionModifyRequest
-	(*GixResources)(nil),                            // 7: Scailo.GixResources
-	(*GiXManifest)(nil),                             // 8: Scailo.GiXManifest
-	(*GiXAppRun)(nil),                               // 9: Scailo.GiXAppRun
-	(*GiXAppRunsList)(nil),                          // 10: Scailo.GiXAppRunsList
-	(*GiXAppRunCountReq)(nil),                       // 11: Scailo.GiXAppRunCountReq
-	(*GiXAppRunFilterReq)(nil),                      // 12: Scailo.GiXAppRunFilterReq
-	(*EnclaveResources)(nil),                        // 13: Scailo.EnclaveResources
-	(*EnclaveManifest)(nil),                         // 14: Scailo.EnclaveManifest
-	(*EnclaveIngress)(nil),                          // 15: Scailo.EnclaveIngress
-	(*EnclaveIngressesList)(nil),                    // 16: Scailo.EnclaveIngressesList
-	(*EnclaveIngressCountReq)(nil),                  // 17: Scailo.EnclaveIngressCountReq
-	(*EnclaveIngressFilterReq)(nil),                 // 18: Scailo.EnclaveIngressFilterReq
-	(*VerifyEnclaveIngressRequest)(nil),             // 19: Scailo.VerifyEnclaveIngressRequest
-	(*VerifyEnclaveIngressResponse)(nil),            // 20: Scailo.VerifyEnclaveIngressResponse
-	(*EnclaveEnvironmentVariableAddRequest)(nil),    // 21: Scailo.EnclaveEnvironmentVariableAddRequest
-	(*EnclaveEnvironmentVariableUpdateRequest)(nil), // 22: Scailo.EnclaveEnvironmentVariableUpdateRequest
-	(*EnclaveEnvironmentVariable)(nil),              // 23: Scailo.EnclaveEnvironmentVariable
-	(*EnclaveEnvironmentVariablesList)(nil),         // 24: Scailo.EnclaveEnvironmentVariablesList
-	(*VaultSearchReq)(nil),                          // 25: Scailo.VaultSearchReq
-	(*VaultSearchResponse)(nil),                     // 26: Scailo.VaultSearchResponse
-	(*VaultSearchResponsesList)(nil),                // 27: Scailo.VaultSearchResponsesList
-	(*VaultDuplicateCheckReq)(nil),                  // 28: Scailo.VaultDuplicateCheckReq
-	(*VaultAccessLog)(nil),                          // 29: Scailo.VaultAccessLog
-	(*VaultAccessLogCreateRequest)(nil),             // 30: Scailo.VaultAccessLogCreateRequest
-	(*VaultAccessLogsList)(nil),                     // 31: Scailo.VaultAccessLogsList
-	(*EmployeeMetadata)(nil),                        // 32: Scailo.EmployeeMetadata
-	(BOOL_FILTER)(0),                                // 33: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                 // 34: Scailo.SORT_ORDER
+	(ENCLAVE_DOMAIN_SORT_KEY)(0),                    // 2: Scailo.ENCLAVE_DOMAIN_SORT_KEY
+	(VAULT_SORT_KEY)(0),                             // 3: Scailo.VAULT_SORT_KEY
+	(VAULT_ACCESS_LOG_OPERATION)(0),                 // 4: Scailo.VAULT_ACCESS_LOG_OPERATION
+	(*VaultPermission)(nil),                         // 5: Scailo.VaultPermission
+	(*VaultPermissionAddRequest)(nil),               // 6: Scailo.VaultPermissionAddRequest
+	(*VaultPermissionModifyRequest)(nil),            // 7: Scailo.VaultPermissionModifyRequest
+	(*GixResources)(nil),                            // 8: Scailo.GixResources
+	(*GiXManifest)(nil),                             // 9: Scailo.GiXManifest
+	(*GiXAppRun)(nil),                               // 10: Scailo.GiXAppRun
+	(*GiXAppRunsList)(nil),                          // 11: Scailo.GiXAppRunsList
+	(*GiXAppRunCountReq)(nil),                       // 12: Scailo.GiXAppRunCountReq
+	(*GiXAppRunFilterReq)(nil),                      // 13: Scailo.GiXAppRunFilterReq
+	(*EnclaveResources)(nil),                        // 14: Scailo.EnclaveResources
+	(*EnclaveManifest)(nil),                         // 15: Scailo.EnclaveManifest
+	(*EnclaveIngress)(nil),                          // 16: Scailo.EnclaveIngress
+	(*EnclaveIngressesList)(nil),                    // 17: Scailo.EnclaveIngressesList
+	(*EnclaveIngressCountReq)(nil),                  // 18: Scailo.EnclaveIngressCountReq
+	(*EnclaveIngressFilterReq)(nil),                 // 19: Scailo.EnclaveIngressFilterReq
+	(*VerifyEnclaveIngressRequest)(nil),             // 20: Scailo.VerifyEnclaveIngressRequest
+	(*VerifyEnclaveIngressResponse)(nil),            // 21: Scailo.VerifyEnclaveIngressResponse
+	(*EnclaveEnvironmentVariableAddRequest)(nil),    // 22: Scailo.EnclaveEnvironmentVariableAddRequest
+	(*EnclaveEnvironmentVariableUpdateRequest)(nil), // 23: Scailo.EnclaveEnvironmentVariableUpdateRequest
+	(*EnclaveEnvironmentVariable)(nil),              // 24: Scailo.EnclaveEnvironmentVariable
+	(*EnclaveEnvironmentVariablesList)(nil),         // 25: Scailo.EnclaveEnvironmentVariablesList
+	(*EnclaveDomainAddRequest)(nil),                 // 26: Scailo.EnclaveDomainAddRequest
+	(*EnclaveDomain)(nil),                           // 27: Scailo.EnclaveDomain
+	(*EnclaveDomainsFilterReq)(nil),                 // 28: Scailo.EnclaveDomainsFilterReq
+	(*EnclaveDomainsList)(nil),                      // 29: Scailo.EnclaveDomainsList
+	(*VaultSearchReq)(nil),                          // 30: Scailo.VaultSearchReq
+	(*VaultSearchResponse)(nil),                     // 31: Scailo.VaultSearchResponse
+	(*VaultSearchResponsesList)(nil),                // 32: Scailo.VaultSearchResponsesList
+	(*VaultDuplicateCheckReq)(nil),                  // 33: Scailo.VaultDuplicateCheckReq
+	(*VaultAccessLog)(nil),                          // 34: Scailo.VaultAccessLog
+	(*VaultAccessLogCreateRequest)(nil),             // 35: Scailo.VaultAccessLogCreateRequest
+	(*VaultAccessLogsList)(nil),                     // 36: Scailo.VaultAccessLogsList
+	(*EmployeeMetadata)(nil),                        // 37: Scailo.EmployeeMetadata
+	(BOOL_FILTER)(0),                                // 38: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                 // 39: Scailo.SORT_ORDER
 }
 var file_vault_commons_scailo_proto_depIdxs = []int32{
-	32, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
+	37, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
 	0,  // 1: Scailo.VaultPermission.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	7,  // 2: Scailo.GiXManifest.resources:type_name -> Scailo.GixResources
-	32, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
-	8,  // 4: Scailo.GiXAppRun.manifest:type_name -> Scailo.GiXManifest
-	9,  // 5: Scailo.GiXAppRunsList.list:type_name -> Scailo.GiXAppRun
-	33, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	33, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	13, // 8: Scailo.EnclaveManifest.resources:type_name -> Scailo.EnclaveResources
-	32, // 9: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
-	15, // 10: Scailo.EnclaveIngressesList.list:type_name -> Scailo.EnclaveIngress
-	33, // 11: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	33, // 12: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32, // 13: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
-	23, // 14: Scailo.EnclaveEnvironmentVariablesList.list:type_name -> Scailo.EnclaveEnvironmentVariable
-	33, // 15: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34, // 16: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
-	2,  // 17: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
-	0,  // 18: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	0,  // 19: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
-	26, // 20: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
-	32, // 21: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
-	0,  // 22: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	3,  // 23: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	0,  // 24: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	3,  // 25: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	29, // 26: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	8,  // 2: Scailo.GiXManifest.resources:type_name -> Scailo.GixResources
+	37, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
+	9,  // 4: Scailo.GiXAppRun.manifest:type_name -> Scailo.GiXManifest
+	10, // 5: Scailo.GiXAppRunsList.list:type_name -> Scailo.GiXAppRun
+	38, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	14, // 8: Scailo.EnclaveManifest.resources:type_name -> Scailo.EnclaveResources
+	37, // 9: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
+	16, // 10: Scailo.EnclaveIngressesList.list:type_name -> Scailo.EnclaveIngress
+	38, // 11: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	38, // 12: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	37, // 13: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
+	24, // 14: Scailo.EnclaveEnvironmentVariablesList.list:type_name -> Scailo.EnclaveEnvironmentVariable
+	37, // 15: Scailo.EnclaveDomain.metadata:type_name -> Scailo.EmployeeMetadata
+	38, // 16: Scailo.EnclaveDomainsFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39, // 17: Scailo.EnclaveDomainsFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	2,  // 18: Scailo.EnclaveDomainsFilterReq.sort_key:type_name -> Scailo.ENCLAVE_DOMAIN_SORT_KEY
+	27, // 19: Scailo.EnclaveDomainsList.list:type_name -> Scailo.EnclaveDomain
+	38, // 20: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39, // 21: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,  // 22: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
+	0,  // 23: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	0,  // 24: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
+	31, // 25: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
+	37, // 26: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
+	0,  // 27: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 28: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	0,  // 29: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 30: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	34, // 31: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_vault_commons_scailo_proto_init() }
@@ -3072,8 +3496,8 @@ func file_vault_commons_scailo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vault_commons_scailo_proto_rawDesc), len(file_vault_commons_scailo_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   28,
+			NumEnums:      5,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

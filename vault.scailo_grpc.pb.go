@@ -79,6 +79,11 @@ const (
 	VaultService_DeleteEnclaveEnvironmentVariable_FullMethodName   = "/Scailo.VaultService/DeleteEnclaveEnvironmentVariable"
 	VaultService_ViewEnclaveEnvironmentVariable_FullMethodName     = "/Scailo.VaultService/ViewEnclaveEnvironmentVariable"
 	VaultService_ViewAllEnclaveEnvironmentVariables_FullMethodName = "/Scailo.VaultService/ViewAllEnclaveEnvironmentVariables"
+	VaultService_AddEnclaveDomain_FullMethodName                   = "/Scailo.VaultService/AddEnclaveDomain"
+	VaultService_DeleteEnclaveDomain_FullMethodName                = "/Scailo.VaultService/DeleteEnclaveDomain"
+	VaultService_ViewEnclaveDomain_FullMethodName                  = "/Scailo.VaultService/ViewEnclaveDomain"
+	VaultService_ViewAllEnclaveDomains_FullMethodName              = "/Scailo.VaultService/ViewAllEnclaveDomains"
+	VaultService_FilterEnclaveDomains_FullMethodName               = "/Scailo.VaultService/FilterEnclaveDomains"
 )
 
 // VaultServiceClient is the client API for VaultService service.
@@ -212,6 +217,16 @@ type VaultServiceClient interface {
 	ViewEnclaveEnvironmentVariable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariable, error)
 	// View all environment variables in enclave for the enclave represented by the Identifier
 	ViewAllEnclaveEnvironmentVariables(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveEnvironmentVariablesList, error)
+	// Add domain to enclave
+	AddEnclaveDomain(ctx context.Context, in *EnclaveDomainAddRequest, opts ...grpc.CallOption) (*EnclaveDomain, error)
+	// Delete domain from enclave
+	DeleteEnclaveDomain(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// View domain for enclave represented by the Identifier
+	ViewEnclaveDomain(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomain, error)
+	// View all domains for enclave for the enclave represented by the Identifier
+	ViewAllEnclaveDomains(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomainsList, error)
+	// Filter all domains that match the given filter criteria
+	FilterEnclaveDomains(ctx context.Context, in *EnclaveDomainsFilterReq, opts ...grpc.CallOption) (*EnclaveDomainsList, error)
 }
 
 type vaultServiceClient struct {
@@ -826,6 +841,56 @@ func (c *vaultServiceClient) ViewAllEnclaveEnvironmentVariables(ctx context.Cont
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EnclaveEnvironmentVariablesList)
 	err := c.cc.Invoke(ctx, VaultService_ViewAllEnclaveEnvironmentVariables_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) AddEnclaveDomain(ctx context.Context, in *EnclaveDomainAddRequest, opts ...grpc.CallOption) (*EnclaveDomain, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveDomain)
+	err := c.cc.Invoke(ctx, VaultService_AddEnclaveDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) DeleteEnclaveDomain(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VaultService_DeleteEnclaveDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewEnclaveDomain(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomain, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveDomain)
+	err := c.cc.Invoke(ctx, VaultService_ViewEnclaveDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewAllEnclaveDomains(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomainsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveDomainsList)
+	err := c.cc.Invoke(ctx, VaultService_ViewAllEnclaveDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) FilterEnclaveDomains(ctx context.Context, in *EnclaveDomainsFilterReq, opts ...grpc.CallOption) (*EnclaveDomainsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveDomainsList)
+	err := c.cc.Invoke(ctx, VaultService_FilterEnclaveDomains_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

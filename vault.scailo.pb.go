@@ -390,7 +390,7 @@ const file_vault_scailo_proto_rawDesc = "" +
 	"\x10GiXRelayResponse\x12\x1c\n" +
 	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12\x12\n" +
 	"\x04body\x18\n" +
-	" \x01(\fR\x04body2\x85$\n" +
+	" \x01(\fR\x04body2\x82'\n" +
 	"\fVaultService\x12[\n" +
 	"\fInitiateFile\x12$.Scailo.VaultFileInitiateFileRequest\x1a%.Scailo.VaultFileInitiateFileResponse\x12H\n" +
 	"\fAddFileChunk\x12 .Scailo.VaultFileAddChunkRequest\x1a\x16.Scailo.IdentifierUUID\x12>\n" +
@@ -455,7 +455,12 @@ const file_vault_scailo_proto_rawDesc = "" +
 	" UpdateEnclaveEnvironmentVariable\x12/.Scailo.EnclaveEnvironmentVariableUpdateRequest\x1a\".Scailo.EnclaveEnvironmentVariable\x12V\n" +
 	" DeleteEnclaveEnvironmentVariable\x12\x16.Scailo.IdentifierUUID\x1a\x1a.Scailo.IdentifierResponse\x12\\\n" +
 	"\x1eViewEnclaveEnvironmentVariable\x12\x16.Scailo.IdentifierUUID\x1a\".Scailo.EnclaveEnvironmentVariable\x12e\n" +
-	"\"ViewAllEnclaveEnvironmentVariables\x12\x16.Scailo.IdentifierUUID\x1a'.Scailo.EnclaveEnvironmentVariablesListBb\n" +
+	"\"ViewAllEnclaveEnvironmentVariables\x12\x16.Scailo.IdentifierUUID\x1a'.Scailo.EnclaveEnvironmentVariablesList\x12J\n" +
+	"\x10AddEnclaveDomain\x12\x1f.Scailo.EnclaveDomainAddRequest\x1a\x15.Scailo.EnclaveDomain\x12I\n" +
+	"\x13DeleteEnclaveDomain\x12\x16.Scailo.IdentifierUUID\x1a\x1a.Scailo.IdentifierResponse\x12B\n" +
+	"\x11ViewEnclaveDomain\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.EnclaveDomain\x12K\n" +
+	"\x15ViewAllEnclaveDomains\x12\x16.Scailo.IdentifierUUID\x1a\x1a.Scailo.EnclaveDomainsList\x12S\n" +
+	"\x14FilterEnclaveDomains\x12\x1f.Scailo.EnclaveDomainsFilterReq\x1a\x1a.Scailo.EnclaveDomainsListBb\n" +
 	"\n" +
 	"com.ScailoB\x10VaultScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -503,27 +508,31 @@ var file_vault_scailo_proto_goTypes = []any{
 	(*VerifyEnclaveIngressRequest)(nil),             // 26: Scailo.VerifyEnclaveIngressRequest
 	(*EnclaveEnvironmentVariableAddRequest)(nil),    // 27: Scailo.EnclaveEnvironmentVariableAddRequest
 	(*EnclaveEnvironmentVariableUpdateRequest)(nil), // 28: Scailo.EnclaveEnvironmentVariableUpdateRequest
-	(*VaultFileInitiateFileResponse)(nil),           // 29: Scailo.VaultFileInitiateFileResponse
-	(*StandardFile)(nil),                            // 30: Scailo.StandardFile
-	(*VaultFileVersionChunk)(nil),                   // 31: Scailo.VaultFileVersionChunk
-	(*VaultPermission)(nil),                         // 32: Scailo.VaultPermission
-	(*BooleanResponse)(nil),                         // 33: Scailo.BooleanResponse
-	(*VaultFileVersionsList)(nil),                   // 34: Scailo.VaultFileVersionsList
-	(*VaultAccessLogsList)(nil),                     // 35: Scailo.VaultAccessLogsList
-	(*VaultFolderDownload)(nil),                     // 36: Scailo.VaultFolderDownload
-	(*VaultFilesList)(nil),                          // 37: Scailo.VaultFilesList
-	(*VaultFoldersList)(nil),                        // 38: Scailo.VaultFoldersList
-	(*RolesList)(nil),                               // 39: Scailo.RolesList
-	(*VaultSearchResponsesList)(nil),                // 40: Scailo.VaultSearchResponsesList
-	(*GiXAppRun)(nil),                               // 41: Scailo.GiXAppRun
-	(*GiXAppRunsList)(nil),                          // 42: Scailo.GiXAppRunsList
-	(*CountResponse)(nil),                           // 43: Scailo.CountResponse
-	(*EnclaveIngress)(nil),                          // 44: Scailo.EnclaveIngress
-	(*EnclaveIngressesList)(nil),                    // 45: Scailo.EnclaveIngressesList
-	(*VerifyEnclaveIngressResponse)(nil),            // 46: Scailo.VerifyEnclaveIngressResponse
-	(*EnclaveEnvironmentVariable)(nil),              // 47: Scailo.EnclaveEnvironmentVariable
-	(*IdentifierResponse)(nil),                      // 48: Scailo.IdentifierResponse
-	(*EnclaveEnvironmentVariablesList)(nil),         // 49: Scailo.EnclaveEnvironmentVariablesList
+	(*EnclaveDomainAddRequest)(nil),                 // 29: Scailo.EnclaveDomainAddRequest
+	(*EnclaveDomainsFilterReq)(nil),                 // 30: Scailo.EnclaveDomainsFilterReq
+	(*VaultFileInitiateFileResponse)(nil),           // 31: Scailo.VaultFileInitiateFileResponse
+	(*StandardFile)(nil),                            // 32: Scailo.StandardFile
+	(*VaultFileVersionChunk)(nil),                   // 33: Scailo.VaultFileVersionChunk
+	(*VaultPermission)(nil),                         // 34: Scailo.VaultPermission
+	(*BooleanResponse)(nil),                         // 35: Scailo.BooleanResponse
+	(*VaultFileVersionsList)(nil),                   // 36: Scailo.VaultFileVersionsList
+	(*VaultAccessLogsList)(nil),                     // 37: Scailo.VaultAccessLogsList
+	(*VaultFolderDownload)(nil),                     // 38: Scailo.VaultFolderDownload
+	(*VaultFilesList)(nil),                          // 39: Scailo.VaultFilesList
+	(*VaultFoldersList)(nil),                        // 40: Scailo.VaultFoldersList
+	(*RolesList)(nil),                               // 41: Scailo.RolesList
+	(*VaultSearchResponsesList)(nil),                // 42: Scailo.VaultSearchResponsesList
+	(*GiXAppRun)(nil),                               // 43: Scailo.GiXAppRun
+	(*GiXAppRunsList)(nil),                          // 44: Scailo.GiXAppRunsList
+	(*CountResponse)(nil),                           // 45: Scailo.CountResponse
+	(*EnclaveIngress)(nil),                          // 46: Scailo.EnclaveIngress
+	(*EnclaveIngressesList)(nil),                    // 47: Scailo.EnclaveIngressesList
+	(*VerifyEnclaveIngressResponse)(nil),            // 48: Scailo.VerifyEnclaveIngressResponse
+	(*EnclaveEnvironmentVariable)(nil),              // 49: Scailo.EnclaveEnvironmentVariable
+	(*IdentifierResponse)(nil),                      // 50: Scailo.IdentifierResponse
+	(*EnclaveEnvironmentVariablesList)(nil),         // 51: Scailo.EnclaveEnvironmentVariablesList
+	(*EnclaveDomain)(nil),                           // 52: Scailo.EnclaveDomain
+	(*EnclaveDomainsList)(nil),                      // 53: Scailo.EnclaveDomainsList
 }
 var file_vault_scailo_proto_depIdxs = []int32{
 	5,  // 0: Scailo.VaultResourcesList.files:type_name -> Scailo.VaultFile
@@ -591,69 +600,79 @@ var file_vault_scailo_proto_depIdxs = []int32{
 	9,  // 62: Scailo.VaultService.DeleteEnclaveEnvironmentVariable:input_type -> Scailo.IdentifierUUID
 	9,  // 63: Scailo.VaultService.ViewEnclaveEnvironmentVariable:input_type -> Scailo.IdentifierUUID
 	9,  // 64: Scailo.VaultService.ViewAllEnclaveEnvironmentVariables:input_type -> Scailo.IdentifierUUID
-	29, // 65: Scailo.VaultService.InitiateFile:output_type -> Scailo.VaultFileInitiateFileResponse
-	9,  // 66: Scailo.VaultService.AddFileChunk:output_type -> Scailo.IdentifierUUID
-	9,  // 67: Scailo.VaultService.CompleteFile:output_type -> Scailo.IdentifierUUID
-	9,  // 68: Scailo.VaultService.RenameFile:output_type -> Scailo.IdentifierUUID
-	9,  // 69: Scailo.VaultService.UnzipFile:output_type -> Scailo.IdentifierUUID
-	9,  // 70: Scailo.VaultService.PersistFile:output_type -> Scailo.IdentifierUUID
-	9,  // 71: Scailo.VaultService.MoveFile:output_type -> Scailo.IdentifierUUID
-	9,  // 72: Scailo.VaultService.DeleteFile:output_type -> Scailo.IdentifierUUID
-	9,  // 73: Scailo.VaultService.AddFilePermission:output_type -> Scailo.IdentifierUUID
-	9,  // 74: Scailo.VaultService.ModifyFilePermission:output_type -> Scailo.IdentifierUUID
-	9,  // 75: Scailo.VaultService.DeleteFilePermission:output_type -> Scailo.IdentifierUUID
-	30, // 76: Scailo.VaultService.DownloadFile:output_type -> Scailo.StandardFile
-	30, // 77: Scailo.VaultService.DownloadFileVersion:output_type -> Scailo.StandardFile
-	30, // 78: Scailo.VaultService.ViewFileLogo:output_type -> Scailo.StandardFile
-	5,  // 79: Scailo.VaultService.ViewFileByUUID:output_type -> Scailo.VaultFile
-	5,  // 80: Scailo.VaultService.ViewFileByID:output_type -> Scailo.VaultFile
-	31, // 81: Scailo.VaultService.ViewFileChunk:output_type -> Scailo.VaultFileVersionChunk
-	31, // 82: Scailo.VaultService.ViewFileChunkMetadata:output_type -> Scailo.VaultFileVersionChunk
-	32, // 83: Scailo.VaultService.ViewFilePermission:output_type -> Scailo.VaultPermission
-	33, // 84: Scailo.VaultService.DoesFileExist:output_type -> Scailo.BooleanResponse
-	34, // 85: Scailo.VaultService.ViewFileVersions:output_type -> Scailo.VaultFileVersionsList
-	35, // 86: Scailo.VaultService.ViewFileAccessLogs:output_type -> Scailo.VaultAccessLogsList
-	9,  // 87: Scailo.VaultService.AddFolder:output_type -> Scailo.IdentifierUUID
-	9,  // 88: Scailo.VaultService.MoveFolder:output_type -> Scailo.IdentifierUUID
-	9,  // 89: Scailo.VaultService.RenameFolder:output_type -> Scailo.IdentifierUUID
-	9,  // 90: Scailo.VaultService.DeleteFolder:output_type -> Scailo.IdentifierUUID
-	9,  // 91: Scailo.VaultService.ZipFolder:output_type -> Scailo.IdentifierUUID
-	9,  // 92: Scailo.VaultService.AddFolderPermission:output_type -> Scailo.IdentifierUUID
-	9,  // 93: Scailo.VaultService.ModifyFolderPermission:output_type -> Scailo.IdentifierUUID
-	9,  // 94: Scailo.VaultService.DeleteFolderPermission:output_type -> Scailo.IdentifierUUID
-	6,  // 95: Scailo.VaultService.ViewFolderByID:output_type -> Scailo.VaultFolder
-	6,  // 96: Scailo.VaultService.ViewFolderByUUID:output_type -> Scailo.VaultFolder
-	36, // 97: Scailo.VaultService.ViewFolderDownloadStatus:output_type -> Scailo.VaultFolderDownload
-	30, // 98: Scailo.VaultService.DownloadFolder:output_type -> Scailo.StandardFile
-	37, // 99: Scailo.VaultService.ViewAccessibleFilesInFolder:output_type -> Scailo.VaultFilesList
-	38, // 100: Scailo.VaultService.ViewAccessibleFoldersInFolder:output_type -> Scailo.VaultFoldersList
-	0,  // 101: Scailo.VaultService.ViewAccessibleResourcesInFolder:output_type -> Scailo.VaultResourcesList
-	32, // 102: Scailo.VaultService.ViewFolderPermission:output_type -> Scailo.VaultPermission
-	33, // 103: Scailo.VaultService.DoesFolderExist:output_type -> Scailo.BooleanResponse
-	35, // 104: Scailo.VaultService.ViewFolderAccessLogs:output_type -> Scailo.VaultAccessLogsList
-	39, // 105: Scailo.VaultService.ViewPassthroughRolesForFolder:output_type -> Scailo.RolesList
-	40, // 106: Scailo.VaultService.Search:output_type -> Scailo.VaultSearchResponsesList
-	41, // 107: Scailo.VaultService.SetupGiX:output_type -> Scailo.GiXAppRun
-	4,  // 108: Scailo.VaultService.GiXRelayDELETE:output_type -> Scailo.GiXRelayResponse
-	4,  // 109: Scailo.VaultService.GiXRelayGET:output_type -> Scailo.GiXRelayResponse
-	4,  // 110: Scailo.VaultService.GiXRelayHEAD:output_type -> Scailo.GiXRelayResponse
-	4,  // 111: Scailo.VaultService.GiXRelayPATCH:output_type -> Scailo.GiXRelayResponse
-	4,  // 112: Scailo.VaultService.GiXRelayPOST:output_type -> Scailo.GiXRelayResponse
-	4,  // 113: Scailo.VaultService.GiXRelayPUT:output_type -> Scailo.GiXRelayResponse
-	42, // 114: Scailo.VaultService.GiXFilter:output_type -> Scailo.GiXAppRunsList
-	43, // 115: Scailo.VaultService.GiXCount:output_type -> Scailo.CountResponse
-	9,  // 116: Scailo.VaultService.ReconfigureEnclave:output_type -> Scailo.IdentifierUUID
-	44, // 117: Scailo.VaultService.SetupEnclaveIngress:output_type -> Scailo.EnclaveIngress
-	45, // 118: Scailo.VaultService.FilterEnclaveIngresses:output_type -> Scailo.EnclaveIngressesList
-	43, // 119: Scailo.VaultService.CountEnclaveIngresses:output_type -> Scailo.CountResponse
-	46, // 120: Scailo.VaultService.VerifyEnclaveIngress:output_type -> Scailo.VerifyEnclaveIngressResponse
-	47, // 121: Scailo.VaultService.AddEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
-	47, // 122: Scailo.VaultService.UpdateEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
-	48, // 123: Scailo.VaultService.DeleteEnclaveEnvironmentVariable:output_type -> Scailo.IdentifierResponse
-	47, // 124: Scailo.VaultService.ViewEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
-	49, // 125: Scailo.VaultService.ViewAllEnclaveEnvironmentVariables:output_type -> Scailo.EnclaveEnvironmentVariablesList
-	65, // [65:126] is the sub-list for method output_type
-	4,  // [4:65] is the sub-list for method input_type
+	29, // 65: Scailo.VaultService.AddEnclaveDomain:input_type -> Scailo.EnclaveDomainAddRequest
+	9,  // 66: Scailo.VaultService.DeleteEnclaveDomain:input_type -> Scailo.IdentifierUUID
+	9,  // 67: Scailo.VaultService.ViewEnclaveDomain:input_type -> Scailo.IdentifierUUID
+	9,  // 68: Scailo.VaultService.ViewAllEnclaveDomains:input_type -> Scailo.IdentifierUUID
+	30, // 69: Scailo.VaultService.FilterEnclaveDomains:input_type -> Scailo.EnclaveDomainsFilterReq
+	31, // 70: Scailo.VaultService.InitiateFile:output_type -> Scailo.VaultFileInitiateFileResponse
+	9,  // 71: Scailo.VaultService.AddFileChunk:output_type -> Scailo.IdentifierUUID
+	9,  // 72: Scailo.VaultService.CompleteFile:output_type -> Scailo.IdentifierUUID
+	9,  // 73: Scailo.VaultService.RenameFile:output_type -> Scailo.IdentifierUUID
+	9,  // 74: Scailo.VaultService.UnzipFile:output_type -> Scailo.IdentifierUUID
+	9,  // 75: Scailo.VaultService.PersistFile:output_type -> Scailo.IdentifierUUID
+	9,  // 76: Scailo.VaultService.MoveFile:output_type -> Scailo.IdentifierUUID
+	9,  // 77: Scailo.VaultService.DeleteFile:output_type -> Scailo.IdentifierUUID
+	9,  // 78: Scailo.VaultService.AddFilePermission:output_type -> Scailo.IdentifierUUID
+	9,  // 79: Scailo.VaultService.ModifyFilePermission:output_type -> Scailo.IdentifierUUID
+	9,  // 80: Scailo.VaultService.DeleteFilePermission:output_type -> Scailo.IdentifierUUID
+	32, // 81: Scailo.VaultService.DownloadFile:output_type -> Scailo.StandardFile
+	32, // 82: Scailo.VaultService.DownloadFileVersion:output_type -> Scailo.StandardFile
+	32, // 83: Scailo.VaultService.ViewFileLogo:output_type -> Scailo.StandardFile
+	5,  // 84: Scailo.VaultService.ViewFileByUUID:output_type -> Scailo.VaultFile
+	5,  // 85: Scailo.VaultService.ViewFileByID:output_type -> Scailo.VaultFile
+	33, // 86: Scailo.VaultService.ViewFileChunk:output_type -> Scailo.VaultFileVersionChunk
+	33, // 87: Scailo.VaultService.ViewFileChunkMetadata:output_type -> Scailo.VaultFileVersionChunk
+	34, // 88: Scailo.VaultService.ViewFilePermission:output_type -> Scailo.VaultPermission
+	35, // 89: Scailo.VaultService.DoesFileExist:output_type -> Scailo.BooleanResponse
+	36, // 90: Scailo.VaultService.ViewFileVersions:output_type -> Scailo.VaultFileVersionsList
+	37, // 91: Scailo.VaultService.ViewFileAccessLogs:output_type -> Scailo.VaultAccessLogsList
+	9,  // 92: Scailo.VaultService.AddFolder:output_type -> Scailo.IdentifierUUID
+	9,  // 93: Scailo.VaultService.MoveFolder:output_type -> Scailo.IdentifierUUID
+	9,  // 94: Scailo.VaultService.RenameFolder:output_type -> Scailo.IdentifierUUID
+	9,  // 95: Scailo.VaultService.DeleteFolder:output_type -> Scailo.IdentifierUUID
+	9,  // 96: Scailo.VaultService.ZipFolder:output_type -> Scailo.IdentifierUUID
+	9,  // 97: Scailo.VaultService.AddFolderPermission:output_type -> Scailo.IdentifierUUID
+	9,  // 98: Scailo.VaultService.ModifyFolderPermission:output_type -> Scailo.IdentifierUUID
+	9,  // 99: Scailo.VaultService.DeleteFolderPermission:output_type -> Scailo.IdentifierUUID
+	6,  // 100: Scailo.VaultService.ViewFolderByID:output_type -> Scailo.VaultFolder
+	6,  // 101: Scailo.VaultService.ViewFolderByUUID:output_type -> Scailo.VaultFolder
+	38, // 102: Scailo.VaultService.ViewFolderDownloadStatus:output_type -> Scailo.VaultFolderDownload
+	32, // 103: Scailo.VaultService.DownloadFolder:output_type -> Scailo.StandardFile
+	39, // 104: Scailo.VaultService.ViewAccessibleFilesInFolder:output_type -> Scailo.VaultFilesList
+	40, // 105: Scailo.VaultService.ViewAccessibleFoldersInFolder:output_type -> Scailo.VaultFoldersList
+	0,  // 106: Scailo.VaultService.ViewAccessibleResourcesInFolder:output_type -> Scailo.VaultResourcesList
+	34, // 107: Scailo.VaultService.ViewFolderPermission:output_type -> Scailo.VaultPermission
+	35, // 108: Scailo.VaultService.DoesFolderExist:output_type -> Scailo.BooleanResponse
+	37, // 109: Scailo.VaultService.ViewFolderAccessLogs:output_type -> Scailo.VaultAccessLogsList
+	41, // 110: Scailo.VaultService.ViewPassthroughRolesForFolder:output_type -> Scailo.RolesList
+	42, // 111: Scailo.VaultService.Search:output_type -> Scailo.VaultSearchResponsesList
+	43, // 112: Scailo.VaultService.SetupGiX:output_type -> Scailo.GiXAppRun
+	4,  // 113: Scailo.VaultService.GiXRelayDELETE:output_type -> Scailo.GiXRelayResponse
+	4,  // 114: Scailo.VaultService.GiXRelayGET:output_type -> Scailo.GiXRelayResponse
+	4,  // 115: Scailo.VaultService.GiXRelayHEAD:output_type -> Scailo.GiXRelayResponse
+	4,  // 116: Scailo.VaultService.GiXRelayPATCH:output_type -> Scailo.GiXRelayResponse
+	4,  // 117: Scailo.VaultService.GiXRelayPOST:output_type -> Scailo.GiXRelayResponse
+	4,  // 118: Scailo.VaultService.GiXRelayPUT:output_type -> Scailo.GiXRelayResponse
+	44, // 119: Scailo.VaultService.GiXFilter:output_type -> Scailo.GiXAppRunsList
+	45, // 120: Scailo.VaultService.GiXCount:output_type -> Scailo.CountResponse
+	9,  // 121: Scailo.VaultService.ReconfigureEnclave:output_type -> Scailo.IdentifierUUID
+	46, // 122: Scailo.VaultService.SetupEnclaveIngress:output_type -> Scailo.EnclaveIngress
+	47, // 123: Scailo.VaultService.FilterEnclaveIngresses:output_type -> Scailo.EnclaveIngressesList
+	45, // 124: Scailo.VaultService.CountEnclaveIngresses:output_type -> Scailo.CountResponse
+	48, // 125: Scailo.VaultService.VerifyEnclaveIngress:output_type -> Scailo.VerifyEnclaveIngressResponse
+	49, // 126: Scailo.VaultService.AddEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
+	49, // 127: Scailo.VaultService.UpdateEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
+	50, // 128: Scailo.VaultService.DeleteEnclaveEnvironmentVariable:output_type -> Scailo.IdentifierResponse
+	49, // 129: Scailo.VaultService.ViewEnclaveEnvironmentVariable:output_type -> Scailo.EnclaveEnvironmentVariable
+	51, // 130: Scailo.VaultService.ViewAllEnclaveEnvironmentVariables:output_type -> Scailo.EnclaveEnvironmentVariablesList
+	52, // 131: Scailo.VaultService.AddEnclaveDomain:output_type -> Scailo.EnclaveDomain
+	50, // 132: Scailo.VaultService.DeleteEnclaveDomain:output_type -> Scailo.IdentifierResponse
+	52, // 133: Scailo.VaultService.ViewEnclaveDomain:output_type -> Scailo.EnclaveDomain
+	53, // 134: Scailo.VaultService.ViewAllEnclaveDomains:output_type -> Scailo.EnclaveDomainsList
+	53, // 135: Scailo.VaultService.FilterEnclaveDomains:output_type -> Scailo.EnclaveDomainsList
+	70, // [70:136] is the sub-list for method output_type
+	4,  // [4:70] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
