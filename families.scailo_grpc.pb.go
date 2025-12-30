@@ -47,6 +47,7 @@ const (
 	FamiliesService_DeleteLabel_FullMethodName                  = "/Scailo.FamiliesService/DeleteLabel"
 	FamiliesService_ViewLabelByID_FullMethodName                = "/Scailo.FamiliesService/ViewLabelByID"
 	FamiliesService_ViewLabels_FullMethodName                   = "/Scailo.FamiliesService/ViewLabels"
+	FamiliesService_ViewLabelsForFamilyIDs_FullMethodName       = "/Scailo.FamiliesService/ViewLabelsForFamilyIDs"
 	FamiliesService_AddUnitConversion_FullMethodName            = "/Scailo.FamiliesService/AddUnitConversion"
 	FamiliesService_ApproveUnitConversion_FullMethodName        = "/Scailo.FamiliesService/ApproveUnitConversion"
 	FamiliesService_DeleteUnitConversion_FullMethodName         = "/Scailo.FamiliesService/DeleteUnitConversion"
@@ -147,6 +148,8 @@ type FamiliesServiceClient interface {
 	ViewLabelByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyLabel, error)
 	// View all labels for given family ID
 	ViewLabels(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyLabelsList, error)
+	// View all labels for given family IDs
+	ViewLabelsForFamilyIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*FamilyLabelsList, error)
 	// Add a unit conversion
 	AddUnitConversion(ctx context.Context, in *FamiliesServiceUnitConversionCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve a unit conversion
@@ -514,6 +517,16 @@ func (c *familiesServiceClient) ViewLabels(ctx context.Context, in *Identifier, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FamilyLabelsList)
 	err := c.cc.Invoke(ctx, FamiliesService_ViewLabels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ViewLabelsForFamilyIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*FamilyLabelsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FamilyLabelsList)
+	err := c.cc.Invoke(ctx, FamiliesService_ViewLabelsForFamilyIDs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -3375,7 +3375,7 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x14FAMILY_SORT_KEY_CODE\x10\f\x12!\n" +
 	"\x1dFAMILY_SORT_KEY_UNIT_QUANTITY\x10\r\x12\x19\n" +
 	"\x15FAMILY_SORT_KEY_PRICE\x10\x0e\x12#\n" +
-	"\x1fFAMILY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xe4$\n" +
+	"\x1fFAMILY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xb1%\n" +
 	"\x0fFamiliesService\x12J\n" +
 	"\x06Create\x12$.Scailo.FamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.FamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -3408,7 +3408,8 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\vDeleteLabel\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x128\n" +
 	"\rViewLabelByID\x12\x12.Scailo.Identifier\x1a\x13.Scailo.FamilyLabel\x12:\n" +
 	"\n" +
-	"ViewLabels\x12\x12.Scailo.Identifier\x1a\x18.Scailo.FamilyLabelsList\x12c\n" +
+	"ViewLabels\x12\x12.Scailo.Identifier\x1a\x18.Scailo.FamilyLabelsList\x12K\n" +
+	"\x16ViewLabelsForFamilyIDs\x12\x17.Scailo.IdentifiersList\x1a\x18.Scailo.FamilyLabelsList\x12c\n" +
 	"\x11AddUnitConversion\x122.Scailo.FamiliesServiceUnitConversionCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x15ApproveUnitConversion\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\x14DeleteUnitConversion\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
@@ -3505,9 +3506,9 @@ var file_families_scailo_proto_goTypes = []any{
 	(*StandardFile)(nil),                                   // 39: Scailo.StandardFile
 	(*IdentifierWithUserComment)(nil),                      // 40: Scailo.IdentifierWithUserComment
 	(*Identifier)(nil),                                     // 41: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                 // 42: Scailo.IdentifierUUID
-	(*SimpleSearchReq)(nil),                                // 43: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                // 44: Scailo.IdentifiersList
+	(*IdentifiersList)(nil),                                // 42: Scailo.IdentifiersList
+	(*IdentifierUUID)(nil),                                 // 43: Scailo.IdentifierUUID
+	(*SimpleSearchReq)(nil),                                // 44: Scailo.SimpleSearchReq
 	(*ActiveStatus)(nil),                                   // 45: Scailo.ActiveStatus
 	(*CountInSLCStatusRequest)(nil),                        // 46: Scailo.CountInSLCStatusRequest
 	(*IdentifierResponse)(nil),                             // 47: Scailo.IdentifierResponse
@@ -3604,103 +3605,105 @@ var file_families_scailo_proto_depIdxs = []int32{
 	40,  // 85: Scailo.FamiliesService.DeleteLabel:input_type -> Scailo.IdentifierWithUserComment
 	41,  // 86: Scailo.FamiliesService.ViewLabelByID:input_type -> Scailo.Identifier
 	41,  // 87: Scailo.FamiliesService.ViewLabels:input_type -> Scailo.Identifier
-	21,  // 88: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
-	40,  // 89: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	40,  // 90: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 91: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
-	41,  // 92: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
-	20,  // 93: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
-	24,  // 94: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
-	40,  // 95: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	40,  // 96: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 97: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
-	41,  // 98: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
-	41,  // 99: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
-	42,  // 100: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	41,  // 101: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	43,  // 102: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
-	42,  // 103: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	44,  // 104: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	45,  // 105: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
-	42,  // 106: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	8,   // 107: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
-	3,   // 108: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
-	41,  // 109: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
-	12,  // 110: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
-	10,  // 111: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
-	43,  // 112: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
-	43,  // 113: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
-	43,  // 114: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
-	43,  // 115: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
-	43,  // 116: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
-	43,  // 117: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
-	43,  // 118: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
-	46,  // 119: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	11,  // 120: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
-	47,  // 121: Scailo.FamiliesService.Create:output_type -> Scailo.IdentifierResponse
-	47,  // 122: Scailo.FamiliesService.Draft:output_type -> Scailo.IdentifierResponse
-	47,  // 123: Scailo.FamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	47,  // 124: Scailo.FamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	47,  // 125: Scailo.FamiliesService.Verify:output_type -> Scailo.IdentifierResponse
-	47,  // 126: Scailo.FamiliesService.Approve:output_type -> Scailo.IdentifierResponse
-	47,  // 127: Scailo.FamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	47,  // 128: Scailo.FamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	47,  // 129: Scailo.FamiliesService.Halt:output_type -> Scailo.IdentifierResponse
-	47,  // 130: Scailo.FamiliesService.Discard:output_type -> Scailo.IdentifierResponse
-	47,  // 131: Scailo.FamiliesService.Restore:output_type -> Scailo.IdentifierResponse
-	47,  // 132: Scailo.FamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	47,  // 133: Scailo.FamiliesService.Amend:output_type -> Scailo.IdentifierResponse
-	47,  // 134: Scailo.FamiliesService.UpdatePrice:output_type -> Scailo.IdentifierResponse
-	48,  // 135: Scailo.FamiliesService.UploadPrices:output_type -> Scailo.IdentifierUUIDsList
-	47,  // 136: Scailo.FamiliesService.UpdateMinStockToMaintain:output_type -> Scailo.IdentifierResponse
-	48,  // 137: Scailo.FamiliesService.UploadMinStockToMaintain:output_type -> Scailo.IdentifierUUIDsList
-	39,  // 138: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	48,  // 139: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	47,  // 140: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
-	47,  // 141: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
-	47,  // 142: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
-	18,  // 143: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
-	19,  // 144: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
-	47,  // 145: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
-	47,  // 146: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
-	47,  // 147: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
-	15,  // 148: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
-	16,  // 149: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
-	47,  // 150: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
-	47,  // 151: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
-	47,  // 152: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
-	22,  // 153: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
-	23,  // 154: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
-	22,  // 155: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
-	47,  // 156: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
-	47,  // 157: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
-	47,  // 158: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
-	25,  // 159: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
-	26,  // 160: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
-	6,   // 161: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
-	6,   // 162: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
-	6,   // 163: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
-	6,   // 164: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
-	6,   // 165: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
-	7,   // 166: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
-	7,   // 167: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
-	7,   // 168: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
-	9,   // 169: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
-	7,   // 170: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
-	49,  // 171: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	7,   // 172: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
-	7,   // 173: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
-	7,   // 174: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
-	7,   // 175: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
-	7,   // 176: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
-	7,   // 177: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
-	7,   // 178: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
-	7,   // 179: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
-	7,   // 180: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
-	50,  // 181: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
-	50,  // 182: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
-	121, // [121:183] is the sub-list for method output_type
-	59,  // [59:121] is the sub-list for method input_type
+	42,  // 88: Scailo.FamiliesService.ViewLabelsForFamilyIDs:input_type -> Scailo.IdentifiersList
+	21,  // 89: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
+	40,  // 90: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	40,  // 91: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 92: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
+	41,  // 93: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
+	20,  // 94: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
+	24,  // 95: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
+	40,  // 96: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	40,  // 97: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 98: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
+	41,  // 99: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
+	41,  // 100: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
+	43,  // 101: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	41,  // 102: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	44,  // 103: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
+	43,  // 104: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	42,  // 105: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	45,  // 106: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
+	43,  // 107: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	8,   // 108: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
+	3,   // 109: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
+	41,  // 110: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
+	12,  // 111: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
+	10,  // 112: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
+	44,  // 113: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
+	44,  // 114: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
+	44,  // 115: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
+	44,  // 116: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
+	44,  // 117: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
+	44,  // 118: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
+	44,  // 119: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
+	46,  // 120: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	11,  // 121: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
+	47,  // 122: Scailo.FamiliesService.Create:output_type -> Scailo.IdentifierResponse
+	47,  // 123: Scailo.FamiliesService.Draft:output_type -> Scailo.IdentifierResponse
+	47,  // 124: Scailo.FamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	47,  // 125: Scailo.FamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	47,  // 126: Scailo.FamiliesService.Verify:output_type -> Scailo.IdentifierResponse
+	47,  // 127: Scailo.FamiliesService.Approve:output_type -> Scailo.IdentifierResponse
+	47,  // 128: Scailo.FamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	47,  // 129: Scailo.FamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	47,  // 130: Scailo.FamiliesService.Halt:output_type -> Scailo.IdentifierResponse
+	47,  // 131: Scailo.FamiliesService.Discard:output_type -> Scailo.IdentifierResponse
+	47,  // 132: Scailo.FamiliesService.Restore:output_type -> Scailo.IdentifierResponse
+	47,  // 133: Scailo.FamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	47,  // 134: Scailo.FamiliesService.Amend:output_type -> Scailo.IdentifierResponse
+	47,  // 135: Scailo.FamiliesService.UpdatePrice:output_type -> Scailo.IdentifierResponse
+	48,  // 136: Scailo.FamiliesService.UploadPrices:output_type -> Scailo.IdentifierUUIDsList
+	47,  // 137: Scailo.FamiliesService.UpdateMinStockToMaintain:output_type -> Scailo.IdentifierResponse
+	48,  // 138: Scailo.FamiliesService.UploadMinStockToMaintain:output_type -> Scailo.IdentifierUUIDsList
+	39,  // 139: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	48,  // 140: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	47,  // 141: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
+	47,  // 142: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
+	47,  // 143: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
+	18,  // 144: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
+	19,  // 145: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
+	47,  // 146: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
+	47,  // 147: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
+	47,  // 148: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
+	15,  // 149: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
+	16,  // 150: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
+	16,  // 151: Scailo.FamiliesService.ViewLabelsForFamilyIDs:output_type -> Scailo.FamilyLabelsList
+	47,  // 152: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
+	47,  // 153: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
+	47,  // 154: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
+	22,  // 155: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
+	23,  // 156: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
+	22,  // 157: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
+	47,  // 158: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
+	47,  // 159: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
+	47,  // 160: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
+	25,  // 161: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
+	26,  // 162: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
+	6,   // 163: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
+	6,   // 164: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
+	6,   // 165: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
+	6,   // 166: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
+	6,   // 167: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
+	7,   // 168: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
+	7,   // 169: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
+	7,   // 170: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
+	9,   // 171: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
+	7,   // 172: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
+	49,  // 173: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	7,   // 174: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
+	7,   // 175: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
+	7,   // 176: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
+	7,   // 177: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
+	7,   // 178: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
+	7,   // 179: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
+	7,   // 180: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
+	7,   // 181: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
+	7,   // 182: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
+	50,  // 183: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
+	50,  // 184: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
+	122, // [122:185] is the sub-list for method output_type
+	59,  // [59:122] is the sub-list for method input_type
 	59,  // [59:59] is the sub-list for extension type_name
 	59,  // [59:59] is the sub-list for extension extendee
 	0,   // [0:59] is the sub-list for field type_name

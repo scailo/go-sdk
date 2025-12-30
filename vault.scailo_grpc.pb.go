@@ -83,6 +83,7 @@ const (
 	VaultService_DeleteEnclaveDomain_FullMethodName                = "/Scailo.VaultService/DeleteEnclaveDomain"
 	VaultService_ViewEnclaveDomain_FullMethodName                  = "/Scailo.VaultService/ViewEnclaveDomain"
 	VaultService_ViewAllEnclaveDomains_FullMethodName              = "/Scailo.VaultService/ViewAllEnclaveDomains"
+	VaultService_ViewDomainSuffix_FullMethodName                   = "/Scailo.VaultService/ViewDomainSuffix"
 	VaultService_FilterEnclaveDomains_FullMethodName               = "/Scailo.VaultService/FilterEnclaveDomains"
 )
 
@@ -225,6 +226,8 @@ type VaultServiceClient interface {
 	ViewEnclaveDomain(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomain, error)
 	// View all domains for enclave for the enclave represented by the Identifier
 	ViewAllEnclaveDomains(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveDomainsList, error)
+	// Retrieve the default domain suffix that could be used for creating a new domain
+	ViewDomainSuffix(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EnclaveDomainSuffixResp, error)
 	// Filter all domains that match the given filter criteria
 	FilterEnclaveDomains(ctx context.Context, in *EnclaveDomainsFilterReq, opts ...grpc.CallOption) (*EnclaveDomainsList, error)
 }
@@ -881,6 +884,16 @@ func (c *vaultServiceClient) ViewAllEnclaveDomains(ctx context.Context, in *Iden
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EnclaveDomainsList)
 	err := c.cc.Invoke(ctx, VaultService_ViewAllEnclaveDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewDomainSuffix(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EnclaveDomainSuffixResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveDomainSuffixResp)
+	err := c.cc.Invoke(ctx, VaultService_ViewDomainSuffix_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
