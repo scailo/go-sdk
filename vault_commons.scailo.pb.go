@@ -1241,8 +1241,8 @@ type EnclaveManifest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores the manifest version
 	ManifestVersion string `protobuf:"bytes,1,opt,name=manifest_version,proto3" json:"manifest_version,omitempty"`
-	// Stores the enclave type (valid options are node, golang, python)
-	EnclaveType string `protobuf:"bytes,2,opt,name=enclave_type,proto3" json:"enclave_type,omitempty"`
+	// Stores the enclave runtime (valid options are node, golang, python)
+	EnclaveRuntime string `protobuf:"bytes,2,opt,name=enclave_runtime,proto3" json:"enclave_runtime,omitempty"`
 	// Stores the application version
 	AppVersion string `protobuf:"bytes,3,opt,name=app_version,proto3" json:"app_version,omitempty"`
 	// Stores the name of the application
@@ -1253,6 +1253,8 @@ type EnclaveManifest struct {
 	AppUniqueIdentifier string `protobuf:"bytes,6,opt,name=app_unique_identifier,proto3" json:"app_unique_identifier,omitempty"`
 	// Stores the command that starts the enclave
 	StartExec string `protobuf:"bytes,7,opt,name=start_exec,proto3" json:"start_exec,omitempty"`
+	// Stores how the entry to the application is to be handled
+	EntryPointManagement string `protobuf:"bytes,8,opt,name=entry_point_management,proto3" json:"entry_point_management,omitempty"`
 	// Stores the resources of the Enclave
 	Resources     *EnclaveResources `protobuf:"bytes,10,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1296,9 +1298,9 @@ func (x *EnclaveManifest) GetManifestVersion() string {
 	return ""
 }
 
-func (x *EnclaveManifest) GetEnclaveType() string {
+func (x *EnclaveManifest) GetEnclaveRuntime() string {
 	if x != nil {
-		return x.EnclaveType
+		return x.EnclaveRuntime
 	}
 	return ""
 }
@@ -1334,6 +1336,13 @@ func (x *EnclaveManifest) GetAppUniqueIdentifier() string {
 func (x *EnclaveManifest) GetStartExec() string {
 	if x != nil {
 		return x.StartExec
+	}
+	return ""
+}
+
+func (x *EnclaveManifest) GetEntryPointManagement() string {
+	if x != nil {
+		return x.EntryPointManagement
 	}
 	return ""
 }
@@ -3237,17 +3246,19 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x10EnclaveResources\x12\x14\n" +
 	"\x05logos\x18\x01 \x03(\tR\x05logos\x12\x18\n" +
 	"\afolders\x18\x02 \x03(\tR\afolders\x12\x14\n" +
-	"\x05files\x18\x03 \x03(\tR\x05files\"\xee\x02\n" +
+	"\x05files\x18\x03 \x03(\tR\x05files\"\xd2\x03\n" +
 	"\x0fEnclaveManifest\x12*\n" +
-	"\x10manifest_version\x18\x01 \x01(\tR\x10manifest_version\x12?\n" +
-	"\fenclave_type\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16R\x04nodeR\x06golangR\x06pythonR\fenclave_type\x12 \n" +
+	"\x10manifest_version\x18\x01 \x01(\tR\x10manifest_version\x12E\n" +
+	"\x0fenclave_runtime\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16R\x04nodeR\x06golangR\x06pythonR\x0fenclave_runtime\x12 \n" +
 	"\vapp_version\x18\x03 \x01(\tR\vapp_version\x12\x1a\n" +
 	"\bapp_name\x18\x04 \x01(\tR\bapp_name\x12\"\n" +
 	"\fenclave_name\x18\x05 \x01(\tR\fenclave_name\x124\n" +
 	"\x15app_unique_identifier\x18\x06 \x01(\tR\x15app_unique_identifier\x12\x1e\n" +
 	"\n" +
 	"start_exec\x18\a \x01(\tR\n" +
-	"start_exec\x126\n" +
+	"start_exec\x12\\\n" +
+	"\x16entry_point_management\x18\b \x01(\tB$\xbaH!r\x1fR\n" +
+	"direct_urlR\x11platform_redirectR\x16entry_point_management\x126\n" +
 	"\tresources\x18\n" +
 	" \x01(\v2\x18.Scailo.EnclaveResourcesR\tresources\"\x9e\x03\n" +
 	"\x0eEnclaveIngress\x12\x1f\n" +
