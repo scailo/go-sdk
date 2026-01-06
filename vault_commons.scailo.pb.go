@@ -1236,6 +1236,70 @@ func (x *EnclaveResources) GetFiles() []string {
 	return nil
 }
 
+// Describes each environment variable that is defined in the Manifest of an Enclave
+type EnclaveManifestEnvVariable struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores the name of the environment variable
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Stores the default value of the environment variable
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	// Stores if the variable is a secret
+	IsSecret      bool `protobuf:"varint,3,opt,name=is_secret,proto3" json:"is_secret,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveManifestEnvVariable) Reset() {
+	*x = EnclaveManifestEnvVariable{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveManifestEnvVariable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveManifestEnvVariable) ProtoMessage() {}
+
+func (x *EnclaveManifestEnvVariable) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveManifestEnvVariable.ProtoReflect.Descriptor instead.
+func (*EnclaveManifestEnvVariable) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *EnclaveManifestEnvVariable) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *EnclaveManifestEnvVariable) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *EnclaveManifestEnvVariable) GetIsSecret() bool {
+	if x != nil {
+		return x.IsSecret
+	}
+	return false
+}
+
 // Describes the manifest file of an Enclave. Stores the attributes that can be a part of the MANIFEST.yaml file, that is present in the root folder of an Enclave
 type EnclaveManifest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1255,6 +1319,8 @@ type EnclaveManifest struct {
 	StartExec string `protobuf:"bytes,7,opt,name=start_exec,proto3" json:"start_exec,omitempty"`
 	// Stores how the entry to the application is to be handled
 	EntryPointManagement string `protobuf:"bytes,8,opt,name=entry_point_management,proto3" json:"entry_point_management,omitempty"`
+	// Stores the list of default environment variables
+	EnvVariables []*EnclaveManifestEnvVariable `protobuf:"bytes,9,rep,name=env_variables,proto3" json:"env_variables,omitempty"`
 	// Stores the resources of the Enclave
 	Resources     *EnclaveResources `protobuf:"bytes,10,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1263,7 +1329,7 @@ type EnclaveManifest struct {
 
 func (x *EnclaveManifest) Reset() {
 	*x = EnclaveManifest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[10]
+	mi := &file_vault_commons_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1341,7 @@ func (x *EnclaveManifest) String() string {
 func (*EnclaveManifest) ProtoMessage() {}
 
 func (x *EnclaveManifest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[10]
+	mi := &file_vault_commons_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1354,7 @@ func (x *EnclaveManifest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveManifest.ProtoReflect.Descriptor instead.
 func (*EnclaveManifest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{10}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *EnclaveManifest) GetManifestVersion() string {
@@ -1347,6 +1413,13 @@ func (x *EnclaveManifest) GetEntryPointManagement() string {
 	return ""
 }
 
+func (x *EnclaveManifest) GetEnvVariables() []*EnclaveManifestEnvVariable {
+	if x != nil {
+		return x.EnvVariables
+	}
+	return nil
+}
+
 func (x *EnclaveManifest) GetResources() *EnclaveResources {
 	if x != nil {
 		return x.Resources
@@ -1385,7 +1458,7 @@ type EnclaveIngress struct {
 
 func (x *EnclaveIngress) Reset() {
 	*x = EnclaveIngress{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[11]
+	mi := &file_vault_commons_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1397,7 +1470,7 @@ func (x *EnclaveIngress) String() string {
 func (*EnclaveIngress) ProtoMessage() {}
 
 func (x *EnclaveIngress) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[11]
+	mi := &file_vault_commons_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1410,7 +1483,7 @@ func (x *EnclaveIngress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveIngress.ProtoReflect.Descriptor instead.
 func (*EnclaveIngress) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{11}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *EnclaveIngress) GetEntityUuid() string {
@@ -1501,7 +1574,7 @@ type EnclaveIngressesList struct {
 
 func (x *EnclaveIngressesList) Reset() {
 	*x = EnclaveIngressesList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[12]
+	mi := &file_vault_commons_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1513,7 +1586,7 @@ func (x *EnclaveIngressesList) String() string {
 func (*EnclaveIngressesList) ProtoMessage() {}
 
 func (x *EnclaveIngressesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[12]
+	mi := &file_vault_commons_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1526,7 +1599,7 @@ func (x *EnclaveIngressesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveIngressesList.ProtoReflect.Descriptor instead.
 func (*EnclaveIngressesList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{12}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *EnclaveIngressesList) GetList() []*EnclaveIngress {
@@ -1563,7 +1636,7 @@ type EnclaveIngressCountReq struct {
 
 func (x *EnclaveIngressCountReq) Reset() {
 	*x = EnclaveIngressCountReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[13]
+	mi := &file_vault_commons_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1575,7 +1648,7 @@ func (x *EnclaveIngressCountReq) String() string {
 func (*EnclaveIngressCountReq) ProtoMessage() {}
 
 func (x *EnclaveIngressCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[13]
+	mi := &file_vault_commons_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1588,7 +1661,7 @@ func (x *EnclaveIngressCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveIngressCountReq.ProtoReflect.Descriptor instead.
 func (*EnclaveIngressCountReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{13}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *EnclaveIngressCountReq) GetIsActive() BOOL_FILTER {
@@ -1685,7 +1758,7 @@ type EnclaveIngressFilterReq struct {
 
 func (x *EnclaveIngressFilterReq) Reset() {
 	*x = EnclaveIngressFilterReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[14]
+	mi := &file_vault_commons_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1697,7 +1770,7 @@ func (x *EnclaveIngressFilterReq) String() string {
 func (*EnclaveIngressFilterReq) ProtoMessage() {}
 
 func (x *EnclaveIngressFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[14]
+	mi := &file_vault_commons_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1710,7 +1783,7 @@ func (x *EnclaveIngressFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveIngressFilterReq.ProtoReflect.Descriptor instead.
 func (*EnclaveIngressFilterReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{14}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *EnclaveIngressFilterReq) GetIsActive() BOOL_FILTER {
@@ -1801,7 +1874,7 @@ type VerifyEnclaveIngressRequest struct {
 
 func (x *VerifyEnclaveIngressRequest) Reset() {
 	*x = VerifyEnclaveIngressRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[15]
+	mi := &file_vault_commons_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1813,7 +1886,7 @@ func (x *VerifyEnclaveIngressRequest) String() string {
 func (*VerifyEnclaveIngressRequest) ProtoMessage() {}
 
 func (x *VerifyEnclaveIngressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[15]
+	mi := &file_vault_commons_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1899,7 @@ func (x *VerifyEnclaveIngressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyEnclaveIngressRequest.ProtoReflect.Descriptor instead.
 func (*VerifyEnclaveIngressRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{15}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *VerifyEnclaveIngressRequest) GetToken() string {
@@ -1855,7 +1928,7 @@ type VerifyEnclaveIngressResponse struct {
 
 func (x *VerifyEnclaveIngressResponse) Reset() {
 	*x = VerifyEnclaveIngressResponse{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[16]
+	mi := &file_vault_commons_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1867,7 +1940,7 @@ func (x *VerifyEnclaveIngressResponse) String() string {
 func (*VerifyEnclaveIngressResponse) ProtoMessage() {}
 
 func (x *VerifyEnclaveIngressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[16]
+	mi := &file_vault_commons_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1880,7 +1953,7 @@ func (x *VerifyEnclaveIngressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyEnclaveIngressResponse.ProtoReflect.Descriptor instead.
 func (*VerifyEnclaveIngressResponse) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{16}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *VerifyEnclaveIngressResponse) GetEnclaveName() string {
@@ -1935,7 +2008,7 @@ type EnclaveEnvironmentVariableAddRequest struct {
 
 func (x *EnclaveEnvironmentVariableAddRequest) Reset() {
 	*x = EnclaveEnvironmentVariableAddRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[17]
+	mi := &file_vault_commons_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1947,7 +2020,7 @@ func (x *EnclaveEnvironmentVariableAddRequest) String() string {
 func (*EnclaveEnvironmentVariableAddRequest) ProtoMessage() {}
 
 func (x *EnclaveEnvironmentVariableAddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[17]
+	mi := &file_vault_commons_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1960,7 +2033,7 @@ func (x *EnclaveEnvironmentVariableAddRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use EnclaveEnvironmentVariableAddRequest.ProtoReflect.Descriptor instead.
 func (*EnclaveEnvironmentVariableAddRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{17}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *EnclaveEnvironmentVariableAddRequest) GetFileUuid() string {
@@ -2004,7 +2077,7 @@ type EnclaveEnvironmentVariableUpdateRequest struct {
 
 func (x *EnclaveEnvironmentVariableUpdateRequest) Reset() {
 	*x = EnclaveEnvironmentVariableUpdateRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[18]
+	mi := &file_vault_commons_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2016,7 +2089,7 @@ func (x *EnclaveEnvironmentVariableUpdateRequest) String() string {
 func (*EnclaveEnvironmentVariableUpdateRequest) ProtoMessage() {}
 
 func (x *EnclaveEnvironmentVariableUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[18]
+	mi := &file_vault_commons_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2029,7 +2102,7 @@ func (x *EnclaveEnvironmentVariableUpdateRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use EnclaveEnvironmentVariableUpdateRequest.ProtoReflect.Descriptor instead.
 func (*EnclaveEnvironmentVariableUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{18}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *EnclaveEnvironmentVariableUpdateRequest) GetUuid() string {
@@ -2067,7 +2140,7 @@ type EnclaveEnvironmentVariable struct {
 
 func (x *EnclaveEnvironmentVariable) Reset() {
 	*x = EnclaveEnvironmentVariable{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[19]
+	mi := &file_vault_commons_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2079,7 +2152,7 @@ func (x *EnclaveEnvironmentVariable) String() string {
 func (*EnclaveEnvironmentVariable) ProtoMessage() {}
 
 func (x *EnclaveEnvironmentVariable) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[19]
+	mi := &file_vault_commons_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2092,7 +2165,7 @@ func (x *EnclaveEnvironmentVariable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveEnvironmentVariable.ProtoReflect.Descriptor instead.
 func (*EnclaveEnvironmentVariable) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{19}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *EnclaveEnvironmentVariable) GetEntityUuid() string {
@@ -2148,7 +2221,7 @@ type EnclaveEnvironmentVariablesList struct {
 
 func (x *EnclaveEnvironmentVariablesList) Reset() {
 	*x = EnclaveEnvironmentVariablesList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[20]
+	mi := &file_vault_commons_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2160,7 +2233,7 @@ func (x *EnclaveEnvironmentVariablesList) String() string {
 func (*EnclaveEnvironmentVariablesList) ProtoMessage() {}
 
 func (x *EnclaveEnvironmentVariablesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[20]
+	mi := &file_vault_commons_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2173,7 +2246,7 @@ func (x *EnclaveEnvironmentVariablesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveEnvironmentVariablesList.ProtoReflect.Descriptor instead.
 func (*EnclaveEnvironmentVariablesList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{20}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *EnclaveEnvironmentVariablesList) GetList() []*EnclaveEnvironmentVariable {
@@ -2196,7 +2269,7 @@ type EnclaveDomainAddRequest struct {
 
 func (x *EnclaveDomainAddRequest) Reset() {
 	*x = EnclaveDomainAddRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	mi := &file_vault_commons_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2208,7 +2281,7 @@ func (x *EnclaveDomainAddRequest) String() string {
 func (*EnclaveDomainAddRequest) ProtoMessage() {}
 
 func (x *EnclaveDomainAddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[21]
+	mi := &file_vault_commons_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2221,7 +2294,7 @@ func (x *EnclaveDomainAddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveDomainAddRequest.ProtoReflect.Descriptor instead.
 func (*EnclaveDomainAddRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{21}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *EnclaveDomainAddRequest) GetFileUuid() string {
@@ -2257,7 +2330,7 @@ type EnclaveDomain struct {
 
 func (x *EnclaveDomain) Reset() {
 	*x = EnclaveDomain{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	mi := &file_vault_commons_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2269,7 +2342,7 @@ func (x *EnclaveDomain) String() string {
 func (*EnclaveDomain) ProtoMessage() {}
 
 func (x *EnclaveDomain) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[22]
+	mi := &file_vault_commons_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2282,7 +2355,7 @@ func (x *EnclaveDomain) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveDomain.ProtoReflect.Descriptor instead.
 func (*EnclaveDomain) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{22}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *EnclaveDomain) GetEntityUuid() string {
@@ -2353,7 +2426,7 @@ type EnclaveDomainsFilterReq struct {
 
 func (x *EnclaveDomainsFilterReq) Reset() {
 	*x = EnclaveDomainsFilterReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	mi := &file_vault_commons_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2365,7 +2438,7 @@ func (x *EnclaveDomainsFilterReq) String() string {
 func (*EnclaveDomainsFilterReq) ProtoMessage() {}
 
 func (x *EnclaveDomainsFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[23]
+	mi := &file_vault_commons_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2378,7 +2451,7 @@ func (x *EnclaveDomainsFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveDomainsFilterReq.ProtoReflect.Descriptor instead.
 func (*EnclaveDomainsFilterReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{23}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *EnclaveDomainsFilterReq) GetIsActive() BOOL_FILTER {
@@ -2476,7 +2549,7 @@ type EnclaveDomainsList struct {
 
 func (x *EnclaveDomainsList) Reset() {
 	*x = EnclaveDomainsList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	mi := &file_vault_commons_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2488,7 +2561,7 @@ func (x *EnclaveDomainsList) String() string {
 func (*EnclaveDomainsList) ProtoMessage() {}
 
 func (x *EnclaveDomainsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[24]
+	mi := &file_vault_commons_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2501,7 +2574,7 @@ func (x *EnclaveDomainsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveDomainsList.ProtoReflect.Descriptor instead.
 func (*EnclaveDomainsList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{24}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *EnclaveDomainsList) GetList() []*EnclaveDomain {
@@ -2524,7 +2597,7 @@ type EnclaveDomainSuffixResp struct {
 
 func (x *EnclaveDomainSuffixResp) Reset() {
 	*x = EnclaveDomainSuffixResp{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[25]
+	mi := &file_vault_commons_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2536,7 +2609,7 @@ func (x *EnclaveDomainSuffixResp) String() string {
 func (*EnclaveDomainSuffixResp) ProtoMessage() {}
 
 func (x *EnclaveDomainSuffixResp) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[25]
+	mi := &file_vault_commons_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2549,7 +2622,7 @@ func (x *EnclaveDomainSuffixResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnclaveDomainSuffixResp.ProtoReflect.Descriptor instead.
 func (*EnclaveDomainSuffixResp) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{25}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *EnclaveDomainSuffixResp) GetSuffix() string {
@@ -2600,7 +2673,7 @@ type VaultSearchReq struct {
 
 func (x *VaultSearchReq) Reset() {
 	*x = VaultSearchReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[26]
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2612,7 +2685,7 @@ func (x *VaultSearchReq) String() string {
 func (*VaultSearchReq) ProtoMessage() {}
 
 func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[26]
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2625,7 +2698,7 @@ func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchReq.ProtoReflect.Descriptor instead.
 func (*VaultSearchReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{26}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *VaultSearchReq) GetIsActive() BOOL_FILTER {
@@ -2740,7 +2813,7 @@ type VaultSearchResponse struct {
 
 func (x *VaultSearchResponse) Reset() {
 	*x = VaultSearchResponse{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2752,7 +2825,7 @@ func (x *VaultSearchResponse) String() string {
 func (*VaultSearchResponse) ProtoMessage() {}
 
 func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2765,7 +2838,7 @@ func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponse.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponse) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *VaultSearchResponse) GetName() string {
@@ -2821,7 +2894,7 @@ type VaultSearchResponsesList struct {
 
 func (x *VaultSearchResponsesList) Reset() {
 	*x = VaultSearchResponsesList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2833,7 +2906,7 @@ func (x *VaultSearchResponsesList) String() string {
 func (*VaultSearchResponsesList) ProtoMessage() {}
 
 func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2846,7 +2919,7 @@ func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponsesList.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponsesList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{28}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *VaultSearchResponsesList) GetList() []*VaultSearchResponse {
@@ -2869,7 +2942,7 @@ type VaultDuplicateCheckReq struct {
 
 func (x *VaultDuplicateCheckReq) Reset() {
 	*x = VaultDuplicateCheckReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2881,7 +2954,7 @@ func (x *VaultDuplicateCheckReq) String() string {
 func (*VaultDuplicateCheckReq) ProtoMessage() {}
 
 func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2894,7 +2967,7 @@ func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultDuplicateCheckReq.ProtoReflect.Descriptor instead.
 func (*VaultDuplicateCheckReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{29}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *VaultDuplicateCheckReq) GetName() string {
@@ -2936,7 +3009,7 @@ type VaultAccessLog struct {
 
 func (x *VaultAccessLog) Reset() {
 	*x = VaultAccessLog{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2948,7 +3021,7 @@ func (x *VaultAccessLog) String() string {
 func (*VaultAccessLog) ProtoMessage() {}
 
 func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2961,7 +3034,7 @@ func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLog.ProtoReflect.Descriptor instead.
 func (*VaultAccessLog) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{30}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *VaultAccessLog) GetEntityUuid() string {
@@ -3043,7 +3116,7 @@ type VaultAccessLogCreateRequest struct {
 
 func (x *VaultAccessLogCreateRequest) Reset() {
 	*x = VaultAccessLogCreateRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	mi := &file_vault_commons_scailo_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3055,7 +3128,7 @@ func (x *VaultAccessLogCreateRequest) String() string {
 func (*VaultAccessLogCreateRequest) ProtoMessage() {}
 
 func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	mi := &file_vault_commons_scailo_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3068,7 +3141,7 @@ func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogCreateRequest.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogCreateRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{31}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *VaultAccessLogCreateRequest) GetEntityUuid() string {
@@ -3131,7 +3204,7 @@ type VaultAccessLogsList struct {
 
 func (x *VaultAccessLogsList) Reset() {
 	*x = VaultAccessLogsList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[32]
+	mi := &file_vault_commons_scailo_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3143,7 +3216,7 @@ func (x *VaultAccessLogsList) String() string {
 func (*VaultAccessLogsList) ProtoMessage() {}
 
 func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[32]
+	mi := &file_vault_commons_scailo_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3156,7 +3229,7 @@ func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogsList.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogsList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{32}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *VaultAccessLogsList) GetList() []*VaultAccessLog {
@@ -3246,7 +3319,11 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x10EnclaveResources\x12\x14\n" +
 	"\x05logos\x18\x01 \x03(\tR\x05logos\x12\x18\n" +
 	"\afolders\x18\x02 \x03(\tR\afolders\x12\x14\n" +
-	"\x05files\x18\x03 \x03(\tR\x05files\"\xd2\x03\n" +
+	"\x05files\x18\x03 \x03(\tR\x05files\"d\n" +
+	"\x1aEnclaveManifestEnvVariable\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\x12\x1c\n" +
+	"\tis_secret\x18\x03 \x01(\bR\tis_secret\"\x9c\x04\n" +
 	"\x0fEnclaveManifest\x12*\n" +
 	"\x10manifest_version\x18\x01 \x01(\tR\x10manifest_version\x12E\n" +
 	"\x0fenclave_runtime\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16R\x04nodeR\x06golangR\x06pythonR\x0fenclave_runtime\x12 \n" +
@@ -3258,7 +3335,8 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"start_exec\x18\a \x01(\tR\n" +
 	"start_exec\x12\\\n" +
 	"\x16entry_point_management\x18\b \x01(\tB$\xbaH!r\x1fR\n" +
-	"direct_urlR\x11platform_redirectR\x16entry_point_management\x126\n" +
+	"direct_urlR\x11platform_redirectR\x16entry_point_management\x12H\n" +
+	"\renv_variables\x18\t \x03(\v2\".Scailo.EnclaveManifestEnvVariableR\renv_variables\x126\n" +
 	"\tresources\x18\n" +
 	" \x01(\v2\x18.Scailo.EnclaveResourcesR\tresources\"\x9e\x03\n" +
 	"\x0eEnclaveIngress\x12\x1f\n" +
@@ -3471,7 +3549,7 @@ func file_vault_commons_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_vault_commons_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_vault_commons_scailo_proto_goTypes = []any{
 	(VAULT_REF_FOR)(0),                              // 0: Scailo.VAULT_REF_FOR
 	(VAULT_PERMISSION_CODE)(0),                      // 1: Scailo.VAULT_PERMISSION_CODE
@@ -3488,71 +3566,73 @@ var file_vault_commons_scailo_proto_goTypes = []any{
 	(*GiXAppRunCountReq)(nil),                       // 12: Scailo.GiXAppRunCountReq
 	(*GiXAppRunFilterReq)(nil),                      // 13: Scailo.GiXAppRunFilterReq
 	(*EnclaveResources)(nil),                        // 14: Scailo.EnclaveResources
-	(*EnclaveManifest)(nil),                         // 15: Scailo.EnclaveManifest
-	(*EnclaveIngress)(nil),                          // 16: Scailo.EnclaveIngress
-	(*EnclaveIngressesList)(nil),                    // 17: Scailo.EnclaveIngressesList
-	(*EnclaveIngressCountReq)(nil),                  // 18: Scailo.EnclaveIngressCountReq
-	(*EnclaveIngressFilterReq)(nil),                 // 19: Scailo.EnclaveIngressFilterReq
-	(*VerifyEnclaveIngressRequest)(nil),             // 20: Scailo.VerifyEnclaveIngressRequest
-	(*VerifyEnclaveIngressResponse)(nil),            // 21: Scailo.VerifyEnclaveIngressResponse
-	(*EnclaveEnvironmentVariableAddRequest)(nil),    // 22: Scailo.EnclaveEnvironmentVariableAddRequest
-	(*EnclaveEnvironmentVariableUpdateRequest)(nil), // 23: Scailo.EnclaveEnvironmentVariableUpdateRequest
-	(*EnclaveEnvironmentVariable)(nil),              // 24: Scailo.EnclaveEnvironmentVariable
-	(*EnclaveEnvironmentVariablesList)(nil),         // 25: Scailo.EnclaveEnvironmentVariablesList
-	(*EnclaveDomainAddRequest)(nil),                 // 26: Scailo.EnclaveDomainAddRequest
-	(*EnclaveDomain)(nil),                           // 27: Scailo.EnclaveDomain
-	(*EnclaveDomainsFilterReq)(nil),                 // 28: Scailo.EnclaveDomainsFilterReq
-	(*EnclaveDomainsList)(nil),                      // 29: Scailo.EnclaveDomainsList
-	(*EnclaveDomainSuffixResp)(nil),                 // 30: Scailo.EnclaveDomainSuffixResp
-	(*VaultSearchReq)(nil),                          // 31: Scailo.VaultSearchReq
-	(*VaultSearchResponse)(nil),                     // 32: Scailo.VaultSearchResponse
-	(*VaultSearchResponsesList)(nil),                // 33: Scailo.VaultSearchResponsesList
-	(*VaultDuplicateCheckReq)(nil),                  // 34: Scailo.VaultDuplicateCheckReq
-	(*VaultAccessLog)(nil),                          // 35: Scailo.VaultAccessLog
-	(*VaultAccessLogCreateRequest)(nil),             // 36: Scailo.VaultAccessLogCreateRequest
-	(*VaultAccessLogsList)(nil),                     // 37: Scailo.VaultAccessLogsList
-	(*EmployeeMetadata)(nil),                        // 38: Scailo.EmployeeMetadata
-	(BOOL_FILTER)(0),                                // 39: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                 // 40: Scailo.SORT_ORDER
+	(*EnclaveManifestEnvVariable)(nil),              // 15: Scailo.EnclaveManifestEnvVariable
+	(*EnclaveManifest)(nil),                         // 16: Scailo.EnclaveManifest
+	(*EnclaveIngress)(nil),                          // 17: Scailo.EnclaveIngress
+	(*EnclaveIngressesList)(nil),                    // 18: Scailo.EnclaveIngressesList
+	(*EnclaveIngressCountReq)(nil),                  // 19: Scailo.EnclaveIngressCountReq
+	(*EnclaveIngressFilterReq)(nil),                 // 20: Scailo.EnclaveIngressFilterReq
+	(*VerifyEnclaveIngressRequest)(nil),             // 21: Scailo.VerifyEnclaveIngressRequest
+	(*VerifyEnclaveIngressResponse)(nil),            // 22: Scailo.VerifyEnclaveIngressResponse
+	(*EnclaveEnvironmentVariableAddRequest)(nil),    // 23: Scailo.EnclaveEnvironmentVariableAddRequest
+	(*EnclaveEnvironmentVariableUpdateRequest)(nil), // 24: Scailo.EnclaveEnvironmentVariableUpdateRequest
+	(*EnclaveEnvironmentVariable)(nil),              // 25: Scailo.EnclaveEnvironmentVariable
+	(*EnclaveEnvironmentVariablesList)(nil),         // 26: Scailo.EnclaveEnvironmentVariablesList
+	(*EnclaveDomainAddRequest)(nil),                 // 27: Scailo.EnclaveDomainAddRequest
+	(*EnclaveDomain)(nil),                           // 28: Scailo.EnclaveDomain
+	(*EnclaveDomainsFilterReq)(nil),                 // 29: Scailo.EnclaveDomainsFilterReq
+	(*EnclaveDomainsList)(nil),                      // 30: Scailo.EnclaveDomainsList
+	(*EnclaveDomainSuffixResp)(nil),                 // 31: Scailo.EnclaveDomainSuffixResp
+	(*VaultSearchReq)(nil),                          // 32: Scailo.VaultSearchReq
+	(*VaultSearchResponse)(nil),                     // 33: Scailo.VaultSearchResponse
+	(*VaultSearchResponsesList)(nil),                // 34: Scailo.VaultSearchResponsesList
+	(*VaultDuplicateCheckReq)(nil),                  // 35: Scailo.VaultDuplicateCheckReq
+	(*VaultAccessLog)(nil),                          // 36: Scailo.VaultAccessLog
+	(*VaultAccessLogCreateRequest)(nil),             // 37: Scailo.VaultAccessLogCreateRequest
+	(*VaultAccessLogsList)(nil),                     // 38: Scailo.VaultAccessLogsList
+	(*EmployeeMetadata)(nil),                        // 39: Scailo.EmployeeMetadata
+	(BOOL_FILTER)(0),                                // 40: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                 // 41: Scailo.SORT_ORDER
 }
 var file_vault_commons_scailo_proto_depIdxs = []int32{
-	38, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
+	39, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
 	0,  // 1: Scailo.VaultPermission.ref_for:type_name -> Scailo.VAULT_REF_FOR
 	8,  // 2: Scailo.GiXManifest.resources:type_name -> Scailo.GixResources
-	38, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
+	39, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
 	9,  // 4: Scailo.GiXAppRun.manifest:type_name -> Scailo.GiXManifest
 	10, // 5: Scailo.GiXAppRunsList.list:type_name -> Scailo.GiXAppRun
-	39, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	39, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	14, // 8: Scailo.EnclaveManifest.resources:type_name -> Scailo.EnclaveResources
-	38, // 9: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
-	16, // 10: Scailo.EnclaveIngressesList.list:type_name -> Scailo.EnclaveIngress
-	39, // 11: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	39, // 12: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	38, // 13: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
-	24, // 14: Scailo.EnclaveEnvironmentVariablesList.list:type_name -> Scailo.EnclaveEnvironmentVariable
-	38, // 15: Scailo.EnclaveDomain.metadata:type_name -> Scailo.EmployeeMetadata
-	39, // 16: Scailo.EnclaveDomainsFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40, // 17: Scailo.EnclaveDomainsFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	2,  // 18: Scailo.EnclaveDomainsFilterReq.sort_key:type_name -> Scailo.ENCLAVE_DOMAIN_SORT_KEY
-	27, // 19: Scailo.EnclaveDomainsList.list:type_name -> Scailo.EnclaveDomain
-	39, // 20: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40, // 21: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,  // 22: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
-	0,  // 23: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	0,  // 24: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
-	32, // 25: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
-	38, // 26: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
-	0,  // 27: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	4,  // 28: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	0,  // 29: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	4,  // 30: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	35, // 31: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	40, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	40, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	15, // 8: Scailo.EnclaveManifest.env_variables:type_name -> Scailo.EnclaveManifestEnvVariable
+	14, // 9: Scailo.EnclaveManifest.resources:type_name -> Scailo.EnclaveResources
+	39, // 10: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
+	17, // 11: Scailo.EnclaveIngressesList.list:type_name -> Scailo.EnclaveIngress
+	40, // 12: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	40, // 13: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	39, // 14: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
+	25, // 15: Scailo.EnclaveEnvironmentVariablesList.list:type_name -> Scailo.EnclaveEnvironmentVariable
+	39, // 16: Scailo.EnclaveDomain.metadata:type_name -> Scailo.EmployeeMetadata
+	40, // 17: Scailo.EnclaveDomainsFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41, // 18: Scailo.EnclaveDomainsFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	2,  // 19: Scailo.EnclaveDomainsFilterReq.sort_key:type_name -> Scailo.ENCLAVE_DOMAIN_SORT_KEY
+	28, // 20: Scailo.EnclaveDomainsList.list:type_name -> Scailo.EnclaveDomain
+	40, // 21: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41, // 22: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,  // 23: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
+	0,  // 24: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	0,  // 25: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
+	33, // 26: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
+	39, // 27: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
+	0,  // 28: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 29: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	0,  // 30: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 31: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	36, // 32: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_vault_commons_scailo_proto_init() }
@@ -3567,7 +3647,7 @@ func file_vault_commons_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vault_commons_scailo_proto_rawDesc), len(file_vault_commons_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   33,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
