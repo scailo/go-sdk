@@ -118,7 +118,9 @@ type FormField struct {
 	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
 	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
-	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	IsSearchable bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	// Denotes if the field is public (field shall be visible on any custom designed public interfaces)
+	IsPublic      bool `protobuf:"varint,33,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -247,6 +249,13 @@ func (x *FormField) GetIsHidden() bool {
 func (x *FormField) GetIsSearchable() bool {
 	if x != nil {
 		return x.IsSearchable
+	}
+	return false
+}
+
+func (x *FormField) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
 	}
 	return false
 }
@@ -400,7 +409,9 @@ type FormsFieldsServiceCreateRequest struct {
 	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
 	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
-	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	IsSearchable bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	// Denotes if the field is public (field shall be visible on any custom designed public interfaces)
+	IsPublic      bool `protobuf:"varint,33,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,6 +544,13 @@ func (x *FormsFieldsServiceCreateRequest) GetIsSearchable() bool {
 	return false
 }
 
+func (x *FormsFieldsServiceCreateRequest) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
+	}
+	return false
+}
+
 // Describes the data structure to perform the update (draft/revision) operation on a form field
 type FormsFieldsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -559,7 +577,9 @@ type FormsFieldsServiceUpdateRequest struct {
 	// Denotes if the field is hidden (field shall not be visible on the UI). The field shall be visible only through the API
 	IsHidden bool `protobuf:"varint,31,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	// Denotes if the field is searchable (field shall not be visible on the UI in the filters view). The field will continue to be searchable through the API
-	IsSearchable  bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	IsSearchable bool `protobuf:"varint,32,opt,name=is_searchable,json=isSearchable,proto3" json:"is_searchable,omitempty"`
+	// Denotes if the field is public (field shall be visible on any custom designed public interfaces)
+	IsPublic      bool `protobuf:"varint,33,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -674,6 +694,13 @@ func (x *FormsFieldsServiceUpdateRequest) GetIsHidden() bool {
 func (x *FormsFieldsServiceUpdateRequest) GetIsSearchable() bool {
 	if x != nil {
 		return x.IsSearchable
+	}
+	return false
+}
+
+func (x *FormsFieldsServiceUpdateRequest) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
 	}
 	return false
 }
@@ -1172,7 +1199,7 @@ var File_forms_fields_scailo_proto protoreflect.FileDescriptor
 
 const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x19forms_fields.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xde\x03\n" +
+	"\x19forms_fields.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xfb\x03\n" +
 	"\tFormField\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1191,14 +1218,15 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\vis_readonly\x18\x1e \x01(\bR\n" +
 	"isReadonly\x12\x1b\n" +
 	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
-	"\ris_searchable\x18  \x01(\bR\fisSearchable\"8\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\x12\x1b\n" +
+	"\tis_public\x18! \x01(\bR\bisPublic\"8\n" +
 	"\x0fFormsFieldsList\x12%\n" +
 	"\x04list\x18\x01 \x03(\v2\x11.Scailo.FormFieldR\x04list\"\x8a\x01\n" +
 	"\x17FormFieldPaginationResp\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.FormFieldR\apayload\"\x81\x04\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.FormFieldR\apayload\"\x9e\x04\n" +
 	"\x1fFormsFieldsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1217,7 +1245,8 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\vis_readonly\x18\x1e \x01(\bR\n" +
 	"isReadonly\x12\x1b\n" +
 	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
-	"\ris_searchable\x18  \x01(\bR\fisSearchable\"\x9c\x03\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\x12\x1b\n" +
+	"\tis_public\x18! \x01(\bR\bisPublic\"\xb9\x03\n" +
 	"\x1fFormsFieldsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12 \n" +
@@ -1233,7 +1262,8 @@ const file_forms_fields_scailo_proto_rawDesc = "" +
 	"\vis_readonly\x18\x1e \x01(\bR\n" +
 	"isReadonly\x12\x1b\n" +
 	"\tis_hidden\x18\x1f \x01(\bR\bisHidden\x12#\n" +
-	"\ris_searchable\x18  \x01(\bR\fisSearchable\"\xfe\x01\n" +
+	"\ris_searchable\x18  \x01(\bR\fisSearchable\x12\x1b\n" +
+	"\tis_public\x18! \x01(\bR\bisPublic\"\xfe\x01\n" +
 	"\x1fFormsFieldsServicePaginationReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
 	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
