@@ -2639,6 +2639,443 @@ func (x *EnclaveDomainSuffixResp) GetRelay() string {
 	return ""
 }
 
+// Stores the payload that is necessary to create a custom frame for an enclave
+type EnclaveFrameAddRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The UUID of the enclave file that will be updated with the given frame
+	FileUuid string `protobuf:"bytes,1,opt,name=file_uuid,json=fileUuid,proto3" json:"file_uuid,omitempty"`
+	// The sequence number of the frame
+	SequenceNumber uint64 `protobuf:"varint,10,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
+	// The time in seconds after which the frame needs to be refreshed
+	AutoRefreshInterval uint64 `protobuf:"varint,11,opt,name=auto_refresh_interval,json=autoRefreshInterval,proto3" json:"auto_refresh_interval,omitempty"`
+	// The width of the frame, with the possible values being 3, 4, 6, 8, 9, and 12
+	Width uint64 `protobuf:"varint,12,opt,name=width,proto3" json:"width,omitempty"`
+	// The height of the frame in vh (viewport height)
+	Height        uint64 `protobuf:"varint,13,opt,name=height,proto3" json:"height,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveFrameAddRequest) Reset() {
+	*x = EnclaveFrameAddRequest{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveFrameAddRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveFrameAddRequest) ProtoMessage() {}
+
+func (x *EnclaveFrameAddRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveFrameAddRequest.ProtoReflect.Descriptor instead.
+func (*EnclaveFrameAddRequest) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *EnclaveFrameAddRequest) GetFileUuid() string {
+	if x != nil {
+		return x.FileUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameAddRequest) GetSequenceNumber() uint64 {
+	if x != nil {
+		return x.SequenceNumber
+	}
+	return 0
+}
+
+func (x *EnclaveFrameAddRequest) GetAutoRefreshInterval() uint64 {
+	if x != nil {
+		return x.AutoRefreshInterval
+	}
+	return 0
+}
+
+func (x *EnclaveFrameAddRequest) GetWidth() uint64 {
+	if x != nil {
+		return x.Width
+	}
+	return 0
+}
+
+func (x *EnclaveFrameAddRequest) GetHeight() uint64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+// Stores the payload that is necessary to update a custom frame for an enclave
+type EnclaveFrameUpdateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The UUID of the frame that needs to be updated
+	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	// The sequence number of the frame
+	SequenceNumber uint64 `protobuf:"varint,10,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
+	// The time in seconds after which the frame needs to be refreshed
+	AutoRefreshInterval uint64 `protobuf:"varint,11,opt,name=auto_refresh_interval,json=autoRefreshInterval,proto3" json:"auto_refresh_interval,omitempty"`
+	// The width of the frame, with the possible values being 3, 4, 6, 8, 9, and 12
+	Width uint64 `protobuf:"varint,12,opt,name=width,proto3" json:"width,omitempty"`
+	// The height of the frame in vh (viewport height)
+	Height        uint64 `protobuf:"varint,13,opt,name=height,proto3" json:"height,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveFrameUpdateRequest) Reset() {
+	*x = EnclaveFrameUpdateRequest{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveFrameUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveFrameUpdateRequest) ProtoMessage() {}
+
+func (x *EnclaveFrameUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveFrameUpdateRequest.ProtoReflect.Descriptor instead.
+func (*EnclaveFrameUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *EnclaveFrameUpdateRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameUpdateRequest) GetSequenceNumber() uint64 {
+	if x != nil {
+		return x.SequenceNumber
+	}
+	return 0
+}
+
+func (x *EnclaveFrameUpdateRequest) GetAutoRefreshInterval() uint64 {
+	if x != nil {
+		return x.AutoRefreshInterval
+	}
+	return 0
+}
+
+func (x *EnclaveFrameUpdateRequest) GetWidth() uint64 {
+	if x != nil {
+		return x.Width
+	}
+	return 0
+}
+
+func (x *EnclaveFrameUpdateRequest) GetHeight() uint64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+// Denotes an individual frame that is part of an enclave
+type EnclaveFrame struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores a globally unique entity UUID. This will be set at the organization level
+	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	// Stores the metadata of this user
+	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Stores the ID of the user that the frame belongs to
+	UserId uint64 `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Stores the ID of the file that is used to render the frame
+	VaultFileId uint64 `protobuf:"varint,11,opt,name=vault_file_id,json=vaultFileId,proto3" json:"vault_file_id,omitempty"`
+	// The sequence number of the frame
+	SequenceNumber uint64 `protobuf:"varint,20,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
+	// The time in seconds after which the frame needs to be refreshed
+	AutoRefreshInterval uint64 `protobuf:"varint,21,opt,name=auto_refresh_interval,json=autoRefreshInterval,proto3" json:"auto_refresh_interval,omitempty"`
+	// The width of the frame, with the possible values being 3, 4, 6, 8, 9, and 12
+	Width uint64 `protobuf:"varint,22,opt,name=width,proto3" json:"width,omitempty"`
+	// The height of the frame in vh (viewport height)
+	Height        uint64 `protobuf:"varint,23,opt,name=height,proto3" json:"height,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveFrame) Reset() {
+	*x = EnclaveFrame{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveFrame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveFrame) ProtoMessage() {}
+
+func (x *EnclaveFrame) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveFrame.ProtoReflect.Descriptor instead.
+func (*EnclaveFrame) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *EnclaveFrame) GetEntityUuid() string {
+	if x != nil {
+		return x.EntityUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrame) GetMetadata() *EmployeeMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *EnclaveFrame) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *EnclaveFrame) GetVaultFileId() uint64 {
+	if x != nil {
+		return x.VaultFileId
+	}
+	return 0
+}
+
+func (x *EnclaveFrame) GetSequenceNumber() uint64 {
+	if x != nil {
+		return x.SequenceNumber
+	}
+	return 0
+}
+
+func (x *EnclaveFrame) GetAutoRefreshInterval() uint64 {
+	if x != nil {
+		return x.AutoRefreshInterval
+	}
+	return 0
+}
+
+func (x *EnclaveFrame) GetWidth() uint64 {
+	if x != nil {
+		return x.Width
+	}
+	return 0
+}
+
+func (x *EnclaveFrame) GetHeight() uint64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+// Describes the data that is returned after setting up a frame
+type EnclaveFrameSetup struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores a globally unique entity UUID. This will be set at the organization level
+	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	// Stores the expiry timestamp of the frame
+	ExpiresAt uint64 `protobuf:"varint,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Stores the unique identifier of the application
+	EnclaveName string `protobuf:"bytes,12,opt,name=enclave_name,json=enclaveName,proto3" json:"enclave_name,omitempty"`
+	// Stores the endpoint of the application execution
+	AppEndpoint string `protobuf:"bytes,13,opt,name=app_endpoint,json=appEndpoint,proto3" json:"app_endpoint,omitempty"`
+	// Stores the UUID of the enclave frame
+	EnclaveFrameUuid string `protobuf:"bytes,20,opt,name=enclave_frame_uuid,json=enclaveFrameUuid,proto3" json:"enclave_frame_uuid,omitempty"`
+	// The sequence number of the frame
+	SequenceNumber uint64 `protobuf:"varint,30,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
+	// The time in seconds after which the frame needs to be refreshed
+	AutoRefreshInterval uint64 `protobuf:"varint,31,opt,name=auto_refresh_interval,json=autoRefreshInterval,proto3" json:"auto_refresh_interval,omitempty"`
+	// The width of the frame, with the possible values being 3, 4, 6, 8, 9, and 12
+	Width uint64 `protobuf:"varint,32,opt,name=width,proto3" json:"width,omitempty"`
+	// The height of the frame in vh (viewport height)
+	Height        uint64 `protobuf:"varint,33,opt,name=height,proto3" json:"height,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveFrameSetup) Reset() {
+	*x = EnclaveFrameSetup{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveFrameSetup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveFrameSetup) ProtoMessage() {}
+
+func (x *EnclaveFrameSetup) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveFrameSetup.ProtoReflect.Descriptor instead.
+func (*EnclaveFrameSetup) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *EnclaveFrameSetup) GetEntityUuid() string {
+	if x != nil {
+		return x.EntityUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetExpiresAt() uint64 {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return 0
+}
+
+func (x *EnclaveFrameSetup) GetEnclaveName() string {
+	if x != nil {
+		return x.EnclaveName
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetAppEndpoint() string {
+	if x != nil {
+		return x.AppEndpoint
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetEnclaveFrameUuid() string {
+	if x != nil {
+		return x.EnclaveFrameUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetSequenceNumber() uint64 {
+	if x != nil {
+		return x.SequenceNumber
+	}
+	return 0
+}
+
+func (x *EnclaveFrameSetup) GetAutoRefreshInterval() uint64 {
+	if x != nil {
+		return x.AutoRefreshInterval
+	}
+	return 0
+}
+
+func (x *EnclaveFrameSetup) GetWidth() uint64 {
+	if x != nil {
+		return x.Width
+	}
+	return 0
+}
+
+func (x *EnclaveFrameSetup) GetHeight() uint64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+// Describes the list of enclave frames that have been setup
+type EnclaveFrameSetupList struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of setup frames
+	List          []*EnclaveFrameSetup `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnclaveFrameSetupList) Reset() {
+	*x = EnclaveFrameSetupList{}
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnclaveFrameSetupList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnclaveFrameSetupList) ProtoMessage() {}
+
+func (x *EnclaveFrameSetupList) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnclaveFrameSetupList.ProtoReflect.Descriptor instead.
+func (*EnclaveFrameSetupList) Descriptor() ([]byte, []int) {
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *EnclaveFrameSetupList) GetList() []*EnclaveFrameSetup {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 type VaultSearchReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// If true, then returns only active records. If false, then returns only inactive records
@@ -2673,7 +3110,7 @@ type VaultSearchReq struct {
 
 func (x *VaultSearchReq) Reset() {
 	*x = VaultSearchReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2685,7 +3122,7 @@ func (x *VaultSearchReq) String() string {
 func (*VaultSearchReq) ProtoMessage() {}
 
 func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[27]
+	mi := &file_vault_commons_scailo_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2698,7 +3135,7 @@ func (x *VaultSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchReq.ProtoReflect.Descriptor instead.
 func (*VaultSearchReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{27}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *VaultSearchReq) GetIsActive() BOOL_FILTER {
@@ -2813,7 +3250,7 @@ type VaultSearchResponse struct {
 
 func (x *VaultSearchResponse) Reset() {
 	*x = VaultSearchResponse{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	mi := &file_vault_commons_scailo_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2825,7 +3262,7 @@ func (x *VaultSearchResponse) String() string {
 func (*VaultSearchResponse) ProtoMessage() {}
 
 func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[28]
+	mi := &file_vault_commons_scailo_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2838,7 +3275,7 @@ func (x *VaultSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponse.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponse) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{28}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *VaultSearchResponse) GetName() string {
@@ -2894,7 +3331,7 @@ type VaultSearchResponsesList struct {
 
 func (x *VaultSearchResponsesList) Reset() {
 	*x = VaultSearchResponsesList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	mi := &file_vault_commons_scailo_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2906,7 +3343,7 @@ func (x *VaultSearchResponsesList) String() string {
 func (*VaultSearchResponsesList) ProtoMessage() {}
 
 func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[29]
+	mi := &file_vault_commons_scailo_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2919,7 +3356,7 @@ func (x *VaultSearchResponsesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultSearchResponsesList.ProtoReflect.Descriptor instead.
 func (*VaultSearchResponsesList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{29}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *VaultSearchResponsesList) GetList() []*VaultSearchResponse {
@@ -2942,7 +3379,7 @@ type VaultDuplicateCheckReq struct {
 
 func (x *VaultDuplicateCheckReq) Reset() {
 	*x = VaultDuplicateCheckReq{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	mi := &file_vault_commons_scailo_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2954,7 +3391,7 @@ func (x *VaultDuplicateCheckReq) String() string {
 func (*VaultDuplicateCheckReq) ProtoMessage() {}
 
 func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[30]
+	mi := &file_vault_commons_scailo_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2967,7 +3404,7 @@ func (x *VaultDuplicateCheckReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultDuplicateCheckReq.ProtoReflect.Descriptor instead.
 func (*VaultDuplicateCheckReq) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{30}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *VaultDuplicateCheckReq) GetName() string {
@@ -3009,7 +3446,7 @@ type VaultAccessLog struct {
 
 func (x *VaultAccessLog) Reset() {
 	*x = VaultAccessLog{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	mi := &file_vault_commons_scailo_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3021,7 +3458,7 @@ func (x *VaultAccessLog) String() string {
 func (*VaultAccessLog) ProtoMessage() {}
 
 func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[31]
+	mi := &file_vault_commons_scailo_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3034,7 +3471,7 @@ func (x *VaultAccessLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLog.ProtoReflect.Descriptor instead.
 func (*VaultAccessLog) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{31}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *VaultAccessLog) GetEntityUuid() string {
@@ -3116,7 +3553,7 @@ type VaultAccessLogCreateRequest struct {
 
 func (x *VaultAccessLogCreateRequest) Reset() {
 	*x = VaultAccessLogCreateRequest{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[32]
+	mi := &file_vault_commons_scailo_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3128,7 +3565,7 @@ func (x *VaultAccessLogCreateRequest) String() string {
 func (*VaultAccessLogCreateRequest) ProtoMessage() {}
 
 func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[32]
+	mi := &file_vault_commons_scailo_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3141,7 +3578,7 @@ func (x *VaultAccessLogCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogCreateRequest.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogCreateRequest) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{32}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *VaultAccessLogCreateRequest) GetEntityUuid() string {
@@ -3204,7 +3641,7 @@ type VaultAccessLogsList struct {
 
 func (x *VaultAccessLogsList) Reset() {
 	*x = VaultAccessLogsList{}
-	mi := &file_vault_commons_scailo_proto_msgTypes[33]
+	mi := &file_vault_commons_scailo_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3216,7 +3653,7 @@ func (x *VaultAccessLogsList) String() string {
 func (*VaultAccessLogsList) ProtoMessage() {}
 
 func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_commons_scailo_proto_msgTypes[33]
+	mi := &file_vault_commons_scailo_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3229,7 +3666,7 @@ func (x *VaultAccessLogsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VaultAccessLogsList.ProtoReflect.Descriptor instead.
 func (*VaultAccessLogsList) Descriptor() ([]byte, []int) {
-	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{33}
+	return file_vault_commons_scailo_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *VaultAccessLogsList) GetList() []*VaultAccessLog {
@@ -3437,7 +3874,47 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x15.Scailo.EnclaveDomainR\x04list\"G\n" +
 	"\x17EnclaveDomainSuffixResp\x12\x16\n" +
 	"\x06suffix\x18\x01 \x01(\tR\x06suffix\x12\x14\n" +
-	"\x05relay\x18\x02 \x01(\tR\x05relay\"\xf2\x04\n" +
+	"\x05relay\x18\x02 \x01(\tR\x05relay\"\xca\x01\n" +
+	"\x16EnclaveFrameAddRequest\x12%\n" +
+	"\tfile_uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bfileUuid\x12'\n" +
+	"\x0fsequence_number\x18\n" +
+	" \x01(\x04R\x0esequenceNumber\x122\n" +
+	"\x15auto_refresh_interval\x18\v \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
+	"\x05width\x18\f \x01(\x04R\x05width\x12\x16\n" +
+	"\x06height\x18\r \x01(\x04R\x06height\"\xc4\x01\n" +
+	"\x19EnclaveFrameUpdateRequest\x12\x1c\n" +
+	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12'\n" +
+	"\x0fsequence_number\x18\n" +
+	" \x01(\x04R\x0esequenceNumber\x122\n" +
+	"\x15auto_refresh_interval\x18\v \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
+	"\x05width\x18\f \x01(\x04R\x05width\x12\x16\n" +
+	"\x06height\x18\r \x01(\x04R\x06height\"\xad\x02\n" +
+	"\fEnclaveFrame\x12\x1f\n" +
+	"\ventity_uuid\x18\x01 \x01(\tR\n" +
+	"entityUuid\x124\n" +
+	"\bmetadata\x18\x02 \x01(\v2\x18.Scailo.EmployeeMetadataR\bmetadata\x12\x17\n" +
+	"\auser_id\x18\n" +
+	" \x01(\x04R\x06userId\x12\"\n" +
+	"\rvault_file_id\x18\v \x01(\x04R\vvaultFileId\x12'\n" +
+	"\x0fsequence_number\x18\x14 \x01(\x04R\x0esequenceNumber\x122\n" +
+	"\x15auto_refresh_interval\x18\x15 \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
+	"\x05width\x18\x16 \x01(\x04R\x05width\x12\x16\n" +
+	"\x06height\x18\x17 \x01(\x04R\x06height\"\xd2\x02\n" +
+	"\x11EnclaveFrameSetup\x12\x1f\n" +
+	"\ventity_uuid\x18\x01 \x01(\tR\n" +
+	"entityUuid\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\n" +
+	" \x01(\x04R\texpiresAt\x12!\n" +
+	"\fenclave_name\x18\f \x01(\tR\venclaveName\x12!\n" +
+	"\fapp_endpoint\x18\r \x01(\tR\vappEndpoint\x12,\n" +
+	"\x12enclave_frame_uuid\x18\x14 \x01(\tR\x10enclaveFrameUuid\x12'\n" +
+	"\x0fsequence_number\x18\x1e \x01(\x04R\x0esequenceNumber\x122\n" +
+	"\x15auto_refresh_interval\x18\x1f \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
+	"\x05width\x18  \x01(\x04R\x05width\x12\x16\n" +
+	"\x06height\x18! \x01(\x04R\x06height\"F\n" +
+	"\x15EnclaveFrameSetupList\x12-\n" +
+	"\x04list\x18\x01 \x03(\v2\x19.Scailo.EnclaveFrameSetupR\x04list\"\xf2\x04\n" +
 	"\x0eVaultSearchReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -3549,7 +4026,7 @@ func file_vault_commons_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_vault_commons_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_vault_commons_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_vault_commons_scailo_proto_goTypes = []any{
 	(VAULT_REF_FOR)(0),                              // 0: Scailo.VAULT_REF_FOR
 	(VAULT_PERMISSION_CODE)(0),                      // 1: Scailo.VAULT_PERMISSION_CODE
@@ -3583,56 +4060,63 @@ var file_vault_commons_scailo_proto_goTypes = []any{
 	(*EnclaveDomainsFilterReq)(nil),                 // 29: Scailo.EnclaveDomainsFilterReq
 	(*EnclaveDomainsList)(nil),                      // 30: Scailo.EnclaveDomainsList
 	(*EnclaveDomainSuffixResp)(nil),                 // 31: Scailo.EnclaveDomainSuffixResp
-	(*VaultSearchReq)(nil),                          // 32: Scailo.VaultSearchReq
-	(*VaultSearchResponse)(nil),                     // 33: Scailo.VaultSearchResponse
-	(*VaultSearchResponsesList)(nil),                // 34: Scailo.VaultSearchResponsesList
-	(*VaultDuplicateCheckReq)(nil),                  // 35: Scailo.VaultDuplicateCheckReq
-	(*VaultAccessLog)(nil),                          // 36: Scailo.VaultAccessLog
-	(*VaultAccessLogCreateRequest)(nil),             // 37: Scailo.VaultAccessLogCreateRequest
-	(*VaultAccessLogsList)(nil),                     // 38: Scailo.VaultAccessLogsList
-	(*EmployeeMetadata)(nil),                        // 39: Scailo.EmployeeMetadata
-	(BOOL_FILTER)(0),                                // 40: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                 // 41: Scailo.SORT_ORDER
+	(*EnclaveFrameAddRequest)(nil),                  // 32: Scailo.EnclaveFrameAddRequest
+	(*EnclaveFrameUpdateRequest)(nil),               // 33: Scailo.EnclaveFrameUpdateRequest
+	(*EnclaveFrame)(nil),                            // 34: Scailo.EnclaveFrame
+	(*EnclaveFrameSetup)(nil),                       // 35: Scailo.EnclaveFrameSetup
+	(*EnclaveFrameSetupList)(nil),                   // 36: Scailo.EnclaveFrameSetupList
+	(*VaultSearchReq)(nil),                          // 37: Scailo.VaultSearchReq
+	(*VaultSearchResponse)(nil),                     // 38: Scailo.VaultSearchResponse
+	(*VaultSearchResponsesList)(nil),                // 39: Scailo.VaultSearchResponsesList
+	(*VaultDuplicateCheckReq)(nil),                  // 40: Scailo.VaultDuplicateCheckReq
+	(*VaultAccessLog)(nil),                          // 41: Scailo.VaultAccessLog
+	(*VaultAccessLogCreateRequest)(nil),             // 42: Scailo.VaultAccessLogCreateRequest
+	(*VaultAccessLogsList)(nil),                     // 43: Scailo.VaultAccessLogsList
+	(*EmployeeMetadata)(nil),                        // 44: Scailo.EmployeeMetadata
+	(BOOL_FILTER)(0),                                // 45: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                 // 46: Scailo.SORT_ORDER
 }
 var file_vault_commons_scailo_proto_depIdxs = []int32{
-	39, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
+	44, // 0: Scailo.VaultPermission.metadata:type_name -> Scailo.EmployeeMetadata
 	0,  // 1: Scailo.VaultPermission.ref_for:type_name -> Scailo.VAULT_REF_FOR
 	8,  // 2: Scailo.GiXManifest.resources:type_name -> Scailo.GixResources
-	39, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
+	44, // 3: Scailo.GiXAppRun.metadata:type_name -> Scailo.EmployeeMetadata
 	9,  // 4: Scailo.GiXAppRun.manifest:type_name -> Scailo.GiXManifest
 	10, // 5: Scailo.GiXAppRunsList.list:type_name -> Scailo.GiXAppRun
-	40, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45, // 6: Scailo.GiXAppRunCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45, // 7: Scailo.GiXAppRunFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
 	15, // 8: Scailo.EnclaveManifest.env_variables:type_name -> Scailo.EnclaveManifestEnvVariable
 	14, // 9: Scailo.EnclaveManifest.resources:type_name -> Scailo.EnclaveResources
-	39, // 10: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
+	44, // 10: Scailo.EnclaveIngress.metadata:type_name -> Scailo.EmployeeMetadata
 	17, // 11: Scailo.EnclaveIngressesList.list:type_name -> Scailo.EnclaveIngress
-	40, // 12: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40, // 13: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	39, // 14: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
+	45, // 12: Scailo.EnclaveIngressCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	45, // 13: Scailo.EnclaveIngressFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	44, // 14: Scailo.EnclaveEnvironmentVariable.metadata:type_name -> Scailo.EmployeeMetadata
 	25, // 15: Scailo.EnclaveEnvironmentVariablesList.list:type_name -> Scailo.EnclaveEnvironmentVariable
-	39, // 16: Scailo.EnclaveDomain.metadata:type_name -> Scailo.EmployeeMetadata
-	40, // 17: Scailo.EnclaveDomainsFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	41, // 18: Scailo.EnclaveDomainsFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	44, // 16: Scailo.EnclaveDomain.metadata:type_name -> Scailo.EmployeeMetadata
+	45, // 17: Scailo.EnclaveDomainsFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	46, // 18: Scailo.EnclaveDomainsFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	2,  // 19: Scailo.EnclaveDomainsFilterReq.sort_key:type_name -> Scailo.ENCLAVE_DOMAIN_SORT_KEY
 	28, // 20: Scailo.EnclaveDomainsList.list:type_name -> Scailo.EnclaveDomain
-	40, // 21: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
-	41, // 22: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
-	3,  // 23: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
-	0,  // 24: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	0,  // 25: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
-	33, // 26: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
-	39, // 27: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
-	0,  // 28: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	4,  // 29: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	0,  // 30: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
-	4,  // 31: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
-	36, // 32: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	44, // 21: Scailo.EnclaveFrame.metadata:type_name -> Scailo.EmployeeMetadata
+	35, // 22: Scailo.EnclaveFrameSetupList.list:type_name -> Scailo.EnclaveFrameSetup
+	45, // 23: Scailo.VaultSearchReq.is_active:type_name -> Scailo.BOOL_FILTER
+	46, // 24: Scailo.VaultSearchReq.sort_order:type_name -> Scailo.SORT_ORDER
+	3,  // 25: Scailo.VaultSearchReq.sort_key:type_name -> Scailo.VAULT_SORT_KEY
+	0,  // 26: Scailo.VaultSearchReq.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	0,  // 27: Scailo.VaultSearchResponse.type:type_name -> Scailo.VAULT_REF_FOR
+	38, // 28: Scailo.VaultSearchResponsesList.list:type_name -> Scailo.VaultSearchResponse
+	44, // 29: Scailo.VaultAccessLog.metadata:type_name -> Scailo.EmployeeMetadata
+	0,  // 30: Scailo.VaultAccessLog.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 31: Scailo.VaultAccessLog.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	0,  // 32: Scailo.VaultAccessLogCreateRequest.ref_for:type_name -> Scailo.VAULT_REF_FOR
+	4,  // 33: Scailo.VaultAccessLogCreateRequest.operation:type_name -> Scailo.VAULT_ACCESS_LOG_OPERATION
+	41, // 34: Scailo.VaultAccessLogsList.list:type_name -> Scailo.VaultAccessLog
+	35, // [35:35] is the sub-list for method output_type
+	35, // [35:35] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_vault_commons_scailo_proto_init() }
@@ -3647,7 +4131,7 @@ func file_vault_commons_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vault_commons_scailo_proto_rawDesc), len(file_vault_commons_scailo_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   34,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

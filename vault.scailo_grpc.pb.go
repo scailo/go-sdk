@@ -85,6 +85,12 @@ const (
 	VaultService_ViewAllEnclaveDomains_FullMethodName              = "/Scailo.VaultService/ViewAllEnclaveDomains"
 	VaultService_ViewDomainSuffix_FullMethodName                   = "/Scailo.VaultService/ViewDomainSuffix"
 	VaultService_FilterEnclaveDomains_FullMethodName               = "/Scailo.VaultService/FilterEnclaveDomains"
+	VaultService_AddEnclaveFrame_FullMethodName                    = "/Scailo.VaultService/AddEnclaveFrame"
+	VaultService_ViewEnclaveFrame_FullMethodName                   = "/Scailo.VaultService/ViewEnclaveFrame"
+	VaultService_UpdateEnclaveFrame_FullMethodName                 = "/Scailo.VaultService/UpdateEnclaveFrame"
+	VaultService_DeleteEnclaveFrame_FullMethodName                 = "/Scailo.VaultService/DeleteEnclaveFrame"
+	VaultService_SetupEnclaveFrame_FullMethodName                  = "/Scailo.VaultService/SetupEnclaveFrame"
+	VaultService_SetupAllEnclaveFrames_FullMethodName              = "/Scailo.VaultService/SetupAllEnclaveFrames"
 )
 
 // VaultServiceClient is the client API for VaultService service.
@@ -230,6 +236,18 @@ type VaultServiceClient interface {
 	ViewDomainSuffix(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EnclaveDomainSuffixResp, error)
 	// Filter all domains that match the given filter criteria
 	FilterEnclaveDomains(ctx context.Context, in *EnclaveDomainsFilterReq, opts ...grpc.CallOption) (*EnclaveDomainsList, error)
+	// Adds an enclave as a dashboard frame. The file needs to be an enclave. Returns an error otherwise
+	AddEnclaveFrame(ctx context.Context, in *EnclaveFrameAddRequest, opts ...grpc.CallOption) (*EnclaveFrame, error)
+	// View the properties of a frame
+	ViewEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveFrame, error)
+	// Update the properties of a frame
+	UpdateEnclaveFrame(ctx context.Context, in *EnclaveFrameUpdateRequest, opts ...grpc.CallOption) (*EnclaveFrame, error)
+	// Delete the dashboard frame
+	DeleteEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Returns the endpoint that could be used to render a frame
+	SetupEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveFrameSetup, error)
+	// Returns all the endpoints that could be used to render frames for the identified user. This can be primary used to render all the frames on a user's dashboard, for example.
+	SetupAllEnclaveFrames(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EnclaveFrameSetupList, error)
 }
 
 type vaultServiceClient struct {
@@ -904,6 +922,66 @@ func (c *vaultServiceClient) FilterEnclaveDomains(ctx context.Context, in *Encla
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EnclaveDomainsList)
 	err := c.cc.Invoke(ctx, VaultService_FilterEnclaveDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) AddEnclaveFrame(ctx context.Context, in *EnclaveFrameAddRequest, opts ...grpc.CallOption) (*EnclaveFrame, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveFrame)
+	err := c.cc.Invoke(ctx, VaultService_AddEnclaveFrame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) ViewEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveFrame, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveFrame)
+	err := c.cc.Invoke(ctx, VaultService_ViewEnclaveFrame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) UpdateEnclaveFrame(ctx context.Context, in *EnclaveFrameUpdateRequest, opts ...grpc.CallOption) (*EnclaveFrame, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveFrame)
+	err := c.cc.Invoke(ctx, VaultService_UpdateEnclaveFrame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) DeleteEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VaultService_DeleteEnclaveFrame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) SetupEnclaveFrame(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EnclaveFrameSetup, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveFrameSetup)
+	err := c.cc.Invoke(ctx, VaultService_SetupEnclaveFrame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) SetupAllEnclaveFrames(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EnclaveFrameSetupList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnclaveFrameSetupList)
+	err := c.cc.Invoke(ctx, VaultService_SetupAllEnclaveFrames_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
