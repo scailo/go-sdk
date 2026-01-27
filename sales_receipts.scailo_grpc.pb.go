@@ -32,6 +32,7 @@ const (
 	SalesReceiptsService_Complete_FullMethodName                      = "/Scailo.SalesReceiptsService/Complete"
 	SalesReceiptsService_Repeat_FullMethodName                        = "/Scailo.SalesReceiptsService/Repeat"
 	SalesReceiptsService_CommentAdd_FullMethodName                    = "/Scailo.SalesReceiptsService/CommentAdd"
+	SalesReceiptsService_SendEmail_FullMethodName                     = "/Scailo.SalesReceiptsService/SendEmail"
 	SalesReceiptsService_CreateMagicLink_FullMethodName               = "/Scailo.SalesReceiptsService/CreateMagicLink"
 	SalesReceiptsService_ViewByID_FullMethodName                      = "/Scailo.SalesReceiptsService/ViewByID"
 	SalesReceiptsService_ViewByUUID_FullMethodName                    = "/Scailo.SalesReceiptsService/ViewByUUID"
@@ -42,6 +43,8 @@ const (
 	SalesReceiptsService_ViewAll_FullMethodName                       = "/Scailo.SalesReceiptsService/ViewAll"
 	SalesReceiptsService_ViewAllForEntityUUID_FullMethodName          = "/Scailo.SalesReceiptsService/ViewAllForEntityUUID"
 	SalesReceiptsService_ViewWithPagination_FullMethodName            = "/Scailo.SalesReceiptsService/ViewWithPagination"
+	SalesReceiptsService_IsDownloadable_FullMethodName                = "/Scailo.SalesReceiptsService/IsDownloadable"
+	SalesReceiptsService_DownloadByUUID_FullMethodName                = "/Scailo.SalesReceiptsService/DownloadByUUID"
 	SalesReceiptsService_SearchAll_FullMethodName                     = "/Scailo.SalesReceiptsService/SearchAll"
 	SalesReceiptsService_Filter_FullMethodName                        = "/Scailo.SalesReceiptsService/Filter"
 	SalesReceiptsService_CountInStatus_FullMethodName                 = "/Scailo.SalesReceiptsService/CountInStatus"
@@ -84,27 +87,31 @@ type SalesReceiptsServiceClient interface {
 	// Add comment
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
-	// rpc SendEmail (Identifier) returns (IdentifierResponse);
+	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// View by ID
-	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SaleReceipt, error)
+	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesReceipt, error)
 	// View by UUID
-	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceipt, error)
+	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceipt, error)
 	// View only essential components by ID (without logs)
-	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SaleReceipt, error)
+	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesReceipt, error)
 	// View only essential components (without logs) that matches the given UUID
-	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceipt, error)
+	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceipt, error)
 	// View all records with the given IDs
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*SalesReceiptsList, error)
 	// View the ancillary parameters (UUIDs of the internal references) by UUID
-	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceiptAncillaryParameters, error)
+	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceiptAncillaryParameters, error)
 	// View all
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*SalesReceiptsList, error)
 	// View all with the given entity UUID
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceiptsList, error)
 	// View with pagination
 	ViewWithPagination(ctx context.Context, in *SalesReceiptsServicePaginationReq, opts ...grpc.CallOption) (*SalesReceiptsServicePaginationResponse, error)
+	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
+	// Download sales receipt with the given IdentifierUUID (can be used to allow public downloads)
+	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// View all that match the given search key
 	SearchAll(ctx context.Context, in *SalesReceiptsServiceSearchAllReq, opts ...grpc.CallOption) (*SalesReceiptsList, error)
 	// View all that match the given filter criteria
@@ -266,6 +273,16 @@ func (c *salesReceiptsServiceClient) CommentAdd(ctx context.Context, in *Identif
 	return out, nil
 }
 
+func (c *salesReceiptsServiceClient) SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesReceiptsService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *salesReceiptsServiceClient) CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
@@ -276,9 +293,9 @@ func (c *salesReceiptsServiceClient) CreateMagicLink(ctx context.Context, in *Ma
 	return out, nil
 }
 
-func (c *salesReceiptsServiceClient) ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SaleReceipt, error) {
+func (c *salesReceiptsServiceClient) ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesReceipt, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaleReceipt)
+	out := new(SalesReceipt)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -286,9 +303,9 @@ func (c *salesReceiptsServiceClient) ViewByID(ctx context.Context, in *Identifie
 	return out, nil
 }
 
-func (c *salesReceiptsServiceClient) ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceipt, error) {
+func (c *salesReceiptsServiceClient) ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceipt, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaleReceipt)
+	out := new(SalesReceipt)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewByUUID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -296,9 +313,9 @@ func (c *salesReceiptsServiceClient) ViewByUUID(ctx context.Context, in *Identif
 	return out, nil
 }
 
-func (c *salesReceiptsServiceClient) ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SaleReceipt, error) {
+func (c *salesReceiptsServiceClient) ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesReceipt, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaleReceipt)
+	out := new(SalesReceipt)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewEssentialByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -306,9 +323,9 @@ func (c *salesReceiptsServiceClient) ViewEssentialByID(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *salesReceiptsServiceClient) ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceipt, error) {
+func (c *salesReceiptsServiceClient) ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceipt, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaleReceipt)
+	out := new(SalesReceipt)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewEssentialByUUID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -326,9 +343,9 @@ func (c *salesReceiptsServiceClient) ViewFromIDs(ctx context.Context, in *Identi
 	return out, nil
 }
 
-func (c *salesReceiptsServiceClient) ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SaleReceiptAncillaryParameters, error) {
+func (c *salesReceiptsServiceClient) ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceiptAncillaryParameters, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaleReceiptAncillaryParameters)
+	out := new(SalesReceiptAncillaryParameters)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewAncillaryParametersByUUID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -360,6 +377,26 @@ func (c *salesReceiptsServiceClient) ViewWithPagination(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SalesReceiptsServicePaginationResponse)
 	err := c.cc.Invoke(ctx, SalesReceiptsService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesReceiptsServiceClient) IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BooleanResponse)
+	err := c.cc.Invoke(ctx, SalesReceiptsService_IsDownloadable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesReceiptsServiceClient) DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, SalesReceiptsService_DownloadByUUID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

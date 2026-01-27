@@ -39,6 +39,7 @@ const (
 	InventoryService_ViewAdjustedDemandQuantity_FullMethodName                 = "/Scailo.InventoryService/ViewAdjustedDemandQuantity"
 	InventoryService_ViewRequiredQuantity_FullMethodName                       = "/Scailo.InventoryService/ViewRequiredQuantity"
 	InventoryService_ViewConsolidatedStatistics_FullMethodName                 = "/Scailo.InventoryService/ViewConsolidatedStatistics"
+	InventoryService_ViewConsolidatedStatisticsForFamilies_FullMethodName      = "/Scailo.InventoryService/ViewConsolidatedStatisticsForFamilies"
 	InventoryService_ViewInStorage_FullMethodName                              = "/Scailo.InventoryService/ViewInStorage"
 	InventoryService_ViewWorkInProgressStatistics_FullMethodName               = "/Scailo.InventoryService/ViewWorkInProgressStatistics"
 	InventoryService_ViewIndentedStatistics_FullMethodName                     = "/Scailo.InventoryService/ViewIndentedStatistics"
@@ -97,8 +98,10 @@ type InventoryServiceClient interface {
 	ViewAdjustedDemandQuantity(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*QuantityResponse, error)
 	// View required quantity of the family with the given Identifier
 	ViewRequiredQuantity(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*QuantityResponse, error)
-	// View consolidated inventory statistics
+	// View consolidated inventory statistics for family with the given Identifier
 	ViewConsolidatedStatistics(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*ConsolidatedInventoryStatistics, error)
+	// View consolidated inventory statistics for families with the given IdentifiersList
+	ViewConsolidatedStatisticsForFamilies(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*ConsolidatedInventoryStatisticsList, error)
 	// View inventory placed in storage represented by the Identifier
 	ViewInStorage(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*GenericInventoryList, error)
 	// View the work in progress statistics of the family with the given Identifier
@@ -328,6 +331,16 @@ func (c *inventoryServiceClient) ViewConsolidatedStatistics(ctx context.Context,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ConsolidatedInventoryStatistics)
 	err := c.cc.Invoke(ctx, InventoryService_ViewConsolidatedStatistics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) ViewConsolidatedStatisticsForFamilies(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*ConsolidatedInventoryStatisticsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConsolidatedInventoryStatisticsList)
+	err := c.cc.Invoke(ctx, InventoryService_ViewConsolidatedStatisticsForFamilies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

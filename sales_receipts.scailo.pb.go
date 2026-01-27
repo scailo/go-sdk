@@ -23,85 +23,142 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
-type SALE_RECEIPT_SORT_KEY int32
+// Stores all the possible references from which a sales receipt can be added
+type SALES_RECEIPT_REF_FROM int32
 
 const (
-	// Fetch ordered results by id
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED SALE_RECEIPT_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_CREATED_AT SALE_RECEIPT_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_MODIFIED_AT SALE_RECEIPT_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_APPROVED_ON SALE_RECEIPT_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_APPROVED_BY SALE_RECEIPT_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_APPROVER_ROLE_ID SALE_RECEIPT_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_COMPLETED_ON SALE_RECEIPT_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_REFERENCE_ID SALE_RECEIPT_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_FINAL_REF_NUMBER SALE_RECEIPT_SORT_KEY = 11
-	// Fetch ordered results by the payment timestamp
-	SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP SALE_RECEIPT_SORT_KEY = 12
+	// Used only in filters
+	SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED SALES_RECEIPT_REF_FROM = 0
+	// Denotes that the sales receipt originated from a sales order
+	SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_SALES_ORDER SALES_RECEIPT_REF_FROM = 1
+	// Denotes that the sales receipt originated from a sales invoice
+	SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_SALES_INVOICE SALES_RECEIPT_REF_FROM = 2
+	// Denotes that the sales receipt originated from a credit note
+	SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_CREDIT_NOTE SALES_RECEIPT_REF_FROM = 3
 )
 
-// Enum value maps for SALE_RECEIPT_SORT_KEY.
+// Enum value maps for SALES_RECEIPT_REF_FROM.
 var (
-	SALE_RECEIPT_SORT_KEY_name = map[int32]string{
-		0:  "SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED",
-		1:  "SALE_RECEIPT_SORT_KEY_CREATED_AT",
-		2:  "SALE_RECEIPT_SORT_KEY_MODIFIED_AT",
-		3:  "SALE_RECEIPT_SORT_KEY_APPROVED_ON",
-		4:  "SALE_RECEIPT_SORT_KEY_APPROVED_BY",
-		5:  "SALE_RECEIPT_SORT_KEY_APPROVER_ROLE_ID",
-		6:  "SALE_RECEIPT_SORT_KEY_COMPLETED_ON",
-		10: "SALE_RECEIPT_SORT_KEY_REFERENCE_ID",
-		11: "SALE_RECEIPT_SORT_KEY_FINAL_REF_NUMBER",
-		12: "SALE_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP",
+	SALES_RECEIPT_REF_FROM_name = map[int32]string{
+		0: "SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED",
+		1: "SALES_RECEIPT_REF_FROM_SALES_ORDER",
+		2: "SALES_RECEIPT_REF_FROM_SALES_INVOICE",
+		3: "SALES_RECEIPT_REF_FROM_CREDIT_NOTE",
 	}
-	SALE_RECEIPT_SORT_KEY_value = map[string]int32{
-		"SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED":    0,
-		"SALE_RECEIPT_SORT_KEY_CREATED_AT":        1,
-		"SALE_RECEIPT_SORT_KEY_MODIFIED_AT":       2,
-		"SALE_RECEIPT_SORT_KEY_APPROVED_ON":       3,
-		"SALE_RECEIPT_SORT_KEY_APPROVED_BY":       4,
-		"SALE_RECEIPT_SORT_KEY_APPROVER_ROLE_ID":  5,
-		"SALE_RECEIPT_SORT_KEY_COMPLETED_ON":      6,
-		"SALE_RECEIPT_SORT_KEY_REFERENCE_ID":      10,
-		"SALE_RECEIPT_SORT_KEY_FINAL_REF_NUMBER":  11,
-		"SALE_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP": 12,
+	SALES_RECEIPT_REF_FROM_value = map[string]int32{
+		"SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED": 0,
+		"SALES_RECEIPT_REF_FROM_SALES_ORDER":     1,
+		"SALES_RECEIPT_REF_FROM_SALES_INVOICE":   2,
+		"SALES_RECEIPT_REF_FROM_CREDIT_NOTE":     3,
 	}
 )
 
-func (x SALE_RECEIPT_SORT_KEY) Enum() *SALE_RECEIPT_SORT_KEY {
-	p := new(SALE_RECEIPT_SORT_KEY)
+func (x SALES_RECEIPT_REF_FROM) Enum() *SALES_RECEIPT_REF_FROM {
+	p := new(SALES_RECEIPT_REF_FROM)
 	*p = x
 	return p
 }
 
-func (x SALE_RECEIPT_SORT_KEY) String() string {
+func (x SALES_RECEIPT_REF_FROM) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SALE_RECEIPT_SORT_KEY) Descriptor() protoreflect.EnumDescriptor {
+func (SALES_RECEIPT_REF_FROM) Descriptor() protoreflect.EnumDescriptor {
 	return file_sales_receipts_scailo_proto_enumTypes[0].Descriptor()
 }
 
-func (SALE_RECEIPT_SORT_KEY) Type() protoreflect.EnumType {
+func (SALES_RECEIPT_REF_FROM) Type() protoreflect.EnumType {
 	return &file_sales_receipts_scailo_proto_enumTypes[0]
 }
 
-func (x SALE_RECEIPT_SORT_KEY) Number() protoreflect.EnumNumber {
+func (x SALES_RECEIPT_REF_FROM) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SALE_RECEIPT_SORT_KEY.Descriptor instead.
-func (SALE_RECEIPT_SORT_KEY) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use SALES_RECEIPT_REF_FROM.Descriptor instead.
+func (SALES_RECEIPT_REF_FROM) EnumDescriptor() ([]byte, []int) {
 	return file_sales_receipts_scailo_proto_rawDescGZIP(), []int{0}
+}
+
+// Describes the available sort keys
+type SALES_RECEIPT_SORT_KEY int32
+
+const (
+	// Fetch ordered results by id
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED SALES_RECEIPT_SORT_KEY = 0
+	// Fetch ordered results by the creation timestamp
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_CREATED_AT SALES_RECEIPT_SORT_KEY = 1
+	// Fetch ordered results by the modified timestamp
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_MODIFIED_AT SALES_RECEIPT_SORT_KEY = 2
+	// Fetch ordered results by the approved on timestamp
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_APPROVED_ON SALES_RECEIPT_SORT_KEY = 3
+	// Fetch ordered results by the approved by field
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_APPROVED_BY SALES_RECEIPT_SORT_KEY = 4
+	// Fetch ordered results by the approver's role ID
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_APPROVER_ROLE_ID SALES_RECEIPT_SORT_KEY = 5
+	// Fetch ordered results by the approver's completed on timestamp
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_COMPLETED_ON SALES_RECEIPT_SORT_KEY = 6
+	// Fetch ordered results by the reference ID
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_REFERENCE_ID SALES_RECEIPT_SORT_KEY = 10
+	// Fetch ordered results by the final ref number
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_FINAL_REF_NUMBER SALES_RECEIPT_SORT_KEY = 11
+	// Fetch ordered results by the payment timestamp
+	SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP SALES_RECEIPT_SORT_KEY = 12
+)
+
+// Enum value maps for SALES_RECEIPT_SORT_KEY.
+var (
+	SALES_RECEIPT_SORT_KEY_name = map[int32]string{
+		0:  "SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED",
+		1:  "SALES_RECEIPT_SORT_KEY_CREATED_AT",
+		2:  "SALES_RECEIPT_SORT_KEY_MODIFIED_AT",
+		3:  "SALES_RECEIPT_SORT_KEY_APPROVED_ON",
+		4:  "SALES_RECEIPT_SORT_KEY_APPROVED_BY",
+		5:  "SALES_RECEIPT_SORT_KEY_APPROVER_ROLE_ID",
+		6:  "SALES_RECEIPT_SORT_KEY_COMPLETED_ON",
+		10: "SALES_RECEIPT_SORT_KEY_REFERENCE_ID",
+		11: "SALES_RECEIPT_SORT_KEY_FINAL_REF_NUMBER",
+		12: "SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP",
+	}
+	SALES_RECEIPT_SORT_KEY_value = map[string]int32{
+		"SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED":    0,
+		"SALES_RECEIPT_SORT_KEY_CREATED_AT":        1,
+		"SALES_RECEIPT_SORT_KEY_MODIFIED_AT":       2,
+		"SALES_RECEIPT_SORT_KEY_APPROVED_ON":       3,
+		"SALES_RECEIPT_SORT_KEY_APPROVED_BY":       4,
+		"SALES_RECEIPT_SORT_KEY_APPROVER_ROLE_ID":  5,
+		"SALES_RECEIPT_SORT_KEY_COMPLETED_ON":      6,
+		"SALES_RECEIPT_SORT_KEY_REFERENCE_ID":      10,
+		"SALES_RECEIPT_SORT_KEY_FINAL_REF_NUMBER":  11,
+		"SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP": 12,
+	}
+)
+
+func (x SALES_RECEIPT_SORT_KEY) Enum() *SALES_RECEIPT_SORT_KEY {
+	p := new(SALES_RECEIPT_SORT_KEY)
+	*p = x
+	return p
+}
+
+func (x SALES_RECEIPT_SORT_KEY) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SALES_RECEIPT_SORT_KEY) Descriptor() protoreflect.EnumDescriptor {
+	return file_sales_receipts_scailo_proto_enumTypes[1].Descriptor()
+}
+
+func (SALES_RECEIPT_SORT_KEY) Type() protoreflect.EnumType {
+	return &file_sales_receipts_scailo_proto_enumTypes[1]
+}
+
+func (x SALES_RECEIPT_SORT_KEY) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SALES_RECEIPT_SORT_KEY.Descriptor instead.
+func (SALES_RECEIPT_SORT_KEY) EnumDescriptor() ([]byte, []int) {
+	return file_sales_receipts_scailo_proto_rawDescGZIP(), []int{1}
 }
 
 // Describes the parameters necessary to create a record
@@ -116,7 +173,7 @@ type SalesReceiptsServiceCreateRequest struct {
 	// The reference ID of the sales receipt
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The reference on which the sales receipt has been created
-	RefFrom string `protobuf:"bytes,12,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom SALES_RECEIPT_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_RECEIPT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated bank account
@@ -124,7 +181,7 @@ type SalesReceiptsServiceCreateRequest struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -195,11 +252,11 @@ func (x *SalesReceiptsServiceCreateRequest) GetReferenceId() string {
 	return ""
 }
 
-func (x *SalesReceiptsServiceCreateRequest) GetRefFrom() string {
+func (x *SalesReceiptsServiceCreateRequest) GetRefFrom() SALES_RECEIPT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceCreateRequest) GetRefId() uint64 {
@@ -223,11 +280,11 @@ func (x *SalesReceiptsServiceCreateRequest) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *SalesReceiptsServiceCreateRequest) GetTransactionType() string {
+func (x *SalesReceiptsServiceCreateRequest) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceCreateRequest) GetAmountBase() uint64 {
@@ -276,7 +333,7 @@ type SalesReceiptsServiceUpdateRequest struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -368,11 +425,11 @@ func (x *SalesReceiptsServiceUpdateRequest) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *SalesReceiptsServiceUpdateRequest) GetTransactionType() string {
+func (x *SalesReceiptsServiceUpdateRequest) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceUpdateRequest) GetAmountBase() uint64 {
@@ -404,7 +461,7 @@ func (x *SalesReceiptsServiceUpdateRequest) GetDescription() string {
 }
 
 // Stores the UUID references of the record
-type SaleReceiptAncillaryParameters struct {
+type SalesReceiptAncillaryParameters struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The UUID of the ref_id (the UUID of the associated ref_id)
 	RefUuid string `protobuf:"bytes,213,opt,name=ref_uuid,json=refUuid,proto3" json:"ref_uuid,omitempty"`
@@ -418,20 +475,20 @@ type SaleReceiptAncillaryParameters struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaleReceiptAncillaryParameters) Reset() {
-	*x = SaleReceiptAncillaryParameters{}
+func (x *SalesReceiptAncillaryParameters) Reset() {
+	*x = SalesReceiptAncillaryParameters{}
 	mi := &file_sales_receipts_scailo_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaleReceiptAncillaryParameters) String() string {
+func (x *SalesReceiptAncillaryParameters) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaleReceiptAncillaryParameters) ProtoMessage() {}
+func (*SalesReceiptAncillaryParameters) ProtoMessage() {}
 
-func (x *SaleReceiptAncillaryParameters) ProtoReflect() protoreflect.Message {
+func (x *SalesReceiptAncillaryParameters) ProtoReflect() protoreflect.Message {
 	mi := &file_sales_receipts_scailo_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -443,33 +500,33 @@ func (x *SaleReceiptAncillaryParameters) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaleReceiptAncillaryParameters.ProtoReflect.Descriptor instead.
-func (*SaleReceiptAncillaryParameters) Descriptor() ([]byte, []int) {
+// Deprecated: Use SalesReceiptAncillaryParameters.ProtoReflect.Descriptor instead.
+func (*SalesReceiptAncillaryParameters) Descriptor() ([]byte, []int) {
 	return file_sales_receipts_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SaleReceiptAncillaryParameters) GetRefUuid() string {
+func (x *SalesReceiptAncillaryParameters) GetRefUuid() string {
 	if x != nil {
 		return x.RefUuid
 	}
 	return ""
 }
 
-func (x *SaleReceiptAncillaryParameters) GetClientUuid() string {
+func (x *SalesReceiptAncillaryParameters) GetClientUuid() string {
 	if x != nil {
 		return x.ClientUuid
 	}
 	return ""
 }
 
-func (x *SaleReceiptAncillaryParameters) GetBankAccountUuid() string {
+func (x *SalesReceiptAncillaryParameters) GetBankAccountUuid() string {
 	if x != nil {
 		return x.BankAccountUuid
 	}
 	return ""
 }
 
-func (x *SaleReceiptAncillaryParameters) GetCurrencyUuid() string {
+func (x *SalesReceiptAncillaryParameters) GetCurrencyUuid() string {
 	if x != nil {
 		return x.CurrencyUuid
 	}
@@ -477,7 +534,7 @@ func (x *SaleReceiptAncillaryParameters) GetCurrencyUuid() string {
 }
 
 // Describes the parameters that are part of a standard response
-type SaleReceipt struct {
+type SalesReceipt struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores a globally unique entity UUID. This will be set at the organization level
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
@@ -498,7 +555,7 @@ type SaleReceipt struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the sales receipt has been created
-	RefFrom string `protobuf:"bytes,12,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom SALES_RECEIPT_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_RECEIPT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated client
@@ -508,7 +565,7 @@ type SaleReceipt struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -521,20 +578,20 @@ type SaleReceipt struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaleReceipt) Reset() {
-	*x = SaleReceipt{}
+func (x *SalesReceipt) Reset() {
+	*x = SalesReceipt{}
 	mi := &file_sales_receipts_scailo_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaleReceipt) String() string {
+func (x *SalesReceipt) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaleReceipt) ProtoMessage() {}
+func (*SalesReceipt) ProtoMessage() {}
 
-func (x *SaleReceipt) ProtoReflect() protoreflect.Message {
+func (x *SalesReceipt) ProtoReflect() protoreflect.Message {
 	mi := &file_sales_receipts_scailo_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -546,138 +603,138 @@ func (x *SaleReceipt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaleReceipt.ProtoReflect.Descriptor instead.
-func (*SaleReceipt) Descriptor() ([]byte, []int) {
+// Deprecated: Use SalesReceipt.ProtoReflect.Descriptor instead.
+func (*SalesReceipt) Descriptor() ([]byte, []int) {
 	return file_sales_receipts_scailo_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SaleReceipt) GetEntityUuid() string {
+func (x *SalesReceipt) GetEntityUuid() string {
 	if x != nil {
 		return x.EntityUuid
 	}
 	return ""
 }
 
-func (x *SaleReceipt) GetMetadata() *EmployeeMetadata {
+func (x *SalesReceipt) GetMetadata() *EmployeeMetadata {
 	if x != nil {
 		return x.Metadata
 	}
 	return nil
 }
 
-func (x *SaleReceipt) GetApprovalMetadata() *ApprovalMetadata {
+func (x *SalesReceipt) GetApprovalMetadata() *ApprovalMetadata {
 	if x != nil {
 		return x.ApprovalMetadata
 	}
 	return nil
 }
 
-func (x *SaleReceipt) GetStatus() STANDARD_LIFECYCLE_STATUS {
+func (x *SalesReceipt) GetStatus() STANDARD_LIFECYCLE_STATUS {
 	if x != nil {
 		return x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-func (x *SaleReceipt) GetLogs() []*LogbookLogConciseSLC {
+func (x *SalesReceipt) GetLogs() []*LogbookLogConciseSLC {
 	if x != nil {
 		return x.Logs
 	}
 	return nil
 }
 
-func (x *SaleReceipt) GetCompletedOn() uint64 {
+func (x *SalesReceipt) GetCompletedOn() uint64 {
 	if x != nil {
 		return x.CompletedOn
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetVaultFolderId() uint64 {
+func (x *SalesReceipt) GetVaultFolderId() uint64 {
 	if x != nil {
 		return x.VaultFolderId
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetReferenceId() string {
+func (x *SalesReceipt) GetReferenceId() string {
 	if x != nil {
 		return x.ReferenceId
 	}
 	return ""
 }
 
-func (x *SaleReceipt) GetFinalRefNumber() string {
+func (x *SalesReceipt) GetFinalRefNumber() string {
 	if x != nil {
 		return x.FinalRefNumber
 	}
 	return ""
 }
 
-func (x *SaleReceipt) GetRefFrom() string {
+func (x *SalesReceipt) GetRefFrom() SALES_RECEIPT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED
 }
 
-func (x *SaleReceipt) GetRefId() uint64 {
+func (x *SalesReceipt) GetRefId() uint64 {
 	if x != nil {
 		return x.RefId
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetClientId() uint64 {
+func (x *SalesReceipt) GetClientId() uint64 {
 	if x != nil {
 		return x.ClientId
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetBankAccountId() uint64 {
+func (x *SalesReceipt) GetBankAccountId() uint64 {
 	if x != nil {
 		return x.BankAccountId
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetCurrencyId() uint64 {
+func (x *SalesReceipt) GetCurrencyId() uint64 {
 	if x != nil {
 		return x.CurrencyId
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetTransactionType() string {
+func (x *SalesReceipt) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
-func (x *SaleReceipt) GetAmountBase() uint64 {
+func (x *SalesReceipt) GetAmountBase() uint64 {
 	if x != nil {
 		return x.AmountBase
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetAmountNet() uint64 {
+func (x *SalesReceipt) GetAmountNet() uint64 {
 	if x != nil {
 		return x.AmountNet
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetPaymentTimestamp() uint64 {
+func (x *SalesReceipt) GetPaymentTimestamp() uint64 {
 	if x != nil {
 		return x.PaymentTimestamp
 	}
 	return 0
 }
 
-func (x *SaleReceipt) GetDescription() string {
+func (x *SalesReceipt) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
@@ -688,7 +745,7 @@ func (x *SaleReceipt) GetDescription() string {
 type SalesReceiptsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of records
-	List          []*SaleReceipt `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	List          []*SalesReceipt `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -723,7 +780,7 @@ func (*SalesReceiptsList) Descriptor() ([]byte, []int) {
 	return file_sales_receipts_scailo_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SalesReceiptsList) GetList() []*SaleReceipt {
+func (x *SalesReceiptsList) GetList() []*SalesReceipt {
 	if x != nil {
 		return x.List
 	}
@@ -742,7 +799,7 @@ type SalesReceiptsServicePaginationReq struct {
 	// The sort order that is to be used to fetch the pagination response
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
 	// The sort key that is to be used to fetch the pagination response
-	SortKey SALE_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALE_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey SALES_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
 	// The status of this sales receipt
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -807,11 +864,11 @@ func (x *SalesReceiptsServicePaginationReq) GetSortOrder() SORT_ORDER {
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
-func (x *SalesReceiptsServicePaginationReq) GetSortKey() SALE_RECEIPT_SORT_KEY {
+func (x *SalesReceiptsServicePaginationReq) GetSortKey() SALES_RECEIPT_SORT_KEY {
 	if x != nil {
 		return x.SortKey
 	}
-	return SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED
+	return SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
@@ -831,7 +888,7 @@ type SalesReceiptsServicePaginationResponse struct {
 	// The total number of records that are available
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
 	// The list of records
-	Payload       []*SaleReceipt `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
+	Payload       []*SalesReceipt `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -887,7 +944,7 @@ func (x *SalesReceiptsServicePaginationResponse) GetTotal() uint64 {
 	return 0
 }
 
-func (x *SalesReceiptsServicePaginationResponse) GetPayload() []*SaleReceipt {
+func (x *SalesReceiptsServicePaginationResponse) GetPayload() []*SalesReceipt {
 	if x != nil {
 		return x.Payload
 	}
@@ -906,7 +963,7 @@ type SalesReceiptsServiceFilterReq struct {
 	// The sort order that is to be used to fetch the pagination response
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
 	// The sort key that is to be used to fetch the pagination response
-	SortKey SALE_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALE_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey SALES_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
 	// The minimum timestamp that needs to be considered to filter by creation
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
 	// The maximum timestamp that needs to be considered to filter by creation
@@ -936,7 +993,7 @@ type SalesReceiptsServiceFilterReq struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the sales receipt has been created
-	RefFrom string `protobuf:"bytes,22,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom SALES_RECEIPT_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_RECEIPT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated client
@@ -946,7 +1003,7 @@ type SalesReceiptsServiceFilterReq struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,26,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,27,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,27,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The start range of the payment timestamp
 	PaymentTimestampStart uint64 `protobuf:"varint,28,opt,name=payment_timestamp_start,json=paymentTimestampStart,proto3" json:"payment_timestamp_start,omitempty"`
 	// The end range of the payment timestamp
@@ -1013,11 +1070,11 @@ func (x *SalesReceiptsServiceFilterReq) GetSortOrder() SORT_ORDER {
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
-func (x *SalesReceiptsServiceFilterReq) GetSortKey() SALE_RECEIPT_SORT_KEY {
+func (x *SalesReceiptsServiceFilterReq) GetSortKey() SALES_RECEIPT_SORT_KEY {
 	if x != nil {
 		return x.SortKey
 	}
-	return SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED
+	return SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceFilterReq) GetCreationTimestampStart() uint64 {
@@ -1118,11 +1175,11 @@ func (x *SalesReceiptsServiceFilterReq) GetFinalRefNumber() string {
 	return ""
 }
 
-func (x *SalesReceiptsServiceFilterReq) GetRefFrom() string {
+func (x *SalesReceiptsServiceFilterReq) GetRefFrom() SALES_RECEIPT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceFilterReq) GetRefId() uint64 {
@@ -1153,11 +1210,11 @@ func (x *SalesReceiptsServiceFilterReq) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *SalesReceiptsServiceFilterReq) GetTransactionType() string {
+func (x *SalesReceiptsServiceFilterReq) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceFilterReq) GetPaymentTimestampStart() uint64 {
@@ -1208,7 +1265,7 @@ type SalesReceiptsServiceCountReq struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the sales receipt has been created
-	RefFrom string `protobuf:"bytes,22,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom SALES_RECEIPT_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_RECEIPT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated client
@@ -1218,7 +1275,7 @@ type SalesReceiptsServiceCountReq struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,26,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,27,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,27,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The start range of the payment timestamp
 	PaymentTimestampStart uint64 `protobuf:"varint,28,opt,name=payment_timestamp_start,json=paymentTimestampStart,proto3" json:"payment_timestamp_start,omitempty"`
 	// The end range of the payment timestamp
@@ -1362,11 +1419,11 @@ func (x *SalesReceiptsServiceCountReq) GetFinalRefNumber() string {
 	return ""
 }
 
-func (x *SalesReceiptsServiceCountReq) GetRefFrom() string {
+func (x *SalesReceiptsServiceCountReq) GetRefFrom() SALES_RECEIPT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return SALES_RECEIPT_REF_FROM_SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceCountReq) GetRefId() uint64 {
@@ -1397,11 +1454,11 @@ func (x *SalesReceiptsServiceCountReq) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *SalesReceiptsServiceCountReq) GetTransactionType() string {
+func (x *SalesReceiptsServiceCountReq) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceCountReq) GetPaymentTimestampStart() uint64 {
@@ -1430,7 +1487,7 @@ type SalesReceiptsServiceSearchAllReq struct {
 	// The sort order that is to be used to fetch the pagination response
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
 	// The sort key that is to be used to fetch the pagination response
-	SortKey SALE_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALE_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey SALES_RECEIPT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_RECEIPT_SORT_KEY" json:"sort_key,omitempty"`
 	// The entity UUID that is to be used to filter records
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Limit the search space to the given status
@@ -1504,11 +1561,11 @@ func (x *SalesReceiptsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
-func (x *SalesReceiptsServiceSearchAllReq) GetSortKey() SALE_RECEIPT_SORT_KEY {
+func (x *SalesReceiptsServiceSearchAllReq) GetSortKey() SALES_RECEIPT_SORT_KEY {
 	if x != nil {
 		return x.SortKey
 	}
-	return SALE_RECEIPT_SORT_KEY_SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED
+	return SALES_RECEIPT_SORT_KEY_SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesReceiptsServiceSearchAllReq) GetEntityUuid() string {
@@ -1550,26 +1607,26 @@ var File_sales_receipts_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1bsales_receipts.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x9a\x05\n" +
+	"\x1bsales_receipts.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x8e\x05\n" +
 	"!SalesReceiptsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
 	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
 	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12I\n" +
-	"\bref_from\x18\f \x01(\tB.\xbaH+r)R\vsales-orderR\rsales-invoiceR\vcredit-noteR\arefFrom\x12\x1e\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x129\n" +
+	"\bref_from\x18\f \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_REF_FROMR\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12/\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12(\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12?\n" +
-	"\x10transaction_type\x18\x11 \x01(\tB\x14\xbaH\x11r\x0fR\x06creditR\x05debitR\x0ftransactionType\x12(\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12(\n" +
 	"\vamount_base\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"amountBase\x12&\n" +
 	"\n" +
 	"amount_net\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\tamountNet\x124\n" +
 	"\x11payment_timestamp\x18\x14 \x01(\x04B\a\xbaH\x042\x02 \x00R\x10paymentTimestamp\x127\n" +
-	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xca\x04\n" +
+	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xce\x04\n" +
 	"!SalesReceiptsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
@@ -1579,21 +1636,21 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12/\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12(\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12?\n" +
-	"\x10transaction_type\x18\x11 \x01(\tB\x14\xbaH\x11r\x0fR\x06creditR\x05debitR\x0ftransactionType\x12(\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12(\n" +
 	"\vamount_base\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"amountBase\x12&\n" +
 	"\n" +
 	"amount_net\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\tamountNet\x124\n" +
 	"\x11payment_timestamp\x18\x14 \x01(\x04B\a\xbaH\x042\x02 \x00R\x10paymentTimestamp\x127\n" +
-	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xb1\x01\n" +
-	"\x1eSaleReceiptAncillaryParameters\x12\x1a\n" +
+	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xb2\x01\n" +
+	"\x1fSalesReceiptAncillaryParameters\x12\x1a\n" +
 	"\bref_uuid\x18\xd5\x01 \x01(\tR\arefUuid\x12 \n" +
 	"\vclient_uuid\x18\xd6\x01 \x01(\tR\n" +
 	"clientUuid\x12+\n" +
 	"\x11bank_account_uuid\x18\xd7\x01 \x01(\tR\x0fbankAccountUuid\x12$\n" +
-	"\rcurrency_uuid\x18\xd8\x01 \x01(\tR\fcurrencyUuid\"\x82\x06\n" +
-	"\vSaleReceipt\x12\x1f\n" +
+	"\rcurrency_uuid\x18\xd8\x01 \x01(\tR\fcurrencyUuid\"\xbd\x06\n" +
+	"\fSalesReceipt\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
 	"\bmetadata\x18\x02 \x01(\v2\x18.Scailo.EmployeeMetadataR\bmetadata\x12E\n" +
@@ -1604,42 +1661,43 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\x0fvault_folder_id\x18\t \x01(\x04R\rvaultFolderId\x12!\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\v \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\f \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\v \x01(\tR\x0efinalRefNumber\x129\n" +
+	"\bref_from\x18\f \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\r \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tclient_id\x18\x0e \x01(\x04R\bclientId\x12&\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x11 \x01(\tR\x0ftransactionType\x12\x1f\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12\x1f\n" +
 	"\vamount_base\x18\x12 \x01(\x04R\n" +
 	"amountBase\x12\x1d\n" +
 	"\n" +
 	"amount_net\x18\x13 \x01(\x04R\tamountNet\x12+\n" +
 	"\x11payment_timestamp\x18\x14 \x01(\x04R\x10paymentTimestamp\x12 \n" +
-	"\vdescription\x18\x15 \x01(\tR\vdescription\"<\n" +
-	"\x11SalesReceiptsList\x12'\n" +
-	"\x04list\x18\x01 \x03(\v2\x13.Scailo.SaleReceiptR\x04list\"\xbd\x02\n" +
+	"\vdescription\x18\x15 \x01(\tR\vdescription\"=\n" +
+	"\x11SalesReceiptsList\x12(\n" +
+	"\x04list\x18\x01 \x03(\v2\x14.Scailo.SalesReceiptR\x04list\"\xbe\x02\n" +
 	"!SalesReceiptsServicePaginationReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
 	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
 	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x128\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1d.Scailo.SALE_RECEIPT_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x9b\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_SORT_KEYR\asortKey\x129\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x9c\x01\n" +
 	"&SalesReceiptsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
-	"\x05total\x18\x03 \x01(\x04R\x05total\x12-\n" +
-	"\apayload\x18\x04 \x03(\v2\x13.Scailo.SaleReceiptR\apayload\"\xd4\t\n" +
+	"\x05total\x18\x03 \x01(\x04R\x05total\x12.\n" +
+	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesReceiptR\apayload\"\x8f\n" +
+	"\n" +
 	"\x1dSalesReceiptsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
 	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x128\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1d.Scailo.SALE_RECEIPT_SORT_KEYR\asortKey\x128\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_SORT_KEYR\asortKey\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
 	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
 	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
@@ -1655,16 +1713,16 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
 	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
 	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\x16 \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x129\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tclient_id\x18\x18 \x01(\x04R\bclientId\x12&\n" +
 	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x1a \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x1b \x01(\tR\x0ftransactionType\x126\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x1b \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x126\n" +
 	"\x17payment_timestamp_start\x18\x1c \x01(\x04R\x15paymentTimestampStart\x122\n" +
-	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\x9d\b\n" +
+	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xd7\b\n" +
 	"\x1cSalesReceiptsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
@@ -1682,23 +1740,23 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
 	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
 	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\x16 \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x129\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tclient_id\x18\x18 \x01(\x04R\bclientId\x12&\n" +
 	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x1a \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x1b \x01(\tR\x0ftransactionType\x126\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x1b \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x126\n" +
 	"\x17payment_timestamp_start\x18\x1c \x01(\x04R\x15paymentTimestampStart\x122\n" +
-	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xdd\x03\n" +
+	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xde\x03\n" +
 	" SalesReceiptsServiceSearchAllReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
 	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x128\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1d.Scailo.SALE_RECEIPT_SORT_KEYR\asortKey\x12\x1f\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_RECEIPT_SORT_KEYR\asortKey\x12\x1f\n" +
 	"\ventity_uuid\x18\x06 \x01(\tR\n" +
 	"entityUuid\x129\n" +
 	"\x06status\x18\n" +
@@ -1706,19 +1764,24 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\n" +
 	"search_key\x18\v \x01(\tR\tsearchKey\x12.\n" +
 	"\x13consignee_client_id\x18< \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18= \x01(\x04R\rbuyerClientId*\xb1\x03\n" +
-	"\x15SALE_RECEIPT_SORT_KEY\x12(\n" +
-	"$SALE_RECEIPT_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12$\n" +
-	" SALE_RECEIPT_SORT_KEY_CREATED_AT\x10\x01\x12%\n" +
-	"!SALE_RECEIPT_SORT_KEY_MODIFIED_AT\x10\x02\x12%\n" +
-	"!SALE_RECEIPT_SORT_KEY_APPROVED_ON\x10\x03\x12%\n" +
-	"!SALE_RECEIPT_SORT_KEY_APPROVED_BY\x10\x04\x12*\n" +
-	"&SALE_RECEIPT_SORT_KEY_APPROVER_ROLE_ID\x10\x05\x12&\n" +
-	"\"SALE_RECEIPT_SORT_KEY_COMPLETED_ON\x10\x06\x12&\n" +
-	"\"SALE_RECEIPT_SORT_KEY_REFERENCE_ID\x10\n" +
-	"\x12*\n" +
-	"&SALE_RECEIPT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12+\n" +
-	"'SALE_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\xef\x11\n" +
+	"\x0fbuyer_client_id\x18= \x01(\x04R\rbuyerClientId*\xbe\x01\n" +
+	"\x16SALES_RECEIPT_REF_FROM\x12*\n" +
+	"&SALES_RECEIPT_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12&\n" +
+	"\"SALES_RECEIPT_REF_FROM_SALES_ORDER\x10\x01\x12(\n" +
+	"$SALES_RECEIPT_REF_FROM_SALES_INVOICE\x10\x02\x12&\n" +
+	"\"SALES_RECEIPT_REF_FROM_CREDIT_NOTE\x10\x03*\xbc\x03\n" +
+	"\x16SALES_RECEIPT_SORT_KEY\x12)\n" +
+	"%SALES_RECEIPT_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12%\n" +
+	"!SALES_RECEIPT_SORT_KEY_CREATED_AT\x10\x01\x12&\n" +
+	"\"SALES_RECEIPT_SORT_KEY_MODIFIED_AT\x10\x02\x12&\n" +
+	"\"SALES_RECEIPT_SORT_KEY_APPROVED_ON\x10\x03\x12&\n" +
+	"\"SALES_RECEIPT_SORT_KEY_APPROVED_BY\x10\x04\x12+\n" +
+	"'SALES_RECEIPT_SORT_KEY_APPROVER_ROLE_ID\x10\x05\x12'\n" +
+	"#SALES_RECEIPT_SORT_KEY_COMPLETED_ON\x10\x06\x12'\n" +
+	"#SALES_RECEIPT_SORT_KEY_REFERENCE_ID\x10\n" +
+	"\x12+\n" +
+	"'SALES_RECEIPT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12,\n" +
+	"(SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\xc7\x13\n" +
 	"\x14SalesReceiptsService\x12O\n" +
 	"\x06Create\x12).Scailo.SalesReceiptsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\x05Draft\x12).Scailo.SalesReceiptsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -1734,18 +1797,21 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
-	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x123\n" +
-	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x13.Scailo.SaleReceipt\x129\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x124\n" +
+	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.SalesReceipt\x12:\n" +
 	"\n" +
-	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x13.Scailo.SaleReceipt\x12<\n" +
-	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x13.Scailo.SaleReceipt\x12B\n" +
-	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x13.Scailo.SaleReceipt\x12A\n" +
-	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x19.Scailo.SalesReceiptsList\x12_\n" +
-	"\x1dViewAncillaryParametersByUUID\x12\x16.Scailo.IdentifierUUID\x1a&.Scailo.SaleReceiptAncillaryParameters\x12:\n" +
+	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.SalesReceipt\x12=\n" +
+	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.SalesReceipt\x12C\n" +
+	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.SalesReceipt\x12A\n" +
+	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x19.Scailo.SalesReceiptsList\x12`\n" +
+	"\x1dViewAncillaryParametersByUUID\x12\x16.Scailo.IdentifierUUID\x1a'.Scailo.SalesReceiptAncillaryParameters\x12:\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x19.Scailo.SalesReceiptsList\x12I\n" +
 	"\x14ViewAllForEntityUUID\x12\x16.Scailo.IdentifierUUID\x1a\x19.Scailo.SalesReceiptsList\x12o\n" +
-	"\x12ViewWithPagination\x12).Scailo.SalesReceiptsServicePaginationReq\x1a..Scailo.SalesReceiptsServicePaginationResponse\x12P\n" +
+	"\x12ViewWithPagination\x12).Scailo.SalesReceiptsServicePaginationReq\x1a..Scailo.SalesReceiptsServicePaginationResponse\x12A\n" +
+	"\x0eIsDownloadable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12>\n" +
+	"\x0eDownloadByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.StandardFile\x12P\n" +
 	"\tSearchAll\x12(.Scailo.SalesReceiptsServiceSearchAllReq\x1a\x19.Scailo.SalesReceiptsList\x12J\n" +
 	"\x06Filter\x12%.Scailo.SalesReceiptsServiceFilterReq\x1a\x19.Scailo.SalesReceiptsList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12D\n" +
@@ -1767,122 +1833,141 @@ func file_sales_receipts_scailo_proto_rawDescGZIP() []byte {
 	return file_sales_receipts_scailo_proto_rawDescData
 }
 
-var file_sales_receipts_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_sales_receipts_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_sales_receipts_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_sales_receipts_scailo_proto_goTypes = []any{
-	(SALE_RECEIPT_SORT_KEY)(0),                                // 0: Scailo.SALE_RECEIPT_SORT_KEY
-	(*SalesReceiptsServiceCreateRequest)(nil),                 // 1: Scailo.SalesReceiptsServiceCreateRequest
-	(*SalesReceiptsServiceUpdateRequest)(nil),                 // 2: Scailo.SalesReceiptsServiceUpdateRequest
-	(*SaleReceiptAncillaryParameters)(nil),                    // 3: Scailo.SaleReceiptAncillaryParameters
-	(*SaleReceipt)(nil),                                       // 4: Scailo.SaleReceipt
-	(*SalesReceiptsList)(nil),                                 // 5: Scailo.SalesReceiptsList
-	(*SalesReceiptsServicePaginationReq)(nil),                 // 6: Scailo.SalesReceiptsServicePaginationReq
-	(*SalesReceiptsServicePaginationResponse)(nil),            // 7: Scailo.SalesReceiptsServicePaginationResponse
-	(*SalesReceiptsServiceFilterReq)(nil),                     // 8: Scailo.SalesReceiptsServiceFilterReq
-	(*SalesReceiptsServiceCountReq)(nil),                      // 9: Scailo.SalesReceiptsServiceCountReq
-	(*SalesReceiptsServiceSearchAllReq)(nil),                  // 10: Scailo.SalesReceiptsServiceSearchAllReq
-	(*EmployeeMetadata)(nil),                                  // 11: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 12: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 13: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 14: Scailo.LogbookLogConciseSLC
-	(BOOL_FILTER)(0),                                          // 15: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 16: Scailo.SORT_ORDER
-	(*IdentifierUUIDWithUserComment)(nil),                     // 17: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 18: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 19: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 20: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 21: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 22: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 23: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 24: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 25: Scailo.MagicLink
-	(*CountResponse)(nil),                                     // 26: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 27: Scailo.StandardFile
+	(SALES_RECEIPT_REF_FROM)(0),                               // 0: Scailo.SALES_RECEIPT_REF_FROM
+	(SALES_RECEIPT_SORT_KEY)(0),                               // 1: Scailo.SALES_RECEIPT_SORT_KEY
+	(*SalesReceiptsServiceCreateRequest)(nil),                 // 2: Scailo.SalesReceiptsServiceCreateRequest
+	(*SalesReceiptsServiceUpdateRequest)(nil),                 // 3: Scailo.SalesReceiptsServiceUpdateRequest
+	(*SalesReceiptAncillaryParameters)(nil),                   // 4: Scailo.SalesReceiptAncillaryParameters
+	(*SalesReceipt)(nil),                                      // 5: Scailo.SalesReceipt
+	(*SalesReceiptsList)(nil),                                 // 6: Scailo.SalesReceiptsList
+	(*SalesReceiptsServicePaginationReq)(nil),                 // 7: Scailo.SalesReceiptsServicePaginationReq
+	(*SalesReceiptsServicePaginationResponse)(nil),            // 8: Scailo.SalesReceiptsServicePaginationResponse
+	(*SalesReceiptsServiceFilterReq)(nil),                     // 9: Scailo.SalesReceiptsServiceFilterReq
+	(*SalesReceiptsServiceCountReq)(nil),                      // 10: Scailo.SalesReceiptsServiceCountReq
+	(*SalesReceiptsServiceSearchAllReq)(nil),                  // 11: Scailo.SalesReceiptsServiceSearchAllReq
+	(TRANSACTION_TYPE)(0),                                     // 12: Scailo.TRANSACTION_TYPE
+	(*EmployeeMetadata)(nil),                                  // 13: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 14: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 15: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 16: Scailo.LogbookLogConciseSLC
+	(BOOL_FILTER)(0),                                          // 17: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 18: Scailo.SORT_ORDER
+	(*IdentifierUUIDWithUserComment)(nil),                     // 19: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                     // 20: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 21: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 22: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 23: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 24: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 25: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 26: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 27: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 28: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 29: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
+	(*CountResponse)(nil),                                     // 31: Scailo.CountResponse
 }
 var file_sales_receipts_scailo_proto_depIdxs = []int32{
-	11, // 0: Scailo.SaleReceipt.metadata:type_name -> Scailo.EmployeeMetadata
-	12, // 1: Scailo.SaleReceipt.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	13, // 2: Scailo.SaleReceipt.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	14, // 3: Scailo.SaleReceipt.logs:type_name -> Scailo.LogbookLogConciseSLC
-	4,  // 4: Scailo.SalesReceiptsList.list:type_name -> Scailo.SaleReceipt
-	15, // 5: Scailo.SalesReceiptsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 6: Scailo.SalesReceiptsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 7: Scailo.SalesReceiptsServicePaginationReq.sort_key:type_name -> Scailo.SALE_RECEIPT_SORT_KEY
-	13, // 8: Scailo.SalesReceiptsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	4,  // 9: Scailo.SalesReceiptsServicePaginationResponse.payload:type_name -> Scailo.SaleReceipt
-	15, // 10: Scailo.SalesReceiptsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 11: Scailo.SalesReceiptsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 12: Scailo.SalesReceiptsServiceFilterReq.sort_key:type_name -> Scailo.SALE_RECEIPT_SORT_KEY
-	13, // 13: Scailo.SalesReceiptsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	15, // 14: Scailo.SalesReceiptsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	13, // 15: Scailo.SalesReceiptsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	15, // 16: Scailo.SalesReceiptsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 17: Scailo.SalesReceiptsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 18: Scailo.SalesReceiptsServiceSearchAllReq.sort_key:type_name -> Scailo.SALE_RECEIPT_SORT_KEY
-	13, // 19: Scailo.SalesReceiptsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	1,  // 20: Scailo.SalesReceiptsService.Create:input_type -> Scailo.SalesReceiptsServiceCreateRequest
-	1,  // 21: Scailo.SalesReceiptsService.Draft:input_type -> Scailo.SalesReceiptsServiceCreateRequest
-	2,  // 22: Scailo.SalesReceiptsService.DraftUpdate:input_type -> Scailo.SalesReceiptsServiceUpdateRequest
-	17, // 23: Scailo.SalesReceiptsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 24: Scailo.SalesReceiptsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 25: Scailo.SalesReceiptsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 26: Scailo.SalesReceiptsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	2,  // 27: Scailo.SalesReceiptsService.RevisionUpdate:input_type -> Scailo.SalesReceiptsServiceUpdateRequest
-	17, // 28: Scailo.SalesReceiptsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 29: Scailo.SalesReceiptsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 30: Scailo.SalesReceiptsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 31: Scailo.SalesReceiptsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 32: Scailo.SalesReceiptsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 33: Scailo.SalesReceiptsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	18, // 34: Scailo.SalesReceiptsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	19, // 35: Scailo.SalesReceiptsService.ViewByID:input_type -> Scailo.Identifier
-	20, // 36: Scailo.SalesReceiptsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 37: Scailo.SalesReceiptsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	20, // 38: Scailo.SalesReceiptsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	21, // 39: Scailo.SalesReceiptsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 40: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 41: Scailo.SalesReceiptsService.ViewAll:input_type -> Scailo.ActiveStatus
-	20, // 42: Scailo.SalesReceiptsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	6,  // 43: Scailo.SalesReceiptsService.ViewWithPagination:input_type -> Scailo.SalesReceiptsServicePaginationReq
-	10, // 44: Scailo.SalesReceiptsService.SearchAll:input_type -> Scailo.SalesReceiptsServiceSearchAllReq
-	8,  // 45: Scailo.SalesReceiptsService.Filter:input_type -> Scailo.SalesReceiptsServiceFilterReq
-	23, // 46: Scailo.SalesReceiptsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	9,  // 47: Scailo.SalesReceiptsService.Count:input_type -> Scailo.SalesReceiptsServiceCountReq
-	8,  // 48: Scailo.SalesReceiptsService.DownloadAsCSV:input_type -> Scailo.SalesReceiptsServiceFilterReq
-	24, // 49: Scailo.SalesReceiptsService.Create:output_type -> Scailo.IdentifierResponse
-	24, // 50: Scailo.SalesReceiptsService.Draft:output_type -> Scailo.IdentifierResponse
-	24, // 51: Scailo.SalesReceiptsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	24, // 52: Scailo.SalesReceiptsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	24, // 53: Scailo.SalesReceiptsService.Verify:output_type -> Scailo.IdentifierResponse
-	24, // 54: Scailo.SalesReceiptsService.Approve:output_type -> Scailo.IdentifierResponse
-	24, // 55: Scailo.SalesReceiptsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	24, // 56: Scailo.SalesReceiptsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	24, // 57: Scailo.SalesReceiptsService.Halt:output_type -> Scailo.IdentifierResponse
-	24, // 58: Scailo.SalesReceiptsService.Discard:output_type -> Scailo.IdentifierResponse
-	24, // 59: Scailo.SalesReceiptsService.Restore:output_type -> Scailo.IdentifierResponse
-	24, // 60: Scailo.SalesReceiptsService.Complete:output_type -> Scailo.IdentifierResponse
-	24, // 61: Scailo.SalesReceiptsService.Repeat:output_type -> Scailo.IdentifierResponse
-	24, // 62: Scailo.SalesReceiptsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	25, // 63: Scailo.SalesReceiptsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 64: Scailo.SalesReceiptsService.ViewByID:output_type -> Scailo.SaleReceipt
-	4,  // 65: Scailo.SalesReceiptsService.ViewByUUID:output_type -> Scailo.SaleReceipt
-	4,  // 66: Scailo.SalesReceiptsService.ViewEssentialByID:output_type -> Scailo.SaleReceipt
-	4,  // 67: Scailo.SalesReceiptsService.ViewEssentialByUUID:output_type -> Scailo.SaleReceipt
-	5,  // 68: Scailo.SalesReceiptsService.ViewFromIDs:output_type -> Scailo.SalesReceiptsList
-	3,  // 69: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SaleReceiptAncillaryParameters
-	5,  // 70: Scailo.SalesReceiptsService.ViewAll:output_type -> Scailo.SalesReceiptsList
-	5,  // 71: Scailo.SalesReceiptsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReceiptsList
-	7,  // 72: Scailo.SalesReceiptsService.ViewWithPagination:output_type -> Scailo.SalesReceiptsServicePaginationResponse
-	5,  // 73: Scailo.SalesReceiptsService.SearchAll:output_type -> Scailo.SalesReceiptsList
-	5,  // 74: Scailo.SalesReceiptsService.Filter:output_type -> Scailo.SalesReceiptsList
-	26, // 75: Scailo.SalesReceiptsService.CountInStatus:output_type -> Scailo.CountResponse
-	26, // 76: Scailo.SalesReceiptsService.Count:output_type -> Scailo.CountResponse
-	27, // 77: Scailo.SalesReceiptsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	49, // [49:78] is the sub-list for method output_type
-	20, // [20:49] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	0,  // 0: Scailo.SalesReceiptsServiceCreateRequest.ref_from:type_name -> Scailo.SALES_RECEIPT_REF_FROM
+	12, // 1: Scailo.SalesReceiptsServiceCreateRequest.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	12, // 2: Scailo.SalesReceiptsServiceUpdateRequest.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	13, // 3: Scailo.SalesReceipt.metadata:type_name -> Scailo.EmployeeMetadata
+	14, // 4: Scailo.SalesReceipt.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	15, // 5: Scailo.SalesReceipt.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	16, // 6: Scailo.SalesReceipt.logs:type_name -> Scailo.LogbookLogConciseSLC
+	0,  // 7: Scailo.SalesReceipt.ref_from:type_name -> Scailo.SALES_RECEIPT_REF_FROM
+	12, // 8: Scailo.SalesReceipt.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	5,  // 9: Scailo.SalesReceiptsList.list:type_name -> Scailo.SalesReceipt
+	17, // 10: Scailo.SalesReceiptsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 11: Scailo.SalesReceiptsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 12: Scailo.SalesReceiptsServicePaginationReq.sort_key:type_name -> Scailo.SALES_RECEIPT_SORT_KEY
+	15, // 13: Scailo.SalesReceiptsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	5,  // 14: Scailo.SalesReceiptsServicePaginationResponse.payload:type_name -> Scailo.SalesReceipt
+	17, // 15: Scailo.SalesReceiptsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 16: Scailo.SalesReceiptsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 17: Scailo.SalesReceiptsServiceFilterReq.sort_key:type_name -> Scailo.SALES_RECEIPT_SORT_KEY
+	15, // 18: Scailo.SalesReceiptsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,  // 19: Scailo.SalesReceiptsServiceFilterReq.ref_from:type_name -> Scailo.SALES_RECEIPT_REF_FROM
+	12, // 20: Scailo.SalesReceiptsServiceFilterReq.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	17, // 21: Scailo.SalesReceiptsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	15, // 22: Scailo.SalesReceiptsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,  // 23: Scailo.SalesReceiptsServiceCountReq.ref_from:type_name -> Scailo.SALES_RECEIPT_REF_FROM
+	12, // 24: Scailo.SalesReceiptsServiceCountReq.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	17, // 25: Scailo.SalesReceiptsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 26: Scailo.SalesReceiptsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 27: Scailo.SalesReceiptsServiceSearchAllReq.sort_key:type_name -> Scailo.SALES_RECEIPT_SORT_KEY
+	15, // 28: Scailo.SalesReceiptsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	2,  // 29: Scailo.SalesReceiptsService.Create:input_type -> Scailo.SalesReceiptsServiceCreateRequest
+	2,  // 30: Scailo.SalesReceiptsService.Draft:input_type -> Scailo.SalesReceiptsServiceCreateRequest
+	3,  // 31: Scailo.SalesReceiptsService.DraftUpdate:input_type -> Scailo.SalesReceiptsServiceUpdateRequest
+	19, // 32: Scailo.SalesReceiptsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 33: Scailo.SalesReceiptsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 34: Scailo.SalesReceiptsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 35: Scailo.SalesReceiptsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	3,  // 36: Scailo.SalesReceiptsService.RevisionUpdate:input_type -> Scailo.SalesReceiptsServiceUpdateRequest
+	19, // 37: Scailo.SalesReceiptsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 38: Scailo.SalesReceiptsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 39: Scailo.SalesReceiptsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 40: Scailo.SalesReceiptsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 41: Scailo.SalesReceiptsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 42: Scailo.SalesReceiptsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 43: Scailo.SalesReceiptsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	21, // 44: Scailo.SalesReceiptsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	22, // 45: Scailo.SalesReceiptsService.ViewByID:input_type -> Scailo.Identifier
+	23, // 46: Scailo.SalesReceiptsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	22, // 47: Scailo.SalesReceiptsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	23, // 48: Scailo.SalesReceiptsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 49: Scailo.SalesReceiptsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	23, // 50: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 51: Scailo.SalesReceiptsService.ViewAll:input_type -> Scailo.ActiveStatus
+	23, // 52: Scailo.SalesReceiptsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 53: Scailo.SalesReceiptsService.ViewWithPagination:input_type -> Scailo.SalesReceiptsServicePaginationReq
+	23, // 54: Scailo.SalesReceiptsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	23, // 55: Scailo.SalesReceiptsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	11, // 56: Scailo.SalesReceiptsService.SearchAll:input_type -> Scailo.SalesReceiptsServiceSearchAllReq
+	9,  // 57: Scailo.SalesReceiptsService.Filter:input_type -> Scailo.SalesReceiptsServiceFilterReq
+	26, // 58: Scailo.SalesReceiptsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 59: Scailo.SalesReceiptsService.Count:input_type -> Scailo.SalesReceiptsServiceCountReq
+	9,  // 60: Scailo.SalesReceiptsService.DownloadAsCSV:input_type -> Scailo.SalesReceiptsServiceFilterReq
+	27, // 61: Scailo.SalesReceiptsService.Create:output_type -> Scailo.IdentifierResponse
+	27, // 62: Scailo.SalesReceiptsService.Draft:output_type -> Scailo.IdentifierResponse
+	27, // 63: Scailo.SalesReceiptsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 64: Scailo.SalesReceiptsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	27, // 65: Scailo.SalesReceiptsService.Verify:output_type -> Scailo.IdentifierResponse
+	27, // 66: Scailo.SalesReceiptsService.Approve:output_type -> Scailo.IdentifierResponse
+	27, // 67: Scailo.SalesReceiptsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	27, // 68: Scailo.SalesReceiptsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 69: Scailo.SalesReceiptsService.Halt:output_type -> Scailo.IdentifierResponse
+	27, // 70: Scailo.SalesReceiptsService.Discard:output_type -> Scailo.IdentifierResponse
+	27, // 71: Scailo.SalesReceiptsService.Restore:output_type -> Scailo.IdentifierResponse
+	27, // 72: Scailo.SalesReceiptsService.Complete:output_type -> Scailo.IdentifierResponse
+	27, // 73: Scailo.SalesReceiptsService.Repeat:output_type -> Scailo.IdentifierResponse
+	27, // 74: Scailo.SalesReceiptsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	27, // 75: Scailo.SalesReceiptsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	28, // 76: Scailo.SalesReceiptsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	5,  // 77: Scailo.SalesReceiptsService.ViewByID:output_type -> Scailo.SalesReceipt
+	5,  // 78: Scailo.SalesReceiptsService.ViewByUUID:output_type -> Scailo.SalesReceipt
+	5,  // 79: Scailo.SalesReceiptsService.ViewEssentialByID:output_type -> Scailo.SalesReceipt
+	5,  // 80: Scailo.SalesReceiptsService.ViewEssentialByUUID:output_type -> Scailo.SalesReceipt
+	6,  // 81: Scailo.SalesReceiptsService.ViewFromIDs:output_type -> Scailo.SalesReceiptsList
+	4,  // 82: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesReceiptAncillaryParameters
+	6,  // 83: Scailo.SalesReceiptsService.ViewAll:output_type -> Scailo.SalesReceiptsList
+	6,  // 84: Scailo.SalesReceiptsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReceiptsList
+	8,  // 85: Scailo.SalesReceiptsService.ViewWithPagination:output_type -> Scailo.SalesReceiptsServicePaginationResponse
+	29, // 86: Scailo.SalesReceiptsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	30, // 87: Scailo.SalesReceiptsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	6,  // 88: Scailo.SalesReceiptsService.SearchAll:output_type -> Scailo.SalesReceiptsList
+	6,  // 89: Scailo.SalesReceiptsService.Filter:output_type -> Scailo.SalesReceiptsList
+	31, // 90: Scailo.SalesReceiptsService.CountInStatus:output_type -> Scailo.CountResponse
+	31, // 91: Scailo.SalesReceiptsService.Count:output_type -> Scailo.CountResponse
+	30, // 92: Scailo.SalesReceiptsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	61, // [61:93] is the sub-list for method output_type
+	29, // [29:61] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_sales_receipts_scailo_proto_init() }
@@ -1897,7 +1982,7 @@ func file_sales_receipts_scailo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sales_receipts_scailo_proto_rawDesc), len(file_sales_receipts_scailo_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,

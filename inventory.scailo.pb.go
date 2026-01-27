@@ -1599,6 +1599,51 @@ func (x *ConsolidatedInventoryStatistics) GetRequiredCount() int64 {
 	return 0
 }
 
+type ConsolidatedInventoryStatisticsList struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The list of records
+	List          []*ConsolidatedInventoryStatistics `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConsolidatedInventoryStatisticsList) Reset() {
+	*x = ConsolidatedInventoryStatisticsList{}
+	mi := &file_inventory_scailo_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConsolidatedInventoryStatisticsList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConsolidatedInventoryStatisticsList) ProtoMessage() {}
+
+func (x *ConsolidatedInventoryStatisticsList) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_scailo_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConsolidatedInventoryStatisticsList.ProtoReflect.Descriptor instead.
+func (*ConsolidatedInventoryStatisticsList) Descriptor() ([]byte, []int) {
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ConsolidatedInventoryStatisticsList) GetList() []*ConsolidatedInventoryStatistics {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the abridged version of each production plan item
 type AbridgedProductionPlanItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1614,7 +1659,7 @@ type AbridgedProductionPlanItem struct {
 
 func (x *AbridgedProductionPlanItem) Reset() {
 	*x = AbridgedProductionPlanItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[12]
+	mi := &file_inventory_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1626,7 +1671,7 @@ func (x *AbridgedProductionPlanItem) String() string {
 func (*AbridgedProductionPlanItem) ProtoMessage() {}
 
 func (x *AbridgedProductionPlanItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[12]
+	mi := &file_inventory_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1639,7 +1684,7 @@ func (x *AbridgedProductionPlanItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedProductionPlanItem.ProtoReflect.Descriptor instead.
 func (*AbridgedProductionPlanItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{12}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *AbridgedProductionPlanItem) GetProductionPlanId() uint64 {
@@ -1678,7 +1723,7 @@ type AbridgedInventoryItem struct {
 
 func (x *AbridgedInventoryItem) Reset() {
 	*x = AbridgedInventoryItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[13]
+	mi := &file_inventory_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1690,7 +1735,7 @@ func (x *AbridgedInventoryItem) String() string {
 func (*AbridgedInventoryItem) ProtoMessage() {}
 
 func (x *AbridgedInventoryItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[13]
+	mi := &file_inventory_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1703,7 +1748,7 @@ func (x *AbridgedInventoryItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedInventoryItem.ProtoReflect.Descriptor instead.
 func (*AbridgedInventoryItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{13}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *AbridgedInventoryItem) GetFamilyId() uint64 {
@@ -1742,7 +1787,7 @@ type AbridgedPurchaseIndentItem struct {
 
 func (x *AbridgedPurchaseIndentItem) Reset() {
 	*x = AbridgedPurchaseIndentItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[14]
+	mi := &file_inventory_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1754,7 +1799,7 @@ func (x *AbridgedPurchaseIndentItem) String() string {
 func (*AbridgedPurchaseIndentItem) ProtoMessage() {}
 
 func (x *AbridgedPurchaseIndentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[14]
+	mi := &file_inventory_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1767,7 +1812,7 @@ func (x *AbridgedPurchaseIndentItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedPurchaseIndentItem.ProtoReflect.Descriptor instead.
 func (*AbridgedPurchaseIndentItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{14}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AbridgedPurchaseIndentItem) GetPurchaseIndentId() uint64 {
@@ -1806,7 +1851,7 @@ type AbridgedPurchaseOrderItem struct {
 
 func (x *AbridgedPurchaseOrderItem) Reset() {
 	*x = AbridgedPurchaseOrderItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[15]
+	mi := &file_inventory_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1818,7 +1863,7 @@ func (x *AbridgedPurchaseOrderItem) String() string {
 func (*AbridgedPurchaseOrderItem) ProtoMessage() {}
 
 func (x *AbridgedPurchaseOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[15]
+	mi := &file_inventory_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1831,7 +1876,7 @@ func (x *AbridgedPurchaseOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedPurchaseOrderItem.ProtoReflect.Descriptor instead.
 func (*AbridgedPurchaseOrderItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{15}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *AbridgedPurchaseOrderItem) GetPurchaseOrderId() uint64 {
@@ -1870,7 +1915,7 @@ type AbridgedGoodsReceiptItem struct {
 
 func (x *AbridgedGoodsReceiptItem) Reset() {
 	*x = AbridgedGoodsReceiptItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[16]
+	mi := &file_inventory_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1882,7 +1927,7 @@ func (x *AbridgedGoodsReceiptItem) String() string {
 func (*AbridgedGoodsReceiptItem) ProtoMessage() {}
 
 func (x *AbridgedGoodsReceiptItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[16]
+	mi := &file_inventory_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1895,7 +1940,7 @@ func (x *AbridgedGoodsReceiptItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedGoodsReceiptItem.ProtoReflect.Descriptor instead.
 func (*AbridgedGoodsReceiptItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{16}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *AbridgedGoodsReceiptItem) GetGoodsReceiptId() uint64 {
@@ -1934,7 +1979,7 @@ type AbridgedPurchaseReturnItem struct {
 
 func (x *AbridgedPurchaseReturnItem) Reset() {
 	*x = AbridgedPurchaseReturnItem{}
-	mi := &file_inventory_scailo_proto_msgTypes[17]
+	mi := &file_inventory_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1946,7 +1991,7 @@ func (x *AbridgedPurchaseReturnItem) String() string {
 func (*AbridgedPurchaseReturnItem) ProtoMessage() {}
 
 func (x *AbridgedPurchaseReturnItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[17]
+	mi := &file_inventory_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1959,7 +2004,7 @@ func (x *AbridgedPurchaseReturnItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbridgedPurchaseReturnItem.ProtoReflect.Descriptor instead.
 func (*AbridgedPurchaseReturnItem) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{17}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AbridgedPurchaseReturnItem) GetPurchaseReturnId() uint64 {
@@ -1996,7 +2041,7 @@ type InventoryWorkInProgressStatistics struct {
 
 func (x *InventoryWorkInProgressStatistics) Reset() {
 	*x = InventoryWorkInProgressStatistics{}
-	mi := &file_inventory_scailo_proto_msgTypes[18]
+	mi := &file_inventory_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2008,7 +2053,7 @@ func (x *InventoryWorkInProgressStatistics) String() string {
 func (*InventoryWorkInProgressStatistics) ProtoMessage() {}
 
 func (x *InventoryWorkInProgressStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[18]
+	mi := &file_inventory_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2021,7 +2066,7 @@ func (x *InventoryWorkInProgressStatistics) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use InventoryWorkInProgressStatistics.ProtoReflect.Descriptor instead.
 func (*InventoryWorkInProgressStatistics) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{18}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *InventoryWorkInProgressStatistics) GetProductionPlans() []*AbridgedProductionPlanItem {
@@ -2051,7 +2096,7 @@ type InventoryIndentedStatistics struct {
 
 func (x *InventoryIndentedStatistics) Reset() {
 	*x = InventoryIndentedStatistics{}
-	mi := &file_inventory_scailo_proto_msgTypes[19]
+	mi := &file_inventory_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2063,7 +2108,7 @@ func (x *InventoryIndentedStatistics) String() string {
 func (*InventoryIndentedStatistics) ProtoMessage() {}
 
 func (x *InventoryIndentedStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[19]
+	mi := &file_inventory_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2076,7 +2121,7 @@ func (x *InventoryIndentedStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InventoryIndentedStatistics.ProtoReflect.Descriptor instead.
 func (*InventoryIndentedStatistics) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{19}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *InventoryIndentedStatistics) GetPurchaseIndents() []*AbridgedPurchaseIndentItem {
@@ -2108,7 +2153,7 @@ type InventoryOrderedStatistics struct {
 
 func (x *InventoryOrderedStatistics) Reset() {
 	*x = InventoryOrderedStatistics{}
-	mi := &file_inventory_scailo_proto_msgTypes[20]
+	mi := &file_inventory_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2120,7 +2165,7 @@ func (x *InventoryOrderedStatistics) String() string {
 func (*InventoryOrderedStatistics) ProtoMessage() {}
 
 func (x *InventoryOrderedStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[20]
+	mi := &file_inventory_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2133,7 +2178,7 @@ func (x *InventoryOrderedStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InventoryOrderedStatistics.ProtoReflect.Descriptor instead.
 func (*InventoryOrderedStatistics) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{20}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *InventoryOrderedStatistics) GetPurchaseOrders() []*AbridgedPurchaseOrderItem {
@@ -2184,7 +2229,7 @@ type InventoryDetailedDemand struct {
 
 func (x *InventoryDetailedDemand) Reset() {
 	*x = InventoryDetailedDemand{}
-	mi := &file_inventory_scailo_proto_msgTypes[21]
+	mi := &file_inventory_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2196,7 +2241,7 @@ func (x *InventoryDetailedDemand) String() string {
 func (*InventoryDetailedDemand) ProtoMessage() {}
 
 func (x *InventoryDetailedDemand) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[21]
+	mi := &file_inventory_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2209,7 +2254,7 @@ func (x *InventoryDetailedDemand) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InventoryDetailedDemand.ProtoReflect.Descriptor instead.
 func (*InventoryDetailedDemand) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{21}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *InventoryDetailedDemand) GetId() uint64 {
@@ -2298,7 +2343,7 @@ type InventoryDemandMap struct {
 
 func (x *InventoryDemandMap) Reset() {
 	*x = InventoryDemandMap{}
-	mi := &file_inventory_scailo_proto_msgTypes[22]
+	mi := &file_inventory_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2310,7 +2355,7 @@ func (x *InventoryDemandMap) String() string {
 func (*InventoryDemandMap) ProtoMessage() {}
 
 func (x *InventoryDemandMap) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[22]
+	mi := &file_inventory_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2323,7 +2368,7 @@ func (x *InventoryDemandMap) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InventoryDemandMap.ProtoReflect.Descriptor instead.
 func (*InventoryDemandMap) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{22}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InventoryDemandMap) GetFamilyId() uint64 {
@@ -2396,7 +2441,7 @@ type InventoryDemand struct {
 
 func (x *InventoryDemand) Reset() {
 	*x = InventoryDemand{}
-	mi := &file_inventory_scailo_proto_msgTypes[23]
+	mi := &file_inventory_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2408,7 +2453,7 @@ func (x *InventoryDemand) String() string {
 func (*InventoryDemand) ProtoMessage() {}
 
 func (x *InventoryDemand) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_scailo_proto_msgTypes[23]
+	mi := &file_inventory_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2421,7 +2466,7 @@ func (x *InventoryDemand) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InventoryDemand.ProtoReflect.Descriptor instead.
 func (*InventoryDemand) Descriptor() ([]byte, []int) {
-	return file_inventory_scailo_proto_rawDescGZIP(), []int{23}
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *InventoryDemand) GetOriginType() INVENTORY_NODE_ORIGIN_TYPE {
@@ -2614,7 +2659,9 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"scrapCount\x12 \n" +
 	"\vstore_count\x18\x96\x01 \x01(\x03R\n" +
 	"storeCount\x12&\n" +
-	"\x0erequired_count\x18\xc8\x01 \x01(\x03R\rrequiredCount\"\x83\x01\n" +
+	"\x0erequired_count\x18\xc8\x01 \x01(\x03R\rrequiredCount\"b\n" +
+	"#ConsolidatedInventoryStatisticsList\x12;\n" +
+	"\x04list\x18\x01 \x03(\v2'.Scailo.ConsolidatedInventoryStatisticsR\x04list\"\x83\x01\n" +
 	"\x1aAbridgedProductionPlanItem\x12,\n" +
 	"\x12production_plan_id\x18\n" +
 	" \x01(\x04R\x10productionPlanId\x12\x1b\n" +
@@ -2717,7 +2764,7 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"%INVENTORY_NODE_ORIGIN_TYPE_RETURNABLE\x10\x8c\x01\x12&\n" +
 	"!INVENTORY_NODE_ORIGIN_TYPE_REWORK\x10\x96\x01\x12%\n" +
 	" INVENTORY_NODE_ORIGIN_TYPE_SCRAP\x10\xa0\x01\x12%\n" +
-	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\x98\x11\n" +
+	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\x87\x12\n" +
 	"\x10InventoryService\x12F\n" +
 	"\n" +
 	"ViewByHash\x12\x1e.Scailo.InventoryHashSearchReq\x1a\x18.Scailo.GenericInventory\x12C\n" +
@@ -2740,7 +2787,8 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"\x16ViewBaseDemandQuantity\x12\x12.Scailo.Identifier\x1a\x18.Scailo.QuantityResponse\x12J\n" +
 	"\x1aViewAdjustedDemandQuantity\x12\x12.Scailo.Identifier\x1a\x18.Scailo.QuantityResponse\x12D\n" +
 	"\x14ViewRequiredQuantity\x12\x12.Scailo.Identifier\x1a\x18.Scailo.QuantityResponse\x12Y\n" +
-	"\x1aViewConsolidatedStatistics\x12\x12.Scailo.Identifier\x1a'.Scailo.ConsolidatedInventoryStatistics\x12A\n" +
+	"\x1aViewConsolidatedStatistics\x12\x12.Scailo.Identifier\x1a'.Scailo.ConsolidatedInventoryStatistics\x12m\n" +
+	"%ViewConsolidatedStatisticsForFamilies\x12\x17.Scailo.IdentifiersList\x1a+.Scailo.ConsolidatedInventoryStatisticsList\x12A\n" +
 	"\rViewInStorage\x12\x12.Scailo.Identifier\x1a\x1c.Scailo.GenericInventoryList\x12]\n" +
 	"\x1cViewWorkInProgressStatistics\x12\x12.Scailo.Identifier\x1a).Scailo.InventoryWorkInProgressStatistics\x12Q\n" +
 	"\x16ViewIndentedStatistics\x12\x12.Scailo.Identifier\x1a#.Scailo.InventoryIndentedStatistics\x12O\n" +
@@ -2763,7 +2811,7 @@ func file_inventory_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_inventory_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_inventory_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_inventory_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_inventory_scailo_proto_goTypes = []any{
 	(GENERIC_INVENTORY_REF_FROM)(0),                    // 0: Scailo.GENERIC_INVENTORY_REF_FROM
 	(INVENTORY_NODE_ORIGIN_TYPE)(0),                    // 1: Scailo.INVENTORY_NODE_ORIGIN_TYPE
@@ -2779,115 +2827,120 @@ var file_inventory_scailo_proto_goTypes = []any{
 	(*FilterReturnableInventoryReq)(nil),               // 11: Scailo.FilterReturnableInventoryReq
 	(*FilterReturnableInventoryForIdentifierUUID)(nil), // 12: Scailo.FilterReturnableInventoryForIdentifierUUID
 	(*ConsolidatedInventoryStatistics)(nil),            // 13: Scailo.ConsolidatedInventoryStatistics
-	(*AbridgedProductionPlanItem)(nil),                 // 14: Scailo.AbridgedProductionPlanItem
-	(*AbridgedInventoryItem)(nil),                      // 15: Scailo.AbridgedInventoryItem
-	(*AbridgedPurchaseIndentItem)(nil),                 // 16: Scailo.AbridgedPurchaseIndentItem
-	(*AbridgedPurchaseOrderItem)(nil),                  // 17: Scailo.AbridgedPurchaseOrderItem
-	(*AbridgedGoodsReceiptItem)(nil),                   // 18: Scailo.AbridgedGoodsReceiptItem
-	(*AbridgedPurchaseReturnItem)(nil),                 // 19: Scailo.AbridgedPurchaseReturnItem
-	(*InventoryWorkInProgressStatistics)(nil),          // 20: Scailo.InventoryWorkInProgressStatistics
-	(*InventoryIndentedStatistics)(nil),                // 21: Scailo.InventoryIndentedStatistics
-	(*InventoryOrderedStatistics)(nil),                 // 22: Scailo.InventoryOrderedStatistics
-	(*InventoryDetailedDemand)(nil),                    // 23: Scailo.InventoryDetailedDemand
-	(*InventoryDemandMap)(nil),                         // 24: Scailo.InventoryDemandMap
-	(*InventoryDemand)(nil),                            // 25: Scailo.InventoryDemand
-	(*EmployeeMetadata)(nil),                           // 26: Scailo.EmployeeMetadata
-	(INVENTORY_LIFECYCLE)(0),                           // 27: Scailo.INVENTORY_LIFECYCLE
-	(FAMILY_TYPE)(0),                                   // 28: Scailo.FAMILY_TYPE
-	(BOOL_FILTER)(0),                                   // 29: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                    // 30: Scailo.SORT_ORDER
-	(INVENTORY_SORT_KEY)(0),                            // 31: Scailo.INVENTORY_SORT_KEY
-	(*SimpleSearchReq)(nil),                            // 32: Scailo.SimpleSearchReq
-	(*Identifier)(nil),                                 // 33: Scailo.Identifier
-	(*QuantityResponse)(nil),                           // 34: Scailo.QuantityResponse
+	(*ConsolidatedInventoryStatisticsList)(nil),        // 14: Scailo.ConsolidatedInventoryStatisticsList
+	(*AbridgedProductionPlanItem)(nil),                 // 15: Scailo.AbridgedProductionPlanItem
+	(*AbridgedInventoryItem)(nil),                      // 16: Scailo.AbridgedInventoryItem
+	(*AbridgedPurchaseIndentItem)(nil),                 // 17: Scailo.AbridgedPurchaseIndentItem
+	(*AbridgedPurchaseOrderItem)(nil),                  // 18: Scailo.AbridgedPurchaseOrderItem
+	(*AbridgedGoodsReceiptItem)(nil),                   // 19: Scailo.AbridgedGoodsReceiptItem
+	(*AbridgedPurchaseReturnItem)(nil),                 // 20: Scailo.AbridgedPurchaseReturnItem
+	(*InventoryWorkInProgressStatistics)(nil),          // 21: Scailo.InventoryWorkInProgressStatistics
+	(*InventoryIndentedStatistics)(nil),                // 22: Scailo.InventoryIndentedStatistics
+	(*InventoryOrderedStatistics)(nil),                 // 23: Scailo.InventoryOrderedStatistics
+	(*InventoryDetailedDemand)(nil),                    // 24: Scailo.InventoryDetailedDemand
+	(*InventoryDemandMap)(nil),                         // 25: Scailo.InventoryDemandMap
+	(*InventoryDemand)(nil),                            // 26: Scailo.InventoryDemand
+	(*EmployeeMetadata)(nil),                           // 27: Scailo.EmployeeMetadata
+	(INVENTORY_LIFECYCLE)(0),                           // 28: Scailo.INVENTORY_LIFECYCLE
+	(FAMILY_TYPE)(0),                                   // 29: Scailo.FAMILY_TYPE
+	(BOOL_FILTER)(0),                                   // 30: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                    // 31: Scailo.SORT_ORDER
+	(INVENTORY_SORT_KEY)(0),                            // 32: Scailo.INVENTORY_SORT_KEY
+	(*SimpleSearchReq)(nil),                            // 33: Scailo.SimpleSearchReq
+	(*Identifier)(nil),                                 // 34: Scailo.Identifier
+	(*IdentifiersList)(nil),                            // 35: Scailo.IdentifiersList
+	(*QuantityResponse)(nil),                           // 36: Scailo.QuantityResponse
 }
 var file_inventory_scailo_proto_depIdxs = []int32{
-	26, // 0: Scailo.GenericInventory.metadata:type_name -> Scailo.EmployeeMetadata
-	27, // 1: Scailo.GenericInventory.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	27, // 0: Scailo.GenericInventory.metadata:type_name -> Scailo.EmployeeMetadata
+	28, // 1: Scailo.GenericInventory.status:type_name -> Scailo.INVENTORY_LIFECYCLE
 	0,  // 2: Scailo.GenericInventory.ref_from:type_name -> Scailo.GENERIC_INVENTORY_REF_FROM
 	2,  // 3: Scailo.GenericInventoryList.list:type_name -> Scailo.GenericInventory
-	26, // 4: Scailo.InventoryCodeMap.metadata:type_name -> Scailo.EmployeeMetadata
-	28, // 5: Scailo.InventoryCodeMap.family_type:type_name -> Scailo.FAMILY_TYPE
-	27, // 6: Scailo.IssuableInventorySearchReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	27, // 7: Scailo.InventoryServiceFamilyQuantityReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	29, // 8: Scailo.SearchReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
-	30, // 9: Scailo.SearchReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
-	31, // 10: Scailo.SearchReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	29, // 11: Scailo.SearchReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	27, // 4: Scailo.InventoryCodeMap.metadata:type_name -> Scailo.EmployeeMetadata
+	29, // 5: Scailo.InventoryCodeMap.family_type:type_name -> Scailo.FAMILY_TYPE
+	28, // 6: Scailo.IssuableInventorySearchReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	28, // 7: Scailo.InventoryServiceFamilyQuantityReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	30, // 8: Scailo.SearchReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
+	31, // 9: Scailo.SearchReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
+	32, // 10: Scailo.SearchReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	30, // 11: Scailo.SearchReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
 	9,  // 12: Scailo.SearchReturnableInventoryForIdentifierUUID.filter:type_name -> Scailo.SearchReturnableInventoryReq
-	29, // 13: Scailo.FilterReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
-	30, // 14: Scailo.FilterReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
-	31, // 15: Scailo.FilterReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	29, // 16: Scailo.FilterReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	30, // 13: Scailo.FilterReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
+	31, // 14: Scailo.FilterReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
+	32, // 15: Scailo.FilterReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	30, // 16: Scailo.FilterReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
 	11, // 17: Scailo.FilterReturnableInventoryForIdentifierUUID.filter:type_name -> Scailo.FilterReturnableInventoryReq
-	14, // 18: Scailo.InventoryWorkInProgressStatistics.production_plans:type_name -> Scailo.AbridgedProductionPlanItem
-	15, // 19: Scailo.InventoryWorkInProgressStatistics.inventory_items:type_name -> Scailo.AbridgedInventoryItem
-	16, // 20: Scailo.InventoryIndentedStatistics.purchase_indents:type_name -> Scailo.AbridgedPurchaseIndentItem
-	17, // 21: Scailo.InventoryIndentedStatistics.purchase_orders:type_name -> Scailo.AbridgedPurchaseOrderItem
-	17, // 22: Scailo.InventoryOrderedStatistics.purchase_orders:type_name -> Scailo.AbridgedPurchaseOrderItem
-	18, // 23: Scailo.InventoryOrderedStatistics.goods_receipts:type_name -> Scailo.AbridgedGoodsReceiptItem
-	19, // 24: Scailo.InventoryOrderedStatistics.purchase_returns:type_name -> Scailo.AbridgedPurchaseReturnItem
-	24, // 25: Scailo.InventoryDetailedDemand.demand_map:type_name -> Scailo.InventoryDemandMap
-	25, // 26: Scailo.InventoryDemandMap.base_demand_list:type_name -> Scailo.InventoryDemand
-	25, // 27: Scailo.InventoryDemandMap.adjusted_demand_list:type_name -> Scailo.InventoryDemand
-	1,  // 28: Scailo.InventoryDemand.origin_type:type_name -> Scailo.INVENTORY_NODE_ORIGIN_TYPE
-	6,  // 29: Scailo.InventoryService.ViewByHash:input_type -> Scailo.InventoryHashSearchReq
-	32, // 30: Scailo.InventoryService.ViewByShortURL:input_type -> Scailo.SimpleSearchReq
-	5,  // 31: Scailo.InventoryService.ViewIssuable:input_type -> Scailo.IssuableInventorySearchReq
-	33, // 32: Scailo.InventoryService.ViewIssuedForGoodsDispatch:input_type -> Scailo.Identifier
-	33, // 33: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
-	33, // 34: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:input_type -> Scailo.Identifier
-	33, // 35: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
-	33, // 36: Scailo.InventoryService.ViewAdmittedFromProductionPlan:input_type -> Scailo.Identifier
-	8,  // 37: Scailo.InventoryService.ViewReturnableForPurchaseOrder:input_type -> Scailo.ReturnableInventorySearchReq
-	8,  // 38: Scailo.InventoryService.ViewReturnableForInwardJob:input_type -> Scailo.ReturnableInventorySearchReq
-	8,  // 39: Scailo.InventoryService.ViewReturnableForStockIssuance:input_type -> Scailo.ReturnableInventorySearchReq
-	8,  // 40: Scailo.InventoryService.ViewReturnableForSalesOrder:input_type -> Scailo.ReturnableInventorySearchReq
-	8,  // 41: Scailo.InventoryService.ViewReturnableForOutwardJob:input_type -> Scailo.ReturnableInventorySearchReq
-	7,  // 42: Scailo.InventoryService.ViewQuantityRemaining:input_type -> Scailo.InventoryServiceFamilyQuantityReq
-	33, // 43: Scailo.InventoryService.CountWorkInProgress:input_type -> Scailo.Identifier
-	33, // 44: Scailo.InventoryService.CountIndented:input_type -> Scailo.Identifier
-	33, // 45: Scailo.InventoryService.CountOrdered:input_type -> Scailo.Identifier
-	33, // 46: Scailo.InventoryService.ViewBaseDemandQuantity:input_type -> Scailo.Identifier
-	33, // 47: Scailo.InventoryService.ViewAdjustedDemandQuantity:input_type -> Scailo.Identifier
-	33, // 48: Scailo.InventoryService.ViewRequiredQuantity:input_type -> Scailo.Identifier
-	33, // 49: Scailo.InventoryService.ViewConsolidatedStatistics:input_type -> Scailo.Identifier
-	33, // 50: Scailo.InventoryService.ViewInStorage:input_type -> Scailo.Identifier
-	33, // 51: Scailo.InventoryService.ViewWorkInProgressStatistics:input_type -> Scailo.Identifier
-	33, // 52: Scailo.InventoryService.ViewIndentedStatistics:input_type -> Scailo.Identifier
-	33, // 53: Scailo.InventoryService.ViewOrderedStatistics:input_type -> Scailo.Identifier
-	33, // 54: Scailo.InventoryService.ViewDetailedDemand:input_type -> Scailo.Identifier
-	2,  // 55: Scailo.InventoryService.ViewByHash:output_type -> Scailo.GenericInventory
-	2,  // 56: Scailo.InventoryService.ViewByShortURL:output_type -> Scailo.GenericInventory
-	3,  // 57: Scailo.InventoryService.ViewIssuable:output_type -> Scailo.GenericInventoryList
-	3,  // 58: Scailo.InventoryService.ViewIssuedForGoodsDispatch:output_type -> Scailo.GenericInventoryList
-	3,  // 59: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
-	3,  // 60: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:output_type -> Scailo.GenericInventoryList
-	3,  // 61: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
-	3,  // 62: Scailo.InventoryService.ViewAdmittedFromProductionPlan:output_type -> Scailo.GenericInventoryList
-	3,  // 63: Scailo.InventoryService.ViewReturnableForPurchaseOrder:output_type -> Scailo.GenericInventoryList
-	3,  // 64: Scailo.InventoryService.ViewReturnableForInwardJob:output_type -> Scailo.GenericInventoryList
-	3,  // 65: Scailo.InventoryService.ViewReturnableForStockIssuance:output_type -> Scailo.GenericInventoryList
-	3,  // 66: Scailo.InventoryService.ViewReturnableForSalesOrder:output_type -> Scailo.GenericInventoryList
-	3,  // 67: Scailo.InventoryService.ViewReturnableForOutwardJob:output_type -> Scailo.GenericInventoryList
-	34, // 68: Scailo.InventoryService.ViewQuantityRemaining:output_type -> Scailo.QuantityResponse
-	34, // 69: Scailo.InventoryService.CountWorkInProgress:output_type -> Scailo.QuantityResponse
-	34, // 70: Scailo.InventoryService.CountIndented:output_type -> Scailo.QuantityResponse
-	34, // 71: Scailo.InventoryService.CountOrdered:output_type -> Scailo.QuantityResponse
-	34, // 72: Scailo.InventoryService.ViewBaseDemandQuantity:output_type -> Scailo.QuantityResponse
-	34, // 73: Scailo.InventoryService.ViewAdjustedDemandQuantity:output_type -> Scailo.QuantityResponse
-	34, // 74: Scailo.InventoryService.ViewRequiredQuantity:output_type -> Scailo.QuantityResponse
-	13, // 75: Scailo.InventoryService.ViewConsolidatedStatistics:output_type -> Scailo.ConsolidatedInventoryStatistics
-	3,  // 76: Scailo.InventoryService.ViewInStorage:output_type -> Scailo.GenericInventoryList
-	20, // 77: Scailo.InventoryService.ViewWorkInProgressStatistics:output_type -> Scailo.InventoryWorkInProgressStatistics
-	21, // 78: Scailo.InventoryService.ViewIndentedStatistics:output_type -> Scailo.InventoryIndentedStatistics
-	22, // 79: Scailo.InventoryService.ViewOrderedStatistics:output_type -> Scailo.InventoryOrderedStatistics
-	23, // 80: Scailo.InventoryService.ViewDetailedDemand:output_type -> Scailo.InventoryDetailedDemand
-	55, // [55:81] is the sub-list for method output_type
-	29, // [29:55] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	13, // 18: Scailo.ConsolidatedInventoryStatisticsList.list:type_name -> Scailo.ConsolidatedInventoryStatistics
+	15, // 19: Scailo.InventoryWorkInProgressStatistics.production_plans:type_name -> Scailo.AbridgedProductionPlanItem
+	16, // 20: Scailo.InventoryWorkInProgressStatistics.inventory_items:type_name -> Scailo.AbridgedInventoryItem
+	17, // 21: Scailo.InventoryIndentedStatistics.purchase_indents:type_name -> Scailo.AbridgedPurchaseIndentItem
+	18, // 22: Scailo.InventoryIndentedStatistics.purchase_orders:type_name -> Scailo.AbridgedPurchaseOrderItem
+	18, // 23: Scailo.InventoryOrderedStatistics.purchase_orders:type_name -> Scailo.AbridgedPurchaseOrderItem
+	19, // 24: Scailo.InventoryOrderedStatistics.goods_receipts:type_name -> Scailo.AbridgedGoodsReceiptItem
+	20, // 25: Scailo.InventoryOrderedStatistics.purchase_returns:type_name -> Scailo.AbridgedPurchaseReturnItem
+	25, // 26: Scailo.InventoryDetailedDemand.demand_map:type_name -> Scailo.InventoryDemandMap
+	26, // 27: Scailo.InventoryDemandMap.base_demand_list:type_name -> Scailo.InventoryDemand
+	26, // 28: Scailo.InventoryDemandMap.adjusted_demand_list:type_name -> Scailo.InventoryDemand
+	1,  // 29: Scailo.InventoryDemand.origin_type:type_name -> Scailo.INVENTORY_NODE_ORIGIN_TYPE
+	6,  // 30: Scailo.InventoryService.ViewByHash:input_type -> Scailo.InventoryHashSearchReq
+	33, // 31: Scailo.InventoryService.ViewByShortURL:input_type -> Scailo.SimpleSearchReq
+	5,  // 32: Scailo.InventoryService.ViewIssuable:input_type -> Scailo.IssuableInventorySearchReq
+	34, // 33: Scailo.InventoryService.ViewIssuedForGoodsDispatch:input_type -> Scailo.Identifier
+	34, // 34: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
+	34, // 35: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:input_type -> Scailo.Identifier
+	34, // 36: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
+	34, // 37: Scailo.InventoryService.ViewAdmittedFromProductionPlan:input_type -> Scailo.Identifier
+	8,  // 38: Scailo.InventoryService.ViewReturnableForPurchaseOrder:input_type -> Scailo.ReturnableInventorySearchReq
+	8,  // 39: Scailo.InventoryService.ViewReturnableForInwardJob:input_type -> Scailo.ReturnableInventorySearchReq
+	8,  // 40: Scailo.InventoryService.ViewReturnableForStockIssuance:input_type -> Scailo.ReturnableInventorySearchReq
+	8,  // 41: Scailo.InventoryService.ViewReturnableForSalesOrder:input_type -> Scailo.ReturnableInventorySearchReq
+	8,  // 42: Scailo.InventoryService.ViewReturnableForOutwardJob:input_type -> Scailo.ReturnableInventorySearchReq
+	7,  // 43: Scailo.InventoryService.ViewQuantityRemaining:input_type -> Scailo.InventoryServiceFamilyQuantityReq
+	34, // 44: Scailo.InventoryService.CountWorkInProgress:input_type -> Scailo.Identifier
+	34, // 45: Scailo.InventoryService.CountIndented:input_type -> Scailo.Identifier
+	34, // 46: Scailo.InventoryService.CountOrdered:input_type -> Scailo.Identifier
+	34, // 47: Scailo.InventoryService.ViewBaseDemandQuantity:input_type -> Scailo.Identifier
+	34, // 48: Scailo.InventoryService.ViewAdjustedDemandQuantity:input_type -> Scailo.Identifier
+	34, // 49: Scailo.InventoryService.ViewRequiredQuantity:input_type -> Scailo.Identifier
+	34, // 50: Scailo.InventoryService.ViewConsolidatedStatistics:input_type -> Scailo.Identifier
+	35, // 51: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:input_type -> Scailo.IdentifiersList
+	34, // 52: Scailo.InventoryService.ViewInStorage:input_type -> Scailo.Identifier
+	34, // 53: Scailo.InventoryService.ViewWorkInProgressStatistics:input_type -> Scailo.Identifier
+	34, // 54: Scailo.InventoryService.ViewIndentedStatistics:input_type -> Scailo.Identifier
+	34, // 55: Scailo.InventoryService.ViewOrderedStatistics:input_type -> Scailo.Identifier
+	34, // 56: Scailo.InventoryService.ViewDetailedDemand:input_type -> Scailo.Identifier
+	2,  // 57: Scailo.InventoryService.ViewByHash:output_type -> Scailo.GenericInventory
+	2,  // 58: Scailo.InventoryService.ViewByShortURL:output_type -> Scailo.GenericInventory
+	3,  // 59: Scailo.InventoryService.ViewIssuable:output_type -> Scailo.GenericInventoryList
+	3,  // 60: Scailo.InventoryService.ViewIssuedForGoodsDispatch:output_type -> Scailo.GenericInventoryList
+	3,  // 61: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
+	3,  // 62: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:output_type -> Scailo.GenericInventoryList
+	3,  // 63: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
+	3,  // 64: Scailo.InventoryService.ViewAdmittedFromProductionPlan:output_type -> Scailo.GenericInventoryList
+	3,  // 65: Scailo.InventoryService.ViewReturnableForPurchaseOrder:output_type -> Scailo.GenericInventoryList
+	3,  // 66: Scailo.InventoryService.ViewReturnableForInwardJob:output_type -> Scailo.GenericInventoryList
+	3,  // 67: Scailo.InventoryService.ViewReturnableForStockIssuance:output_type -> Scailo.GenericInventoryList
+	3,  // 68: Scailo.InventoryService.ViewReturnableForSalesOrder:output_type -> Scailo.GenericInventoryList
+	3,  // 69: Scailo.InventoryService.ViewReturnableForOutwardJob:output_type -> Scailo.GenericInventoryList
+	36, // 70: Scailo.InventoryService.ViewQuantityRemaining:output_type -> Scailo.QuantityResponse
+	36, // 71: Scailo.InventoryService.CountWorkInProgress:output_type -> Scailo.QuantityResponse
+	36, // 72: Scailo.InventoryService.CountIndented:output_type -> Scailo.QuantityResponse
+	36, // 73: Scailo.InventoryService.CountOrdered:output_type -> Scailo.QuantityResponse
+	36, // 74: Scailo.InventoryService.ViewBaseDemandQuantity:output_type -> Scailo.QuantityResponse
+	36, // 75: Scailo.InventoryService.ViewAdjustedDemandQuantity:output_type -> Scailo.QuantityResponse
+	36, // 76: Scailo.InventoryService.ViewRequiredQuantity:output_type -> Scailo.QuantityResponse
+	13, // 77: Scailo.InventoryService.ViewConsolidatedStatistics:output_type -> Scailo.ConsolidatedInventoryStatistics
+	14, // 78: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:output_type -> Scailo.ConsolidatedInventoryStatisticsList
+	3,  // 79: Scailo.InventoryService.ViewInStorage:output_type -> Scailo.GenericInventoryList
+	21, // 80: Scailo.InventoryService.ViewWorkInProgressStatistics:output_type -> Scailo.InventoryWorkInProgressStatistics
+	22, // 81: Scailo.InventoryService.ViewIndentedStatistics:output_type -> Scailo.InventoryIndentedStatistics
+	23, // 82: Scailo.InventoryService.ViewOrderedStatistics:output_type -> Scailo.InventoryOrderedStatistics
+	24, // 83: Scailo.InventoryService.ViewDetailedDemand:output_type -> Scailo.InventoryDetailedDemand
+	57, // [57:84] is the sub-list for method output_type
+	30, // [30:57] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_inventory_scailo_proto_init() }
@@ -2903,7 +2956,7 @@ func file_inventory_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_scailo_proto_rawDesc), len(file_inventory_scailo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

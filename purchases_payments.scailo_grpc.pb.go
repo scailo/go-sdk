@@ -32,6 +32,7 @@ const (
 	PurchasesPaymentsService_Complete_FullMethodName                      = "/Scailo.PurchasesPaymentsService/Complete"
 	PurchasesPaymentsService_Repeat_FullMethodName                        = "/Scailo.PurchasesPaymentsService/Repeat"
 	PurchasesPaymentsService_CommentAdd_FullMethodName                    = "/Scailo.PurchasesPaymentsService/CommentAdd"
+	PurchasesPaymentsService_SendEmail_FullMethodName                     = "/Scailo.PurchasesPaymentsService/SendEmail"
 	PurchasesPaymentsService_CreateMagicLink_FullMethodName               = "/Scailo.PurchasesPaymentsService/CreateMagicLink"
 	PurchasesPaymentsService_ViewByID_FullMethodName                      = "/Scailo.PurchasesPaymentsService/ViewByID"
 	PurchasesPaymentsService_ViewByUUID_FullMethodName                    = "/Scailo.PurchasesPaymentsService/ViewByUUID"
@@ -42,6 +43,8 @@ const (
 	PurchasesPaymentsService_ViewAll_FullMethodName                       = "/Scailo.PurchasesPaymentsService/ViewAll"
 	PurchasesPaymentsService_ViewAllForEntityUUID_FullMethodName          = "/Scailo.PurchasesPaymentsService/ViewAllForEntityUUID"
 	PurchasesPaymentsService_ViewWithPagination_FullMethodName            = "/Scailo.PurchasesPaymentsService/ViewWithPagination"
+	PurchasesPaymentsService_IsDownloadable_FullMethodName                = "/Scailo.PurchasesPaymentsService/IsDownloadable"
+	PurchasesPaymentsService_DownloadByUUID_FullMethodName                = "/Scailo.PurchasesPaymentsService/DownloadByUUID"
 	PurchasesPaymentsService_SearchAll_FullMethodName                     = "/Scailo.PurchasesPaymentsService/SearchAll"
 	PurchasesPaymentsService_Filter_FullMethodName                        = "/Scailo.PurchasesPaymentsService/Filter"
 	PurchasesPaymentsService_CountInStatus_FullMethodName                 = "/Scailo.PurchasesPaymentsService/CountInStatus"
@@ -84,7 +87,7 @@ type PurchasesPaymentsServiceClient interface {
 	// Add comment
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
-	// rpc SendEmail (Identifier) returns (IdentifierResponse);
+	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// View by ID
@@ -105,6 +108,10 @@ type PurchasesPaymentsServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PurchasesPaymentsList, error)
 	// View with pagination
 	ViewWithPagination(ctx context.Context, in *PurchasesPaymentsServicePaginationReq, opts ...grpc.CallOption) (*PurchasesPaymentsServicePaginationResponse, error)
+	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
+	// Download purchase payment with the given IdentifierUUID (can be used to allow public downloads)
+	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// View all that match the given search key
 	SearchAll(ctx context.Context, in *PurchasesPaymentsServiceSearchAllReq, opts ...grpc.CallOption) (*PurchasesPaymentsList, error)
 	// View all that match the given filter criteria
@@ -266,6 +273,16 @@ func (c *purchasesPaymentsServiceClient) CommentAdd(ctx context.Context, in *Ide
 	return out, nil
 }
 
+func (c *purchasesPaymentsServiceClient) SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesPaymentsService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *purchasesPaymentsServiceClient) CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MagicLink)
@@ -360,6 +377,26 @@ func (c *purchasesPaymentsServiceClient) ViewWithPagination(ctx context.Context,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PurchasesPaymentsServicePaginationResponse)
 	err := c.cc.Invoke(ctx, PurchasesPaymentsService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesPaymentsServiceClient) IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BooleanResponse)
+	err := c.cc.Invoke(ctx, PurchasesPaymentsService_IsDownloadable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesPaymentsServiceClient) DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, PurchasesPaymentsService_DownloadByUUID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

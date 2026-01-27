@@ -1042,6 +1042,59 @@ func (AMENDMENT_LOG_REF_FOR) EnumDescriptor() ([]byte, []int) {
 	return file_base_scailo_proto_rawDescGZIP(), []int{10}
 }
 
+// Stores all the possible references of a transaction type
+type TRANSACTION_TYPE int32
+
+const (
+	// Only used for filter operations
+	TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED TRANSACTION_TYPE = 0
+	// Denotes a credit
+	TRANSACTION_TYPE_TRANSACTION_TYPE_CREDIT TRANSACTION_TYPE = 1
+	// Denotes a debit
+	TRANSACTION_TYPE_TRANSACTION_TYPE_DEBIT TRANSACTION_TYPE = 2
+)
+
+// Enum value maps for TRANSACTION_TYPE.
+var (
+	TRANSACTION_TYPE_name = map[int32]string{
+		0: "TRANSACTION_TYPE_ANY_UNSPECIFIED",
+		1: "TRANSACTION_TYPE_CREDIT",
+		2: "TRANSACTION_TYPE_DEBIT",
+	}
+	TRANSACTION_TYPE_value = map[string]int32{
+		"TRANSACTION_TYPE_ANY_UNSPECIFIED": 0,
+		"TRANSACTION_TYPE_CREDIT":          1,
+		"TRANSACTION_TYPE_DEBIT":           2,
+	}
+)
+
+func (x TRANSACTION_TYPE) Enum() *TRANSACTION_TYPE {
+	p := new(TRANSACTION_TYPE)
+	*p = x
+	return p
+}
+
+func (x TRANSACTION_TYPE) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TRANSACTION_TYPE) Descriptor() protoreflect.EnumDescriptor {
+	return file_base_scailo_proto_enumTypes[11].Descriptor()
+}
+
+func (TRANSACTION_TYPE) Type() protoreflect.EnumType {
+	return &file_base_scailo_proto_enumTypes[11]
+}
+
+func (x TRANSACTION_TYPE) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TRANSACTION_TYPE.Descriptor instead.
+func (TRANSACTION_TYPE) EnumDescriptor() ([]byte, []int) {
+	return file_base_scailo_proto_rawDescGZIP(), []int{11}
+}
+
 // Describes an empty object
 type Empty struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -4393,7 +4446,11 @@ const file_base_scailo_proto_rawDesc = "" +
 	"#AMENDMENT_LOG_REF_FOR_SALES_INVOICE\x10\x06\x12*\n" +
 	"&AMENDMENT_LOG_REF_FOR_PROFORMA_INVOICE\x10\a\x12$\n" +
 	" AMENDMENT_LOG_REF_FOR_WORK_ORDER\x102\x12-\n" +
-	")AMENDMENT_LOG_REF_FOR_EQUATION_WORK_ORDER\x10dBa\n" +
+	")AMENDMENT_LOG_REF_FOR_EQUATION_WORK_ORDER\x10d*q\n" +
+	"\x10TRANSACTION_TYPE\x12$\n" +
+	" TRANSACTION_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17TRANSACTION_TYPE_CREDIT\x10\x01\x12\x1a\n" +
+	"\x16TRANSACTION_TYPE_DEBIT\x10\x02Ba\n" +
 	"\n" +
 	"com.ScailoB\x0fBaseScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -4410,7 +4467,7 @@ func file_base_scailo_proto_rawDescGZIP() []byte {
 	return file_base_scailo_proto_rawDescData
 }
 
-var file_base_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 11)
+var file_base_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
 var file_base_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_base_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                               // 0: Scailo.SORT_ORDER
@@ -4424,72 +4481,73 @@ var file_base_scailo_proto_goTypes = []any{
 	(INVENTORY_INTERACTION_CATEGORY)(0),           // 8: Scailo.INVENTORY_INTERACTION_CATEGORY
 	(INVENTORY_ISSUED_PURPOSE)(0),                 // 9: Scailo.INVENTORY_ISSUED_PURPOSE
 	(AMENDMENT_LOG_REF_FOR)(0),                    // 10: Scailo.AMENDMENT_LOG_REF_FOR
-	(*Empty)(nil),                                 // 11: Scailo.Empty
-	(*BooleanResponse)(nil),                       // 12: Scailo.BooleanResponse
-	(*BytesResponse)(nil),                         // 13: Scailo.BytesResponse
-	(*StringResponse)(nil),                        // 14: Scailo.StringResponse
-	(*PriceResponse)(nil),                         // 15: Scailo.PriceResponse
-	(*ImageResponse)(nil),                         // 16: Scailo.ImageResponse
-	(*Base64String)(nil),                          // 17: Scailo.Base64String
-	(*MonthAndDayFilter)(nil),                     // 18: Scailo.MonthAndDayFilter
-	(*GPSCoordinatesResponse)(nil),                // 19: Scailo.GPSCoordinatesResponse
-	(*CountInSLCStatusRequest)(nil),               // 20: Scailo.CountInSLCStatusRequest
-	(*CountResponse)(nil),                         // 21: Scailo.CountResponse
-	(*SumResponse)(nil),                           // 22: Scailo.SumResponse
-	(*QuantityResponse)(nil),                      // 23: Scailo.QuantityResponse
-	(*DualQuantitiesResponse)(nil),                // 24: Scailo.DualQuantitiesResponse
-	(*EmployeeMetadata)(nil),                      // 25: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                      // 26: Scailo.ApprovalMetadata
-	(*ActiveStatus)(nil),                          // 27: Scailo.ActiveStatus
-	(*UpdatePasswordReq)(nil),                     // 28: Scailo.UpdatePasswordReq
-	(*UpdateOwnPasswordReq)(nil),                  // 29: Scailo.UpdateOwnPasswordReq
-	(*UploadPictureReq)(nil),                      // 30: Scailo.UploadPictureReq
-	(*SimpleSearchReq)(nil),                       // 31: Scailo.SimpleSearchReq
-	(*RepeatWithDeliveryDate)(nil),                // 32: Scailo.RepeatWithDeliveryDate
-	(*Identifier)(nil),                            // 33: Scailo.Identifier
-	(*IdentifierResponse)(nil),                    // 34: Scailo.IdentifierResponse
-	(*IdentifierZeroable)(nil),                    // 35: Scailo.IdentifierZeroable
-	(*IdentifiersList)(nil),                       // 36: Scailo.IdentifiersList
-	(*StringsList)(nil),                           // 37: Scailo.StringsList
-	(*IdentifierWithUserComment)(nil),             // 38: Scailo.IdentifierWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),         // 39: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierWithSearchKey)(nil),               // 40: Scailo.IdentifierWithSearchKey
-	(*IdentifierWithFile)(nil),                    // 41: Scailo.IdentifierWithFile
-	(*IdentifierUUIDWithFile)(nil),                // 42: Scailo.IdentifierUUIDWithFile
-	(*IdentifierUUID)(nil),                        // 43: Scailo.IdentifierUUID
-	(*IdentifierUUIDWithUserComment)(nil),         // 44: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierUUIDsList)(nil),                   // 45: Scailo.IdentifierUUIDsList
-	(*LogbookLogConciseSLC)(nil),                  // 46: Scailo.LogbookLogConciseSLC
-	(*LogbookLogConciseSLCCreateRequest)(nil),     // 47: Scailo.LogbookLogConciseSLCCreateRequest
-	(*LogbookLogConciseGenericCreateRequest)(nil), // 48: Scailo.LogbookLogConciseGenericCreateRequest
-	(*LogbookLogComplete)(nil),                    // 49: Scailo.LogbookLogComplete
-	(*ReorderItemsRequest)(nil),                   // 50: Scailo.ReorderItemsRequest
-	(*CloneRequest)(nil),                          // 51: Scailo.CloneRequest
-	(*StandardFile)(nil),                          // 52: Scailo.StandardFile
-	(*LogbookLogInventoryLC)(nil),                 // 53: Scailo.LogbookLogInventoryLC
-	(*InventoryPartitionRequest)(nil),             // 54: Scailo.InventoryPartitionRequest
-	(*InventoryInteraction)(nil),                  // 55: Scailo.InventoryInteraction
-	(*InventoryInteractionsList)(nil),             // 56: Scailo.InventoryInteractionsList
-	(*AmendmentLog)(nil),                          // 57: Scailo.AmendmentLog
-	(*AmendmentLogsList)(nil),                     // 58: Scailo.AmendmentLogsList
+	(TRANSACTION_TYPE)(0),                         // 11: Scailo.TRANSACTION_TYPE
+	(*Empty)(nil),                                 // 12: Scailo.Empty
+	(*BooleanResponse)(nil),                       // 13: Scailo.BooleanResponse
+	(*BytesResponse)(nil),                         // 14: Scailo.BytesResponse
+	(*StringResponse)(nil),                        // 15: Scailo.StringResponse
+	(*PriceResponse)(nil),                         // 16: Scailo.PriceResponse
+	(*ImageResponse)(nil),                         // 17: Scailo.ImageResponse
+	(*Base64String)(nil),                          // 18: Scailo.Base64String
+	(*MonthAndDayFilter)(nil),                     // 19: Scailo.MonthAndDayFilter
+	(*GPSCoordinatesResponse)(nil),                // 20: Scailo.GPSCoordinatesResponse
+	(*CountInSLCStatusRequest)(nil),               // 21: Scailo.CountInSLCStatusRequest
+	(*CountResponse)(nil),                         // 22: Scailo.CountResponse
+	(*SumResponse)(nil),                           // 23: Scailo.SumResponse
+	(*QuantityResponse)(nil),                      // 24: Scailo.QuantityResponse
+	(*DualQuantitiesResponse)(nil),                // 25: Scailo.DualQuantitiesResponse
+	(*EmployeeMetadata)(nil),                      // 26: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                      // 27: Scailo.ApprovalMetadata
+	(*ActiveStatus)(nil),                          // 28: Scailo.ActiveStatus
+	(*UpdatePasswordReq)(nil),                     // 29: Scailo.UpdatePasswordReq
+	(*UpdateOwnPasswordReq)(nil),                  // 30: Scailo.UpdateOwnPasswordReq
+	(*UploadPictureReq)(nil),                      // 31: Scailo.UploadPictureReq
+	(*SimpleSearchReq)(nil),                       // 32: Scailo.SimpleSearchReq
+	(*RepeatWithDeliveryDate)(nil),                // 33: Scailo.RepeatWithDeliveryDate
+	(*Identifier)(nil),                            // 34: Scailo.Identifier
+	(*IdentifierResponse)(nil),                    // 35: Scailo.IdentifierResponse
+	(*IdentifierZeroable)(nil),                    // 36: Scailo.IdentifierZeroable
+	(*IdentifiersList)(nil),                       // 37: Scailo.IdentifiersList
+	(*StringsList)(nil),                           // 38: Scailo.StringsList
+	(*IdentifierWithUserComment)(nil),             // 39: Scailo.IdentifierWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),         // 40: Scailo.IdentifierWithEmailAttributes
+	(*IdentifierWithSearchKey)(nil),               // 41: Scailo.IdentifierWithSearchKey
+	(*IdentifierWithFile)(nil),                    // 42: Scailo.IdentifierWithFile
+	(*IdentifierUUIDWithFile)(nil),                // 43: Scailo.IdentifierUUIDWithFile
+	(*IdentifierUUID)(nil),                        // 44: Scailo.IdentifierUUID
+	(*IdentifierUUIDWithUserComment)(nil),         // 45: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierUUIDsList)(nil),                   // 46: Scailo.IdentifierUUIDsList
+	(*LogbookLogConciseSLC)(nil),                  // 47: Scailo.LogbookLogConciseSLC
+	(*LogbookLogConciseSLCCreateRequest)(nil),     // 48: Scailo.LogbookLogConciseSLCCreateRequest
+	(*LogbookLogConciseGenericCreateRequest)(nil), // 49: Scailo.LogbookLogConciseGenericCreateRequest
+	(*LogbookLogComplete)(nil),                    // 50: Scailo.LogbookLogComplete
+	(*ReorderItemsRequest)(nil),                   // 51: Scailo.ReorderItemsRequest
+	(*CloneRequest)(nil),                          // 52: Scailo.CloneRequest
+	(*StandardFile)(nil),                          // 53: Scailo.StandardFile
+	(*LogbookLogInventoryLC)(nil),                 // 54: Scailo.LogbookLogInventoryLC
+	(*InventoryPartitionRequest)(nil),             // 55: Scailo.InventoryPartitionRequest
+	(*InventoryInteraction)(nil),                  // 56: Scailo.InventoryInteraction
+	(*InventoryInteractionsList)(nil),             // 57: Scailo.InventoryInteractionsList
+	(*AmendmentLog)(nil),                          // 58: Scailo.AmendmentLog
+	(*AmendmentLogsList)(nil),                     // 59: Scailo.AmendmentLogsList
 }
 var file_base_scailo_proto_depIdxs = []int32{
 	5,  // 0: Scailo.CountInSLCStatusRequest.is_active:type_name -> Scailo.BOOL_FILTER
 	1,  // 1: Scailo.CountInSLCStatusRequest.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	5,  // 2: Scailo.ActiveStatus.is_active:type_name -> Scailo.BOOL_FILTER
-	43, // 3: Scailo.IdentifierUUIDsList.list:type_name -> Scailo.IdentifierUUID
+	44, // 3: Scailo.IdentifierUUIDsList.list:type_name -> Scailo.IdentifierUUID
 	1,  // 4: Scailo.LogbookLogConciseSLC.operation:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	1,  // 5: Scailo.LogbookLogConciseSLCCreateRequest.operation:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	25, // 6: Scailo.LogbookLogComplete.metadata:type_name -> Scailo.EmployeeMetadata
+	26, // 6: Scailo.LogbookLogComplete.metadata:type_name -> Scailo.EmployeeMetadata
 	4,  // 7: Scailo.LogbookLogComplete.operation:type_name -> Scailo.LOGBOOK_OPERATION
 	6,  // 8: Scailo.LogbookLogInventoryLC.operation:type_name -> Scailo.INVENTORY_LIFECYCLE
-	25, // 9: Scailo.InventoryInteraction.metadata:type_name -> Scailo.EmployeeMetadata
+	26, // 9: Scailo.InventoryInteraction.metadata:type_name -> Scailo.EmployeeMetadata
 	8,  // 10: Scailo.InventoryInteraction.category:type_name -> Scailo.INVENTORY_INTERACTION_CATEGORY
 	9,  // 11: Scailo.InventoryInteraction.issued_ref_purpose:type_name -> Scailo.INVENTORY_ISSUED_PURPOSE
-	55, // 12: Scailo.InventoryInteractionsList.list:type_name -> Scailo.InventoryInteraction
-	25, // 13: Scailo.AmendmentLog.metadata:type_name -> Scailo.EmployeeMetadata
+	56, // 12: Scailo.InventoryInteractionsList.list:type_name -> Scailo.InventoryInteraction
+	26, // 13: Scailo.AmendmentLog.metadata:type_name -> Scailo.EmployeeMetadata
 	10, // 14: Scailo.AmendmentLog.ref_for:type_name -> Scailo.AMENDMENT_LOG_REF_FOR
-	57, // 15: Scailo.AmendmentLogsList.list:type_name -> Scailo.AmendmentLog
+	58, // 15: Scailo.AmendmentLogsList.list:type_name -> Scailo.AmendmentLog
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
@@ -4507,7 +4565,7 @@ func file_base_scailo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_base_scailo_proto_rawDesc), len(file_base_scailo_proto_rawDesc)),
-			NumEnums:      11,
+			NumEnums:      12,
 			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -2646,7 +2646,7 @@ type EnclaveFrameAddRequest struct {
 	FileUuid string `protobuf:"bytes,1,opt,name=file_uuid,json=fileUuid,proto3" json:"file_uuid,omitempty"`
 	// The sequence number of the frame
 	SequenceNumber uint64 `protobuf:"varint,10,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
-	// The time in seconds after which the frame needs to be refreshed
+	// The time in seconds after which the frame needs to be refreshed. O denotes no auto refresh.
 	AutoRefreshInterval uint64 `protobuf:"varint,11,opt,name=auto_refresh_interval,json=autoRefreshInterval,proto3" json:"auto_refresh_interval,omitempty"`
 	// The width of the frame, with the possible values being 3, 4, 6, 8, 9, and 12
 	Width uint64 `protobuf:"varint,12,opt,name=width,proto3" json:"width,omitempty"`
@@ -2925,6 +2925,10 @@ type EnclaveFrameSetup struct {
 	AppEndpoint string `protobuf:"bytes,13,opt,name=app_endpoint,json=appEndpoint,proto3" json:"app_endpoint,omitempty"`
 	// Stores the UUID of the enclave frame
 	EnclaveFrameUuid string `protobuf:"bytes,20,opt,name=enclave_frame_uuid,json=enclaveFrameUuid,proto3" json:"enclave_frame_uuid,omitempty"`
+	// Stores the UUID of the file
+	FileUuid string `protobuf:"bytes,21,opt,name=file_uuid,json=fileUuid,proto3" json:"file_uuid,omitempty"`
+	// Stores the version number of the enclave
+	AppVersion string `protobuf:"bytes,22,opt,name=app_version,json=appVersion,proto3" json:"app_version,omitempty"`
 	// The sequence number of the frame
 	SequenceNumber uint64 `protobuf:"varint,30,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
 	// The time in seconds after which the frame needs to be refreshed
@@ -2998,6 +3002,20 @@ func (x *EnclaveFrameSetup) GetAppEndpoint() string {
 func (x *EnclaveFrameSetup) GetEnclaveFrameUuid() string {
 	if x != nil {
 		return x.EnclaveFrameUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetFileUuid() string {
+	if x != nil {
+		return x.FileUuid
+	}
+	return ""
+}
+
+func (x *EnclaveFrameSetup) GetAppVersion() string {
+	if x != nil {
+		return x.AppVersion
 	}
 	return ""
 }
@@ -3874,14 +3892,14 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x04list\x18\x01 \x03(\v2\x15.Scailo.EnclaveDomainR\x04list\"G\n" +
 	"\x17EnclaveDomainSuffixResp\x12\x16\n" +
 	"\x06suffix\x18\x01 \x01(\tR\x06suffix\x12\x14\n" +
-	"\x05relay\x18\x02 \x01(\tR\x05relay\"\xca\x01\n" +
+	"\x05relay\x18\x02 \x01(\tR\x05relay\"\xe5\x01\n" +
 	"\x16EnclaveFrameAddRequest\x12%\n" +
-	"\tfile_uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bfileUuid\x12'\n" +
+	"\tfile_uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bfileUuid\x120\n" +
 	"\x0fsequence_number\x18\n" +
-	" \x01(\x04R\x0esequenceNumber\x122\n" +
-	"\x15auto_refresh_interval\x18\v \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
-	"\x05width\x18\f \x01(\x04R\x05width\x12\x16\n" +
-	"\x06height\x18\r \x01(\x04R\x06height\"\xc4\x01\n" +
+	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esequenceNumber\x122\n" +
+	"\x15auto_refresh_interval\x18\v \x01(\x04R\x13autoRefreshInterval\x12\x1d\n" +
+	"\x05width\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x05width\x12\x1f\n" +
+	"\x06height\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x06height\"\xc4\x01\n" +
 	"\x19EnclaveFrameUpdateRequest\x12\x1c\n" +
 	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12'\n" +
 	"\x0fsequence_number\x18\n" +
@@ -3899,7 +3917,7 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"\x0fsequence_number\x18\x14 \x01(\x04R\x0esequenceNumber\x122\n" +
 	"\x15auto_refresh_interval\x18\x15 \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
 	"\x05width\x18\x16 \x01(\x04R\x05width\x12\x16\n" +
-	"\x06height\x18\x17 \x01(\x04R\x06height\"\xd2\x02\n" +
+	"\x06height\x18\x17 \x01(\x04R\x06height\"\x90\x03\n" +
 	"\x11EnclaveFrameSetup\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12\x1d\n" +
@@ -3908,7 +3926,10 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	" \x01(\x04R\texpiresAt\x12!\n" +
 	"\fenclave_name\x18\f \x01(\tR\venclaveName\x12!\n" +
 	"\fapp_endpoint\x18\r \x01(\tR\vappEndpoint\x12,\n" +
-	"\x12enclave_frame_uuid\x18\x14 \x01(\tR\x10enclaveFrameUuid\x12'\n" +
+	"\x12enclave_frame_uuid\x18\x14 \x01(\tR\x10enclaveFrameUuid\x12\x1b\n" +
+	"\tfile_uuid\x18\x15 \x01(\tR\bfileUuid\x12\x1f\n" +
+	"\vapp_version\x18\x16 \x01(\tR\n" +
+	"appVersion\x12'\n" +
 	"\x0fsequence_number\x18\x1e \x01(\x04R\x0esequenceNumber\x122\n" +
 	"\x15auto_refresh_interval\x18\x1f \x01(\x04R\x13autoRefreshInterval\x12\x14\n" +
 	"\x05width\x18  \x01(\x04R\x05width\x12\x16\n" +

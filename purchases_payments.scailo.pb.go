@@ -23,6 +23,63 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Stores all the possible references from which a purchase payment can be added
+type PURCHASE_PAYMENT_REF_FROM int32
+
+const (
+	// Used only in filters
+	PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED PURCHASE_PAYMENT_REF_FROM = 0
+	// Denotes that the purchase payment originated from a purchase order
+	PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_PURCHASE_ORDER PURCHASE_PAYMENT_REF_FROM = 1
+	// Denotes that the purchase payment originated from a vendor invoice
+	PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_VENDOR_INVOICE PURCHASE_PAYMENT_REF_FROM = 2
+	// Denotes that the purchase payment originated from a debit note
+	PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_DEBIT_NOTE PURCHASE_PAYMENT_REF_FROM = 3
+)
+
+// Enum value maps for PURCHASE_PAYMENT_REF_FROM.
+var (
+	PURCHASE_PAYMENT_REF_FROM_name = map[int32]string{
+		0: "PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED",
+		1: "PURCHASE_PAYMENT_REF_FROM_PURCHASE_ORDER",
+		2: "PURCHASE_PAYMENT_REF_FROM_VENDOR_INVOICE",
+		3: "PURCHASE_PAYMENT_REF_FROM_DEBIT_NOTE",
+	}
+	PURCHASE_PAYMENT_REF_FROM_value = map[string]int32{
+		"PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED": 0,
+		"PURCHASE_PAYMENT_REF_FROM_PURCHASE_ORDER":  1,
+		"PURCHASE_PAYMENT_REF_FROM_VENDOR_INVOICE":  2,
+		"PURCHASE_PAYMENT_REF_FROM_DEBIT_NOTE":      3,
+	}
+)
+
+func (x PURCHASE_PAYMENT_REF_FROM) Enum() *PURCHASE_PAYMENT_REF_FROM {
+	p := new(PURCHASE_PAYMENT_REF_FROM)
+	*p = x
+	return p
+}
+
+func (x PURCHASE_PAYMENT_REF_FROM) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PURCHASE_PAYMENT_REF_FROM) Descriptor() protoreflect.EnumDescriptor {
+	return file_purchases_payments_scailo_proto_enumTypes[0].Descriptor()
+}
+
+func (PURCHASE_PAYMENT_REF_FROM) Type() protoreflect.EnumType {
+	return &file_purchases_payments_scailo_proto_enumTypes[0]
+}
+
+func (x PURCHASE_PAYMENT_REF_FROM) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PURCHASE_PAYMENT_REF_FROM.Descriptor instead.
+func (PURCHASE_PAYMENT_REF_FROM) EnumDescriptor() ([]byte, []int) {
+	return file_purchases_payments_scailo_proto_rawDescGZIP(), []int{0}
+}
+
 // Describes the available sort keys
 type PURCHASE_PAYMENT_SORT_KEY int32
 
@@ -88,11 +145,11 @@ func (x PURCHASE_PAYMENT_SORT_KEY) String() string {
 }
 
 func (PURCHASE_PAYMENT_SORT_KEY) Descriptor() protoreflect.EnumDescriptor {
-	return file_purchases_payments_scailo_proto_enumTypes[0].Descriptor()
+	return file_purchases_payments_scailo_proto_enumTypes[1].Descriptor()
 }
 
 func (PURCHASE_PAYMENT_SORT_KEY) Type() protoreflect.EnumType {
-	return &file_purchases_payments_scailo_proto_enumTypes[0]
+	return &file_purchases_payments_scailo_proto_enumTypes[1]
 }
 
 func (x PURCHASE_PAYMENT_SORT_KEY) Number() protoreflect.EnumNumber {
@@ -101,7 +158,7 @@ func (x PURCHASE_PAYMENT_SORT_KEY) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PURCHASE_PAYMENT_SORT_KEY.Descriptor instead.
 func (PURCHASE_PAYMENT_SORT_KEY) EnumDescriptor() ([]byte, []int) {
-	return file_purchases_payments_scailo_proto_rawDescGZIP(), []int{0}
+	return file_purchases_payments_scailo_proto_rawDescGZIP(), []int{1}
 }
 
 // Describes the parameters necessary to create a record
@@ -116,7 +173,7 @@ type PurchasesPaymentsServiceCreateRequest struct {
 	// The reference ID of the purchase payment
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The reference on which the purchase payment has been created
-	RefFrom string `protobuf:"bytes,12,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom PURCHASE_PAYMENT_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PURCHASE_PAYMENT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated bank account
@@ -124,7 +181,7 @@ type PurchasesPaymentsServiceCreateRequest struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -195,11 +252,11 @@ func (x *PurchasesPaymentsServiceCreateRequest) GetReferenceId() string {
 	return ""
 }
 
-func (x *PurchasesPaymentsServiceCreateRequest) GetRefFrom() string {
+func (x *PurchasesPaymentsServiceCreateRequest) GetRefFrom() PURCHASE_PAYMENT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceCreateRequest) GetRefId() uint64 {
@@ -223,11 +280,11 @@ func (x *PurchasesPaymentsServiceCreateRequest) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *PurchasesPaymentsServiceCreateRequest) GetTransactionType() string {
+func (x *PurchasesPaymentsServiceCreateRequest) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceCreateRequest) GetAmountBase() uint64 {
@@ -276,7 +333,7 @@ type PurchasesPaymentsServiceUpdateRequest struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -368,11 +425,11 @@ func (x *PurchasesPaymentsServiceUpdateRequest) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *PurchasesPaymentsServiceUpdateRequest) GetTransactionType() string {
+func (x *PurchasesPaymentsServiceUpdateRequest) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceUpdateRequest) GetAmountBase() uint64 {
@@ -498,7 +555,7 @@ type PurchasePayment struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the purchase payment has been created
-	RefFrom string `protobuf:"bytes,12,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom PURCHASE_PAYMENT_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PURCHASE_PAYMENT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated vendor
@@ -508,7 +565,7 @@ type PurchasePayment struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,16,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,17,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,17,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The initial amount in cents, without any deductions
 	AmountBase uint64 `protobuf:"varint,18,opt,name=amount_base,json=amountBase,proto3" json:"amount_base,omitempty"`
 	// The final amount in cents, after all the deductions
@@ -614,11 +671,11 @@ func (x *PurchasePayment) GetFinalRefNumber() string {
 	return ""
 }
 
-func (x *PurchasePayment) GetRefFrom() string {
+func (x *PurchasePayment) GetRefFrom() PURCHASE_PAYMENT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *PurchasePayment) GetRefId() uint64 {
@@ -649,11 +706,11 @@ func (x *PurchasePayment) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *PurchasePayment) GetTransactionType() string {
+func (x *PurchasePayment) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *PurchasePayment) GetAmountBase() uint64 {
@@ -936,7 +993,7 @@ type PurchasesPaymentsServiceFilterReq struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the purchase payment has been created
-	RefFrom string `protobuf:"bytes,22,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom PURCHASE_PAYMENT_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PURCHASE_PAYMENT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated vendor
@@ -946,7 +1003,7 @@ type PurchasesPaymentsServiceFilterReq struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,26,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,27,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,27,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The start range of the payment timestamp
 	PaymentTimestampStart uint64 `protobuf:"varint,28,opt,name=payment_timestamp_start,json=paymentTimestampStart,proto3" json:"payment_timestamp_start,omitempty"`
 	// The end range of the payment timestamp
@@ -1118,11 +1175,11 @@ func (x *PurchasesPaymentsServiceFilterReq) GetFinalRefNumber() string {
 	return ""
 }
 
-func (x *PurchasesPaymentsServiceFilterReq) GetRefFrom() string {
+func (x *PurchasesPaymentsServiceFilterReq) GetRefFrom() PURCHASE_PAYMENT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceFilterReq) GetRefId() uint64 {
@@ -1153,11 +1210,11 @@ func (x *PurchasesPaymentsServiceFilterReq) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *PurchasesPaymentsServiceFilterReq) GetTransactionType() string {
+func (x *PurchasesPaymentsServiceFilterReq) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceFilterReq) GetPaymentTimestampStart() uint64 {
@@ -1208,7 +1265,7 @@ type PurchasesPaymentsServiceCountReq struct {
 	// The unique reference number that has been automatically generated
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The reference on which the purchase payment has been created
-	RefFrom string `protobuf:"bytes,22,opt,name=ref_from,json=refFrom,proto3" json:"ref_from,omitempty"`
+	RefFrom PURCHASE_PAYMENT_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PURCHASE_PAYMENT_REF_FROM" json:"ref_from,omitempty"`
 	// The ID of the associated reference
 	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	// The ID of the associated vendor
@@ -1218,7 +1275,7 @@ type PurchasesPaymentsServiceCountReq struct {
 	// The ID of the associated currency
 	CurrencyId uint64 `protobuf:"varint,26,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The type of the transaction
-	TransactionType string `protobuf:"bytes,27,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType TRANSACTION_TYPE `protobuf:"varint,27,opt,name=transaction_type,json=transactionType,proto3,enum=Scailo.TRANSACTION_TYPE" json:"transaction_type,omitempty"`
 	// The start range of the payment timestamp
 	PaymentTimestampStart uint64 `protobuf:"varint,28,opt,name=payment_timestamp_start,json=paymentTimestampStart,proto3" json:"payment_timestamp_start,omitempty"`
 	// The end range of the payment timestamp
@@ -1362,11 +1419,11 @@ func (x *PurchasesPaymentsServiceCountReq) GetFinalRefNumber() string {
 	return ""
 }
 
-func (x *PurchasesPaymentsServiceCountReq) GetRefFrom() string {
+func (x *PurchasesPaymentsServiceCountReq) GetRefFrom() PURCHASE_PAYMENT_REF_FROM {
 	if x != nil {
 		return x.RefFrom
 	}
-	return ""
+	return PURCHASE_PAYMENT_REF_FROM_PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceCountReq) GetRefId() uint64 {
@@ -1397,11 +1454,11 @@ func (x *PurchasesPaymentsServiceCountReq) GetCurrencyId() uint64 {
 	return 0
 }
 
-func (x *PurchasesPaymentsServiceCountReq) GetTransactionType() string {
+func (x *PurchasesPaymentsServiceCountReq) GetTransactionType() TRANSACTION_TYPE {
 	if x != nil {
 		return x.TransactionType
 	}
-	return ""
+	return TRANSACTION_TYPE_TRANSACTION_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *PurchasesPaymentsServiceCountReq) GetPaymentTimestampStart() uint64 {
@@ -1540,27 +1597,26 @@ var File_purchases_payments_scailo_proto protoreflect.FileDescriptor
 
 const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1fpurchases_payments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\xa1\x05\n" +
+	"\x1fpurchases_payments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x95\x05\n" +
 	"%PurchasesPaymentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
 	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
 	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12L\n" +
-	"\bref_from\x18\f \x01(\tB1\xbaH.r,R\x0epurchase-orderR\x0evendor-invoiceR\n" +
-	"debit-noteR\arefFrom\x12\x1e\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12<\n" +
+	"\bref_from\x18\f \x01(\x0e2!.Scailo.PURCHASE_PAYMENT_REF_FROMR\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12/\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12(\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12?\n" +
-	"\x10transaction_type\x18\x11 \x01(\tB\x14\xbaH\x11r\x0fR\x06creditR\x05debitR\x0ftransactionType\x12(\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12(\n" +
 	"\vamount_base\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"amountBase\x12&\n" +
 	"\n" +
 	"amount_net\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\tamountNet\x124\n" +
 	"\x11payment_timestamp\x18\x14 \x01(\x04B\a\xbaH\x042\x02 \x00R\x10paymentTimestamp\x127\n" +
-	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xce\x04\n" +
+	"\vdescription\x18\x15 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\"\xd2\x04\n" +
 	"%PurchasesPaymentsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
@@ -1570,8 +1626,8 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12/\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12(\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12?\n" +
-	"\x10transaction_type\x18\x11 \x01(\tB\x14\xbaH\x11r\x0fR\x06creditR\x05debitR\x0ftransactionType\x12(\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12(\n" +
 	"\vamount_base\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"amountBase\x12&\n" +
 	"\n" +
@@ -1583,7 +1639,7 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\vvendor_uuid\x18\xd6\x01 \x01(\tR\n" +
 	"vendorUuid\x12+\n" +
 	"\x11bank_account_uuid\x18\xd7\x01 \x01(\tR\x0fbankAccountUuid\x12$\n" +
-	"\rcurrency_uuid\x18\xd8\x01 \x01(\tR\fcurrencyUuid\"\x86\x06\n" +
+	"\rcurrency_uuid\x18\xd8\x01 \x01(\tR\fcurrencyUuid\"\xc3\x06\n" +
 	"\x0fPurchasePayment\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1595,14 +1651,14 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x0fvault_folder_id\x18\t \x01(\x04R\rvaultFolderId\x12!\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\v \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\f \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\v \x01(\tR\x0efinalRefNumber\x12<\n" +
+	"\bref_from\x18\f \x01(\x0e2!.Scailo.PURCHASE_PAYMENT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\r \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tvendor_id\x18\x0e \x01(\x04R\bvendorId\x12&\n" +
 	"\x0fbank_account_id\x18\x0f \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x10 \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x11 \x01(\tR\x0ftransactionType\x12\x1f\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x11 \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x12\x1f\n" +
 	"\vamount_base\x18\x12 \x01(\x04R\n" +
 	"amountBase\x12\x1d\n" +
 	"\n" +
@@ -1623,7 +1679,8 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x121\n" +
-	"\apayload\x18\x04 \x03(\v2\x17.Scailo.PurchasePaymentR\apayload\"\xdc\t\n" +
+	"\apayload\x18\x04 \x03(\v2\x17.Scailo.PurchasePaymentR\apayload\"\x99\n" +
+	"\n" +
 	"!PurchasesPaymentsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -1646,16 +1703,16 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
 	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
 	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\x16 \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12<\n" +
+	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PURCHASE_PAYMENT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tvendor_id\x18\x18 \x01(\x04R\bvendorId\x12&\n" +
 	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x1a \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x1b \x01(\tR\x0ftransactionType\x126\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x1b \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x126\n" +
 	"\x17payment_timestamp_start\x18\x1c \x01(\x04R\x15paymentTimestampStart\x122\n" +
-	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xa1\b\n" +
+	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xde\b\n" +
 	" PurchasesPaymentsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
@@ -1673,14 +1730,14 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
 	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
 	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x19\n" +
-	"\bref_from\x18\x16 \x01(\tR\arefFrom\x12\x15\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12<\n" +
+	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PURCHASE_PAYMENT_REF_FROMR\arefFrom\x12\x15\n" +
 	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1b\n" +
 	"\tvendor_id\x18\x18 \x01(\x04R\bvendorId\x12&\n" +
 	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1f\n" +
 	"\vcurrency_id\x18\x1a \x01(\x04R\n" +
-	"currencyId\x12)\n" +
-	"\x10transaction_type\x18\x1b \x01(\tR\x0ftransactionType\x126\n" +
+	"currencyId\x12C\n" +
+	"\x10transaction_type\x18\x1b \x01(\x0e2\x18.Scailo.TRANSACTION_TYPER\x0ftransactionType\x126\n" +
 	"\x17payment_timestamp_start\x18\x1c \x01(\x04R\x15paymentTimestampStart\x122\n" +
 	"\x15payment_timestamp_end\x18\x1d \x01(\x04R\x13paymentTimestampEnd\"\xaa\x03\n" +
 	"$PurchasesPaymentsServiceSearchAllReq\x120\n" +
@@ -1696,7 +1753,12 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
 	"\n" +
 	"search_key\x18\v \x01(\tR\tsearchKey\x12\x1b\n" +
-	"\tvendor_id\x18\x19 \x01(\x04R\bvendorId*\xdd\x03\n" +
+	"\tvendor_id\x18\x19 \x01(\x04R\bvendorId*\xd0\x01\n" +
+	"\x19PURCHASE_PAYMENT_REF_FROM\x12-\n" +
+	")PURCHASE_PAYMENT_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12,\n" +
+	"(PURCHASE_PAYMENT_REF_FROM_PURCHASE_ORDER\x10\x01\x12,\n" +
+	"(PURCHASE_PAYMENT_REF_FROM_VENDOR_INVOICE\x10\x02\x12(\n" +
+	"$PURCHASE_PAYMENT_REF_FROM_DEBIT_NOTE\x10\x03*\xdd\x03\n" +
 	"\x19PURCHASE_PAYMENT_SORT_KEY\x12,\n" +
 	"(PURCHASE_PAYMENT_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12(\n" +
 	"$PURCHASE_PAYMENT_SORT_KEY_CREATED_AT\x10\x01\x12)\n" +
@@ -1708,7 +1770,7 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"&PURCHASE_PAYMENT_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12.\n" +
 	"*PURCHASE_PAYMENT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12/\n" +
-	"+PURCHASE_PAYMENT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\xc3\x12\n" +
+	"+PURCHASE_PAYMENT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\x96\x14\n" +
 	"\x18PurchasesPaymentsService\x12S\n" +
 	"\x06Create\x12-.Scailo.PurchasesPaymentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
 	"\x05Draft\x12-.Scailo.PurchasesPaymentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -1724,7 +1786,8 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x127\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x17.Scailo.PurchasePayment\x12=\n" +
 	"\n" +
@@ -1735,7 +1798,9 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x1dViewAncillaryParametersByUUID\x12\x16.Scailo.IdentifierUUID\x1a*.Scailo.PurchasePaymentAncillaryParameters\x12>\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x1d.Scailo.PurchasesPaymentsList\x12M\n" +
 	"\x14ViewAllForEntityUUID\x12\x16.Scailo.IdentifierUUID\x1a\x1d.Scailo.PurchasesPaymentsList\x12w\n" +
-	"\x12ViewWithPagination\x12-.Scailo.PurchasesPaymentsServicePaginationReq\x1a2.Scailo.PurchasesPaymentsServicePaginationResponse\x12X\n" +
+	"\x12ViewWithPagination\x12-.Scailo.PurchasesPaymentsServicePaginationReq\x1a2.Scailo.PurchasesPaymentsServicePaginationResponse\x12A\n" +
+	"\x0eIsDownloadable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12>\n" +
+	"\x0eDownloadByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.StandardFile\x12X\n" +
 	"\tSearchAll\x12,.Scailo.PurchasesPaymentsServiceSearchAllReq\x1a\x1d.Scailo.PurchasesPaymentsList\x12R\n" +
 	"\x06Filter\x12).Scailo.PurchasesPaymentsServiceFilterReq\x1a\x1d.Scailo.PurchasesPaymentsList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12H\n" +
@@ -1757,122 +1822,141 @@ func file_purchases_payments_scailo_proto_rawDescGZIP() []byte {
 	return file_purchases_payments_scailo_proto_rawDescData
 }
 
-var file_purchases_payments_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_purchases_payments_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_purchases_payments_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_purchases_payments_scailo_proto_goTypes = []any{
-	(PURCHASE_PAYMENT_SORT_KEY)(0),                            // 0: Scailo.PURCHASE_PAYMENT_SORT_KEY
-	(*PurchasesPaymentsServiceCreateRequest)(nil),             // 1: Scailo.PurchasesPaymentsServiceCreateRequest
-	(*PurchasesPaymentsServiceUpdateRequest)(nil),             // 2: Scailo.PurchasesPaymentsServiceUpdateRequest
-	(*PurchasePaymentAncillaryParameters)(nil),                // 3: Scailo.PurchasePaymentAncillaryParameters
-	(*PurchasePayment)(nil),                                   // 4: Scailo.PurchasePayment
-	(*PurchasesPaymentsList)(nil),                             // 5: Scailo.PurchasesPaymentsList
-	(*PurchasesPaymentsServicePaginationReq)(nil),             // 6: Scailo.PurchasesPaymentsServicePaginationReq
-	(*PurchasesPaymentsServicePaginationResponse)(nil),        // 7: Scailo.PurchasesPaymentsServicePaginationResponse
-	(*PurchasesPaymentsServiceFilterReq)(nil),                 // 8: Scailo.PurchasesPaymentsServiceFilterReq
-	(*PurchasesPaymentsServiceCountReq)(nil),                  // 9: Scailo.PurchasesPaymentsServiceCountReq
-	(*PurchasesPaymentsServiceSearchAllReq)(nil),              // 10: Scailo.PurchasesPaymentsServiceSearchAllReq
-	(*EmployeeMetadata)(nil),                                  // 11: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 12: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 13: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 14: Scailo.LogbookLogConciseSLC
-	(BOOL_FILTER)(0),                                          // 15: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 16: Scailo.SORT_ORDER
-	(*IdentifierUUIDWithUserComment)(nil),                     // 17: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 18: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 19: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 20: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 21: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 22: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 23: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 24: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 25: Scailo.MagicLink
-	(*CountResponse)(nil),                                     // 26: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 27: Scailo.StandardFile
+	(PURCHASE_PAYMENT_REF_FROM)(0),                            // 0: Scailo.PURCHASE_PAYMENT_REF_FROM
+	(PURCHASE_PAYMENT_SORT_KEY)(0),                            // 1: Scailo.PURCHASE_PAYMENT_SORT_KEY
+	(*PurchasesPaymentsServiceCreateRequest)(nil),             // 2: Scailo.PurchasesPaymentsServiceCreateRequest
+	(*PurchasesPaymentsServiceUpdateRequest)(nil),             // 3: Scailo.PurchasesPaymentsServiceUpdateRequest
+	(*PurchasePaymentAncillaryParameters)(nil),                // 4: Scailo.PurchasePaymentAncillaryParameters
+	(*PurchasePayment)(nil),                                   // 5: Scailo.PurchasePayment
+	(*PurchasesPaymentsList)(nil),                             // 6: Scailo.PurchasesPaymentsList
+	(*PurchasesPaymentsServicePaginationReq)(nil),             // 7: Scailo.PurchasesPaymentsServicePaginationReq
+	(*PurchasesPaymentsServicePaginationResponse)(nil),        // 8: Scailo.PurchasesPaymentsServicePaginationResponse
+	(*PurchasesPaymentsServiceFilterReq)(nil),                 // 9: Scailo.PurchasesPaymentsServiceFilterReq
+	(*PurchasesPaymentsServiceCountReq)(nil),                  // 10: Scailo.PurchasesPaymentsServiceCountReq
+	(*PurchasesPaymentsServiceSearchAllReq)(nil),              // 11: Scailo.PurchasesPaymentsServiceSearchAllReq
+	(TRANSACTION_TYPE)(0),                                     // 12: Scailo.TRANSACTION_TYPE
+	(*EmployeeMetadata)(nil),                                  // 13: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 14: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 15: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 16: Scailo.LogbookLogConciseSLC
+	(BOOL_FILTER)(0),                                          // 17: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 18: Scailo.SORT_ORDER
+	(*IdentifierUUIDWithUserComment)(nil),                     // 19: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                     // 20: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 21: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 22: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 23: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 24: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 25: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 26: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 27: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 28: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 29: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
+	(*CountResponse)(nil),                                     // 31: Scailo.CountResponse
 }
 var file_purchases_payments_scailo_proto_depIdxs = []int32{
-	11, // 0: Scailo.PurchasePayment.metadata:type_name -> Scailo.EmployeeMetadata
-	12, // 1: Scailo.PurchasePayment.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	13, // 2: Scailo.PurchasePayment.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	14, // 3: Scailo.PurchasePayment.logs:type_name -> Scailo.LogbookLogConciseSLC
-	4,  // 4: Scailo.PurchasesPaymentsList.list:type_name -> Scailo.PurchasePayment
-	15, // 5: Scailo.PurchasesPaymentsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 6: Scailo.PurchasesPaymentsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 7: Scailo.PurchasesPaymentsServicePaginationReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
-	13, // 8: Scailo.PurchasesPaymentsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	4,  // 9: Scailo.PurchasesPaymentsServicePaginationResponse.payload:type_name -> Scailo.PurchasePayment
-	15, // 10: Scailo.PurchasesPaymentsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 11: Scailo.PurchasesPaymentsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 12: Scailo.PurchasesPaymentsServiceFilterReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
-	13, // 13: Scailo.PurchasesPaymentsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	15, // 14: Scailo.PurchasesPaymentsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	13, // 15: Scailo.PurchasesPaymentsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	15, // 16: Scailo.PurchasesPaymentsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	16, // 17: Scailo.PurchasesPaymentsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	0,  // 18: Scailo.PurchasesPaymentsServiceSearchAllReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
-	13, // 19: Scailo.PurchasesPaymentsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	1,  // 20: Scailo.PurchasesPaymentsService.Create:input_type -> Scailo.PurchasesPaymentsServiceCreateRequest
-	1,  // 21: Scailo.PurchasesPaymentsService.Draft:input_type -> Scailo.PurchasesPaymentsServiceCreateRequest
-	2,  // 22: Scailo.PurchasesPaymentsService.DraftUpdate:input_type -> Scailo.PurchasesPaymentsServiceUpdateRequest
-	17, // 23: Scailo.PurchasesPaymentsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 24: Scailo.PurchasesPaymentsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 25: Scailo.PurchasesPaymentsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 26: Scailo.PurchasesPaymentsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	2,  // 27: Scailo.PurchasesPaymentsService.RevisionUpdate:input_type -> Scailo.PurchasesPaymentsServiceUpdateRequest
-	17, // 28: Scailo.PurchasesPaymentsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 29: Scailo.PurchasesPaymentsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 30: Scailo.PurchasesPaymentsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 31: Scailo.PurchasesPaymentsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 32: Scailo.PurchasesPaymentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 33: Scailo.PurchasesPaymentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	18, // 34: Scailo.PurchasesPaymentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	19, // 35: Scailo.PurchasesPaymentsService.ViewByID:input_type -> Scailo.Identifier
-	20, // 36: Scailo.PurchasesPaymentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 37: Scailo.PurchasesPaymentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	20, // 38: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	21, // 39: Scailo.PurchasesPaymentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 40: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 41: Scailo.PurchasesPaymentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	20, // 42: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	6,  // 43: Scailo.PurchasesPaymentsService.ViewWithPagination:input_type -> Scailo.PurchasesPaymentsServicePaginationReq
-	10, // 44: Scailo.PurchasesPaymentsService.SearchAll:input_type -> Scailo.PurchasesPaymentsServiceSearchAllReq
-	8,  // 45: Scailo.PurchasesPaymentsService.Filter:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
-	23, // 46: Scailo.PurchasesPaymentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	9,  // 47: Scailo.PurchasesPaymentsService.Count:input_type -> Scailo.PurchasesPaymentsServiceCountReq
-	8,  // 48: Scailo.PurchasesPaymentsService.DownloadAsCSV:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
-	24, // 49: Scailo.PurchasesPaymentsService.Create:output_type -> Scailo.IdentifierResponse
-	24, // 50: Scailo.PurchasesPaymentsService.Draft:output_type -> Scailo.IdentifierResponse
-	24, // 51: Scailo.PurchasesPaymentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	24, // 52: Scailo.PurchasesPaymentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	24, // 53: Scailo.PurchasesPaymentsService.Verify:output_type -> Scailo.IdentifierResponse
-	24, // 54: Scailo.PurchasesPaymentsService.Approve:output_type -> Scailo.IdentifierResponse
-	24, // 55: Scailo.PurchasesPaymentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	24, // 56: Scailo.PurchasesPaymentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	24, // 57: Scailo.PurchasesPaymentsService.Halt:output_type -> Scailo.IdentifierResponse
-	24, // 58: Scailo.PurchasesPaymentsService.Discard:output_type -> Scailo.IdentifierResponse
-	24, // 59: Scailo.PurchasesPaymentsService.Restore:output_type -> Scailo.IdentifierResponse
-	24, // 60: Scailo.PurchasesPaymentsService.Complete:output_type -> Scailo.IdentifierResponse
-	24, // 61: Scailo.PurchasesPaymentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	24, // 62: Scailo.PurchasesPaymentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	25, // 63: Scailo.PurchasesPaymentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 64: Scailo.PurchasesPaymentsService.ViewByID:output_type -> Scailo.PurchasePayment
-	4,  // 65: Scailo.PurchasesPaymentsService.ViewByUUID:output_type -> Scailo.PurchasePayment
-	4,  // 66: Scailo.PurchasesPaymentsService.ViewEssentialByID:output_type -> Scailo.PurchasePayment
-	4,  // 67: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:output_type -> Scailo.PurchasePayment
-	5,  // 68: Scailo.PurchasesPaymentsService.ViewFromIDs:output_type -> Scailo.PurchasesPaymentsList
-	3,  // 69: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchasePaymentAncillaryParameters
-	5,  // 70: Scailo.PurchasesPaymentsService.ViewAll:output_type -> Scailo.PurchasesPaymentsList
-	5,  // 71: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesPaymentsList
-	7,  // 72: Scailo.PurchasesPaymentsService.ViewWithPagination:output_type -> Scailo.PurchasesPaymentsServicePaginationResponse
-	5,  // 73: Scailo.PurchasesPaymentsService.SearchAll:output_type -> Scailo.PurchasesPaymentsList
-	5,  // 74: Scailo.PurchasesPaymentsService.Filter:output_type -> Scailo.PurchasesPaymentsList
-	26, // 75: Scailo.PurchasesPaymentsService.CountInStatus:output_type -> Scailo.CountResponse
-	26, // 76: Scailo.PurchasesPaymentsService.Count:output_type -> Scailo.CountResponse
-	27, // 77: Scailo.PurchasesPaymentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	49, // [49:78] is the sub-list for method output_type
-	20, // [20:49] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	0,  // 0: Scailo.PurchasesPaymentsServiceCreateRequest.ref_from:type_name -> Scailo.PURCHASE_PAYMENT_REF_FROM
+	12, // 1: Scailo.PurchasesPaymentsServiceCreateRequest.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	12, // 2: Scailo.PurchasesPaymentsServiceUpdateRequest.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	13, // 3: Scailo.PurchasePayment.metadata:type_name -> Scailo.EmployeeMetadata
+	14, // 4: Scailo.PurchasePayment.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	15, // 5: Scailo.PurchasePayment.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	16, // 6: Scailo.PurchasePayment.logs:type_name -> Scailo.LogbookLogConciseSLC
+	0,  // 7: Scailo.PurchasePayment.ref_from:type_name -> Scailo.PURCHASE_PAYMENT_REF_FROM
+	12, // 8: Scailo.PurchasePayment.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	5,  // 9: Scailo.PurchasesPaymentsList.list:type_name -> Scailo.PurchasePayment
+	17, // 10: Scailo.PurchasesPaymentsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 11: Scailo.PurchasesPaymentsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 12: Scailo.PurchasesPaymentsServicePaginationReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
+	15, // 13: Scailo.PurchasesPaymentsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	5,  // 14: Scailo.PurchasesPaymentsServicePaginationResponse.payload:type_name -> Scailo.PurchasePayment
+	17, // 15: Scailo.PurchasesPaymentsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 16: Scailo.PurchasesPaymentsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 17: Scailo.PurchasesPaymentsServiceFilterReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
+	15, // 18: Scailo.PurchasesPaymentsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,  // 19: Scailo.PurchasesPaymentsServiceFilterReq.ref_from:type_name -> Scailo.PURCHASE_PAYMENT_REF_FROM
+	12, // 20: Scailo.PurchasesPaymentsServiceFilterReq.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	17, // 21: Scailo.PurchasesPaymentsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	15, // 22: Scailo.PurchasesPaymentsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,  // 23: Scailo.PurchasesPaymentsServiceCountReq.ref_from:type_name -> Scailo.PURCHASE_PAYMENT_REF_FROM
+	12, // 24: Scailo.PurchasesPaymentsServiceCountReq.transaction_type:type_name -> Scailo.TRANSACTION_TYPE
+	17, // 25: Scailo.PurchasesPaymentsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	18, // 26: Scailo.PurchasesPaymentsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,  // 27: Scailo.PurchasesPaymentsServiceSearchAllReq.sort_key:type_name -> Scailo.PURCHASE_PAYMENT_SORT_KEY
+	15, // 28: Scailo.PurchasesPaymentsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	2,  // 29: Scailo.PurchasesPaymentsService.Create:input_type -> Scailo.PurchasesPaymentsServiceCreateRequest
+	2,  // 30: Scailo.PurchasesPaymentsService.Draft:input_type -> Scailo.PurchasesPaymentsServiceCreateRequest
+	3,  // 31: Scailo.PurchasesPaymentsService.DraftUpdate:input_type -> Scailo.PurchasesPaymentsServiceUpdateRequest
+	19, // 32: Scailo.PurchasesPaymentsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 33: Scailo.PurchasesPaymentsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 34: Scailo.PurchasesPaymentsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 35: Scailo.PurchasesPaymentsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	3,  // 36: Scailo.PurchasesPaymentsService.RevisionUpdate:input_type -> Scailo.PurchasesPaymentsServiceUpdateRequest
+	19, // 37: Scailo.PurchasesPaymentsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 38: Scailo.PurchasesPaymentsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 39: Scailo.PurchasesPaymentsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 40: Scailo.PurchasesPaymentsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 41: Scailo.PurchasesPaymentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
+	19, // 42: Scailo.PurchasesPaymentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	20, // 43: Scailo.PurchasesPaymentsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	21, // 44: Scailo.PurchasesPaymentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	22, // 45: Scailo.PurchasesPaymentsService.ViewByID:input_type -> Scailo.Identifier
+	23, // 46: Scailo.PurchasesPaymentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	22, // 47: Scailo.PurchasesPaymentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	23, // 48: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 49: Scailo.PurchasesPaymentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	23, // 50: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 51: Scailo.PurchasesPaymentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	23, // 52: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 53: Scailo.PurchasesPaymentsService.ViewWithPagination:input_type -> Scailo.PurchasesPaymentsServicePaginationReq
+	23, // 54: Scailo.PurchasesPaymentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	23, // 55: Scailo.PurchasesPaymentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	11, // 56: Scailo.PurchasesPaymentsService.SearchAll:input_type -> Scailo.PurchasesPaymentsServiceSearchAllReq
+	9,  // 57: Scailo.PurchasesPaymentsService.Filter:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
+	26, // 58: Scailo.PurchasesPaymentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 59: Scailo.PurchasesPaymentsService.Count:input_type -> Scailo.PurchasesPaymentsServiceCountReq
+	9,  // 60: Scailo.PurchasesPaymentsService.DownloadAsCSV:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
+	27, // 61: Scailo.PurchasesPaymentsService.Create:output_type -> Scailo.IdentifierResponse
+	27, // 62: Scailo.PurchasesPaymentsService.Draft:output_type -> Scailo.IdentifierResponse
+	27, // 63: Scailo.PurchasesPaymentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 64: Scailo.PurchasesPaymentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	27, // 65: Scailo.PurchasesPaymentsService.Verify:output_type -> Scailo.IdentifierResponse
+	27, // 66: Scailo.PurchasesPaymentsService.Approve:output_type -> Scailo.IdentifierResponse
+	27, // 67: Scailo.PurchasesPaymentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	27, // 68: Scailo.PurchasesPaymentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 69: Scailo.PurchasesPaymentsService.Halt:output_type -> Scailo.IdentifierResponse
+	27, // 70: Scailo.PurchasesPaymentsService.Discard:output_type -> Scailo.IdentifierResponse
+	27, // 71: Scailo.PurchasesPaymentsService.Restore:output_type -> Scailo.IdentifierResponse
+	27, // 72: Scailo.PurchasesPaymentsService.Complete:output_type -> Scailo.IdentifierResponse
+	27, // 73: Scailo.PurchasesPaymentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	27, // 74: Scailo.PurchasesPaymentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	27, // 75: Scailo.PurchasesPaymentsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	28, // 76: Scailo.PurchasesPaymentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	5,  // 77: Scailo.PurchasesPaymentsService.ViewByID:output_type -> Scailo.PurchasePayment
+	5,  // 78: Scailo.PurchasesPaymentsService.ViewByUUID:output_type -> Scailo.PurchasePayment
+	5,  // 79: Scailo.PurchasesPaymentsService.ViewEssentialByID:output_type -> Scailo.PurchasePayment
+	5,  // 80: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:output_type -> Scailo.PurchasePayment
+	6,  // 81: Scailo.PurchasesPaymentsService.ViewFromIDs:output_type -> Scailo.PurchasesPaymentsList
+	4,  // 82: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchasePaymentAncillaryParameters
+	6,  // 83: Scailo.PurchasesPaymentsService.ViewAll:output_type -> Scailo.PurchasesPaymentsList
+	6,  // 84: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesPaymentsList
+	8,  // 85: Scailo.PurchasesPaymentsService.ViewWithPagination:output_type -> Scailo.PurchasesPaymentsServicePaginationResponse
+	29, // 86: Scailo.PurchasesPaymentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	30, // 87: Scailo.PurchasesPaymentsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	6,  // 88: Scailo.PurchasesPaymentsService.SearchAll:output_type -> Scailo.PurchasesPaymentsList
+	6,  // 89: Scailo.PurchasesPaymentsService.Filter:output_type -> Scailo.PurchasesPaymentsList
+	31, // 90: Scailo.PurchasesPaymentsService.CountInStatus:output_type -> Scailo.CountResponse
+	31, // 91: Scailo.PurchasesPaymentsService.Count:output_type -> Scailo.CountResponse
+	30, // 92: Scailo.PurchasesPaymentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	61, // [61:93] is the sub-list for method output_type
+	29, // [29:61] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_purchases_payments_scailo_proto_init() }
@@ -1887,7 +1971,7 @@ func file_purchases_payments_scailo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_purchases_payments_scailo_proto_rawDesc), len(file_purchases_payments_scailo_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
