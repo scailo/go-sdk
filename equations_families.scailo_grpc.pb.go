@@ -61,6 +61,7 @@ const (
 	EquationsFamiliesService_ViewAllForEntityUUID_FullMethodName                       = "/Scailo.EquationsFamiliesService/ViewAllForEntityUUID"
 	EquationsFamiliesService_ViewWithPagination_FullMethodName                         = "/Scailo.EquationsFamiliesService/ViewWithPagination"
 	EquationsFamiliesService_ViewForFamilyID_FullMethodName                            = "/Scailo.EquationsFamiliesService/ViewForFamilyID"
+	EquationsFamiliesService_ViewForFamilyIDs_FullMethodName                           = "/Scailo.EquationsFamiliesService/ViewForFamilyIDs"
 	EquationsFamiliesService_ViewProspectiveFamilies_FullMethodName                    = "/Scailo.EquationsFamiliesService/ViewProspectiveFamilies"
 	EquationsFamiliesService_FilterProspectiveFamilies_FullMethodName                  = "/Scailo.EquationsFamiliesService/FilterProspectiveFamilies"
 	EquationsFamiliesService_IsDownloadable_FullMethodName                             = "/Scailo.EquationsFamiliesService/IsDownloadable"
@@ -168,6 +169,8 @@ type EquationsFamiliesServiceClient interface {
 	ViewWithPagination(ctx context.Context, in *EquationsFamiliesServicePaginationReq, opts ...grpc.CallOption) (*EquationsFamiliesServicePaginationResponse, error)
 	// View the latest equation for a family (denoted by the given identifier)
 	ViewForFamilyID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*EquationFamily, error)
+	// View the latest equation for every family from the given identifiers list
+	ViewForFamilyIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
 	// View prospective families for the given equation family (without cyclical dependencies)
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
 	// Filter prospective families for the record represented by the given UUID identifier (without cyclical dependencies)
@@ -623,6 +626,16 @@ func (c *equationsFamiliesServiceClient) ViewForFamilyID(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EquationFamily)
 	err := c.cc.Invoke(ctx, EquationsFamiliesService_ViewForFamilyID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *equationsFamiliesServiceClient) ViewForFamilyIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*EquationsFamiliesList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EquationsFamiliesList)
+	err := c.cc.Invoke(ctx, EquationsFamiliesService_ViewForFamilyIDs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
