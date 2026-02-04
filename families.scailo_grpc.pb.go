@@ -59,6 +59,13 @@ const (
 	FamiliesService_DeleteQCGroup_FullMethodName                = "/Scailo.FamiliesService/DeleteQCGroup"
 	FamiliesService_ViewQCGroupByID_FullMethodName              = "/Scailo.FamiliesService/ViewQCGroupByID"
 	FamiliesService_ViewQCGroups_FullMethodName                 = "/Scailo.FamiliesService/ViewQCGroups"
+	FamiliesService_AddImage_FullMethodName                     = "/Scailo.FamiliesService/AddImage"
+	FamiliesService_UpdateImage_FullMethodName                  = "/Scailo.FamiliesService/UpdateImage"
+	FamiliesService_ApproveImage_FullMethodName                 = "/Scailo.FamiliesService/ApproveImage"
+	FamiliesService_DeleteImage_FullMethodName                  = "/Scailo.FamiliesService/DeleteImage"
+	FamiliesService_ViewImageByID_FullMethodName                = "/Scailo.FamiliesService/ViewImageByID"
+	FamiliesService_ViewImages_FullMethodName                   = "/Scailo.FamiliesService/ViewImages"
+	FamiliesService_ViewPublicImages_FullMethodName             = "/Scailo.FamiliesService/ViewPublicImages"
 	FamiliesService_ViewByID_FullMethodName                     = "/Scailo.FamiliesService/ViewByID"
 	FamiliesService_ViewByUUID_FullMethodName                   = "/Scailo.FamiliesService/ViewByUUID"
 	FamiliesService_ViewEssentialByID_FullMethodName            = "/Scailo.FamiliesService/ViewEssentialByID"
@@ -172,6 +179,20 @@ type FamiliesServiceClient interface {
 	ViewQCGroupByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyQCGroup, error)
 	// View all qc groups for given family ID
 	ViewQCGroups(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyQCGroupsList, error)
+	// Add a image
+	AddImage(ctx context.Context, in *FamiliesServiceImageCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Modify an item in a sales order
+	UpdateImage(ctx context.Context, in *FamiliesServiceImageUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Approve a image
+	ApproveImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Delete a image
+	DeleteImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// View a image for the given ID
+	ViewImageByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImage, error)
+	// View all images for given family ID
+	ViewImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error)
+	// View public images for given family ID
+	ViewPublicImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error)
 	// View by ID
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Family, error)
 	// View by UUID
@@ -637,6 +658,76 @@ func (c *familiesServiceClient) ViewQCGroups(ctx context.Context, in *Identifier
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FamilyQCGroupsList)
 	err := c.cc.Invoke(ctx, FamiliesService_ViewQCGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) AddImage(ctx context.Context, in *FamiliesServiceImageCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_AddImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) UpdateImage(ctx context.Context, in *FamiliesServiceImageUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_UpdateImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ApproveImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_ApproveImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) DeleteImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_DeleteImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ViewImageByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FamilyImage)
+	err := c.cc.Invoke(ctx, FamiliesService_ViewImageByID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ViewImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FamilyImagesList)
+	err := c.cc.Invoke(ctx, FamiliesService_ViewImages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ViewPublicImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FamilyImagesList)
+	err := c.cc.Invoke(ctx, FamiliesService_ViewPublicImages_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
