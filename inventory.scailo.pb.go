@@ -2823,7 +2823,7 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"%INVENTORY_NODE_ORIGIN_TYPE_RETURNABLE\x10\x8c\x01\x12&\n" +
 	"!INVENTORY_NODE_ORIGIN_TYPE_REWORK\x10\x96\x01\x12%\n" +
 	" INVENTORY_NODE_ORIGIN_TYPE_SCRAP\x10\xa0\x01\x12%\n" +
-	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\xa3\x15\n" +
+	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\x9b\x15\n" +
 	"\x10InventoryService\x12F\n" +
 	"\n" +
 	"ViewByHash\x12\x1e.Scailo.InventoryHashSearchReq\x1a\x18.Scailo.GenericInventory\x12C\n" +
@@ -2852,11 +2852,11 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"\x1cViewWorkInProgressStatistics\x12\x12.Scailo.Identifier\x1a).Scailo.InventoryWorkInProgressStatistics\x12Q\n" +
 	"\x16ViewIndentedStatistics\x12\x12.Scailo.Identifier\x1a#.Scailo.InventoryIndentedStatistics\x12O\n" +
 	"\x15ViewOrderedStatistics\x12\x12.Scailo.Identifier\x1a\".Scailo.InventoryOrderedStatistics\x12I\n" +
-	"\x12ViewDetailedDemand\x12\x12.Scailo.Identifier\x1a\x1f.Scailo.InventoryDetailedDemand\x12a\n" +
-	"\x19UpdateStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
-	"!UpdateStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12a\n" +
-	"\x19MoveToStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
-	"!MoveToStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponseBf\n" +
+	"\x12ViewDetailedDemand\x12\x12.Scailo.Identifier\x1a\x1f.Scailo.InventoryDetailedDemand\x12_\n" +
+	"\x19UpdateStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12g\n" +
+	"!UpdateStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12_\n" +
+	"\x19MoveToStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12g\n" +
+	"!MoveToStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventoryBf\n" +
 	"\n" +
 	"com.ScailoB\x14InventoryScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -2914,7 +2914,6 @@ var file_inventory_scailo_proto_goTypes = []any{
 	(*Identifier)(nil),                                 // 35: Scailo.Identifier
 	(*IdentifiersList)(nil),                            // 36: Scailo.IdentifiersList
 	(*QuantityResponse)(nil),                           // 37: Scailo.QuantityResponse
-	(*IdentifierResponse)(nil),                         // 38: Scailo.IdentifierResponse
 }
 var file_inventory_scailo_proto_depIdxs = []int32{
 	28, // 0: Scailo.GenericInventory.metadata:type_name -> Scailo.EmployeeMetadata
@@ -3005,10 +3004,10 @@ var file_inventory_scailo_proto_depIdxs = []int32{
 	22, // 85: Scailo.InventoryService.ViewIndentedStatistics:output_type -> Scailo.InventoryIndentedStatistics
 	23, // 86: Scailo.InventoryService.ViewOrderedStatistics:output_type -> Scailo.InventoryOrderedStatistics
 	24, // 87: Scailo.InventoryService.ViewDetailedDemand:output_type -> Scailo.InventoryDetailedDemand
-	38, // 88: Scailo.InventoryService.UpdateStorageWithShortURL:output_type -> Scailo.IdentifierResponse
-	38, // 89: Scailo.InventoryService.UpdateStorageWithInternalItemCode:output_type -> Scailo.IdentifierResponse
-	38, // 90: Scailo.InventoryService.MoveToStorageWithShortURL:output_type -> Scailo.IdentifierResponse
-	38, // 91: Scailo.InventoryService.MoveToStorageWithInternalItemCode:output_type -> Scailo.IdentifierResponse
+	2,  // 88: Scailo.InventoryService.UpdateStorageWithShortURL:output_type -> Scailo.GenericInventory
+	2,  // 89: Scailo.InventoryService.UpdateStorageWithInternalItemCode:output_type -> Scailo.GenericInventory
+	2,  // 90: Scailo.InventoryService.MoveToStorageWithShortURL:output_type -> Scailo.GenericInventory
+	2,  // 91: Scailo.InventoryService.MoveToStorageWithInternalItemCode:output_type -> Scailo.GenericInventory
 	61, // [61:92] is the sub-list for method output_type
 	30, // [30:61] is the sub-list for method input_type
 	30, // [30:30] is the sub-list for extension type_name
