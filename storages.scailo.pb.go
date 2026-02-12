@@ -1317,7 +1317,7 @@ const file_storages_scailo_proto_rawDesc = "" +
 	"!STORAGE_SORT_KEY_APPROVER_ROLE_ID\x10\x05\x12\x19\n" +
 	"\x15STORAGE_SORT_KEY_NAME\x10\n" +
 	"\x12\x19\n" +
-	"\x15STORAGE_SORT_KEY_CODE\x10\v2\xf5\x0e\n" +
+	"\x15STORAGE_SORT_KEY_CODE\x10\v2\xab\x10\n" +
 	"\x0fStoragesService\x12J\n" +
 	"\x06Create\x12$.Scailo.StoragesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.StoragesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -1337,10 +1337,14 @@ const file_storages_scailo_proto_rawDesc = "" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x0f.Scailo.Storage\x128\n" +
 	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x0f.Scailo.Storage\x12>\n" +
 	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x0f.Scailo.Storage\x12<\n" +
-	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x14.Scailo.StoragesList\x125\n" +
+	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x14.Scailo.StoragesList\x126\n" +
+	"\n" +
+	"ViewByCode\x12\x17.Scailo.SimpleSearchReq\x1a\x0f.Scailo.Storage\x125\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x14.Scailo.StoragesList\x12D\n" +
 	"\x14ViewAllForEntityUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.StoragesList\x12e\n" +
-	"\x12ViewWithPagination\x12$.Scailo.StoragesServicePaginationReq\x1a).Scailo.StoragesServicePaginationResponse\x12F\n" +
+	"\x12ViewWithPagination\x12$.Scailo.StoragesServicePaginationReq\x1a).Scailo.StoragesServicePaginationResponse\x12<\n" +
+	"\vViewQRImage\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.ImageResponse\x12>\n" +
+	"\fViewQRString\x12\x16.Scailo.IdentifierUUID\x1a\x16.Scailo.StringResponse\x12F\n" +
 	"\tSearchAll\x12#.Scailo.StoragesServiceSearchAllReq\x1a\x14.Scailo.StoragesList\x12@\n" +
 	"\x06Filter\x12 .Scailo.StoragesServiceFilterReq\x1a\x14.Scailo.StoragesList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12?\n" +
@@ -1386,12 +1390,15 @@ var file_storages_scailo_proto_goTypes = []any{
 	(*Identifier)(nil),                        // 17: Scailo.Identifier
 	(*IdentifierUUID)(nil),                    // 18: Scailo.IdentifierUUID
 	(*IdentifiersList)(nil),                   // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                      // 20: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),           // 21: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                      // 22: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                // 23: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                     // 24: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),               // 25: Scailo.IdentifierUUIDsList
+	(*SimpleSearchReq)(nil),                   // 20: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                      // 21: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),           // 22: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                      // 23: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                // 24: Scailo.IdentifierResponse
+	(*ImageResponse)(nil),                     // 25: Scailo.ImageResponse
+	(*StringResponse)(nil),                    // 26: Scailo.StringResponse
+	(*CountResponse)(nil),                     // 27: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),               // 28: Scailo.IdentifierUUIDsList
 }
 var file_storages_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.Storage.metadata:type_name -> Scailo.EmployeeMetadata
@@ -1434,43 +1441,49 @@ var file_storages_scailo_proto_depIdxs = []int32{
 	17, // 37: Scailo.StoragesService.ViewEssentialByID:input_type -> Scailo.Identifier
 	18, // 38: Scailo.StoragesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
 	19, // 39: Scailo.StoragesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 40: Scailo.StoragesService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 41: Scailo.StoragesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 42: Scailo.StoragesService.ViewWithPagination:input_type -> Scailo.StoragesServicePaginationReq
-	9,  // 43: Scailo.StoragesService.SearchAll:input_type -> Scailo.StoragesServiceSearchAllReq
-	7,  // 44: Scailo.StoragesService.Filter:input_type -> Scailo.StoragesServiceFilterReq
-	21, // 45: Scailo.StoragesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 46: Scailo.StoragesService.Count:input_type -> Scailo.StoragesServiceCountReq
-	7,  // 47: Scailo.StoragesService.DownloadAsCSV:input_type -> Scailo.StoragesServiceFilterReq
-	22, // 48: Scailo.StoragesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	23, // 49: Scailo.StoragesService.Create:output_type -> Scailo.IdentifierResponse
-	23, // 50: Scailo.StoragesService.Draft:output_type -> Scailo.IdentifierResponse
-	23, // 51: Scailo.StoragesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 52: Scailo.StoragesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	23, // 53: Scailo.StoragesService.Verify:output_type -> Scailo.IdentifierResponse
-	23, // 54: Scailo.StoragesService.Approve:output_type -> Scailo.IdentifierResponse
-	23, // 55: Scailo.StoragesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	23, // 56: Scailo.StoragesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 57: Scailo.StoragesService.Halt:output_type -> Scailo.IdentifierResponse
-	23, // 58: Scailo.StoragesService.Discard:output_type -> Scailo.IdentifierResponse
-	23, // 59: Scailo.StoragesService.Restore:output_type -> Scailo.IdentifierResponse
-	23, // 60: Scailo.StoragesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 61: Scailo.StoragesService.ViewByID:output_type -> Scailo.Storage
-	3,  // 62: Scailo.StoragesService.ViewByUUID:output_type -> Scailo.Storage
-	3,  // 63: Scailo.StoragesService.ViewEssentialByID:output_type -> Scailo.Storage
-	3,  // 64: Scailo.StoragesService.ViewEssentialByUUID:output_type -> Scailo.Storage
-	4,  // 65: Scailo.StoragesService.ViewFromIDs:output_type -> Scailo.StoragesList
-	4,  // 66: Scailo.StoragesService.ViewAll:output_type -> Scailo.StoragesList
-	4,  // 67: Scailo.StoragesService.ViewAllForEntityUUID:output_type -> Scailo.StoragesList
-	6,  // 68: Scailo.StoragesService.ViewWithPagination:output_type -> Scailo.StoragesServicePaginationResponse
-	4,  // 69: Scailo.StoragesService.SearchAll:output_type -> Scailo.StoragesList
-	4,  // 70: Scailo.StoragesService.Filter:output_type -> Scailo.StoragesList
-	24, // 71: Scailo.StoragesService.CountInStatus:output_type -> Scailo.CountResponse
-	24, // 72: Scailo.StoragesService.Count:output_type -> Scailo.CountResponse
-	22, // 73: Scailo.StoragesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	25, // 74: Scailo.StoragesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	49, // [49:75] is the sub-list for method output_type
-	23, // [23:49] is the sub-list for method input_type
+	20, // 40: Scailo.StoragesService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	21, // 41: Scailo.StoragesService.ViewAll:input_type -> Scailo.ActiveStatus
+	18, // 42: Scailo.StoragesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 43: Scailo.StoragesService.ViewWithPagination:input_type -> Scailo.StoragesServicePaginationReq
+	18, // 44: Scailo.StoragesService.ViewQRImage:input_type -> Scailo.IdentifierUUID
+	18, // 45: Scailo.StoragesService.ViewQRString:input_type -> Scailo.IdentifierUUID
+	9,  // 46: Scailo.StoragesService.SearchAll:input_type -> Scailo.StoragesServiceSearchAllReq
+	7,  // 47: Scailo.StoragesService.Filter:input_type -> Scailo.StoragesServiceFilterReq
+	22, // 48: Scailo.StoragesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 49: Scailo.StoragesService.Count:input_type -> Scailo.StoragesServiceCountReq
+	7,  // 50: Scailo.StoragesService.DownloadAsCSV:input_type -> Scailo.StoragesServiceFilterReq
+	23, // 51: Scailo.StoragesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	24, // 52: Scailo.StoragesService.Create:output_type -> Scailo.IdentifierResponse
+	24, // 53: Scailo.StoragesService.Draft:output_type -> Scailo.IdentifierResponse
+	24, // 54: Scailo.StoragesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 55: Scailo.StoragesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	24, // 56: Scailo.StoragesService.Verify:output_type -> Scailo.IdentifierResponse
+	24, // 57: Scailo.StoragesService.Approve:output_type -> Scailo.IdentifierResponse
+	24, // 58: Scailo.StoragesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	24, // 59: Scailo.StoragesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 60: Scailo.StoragesService.Halt:output_type -> Scailo.IdentifierResponse
+	24, // 61: Scailo.StoragesService.Discard:output_type -> Scailo.IdentifierResponse
+	24, // 62: Scailo.StoragesService.Restore:output_type -> Scailo.IdentifierResponse
+	24, // 63: Scailo.StoragesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	3,  // 64: Scailo.StoragesService.ViewByID:output_type -> Scailo.Storage
+	3,  // 65: Scailo.StoragesService.ViewByUUID:output_type -> Scailo.Storage
+	3,  // 66: Scailo.StoragesService.ViewEssentialByID:output_type -> Scailo.Storage
+	3,  // 67: Scailo.StoragesService.ViewEssentialByUUID:output_type -> Scailo.Storage
+	4,  // 68: Scailo.StoragesService.ViewFromIDs:output_type -> Scailo.StoragesList
+	3,  // 69: Scailo.StoragesService.ViewByCode:output_type -> Scailo.Storage
+	4,  // 70: Scailo.StoragesService.ViewAll:output_type -> Scailo.StoragesList
+	4,  // 71: Scailo.StoragesService.ViewAllForEntityUUID:output_type -> Scailo.StoragesList
+	6,  // 72: Scailo.StoragesService.ViewWithPagination:output_type -> Scailo.StoragesServicePaginationResponse
+	25, // 73: Scailo.StoragesService.ViewQRImage:output_type -> Scailo.ImageResponse
+	26, // 74: Scailo.StoragesService.ViewQRString:output_type -> Scailo.StringResponse
+	4,  // 75: Scailo.StoragesService.SearchAll:output_type -> Scailo.StoragesList
+	4,  // 76: Scailo.StoragesService.Filter:output_type -> Scailo.StoragesList
+	27, // 77: Scailo.StoragesService.CountInStatus:output_type -> Scailo.CountResponse
+	27, // 78: Scailo.StoragesService.Count:output_type -> Scailo.CountResponse
+	23, // 79: Scailo.StoragesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	28, // 80: Scailo.StoragesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	52, // [52:81] is the sub-list for method output_type
+	23, // [23:52] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
 	23, // [23:23] is the sub-list for extension extendee
 	0,  // [0:23] is the sub-list for field type_name

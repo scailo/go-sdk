@@ -35,9 +35,12 @@ const (
 	StoragesService_ViewEssentialByID_FullMethodName    = "/Scailo.StoragesService/ViewEssentialByID"
 	StoragesService_ViewEssentialByUUID_FullMethodName  = "/Scailo.StoragesService/ViewEssentialByUUID"
 	StoragesService_ViewFromIDs_FullMethodName          = "/Scailo.StoragesService/ViewFromIDs"
+	StoragesService_ViewByCode_FullMethodName           = "/Scailo.StoragesService/ViewByCode"
 	StoragesService_ViewAll_FullMethodName              = "/Scailo.StoragesService/ViewAll"
 	StoragesService_ViewAllForEntityUUID_FullMethodName = "/Scailo.StoragesService/ViewAllForEntityUUID"
 	StoragesService_ViewWithPagination_FullMethodName   = "/Scailo.StoragesService/ViewWithPagination"
+	StoragesService_ViewQRImage_FullMethodName          = "/Scailo.StoragesService/ViewQRImage"
+	StoragesService_ViewQRString_FullMethodName         = "/Scailo.StoragesService/ViewQRString"
 	StoragesService_SearchAll_FullMethodName            = "/Scailo.StoragesService/SearchAll"
 	StoragesService_Filter_FullMethodName               = "/Scailo.StoragesService/Filter"
 	StoragesService_CountInStatus_FullMethodName        = "/Scailo.StoragesService/CountInStatus"
@@ -86,12 +89,18 @@ type StoragesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Storage, error)
 	// View all records with the given IDs
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*StoragesList, error)
+	// View by storage's code (logs aren't returned)
+	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Storage, error)
 	// View all
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*StoragesList, error)
 	// View all with the given entity UUID
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StoragesList, error)
 	// View with pagination
 	ViewWithPagination(ctx context.Context, in *StoragesServicePaginationReq, opts ...grpc.CallOption) (*StoragesServicePaginationResponse, error)
+	// View storage's QR Code as image
+	ViewQRImage(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
+	// View storage's QR Code as string
+	ViewQRString(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StringResponse, error)
 	// View all that match the given search key
 	SearchAll(ctx context.Context, in *StoragesServiceSearchAllReq, opts ...grpc.CallOption) (*StoragesList, error)
 	// View all that match the given filter criteria
@@ -285,6 +294,16 @@ func (c *storagesServiceClient) ViewFromIDs(ctx context.Context, in *Identifiers
 	return out, nil
 }
 
+func (c *storagesServiceClient) ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Storage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Storage)
+	err := c.cc.Invoke(ctx, StoragesService_ViewByCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *storagesServiceClient) ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*StoragesList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StoragesList)
@@ -309,6 +328,26 @@ func (c *storagesServiceClient) ViewWithPagination(ctx context.Context, in *Stor
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StoragesServicePaginationResponse)
 	err := c.cc.Invoke(ctx, StoragesService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storagesServiceClient) ViewQRImage(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ImageResponse)
+	err := c.cc.Invoke(ctx, StoragesService_ViewQRImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storagesServiceClient) ViewQRString(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StringResponse)
+	err := c.cc.Invoke(ctx, StoragesService_ViewQRString_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

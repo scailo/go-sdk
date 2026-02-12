@@ -45,6 +45,10 @@ const (
 	InventoryService_ViewIndentedStatistics_FullMethodName                     = "/Scailo.InventoryService/ViewIndentedStatistics"
 	InventoryService_ViewOrderedStatistics_FullMethodName                      = "/Scailo.InventoryService/ViewOrderedStatistics"
 	InventoryService_ViewDetailedDemand_FullMethodName                         = "/Scailo.InventoryService/ViewDetailedDemand"
+	InventoryService_UpdateStorageWithShortURL_FullMethodName                  = "/Scailo.InventoryService/UpdateStorageWithShortURL"
+	InventoryService_UpdateStorageWithInternalItemCode_FullMethodName          = "/Scailo.InventoryService/UpdateStorageWithInternalItemCode"
+	InventoryService_MoveToStorageWithShortURL_FullMethodName                  = "/Scailo.InventoryService/MoveToStorageWithShortURL"
+	InventoryService_MoveToStorageWithInternalItemCode_FullMethodName          = "/Scailo.InventoryService/MoveToStorageWithInternalItemCode"
 )
 
 // InventoryServiceClient is the client API for InventoryService service.
@@ -112,6 +116,14 @@ type InventoryServiceClient interface {
 	ViewOrderedStatistics(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*InventoryOrderedStatistics, error)
 	// View the detailed demand of the family with the given Identifier
 	ViewDetailedDemand(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*InventoryDetailedDemand, error)
+	// Updates the inventory item identified by the given short URL with the given storage
+	UpdateStorageWithShortURL(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Updates the first inventory item identified by the given internal item code with the given storage
+	UpdateStorageWithInternalItemCode(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Moves the inventory item identified by the given short URL into the given storage
+	MoveToStorageWithShortURL(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Moves the inventory item identified by the given internal item code into the given storage
+	MoveToStorageWithInternalItemCode(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
 }
 
 type inventoryServiceClient struct {
@@ -391,6 +403,46 @@ func (c *inventoryServiceClient) ViewDetailedDemand(ctx context.Context, in *Ide
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InventoryDetailedDemand)
 	err := c.cc.Invoke(ctx, InventoryService_ViewDetailedDemand_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) UpdateStorageWithShortURL(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, InventoryService_UpdateStorageWithShortURL_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) UpdateStorageWithInternalItemCode(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, InventoryService_UpdateStorageWithInternalItemCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) MoveToStorageWithShortURL(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, InventoryService_MoveToStorageWithShortURL_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inventoryServiceClient) MoveToStorageWithInternalItemCode(ctx context.Context, in *InventoryServiceUpdateStorageReq, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, InventoryService_MoveToStorageWithInternalItemCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

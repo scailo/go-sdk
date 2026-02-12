@@ -2511,6 +2511,61 @@ func (x *InventoryDemand) GetIsPositiveQuantity() bool {
 	return false
 }
 
+// Describes the payload necessary to either update the storage or to move an inventory item to a new storage
+type InventoryServiceUpdateStorageReq struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The item code or the short URL that could be used to uniquely identify an inventory item
+	SearchKey string `protobuf:"bytes,1,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	// The UUID of the destination storage where the inventory item needs to be moved into
+	StorageUuid   string `protobuf:"bytes,2,opt,name=storage_uuid,json=storageUuid,proto3" json:"storage_uuid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InventoryServiceUpdateStorageReq) Reset() {
+	*x = InventoryServiceUpdateStorageReq{}
+	mi := &file_inventory_scailo_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryServiceUpdateStorageReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryServiceUpdateStorageReq) ProtoMessage() {}
+
+func (x *InventoryServiceUpdateStorageReq) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_scailo_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryServiceUpdateStorageReq.ProtoReflect.Descriptor instead.
+func (*InventoryServiceUpdateStorageReq) Descriptor() ([]byte, []int) {
+	return file_inventory_scailo_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *InventoryServiceUpdateStorageReq) GetSearchKey() string {
+	if x != nil {
+		return x.SearchKey
+	}
+	return ""
+}
+
+func (x *InventoryServiceUpdateStorageReq) GetStorageUuid() string {
+	if x != nil {
+		return x.StorageUuid
+	}
+	return ""
+}
+
 var File_inventory_scailo_proto protoreflect.FileDescriptor
 
 const file_inventory_scailo_proto_rawDesc = "" +
@@ -2737,7 +2792,11 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"multiplier\x18( \x01(\x03R\n" +
 	"multiplier\x12\x14\n" +
 	"\x05total\x182 \x01(\x03R\x05total\x120\n" +
-	"\x14is_positive_quantity\x18< \x01(\bR\x12isPositiveQuantity*\xd7\x02\n" +
+	"\x14is_positive_quantity\x18< \x01(\bR\x12isPositiveQuantity\"w\n" +
+	" InventoryServiceUpdateStorageReq\x12&\n" +
+	"\n" +
+	"search_key\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x00R\tsearchKey\x12+\n" +
+	"\fstorage_uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\vstorageUuid*\xd7\x02\n" +
 	"\x1aGENERIC_INVENTORY_REF_FROM\x12.\n" +
 	"*GENERIC_INVENTORY_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12,\n" +
 	"(GENERIC_INVENTORY_REF_FROM_INITIAL_STOCK\x10\x01\x12,\n" +
@@ -2764,7 +2823,7 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"%INVENTORY_NODE_ORIGIN_TYPE_RETURNABLE\x10\x8c\x01\x12&\n" +
 	"!INVENTORY_NODE_ORIGIN_TYPE_REWORK\x10\x96\x01\x12%\n" +
 	" INVENTORY_NODE_ORIGIN_TYPE_SCRAP\x10\xa0\x01\x12%\n" +
-	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\x87\x12\n" +
+	" INVENTORY_NODE_ORIGIN_TYPE_STORE\x10\xaa\x012\xa3\x15\n" +
 	"\x10InventoryService\x12F\n" +
 	"\n" +
 	"ViewByHash\x12\x1e.Scailo.InventoryHashSearchReq\x1a\x18.Scailo.GenericInventory\x12C\n" +
@@ -2793,7 +2852,11 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"\x1cViewWorkInProgressStatistics\x12\x12.Scailo.Identifier\x1a).Scailo.InventoryWorkInProgressStatistics\x12Q\n" +
 	"\x16ViewIndentedStatistics\x12\x12.Scailo.Identifier\x1a#.Scailo.InventoryIndentedStatistics\x12O\n" +
 	"\x15ViewOrderedStatistics\x12\x12.Scailo.Identifier\x1a\".Scailo.InventoryOrderedStatistics\x12I\n" +
-	"\x12ViewDetailedDemand\x12\x12.Scailo.Identifier\x1a\x1f.Scailo.InventoryDetailedDemandBf\n" +
+	"\x12ViewDetailedDemand\x12\x12.Scailo.Identifier\x1a\x1f.Scailo.InventoryDetailedDemand\x12a\n" +
+	"\x19UpdateStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
+	"!UpdateStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12a\n" +
+	"\x19MoveToStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
+	"!MoveToStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x1a.Scailo.IdentifierResponseBf\n" +
 	"\n" +
 	"com.ScailoB\x14InventoryScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -2811,7 +2874,7 @@ func file_inventory_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_inventory_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_inventory_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_inventory_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_inventory_scailo_proto_goTypes = []any{
 	(GENERIC_INVENTORY_REF_FROM)(0),                    // 0: Scailo.GENERIC_INVENTORY_REF_FROM
 	(INVENTORY_NODE_ORIGIN_TYPE)(0),                    // 1: Scailo.INVENTORY_NODE_ORIGIN_TYPE
@@ -2840,35 +2903,37 @@ var file_inventory_scailo_proto_goTypes = []any{
 	(*InventoryDetailedDemand)(nil),                    // 24: Scailo.InventoryDetailedDemand
 	(*InventoryDemandMap)(nil),                         // 25: Scailo.InventoryDemandMap
 	(*InventoryDemand)(nil),                            // 26: Scailo.InventoryDemand
-	(*EmployeeMetadata)(nil),                           // 27: Scailo.EmployeeMetadata
-	(INVENTORY_LIFECYCLE)(0),                           // 28: Scailo.INVENTORY_LIFECYCLE
-	(FAMILY_TYPE)(0),                                   // 29: Scailo.FAMILY_TYPE
-	(BOOL_FILTER)(0),                                   // 30: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                    // 31: Scailo.SORT_ORDER
-	(INVENTORY_SORT_KEY)(0),                            // 32: Scailo.INVENTORY_SORT_KEY
-	(*SimpleSearchReq)(nil),                            // 33: Scailo.SimpleSearchReq
-	(*Identifier)(nil),                                 // 34: Scailo.Identifier
-	(*IdentifiersList)(nil),                            // 35: Scailo.IdentifiersList
-	(*QuantityResponse)(nil),                           // 36: Scailo.QuantityResponse
+	(*InventoryServiceUpdateStorageReq)(nil),           // 27: Scailo.InventoryServiceUpdateStorageReq
+	(*EmployeeMetadata)(nil),                           // 28: Scailo.EmployeeMetadata
+	(INVENTORY_LIFECYCLE)(0),                           // 29: Scailo.INVENTORY_LIFECYCLE
+	(FAMILY_TYPE)(0),                                   // 30: Scailo.FAMILY_TYPE
+	(BOOL_FILTER)(0),                                   // 31: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                    // 32: Scailo.SORT_ORDER
+	(INVENTORY_SORT_KEY)(0),                            // 33: Scailo.INVENTORY_SORT_KEY
+	(*SimpleSearchReq)(nil),                            // 34: Scailo.SimpleSearchReq
+	(*Identifier)(nil),                                 // 35: Scailo.Identifier
+	(*IdentifiersList)(nil),                            // 36: Scailo.IdentifiersList
+	(*QuantityResponse)(nil),                           // 37: Scailo.QuantityResponse
+	(*IdentifierResponse)(nil),                         // 38: Scailo.IdentifierResponse
 }
 var file_inventory_scailo_proto_depIdxs = []int32{
-	27, // 0: Scailo.GenericInventory.metadata:type_name -> Scailo.EmployeeMetadata
-	28, // 1: Scailo.GenericInventory.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	28, // 0: Scailo.GenericInventory.metadata:type_name -> Scailo.EmployeeMetadata
+	29, // 1: Scailo.GenericInventory.status:type_name -> Scailo.INVENTORY_LIFECYCLE
 	0,  // 2: Scailo.GenericInventory.ref_from:type_name -> Scailo.GENERIC_INVENTORY_REF_FROM
 	2,  // 3: Scailo.GenericInventoryList.list:type_name -> Scailo.GenericInventory
-	27, // 4: Scailo.InventoryCodeMap.metadata:type_name -> Scailo.EmployeeMetadata
-	29, // 5: Scailo.InventoryCodeMap.family_type:type_name -> Scailo.FAMILY_TYPE
-	28, // 6: Scailo.IssuableInventorySearchReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	28, // 7: Scailo.InventoryServiceFamilyQuantityReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
-	30, // 8: Scailo.SearchReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
-	31, // 9: Scailo.SearchReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
-	32, // 10: Scailo.SearchReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	30, // 11: Scailo.SearchReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	28, // 4: Scailo.InventoryCodeMap.metadata:type_name -> Scailo.EmployeeMetadata
+	30, // 5: Scailo.InventoryCodeMap.family_type:type_name -> Scailo.FAMILY_TYPE
+	29, // 6: Scailo.IssuableInventorySearchReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	29, // 7: Scailo.InventoryServiceFamilyQuantityReq.status:type_name -> Scailo.INVENTORY_LIFECYCLE
+	31, // 8: Scailo.SearchReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
+	32, // 9: Scailo.SearchReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
+	33, // 10: Scailo.SearchReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	31, // 11: Scailo.SearchReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
 	9,  // 12: Scailo.SearchReturnableInventoryForIdentifierUUID.filter:type_name -> Scailo.SearchReturnableInventoryReq
-	30, // 13: Scailo.FilterReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
-	31, // 14: Scailo.FilterReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
-	32, // 15: Scailo.FilterReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
-	30, // 16: Scailo.FilterReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
+	31, // 13: Scailo.FilterReturnableInventoryReq.is_active:type_name -> Scailo.BOOL_FILTER
+	32, // 14: Scailo.FilterReturnableInventoryReq.sort_order:type_name -> Scailo.SORT_ORDER
+	33, // 15: Scailo.FilterReturnableInventoryReq.sort_key:type_name -> Scailo.INVENTORY_SORT_KEY
+	31, // 16: Scailo.FilterReturnableInventoryReq.is_qc_report_public:type_name -> Scailo.BOOL_FILTER
 	11, // 17: Scailo.FilterReturnableInventoryForIdentifierUUID.filter:type_name -> Scailo.FilterReturnableInventoryReq
 	13, // 18: Scailo.ConsolidatedInventoryStatisticsList.list:type_name -> Scailo.ConsolidatedInventoryStatistics
 	15, // 19: Scailo.InventoryWorkInProgressStatistics.production_plans:type_name -> Scailo.AbridgedProductionPlanItem
@@ -2883,61 +2948,69 @@ var file_inventory_scailo_proto_depIdxs = []int32{
 	26, // 28: Scailo.InventoryDemandMap.adjusted_demand_list:type_name -> Scailo.InventoryDemand
 	1,  // 29: Scailo.InventoryDemand.origin_type:type_name -> Scailo.INVENTORY_NODE_ORIGIN_TYPE
 	6,  // 30: Scailo.InventoryService.ViewByHash:input_type -> Scailo.InventoryHashSearchReq
-	33, // 31: Scailo.InventoryService.ViewByShortURL:input_type -> Scailo.SimpleSearchReq
+	34, // 31: Scailo.InventoryService.ViewByShortURL:input_type -> Scailo.SimpleSearchReq
 	5,  // 32: Scailo.InventoryService.ViewIssuable:input_type -> Scailo.IssuableInventorySearchReq
-	34, // 33: Scailo.InventoryService.ViewIssuedForGoodsDispatch:input_type -> Scailo.Identifier
-	34, // 34: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
-	34, // 35: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:input_type -> Scailo.Identifier
-	34, // 36: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
-	34, // 37: Scailo.InventoryService.ViewAdmittedFromProductionPlan:input_type -> Scailo.Identifier
+	35, // 33: Scailo.InventoryService.ViewIssuedForGoodsDispatch:input_type -> Scailo.Identifier
+	35, // 34: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
+	35, // 35: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:input_type -> Scailo.Identifier
+	35, // 36: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:input_type -> Scailo.Identifier
+	35, // 37: Scailo.InventoryService.ViewAdmittedFromProductionPlan:input_type -> Scailo.Identifier
 	8,  // 38: Scailo.InventoryService.ViewReturnableForPurchaseOrder:input_type -> Scailo.ReturnableInventorySearchReq
 	8,  // 39: Scailo.InventoryService.ViewReturnableForInwardJob:input_type -> Scailo.ReturnableInventorySearchReq
 	8,  // 40: Scailo.InventoryService.ViewReturnableForStockIssuance:input_type -> Scailo.ReturnableInventorySearchReq
 	8,  // 41: Scailo.InventoryService.ViewReturnableForSalesOrder:input_type -> Scailo.ReturnableInventorySearchReq
 	8,  // 42: Scailo.InventoryService.ViewReturnableForOutwardJob:input_type -> Scailo.ReturnableInventorySearchReq
 	7,  // 43: Scailo.InventoryService.ViewQuantityRemaining:input_type -> Scailo.InventoryServiceFamilyQuantityReq
-	34, // 44: Scailo.InventoryService.CountWorkInProgress:input_type -> Scailo.Identifier
-	34, // 45: Scailo.InventoryService.CountIndented:input_type -> Scailo.Identifier
-	34, // 46: Scailo.InventoryService.CountOrdered:input_type -> Scailo.Identifier
-	34, // 47: Scailo.InventoryService.ViewBaseDemandQuantity:input_type -> Scailo.Identifier
-	34, // 48: Scailo.InventoryService.ViewAdjustedDemandQuantity:input_type -> Scailo.Identifier
-	34, // 49: Scailo.InventoryService.ViewRequiredQuantity:input_type -> Scailo.Identifier
-	34, // 50: Scailo.InventoryService.ViewConsolidatedStatistics:input_type -> Scailo.Identifier
-	35, // 51: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:input_type -> Scailo.IdentifiersList
-	34, // 52: Scailo.InventoryService.ViewInStorage:input_type -> Scailo.Identifier
-	34, // 53: Scailo.InventoryService.ViewWorkInProgressStatistics:input_type -> Scailo.Identifier
-	34, // 54: Scailo.InventoryService.ViewIndentedStatistics:input_type -> Scailo.Identifier
-	34, // 55: Scailo.InventoryService.ViewOrderedStatistics:input_type -> Scailo.Identifier
-	34, // 56: Scailo.InventoryService.ViewDetailedDemand:input_type -> Scailo.Identifier
-	2,  // 57: Scailo.InventoryService.ViewByHash:output_type -> Scailo.GenericInventory
-	2,  // 58: Scailo.InventoryService.ViewByShortURL:output_type -> Scailo.GenericInventory
-	3,  // 59: Scailo.InventoryService.ViewIssuable:output_type -> Scailo.GenericInventoryList
-	3,  // 60: Scailo.InventoryService.ViewIssuedForGoodsDispatch:output_type -> Scailo.GenericInventoryList
-	3,  // 61: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
-	3,  // 62: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:output_type -> Scailo.GenericInventoryList
-	3,  // 63: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
-	3,  // 64: Scailo.InventoryService.ViewAdmittedFromProductionPlan:output_type -> Scailo.GenericInventoryList
-	3,  // 65: Scailo.InventoryService.ViewReturnableForPurchaseOrder:output_type -> Scailo.GenericInventoryList
-	3,  // 66: Scailo.InventoryService.ViewReturnableForInwardJob:output_type -> Scailo.GenericInventoryList
-	3,  // 67: Scailo.InventoryService.ViewReturnableForStockIssuance:output_type -> Scailo.GenericInventoryList
-	3,  // 68: Scailo.InventoryService.ViewReturnableForSalesOrder:output_type -> Scailo.GenericInventoryList
-	3,  // 69: Scailo.InventoryService.ViewReturnableForOutwardJob:output_type -> Scailo.GenericInventoryList
-	36, // 70: Scailo.InventoryService.ViewQuantityRemaining:output_type -> Scailo.QuantityResponse
-	36, // 71: Scailo.InventoryService.CountWorkInProgress:output_type -> Scailo.QuantityResponse
-	36, // 72: Scailo.InventoryService.CountIndented:output_type -> Scailo.QuantityResponse
-	36, // 73: Scailo.InventoryService.CountOrdered:output_type -> Scailo.QuantityResponse
-	36, // 74: Scailo.InventoryService.ViewBaseDemandQuantity:output_type -> Scailo.QuantityResponse
-	36, // 75: Scailo.InventoryService.ViewAdjustedDemandQuantity:output_type -> Scailo.QuantityResponse
-	36, // 76: Scailo.InventoryService.ViewRequiredQuantity:output_type -> Scailo.QuantityResponse
-	13, // 77: Scailo.InventoryService.ViewConsolidatedStatistics:output_type -> Scailo.ConsolidatedInventoryStatistics
-	14, // 78: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:output_type -> Scailo.ConsolidatedInventoryStatisticsList
-	3,  // 79: Scailo.InventoryService.ViewInStorage:output_type -> Scailo.GenericInventoryList
-	21, // 80: Scailo.InventoryService.ViewWorkInProgressStatistics:output_type -> Scailo.InventoryWorkInProgressStatistics
-	22, // 81: Scailo.InventoryService.ViewIndentedStatistics:output_type -> Scailo.InventoryIndentedStatistics
-	23, // 82: Scailo.InventoryService.ViewOrderedStatistics:output_type -> Scailo.InventoryOrderedStatistics
-	24, // 83: Scailo.InventoryService.ViewDetailedDemand:output_type -> Scailo.InventoryDetailedDemand
-	57, // [57:84] is the sub-list for method output_type
-	30, // [30:57] is the sub-list for method input_type
+	35, // 44: Scailo.InventoryService.CountWorkInProgress:input_type -> Scailo.Identifier
+	35, // 45: Scailo.InventoryService.CountIndented:input_type -> Scailo.Identifier
+	35, // 46: Scailo.InventoryService.CountOrdered:input_type -> Scailo.Identifier
+	35, // 47: Scailo.InventoryService.ViewBaseDemandQuantity:input_type -> Scailo.Identifier
+	35, // 48: Scailo.InventoryService.ViewAdjustedDemandQuantity:input_type -> Scailo.Identifier
+	35, // 49: Scailo.InventoryService.ViewRequiredQuantity:input_type -> Scailo.Identifier
+	35, // 50: Scailo.InventoryService.ViewConsolidatedStatistics:input_type -> Scailo.Identifier
+	36, // 51: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:input_type -> Scailo.IdentifiersList
+	35, // 52: Scailo.InventoryService.ViewInStorage:input_type -> Scailo.Identifier
+	35, // 53: Scailo.InventoryService.ViewWorkInProgressStatistics:input_type -> Scailo.Identifier
+	35, // 54: Scailo.InventoryService.ViewIndentedStatistics:input_type -> Scailo.Identifier
+	35, // 55: Scailo.InventoryService.ViewOrderedStatistics:input_type -> Scailo.Identifier
+	35, // 56: Scailo.InventoryService.ViewDetailedDemand:input_type -> Scailo.Identifier
+	27, // 57: Scailo.InventoryService.UpdateStorageWithShortURL:input_type -> Scailo.InventoryServiceUpdateStorageReq
+	27, // 58: Scailo.InventoryService.UpdateStorageWithInternalItemCode:input_type -> Scailo.InventoryServiceUpdateStorageReq
+	27, // 59: Scailo.InventoryService.MoveToStorageWithShortURL:input_type -> Scailo.InventoryServiceUpdateStorageReq
+	27, // 60: Scailo.InventoryService.MoveToStorageWithInternalItemCode:input_type -> Scailo.InventoryServiceUpdateStorageReq
+	2,  // 61: Scailo.InventoryService.ViewByHash:output_type -> Scailo.GenericInventory
+	2,  // 62: Scailo.InventoryService.ViewByShortURL:output_type -> Scailo.GenericInventory
+	3,  // 63: Scailo.InventoryService.ViewIssuable:output_type -> Scailo.GenericInventoryList
+	3,  // 64: Scailo.InventoryService.ViewIssuedForGoodsDispatch:output_type -> Scailo.GenericInventoryList
+	3,  // 65: Scailo.InventoryService.ViewIssuedForOutwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
+	3,  // 66: Scailo.InventoryService.ViewAdmittedFromGoodsReceipt:output_type -> Scailo.GenericInventoryList
+	3,  // 67: Scailo.InventoryService.ViewAdmittedFromInwardJobFreeIssueMaterial:output_type -> Scailo.GenericInventoryList
+	3,  // 68: Scailo.InventoryService.ViewAdmittedFromProductionPlan:output_type -> Scailo.GenericInventoryList
+	3,  // 69: Scailo.InventoryService.ViewReturnableForPurchaseOrder:output_type -> Scailo.GenericInventoryList
+	3,  // 70: Scailo.InventoryService.ViewReturnableForInwardJob:output_type -> Scailo.GenericInventoryList
+	3,  // 71: Scailo.InventoryService.ViewReturnableForStockIssuance:output_type -> Scailo.GenericInventoryList
+	3,  // 72: Scailo.InventoryService.ViewReturnableForSalesOrder:output_type -> Scailo.GenericInventoryList
+	3,  // 73: Scailo.InventoryService.ViewReturnableForOutwardJob:output_type -> Scailo.GenericInventoryList
+	37, // 74: Scailo.InventoryService.ViewQuantityRemaining:output_type -> Scailo.QuantityResponse
+	37, // 75: Scailo.InventoryService.CountWorkInProgress:output_type -> Scailo.QuantityResponse
+	37, // 76: Scailo.InventoryService.CountIndented:output_type -> Scailo.QuantityResponse
+	37, // 77: Scailo.InventoryService.CountOrdered:output_type -> Scailo.QuantityResponse
+	37, // 78: Scailo.InventoryService.ViewBaseDemandQuantity:output_type -> Scailo.QuantityResponse
+	37, // 79: Scailo.InventoryService.ViewAdjustedDemandQuantity:output_type -> Scailo.QuantityResponse
+	37, // 80: Scailo.InventoryService.ViewRequiredQuantity:output_type -> Scailo.QuantityResponse
+	13, // 81: Scailo.InventoryService.ViewConsolidatedStatistics:output_type -> Scailo.ConsolidatedInventoryStatistics
+	14, // 82: Scailo.InventoryService.ViewConsolidatedStatisticsForFamilies:output_type -> Scailo.ConsolidatedInventoryStatisticsList
+	3,  // 83: Scailo.InventoryService.ViewInStorage:output_type -> Scailo.GenericInventoryList
+	21, // 84: Scailo.InventoryService.ViewWorkInProgressStatistics:output_type -> Scailo.InventoryWorkInProgressStatistics
+	22, // 85: Scailo.InventoryService.ViewIndentedStatistics:output_type -> Scailo.InventoryIndentedStatistics
+	23, // 86: Scailo.InventoryService.ViewOrderedStatistics:output_type -> Scailo.InventoryOrderedStatistics
+	24, // 87: Scailo.InventoryService.ViewDetailedDemand:output_type -> Scailo.InventoryDetailedDemand
+	38, // 88: Scailo.InventoryService.UpdateStorageWithShortURL:output_type -> Scailo.IdentifierResponse
+	38, // 89: Scailo.InventoryService.UpdateStorageWithInternalItemCode:output_type -> Scailo.IdentifierResponse
+	38, // 90: Scailo.InventoryService.MoveToStorageWithShortURL:output_type -> Scailo.IdentifierResponse
+	38, // 91: Scailo.InventoryService.MoveToStorageWithInternalItemCode:output_type -> Scailo.IdentifierResponse
+	61, // [61:92] is the sub-list for method output_type
+	30, // [30:61] is the sub-list for method input_type
 	30, // [30:30] is the sub-list for extension type_name
 	30, // [30:30] is the sub-list for extension extendee
 	0,  // [0:30] is the sub-list for field type_name
@@ -2956,7 +3029,7 @@ func file_inventory_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_scailo_proto_rawDesc), len(file_inventory_scailo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   25,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -181,7 +181,7 @@ type FamiliesServiceClient interface {
 	ViewQCGroups(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyQCGroupsList, error)
 	// Add a image
 	AddImage(ctx context.Context, in *FamiliesServiceImageCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an item in a sales order
+	// Modify an image
 	UpdateImage(ctx context.Context, in *FamiliesServiceImageUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve a image
 	ApproveImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
