@@ -859,6 +859,8 @@ type GoodsReceiptsServiceItemCreateRequest struct {
 	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
 	// Stores the quantity (in cents) being admitted in vendor's unit of material
 	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,18,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -935,6 +937,13 @@ func (x *GoodsReceiptsServiceItemCreateRequest) GetVendorQuantity() uint64 {
 	return 0
 }
 
+func (x *GoodsReceiptsServiceItemCreateRequest) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
 // Describes the parameters required to add an individual item as part of multiple item addition to a goods receipt
 type GoodsReceiptsServiceMultipleItemsSingleton struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -946,6 +955,8 @@ type GoodsReceiptsServiceMultipleItemsSingleton struct {
 	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
 	// Stores the quantity (in cents) being admitted in vendor's unit of material
 	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,18,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1006,6 +1017,13 @@ func (x *GoodsReceiptsServiceMultipleItemsSingleton) GetVendorQuantity() uint64 
 		return x.VendorQuantity
 	}
 	return 0
+}
+
+func (x *GoodsReceiptsServiceMultipleItemsSingleton) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
 }
 
 // Describes the parameters required to add multiple items to a goods receipt
@@ -1085,6 +1103,8 @@ type GoodsReceiptsServiceItemUpdateRequest struct {
 	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
 	// Stores the quantity (in cents) being admitted in vendor's unit of material
 	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,18,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1154,6 +1174,13 @@ func (x *GoodsReceiptsServiceItemUpdateRequest) GetVendorQuantity() uint64 {
 	return 0
 }
 
+func (x *GoodsReceiptsServiceItemUpdateRequest) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
+}
+
 // Describes the parameters that constitute an item associated to a goods receipt
 type GoodsReceiptItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1177,6 +1204,8 @@ type GoodsReceiptItem struct {
 	VendorUomId uint64 `protobuf:"varint,13,opt,name=vendor_uom_id,json=vendorUomId,proto3" json:"vendor_uom_id,omitempty"`
 	// Stores the quantity (in cents) being admitted in vendor's unit of material
 	VendorQuantity uint64 `protobuf:"varint,14,opt,name=vendor_quantity,json=vendorQuantity,proto3" json:"vendor_quantity,omitempty"`
+	// Optional specifications
+	Specifications string `protobuf:"bytes,18,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	// ----------------------------------------
 	// The UUID of the associated goods receipt
 	GoodsReceiptUuid string `protobuf:"bytes,110,opt,name=goods_receipt_uuid,json=goodsReceiptUuid,proto3" json:"goods_receipt_uuid,omitempty"`
@@ -1284,6 +1313,13 @@ func (x *GoodsReceiptItem) GetVendorQuantity() uint64 {
 		return x.VendorQuantity
 	}
 	return 0
+}
+
+func (x *GoodsReceiptItem) GetSpecifications() string {
+	if x != nil {
+		return x.Specifications
+	}
+	return ""
 }
 
 func (x *GoodsReceiptItem) GetGoodsReceiptUuid() string {
@@ -2758,7 +2794,7 @@ const file_goods_receipts_scailo_proto_rawDesc = "" +
 	"\x0evendor_bill_no\x18\x0e \x01(\tR\fvendorBillNo\x12(\n" +
 	"\x10vendor_bill_date\x18\x0f \x01(\tR\x0evendorBillDate\x12,\n" +
 	"\x04list\x18\x14 \x03(\v2\x18.Scailo.GoodsReceiptItemR\x04list\x123\n" +
-	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xb8\x02\n" +
+	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xe0\x02\n" +
 	"%GoodsReceiptsServiceItemCreateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
 	"\x10goods_receipt_id\x18\n" +
@@ -2766,23 +2802,26 @@ const file_goods_receipts_scailo_proto_rawDesc = "" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rvendor_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vvendorUomId\x120\n" +
-	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\"\xe7\x01\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\x12&\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\x8f\x02\n" +
 	"*GoodsReceiptsServiceMultipleItemsSingleton\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rvendor_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vvendorUomId\x120\n" +
-	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\"\xce\x01\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\x12&\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\xce\x01\n" +
 	".GoodsReceiptsServiceMultipleItemsCreateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
 	"\x10goods_receipt_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0egoodsReceiptId\x12F\n" +
-	"\x04list\x18\v \x03(\v22.Scailo.GoodsReceiptsServiceMultipleItemsSingletonR\x04list\"\xf8\x01\n" +
+	"\x04list\x18\v \x03(\v22.Scailo.GoodsReceiptsServiceMultipleItemsSingletonR\x04list\"\xa0\x02\n" +
 	"%GoodsReceiptsServiceItemUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rvendor_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vvendorUomId\x120\n" +
-	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\"\x88\x04\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0evendorQuantity\x12&\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\"\xb0\x04\n" +
 	"\x10GoodsReceiptItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2795,7 +2834,8 @@ const file_goods_receipts_scailo_proto_rawDesc = "" +
 	"\tfamily_id\x18\v \x01(\x04R\bfamilyId\x12+\n" +
 	"\x11internal_quantity\x18\f \x01(\x04R\x10internalQuantity\x12\"\n" +
 	"\rvendor_uom_id\x18\r \x01(\x04R\vvendorUomId\x12'\n" +
-	"\x0fvendor_quantity\x18\x0e \x01(\x04R\x0evendorQuantity\x12,\n" +
+	"\x0fvendor_quantity\x18\x0e \x01(\x04R\x0evendorQuantity\x12&\n" +
+	"\x0especifications\x18\x12 \x01(\tR\x0especifications\x12,\n" +
 	"\x12goods_receipt_uuid\x18n \x01(\tR\x10goodsReceiptUuid\x12\x1f\n" +
 	"\vfamily_uuid\x18o \x01(\tR\n" +
 	"familyUuid\"=\n" +

@@ -1837,6 +1837,52 @@ func (x *QCSamplesServiceParameterUpdateRequest) GetDescription() string {
 	return ""
 }
 
+// Describes the parameters required to update a list of parameters in a qc sample
+type QCSamplesServiceParameterUpdateRequestsList struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of records
+	List          []*QCSamplesServiceParameterUpdateRequest `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QCSamplesServiceParameterUpdateRequestsList) Reset() {
+	*x = QCSamplesServiceParameterUpdateRequestsList{}
+	mi := &file_qc_samples_scailo_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QCSamplesServiceParameterUpdateRequestsList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QCSamplesServiceParameterUpdateRequestsList) ProtoMessage() {}
+
+func (x *QCSamplesServiceParameterUpdateRequestsList) ProtoReflect() protoreflect.Message {
+	mi := &file_qc_samples_scailo_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QCSamplesServiceParameterUpdateRequestsList.ProtoReflect.Descriptor instead.
+func (*QCSamplesServiceParameterUpdateRequestsList) Descriptor() ([]byte, []int) {
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *QCSamplesServiceParameterUpdateRequestsList) GetList() []*QCSamplesServiceParameterUpdateRequest {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 // Describes the parameters that constitute an parameter associated to a qc sample
 type QCSampleParameter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1884,7 +1930,7 @@ type QCSampleParameter struct {
 
 func (x *QCSampleParameter) Reset() {
 	*x = QCSampleParameter{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[14]
+	mi := &file_qc_samples_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1896,7 +1942,7 @@ func (x *QCSampleParameter) String() string {
 func (*QCSampleParameter) ProtoMessage() {}
 
 func (x *QCSampleParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[14]
+	mi := &file_qc_samples_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1909,7 +1955,7 @@ func (x *QCSampleParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParameter.ProtoReflect.Descriptor instead.
 func (*QCSampleParameter) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{14}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *QCSampleParameter) GetEntityUuid() string {
@@ -2056,7 +2102,7 @@ type QCSampleParametersList struct {
 
 func (x *QCSampleParametersList) Reset() {
 	*x = QCSampleParametersList{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[15]
+	mi := &file_qc_samples_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2068,7 +2114,7 @@ func (x *QCSampleParametersList) String() string {
 func (*QCSampleParametersList) ProtoMessage() {}
 
 func (x *QCSampleParametersList) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[15]
+	mi := &file_qc_samples_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2081,7 +2127,7 @@ func (x *QCSampleParametersList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParametersList.ProtoReflect.Descriptor instead.
 func (*QCSampleParametersList) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{15}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *QCSampleParametersList) GetList() []*QCSampleParameter {
@@ -2102,7 +2148,7 @@ type QCSampleParameterHistoryRequest struct {
 
 func (x *QCSampleParameterHistoryRequest) Reset() {
 	*x = QCSampleParameterHistoryRequest{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[16]
+	mi := &file_qc_samples_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2114,7 +2160,7 @@ func (x *QCSampleParameterHistoryRequest) String() string {
 func (*QCSampleParameterHistoryRequest) ProtoMessage() {}
 
 func (x *QCSampleParameterHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[16]
+	mi := &file_qc_samples_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2127,7 +2173,7 @@ func (x *QCSampleParameterHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParameterHistoryRequest.ProtoReflect.Descriptor instead.
 func (*QCSampleParameterHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{16}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *QCSampleParameterHistoryRequest) GetQcSampleParameterId() uint64 {
@@ -2164,7 +2210,7 @@ type QCSampleParameterHistory struct {
 
 func (x *QCSampleParameterHistory) Reset() {
 	*x = QCSampleParameterHistory{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[17]
+	mi := &file_qc_samples_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2176,7 +2222,7 @@ func (x *QCSampleParameterHistory) String() string {
 func (*QCSampleParameterHistory) ProtoMessage() {}
 
 func (x *QCSampleParameterHistory) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[17]
+	mi := &file_qc_samples_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2189,7 +2235,7 @@ func (x *QCSampleParameterHistory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParameterHistory.ProtoReflect.Descriptor instead.
 func (*QCSampleParameterHistory) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{17}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *QCSampleParameterHistory) GetEntityUuid() string {
@@ -2266,7 +2312,7 @@ type QCSampleParameterHistoryList struct {
 
 func (x *QCSampleParameterHistoryList) Reset() {
 	*x = QCSampleParameterHistoryList{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[18]
+	mi := &file_qc_samples_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2278,7 +2324,7 @@ func (x *QCSampleParameterHistoryList) String() string {
 func (*QCSampleParameterHistoryList) ProtoMessage() {}
 
 func (x *QCSampleParameterHistoryList) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[18]
+	mi := &file_qc_samples_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2291,7 +2337,7 @@ func (x *QCSampleParameterHistoryList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParameterHistoryList.ProtoReflect.Descriptor instead.
 func (*QCSampleParameterHistoryList) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{18}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *QCSampleParameterHistoryList) GetList() []*QCSampleParameterHistory {
@@ -2355,7 +2401,7 @@ type QCSampleParametersSearchRequest struct {
 
 func (x *QCSampleParametersSearchRequest) Reset() {
 	*x = QCSampleParametersSearchRequest{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[19]
+	mi := &file_qc_samples_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2367,7 +2413,7 @@ func (x *QCSampleParametersSearchRequest) String() string {
 func (*QCSampleParametersSearchRequest) ProtoMessage() {}
 
 func (x *QCSampleParametersSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[19]
+	mi := &file_qc_samples_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2380,7 +2426,7 @@ func (x *QCSampleParametersSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSampleParametersSearchRequest.ProtoReflect.Descriptor instead.
 func (*QCSampleParametersSearchRequest) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{19}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *QCSampleParametersSearchRequest) GetIsActive() BOOL_FILTER {
@@ -2547,7 +2593,7 @@ type QCSamplesServicePaginatedParametersResponse struct {
 
 func (x *QCSamplesServicePaginatedParametersResponse) Reset() {
 	*x = QCSamplesServicePaginatedParametersResponse{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[20]
+	mi := &file_qc_samples_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2559,7 +2605,7 @@ func (x *QCSamplesServicePaginatedParametersResponse) String() string {
 func (*QCSamplesServicePaginatedParametersResponse) ProtoMessage() {}
 
 func (x *QCSamplesServicePaginatedParametersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[20]
+	mi := &file_qc_samples_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2572,7 +2618,7 @@ func (x *QCSamplesServicePaginatedParametersResponse) ProtoReflect() protoreflec
 
 // Deprecated: Use QCSamplesServicePaginatedParametersResponse.ProtoReflect.Descriptor instead.
 func (*QCSamplesServicePaginatedParametersResponse) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{20}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *QCSamplesServicePaginatedParametersResponse) GetCount() uint64 {
@@ -2624,7 +2670,7 @@ type QCSamplesCountStatistics struct {
 
 func (x *QCSamplesCountStatistics) Reset() {
 	*x = QCSamplesCountStatistics{}
-	mi := &file_qc_samples_scailo_proto_msgTypes[21]
+	mi := &file_qc_samples_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2636,7 +2682,7 @@ func (x *QCSamplesCountStatistics) String() string {
 func (*QCSamplesCountStatistics) ProtoMessage() {}
 
 func (x *QCSamplesCountStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_qc_samples_scailo_proto_msgTypes[21]
+	mi := &file_qc_samples_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2649,7 +2695,7 @@ func (x *QCSamplesCountStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QCSamplesCountStatistics.ProtoReflect.Descriptor instead.
 func (*QCSamplesCountStatistics) Descriptor() ([]byte, []int) {
-	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{21}
+	return file_qc_samples_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *QCSamplesCountStatistics) GetOpen() uint64 {
@@ -2859,7 +2905,9 @@ const file_qc_samples_scailo_proto_rawDesc = "" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x122\n" +
 	"\x15number_observed_value\x18\r \x01(\x03R\x13numberObservedValue\x12.\n" +
 	"\x13text_observed_value\x18\x0e \x01(\tR\x11textObservedValue\x12 \n" +
-	"\vdescription\x18\x14 \x01(\tR\vdescription\"\xa4\a\n" +
+	"\vdescription\x18\x14 \x01(\tR\vdescription\"q\n" +
+	"+QCSamplesServiceParameterUpdateRequestsList\x12B\n" +
+	"\x04list\x18\x01 \x03(\v2..Scailo.QCSamplesServiceParameterUpdateRequestR\x04list\"\xa4\a\n" +
 	"\x11QCSampleParameter\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2975,7 +3023,7 @@ const file_qc_samples_scailo_proto_rawDesc = "" +
 	"'QC_SAMPLE_PARAMETER_SORT_KEY_CHECKED_AT\x10\v\x12-\n" +
 	")QC_SAMPLE_PARAMETER_SORT_KEY_QC_SAMPLE_ID\x10\f\x12,\n" +
 	"(QC_SAMPLE_PARAMETER_SORT_KEY_QC_PARAM_ID\x10\r\x12'\n" +
-	"#QC_SAMPLE_PARAMETER_SORT_KEY_UOM_ID\x10\x0e2\x88\x15\n" +
+	"#QC_SAMPLE_PARAMETER_SORT_KEY_UOM_ID\x10\x0e2\xea\x15\n" +
 	"\x10QCSamplesService\x12L\n" +
 	"\x06Create\x12%.Scailo.QCSamplesServiceCreateRequest\x1a\x1b.Scailo.IdentifierUUIDsList\x12K\n" +
 	"\x06Update\x12%.Scailo.QCSamplesServiceUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
@@ -2989,7 +3037,8 @@ const file_qc_samples_scailo_proto_rawDesc = "" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12]\n" +
-	"\x0fUpdateParameter\x12..Scailo.QCSamplesServiceParameterUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12B\n" +
+	"\x0fUpdateParameter\x12..Scailo.QCSamplesServiceParameterUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12`\n" +
+	"\x10UpdateParameters\x123.Scailo.QCSamplesServiceParameterUpdateRequestsList\x1a\x17.Scailo.IdentifiersList\x12B\n" +
 	"\x11ViewParameterByID\x12\x12.Scailo.Identifier\x1a\x19.Scailo.QCSampleParameter\x12H\n" +
 	"\x0eViewParameters\x12\x16.Scailo.IdentifierUUID\x1a\x1e.Scailo.QCSampleParametersList\x12e\n" +
 	"\x14ViewParameterHistory\x12'.Scailo.QCSampleParameterHistoryRequest\x1a$.Scailo.QCSampleParameterHistoryList\x12w\n" +
@@ -3030,7 +3079,7 @@ func file_qc_samples_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_qc_samples_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qc_samples_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_qc_samples_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_qc_samples_scailo_proto_goTypes = []any{
 	(QC_SAMPLE_LIFECYCLE)(0),                                  // 0: Scailo.QC_SAMPLE_LIFECYCLE
 	(QC_SAMPLE_SORT_KEY)(0),                                   // 1: Scailo.QC_SAMPLE_SORT_KEY
@@ -3049,150 +3098,154 @@ var file_qc_samples_scailo_proto_goTypes = []any{
 	(*QCSamplesServiceCountReq)(nil),                          // 14: Scailo.QCSamplesServiceCountReq
 	(*QCSamplesServiceSearchAllReq)(nil),                      // 15: Scailo.QCSamplesServiceSearchAllReq
 	(*QCSamplesServiceParameterUpdateRequest)(nil),            // 16: Scailo.QCSamplesServiceParameterUpdateRequest
-	(*QCSampleParameter)(nil),                                 // 17: Scailo.QCSampleParameter
-	(*QCSampleParametersList)(nil),                            // 18: Scailo.QCSampleParametersList
-	(*QCSampleParameterHistoryRequest)(nil),                   // 19: Scailo.QCSampleParameterHistoryRequest
-	(*QCSampleParameterHistory)(nil),                          // 20: Scailo.QCSampleParameterHistory
-	(*QCSampleParameterHistoryList)(nil),                      // 21: Scailo.QCSampleParameterHistoryList
-	(*QCSampleParametersSearchRequest)(nil),                   // 22: Scailo.QCSampleParametersSearchRequest
-	(*QCSamplesServicePaginatedParametersResponse)(nil),       // 23: Scailo.QCSamplesServicePaginatedParametersResponse
-	(*QCSamplesCountStatistics)(nil),                          // 24: Scailo.QCSamplesCountStatistics
-	(*EmployeeMetadata)(nil),                                  // 25: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 26: Scailo.ApprovalMetadata
-	(FAMILY_TYPE)(0),                                          // 27: Scailo.FAMILY_TYPE
-	(*Family)(nil),                                            // 28: Scailo.Family
-	(*QCGroup)(nil),                                           // 29: Scailo.QCGroup
-	(*GenericInventory)(nil),                                  // 30: Scailo.GenericInventory
-	(BOOL_FILTER)(0),                                          // 31: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 32: Scailo.SORT_ORDER
-	(QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE)(0),                  // 33: Scailo.QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE
-	(*IdentifierUUIDWithUserComment)(nil),                     // 34: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithEmailAttributes)(nil),                     // 35: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 36: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 37: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 38: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 39: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 40: Scailo.ActiveStatus
-	(*IdentifierUUIDsList)(nil),                               // 41: Scailo.IdentifierUUIDsList
-	(*IdentifierResponse)(nil),                                // 42: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 43: Scailo.MagicLink
-	(*StandardFile)(nil),                                      // 44: Scailo.StandardFile
-	(*BooleanResponse)(nil),                                   // 45: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 46: Scailo.CountResponse
+	(*QCSamplesServiceParameterUpdateRequestsList)(nil),       // 17: Scailo.QCSamplesServiceParameterUpdateRequestsList
+	(*QCSampleParameter)(nil),                                 // 18: Scailo.QCSampleParameter
+	(*QCSampleParametersList)(nil),                            // 19: Scailo.QCSampleParametersList
+	(*QCSampleParameterHistoryRequest)(nil),                   // 20: Scailo.QCSampleParameterHistoryRequest
+	(*QCSampleParameterHistory)(nil),                          // 21: Scailo.QCSampleParameterHistory
+	(*QCSampleParameterHistoryList)(nil),                      // 22: Scailo.QCSampleParameterHistoryList
+	(*QCSampleParametersSearchRequest)(nil),                   // 23: Scailo.QCSampleParametersSearchRequest
+	(*QCSamplesServicePaginatedParametersResponse)(nil),       // 24: Scailo.QCSamplesServicePaginatedParametersResponse
+	(*QCSamplesCountStatistics)(nil),                          // 25: Scailo.QCSamplesCountStatistics
+	(*EmployeeMetadata)(nil),                                  // 26: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 27: Scailo.ApprovalMetadata
+	(FAMILY_TYPE)(0),                                          // 28: Scailo.FAMILY_TYPE
+	(*Family)(nil),                                            // 29: Scailo.Family
+	(*QCGroup)(nil),                                           // 30: Scailo.QCGroup
+	(*GenericInventory)(nil),                                  // 31: Scailo.GenericInventory
+	(BOOL_FILTER)(0),                                          // 32: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 33: Scailo.SORT_ORDER
+	(QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE)(0),                  // 34: Scailo.QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE
+	(*IdentifierUUIDWithUserComment)(nil),                     // 35: Scailo.IdentifierUUIDWithUserComment
+	(*IdentifierWithEmailAttributes)(nil),                     // 36: Scailo.IdentifierWithEmailAttributes
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 37: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 38: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 39: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 40: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 41: Scailo.ActiveStatus
+	(*IdentifierUUIDsList)(nil),                               // 42: Scailo.IdentifierUUIDsList
+	(*IdentifierResponse)(nil),                                // 43: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 44: Scailo.MagicLink
+	(*StandardFile)(nil),                                      // 45: Scailo.StandardFile
+	(*BooleanResponse)(nil),                                   // 46: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 47: Scailo.CountResponse
 }
 var file_qc_samples_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogQCSampleLC.operation:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
-	25, // 1: Scailo.QCSample.metadata:type_name -> Scailo.EmployeeMetadata
-	26, // 2: Scailo.QCSample.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	26, // 1: Scailo.QCSample.metadata:type_name -> Scailo.EmployeeMetadata
+	27, // 2: Scailo.QCSample.approval_metadata:type_name -> Scailo.ApprovalMetadata
 	0,  // 3: Scailo.QCSample.status:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
 	3,  // 4: Scailo.QCSample.logs:type_name -> Scailo.LogbookLogQCSampleLC
-	27, // 5: Scailo.QCSample.family_type:type_name -> Scailo.FAMILY_TYPE
+	28, // 5: Scailo.QCSample.family_type:type_name -> Scailo.FAMILY_TYPE
 	7,  // 6: Scailo.QCSampleWithMetadata.qc_sample:type_name -> Scailo.QCSample
-	28, // 7: Scailo.QCSampleWithMetadata.family:type_name -> Scailo.Family
-	29, // 8: Scailo.QCSampleWithMetadata.qc_group:type_name -> Scailo.QCGroup
-	30, // 9: Scailo.QCSampleWithMetadata.inventory_item:type_name -> Scailo.GenericInventory
+	29, // 7: Scailo.QCSampleWithMetadata.family:type_name -> Scailo.Family
+	30, // 8: Scailo.QCSampleWithMetadata.qc_group:type_name -> Scailo.QCGroup
+	31, // 9: Scailo.QCSampleWithMetadata.inventory_item:type_name -> Scailo.GenericInventory
 	7,  // 10: Scailo.QCSamplesList.list:type_name -> Scailo.QCSample
 	8,  // 11: Scailo.QCSamplesWithMetadataList.list:type_name -> Scailo.QCSampleWithMetadata
-	31, // 12: Scailo.QCSamplesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32, // 13: Scailo.QCSamplesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	32, // 12: Scailo.QCSamplesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	33, // 13: Scailo.QCSamplesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 14: Scailo.QCSamplesServicePaginationReq.sort_key:type_name -> Scailo.QC_SAMPLE_SORT_KEY
 	0,  // 15: Scailo.QCSamplesServicePaginationReq.status:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
 	7,  // 16: Scailo.QCSamplesServicePaginationResponse.payload:type_name -> Scailo.QCSample
-	31, // 17: Scailo.QCSamplesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32, // 18: Scailo.QCSamplesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	32, // 17: Scailo.QCSamplesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	33, // 18: Scailo.QCSamplesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 19: Scailo.QCSamplesServiceFilterReq.sort_key:type_name -> Scailo.QC_SAMPLE_SORT_KEY
 	0,  // 20: Scailo.QCSamplesServiceFilterReq.status:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
-	27, // 21: Scailo.QCSamplesServiceFilterReq.family_type:type_name -> Scailo.FAMILY_TYPE
-	31, // 22: Scailo.QCSamplesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	28, // 21: Scailo.QCSamplesServiceFilterReq.family_type:type_name -> Scailo.FAMILY_TYPE
+	32, // 22: Scailo.QCSamplesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
 	0,  // 23: Scailo.QCSamplesServiceCountReq.status:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
-	27, // 24: Scailo.QCSamplesServiceCountReq.family_type:type_name -> Scailo.FAMILY_TYPE
-	31, // 25: Scailo.QCSamplesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	32, // 26: Scailo.QCSamplesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	28, // 24: Scailo.QCSamplesServiceCountReq.family_type:type_name -> Scailo.FAMILY_TYPE
+	32, // 25: Scailo.QCSamplesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	33, // 26: Scailo.QCSamplesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 27: Scailo.QCSamplesServiceSearchAllReq.sort_key:type_name -> Scailo.QC_SAMPLE_SORT_KEY
 	0,  // 28: Scailo.QCSamplesServiceSearchAllReq.status:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
-	27, // 29: Scailo.QCSamplesServiceSearchAllReq.family_type:type_name -> Scailo.FAMILY_TYPE
-	25, // 30: Scailo.QCSampleParameter.metadata:type_name -> Scailo.EmployeeMetadata
-	33, // 31: Scailo.QCSampleParameter.acceptable_value_type:type_name -> Scailo.QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE
-	17, // 32: Scailo.QCSampleParametersList.list:type_name -> Scailo.QCSampleParameter
-	25, // 33: Scailo.QCSampleParameterHistory.metadata:type_name -> Scailo.EmployeeMetadata
-	20, // 34: Scailo.QCSampleParameterHistoryList.list:type_name -> Scailo.QCSampleParameterHistory
-	31, // 35: Scailo.QCSampleParametersSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	32, // 36: Scailo.QCSampleParametersSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	2,  // 37: Scailo.QCSampleParametersSearchRequest.sort_key:type_name -> Scailo.QC_SAMPLE_PARAMETER_SORT_KEY
-	17, // 38: Scailo.QCSamplesServicePaginatedParametersResponse.payload:type_name -> Scailo.QCSampleParameter
-	4,  // 39: Scailo.QCSamplesService.Create:input_type -> Scailo.QCSamplesServiceCreateRequest
-	5,  // 40: Scailo.QCSamplesService.Update:input_type -> Scailo.QCSamplesServiceUpdateRequest
-	34, // 41: Scailo.QCSamplesService.Finish:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 42: Scailo.QCSamplesService.Accept:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 43: Scailo.QCSamplesService.AcceptWithDeviation:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 44: Scailo.QCSamplesService.Reject:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 45: Scailo.QCSamplesService.Cancel:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 46: Scailo.QCSamplesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	34, // 47: Scailo.QCSamplesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	35, // 48: Scailo.QCSamplesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	36, // 49: Scailo.QCSamplesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	16, // 50: Scailo.QCSamplesService.UpdateParameter:input_type -> Scailo.QCSamplesServiceParameterUpdateRequest
-	37, // 51: Scailo.QCSamplesService.ViewParameterByID:input_type -> Scailo.Identifier
-	38, // 52: Scailo.QCSamplesService.ViewParameters:input_type -> Scailo.IdentifierUUID
-	19, // 53: Scailo.QCSamplesService.ViewParameterHistory:input_type -> Scailo.QCSampleParameterHistoryRequest
-	22, // 54: Scailo.QCSamplesService.ViewPaginatedParameters:input_type -> Scailo.QCSampleParametersSearchRequest
-	22, // 55: Scailo.QCSamplesService.SearchParametersWithPagination:input_type -> Scailo.QCSampleParametersSearchRequest
-	38, // 56: Scailo.QCSamplesService.DownloadParametersAsCSV:input_type -> Scailo.IdentifierUUID
-	37, // 57: Scailo.QCSamplesService.ViewByID:input_type -> Scailo.Identifier
-	38, // 58: Scailo.QCSamplesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	37, // 59: Scailo.QCSamplesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	38, // 60: Scailo.QCSamplesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 61: Scailo.QCSamplesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	38, // 62: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	40, // 63: Scailo.QCSamplesService.ViewAll:input_type -> Scailo.ActiveStatus
-	38, // 64: Scailo.QCSamplesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	11, // 65: Scailo.QCSamplesService.ViewWithPagination:input_type -> Scailo.QCSamplesServicePaginationReq
-	38, // 66: Scailo.QCSamplesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	38, // 67: Scailo.QCSamplesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	15, // 68: Scailo.QCSamplesService.SearchAll:input_type -> Scailo.QCSamplesServiceSearchAllReq
-	13, // 69: Scailo.QCSamplesService.Filter:input_type -> Scailo.QCSamplesServiceFilterReq
-	14, // 70: Scailo.QCSamplesService.Count:input_type -> Scailo.QCSamplesServiceCountReq
-	38, // 71: Scailo.QCSamplesService.CountsForInventoryItem:input_type -> Scailo.IdentifierUUID
-	13, // 72: Scailo.QCSamplesService.DownloadAsCSV:input_type -> Scailo.QCSamplesServiceFilterReq
-	41, // 73: Scailo.QCSamplesService.Create:output_type -> Scailo.IdentifierUUIDsList
-	42, // 74: Scailo.QCSamplesService.Update:output_type -> Scailo.IdentifierResponse
-	42, // 75: Scailo.QCSamplesService.Finish:output_type -> Scailo.IdentifierResponse
-	42, // 76: Scailo.QCSamplesService.Accept:output_type -> Scailo.IdentifierResponse
-	42, // 77: Scailo.QCSamplesService.AcceptWithDeviation:output_type -> Scailo.IdentifierResponse
-	42, // 78: Scailo.QCSamplesService.Reject:output_type -> Scailo.IdentifierResponse
-	42, // 79: Scailo.QCSamplesService.Cancel:output_type -> Scailo.IdentifierResponse
-	42, // 80: Scailo.QCSamplesService.Reopen:output_type -> Scailo.IdentifierResponse
-	42, // 81: Scailo.QCSamplesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	42, // 82: Scailo.QCSamplesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	43, // 83: Scailo.QCSamplesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	42, // 84: Scailo.QCSamplesService.UpdateParameter:output_type -> Scailo.IdentifierResponse
-	17, // 85: Scailo.QCSamplesService.ViewParameterByID:output_type -> Scailo.QCSampleParameter
-	18, // 86: Scailo.QCSamplesService.ViewParameters:output_type -> Scailo.QCSampleParametersList
-	21, // 87: Scailo.QCSamplesService.ViewParameterHistory:output_type -> Scailo.QCSampleParameterHistoryList
-	23, // 88: Scailo.QCSamplesService.ViewPaginatedParameters:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
-	23, // 89: Scailo.QCSamplesService.SearchParametersWithPagination:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
-	44, // 90: Scailo.QCSamplesService.DownloadParametersAsCSV:output_type -> Scailo.StandardFile
-	7,  // 91: Scailo.QCSamplesService.ViewByID:output_type -> Scailo.QCSample
-	7,  // 92: Scailo.QCSamplesService.ViewByUUID:output_type -> Scailo.QCSample
-	7,  // 93: Scailo.QCSamplesService.ViewEssentialByID:output_type -> Scailo.QCSample
-	7,  // 94: Scailo.QCSamplesService.ViewEssentialByUUID:output_type -> Scailo.QCSample
-	9,  // 95: Scailo.QCSamplesService.ViewFromIDs:output_type -> Scailo.QCSamplesList
-	6,  // 96: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QCSampleAncillaryParameters
-	9,  // 97: Scailo.QCSamplesService.ViewAll:output_type -> Scailo.QCSamplesList
-	9,  // 98: Scailo.QCSamplesService.ViewAllForEntityUUID:output_type -> Scailo.QCSamplesList
-	12, // 99: Scailo.QCSamplesService.ViewWithPagination:output_type -> Scailo.QCSamplesServicePaginationResponse
-	45, // 100: Scailo.QCSamplesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	44, // 101: Scailo.QCSamplesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	10, // 102: Scailo.QCSamplesService.SearchAll:output_type -> Scailo.QCSamplesWithMetadataList
-	9,  // 103: Scailo.QCSamplesService.Filter:output_type -> Scailo.QCSamplesList
-	46, // 104: Scailo.QCSamplesService.Count:output_type -> Scailo.CountResponse
-	24, // 105: Scailo.QCSamplesService.CountsForInventoryItem:output_type -> Scailo.QCSamplesCountStatistics
-	44, // 106: Scailo.QCSamplesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	73, // [73:107] is the sub-list for method output_type
-	39, // [39:73] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	28, // 29: Scailo.QCSamplesServiceSearchAllReq.family_type:type_name -> Scailo.FAMILY_TYPE
+	16, // 30: Scailo.QCSamplesServiceParameterUpdateRequestsList.list:type_name -> Scailo.QCSamplesServiceParameterUpdateRequest
+	26, // 31: Scailo.QCSampleParameter.metadata:type_name -> Scailo.EmployeeMetadata
+	34, // 32: Scailo.QCSampleParameter.acceptable_value_type:type_name -> Scailo.QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE
+	18, // 33: Scailo.QCSampleParametersList.list:type_name -> Scailo.QCSampleParameter
+	26, // 34: Scailo.QCSampleParameterHistory.metadata:type_name -> Scailo.EmployeeMetadata
+	21, // 35: Scailo.QCSampleParameterHistoryList.list:type_name -> Scailo.QCSampleParameterHistory
+	32, // 36: Scailo.QCSampleParametersSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	33, // 37: Scailo.QCSampleParametersSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	2,  // 38: Scailo.QCSampleParametersSearchRequest.sort_key:type_name -> Scailo.QC_SAMPLE_PARAMETER_SORT_KEY
+	18, // 39: Scailo.QCSamplesServicePaginatedParametersResponse.payload:type_name -> Scailo.QCSampleParameter
+	4,  // 40: Scailo.QCSamplesService.Create:input_type -> Scailo.QCSamplesServiceCreateRequest
+	5,  // 41: Scailo.QCSamplesService.Update:input_type -> Scailo.QCSamplesServiceUpdateRequest
+	35, // 42: Scailo.QCSamplesService.Finish:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 43: Scailo.QCSamplesService.Accept:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 44: Scailo.QCSamplesService.AcceptWithDeviation:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 45: Scailo.QCSamplesService.Reject:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 46: Scailo.QCSamplesService.Cancel:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 47: Scailo.QCSamplesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	35, // 48: Scailo.QCSamplesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36, // 49: Scailo.QCSamplesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	37, // 50: Scailo.QCSamplesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	16, // 51: Scailo.QCSamplesService.UpdateParameter:input_type -> Scailo.QCSamplesServiceParameterUpdateRequest
+	17, // 52: Scailo.QCSamplesService.UpdateParameters:input_type -> Scailo.QCSamplesServiceParameterUpdateRequestsList
+	38, // 53: Scailo.QCSamplesService.ViewParameterByID:input_type -> Scailo.Identifier
+	39, // 54: Scailo.QCSamplesService.ViewParameters:input_type -> Scailo.IdentifierUUID
+	20, // 55: Scailo.QCSamplesService.ViewParameterHistory:input_type -> Scailo.QCSampleParameterHistoryRequest
+	23, // 56: Scailo.QCSamplesService.ViewPaginatedParameters:input_type -> Scailo.QCSampleParametersSearchRequest
+	23, // 57: Scailo.QCSamplesService.SearchParametersWithPagination:input_type -> Scailo.QCSampleParametersSearchRequest
+	39, // 58: Scailo.QCSamplesService.DownloadParametersAsCSV:input_type -> Scailo.IdentifierUUID
+	38, // 59: Scailo.QCSamplesService.ViewByID:input_type -> Scailo.Identifier
+	39, // 60: Scailo.QCSamplesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	38, // 61: Scailo.QCSamplesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	39, // 62: Scailo.QCSamplesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 63: Scailo.QCSamplesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	39, // 64: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	41, // 65: Scailo.QCSamplesService.ViewAll:input_type -> Scailo.ActiveStatus
+	39, // 66: Scailo.QCSamplesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	11, // 67: Scailo.QCSamplesService.ViewWithPagination:input_type -> Scailo.QCSamplesServicePaginationReq
+	39, // 68: Scailo.QCSamplesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	39, // 69: Scailo.QCSamplesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	15, // 70: Scailo.QCSamplesService.SearchAll:input_type -> Scailo.QCSamplesServiceSearchAllReq
+	13, // 71: Scailo.QCSamplesService.Filter:input_type -> Scailo.QCSamplesServiceFilterReq
+	14, // 72: Scailo.QCSamplesService.Count:input_type -> Scailo.QCSamplesServiceCountReq
+	39, // 73: Scailo.QCSamplesService.CountsForInventoryItem:input_type -> Scailo.IdentifierUUID
+	13, // 74: Scailo.QCSamplesService.DownloadAsCSV:input_type -> Scailo.QCSamplesServiceFilterReq
+	42, // 75: Scailo.QCSamplesService.Create:output_type -> Scailo.IdentifierUUIDsList
+	43, // 76: Scailo.QCSamplesService.Update:output_type -> Scailo.IdentifierResponse
+	43, // 77: Scailo.QCSamplesService.Finish:output_type -> Scailo.IdentifierResponse
+	43, // 78: Scailo.QCSamplesService.Accept:output_type -> Scailo.IdentifierResponse
+	43, // 79: Scailo.QCSamplesService.AcceptWithDeviation:output_type -> Scailo.IdentifierResponse
+	43, // 80: Scailo.QCSamplesService.Reject:output_type -> Scailo.IdentifierResponse
+	43, // 81: Scailo.QCSamplesService.Cancel:output_type -> Scailo.IdentifierResponse
+	43, // 82: Scailo.QCSamplesService.Reopen:output_type -> Scailo.IdentifierResponse
+	43, // 83: Scailo.QCSamplesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	43, // 84: Scailo.QCSamplesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	44, // 85: Scailo.QCSamplesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	43, // 86: Scailo.QCSamplesService.UpdateParameter:output_type -> Scailo.IdentifierResponse
+	40, // 87: Scailo.QCSamplesService.UpdateParameters:output_type -> Scailo.IdentifiersList
+	18, // 88: Scailo.QCSamplesService.ViewParameterByID:output_type -> Scailo.QCSampleParameter
+	19, // 89: Scailo.QCSamplesService.ViewParameters:output_type -> Scailo.QCSampleParametersList
+	22, // 90: Scailo.QCSamplesService.ViewParameterHistory:output_type -> Scailo.QCSampleParameterHistoryList
+	24, // 91: Scailo.QCSamplesService.ViewPaginatedParameters:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
+	24, // 92: Scailo.QCSamplesService.SearchParametersWithPagination:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
+	45, // 93: Scailo.QCSamplesService.DownloadParametersAsCSV:output_type -> Scailo.StandardFile
+	7,  // 94: Scailo.QCSamplesService.ViewByID:output_type -> Scailo.QCSample
+	7,  // 95: Scailo.QCSamplesService.ViewByUUID:output_type -> Scailo.QCSample
+	7,  // 96: Scailo.QCSamplesService.ViewEssentialByID:output_type -> Scailo.QCSample
+	7,  // 97: Scailo.QCSamplesService.ViewEssentialByUUID:output_type -> Scailo.QCSample
+	9,  // 98: Scailo.QCSamplesService.ViewFromIDs:output_type -> Scailo.QCSamplesList
+	6,  // 99: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QCSampleAncillaryParameters
+	9,  // 100: Scailo.QCSamplesService.ViewAll:output_type -> Scailo.QCSamplesList
+	9,  // 101: Scailo.QCSamplesService.ViewAllForEntityUUID:output_type -> Scailo.QCSamplesList
+	12, // 102: Scailo.QCSamplesService.ViewWithPagination:output_type -> Scailo.QCSamplesServicePaginationResponse
+	46, // 103: Scailo.QCSamplesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	45, // 104: Scailo.QCSamplesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	10, // 105: Scailo.QCSamplesService.SearchAll:output_type -> Scailo.QCSamplesWithMetadataList
+	9,  // 106: Scailo.QCSamplesService.Filter:output_type -> Scailo.QCSamplesList
+	47, // 107: Scailo.QCSamplesService.Count:output_type -> Scailo.CountResponse
+	25, // 108: Scailo.QCSamplesService.CountsForInventoryItem:output_type -> Scailo.QCSamplesCountStatistics
+	45, // 109: Scailo.QCSamplesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	75, // [75:110] is the sub-list for method output_type
+	40, // [40:75] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_qc_samples_scailo_proto_init() }
@@ -3211,7 +3264,7 @@ func file_qc_samples_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qc_samples_scailo_proto_rawDesc), len(file_qc_samples_scailo_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

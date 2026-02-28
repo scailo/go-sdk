@@ -33,6 +33,7 @@ const (
 	PurchasesEnquiriesService_Repeat_FullMethodName                                      = "/Scailo.PurchasesEnquiriesService/Repeat"
 	PurchasesEnquiriesService_Reopen_FullMethodName                                      = "/Scailo.PurchasesEnquiriesService/Reopen"
 	PurchasesEnquiriesService_CommentAdd_FullMethodName                                  = "/Scailo.PurchasesEnquiriesService/CommentAdd"
+	PurchasesEnquiriesService_SendEmail_FullMethodName                                   = "/Scailo.PurchasesEnquiriesService/SendEmail"
 	PurchasesEnquiriesService_CreateMagicLink_FullMethodName                             = "/Scailo.PurchasesEnquiriesService/CreateMagicLink"
 	PurchasesEnquiriesService_AddPurchaseEnquiryItem_FullMethodName                      = "/Scailo.PurchasesEnquiriesService/AddPurchaseEnquiryItem"
 	PurchasesEnquiriesService_ModifyPurchaseEnquiryItem_FullMethodName                   = "/Scailo.PurchasesEnquiriesService/ModifyPurchaseEnquiryItem"
@@ -103,6 +104,8 @@ type PurchasesEnquiriesServiceClient interface {
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add comment
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Send Email
+	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// Add an item to a purchase enquiry
@@ -323,6 +326,16 @@ func (c *purchasesEnquiriesServiceClient) CommentAdd(ctx context.Context, in *Id
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, PurchasesEnquiriesService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesEnquiriesServiceClient) SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesEnquiriesService_SendEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

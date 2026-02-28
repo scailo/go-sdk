@@ -30,6 +30,7 @@ const (
 	QCSamplesService_SendEmail_FullMethodName                      = "/Scailo.QCSamplesService/SendEmail"
 	QCSamplesService_CreateMagicLink_FullMethodName                = "/Scailo.QCSamplesService/CreateMagicLink"
 	QCSamplesService_UpdateParameter_FullMethodName                = "/Scailo.QCSamplesService/UpdateParameter"
+	QCSamplesService_UpdateParameters_FullMethodName               = "/Scailo.QCSamplesService/UpdateParameters"
 	QCSamplesService_ViewParameterByID_FullMethodName              = "/Scailo.QCSamplesService/ViewParameterByID"
 	QCSamplesService_ViewParameters_FullMethodName                 = "/Scailo.QCSamplesService/ViewParameters"
 	QCSamplesService_ViewParameterHistory_FullMethodName           = "/Scailo.QCSamplesService/ViewParameterHistory"
@@ -82,8 +83,10 @@ type QCSamplesServiceClient interface {
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Modify an parameter in a qc sample
+	// Update a parameter in a qc sample
 	UpdateParameter(ctx context.Context, in *QCSamplesServiceParameterUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Update a list of parameters in a qc sample
+	UpdateParameters(ctx context.Context, in *QCSamplesServiceParameterUpdateRequestsList, opts ...grpc.CallOption) (*IdentifiersList, error)
 	// View QCSample Parameter by ID
 	ViewParameterByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*QCSampleParameter, error)
 	// View all parameters for given qc sample UUID
@@ -254,6 +257,16 @@ func (c *qCSamplesServiceClient) UpdateParameter(ctx context.Context, in *QCSamp
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, QCSamplesService_UpdateParameter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *qCSamplesServiceClient) UpdateParameters(ctx context.Context, in *QCSamplesServiceParameterUpdateRequestsList, opts ...grpc.CallOption) (*IdentifiersList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifiersList)
+	err := c.cc.Invoke(ctx, QCSamplesService_UpdateParameters_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

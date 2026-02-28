@@ -40,6 +40,7 @@ const (
 	SalesOrdersService_AddMultipleSalesOrderItems_FullMethodName             = "/Scailo.SalesOrdersService/AddMultipleSalesOrderItems"
 	SalesOrdersService_AddSalesOrderItem_FullMethodName                      = "/Scailo.SalesOrdersService/AddSalesOrderItem"
 	SalesOrdersService_ModifySalesOrderItem_FullMethodName                   = "/Scailo.SalesOrdersService/ModifySalesOrderItem"
+	SalesOrdersService_UpdateSalesOrderItemTerms_FullMethodName              = "/Scailo.SalesOrdersService/UpdateSalesOrderItemTerms"
 	SalesOrdersService_UpdateSalesOrderItemSpecifications_FullMethodName     = "/Scailo.SalesOrdersService/UpdateSalesOrderItemSpecifications"
 	SalesOrdersService_ApproveSalesOrderItem_FullMethodName                  = "/Scailo.SalesOrdersService/ApproveSalesOrderItem"
 	SalesOrdersService_DeleteSalesOrderItem_FullMethodName                   = "/Scailo.SalesOrdersService/DeleteSalesOrderItem"
@@ -143,6 +144,8 @@ type SalesOrdersServiceClient interface {
 	AddSalesOrderItem(ctx context.Context, in *SalesOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
 	// Modify an item in a sales order
 	ModifySalesOrderItem(ctx context.Context, in *SalesOrdersServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
+	// Update Price, Discount, Tax Group, Delivery Date and Specifications of an item in a sales order. This can safely be done even after the item may have been dispatched
+	UpdateSalesOrderItemTerms(ctx context.Context, in *SalesOrdersServiceItemTermsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Update specifications of an item in a sales order
 	UpdateSalesOrderItemSpecifications(ctx context.Context, in *SalesOrdersServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Approve an item in a sales order
@@ -471,6 +474,16 @@ func (c *salesOrdersServiceClient) ModifySalesOrderItem(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifiersList)
 	err := c.cc.Invoke(ctx, SalesOrdersService_ModifySalesOrderItem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesOrdersServiceClient) UpdateSalesOrderItemTerms(ctx context.Context, in *SalesOrdersServiceItemTermsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesOrdersService_UpdateSalesOrderItemTerms_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

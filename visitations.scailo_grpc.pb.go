@@ -18,43 +18,45 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VisitationsService_Create_FullMethodName                  = "/Scailo.VisitationsService/Create"
-	VisitationsService_Draft_FullMethodName                   = "/Scailo.VisitationsService/Draft"
-	VisitationsService_DraftUpdate_FullMethodName             = "/Scailo.VisitationsService/DraftUpdate"
-	VisitationsService_SendForVerification_FullMethodName     = "/Scailo.VisitationsService/SendForVerification"
-	VisitationsService_Verify_FullMethodName                  = "/Scailo.VisitationsService/Verify"
-	VisitationsService_Approve_FullMethodName                 = "/Scailo.VisitationsService/Approve"
-	VisitationsService_SendForRevision_FullMethodName         = "/Scailo.VisitationsService/SendForRevision"
-	VisitationsService_RevisionUpdate_FullMethodName          = "/Scailo.VisitationsService/RevisionUpdate"
-	VisitationsService_Halt_FullMethodName                    = "/Scailo.VisitationsService/Halt"
-	VisitationsService_Discard_FullMethodName                 = "/Scailo.VisitationsService/Discard"
-	VisitationsService_Restore_FullMethodName                 = "/Scailo.VisitationsService/Restore"
-	VisitationsService_Complete_FullMethodName                = "/Scailo.VisitationsService/Complete"
-	VisitationsService_Repeat_FullMethodName                  = "/Scailo.VisitationsService/Repeat"
-	VisitationsService_CommentAdd_FullMethodName              = "/Scailo.VisitationsService/CommentAdd"
-	VisitationsService_CreateMagicLink_FullMethodName         = "/Scailo.VisitationsService/CreateMagicLink"
-	VisitationsService_RecordImageEntry_FullMethodName        = "/Scailo.VisitationsService/RecordImageEntry"
-	VisitationsService_RecordImageExit_FullMethodName         = "/Scailo.VisitationsService/RecordImageExit"
-	VisitationsService_ViewByID_FullMethodName                = "/Scailo.VisitationsService/ViewByID"
-	VisitationsService_ViewByUUID_FullMethodName              = "/Scailo.VisitationsService/ViewByUUID"
-	VisitationsService_ViewEssentialByID_FullMethodName       = "/Scailo.VisitationsService/ViewEssentialByID"
-	VisitationsService_ViewEssentialByUUID_FullMethodName     = "/Scailo.VisitationsService/ViewEssentialByUUID"
-	VisitationsService_ViewFromIDs_FullMethodName             = "/Scailo.VisitationsService/ViewFromIDs"
-	VisitationsService_ViewAll_FullMethodName                 = "/Scailo.VisitationsService/ViewAll"
-	VisitationsService_ViewAllForEntityUUID_FullMethodName    = "/Scailo.VisitationsService/ViewAllForEntityUUID"
-	VisitationsService_ViewWithPagination_FullMethodName      = "/Scailo.VisitationsService/ViewWithPagination"
-	VisitationsService_ViewEntryImage_FullMethodName          = "/Scailo.VisitationsService/ViewEntryImage"
-	VisitationsService_ViewExitImage_FullMethodName           = "/Scailo.VisitationsService/ViewExitImage"
-	VisitationsService_ViewEntryGPSCoordinates_FullMethodName = "/Scailo.VisitationsService/ViewEntryGPSCoordinates"
-	VisitationsService_ViewExitGPSCoordinates_FullMethodName  = "/Scailo.VisitationsService/ViewExitGPSCoordinates"
-	VisitationsService_ViewEntryGPSStaticImage_FullMethodName = "/Scailo.VisitationsService/ViewEntryGPSStaticImage"
-	VisitationsService_ViewExitGPSStaticImage_FullMethodName  = "/Scailo.VisitationsService/ViewExitGPSStaticImage"
-	VisitationsService_ViewQRCode_FullMethodName              = "/Scailo.VisitationsService/ViewQRCode"
-	VisitationsService_SearchAll_FullMethodName               = "/Scailo.VisitationsService/SearchAll"
-	VisitationsService_Filter_FullMethodName                  = "/Scailo.VisitationsService/Filter"
-	VisitationsService_CountInStatus_FullMethodName           = "/Scailo.VisitationsService/CountInStatus"
-	VisitationsService_Count_FullMethodName                   = "/Scailo.VisitationsService/Count"
-	VisitationsService_DownloadAsCSV_FullMethodName           = "/Scailo.VisitationsService/DownloadAsCSV"
+	VisitationsService_Create_FullMethodName                         = "/Scailo.VisitationsService/Create"
+	VisitationsService_Draft_FullMethodName                          = "/Scailo.VisitationsService/Draft"
+	VisitationsService_DraftUpdate_FullMethodName                    = "/Scailo.VisitationsService/DraftUpdate"
+	VisitationsService_SendForVerification_FullMethodName            = "/Scailo.VisitationsService/SendForVerification"
+	VisitationsService_Verify_FullMethodName                         = "/Scailo.VisitationsService/Verify"
+	VisitationsService_Approve_FullMethodName                        = "/Scailo.VisitationsService/Approve"
+	VisitationsService_SendForRevision_FullMethodName                = "/Scailo.VisitationsService/SendForRevision"
+	VisitationsService_RevisionUpdate_FullMethodName                 = "/Scailo.VisitationsService/RevisionUpdate"
+	VisitationsService_Halt_FullMethodName                           = "/Scailo.VisitationsService/Halt"
+	VisitationsService_Discard_FullMethodName                        = "/Scailo.VisitationsService/Discard"
+	VisitationsService_Restore_FullMethodName                        = "/Scailo.VisitationsService/Restore"
+	VisitationsService_Complete_FullMethodName                       = "/Scailo.VisitationsService/Complete"
+	VisitationsService_Repeat_FullMethodName                         = "/Scailo.VisitationsService/Repeat"
+	VisitationsService_CommentAdd_FullMethodName                     = "/Scailo.VisitationsService/CommentAdd"
+	VisitationsService_CreateMagicLink_FullMethodName                = "/Scailo.VisitationsService/CreateMagicLink"
+	VisitationsService_RecordImageEntry_FullMethodName               = "/Scailo.VisitationsService/RecordImageEntry"
+	VisitationsService_RecordImageExit_FullMethodName                = "/Scailo.VisitationsService/RecordImageExit"
+	VisitationsService_ViewByID_FullMethodName                       = "/Scailo.VisitationsService/ViewByID"
+	VisitationsService_ViewByUUID_FullMethodName                     = "/Scailo.VisitationsService/ViewByUUID"
+	VisitationsService_ViewEssentialByID_FullMethodName              = "/Scailo.VisitationsService/ViewEssentialByID"
+	VisitationsService_ViewEssentialByUUID_FullMethodName            = "/Scailo.VisitationsService/ViewEssentialByUUID"
+	VisitationsService_ViewFromIDs_FullMethodName                    = "/Scailo.VisitationsService/ViewFromIDs"
+	VisitationsService_ViewAll_FullMethodName                        = "/Scailo.VisitationsService/ViewAll"
+	VisitationsService_ViewAllForEntityUUID_FullMethodName           = "/Scailo.VisitationsService/ViewAllForEntityUUID"
+	VisitationsService_ViewWithPagination_FullMethodName             = "/Scailo.VisitationsService/ViewWithPagination"
+	VisitationsService_ViewEntryImage_FullMethodName                 = "/Scailo.VisitationsService/ViewEntryImage"
+	VisitationsService_ViewExitImage_FullMethodName                  = "/Scailo.VisitationsService/ViewExitImage"
+	VisitationsService_ViewEntryGPSCoordinates_FullMethodName        = "/Scailo.VisitationsService/ViewEntryGPSCoordinates"
+	VisitationsService_ViewExitGPSCoordinates_FullMethodName         = "/Scailo.VisitationsService/ViewExitGPSCoordinates"
+	VisitationsService_ViewEntryGPSStaticImage_FullMethodName        = "/Scailo.VisitationsService/ViewEntryGPSStaticImage"
+	VisitationsService_ViewExitGPSStaticImage_FullMethodName         = "/Scailo.VisitationsService/ViewExitGPSStaticImage"
+	VisitationsService_ViewQRCode_FullMethodName                     = "/Scailo.VisitationsService/ViewQRCode"
+	VisitationsService_ViewOpenVisitationForAssociate_FullMethodName = "/Scailo.VisitationsService/ViewOpenVisitationForAssociate"
+	VisitationsService_SearchAll_FullMethodName                      = "/Scailo.VisitationsService/SearchAll"
+	VisitationsService_Filter_FullMethodName                         = "/Scailo.VisitationsService/Filter"
+	VisitationsService_AssociateHasOpenVisitation_FullMethodName     = "/Scailo.VisitationsService/AssociateHasOpenVisitation"
+	VisitationsService_CountInStatus_FullMethodName                  = "/Scailo.VisitationsService/CountInStatus"
+	VisitationsService_Count_FullMethodName                          = "/Scailo.VisitationsService/Count"
+	VisitationsService_DownloadAsCSV_FullMethodName                  = "/Scailo.VisitationsService/DownloadAsCSV"
 )
 
 // VisitationsServiceClient is the client API for VisitationsService service.
@@ -129,10 +131,14 @@ type VisitationsServiceClient interface {
 	ViewExitGPSStaticImage(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
 	// View QR Code
 	ViewQRCode(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
+	// View the open visitation for an associate (with the given identifier), if available. Returns an empty instance if no visitation is available
+	ViewOpenVisitationForAssociate(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Visitation, error)
 	// View all that match the given search key
 	SearchAll(ctx context.Context, in *VisitationsServiceSearchAllReq, opts ...grpc.CallOption) (*VisitationsList, error)
 	// View all that match the given filter criteria
 	Filter(ctx context.Context, in *VisitationsServiceFilterReq, opts ...grpc.CallOption) (*VisitationsList, error)
+	// Checks if an associate (with the given identifier) has an open visitation (visitation with only entry and no exit)
+	AssociateHasOpenVisitation(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Count in status
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
 	// Count all that match the given criteria
@@ -470,6 +476,16 @@ func (c *visitationsServiceClient) ViewQRCode(ctx context.Context, in *Identifie
 	return out, nil
 }
 
+func (c *visitationsServiceClient) ViewOpenVisitationForAssociate(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Visitation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Visitation)
+	err := c.cc.Invoke(ctx, VisitationsService_ViewOpenVisitationForAssociate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *visitationsServiceClient) SearchAll(ctx context.Context, in *VisitationsServiceSearchAllReq, opts ...grpc.CallOption) (*VisitationsList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VisitationsList)
@@ -484,6 +500,16 @@ func (c *visitationsServiceClient) Filter(ctx context.Context, in *VisitationsSe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VisitationsList)
 	err := c.cc.Invoke(ctx, VisitationsService_Filter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitationsServiceClient) AssociateHasOpenVisitation(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*BooleanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BooleanResponse)
+	err := c.cc.Invoke(ctx, VisitationsService_AssociateHasOpenVisitation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
