@@ -204,7 +204,9 @@ func (INVENTORY_NODE_ORIGIN_TYPE) EnumDescriptor() ([]byte, []int) {
 // Describes the parameters that are present in a generic inventory payload, which is an abstraction over every inventory item that consists of the common parameters
 type GenericInventory struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this inventory item
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -557,7 +559,9 @@ func (x *GenericInventoryList) GetList() []*GenericInventory {
 // Describes the parameters that are present in an inventory code map
 type InventoryCodeMap struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this inventory item
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -913,19 +917,61 @@ func (x *ReturnableInventorySearchReq) GetLocationId() uint64 {
 // Describes the message that consists of parameters that are required to search for returnable inventory
 type SearchReturnableInventoryReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey INVENTORY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.INVENTORY_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
 	// Stores the ID of the associated family
 	FamilyId uint64 `protobuf:"varint,33,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
@@ -1158,25 +1204,91 @@ func (x *SearchReturnableInventoryForIdentifierUUID) GetFilter() *SearchReturnab
 // Describes the message that consists of parameters that are required to filter for returnable inventory
 type FilterReturnableInventoryReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey INVENTORY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.INVENTORY_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the ID of the associated family
 	FamilyId uint64 `protobuf:"varint,33,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
@@ -2856,10 +2968,10 @@ const file_inventory_scailo_proto_rawDesc = "" +
 	"\x19UpdateStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12g\n" +
 	"!UpdateStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12_\n" +
 	"\x19MoveToStorageWithShortURL\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventory\x12g\n" +
-	"!MoveToStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventoryBf\n" +
-	"\n" +
-	"com.ScailoB\x14InventoryScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"!MoveToStorageWithInternalItemCode\x12(.Scailo.InventoryServiceUpdateStorageReq\x1a\x18.Scailo.GenericInventoryBn\n" +
+	"\x0ecom.scailo.sdkB\x14InventoryScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_inventory_scailo_proto_rawDescOnce sync.Once

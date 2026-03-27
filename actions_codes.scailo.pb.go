@@ -23,25 +23,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting action code search results.
 type ACTION_CODE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_ID_UNSPECIFIED ACTION_CODE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_CREATED_AT ACTION_CODE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_MODIFIED_AT ACTION_CODE_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_APPROVED_ON ACTION_CODE_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_APPROVED_BY ACTION_CODE_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_APPROVER_ROLE_ID ACTION_CODE_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided display name.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_NAME ACTION_CODE_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided unique alphanumeric identifier.
 	ACTION_CODE_SORT_KEY_ACTION_CODE_SORT_KEY_CODE ACTION_CODE_SORT_KEY = 11
 )
 
@@ -96,26 +96,99 @@ func (ACTION_CODE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_actions_codes_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating a new Action Code.
+// Action Codes are used to classify specific activities, events, or status changes
+// within the system, often organized in a hierarchical (tree) structure.
+//
+// **Note:** This is a configuration-level entity used to define categorization
+// logic for reporting, workflows, and UI visualization.
 type ActionsCodesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ActionsCodes a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// ActionsCodes any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this action code. Useful for tracking configuration changes in the system history.
+	//
+	// @example "Adding new sub-code for regional compliance tracking."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The name of the action code
+	// @mandatory
+	//
+	// @description The display name of the action code. Must be at least 1 character long.
+	//
+	// @example "Technical Support"
+	//
+	// @regex .+
+	//
+	// @format May contain any UTF-8 characters.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the action code is classified
+	// @mandatory
+	//
+	// @description The unique alphanumeric identifier used for system classification. This is typically a short string or mnemonic used in logic and filtering.
+	//
+	// @example "TECH_SUP_01"
+	//
+	// @regex .+
+	//
+	// @format May contain any UTF-8 characters.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The color of the text that is displayed for easy recognition
+	// @optional
+	//
+	// @description The Hexadecimal foreground (text) color for UI rendering. Used to visually distinguish codes in dashboards or lists.
+	//
+	// @example "#FFFFFF"
+	//
+	// @regex "^#[0-9a-fA-F]{6}$"
+	//
+	// @format Must be a 6-digit hex code starting with #.
 	FgColor string `protobuf:"bytes,12,opt,name=fg_color,json=fgColor,proto3" json:"fg_color,omitempty"`
-	// The background color that is displayed for easy recognition
+	// @optional
+	//
+	// @description The Hexadecimal background color for UI rendering. Used to visually distinguish codes in dashboards or lists.
+	//
+	// @example "#FF5733"
+	//
+	// @regex "^#[0-9a-fA-F]{6}$"
+	//
+	// @format Must be a 6-digit hex code starting with #.
 	BgColor string `protobuf:"bytes,13,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
-	// The ID of the associated non-leaf parent action code (0, if the first action code that is being created is a leaf action code)
+	// @optional
+	//
+	// @description The ID of the parent category in the action code hierarchy. Set to `0` if this is a top-level (root) action code.
+	//
+	// @example 105
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ParentActionCodeId uint64 `protobuf:"varint,16,opt,name=parent_action_code_id,json=parentActionCodeId,proto3" json:"parent_action_code_id,omitempty"`
-	// Stores if this is a leaf action code or a non-leaf action code
+	// @mandatory
+	//
+	// @description Indicates whether this code is a terminal "leaf" node. If `true`, no further sub-codes can be nested under this entry.
+	//
+	// @example true
 	IsLeaf bool `protobuf:"varint,17,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// The description of the action code
+	// @optional
+	//
+	// @description Detailed explanation of what this action code represents and when it should be used.
+	//
+	// @example "Used for tracking inbound technical support tickets for Tier 1 issues."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Description   string `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -214,22 +287,80 @@ func (x *ActionsCodesServiceCreateRequest) GetDescription() string {
 	return ""
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Action Code record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the visual properties, naming, and
+// metadata of an established Action Code.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type ActionsCodesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ActionsCodes any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for this specific update. Captured in the version history for administrative tracking.
+	//
+	// @example "Updating brand colors to match new UI guidelines."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique system identifier of the Action Code to be updated. Must be a value greater than `0`.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that actions codes if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
 	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The name of the action code
+	// @mandatory
+	//
+	// @description The updated display name of the action code. Must contain at least 1 character.
+	//
+	// @example "Emergency Maintenance"
+	//
+	// @regex .+
+	//
+	// @format May contain any UTF-8 characters.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The color of the text that is displayed for easy recognition
+	// @optional
+	//
+	// @description The updated Hexadecimal foreground (text) color.
+	//
+	// @example "#000000"
+	//
+	// @regex "^#[0-9a-fA-F]{6}$"
+	//
+	// @format Must be a 6-digit hex code starting with #.
 	FgColor string `protobuf:"bytes,12,opt,name=fg_color,json=fgColor,proto3" json:"fg_color,omitempty"`
-	// The background color that is displayed for easy recognition
+	// @optional
+	//
+	// @description The updated Hexadecimal background color.
+	//
+	// @example "#FFFF00"
+	//
+	// @regex "^#[0-9a-fA-F]{6}$"
+	//
+	// @format Must be a 6-digit hex code starting with #.
 	BgColor string `protobuf:"bytes,13,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
-	// The description of the action code
+	// @optional
+	//
+	// @description An updated detailed description of the action code's purpose.
+	//
+	// @example "Revised to include high-priority hardware failures."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Description   string `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -314,32 +445,48 @@ func (x *ActionsCodesServiceUpdateRequest) GetDescription() string {
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Action Code within the system.
 type ActionCode struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ActionsCodes a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// ActionsCodes the metadata of this action code
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// ActionsCodes the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// The status of this action code
+	// @description The current lifecycle status (e.g., DRAFT, VERIFIED, STANDING).
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// ActionsCodes the logs of every operation performed on this action code
+	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The name of the action code
+	// @description The display name of the action code.
+	//
+	// @example "Technical Support"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the action code is classified
+	// @description The unique alphanumeric identifier used for system classification. This is typically a short string or mnemonic used in logic and filtering.
+	//
+	// @example "TECH_SUP_01"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The color of the text that is displayed for easy recognition
+	// @description The Hexadecimal foreground (text) color for UI rendering. Used to visually distinguish codes in dashboards or lists.
+	//
+	// @example "#FFFFFF"
 	FgColor string `protobuf:"bytes,12,opt,name=fg_color,json=fgColor,proto3" json:"fg_color,omitempty"`
-	// The background color that is displayed for easy recognition
+	// @description The Hexadecimal background color for UI rendering. Used to visually distinguish codes in dashboards or lists.
+	//
+	// @example "#FF5733"
 	BgColor string `protobuf:"bytes,13,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
-	// The ID of the associated non-leaf parent action code (0, if the first action code that is being created is a leaf action code)
+	// @description The ID of the associated non-leaf parent action code in the action code hierarchy. If `0`, this is a top-level (root) action code.
+	//
+	// @example 105
 	ParentActionCodeId uint64 `protobuf:"varint,16,opt,name=parent_action_code_id,json=parentActionCodeId,proto3" json:"parent_action_code_id,omitempty"`
-	// Stores if this is a leaf action code or a non-leaf action code
+	// @description Indicates whether this code is a terminal "leaf" node. If `true`, no further sub-codes can be nested under this entry.
+	//
+	// @example true
 	IsLeaf bool `protobuf:"varint,17,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// The description of the action code
+	// @description Detailed explanation of what this action code represents and when it should be used.
+	//
+	// @example "Used for tracking inbound technical support tickets for Tier 1 issues."
 	Description   string `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -459,10 +606,10 @@ func (x *ActionCode) GetDescription() string {
 	return ""
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of Action Code records.
 type ActionsCodesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Action Code records.
 	List          []*ActionCode `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -505,20 +652,50 @@ func (x *ActionsCodesList) GetList() []*ActionCode {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Action Code records.
 type ActionsCodesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey ACTION_CODE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ACTION_CODE_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this action code
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -596,16 +773,22 @@ func (x *ActionsCodesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type ActionsCodesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*ActionCode `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -669,50 +852,196 @@ func (x *ActionsCodesServicePaginationResponse) GetPayload() []*ActionCode {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching action codes using multiple logical criteria.
 type ActionsCodesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey ACTION_CODE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ACTION_CODE_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this action code
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the action code
+	// @optional
+	//
+	// @description Fuzzy match for the display name.
+	//
+	// @example "Technical Support"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the action code is classified
+	// @optional
+	//
+	// @description Exact match for the unique alphanumeric identifier.
+	//
+	// @example "TECH_SUP_01"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The color of the text that is displayed for easy recognition
+	// @optional
+	//
+	// @description Exact match for the Hexadecimal foreground (text) color.
+	//
+	// @example "#FFFFFF"
+	//
+	// @regex "^$|^#[0-9a-fA-F]{6}$"
+	//
+	// @format May be empty, but if provided, must be a '#' followed by exactly 6 hex characters.
 	FgColor string `protobuf:"bytes,22,opt,name=fg_color,json=fgColor,proto3" json:"fg_color,omitempty"`
-	// The background color that is displayed for easy recognition
+	// @optional
+	//
+	// @description Exact match for the Hexadecimal background (text) color.
+	//
+	// @example "#FF5733"
+	//
+	// @regex "^$|^#[0-9a-fA-F]{6}$"
+	//
+	// @format May be empty, but if provided, must be a '#' followed by exactly 6 hex characters.
 	BgColor string `protobuf:"bytes,23,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
-	// The ID of the associated non-leaf parent action code (0, if the first action code that is being created is a leaf action code)
+	// @optional
+	//
+	// @description Filter by specific ID of the parent action code. If this is set, then all the action codes that are associated to this parent action code are retrieved.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ParentActionCodeId uint64 `protobuf:"varint,26,opt,name=parent_action_code_id,json=parentActionCodeId,proto3" json:"parent_action_code_id,omitempty"`
-	// Filter with the given leaf property
+	// @optional
+	//
+	// @description Filter by the given leaf property (TRUE, FALSE, ANY)
+	//
+	// @example ANY
 	IsLeaf        BOOL_FILTER `protobuf:"varint,27,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -898,39 +1227,163 @@ func (x *ActionsCodesServiceFilterReq) GetIsLeaf() BOOL_FILTER {
 // Describes the base request payload of a count search
 type ActionsCodesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this action code
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the action code
+	// @optional
+	//
+	// @description Fuzzy match for the display name.
+	//
+	// @example "Technical Support"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the action code is classified
+	// @optional
+	//
+	// @description Exact match for the unique alphanumeric identifier.
+	//
+	// @example "TECH_SUP_01"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The color of the text that is displayed for easy recognition
+	// @optional
+	//
+	// @description Exact match for the Hexadecimal foreground (text) color.
+	//
+	// @example "#FFFFFF"
+	//
+	// @regex "^$|^#[0-9a-fA-F]{6}$"
+	//
+	// @format May be empty, but if provided, must be a '#' followed by exactly 6 hex characters.
 	FgColor string `protobuf:"bytes,22,opt,name=fg_color,json=fgColor,proto3" json:"fg_color,omitempty"`
-	// The background color that is displayed for easy recognition
+	// @optional
+	//
+	// @description Exact match for the Hexadecimal background (text) color.
+	//
+	// @example "#FF5733"
+	//
+	// @regex "^$|^#[0-9a-fA-F]{6}$"
+	//
+	// @format May be empty, but if provided, must be a '#' followed by exactly 6 hex characters.
 	BgColor string `protobuf:"bytes,23,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
-	// The ID of the associated non-leaf parent action code (0, if the first action code that is being created is a leaf action code)
+	// @optional
+	//
+	// @description Filter by specific ID of the parent action code. If this is set, then all the action codes that are associated to this parent action code are retrieved.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ParentActionCodeId uint64 `protobuf:"varint,26,opt,name=parent_action_code_id,json=parentActionCodeId,proto3" json:"parent_action_code_id,omitempty"`
-	// Filter with the given leaf property
+	// @optional
+	//
+	// @description Filter by the given leaf property (TRUE, FALSE, ANY)
+	//
+	// @example ANY
 	IsLeaf        BOOL_FILTER `protobuf:"varint,27,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1088,25 +1541,83 @@ func (x *ActionsCodesServiceCountReq) GetIsLeaf() BOOL_FILTER {
 // Describes the request payload for performing a generic search operation on records
 type ActionsCodesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to return per page. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 50
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey ACTION_CODE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ACTION_CODE_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Limit the search space to the given status
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The ID of the associated non-leaf parent action code (0, if the first action code that is being created is a leaf action code)
+	// @optional
+	//
+	// @description Filter by specific ID of the parent action code. If this is set, then all the action codes that are associated to this parent action code are retrieved.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ParentActionCodeId uint64 `protobuf:"varint,25,opt,name=parent_action_code_id,json=parentActionCodeId,proto3" json:"parent_action_code_id,omitempty"`
-	// Filter with the given leaf property
+	// @optional
+	//
+	// @description Filter by the given leaf property (TRUE, FALSE, ANY)
+	//
+	// @example ANY
 	IsLeaf        BOOL_FILTER `protobuf:"varint,26,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1367,10 +1878,10 @@ const file_actions_codes_scailo_proto_rawDesc = "" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12C\n" +
 	"\x05Count\x12#.Scailo.ActionsCodesServiceCountReq\x1a\x15.Scailo.CountResponse\x12K\n" +
 	"\rDownloadAsCSV\x12$.Scailo.ActionsCodesServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBi\n" +
-	"\n" +
-	"com.ScailoB\x17ActionsCodesScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBq\n" +
+	"\x0ecom.scailo.sdkB\x17ActionsCodesScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_actions_codes_scailo_proto_rawDescOnce sync.Once

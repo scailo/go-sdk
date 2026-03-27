@@ -91,7 +91,9 @@ func (FORM_FIELD_FILTER_OPERATOR) EnumDescriptor() ([]byte, []int) {
 // Describes the data stored in an individual form field data row of each dynamic form
 type FormFieldDatum struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this resource
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -197,14 +199,24 @@ func (x *FormFieldDatum) GetNeedApproval() bool {
 	return false
 }
 
-// Describes the data required for creating a dynamic form field entry
+// Represents a single data entry for a dynamic form field.
+// * Use this to submit values for custom fields defined at the organization level,
+// such as "Emergency Contact Name" or "T-Shirt Size".
 type FormFieldDatumCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the corresponding form field
+	// [Required] The unique identifier of the form field definition.
+	// This ID must correspond to an existing field in the Form Configuration.
 	FormFieldId uint64 `protobuf:"varint,1,opt,name=form_field_id,json=formFieldId,proto3" json:"form_field_id,omitempty"`
-	// The value to be stored (for textarea and input)
+	// [Conditional] The text content for single-value inputs.
+	// Use this for `text`, `textarea`, `number`, or `date` field types.
+	//
+	// *Example:* "John Doe" or "123.45"
 	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	// The list of selected values (for radio, checkbox, and select)
+	// [Conditional] A list of identifiers for multi-selection fields.
+	// Use this for `radio`, `checkbox`, or `dropdown` field types.
+	//
+	// *Note:* For radio buttons, this list should contain exactly one element.
+	// *Example:* ["option_1", "option_5"]
 	SelectedValues []string `protobuf:"bytes,3,rep,name=selected_values,json=selectedValues,proto3" json:"selected_values,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -466,10 +478,10 @@ const file_forms_fields_data_scailo_proto_rawDesc = "" +
 	"'FORM_FIELD_FILTER_OPERATOR_GREATER_THAN\x10\x1e\x124\n" +
 	"0FORM_FIELD_FILTER_OPERATOR_GREATER_THAN_OR_EQUAL\x10\x1f2v\n" +
 	"\x16FormsFieldsDataService\x12\\\n" +
-	"\x18ViewFormFieldDataHistory\x12$.Scailo.FormFieldDatumHistoryRequest\x1a\x1a.Scailo.FormFieldDatumListBl\n" +
-	"\n" +
-	"com.ScailoB\x1aFormsFieldsDataScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\x18ViewFormFieldDataHistory\x12$.Scailo.FormFieldDatumHistoryRequest\x1a\x1a.Scailo.FormFieldDatumListBt\n" +
+	"\x0ecom.scailo.sdkB\x1aFormsFieldsDataScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_forms_fields_data_scailo_proto_rawDescOnce sync.Once

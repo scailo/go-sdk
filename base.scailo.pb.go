@@ -72,27 +72,31 @@ func (SORT_ORDER) EnumDescriptor() ([]byte, []int) {
 	return file_base_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the standard lifecycle status of each record
+// Describes the standard lifecycle status of each record.
+// * Status Transitions Scenarios:
+// 1. Happy Path: CREATE -> PREVERIFY -> VERIFIED -> STANDING -> COMPLETED
+// 2. Revision Path: CREATE -> PREVERIFY -> REVISION -> HALTED -> DISCARDED -> PREVERIFY -> VERIFIED -> HALTED -> DISCARDED
+// 3. Draft Path: DRAFT -> PREVERIFY -> HALTED -> DISCARDED -> PREVERIFY -> VERIFIED -> REVISION -> PREVERIFY -> VERIFIED -> STANDING -> COMPLETED
 type STANDARD_LIFECYCLE_STATUS int32
 
 const (
-	// Use this only in filter and search queries so as to retrieve all the records regardless of the status that they are in
+	// Use this only in filter and search queries to retrieve all records regardless of status.
 	STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED STANDARD_LIFECYCLE_STATUS = 0
-	// The resource has just been created, and has been sent for verification
+	// The resource has just been created or restored and is awaiting verification.
 	STANDARD_LIFECYCLE_STATUS_PREVERIFY STANDARD_LIFECYCLE_STATUS = 1
-	// The resource has been saved as a draft
+	// The resource has been saved as a draft and is not yet in the workflow.
 	STANDARD_LIFECYCLE_STATUS_DRAFT STANDARD_LIFECYCLE_STATUS = 2
-	// The resource has been verified
+	// The resource has been verified and is ready for final approval.
 	STANDARD_LIFECYCLE_STATUS_VERIFIED STANDARD_LIFECYCLE_STATUS = 3
-	// The resource has been approved
+	// The resource has been approved. It is now read-only.
 	STANDARD_LIFECYCLE_STATUS_STANDING STANDARD_LIFECYCLE_STATUS = 4
-	// The resource has been sent for revision
+	// The resource has been sent back for corrections.
 	STANDARD_LIFECYCLE_STATUS_REVISION STANDARD_LIFECYCLE_STATUS = 5
-	// The resource has been halted
+	// The resource processing has been temporarily paused.
 	STANDARD_LIFECYCLE_STATUS_HALTED STANDARD_LIFECYCLE_STATUS = 6
-	// The resource has been marked as completed
+	// The resource has been finalized/processed.
 	STANDARD_LIFECYCLE_STATUS_COMPLETED STANDARD_LIFECYCLE_STATUS = 7
-	// The resource has been discarded
+	// The resource has been permanently cancelled.
 	STANDARD_LIFECYCLE_STATUS_DISCARDED STANDARD_LIFECYCLE_STATUS = 8
 )
 
@@ -1990,8 +1994,8 @@ type UpdatePasswordReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
-	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// The UUID of the record that needs to be updated
+	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	// The plain text password using which the user can login
 	PlainTextPassword string `protobuf:"bytes,10,opt,name=plain_text_password,json=plainTextPassword,proto3" json:"plain_text_password,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -2035,11 +2039,11 @@ func (x *UpdatePasswordReq) GetUserComment() string {
 	return ""
 }
 
-func (x *UpdatePasswordReq) GetId() uint64 {
+func (x *UpdatePasswordReq) GetUuid() string {
 	if x != nil {
-		return x.Id
+		return x.Uuid
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdatePasswordReq) GetPlainTextPassword() string {
@@ -2238,7 +2242,15 @@ type RepeatWithDeliveryDate struct {
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The reference ID of the repeated record
+	// @mandatory
+	//
+	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex "[0-9A-Za-z ]+$"
+	//
+	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The common delivery date
 	DeliveryDate  string `protobuf:"bytes,13,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
@@ -2350,12 +2362,18 @@ func (x *Identifier) GetId() uint64 {
 	return 0
 }
 
-// Describes the response that consists of the ID and the UUID of the record
+// The standard response returned after a successful resource creation or lookup.
+// * This message provides both the internal database ID and the public UUID
+// for the newly created or identified record.
 type IdentifierResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the resource
+	// [Output Only] The internal, auto-incrementing integer ID.
+	// Use this for high-performance internal database lookups or joins.
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// UUID of the resource
+	// [Output Only] The globally unique identifier (UUID v4).
+	// **Note:** This is the preferred ID to use in public URLs or client-side
+	// API requests to prevent ID enumeration attacks.
+	// Example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
 	Uuid          string `protobuf:"bytes,10,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3787,7 +3805,9 @@ func (x *InventoryPartitionRequest) GetPartitionSecondaryQuantity() uint64 {
 // Stores the parameters present within an inventory interaction
 type InventoryInteraction struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this interaction
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -3942,7 +3962,9 @@ func (x *InventoryInteractionsList) GetList() []*InventoryInteraction {
 // Describes the data payload within an amendment log
 type AmendmentLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metada of this resource
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -4120,10 +4142,10 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\x13approved_by_user_id\x18\x02 \x01(\x04R\x10approvedByUserId\x12(\n" +
 	"\x10approver_role_id\x18\x03 \x01(\x04R\x0eapproverRoleId\"@\n" +
 	"\fActiveStatus\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\"\x88\x01\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\"\x8d\x01\n" +
 	"\x11UpdatePasswordReq\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x127\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x127\n" +
 	"\x13plain_text_password\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11plainTextPassword\"\xda\x01\n" +
 	"\x14UpdateOwnPasswordReq\x12!\n" +
@@ -4450,10 +4472,10 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\x10TRANSACTION_TYPE\x12$\n" +
 	" TRANSACTION_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17TRANSACTION_TYPE_CREDIT\x10\x01\x12\x1a\n" +
-	"\x16TRANSACTION_TYPE_DEBIT\x10\x02Ba\n" +
-	"\n" +
-	"com.ScailoB\x0fBaseScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\x16TRANSACTION_TYPE_DEBIT\x10\x02Bi\n" +
+	"\x0ecom.scailo.sdkB\x0fBaseScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_base_scailo_proto_rawDescOnce sync.Once

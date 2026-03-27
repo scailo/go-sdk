@@ -50,13 +50,13 @@ type MagicLinksServiceClient interface {
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Restore the magic link
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*MagicLink, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*MagicLink, error)
 	// View only essential components that matches the given code
 	ViewByCode(ctx context.Context, in *MagicLinkServiceSearchByCodeReq, opts ...grpc.CallOption) (*MagicLink, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*MagicLinksList, error)
 	// View all magic links
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*MagicLinksList, error)
@@ -68,9 +68,9 @@ type MagicLinksServiceClient interface {
 	ViewAccessLogs(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*MagicLinkAccessLogsList, error)
 	// View all magic links that match the given search key
 	SearchAll(ctx context.Context, in *MagicLinksServiceSearchAllReq, opts ...grpc.CallOption) (*MagicLinksList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *MagicLinksServiceFilterReq, opts ...grpc.CallOption) (*MagicLinksList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *MagicLinksServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

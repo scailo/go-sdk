@@ -347,7 +347,9 @@ func (VAULT_ACCESS_LOG_OPERATION) EnumDescriptor() ([]byte, []int) {
 // Describes the parameters of a permission related to a vault file or folder
 type VaultPermission struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -438,7 +440,9 @@ func (x *VaultPermission) GetPermissionCode() uint64 {
 // Describes the parameters required to create a vault permission
 type VaultPermissionAddRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -748,7 +752,9 @@ func (x *GiXManifest) GetResources() *GixResources {
 // Describes the parameters that are a part of each vault app execution (GiX app execution)
 type GiXAppRun struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -939,15 +945,51 @@ func (x *GiXAppRunsList) GetList() []*GiXAppRun {
 // Describes the request payload of a count filter for app runs
 type GiXAppRunCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// The UUID of the file
 	VaultFileUuid string `protobuf:"bytes,20,opt,name=vault_file_uuid,json=vaultFileUuid,proto3" json:"vault_file_uuid,omitempty"`
@@ -1048,19 +1090,55 @@ func (x *GiXAppRunCountReq) GetRunBy() string {
 // Describes the base request payload of a filter search for gix app runs
 type GiXAppRunFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
 	// The number of records that need to be sent in the response. Returns all records if it is set to -1
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	// The number that need to be offset by before fetching the records
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// The UUID of the file
 	VaultFileUuid string `protobuf:"bytes,20,opt,name=vault_file_uuid,json=vaultFileUuid,proto3" json:"vault_file_uuid,omitempty"`
@@ -1430,7 +1508,9 @@ func (x *EnclaveManifest) GetResources() *EnclaveResources {
 // Describes the parameters that are a part of each enclave ingress
 type EnclaveIngress struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -1612,15 +1692,51 @@ func (x *EnclaveIngressesList) GetList() []*EnclaveIngress {
 // Describes the request payload of a count filter for enclave runs
 type EnclaveIngressCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// The UUID of the file
 	VaultFileUuid string `protobuf:"bytes,20,opt,name=vault_file_uuid,json=vaultFileUuid,proto3" json:"vault_file_uuid,omitempty"`
@@ -1730,19 +1846,55 @@ func (x *EnclaveIngressCountReq) GetRunnerRoleId() uint64 {
 // Describes the base request payload of a filter search for enclave runs
 type EnclaveIngressFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
 	// The number of records that need to be sent in the response. Returns all records if it is set to -1
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	// The number that need to be offset by before fetching the records
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// The UUID of the file
 	VaultFileUuid string `protobuf:"bytes,20,opt,name=vault_file_uuid,json=vaultFileUuid,proto3" json:"vault_file_uuid,omitempty"`
@@ -2122,7 +2274,9 @@ func (x *EnclaveEnvironmentVariableUpdateRequest) GetValue() string {
 // Denotes an individual environment variable that is part of an enclave
 type EnclaveEnvironmentVariable struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -2314,7 +2468,9 @@ func (x *EnclaveDomainAddRequest) GetDomain() string {
 // Denotes an individual domain that is part of an enclave
 type EnclaveDomain struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -2396,25 +2552,91 @@ func (x *EnclaveDomain) GetServiceAddr() string {
 // Describes the request payload of a enclave domains filter search
 type EnclaveDomainsFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey ENCLAVE_DOMAIN_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ENCLAVE_DOMAIN_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The domain that points to the enclave
 	Domain string `protobuf:"bytes,11,opt,name=domain,proto3" json:"domain,omitempty"`
@@ -2806,7 +3028,9 @@ func (x *EnclaveFrameUpdateRequest) GetHeight() uint64 {
 // Denotes an individual frame that is part of an enclave
 type EnclaveFrame struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -2915,7 +3139,9 @@ func (x *EnclaveFrame) GetHeight() uint64 {
 // Describes the data that is returned after setting up a frame
 type EnclaveFrameSetup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the expiry timestamp of the frame
 	ExpiresAt uint64 `protobuf:"varint,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
@@ -3096,31 +3322,105 @@ func (x *EnclaveFrameSetupList) GetList() []*EnclaveFrameSetup {
 
 type VaultSearchReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey VAULT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VAULT_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Limit the search to the given ref_for
 	RefFor VAULT_REF_FOR `protobuf:"varint,9,opt,name=ref_for,json=refFor,proto3,enum=Scailo.VAULT_REF_FOR" json:"ref_for,omitempty"`
 	// Limit the search to an optional folder
 	FolderUuid string `protobuf:"bytes,10,opt,name=folder_uuid,json=folderUuid,proto3" json:"folder_uuid,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3442,7 +3742,9 @@ func (x *VaultDuplicateCheckReq) GetFolderUuid() string {
 // Describes the access log of every file or folder
 type VaultAccessLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -3551,7 +3853,15 @@ func (x *VaultAccessLog) GetComment() string {
 // Describes the necessary parameters to create an access log
 type VaultAccessLogCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the reference for which this access log is applicable
 	RefFor VAULT_REF_FOR `protobuf:"varint,10,opt,name=ref_for,json=refFor,proto3,enum=Scailo.VAULT_REF_FOR" json:"ref_for,omitempty"`
@@ -4029,10 +4339,10 @@ const file_vault_commons_scailo_proto_rawDesc = "" +
 	"%VAULT_ACCESS_LOG_OPERATION_PERSISTENT\x10\b\x12*\n" +
 	"&VAULT_ACCESS_LOG_OPERATION_PERMISSIONS\x10\t\x12&\n" +
 	"\"VAULT_ACCESS_LOG_OPERATION_EXECUTE\x10\n" +
-	"Bi\n" +
-	"\n" +
-	"com.ScailoB\x17VaultCommonsScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"Bq\n" +
+	"\x0ecom.scailo.sdkB\x17VaultCommonsScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_vault_commons_scailo_proto_rawDescOnce sync.Once

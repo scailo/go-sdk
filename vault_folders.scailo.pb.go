@@ -26,7 +26,9 @@ const (
 // Describes the parameters necessary to add a vault folder
 type VaultFolderAddRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -209,7 +211,9 @@ func (x *VaultFolderRenameFolderRequest) GetName() string {
 // Describes the parameters of a vault parent folder
 type VaultParentFolder struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -309,7 +313,9 @@ func (x *VaultParentFolder) GetParentFolderUuid() string {
 // Describes the parameters of a vault folder
 type VaultFolder struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -464,7 +470,9 @@ func (x *VaultFoldersList) GetList() []*VaultFolder {
 // Describes the parameters of a vault folder download
 type VaultFolderDownload struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -642,10 +650,10 @@ const file_vault_folders_scailo_proto_rawDesc = "" +
 	"\x13download_started_at\x18\x0e \x01(\x04R\x11downloadStartedAt\x12*\n" +
 	"\x11download_ended_at\x18\x0f \x01(\x04R\x0fdownloadEndedAt\x12#\n" +
 	"\rdownloaded_by\x18\x10 \x01(\tR\fdownloadedBy\x12\x14\n" +
-	"\x05error\x18\x11 \x01(\tR\x05errorBi\n" +
-	"\n" +
-	"com.ScailoB\x17VaultFoldersScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\x05error\x18\x11 \x01(\tR\x05errorBq\n" +
+	"\x0ecom.scailo.sdkB\x17VaultFoldersScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_vault_folders_scailo_proto_rawDescOnce sync.Once

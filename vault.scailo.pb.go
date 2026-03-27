@@ -467,10 +467,10 @@ const file_vault_scailo_proto_rawDesc = "" +
 	"\x12UpdateEnclaveFrame\x12!.Scailo.EnclaveFrameUpdateRequest\x1a\x14.Scailo.EnclaveFrame\x12H\n" +
 	"\x12DeleteEnclaveFrame\x12\x16.Scailo.IdentifierUUID\x1a\x1a.Scailo.IdentifierResponse\x12F\n" +
 	"\x11SetupEnclaveFrame\x12\x16.Scailo.IdentifierUUID\x1a\x19.Scailo.EnclaveFrameSetup\x12E\n" +
-	"\x15SetupAllEnclaveFrames\x12\r.Scailo.Empty\x1a\x1d.Scailo.EnclaveFrameSetupListBb\n" +
-	"\n" +
-	"com.ScailoB\x10VaultScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\x15SetupAllEnclaveFrames\x12\r.Scailo.Empty\x1a\x1d.Scailo.EnclaveFrameSetupListBj\n" +
+	"\x0ecom.scailo.sdkB\x10VaultScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_vault_scailo_proto_rawDescOnce sync.Once

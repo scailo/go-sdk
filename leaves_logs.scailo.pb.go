@@ -99,7 +99,15 @@ func (LEAVE_LOG_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 // Describes the parameters necessary to create a record
 type LeavesLogsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The ID of the user for whom this log needs to be made
 	UserId uint64 `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -199,7 +207,9 @@ func (x *LeavesLogsServiceCreateRequest) GetQuantity() uint64 {
 // Describes the parameters that are part of a standard response
 type LeaveLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this record
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -409,25 +419,91 @@ func (x *LeavesLogsList) GetList() []*LeaveLog {
 // Describes the base request payload of a filter search
 type LeavesLogsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey LEAVE_LOG_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LEAVE_LOG_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The ID of the user for whom this log needs to be made
 	UserId uint64 `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -599,17 +675,61 @@ func (x *LeavesLogsServiceFilterReq) GetQuantityMax() uint64 {
 // Describes the base request payload of a count search
 type LeavesLogsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The ID of the user for whom this log needs to be made
 	UserId uint64 `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -832,10 +952,10 @@ const file_leaves_logs_scailo_proto_rawDesc = "" +
 	"\x11LeavesLogsService\x12D\n" +
 	"\x06Filter\x12\".Scailo.LeavesLogsServiceFilterReq\x1a\x16.Scailo.LeavesLogsList\x12Z\n" +
 	"\x13CountEmployeeLeaves\x12,.Scailo.LeavesLogsCountEmployeeLeavesRequest\x1a\x15.Scailo.CountResponse\x12A\n" +
-	"\x05Count\x12!.Scailo.LeavesLogsServiceCountReq\x1a\x15.Scailo.CountResponseBg\n" +
-	"\n" +
-	"com.ScailoB\x15LeavesLogsScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\x05Count\x12!.Scailo.LeavesLogsServiceCountReq\x1a\x15.Scailo.CountResponseBo\n" +
+	"\x0ecom.scailo.sdkB\x15LeavesLogsScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_leaves_logs_scailo_proto_rawDescOnce sync.Once

@@ -23,35 +23,35 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting absence search results.
 type ABSENCE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_ID_UNSPECIFIED ABSENCE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_CREATED_AT ABSENCE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_MODIFIED_AT ABSENCE_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_APPROVED_ON ABSENCE_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_APPROVED_BY ABSENCE_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_APPROVER_ROLE_ID ABSENCE_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_COMPLETED_ON ABSENCE_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_REFERENCE_ID ABSENCE_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_FINAL_REF_NUMBER ABSENCE_SORT_KEY = 11
-	// Fetch ordered results by the user ID
+	// @description Sort numerically by the employee's user ID.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_USER_ID ABSENCE_SORT_KEY = 12
-	// Fetch ordered results by the leave request ID
+	// @description Sort numerically by the linked leave request ID.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_LEAVE_REQUEST_ID ABSENCE_SORT_KEY = 13
-	// Fetch ordered results by the "from timestamp"
+	// @description Sort chronologically by the absence start date.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_FROM_TIMESTAMP ABSENCE_SORT_KEY = 14
-	// Fetch ordered results by the "to timestamp"
+	// @description Sort chronologically by the absence end date.
 	ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_TO_TIMESTAMP ABSENCE_SORT_KEY = 15
 )
 
@@ -116,32 +116,127 @@ func (ABSENCE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_absences_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for recording a new employee absence.
+// This record tracks non-attendance periods such as sick leave, unauthorized absences,
+// or specific time-off types not covered by standard leave requests.
+//
+// **Note:** This is the primary entry point for HR and Managers to log time away
+// from work for compliance and payroll processing.
 type AbsencesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "Employee called in with flu symptoms."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference ID of the absence
+	// @mandatory
+	//
+	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex "[0-9A-Za-z ]+$"
+	//
+	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The ID of the user who has been marked as absent
+	// @mandatory
+	//
+	// @description The unique system identifier of the employee who is absent.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// The ID of the optional associated leave request
+	// @optional
+	//
+	// @description The ID of the Leave Request if this absence is linked to a formal approval. Set to 0 if not applicable.
+	//
+	// @example 552
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	LeaveRequestId uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// The UNIX timestamp from when the user is absent
+	// @mandatory
+	//
+	// @description Start of the absence period in UNIX Epoch Seconds.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	FromTimestamp uint64 `protobuf:"varint,13,opt,name=from_timestamp,json=fromTimestamp,proto3" json:"from_timestamp,omitempty"`
-	// The UNIX timestamp until when the user is absent
+	// @mandatory
+	//
+	// @description End of the absence period in UNIX Epoch Seconds.
+	//
+	// @example 1698307200
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	ToTimestamp uint64 `protobuf:"varint,14,opt,name=to_timestamp,json=toTimestamp,proto3" json:"to_timestamp,omitempty"`
-	// Stores the unit of material ID
+	// @mandatory
+	//
+	// @description Unit of Measure ID for the absence quantity (e.g., Days, Hours).
+	//
+	// @example 1
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	UomId uint64 `protobuf:"varint,15,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the quantity of absence (in cents)
+	// @mandatory
+	//
+	// @description The total quantity of absence expressed in **cents** (multiplied by 100).
+	//
+	// @example 1.5 days -> 150; 2.5 hours -> 250.
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Quantity uint64 `protobuf:"varint,16,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	// The description of the absence
+	// @optional
+	//
+	// @description Detailed description or notes regarding the nature of the absence.
+	//
+	// @example "Medical leave - Doctor's note pending"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -261,32 +356,114 @@ func (x *AbsencesServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Absence record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the naming, leave request, start and end timestamps and quantity
+// of an established Action Code.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type AbsencesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for this specific update. Captured in the version history for administrative tracking.
+	//
+	// @example "Corrected the end date as per the medical certificate."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique system identifier of the Absence to be modified. Must be a value greater than `0`.
+	//
+	// @example 98765
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that stores if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
 	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference ID of the absence
+	// @mandatory
+	//
+	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
+	//
+	// @example "ABS-2023-001-REV"
+	//
+	// @regex "[0-9A-Za-z ]+$"
+	//
+	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The ID of the optional associated leave request
+	// @optional
+	//
+	// @description Updated link to a Leave Request.
+	//
+	// @example 553
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	LeaveRequestId uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// The UNIX timestamp from when the user is absent
+	// @mandatory
+	//
+	// @description Updated start timestamp in UNIX Epoch Seconds.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	FromTimestamp uint64 `protobuf:"varint,13,opt,name=from_timestamp,json=fromTimestamp,proto3" json:"from_timestamp,omitempty"`
-	// The UNIX timestamp until when the user is absent
+	// @mandatory
+	//
+	// @description Updated end timestamp in UNIX Epoch Seconds.
+	//
+	// @example 1698393600
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	ToTimestamp uint64 `protobuf:"varint,14,opt,name=to_timestamp,json=toTimestamp,proto3" json:"to_timestamp,omitempty"`
-	// // Stores the unit of material ID
-	// uint64 uom_id = 15 [(buf.validate.field).uint64.gt = 0];
-	// Stores the quantity of absence (in cents)
+	// @mandatory
+	//
+	// @description Updated quantity in cents (x100).
+	//
+	// @example 200
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Quantity uint64 `protobuf:"varint,16,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	// The description of the absence
+	// @optional
+	//
+	// @description Updated textual description.
+	//
+	// @example "Confirmed medical leave."
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description Updated custom dynamic form data.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -399,42 +576,66 @@ func (x *AbsencesServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Absence within the system.
 type Absence struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this absence
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// The status of this absence
+	// @description The current lifecycle status (e.g., DRAFT, VERIFIED, STANDING).
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Stores the logs of every operation performed on this absence
+	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The timestamp of when this absence was marked as completed
+	// @description UNIX timestamp of when the record transitioned to the COMPLETED state.
+	//
+	// @example 1698400000
 	CompletedOn uint64 `protobuf:"varint,6,opt,name=completed_on,json=completedOn,proto3" json:"completed_on,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference_id of the absence
+	// @description The user-provided reference ID.
+	//
+	// @example "ABS-2023-001"
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @description The system-generated immutable reference number.
+	//
+	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the user who has been marked as absent
+	// @description The ID of the employee associated with this record.
+	//
+	// @example 1024
 	UserId uint64 `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// The ID of the optional associated leave request
+	// @description The ID of the linked leave request, if any.
+	//
+	// @example 552
 	LeaveRequestId uint64 `protobuf:"varint,13,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// The UNIX timestamp from when the user is absent
+	// @description Start time of the absence (UNIX Epoch).
+	//
+	// @example 1698220800
 	FromTimestamp uint64 `protobuf:"varint,14,opt,name=from_timestamp,json=fromTimestamp,proto3" json:"from_timestamp,omitempty"`
-	// The UNIX timestamp until when the user is absent
+	// @description End time of the absence (UNIX Epoch).
+	//
+	// @example 1698307200
 	ToTimestamp uint64 `protobuf:"varint,15,opt,name=to_timestamp,json=toTimestamp,proto3" json:"to_timestamp,omitempty"`
-	// Stores the unit of material ID
+	// @description The unit of measure ID.
+	//
+	// @example 1
 	UomId uint64 `protobuf:"varint,16,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the quantity of absence (in cents)
+	// @description Total quantity in cents (multiplied by 100).
+	//
+	// @example 150
 	Quantity uint64 `protobuf:"varint,17,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	// The description of the absence
+	// @description Descriptive notes for the absence.
+	//
+	// @example "Sick Leave"
 	Description string `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -589,10 +790,10 @@ func (x *Absence) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of Absence records.
 type AbsencesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Absence records.
 	List          []*Absence `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -635,20 +836,50 @@ func (x *AbsencesList) GetList() []*Absence {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Absence records.
 type AbsencesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this absence
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -726,16 +957,22 @@ func (x *AbsencesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type AbsencesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*Absence `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -799,66 +1036,274 @@ func (x *AbsencesServicePaginationResponse) GetPayload() []*Absence {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching absences using multiple logical criteria.
 type AbsencesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this absence
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The reference_id of the absence
+	// @optional
+	//
+	// @description Fuzzy match for the user-defined reference ID.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @optional
+	//
+	// @description Fuzzy match for the system-generated ref number.
+	//
+	// @example "ABS-2023-X9Z2"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the user who has been marked as absent
+	// @optional
+	//
+	// @description Filter by specific employee ID.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UserId uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// The ID of the optionally associated leave request
+	// @optional
+	//
+	// @description Filter by linked leave request ID.
+	//
+	// @example 552
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	LeaveRequestId uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// The start range of "from timestamp"
+	// @optional
+	//
+	// @description Filter absences starting ON or AFTER this timestamp.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	FromTimestampStart uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3" json:"from_timestamp_start,omitempty"`
-	// The end range of "from timestamp"
+	// @optional
+	//
+	// @description Filter absences starting ON or BEFORE this timestamp.
+	//
+	// @example 1698307200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	FromTimestampEnd uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3" json:"from_timestamp_end,omitempty"`
-	// The start range of "to timestamp"
+	// @optional
+	//
+	// @description Filter absences ending ON or AFTER this timestamp.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ToTimestampStart uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3" json:"to_timestamp_start,omitempty"`
-	// The end range of "to timestamp"
+	// @optional
+	//
+	// @description Filter absences ending ON or BEFORE this timestamp.
+	//
+	// @example 1698307200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ToTimestampEnd uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3" json:"to_timestamp_end,omitempty"`
-	// Stores the unit of material ID
+	// @optional
+	//
+	// @description Filter by Unit of Measure (e.g., Days, Hours).
+	//
+	// @example 1
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UomId uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The min quantity of absence (in cents)
+	// @optional
+	//
+	// @description Minimum quantity filter (expressed in cents).
+	//
+	// @example 100
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	QuantityMin uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3" json:"quantity_min,omitempty"`
-	// The max quantity of absence (in cents)
+	// @optional
+	//
+	// @description Maximum quantity filter (expressed in cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	QuantityMax uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3" json:"quantity_max,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1097,58 +1542,244 @@ func (x *AbsencesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest 
 	return nil
 }
 
-// Describes the base request payload of a count search
+// Request message to count records matching specific criteria.
 type AbsencesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this absence
+	// @optional
+	//
+	// @description Filter by lifecycle status.
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by specific user who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role used during approval.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The reference_id of the absence
+	// @optional
+	//
+	// @description Fuzzy match for the user-defined reference ID.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @optional
+	//
+	// @description Fuzzy match for the system-generated ref number.
+	//
+	// @example "ABS-2023-X9Z2"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the user who has been marked as absent
+	// @optional
+	//
+	// @description Filter by specific employee ID.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UserId uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// The ID of the optionally associated leave request
+	// @optional
+	//
+	// @description Filter by linked leave request ID.
+	//
+	// @example 552
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	LeaveRequestId uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// The start range of "from timestamp"
+	// @optional
+	//
+	// @description Filter absences starting ON or AFTER this timestamp.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	FromTimestampStart uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3" json:"from_timestamp_start,omitempty"`
-	// The end range of "from timestamp"
+	// @optional
+	//
+	// @description Filter absences starting ON or BEFORE this timestamp.
+	//
+	// @example 1698307200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	FromTimestampEnd uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3" json:"from_timestamp_end,omitempty"`
-	// The start range of "to timestamp"
+	// @optional
+	//
+	// @description Filter absences ending ON or AFTER this timestamp.
+	//
+	// @example 1698220800
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ToTimestampStart uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3" json:"to_timestamp_start,omitempty"`
-	// The end range of "to timestamp"
+	// @optional
+	//
+	// @description Filter absences ending ON or BEFORE this timestamp.
+	//
+	// @example 1698307200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ToTimestampEnd uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3" json:"to_timestamp_end,omitempty"`
-	// Stores the unit of material ID
+	// @optional
+	//
+	// @description Filter by specific Unit of Measure.
+	//
+	// @example 1
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UomId uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The min quantity of absence (in cents)
+	// @optional
+	//
+	// @description Minimum quantity filter (in cents).
+	//
+	// @example 100
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	QuantityMin uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3" json:"quantity_min,omitempty"`
-	// The max quantity of absence (in cents)
+	// @optional
+	//
+	// @description Maximum quantity filter (in cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	QuantityMax uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3" json:"quantity_max,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Custom field filters.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1359,26 +1990,80 @@ func (x *AbsencesServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Generic search request for finding absences using a free-text search key.
 type AbsencesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Limit the search space to the given status
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The ID of the user who has been marked as absent
+	// @optional
+	//
+	// @description Limit search results to a specific employee ID.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UserId        uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1666,10 +2351,10 @@ const file_absences_scailo_proto_rawDesc = "" +
 	"\x06Filter\x12 .Scailo.AbsencesServiceFilterReq\x1a\x14.Scailo.AbsencesList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12?\n" +
 	"\x05Count\x12\x1f.Scailo.AbsencesServiceCountReq\x1a\x15.Scailo.CountResponse\x12G\n" +
-	"\rDownloadAsCSV\x12 .Scailo.AbsencesServiceFilterReq\x1a\x14.Scailo.StandardFileBe\n" +
-	"\n" +
-	"com.ScailoB\x13AbsencesScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rDownloadAsCSV\x12 .Scailo.AbsencesServiceFilterReq\x1a\x14.Scailo.StandardFileBm\n" +
+	"\x0ecom.scailo.sdkB\x13AbsencesScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_absences_scailo_proto_rawDescOnce sync.Once

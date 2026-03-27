@@ -82,37 +82,100 @@ const (
 type EquationsFamiliesServiceClient interface {
 	// Create and send for verification
 	Create(ctx context.Context, in *EquationsFamiliesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create and save as draft
+	// Saves a new record as a draft without triggering side effects.
+	//
+	// Use this method when you have incomplete information but wish to persist
+	// the record for later completion. The record remains in a `DRAFT` state.
+	//
+	// **Note:** Some strict validation rules may be relaxed in the backend for drafts compared to `Create`.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Draft" action.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If critical system fields are missing.
 	Draft(ctx context.Context, in *EquationsFamiliesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update draft
+	// Updates an existing record that is currently in `DRAFT` status.
+	//
+	// This method allows modification of all primary attributes while the record is not yet verified.
+	//
+	// **Errors:**
+	// - `FAILED_PRECONDITION`: If the record is not in a `DRAFT` state.
+	// - `NOT_FOUND`: If the provided ID does not exist.
 	DraftUpdate(ctx context.Context, in *EquationsFamiliesServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send for verification
+	// Submits a record in `DRAFT` or `REVISION` status for verification.
+	//
+	// This triggers the first stage of the approval workflow.
+	//
+	// **Status Transition:** -> `PREVERIFY`
+	//
+	// **Side Effects:**
+	// - Notifies designated verifiers or approvers.
+	// - Locks certain fields from being updated without returning to `REVISION`.
 	SendForVerification(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Verify
+	// Marks a record as verified, signaling that it is ready for final approval.
+	//
+	// **Status Transition:** -> `VERIFIED`
+	//
+	// **Side Effects:**
+	// - Records the verifying user and timestamp in the audit logs.
 	Verify(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve
+	// Officially approves the record.
+	//
+	// **Status Transition:** -> `STANDING`
+	//
+	// **Side Effects:**
+	// - Finalizes the `final_ref_number`.
+	// - Records the approver's identity and timestamp.
 	Approve(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send For Revision
+	// Sends the record back to the creator for corrections.
+	//
+	// Use this if details are incorrect or supporting documents (in the vault) are missing.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Notifies the record creator that changes are required.
 	SendForRevision(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update revision
+	// Updates a record that has been sent back for `REVISION`.
+	//
+	// **Side Effects:**
+	// - Re-validates the updated fields.
 	RevisionUpdate(ctx context.Context, in *EquationsFamiliesServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Halt
+	// Temporarily halts processing of the record.
+	//
+	// **Status Transition:** -> `HALTED`
 	Halt(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Discard
+	// Permanently cancels the record.
+	//
+	// Records in this state are typically ignored.
+	//
+	// **Status Transition:** -> `DISCARDED`
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Restore
+	// Restores a previously `DISCARDED` or `HALTED` record.
+	//
+	// **Side Effects:**
+	// - Moves the record back to `PREVERIFY` and sends for verification.
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Complete
+	// Marks the record as finalized and fully processed.
+	//
+	// **Status Transition:** -> `COMPLETED`
+	//
+	// **Side Effects:**
+	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Creates a new record based on an existing one (cloning).
+	//
+	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Reopen
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
-	// rpc SendEmail (IdentifierWithEmailAttributes) returns (IdentifierResponse);
-	// Create a magic link
+	// Generates a magic link for temporary, authenticated access to the resource.
+	//
+	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// Clone equation from an existing equation (denoted by the identifier)
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -149,23 +212,23 @@ type EquationsFamiliesServiceClient interface {
 	DownloadTreeAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Upload items using a CSV file. This is an idempotent operation. All the existing items are deleted before adding the items from the file.
 	UploadEquationFamilyItems(ctx context.Context, in *IdentifierUUIDWithFile, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*EquationFamily, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EquationFamily, error)
 	// View by Name (returns the latest record in case of duplicates)
 	ViewByName(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*EquationFamily, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*EquationFamily, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EquationFamily, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *EquationsFamiliesServicePaginationReq, opts ...grpc.CallOption) (*EquationsFamiliesServicePaginationResponse, error)
 	// View the latest equation for a family (denoted by the given identifier)
 	ViewForFamilyID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*EquationFamily, error)
@@ -179,18 +242,25 @@ type EquationsFamiliesServiceClient interface {
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Download equation with the given IdentifierUUID
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *EquationsFamiliesServiceSearchAllReq, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *EquationsFamiliesServiceFilterReq, opts ...grpc.CallOption) (*EquationsFamiliesList, error)
-	// Count in status
+	// Returns the total number of records currently in a specific lifecycle status.
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
-	// View all that match the given count criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *EquationsFamiliesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records
 	DownloadAsCSV(ctx context.Context, in *EquationsFamiliesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
-	// Import records using a CSV file (duplicate codes will be skipped)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
 	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 

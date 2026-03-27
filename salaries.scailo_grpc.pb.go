@@ -88,33 +88,96 @@ const (
 type SalariesServiceClient interface {
 	// Create and send for verification
 	Create(ctx context.Context, in *SalariesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create and save as draft
+	// Saves a new record as a draft without triggering side effects.
+	//
+	// Use this method when you have incomplete information but wish to persist
+	// the record for later completion. The record remains in a `DRAFT` state.
+	//
+	// **Note:** Some strict validation rules may be relaxed in the backend for drafts compared to `Create`.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Draft" action.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If critical system fields are missing.
 	Draft(ctx context.Context, in *SalariesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update draft
+	// Updates an existing record that is currently in `DRAFT` status.
+	//
+	// This method allows modification of all primary attributes while the record is not yet verified.
+	//
+	// **Errors:**
+	// - `FAILED_PRECONDITION`: If the record is not in a `DRAFT` state.
+	// - `NOT_FOUND`: If the provided ID does not exist.
 	DraftUpdate(ctx context.Context, in *SalariesServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send for verification
+	// Submits a record in `DRAFT` or `REVISION` status for verification.
+	//
+	// This triggers the first stage of the approval workflow.
+	//
+	// **Status Transition:** -> `PREVERIFY`
+	//
+	// **Side Effects:**
+	// - Notifies designated verifiers or approvers.
+	// - Locks certain fields from being updated without returning to `REVISION`.
 	SendForVerification(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Verify
+	// Marks a record as verified, signaling that it is ready for final approval.
+	//
+	// **Status Transition:** -> `VERIFIED`
+	//
+	// **Side Effects:**
+	// - Records the verifying user and timestamp in the audit logs.
 	Verify(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve
+	// Officially approves the record.
+	//
+	// **Status Transition:** -> `STANDING`
+	//
+	// **Side Effects:**
+	// - Finalizes the `final_ref_number`.
+	// - Records the approver's identity and timestamp.
 	Approve(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send For Revision
+	// Sends the record back to the creator for corrections.
+	//
+	// Use this if details are incorrect or supporting documents (in the vault) are missing.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Notifies the record creator that changes are required.
 	SendForRevision(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update revision
+	// Updates a record that has been sent back for `REVISION`.
+	//
+	// **Side Effects:**
+	// - Re-validates the updated fields.
 	RevisionUpdate(ctx context.Context, in *SalariesServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Halt
+	// Temporarily halts processing of the record.
+	//
+	// **Status Transition:** -> `HALTED`
 	Halt(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Discard
+	// Permanently cancels the record.
+	//
+	// Records in this state are typically ignored.
+	//
+	// **Status Transition:** -> `DISCARDED`
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Restore
+	// Restores a previously `DISCARDED` or `HALTED` record.
+	//
+	// **Side Effects:**
+	// - Moves the record back to `PREVERIFY` and sends for verification.
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Complete
+	// Marks the record as finalized and fully processed.
+	//
+	// **Status Transition:** -> `COMPLETED`
+	//
+	// **Side Effects:**
+	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Creates a new record based on an existing one (cloning).
+	//
+	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Reopen
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -180,29 +243,29 @@ type SalariesServiceClient interface {
 	ViewSalaryReimbursementItemHistory(ctx context.Context, in *SalaryReimbursementItemHistoryRequest, opts ...grpc.CallOption) (*SalariesReimbursementItemsList, error)
 	// View prospective reimbursement item info
 	ViewProspectiveSalaryReimbursementItem(ctx context.Context, in *SalaryReimbursementItemProspectiveInfoRequest, opts ...grpc.CallOption) (*SalariesServiceReimbursementItemCreateRequest, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Salary, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Salary, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Salary, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Salary, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*SalariesList, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*SalariesList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalariesList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *SalariesServicePaginationReq, opts ...grpc.CallOption) (*SalariesServicePaginationResponse, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *SalariesServiceSearchAllReq, opts ...grpc.CallOption) (*SalariesList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *SalariesServiceFilterReq, opts ...grpc.CallOption) (*SalariesList, error)
-	// Count in status
+	// Returns the total number of records currently in a specific lifecycle status.
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *SalariesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

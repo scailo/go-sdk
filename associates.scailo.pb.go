@@ -156,11 +156,15 @@ func (ASSOCIATE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 // Describes the data structure of each associate on the platform
 type Associate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this resource
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The first name of the associate
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -401,13 +405,19 @@ func (x *AssociatesList) GetList() []*Associate {
 // Describes the data structure that responds to a pagination request
 type AssociatePaginationResp struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*Associate `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -474,11 +484,27 @@ func (x *AssociatePaginationResp) GetPayload() []*Associate {
 // Describes the necessary data structure during creation of a associate
 type AssociatesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The first name of the associate
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -732,7 +758,15 @@ type AssociatesServiceUpdateRequest struct {
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the associate that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The first name of the associate
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -927,15 +961,41 @@ func (x *AssociatesServiceUpdateRequest) GetDescription() string {
 // Describes a pagination request to retrieve records
 type AssociatesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey       ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1009,25 +1069,91 @@ func (x *AssociatesServicePaginationReq) GetSortKey() ASSOCIATE_SORT_KEY {
 // Describes the base request payload of a filter search
 type AssociatesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The first name of the associate
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -1262,17 +1388,61 @@ func (x *AssociatesServiceFilterReq) GetClientId() uint64 {
 // Describes the base request payload of a count search
 type AssociatesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The first name of the associate
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -1479,7 +1649,11 @@ func (x *AssociatesServiceCountReq) GetClientId() uint64 {
 // Describes the request payload for performing a generic search operation on associates
 type AssociatesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
 	// The number of records that need to be sent in the response. Returns all records if it is set to -1
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
@@ -1489,7 +1663,15 @@ type AssociatesServiceSearchAllReq struct {
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
 	// The sort key that is to be used to fetch the response
 	SortKey ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter associates
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Describes the key with which the search operation needs to be performed
 	SearchKey string `protobuf:"bytes,10,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
@@ -1634,12 +1816,12 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xc5\x06\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xce\x06\n" +
 	"\x1eAssociatesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12&\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04R\rvaultFolderId\x126\n" +
+	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x126\n" +
 	"\n" +
 	"first_name\x18\n" +
 	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$R\tfirstName\x128\n" +
@@ -1667,11 +1849,11 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x1eAssociatesServiceImportRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12:\n" +
 	"\x04list\x18\n" +
-	" \x03(\v2&.Scailo.AssociatesServiceCreateRequestR\x04list\"\xd7\x06\n" +
+	" \x03(\v2&.Scailo.AssociatesServiceCreateRequestR\x04list\"\xe0\x06\n" +
 	"\x1eAssociatesServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04R\rvaultFolderId\x126\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12/\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x126\n" +
 	"\n" +
 	"first_name\x18\n" +
 	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$R\tfirstName\x128\n" +
@@ -1823,10 +2005,10 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x06Filter\x12\".Scailo.AssociatesServiceFilterReq\x1a\x16.Scailo.AssociatesList\x12A\n" +
 	"\x05Count\x12!.Scailo.AssociatesServiceCountReq\x1a\x15.Scailo.CountResponse\x12I\n" +
 	"\rDownloadAsCSV\x12\".Scailo.AssociatesServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBg\n" +
-	"\n" +
-	"com.ScailoB\x15AssociatesScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBo\n" +
+	"\x0ecom.scailo.sdkB\x15AssociatesScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_associates_scailo_proto_rawDescOnce sync.Once

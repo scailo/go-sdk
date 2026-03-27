@@ -83,25 +83,27 @@ type FeedstocksServiceClient interface {
 	ReturnMaterial(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Discard
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create a magic link
+	// Generates a magic link for temporary, authenticated access to the resource.
+	//
+	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Feedstock, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Feedstock, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Feedstock, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Feedstock, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*FeedstocksList, error)
 	// View all records with the given UUIDs
 	ViewFromUUIDs(ctx context.Context, in *IdentifierUUIDsList, opts ...grpc.CallOption) (*FeedstocksList, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*FeedstocksList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *FeedstocksServicePaginationReq, opts ...grpc.CallOption) (*FeedstocksServicePaginationResponse, error)
 	// Download QC Report with the given Identifier
 	DownloadQCReportByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StandardFile, error)
@@ -113,18 +115,25 @@ type FeedstocksServiceClient interface {
 	DownloadLabelByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// View all inventory interactions for feedstock with the given IdentifierUUID
 	ViewInventoryInteractions(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*InventoryInteractionsList, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *FeedstocksServiceSearchAllReq, opts ...grpc.CallOption) (*FeedstocksList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *FeedstocksServiceFilterReq, opts ...grpc.CallOption) (*FeedstocksList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *FeedstocksServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request
 	DownloadAsCSV(ctx context.Context, in *FeedstocksServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download the CSV template that could be used to upload records
 	DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Import records using a CSV file. Imports records as initial stock
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
 	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 

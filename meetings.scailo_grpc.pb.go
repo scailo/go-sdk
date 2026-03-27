@@ -73,11 +73,18 @@ type MeetingsServiceClient interface {
 	Update(ctx context.Context, in *MeetingsServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Cancel
 	Cancel(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Complete
+	// Marks the record as finalized and fully processed.
+	//
+	// **Status Transition:** -> `COMPLETED`
+	//
+	// **Side Effects:**
+	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Creates a new record based on an existing one (cloning).
+	//
+	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -127,27 +134,27 @@ type MeetingsServiceClient interface {
 	ViewAssociates(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*MeetingAssociatesList, error)
 	// Set the RSVP of the associate with the given meeting associate UUID
 	SetAssociateRSVP(ctx context.Context, in *MeetingsServiceSetRSVPRequest, opts ...grpc.CallOption) (*IdentifierUUID, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Meeting, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Meeting, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Meeting, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Meeting, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*MeetingsList, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*MeetingsList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*MeetingsList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *MeetingsServicePaginationReq, opts ...grpc.CallOption) (*MeetingsServicePaginationResponse, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *MeetingsServiceSearchAllReq, opts ...grpc.CallOption) (*MeetingsList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *MeetingsServiceFilterReq, opts ...grpc.CallOption) (*MeetingsList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *MeetingsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 }
 

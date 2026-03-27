@@ -34,6 +34,7 @@ const (
 	UsersService_CreateMagicLinkForSignature_FullMethodName = "/Scailo.UsersService/CreateMagicLinkForSignature"
 	UsersService_UpdatePassword_FullMethodName              = "/Scailo.UsersService/UpdatePassword"
 	UsersService_UpdateOwnPassword_FullMethodName           = "/Scailo.UsersService/UpdateOwnPassword"
+	UsersService_RequestPasswordResetEmail_FullMethodName   = "/Scailo.UsersService/RequestPasswordResetEmail"
 	UsersService_UpdateProfilePicture_FullMethodName        = "/Scailo.UsersService/UpdateProfilePicture"
 	UsersService_UpdateSignature_FullMethodName             = "/Scailo.UsersService/UpdateSignature"
 	UsersService_MFAEnable_FullMethodName                   = "/Scailo.UsersService/MFAEnable"
@@ -76,29 +77,88 @@ const (
 type UsersServiceClient interface {
 	// Register user's mobile device for push notifications. Returns the ID of the user device record
 	RegisterMobileDevice(ctx context.Context, in *UsersServiceRegisterMobileDeviceRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create and send for verification
+	// Creates a new user and initiates the verification workflow.
+	//
+	// This method validates all required fields.
+	// The user record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	//
+	// **Errors:** // - `ALREADY_EXISTS`: If the `username`, `code`, or `email` is already taken.
+	// - `INVALID_ARGUMENT`: If validation rules (e.g., `buf.validate`) fail.
 	Create(ctx context.Context, in *UsersServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create and save as draft
+	// Saves a new user record as a draft without triggering side effects.
+	//
+	// Use this method when you have incomplete information but wish to persist
+	// the record for later completion. The user cannot log in while the record is in a `DRAFT` state.
+	//
+	// **Note:** Some strict validation rules may be relaxed in the backend for drafts
 	Draft(ctx context.Context, in *UsersServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update draft
+	// Updates an existing record that is currently in `DRAFT` status.
+	//
+	// This method allows modification of all primary attributes while the record is not yet verified.
+	//
+	// **Errors:**
+	// - `FAILED_PRECONDITION`: If the record is not in a `DRAFT` state.
+	// - `NOT_FOUND`: If the provided ID does not exist.
 	DraftUpdate(ctx context.Context, in *UsersServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send for verification
+	// Submits a record in `DRAFT` or `REVISION` status for verification.
+	//
+	// This triggers the first stage of the approval workflow.
+	//
+	// **Status Transition:** -> `PREVERIFY`
+	//
+	// **Side Effects:**
+	// - Notifies designated verifiers or approvers.
+	// - Locks certain fields from being updated without returning to `REVISION`.
 	SendForVerification(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Verify
+	// Marks a record as verified, signaling that it is ready for final approval.
+	//
+	// **Status Transition:** -> `VERIFIED`
+	//
+	// **Side Effects:**
+	// - Records the verifying user and timestamp in the audit logs.
 	Verify(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve
+	// Officially approves the record.
+	//
+	// **Status Transition:** -> `STANDING`
+	//
+	// **Side Effects:**
+	// - Finalizes the `final_ref_number`.
+	// - Records the approver's identity and timestamp.
 	Approve(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send For Revision
+	// Sends the record back to the creator for corrections.
+	//
+	// Use this if details are incorrect or supporting documents (in the vault) are missing.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Notifies the record creator that changes are required.
 	SendForRevision(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update revision
+	// Updates a record that has been sent back for `REVISION`.
+	//
+	// **Side Effects:**
+	// - Re-validates the updated fields.
 	RevisionUpdate(ctx context.Context, in *UsersServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Halt
+	// Temporarily halts processing of the record.
+	//
+	// **Status Transition:** -> `HALTED`
 	Halt(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Discard
+	// Permanently cancels the record.
+	//
+	// Records in this state are typically ignored.
+	//
+	// **Status Transition:** -> `DISCARDED`
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Restore
+	// Restores a previously `DISCARDED` or `HALTED` record.
+	//
+	// **Side Effects:**
+	// - Moves the record back to `PREVERIFY` and sends for verification.
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Create a magic link that allows user to upload their signature
 	CreateMagicLinkForSignature(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
@@ -106,6 +166,8 @@ type UsersServiceClient interface {
 	UpdatePassword(ctx context.Context, in *UpdatePasswordReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Update user's own password
 	UpdateOwnPassword(ctx context.Context, in *UpdateOwnPasswordReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Request the password reset email for the given username. An email is triggered if the username is found.
+	RequestPasswordResetEmail(ctx context.Context, in *UsersServicePasswordResetReq, opts ...grpc.CallOption) (*MagicLink, error)
 	// Update the user's profile picture
 	UpdateProfilePicture(ctx context.Context, in *UploadPictureReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Update the user's signature
@@ -118,19 +180,19 @@ type UsersServiceClient interface {
 	ViewByID(ctx context.Context, in *IdentifierZeroable, opts ...grpc.CallOption) (*User, error)
 	// View by UUID (logs aren't returned)
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*User, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*User, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*User, error)
 	// View by username (logs aren't returned)
 	ViewByUsername(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*User, error)
 	// View by user's code (logs aren't returned)
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*User, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*UsersList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*UsersList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *UsersServicePaginationReq, opts ...grpc.CallOption) (*UsersServicePaginationResponse, error)
 	// View all users with the given IDs
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*UsersList, error)
@@ -158,18 +220,25 @@ type UsersServiceClient interface {
 	IdentifyCroppedFace(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*User, error)
 	// View user info on the basis of the provided image. The image should consist of just the user (might be a full sized photo). The face will be cropped. Will return an error if the image has not been recognized.
 	IdentifyFullFace(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*User, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *UsersServiceSearchAllReq, opts ...grpc.CallOption) (*UsersList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *UsersServiceFilterReq, opts ...grpc.CallOption) (*UsersList, error)
-	// Count in status
+	// Returns the total number of records currently in a specific lifecycle status.
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *UsersServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records
 	DownloadAsCSV(ctx context.Context, in *UsersServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
-	// Import records using a CSV file (duplicate codes will be skipped)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
 	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 
@@ -335,6 +404,16 @@ func (c *usersServiceClient) UpdateOwnPassword(ctx context.Context, in *UpdateOw
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, UsersService_UpdateOwnPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersServiceClient) RequestPasswordResetEmail(ctx context.Context, in *UsersServicePasswordResetReq, opts ...grpc.CallOption) (*MagicLink, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MagicLink)
+	err := c.cc.Invoke(ctx, UsersService_RequestPasswordResetEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

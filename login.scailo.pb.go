@@ -283,7 +283,9 @@ func (*LogoutResponse) Descriptor() ([]byte, []int) {
 // Stores the user login history
 type UserLoginHistory struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Storages a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Storages the metadata of this storage
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -644,10 +646,10 @@ const file_login_scailo_proto_rawDesc = "" +
 	"\x11LoginAsClientUser\x12\x18.Scailo.UserLoginRequest\x1a\x1f.Scailo.ClientUserLoginResponse\x12M\n" +
 	"\x10IsAuthTokenValid\x12 .Scailo.AuthTokenValidityRequest\x1a\x17.Scailo.BooleanResponse\x127\n" +
 	"\x06Logout\x12\x15.Scailo.LogoutRequest\x1a\x16.Scailo.LogoutResponse\x12D\n" +
-	"\vViewHistory\x12\x17.Scailo.SimpleSearchReq\x1a\x1c.Scailo.UserLoginHistoryListBb\n" +
-	"\n" +
-	"com.ScailoB\x10LoginScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\vViewHistory\x12\x17.Scailo.SimpleSearchReq\x1a\x1c.Scailo.UserLoginHistoryListBj\n" +
+	"\x0ecom.scailo.sdkB\x10LoginScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_login_scailo_proto_rawDescOnce sync.Once

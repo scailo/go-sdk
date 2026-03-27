@@ -45,7 +45,14 @@ type GeneralSettingsServiceClient interface {
 	// CSV operations
 	// Download the CSV template that could be used to upload records
 	DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Import records using a CSV file
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
 	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 

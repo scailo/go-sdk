@@ -113,27 +113,27 @@ type VendorStreamsServiceClient interface {
 	ViewVendorSubscriberByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorStreamVendorSubscriber, error)
 	// View all vendor subscribers for given vendor stream UUID
 	ViewVendorSubscribers(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VendorStreamVendorSubscribersList, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorStream, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VendorStream, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorStream, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VendorStream, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*VendorStreamsList, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*VendorStreamsList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VendorStreamsList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *VendorStreamsServicePaginationReq, opts ...grpc.CallOption) (*VendorStreamsServicePaginationResponse, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *VendorStreamsServiceSearchAllReq, opts ...grpc.CallOption) (*VendorStreamsList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *VendorStreamsServiceFilterReq, opts ...grpc.CallOption) (*VendorStreamsList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *VendorStreamsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request

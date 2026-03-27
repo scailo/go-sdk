@@ -84,37 +84,102 @@ const (
 type OutwardJobsFreeIssueMaterialsServiceClient interface {
 	// Create and send for verification
 	Create(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create and save as draft
+	// Saves a new record as a draft without triggering side effects.
+	//
+	// Use this method when you have incomplete information but wish to persist
+	// the record for later completion. The record remains in a `DRAFT` state.
+	//
+	// **Note:** Some strict validation rules may be relaxed in the backend for drafts compared to `Create`.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Draft" action.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If critical system fields are missing.
 	Draft(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update draft
+	// Updates an existing record that is currently in `DRAFT` status.
+	//
+	// This method allows modification of all primary attributes while the record is not yet verified.
+	//
+	// **Errors:**
+	// - `FAILED_PRECONDITION`: If the record is not in a `DRAFT` state.
+	// - `NOT_FOUND`: If the provided ID does not exist.
 	DraftUpdate(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send for verification
+	// Submits a record in `DRAFT` or `REVISION` status for verification.
+	//
+	// This triggers the first stage of the approval workflow.
+	//
+	// **Status Transition:** -> `PREVERIFY`
+	//
+	// **Side Effects:**
+	// - Notifies designated verifiers or approvers.
+	// - Locks certain fields from being updated without returning to `REVISION`.
 	SendForVerification(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Verify
+	// Marks a record as verified, signaling that it is ready for final approval.
+	//
+	// **Status Transition:** -> `VERIFIED`
+	//
+	// **Side Effects:**
+	// - Records the verifying user and timestamp in the audit logs.
 	Verify(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve
+	// Officially approves the record.
+	//
+	// **Status Transition:** -> `STANDING`
+	//
+	// **Side Effects:**
+	// - Finalizes the `final_ref_number`.
+	// - Records the approver's identity and timestamp.
 	Approve(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send For Revision
+	// Sends the record back to the creator for corrections.
+	//
+	// Use this if details are incorrect or supporting documents (in the vault) are missing.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Notifies the record creator that changes are required.
 	SendForRevision(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update revision
+	// Updates a record that has been sent back for `REVISION`.
+	//
+	// **Side Effects:**
+	// - Re-validates the updated fields.
 	RevisionUpdate(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Halt
+	// Temporarily halts processing of the record.
+	//
+	// **Status Transition:** -> `HALTED`
 	Halt(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Discard
+	// Permanently cancels the record.
+	//
+	// Records in this state are typically ignored.
+	//
+	// **Status Transition:** -> `DISCARDED`
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Restore
+	// Restores a previously `DISCARDED` or `HALTED` record.
+	//
+	// **Side Effects:**
+	// - Moves the record back to `PREVERIFY` and sends for verification.
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Complete
+	// Marks the record as finalized and fully processed.
+	//
+	// **Status Transition:** -> `COMPLETED`
+	//
+	// **Side Effects:**
+	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Creates a new record based on an existing one (cloning).
+	//
+	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Reopen
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create a magic link
+	// Generates a magic link for temporary, authenticated access to the resource.
+	//
+	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// Autofill the outward job free issue material
 	Autofill(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -151,25 +216,25 @@ type OutwardJobsFreeIssueMaterialsServiceClient interface {
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download the CSV template that could be used to upload items
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterial, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterial, error)
 	// View by Reference ID (returns the latest record in case of duplicates)
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterial, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterial, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterial, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsList, error)
 	// View the ancillary parameters (UUIDs of the internal references) by UUID
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*OutwardJobFreeIssueMaterialAncillaryParameters, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServicePaginationReq, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsServicePaginationResponse, error)
 	// View prospective families for the given outward job free issue material
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
@@ -185,13 +250,13 @@ type OutwardJobsFreeIssueMaterialsServiceClient interface {
 	DownloadLabelByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// View already added quantities
 	ViewAddedFamilyQuantityForSource(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceAlreadyAddedQuantityForSourceRequest, opts ...grpc.CallOption) (*DualQuantitiesResponse, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceSearchAllReq, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceFilterReq, opts ...grpc.CallOption) (*OutwardJobsFreeIssueMaterialsList, error)
-	// Count in status
+	// Returns the total number of records currently in a specific lifecycle status.
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *OutwardJobsFreeIssueMaterialsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

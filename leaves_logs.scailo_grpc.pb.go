@@ -29,11 +29,11 @@ const (
 //
 // Describes the common methods applicable on each record
 type LeavesLogsServiceClient interface {
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *LeavesLogsServiceFilterReq, opts ...grpc.CallOption) (*LeavesLogsList, error)
 	// Count leaves of employee
 	CountEmployeeLeaves(ctx context.Context, in *LeavesLogsCountEmployeeLeavesRequest, opts ...grpc.CallOption) (*CountResponse, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *LeavesLogsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 }
 

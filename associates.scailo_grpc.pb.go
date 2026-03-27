@@ -57,15 +57,15 @@ type AssociatesServiceClient interface {
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Restore the associate
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Associate, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Associate, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Associate, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Associate, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*AssociatesList, error)
 	// Download Associate by ID as a vCard
 	DownloadVCard(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*BytesResponse, error)
@@ -81,14 +81,21 @@ type AssociatesServiceClient interface {
 	CheckAddPermission(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// View all associates that match the given search key
 	SearchAll(ctx context.Context, in *AssociatesServiceSearchAllReq, opts ...grpc.CallOption) (*AssociatesList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *AssociatesServiceFilterReq, opts ...grpc.CallOption) (*AssociatesList, error)
-	// View all that match the given count criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *AssociatesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records
 	DownloadAsCSV(ctx context.Context, in *AssociatesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
-	// Import records using a CSV file (duplicate codes will be skipped)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
 	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 

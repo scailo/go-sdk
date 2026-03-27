@@ -38,11 +38,11 @@ const (
 type TransactionalEmailsServiceClient interface {
 	// Create a transactional email
 	Create(ctx context.Context, in *TransactionalEmailsServiceCreateRequest, opts ...grpc.CallOption) (*TransactionalEmail, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*TransactionalEmail, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*TransactionalEmail, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*TransactionalEmailsList, error)
 	// View all recipients of the transactional email
 	ViewRecipients(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*TransactionalEmailRecipientsList, error)
@@ -50,9 +50,9 @@ type TransactionalEmailsServiceClient interface {
 	ViewAttachments(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*TransactionalEmailAttachmentsList, error)
 	// View all transactional emails that match the given search key
 	SearchAll(ctx context.Context, in *TransactionalEmailsServiceSearchAllReq, opts ...grpc.CallOption) (*TransactionalEmailsList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *TransactionalEmailsServiceFilterReq, opts ...grpc.CallOption) (*TransactionalEmailsList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *TransactionalEmailsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

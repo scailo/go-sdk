@@ -231,11 +231,27 @@ func (EQUATION_REPLACEABLE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 // Describes the parameters necessary to create a record
 type EquationsReplaceablesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The name of the equation replaceable
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
@@ -326,9 +342,21 @@ type EquationsReplaceablesServiceUpdateRequest struct {
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that stores if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
 	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The name of the equation replaceable
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
@@ -413,19 +441,25 @@ func (x *EquationsReplaceablesServiceUpdateRequest) GetDescription() string {
 // Describes the parameters that are part of a standard response
 type EquationReplaceable struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this equation replaceable
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// The status of this equation replaceable
+	// @description The current lifecycle status (e.g., DRAFT, VERIFIED, STANDING).
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Stores the logs of every operation performed on this equation replaceable
+	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The timestamp of when this equation replaceable was marked as completed
+	// @description UNIX timestamp of when the record transitioned to the COMPLETED state.
+	//
+	// @example 1698400000
 	CompletedOn uint64 `protobuf:"varint,6,opt,name=completed_on,json=completedOn,proto3" json:"completed_on,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The name of the equation replaceable
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
@@ -731,13 +765,15 @@ func (x *EquationsReplaceablesServiceItemUpdateRequest) GetSpecifications() stri
 // Describes the parameters that constitute an item associated to a equation replaceable
 type EquationReplaceableItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this equation replaceable
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// Denotes if this record requires approval (or has been approved)
+	// @description The approval state of the record
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -1005,17 +1041,51 @@ func (x *EquationReplaceableItemHistoryRequest) GetReplaceableFamilyId() uint64 
 // Describes the request payload to retrieve approved or unapproved items.
 type EquationReplaceableItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey EQUATION_REPLACEABLE_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.EQUATION_REPLACEABLE_ITEM_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The status of the items
 	Status EQUATION_REPLACEABLE_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.EQUATION_REPLACEABLE_ITEM_STATUS" json:"status,omitempty"`
@@ -1168,13 +1238,19 @@ func (x *EquationReplaceableItemsSearchRequest) GetSearchKey() string {
 // Describes the response to a pagination items request
 type EquationsReplaceablesServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*EquationReplaceableItem `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1241,15 +1317,41 @@ func (x *EquationsReplaceablesServicePaginatedItemsResponse) GetPayload() []*Equ
 // Describes a pagination request to retrieve records
 type EquationsReplaceablesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey EQUATION_REPLACEABLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.EQUATION_REPLACEABLE_SORT_KEY" json:"sort_key,omitempty"`
 	// The status of this equation replaceable
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
@@ -1332,13 +1434,19 @@ func (x *EquationsReplaceablesServicePaginationReq) GetStatus() STANDARD_LIFECYC
 // Describes the response to a pagination request
 type EquationsReplaceablesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*EquationReplaceable `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1405,39 +1513,157 @@ func (x *EquationsReplaceablesServicePaginationResponse) GetPayload() []*Equatio
 // Describes the base request payload of a filter search
 type EquationsReplaceablesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey EQUATION_REPLACEABLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.EQUATION_REPLACEABLE_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this equation replaceable
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
 	// The name of the equation replaceable
 	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
@@ -1622,31 +1848,127 @@ func (x *EquationsReplaceablesServiceFilterReq) GetConstituentFamilyId() uint64 
 // Describes the base request payload of a count search
 type EquationsReplaceablesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this equation replaceable
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
 	// The name of the equation replaceable
 	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
@@ -1803,21 +2125,67 @@ func (x *EquationsReplaceablesServiceCountReq) GetConstituentFamilyId() uint64 {
 // Describes the request payload for performing a generic search operation on records
 type EquationsReplaceablesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey EQUATION_REPLACEABLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.EQUATION_REPLACEABLE_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Limit the search space to the given status
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2163,10 +2531,10 @@ const file_equations_replaceables_scailo_proto_rawDesc = "" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12L\n" +
 	"\x05Count\x12,.Scailo.EquationsReplaceablesServiceCountReq\x1a\x15.Scailo.CountResponse\x12T\n" +
 	"\rDownloadAsCSV\x12-.Scailo.EquationsReplaceablesServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBr\n" +
-	"\n" +
-	"com.ScailoB EquationsReplaceablesScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBz\n" +
+	"\x0ecom.scailo.sdkB EquationsReplaceablesScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_equations_replaceables_scailo_proto_rawDescOnce sync.Once

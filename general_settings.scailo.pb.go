@@ -26,7 +26,9 @@ const (
 // Describes the data structure of general settings on the platform
 type GeneralSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this sales order
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -315,7 +317,15 @@ func (x *GeneralSettings) GetFormData() []*FormFieldDatum {
 // Describes the necessary data structure during creation of a general settings
 type GeneralSettingsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The name of the organization
 	CompanyName string `protobuf:"bytes,10,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
@@ -667,10 +677,10 @@ const file_general_settings_scailo_proto_rawDesc = "" +
 	"\x14ViewOrganizationLogo\x12\r.Scailo.Empty\x1a\x15.Scailo.ImageResponse\x126\n" +
 	"\fViewSettings\x12\r.Scailo.Empty\x1a\x17.Scailo.GeneralSettings\x12=\n" +
 	"\x16DownloadImportTemplate\x12\r.Scailo.Empty\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBl\n" +
-	"\n" +
-	"com.ScailoB\x1aGeneralSettingsScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBt\n" +
+	"\x0ecom.scailo.sdkB\x1aGeneralSettingsScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_general_settings_scailo_proto_rawDescOnce sync.Once

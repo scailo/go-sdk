@@ -77,11 +77,13 @@ type QCSamplesServiceClient interface {
 	Cancel(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Reopen
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add comment
+	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create a magic link
+	// Generates a magic link for temporary, authenticated access to the resource.
+	//
+	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// Update a parameter in a qc sample
 	UpdateParameter(ctx context.Context, in *QCSamplesServiceParameterUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -100,33 +102,33 @@ type QCSamplesServiceClient interface {
 	// CSV operations
 	// Download the CSV file that consists of the list of parameters in each qc sample represented by the given identifier UUID
 	DownloadParametersAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// View by ID
+	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*QCSample, error)
-	// View by UUID
+	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*QCSample, error)
-	// View only essential components by ID (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*QCSample, error)
-	// View only essential components (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*QCSample, error)
-	// View all records with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*QCSamplesList, error)
 	// View the ancillary parameters (UUIDs of the internal references) by UUID
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*QCSampleAncillaryParameters, error)
-	// View all
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*QCSamplesList, error)
-	// View all with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*QCSamplesList, error)
-	// View with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *QCSamplesServicePaginationReq, opts ...grpc.CallOption) (*QCSamplesServicePaginationResponse, error)
 	// Checks if the record is downloadable (checks if the custom download function has been implemented)
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Download qc sample with the given IdentifierUUID (can be used to allow public downloads)
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// View all that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *QCSamplesServiceSearchAllReq, opts ...grpc.CallOption) (*QCSamplesWithMetadataList, error)
-	// View all that match the given filter criteria
+	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *QCSamplesServiceFilterReq, opts ...grpc.CallOption) (*QCSamplesList, error)
-	// Count all that match the given criteria
+	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *QCSamplesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
 	// Count all the qc samples in various statuses for the inventory item with the given UUID
 	CountsForInventoryItem(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*QCSamplesCountStatistics, error)

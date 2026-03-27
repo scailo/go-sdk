@@ -165,68 +165,104 @@ func (USER_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_users_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating a new user record.
+// * This is the primary entry point for onboarding employees or system users.
+// It handles identity, contact information, physical address, and payroll
+// configuration in a single atomic operation.
+//
+// **Note:** Dynamic fields should be provided in the `form_data` field for
+// organization-specific requirements.
 type UsersServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// [Optional] Internal notes or audit comments for this creation event.
+	// Maximum 500 characters.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the user type
+	// [Required] The classification of the user (e.g., CLIENT, EMPLOYEE, VENDOR).
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The username of the user
+	// [Required] The unique login identifier.
+	// Must be at least 1 character and unique across the entity.
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
-	// The unique employee code by which the user is classified
+	// [Required] The unique employee or payroll code.
+	// Used for cross-referencing with external HR or ERP systems.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The name of the user
+	// [Required] The full legal name of the user.
 	Name string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
-	// The plain text password using which the user can login
+	// [Required] The plain text password for the account.
+	// This value is hashed before storage.
 	PlainTextPassword string `protobuf:"bytes,13,opt,name=plain_text_password,json=plainTextPassword,proto3" json:"plain_text_password,omitempty"`
-	// The associated role ID
+	// [Required] The primary security Role ID (System/Web access).
 	RoleId uint64 `protobuf:"varint,14,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated mobile role ID
+	// [Optional] The secondary Role ID for mobile application access.
 	MobileRoleId uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3" json:"mobile_role_id,omitempty"`
-	// The primary email of the user
+	// [Required] The primary email address for system notifications.
+	// Example: "jane.doe@example.com"
 	Email string `protobuf:"bytes,16,opt,name=email,proto3" json:"email,omitempty"`
-	// The optional work email of the user
+	// [Optional] The secondary/corporate work email address.
 	WorkEmail string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The primary contact number of the user
+	// [Required] The primary contact number (e.g., Mobile or Landline).
+	// Recommended format: E.164 (e.g., "+12125550123").
 	Phone string `protobuf:"bytes,18,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The birthday of the user
+	// [Optional] The user's date of birth.
+	// **Format:** `Day Month Date Year`
+	// Example: "Mon Jan 02 2006"
 	Birthday string `protobuf:"bytes,30,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The joining date of the user
+	// [Optional] The official start date for the user.
+	// **Format:** `Day Month Date Year`
+	// Example: "Wed Oct 25 2023"
 	JoiningDate string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3" json:"joining_date,omitempty"`
-	// The address of the user
+	// [Optional] Primary residential or mailing address.
 	Address string `protobuf:"bytes,32,opt,name=address,proto3" json:"address,omitempty"`
-	// The city of residence
+	// [Optional] City of residence.
 	City string `protobuf:"bytes,33,opt,name=city,proto3" json:"city,omitempty"`
-	// The state of residence
+	// [Optional] State, Province, or Region of residence.
 	State string `protobuf:"bytes,34,opt,name=state,proto3" json:"state,omitempty"`
-	// The country of residence
+	// [Optional] Country of residence (ISO 3166-1 alpha-2 recommended).
+	// Example: "US", "GB", "IN"
 	Country string `protobuf:"bytes,35,opt,name=country,proto3" json:"country,omitempty"`
-	// THe PIN Code of residence
+	// [Optional] Postal or ZIP code.
 	PinCode string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
-	// THe Blood Group of the user
+	// [Optional] The user's blood group.
+	// Example: "O+", "A-", "B+"
 	BloodGroup string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3" json:"blood_group,omitempty"`
-	// The associated shift group ID
+	// [Optional] Assigned shift group for attendance scheduling.
 	ShiftGroupId uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// The associated unit of material of the user's attendance record
+	// [Optional] Unit of Measure (UOM) for tracking attendance duration.
 	AttendanceUomId uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// The associated department (can be 0 to allow seamless transition)
+	// [Optional] The department ID. Set to 0 for unassigned/general.
 	DepartmentId uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// The associated payroll group ID of the user
+	// [Optional] The payroll group used for salary batching.
 	PayrollGroupId uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// The associated tax group ID using which the user's payroll needs to be calculated
+	// [Optional] The tax group used for statutory deductions.
 	PayrollTaxGroupId uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// The associated currency ID of the user's payroll
+	// [Optional] The ID of the currency for the user's base salary.
 	PayrollCurrencyId uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// The basic pay amount of the user (in cents)
+	// [Optional] The base salary amount in the **smallest currency unit**.
+	// For USD, 500000 represents $5,000.00.
 	BasicPayAmount uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3" json:"basic_pay_amount,omitempty"`
-	// The associated unit of material for storing the basic pay amount
+	// [Optional] The UOM ID for the basic pay (e.g., Per Month, Per Year).
 	BasicPayUomId uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// The list of dynamic forms
+	// [Optional] A collection of custom field data.
+	// Use this for any organization-specific dynamic attributes.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,70,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -479,9 +515,21 @@ type UsersServiceUpdateRequest struct {
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that stores if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
 	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The unique employee code by which the user is classified
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
@@ -764,19 +812,23 @@ func (x *UsersServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequest
 // Describes the parameters that are part of a standard response
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this user
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// The status of this user
+	// @description The current lifecycle status (e.g., DRAFT, VERIFIED, STANDING).
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Stores the logs of every operation performed on this user
+	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
 	// Stores the user type
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// The username of the user
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
@@ -1262,15 +1314,41 @@ func (x *UsersList) GetList() []*User {
 // Describes a pagination request to retrieve records
 type UsersServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
 	// The status of this user
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
@@ -1353,13 +1431,19 @@ func (x *UsersServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
 // Describes the response to a pagination request
 type UsersServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*User `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1426,37 +1510,139 @@ func (x *UsersServicePaginationResponse) GetPayload() []*User {
 // Describes the base request payload of a filter search
 type UsersServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// Stores the user type
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this user
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
 	// The username of the user
 	Username string `protobuf:"bytes,20,opt,name=username,proto3" json:"username,omitempty"`
@@ -1761,29 +1947,109 @@ func (x *UsersServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest {
 // Describes the base request payload of a count search
 type UsersServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
 	// Stores the user type
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this user
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
 	// The username of the user
 	Username string `protobuf:"bytes,20,opt,name=username,proto3" json:"username,omitempty"`
@@ -2060,23 +2326,69 @@ func (x *UsersServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 // Describes the request payload for performing a generic search operation on records
 type UsersServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the user type
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// Limit the search space to the given status
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
 	// --------------------------------------------------------------------------------
 	// Filter by the associated vendor ID (return all the users that belong to this vendor)
@@ -2197,7 +2509,9 @@ func (x *UsersServiceSearchAllReq) GetClientId() uint64 {
 // Describes the message that is required to register a user's device
 type UsersServiceRegisterMobileDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The ID of the user who has possession of the device
 	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2267,16 +2581,71 @@ func (x *UsersServiceRegisterMobileDeviceRequest) GetDeviceToken() string {
 	return ""
 }
 
+// Describes the message that is required to reset a user's password through an email
+type UsersServicePasswordResetReq struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The username of the user
+	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
+	// The optional domain prefix that is used to generate the magic link that will allow the user to update the password. If this is empty, then the default authless access domain is used. This is useful in case of password redirections need to happen at custom domains.
+	DomainPrefix  string `protobuf:"bytes,20,opt,name=domain_prefix,json=domainPrefix,proto3" json:"domain_prefix,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UsersServicePasswordResetReq) Reset() {
+	*x = UsersServicePasswordResetReq{}
+	mi := &file_users_scailo_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UsersServicePasswordResetReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsersServicePasswordResetReq) ProtoMessage() {}
+
+func (x *UsersServicePasswordResetReq) ProtoReflect() protoreflect.Message {
+	mi := &file_users_scailo_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsersServicePasswordResetReq.ProtoReflect.Descriptor instead.
+func (*UsersServicePasswordResetReq) Descriptor() ([]byte, []int) {
+	return file_users_scailo_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UsersServicePasswordResetReq) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *UsersServicePasswordResetReq) GetDomainPrefix() string {
+	if x != nil {
+		return x.DomainPrefix
+	}
+	return ""
+}
+
 var File_users_scailo_proto protoreflect.FileDescriptor
 
 const file_users_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xbe\t\n" +
+	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xc8\t\n" +
 	"\x19UsersServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12.\n" +
-	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPER\buserType\x12/\n" +
+	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x128\n" +
+	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEB\b\xbaH\x05\x82\x01\x02\x10\x01R\buserType\x12/\n" +
 	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12#\n" +
 	"\busername\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\busername\x12\x1b\n" +
@@ -2500,7 +2869,11 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x121\n" +
 	"\tdevice_os\x18\f \x01(\tB\x14\xbaH\x11r\x0f2\r[0-9A-Za-z]+$R\bdeviceOs\x12-\n" +
 	"\fdevice_token\x18\r \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xac\x02R\vdeviceToken*n\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xac\x02R\vdeviceToken\"h\n" +
+	"\x1cUsersServicePasswordResetReq\x12#\n" +
+	"\busername\x18\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\busername\x12#\n" +
+	"\rdomain_prefix\x18\x14 \x01(\tR\fdomainPrefix*n\n" +
 	"\tUSER_TYPE\x12\x1d\n" +
 	"\x19USER_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_TYPE_EMPLOYEE\x10\x01\x12\x14\n" +
@@ -2518,7 +2891,7 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\x12USER_SORT_KEY_NAME\x10\v\x12\x16\n" +
 	"\x12USER_SORT_KEY_CODE\x10\f\x12\x17\n" +
 	"\x13USER_SORT_KEY_EMAIL\x10\r\x12\x17\n" +
-	"\x13USER_SORT_KEY_PHONE\x10\x0e2\x8c\x1a\n" +
+	"\x13USER_SORT_KEY_PHONE\x10\x0e2\xe2\x1a\n" +
 	"\fUsersService\x12c\n" +
 	"\x14RegisterMobileDevice\x12/.Scailo.UsersServiceRegisterMobileDeviceRequest\x1a\x1a.Scailo.IdentifierResponse\x12G\n" +
 	"\x06Create\x12!.Scailo.UsersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12F\n" +
@@ -2536,7 +2909,8 @@ const file_users_scailo_proto_rawDesc = "" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
 	"\x1bCreateMagicLinkForSignature\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12G\n" +
 	"\x0eUpdatePassword\x12\x19.Scailo.UpdatePasswordReq\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
-	"\x11UpdateOwnPassword\x12\x1c.Scailo.UpdateOwnPasswordReq\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
+	"\x11UpdateOwnPassword\x12\x1c.Scailo.UpdateOwnPasswordReq\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
+	"\x19RequestPasswordResetEmail\x12$.Scailo.UsersServicePasswordResetReq\x1a\x11.Scailo.MagicLink\x12L\n" +
 	"\x14UpdateProfilePicture\x12\x18.Scailo.UploadPictureReq\x1a\x1a.Scailo.IdentifierResponse\x12G\n" +
 	"\x0fUpdateSignature\x12\x18.Scailo.UploadPictureReq\x1a\x1a.Scailo.IdentifierResponse\x12:\n" +
 	"\tMFAEnable\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.ImageResponse\x12>\n" +
@@ -2570,10 +2944,10 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12<\n" +
 	"\x05Count\x12\x1c.Scailo.UsersServiceCountReq\x1a\x15.Scailo.CountResponse\x12D\n" +
 	"\rDownloadAsCSV\x12\x1d.Scailo.UsersServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBb\n" +
-	"\n" +
-	"com.ScailoB\x10UsersScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBj\n" +
+	"\x0ecom.scailo.sdkB\x10UsersScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_users_scailo_proto_rawDescOnce sync.Once
@@ -2588,7 +2962,7 @@ func file_users_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_users_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_users_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_users_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_users_scailo_proto_goTypes = []any{
 	(USER_TYPE)(0),                                            // 0: Scailo.USER_TYPE
 	(USER_SORT_KEY)(0),                                        // 1: Scailo.USER_SORT_KEY
@@ -2603,169 +2977,172 @@ var file_users_scailo_proto_goTypes = []any{
 	(*UsersServiceCountReq)(nil),                              // 10: Scailo.UsersServiceCountReq
 	(*UsersServiceSearchAllReq)(nil),                          // 11: Scailo.UsersServiceSearchAllReq
 	(*UsersServiceRegisterMobileDeviceRequest)(nil),           // 12: Scailo.UsersServiceRegisterMobileDeviceRequest
-	(*FormFieldDatumCreateRequest)(nil),                       // 13: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                                  // 14: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                                  // 15: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                            // 16: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                              // 17: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                    // 18: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                          // 19: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                           // 20: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                       // 21: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                     // 22: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 23: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*UpdatePasswordReq)(nil),                                 // 24: Scailo.UpdatePasswordReq
-	(*UpdateOwnPasswordReq)(nil),                              // 25: Scailo.UpdateOwnPasswordReq
-	(*UploadPictureReq)(nil),                                  // 26: Scailo.UploadPictureReq
-	(*IdentifierUUID)(nil),                                    // 27: Scailo.IdentifierUUID
-	(*IdentifierZeroable)(nil),                                // 28: Scailo.IdentifierZeroable
-	(*Identifier)(nil),                                        // 29: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                   // 30: Scailo.SimpleSearchReq
-	(*ActiveStatus)(nil),                                      // 31: Scailo.ActiveStatus
-	(*IdentifiersList)(nil),                                   // 32: Scailo.IdentifiersList
-	(*IdentifierUUIDsList)(nil),                               // 33: Scailo.IdentifierUUIDsList
-	(*StringsList)(nil),                                       // 34: Scailo.StringsList
-	(*Empty)(nil),                                             // 35: Scailo.Empty
-	(*MonthAndDayFilter)(nil),                                 // 36: Scailo.MonthAndDayFilter
-	(*StandardFile)(nil),                                      // 37: Scailo.StandardFile
-	(*CountInSLCStatusRequest)(nil),                           // 38: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 39: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 40: Scailo.MagicLink
-	(*ImageResponse)(nil),                                     // 41: Scailo.ImageResponse
-	(*Base64String)(nil),                                      // 42: Scailo.Base64String
-	(*StringResponse)(nil),                                    // 43: Scailo.StringResponse
-	(*CountResponse)(nil),                                     // 44: Scailo.CountResponse
+	(*UsersServicePasswordResetReq)(nil),                      // 13: Scailo.UsersServicePasswordResetReq
+	(*FormFieldDatumCreateRequest)(nil),                       // 14: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                                  // 15: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                                  // 16: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                            // 17: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                              // 18: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                    // 19: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                          // 20: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                           // 21: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                       // 22: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                     // 23: Scailo.IdentifierUUIDWithUserComment
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 24: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*UpdatePasswordReq)(nil),                                 // 25: Scailo.UpdatePasswordReq
+	(*UpdateOwnPasswordReq)(nil),                              // 26: Scailo.UpdateOwnPasswordReq
+	(*UploadPictureReq)(nil),                                  // 27: Scailo.UploadPictureReq
+	(*IdentifierUUID)(nil),                                    // 28: Scailo.IdentifierUUID
+	(*IdentifierZeroable)(nil),                                // 29: Scailo.IdentifierZeroable
+	(*Identifier)(nil),                                        // 30: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                   // 31: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                                      // 32: Scailo.ActiveStatus
+	(*IdentifiersList)(nil),                                   // 33: Scailo.IdentifiersList
+	(*IdentifierUUIDsList)(nil),                               // 34: Scailo.IdentifierUUIDsList
+	(*StringsList)(nil),                                       // 35: Scailo.StringsList
+	(*Empty)(nil),                                             // 36: Scailo.Empty
+	(*MonthAndDayFilter)(nil),                                 // 37: Scailo.MonthAndDayFilter
+	(*StandardFile)(nil),                                      // 38: Scailo.StandardFile
+	(*CountInSLCStatusRequest)(nil),                           // 39: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 40: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 41: Scailo.MagicLink
+	(*ImageResponse)(nil),                                     // 42: Scailo.ImageResponse
+	(*Base64String)(nil),                                      // 43: Scailo.Base64String
+	(*StringResponse)(nil),                                    // 44: Scailo.StringResponse
+	(*CountResponse)(nil),                                     // 45: Scailo.CountResponse
 }
 var file_users_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.UsersServiceCreateRequest.user_type:type_name -> Scailo.USER_TYPE
-	13, // 1: Scailo.UsersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	13, // 2: Scailo.UsersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	14, // 3: Scailo.User.metadata:type_name -> Scailo.EmployeeMetadata
-	15, // 4: Scailo.User.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	16, // 5: Scailo.User.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	17, // 6: Scailo.User.logs:type_name -> Scailo.LogbookLogConciseSLC
+	14, // 1: Scailo.UsersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	14, // 2: Scailo.UsersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	15, // 3: Scailo.User.metadata:type_name -> Scailo.EmployeeMetadata
+	16, // 4: Scailo.User.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	17, // 5: Scailo.User.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	18, // 6: Scailo.User.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,  // 7: Scailo.User.user_type:type_name -> Scailo.USER_TYPE
-	18, // 8: Scailo.User.form_data:type_name -> Scailo.FormFieldDatum
+	19, // 8: Scailo.User.form_data:type_name -> Scailo.FormFieldDatum
 	0,  // 9: Scailo.UserPrimaryInfo.user_type:type_name -> Scailo.USER_TYPE
 	4,  // 10: Scailo.UsersList.list:type_name -> Scailo.User
-	19, // 11: Scailo.UsersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	20, // 12: Scailo.UsersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	20, // 11: Scailo.UsersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	21, // 12: Scailo.UsersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 13: Scailo.UsersServicePaginationReq.sort_key:type_name -> Scailo.USER_SORT_KEY
-	16, // 14: Scailo.UsersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	17, // 14: Scailo.UsersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	4,  // 15: Scailo.UsersServicePaginationResponse.payload:type_name -> Scailo.User
-	19, // 16: Scailo.UsersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	20, // 17: Scailo.UsersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	20, // 16: Scailo.UsersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	21, // 17: Scailo.UsersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 18: Scailo.UsersServiceFilterReq.sort_key:type_name -> Scailo.USER_SORT_KEY
 	0,  // 19: Scailo.UsersServiceFilterReq.user_type:type_name -> Scailo.USER_TYPE
-	16, // 20: Scailo.UsersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	21, // 21: Scailo.UsersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	19, // 22: Scailo.UsersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	17, // 20: Scailo.UsersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	22, // 21: Scailo.UsersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	20, // 22: Scailo.UsersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
 	0,  // 23: Scailo.UsersServiceCountReq.user_type:type_name -> Scailo.USER_TYPE
-	16, // 24: Scailo.UsersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	21, // 25: Scailo.UsersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	19, // 26: Scailo.UsersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	20, // 27: Scailo.UsersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	17, // 24: Scailo.UsersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	22, // 25: Scailo.UsersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	20, // 26: Scailo.UsersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	21, // 27: Scailo.UsersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	1,  // 28: Scailo.UsersServiceSearchAllReq.sort_key:type_name -> Scailo.USER_SORT_KEY
 	0,  // 29: Scailo.UsersServiceSearchAllReq.user_type:type_name -> Scailo.USER_TYPE
-	16, // 30: Scailo.UsersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	17, // 30: Scailo.UsersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	12, // 31: Scailo.UsersService.RegisterMobileDevice:input_type -> Scailo.UsersServiceRegisterMobileDeviceRequest
 	2,  // 32: Scailo.UsersService.Create:input_type -> Scailo.UsersServiceCreateRequest
 	2,  // 33: Scailo.UsersService.Draft:input_type -> Scailo.UsersServiceCreateRequest
 	3,  // 34: Scailo.UsersService.DraftUpdate:input_type -> Scailo.UsersServiceUpdateRequest
-	22, // 35: Scailo.UsersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 36: Scailo.UsersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 37: Scailo.UsersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 38: Scailo.UsersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 35: Scailo.UsersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 36: Scailo.UsersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 37: Scailo.UsersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 38: Scailo.UsersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
 	3,  // 39: Scailo.UsersService.RevisionUpdate:input_type -> Scailo.UsersServiceUpdateRequest
-	22, // 40: Scailo.UsersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 41: Scailo.UsersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 42: Scailo.UsersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 43: Scailo.UsersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	23, // 44: Scailo.UsersService.CreateMagicLinkForSignature:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	24, // 45: Scailo.UsersService.UpdatePassword:input_type -> Scailo.UpdatePasswordReq
-	25, // 46: Scailo.UsersService.UpdateOwnPassword:input_type -> Scailo.UpdateOwnPasswordReq
-	26, // 47: Scailo.UsersService.UpdateProfilePicture:input_type -> Scailo.UploadPictureReq
-	26, // 48: Scailo.UsersService.UpdateSignature:input_type -> Scailo.UploadPictureReq
-	27, // 49: Scailo.UsersService.MFAEnable:input_type -> Scailo.IdentifierUUID
-	27, // 50: Scailo.UsersService.MFAReset:input_type -> Scailo.IdentifierUUID
-	28, // 51: Scailo.UsersService.ViewByID:input_type -> Scailo.IdentifierZeroable
-	27, // 52: Scailo.UsersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	29, // 53: Scailo.UsersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	27, // 54: Scailo.UsersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	30, // 55: Scailo.UsersService.ViewByUsername:input_type -> Scailo.SimpleSearchReq
-	30, // 56: Scailo.UsersService.ViewByCode:input_type -> Scailo.SimpleSearchReq
-	31, // 57: Scailo.UsersService.ViewAll:input_type -> Scailo.ActiveStatus
-	27, // 58: Scailo.UsersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 59: Scailo.UsersService.ViewWithPagination:input_type -> Scailo.UsersServicePaginationReq
-	32, // 60: Scailo.UsersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	33, // 61: Scailo.UsersService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
-	34, // 62: Scailo.UsersService.ViewFromUsernames:input_type -> Scailo.StringsList
-	35, // 63: Scailo.UsersService.ViewSelf:input_type -> Scailo.Empty
-	36, // 64: Scailo.UsersService.ViewBirthdaysOn:input_type -> Scailo.MonthAndDayFilter
-	27, // 65: Scailo.UsersService.ViewSignature:input_type -> Scailo.IdentifierUUID
-	27, // 66: Scailo.UsersService.ViewProfilePicture:input_type -> Scailo.IdentifierUUID
-	27, // 67: Scailo.UsersService.ViewThumbnailPicture:input_type -> Scailo.IdentifierUUID
-	27, // 68: Scailo.UsersService.ViewVCard:input_type -> Scailo.IdentifierUUID
-	27, // 69: Scailo.UsersService.ViewQRImage:input_type -> Scailo.IdentifierUUID
-	27, // 70: Scailo.UsersService.ViewQRString:input_type -> Scailo.IdentifierUUID
-	37, // 71: Scailo.UsersService.IdentifyCroppedFace:input_type -> Scailo.StandardFile
-	37, // 72: Scailo.UsersService.IdentifyFullFace:input_type -> Scailo.StandardFile
-	11, // 73: Scailo.UsersService.SearchAll:input_type -> Scailo.UsersServiceSearchAllReq
-	9,  // 74: Scailo.UsersService.Filter:input_type -> Scailo.UsersServiceFilterReq
-	38, // 75: Scailo.UsersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 76: Scailo.UsersService.Count:input_type -> Scailo.UsersServiceCountReq
-	9,  // 77: Scailo.UsersService.DownloadAsCSV:input_type -> Scailo.UsersServiceFilterReq
-	37, // 78: Scailo.UsersService.ImportFromCSV:input_type -> Scailo.StandardFile
-	39, // 79: Scailo.UsersService.RegisterMobileDevice:output_type -> Scailo.IdentifierResponse
-	39, // 80: Scailo.UsersService.Create:output_type -> Scailo.IdentifierResponse
-	39, // 81: Scailo.UsersService.Draft:output_type -> Scailo.IdentifierResponse
-	39, // 82: Scailo.UsersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	39, // 83: Scailo.UsersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	39, // 84: Scailo.UsersService.Verify:output_type -> Scailo.IdentifierResponse
-	39, // 85: Scailo.UsersService.Approve:output_type -> Scailo.IdentifierResponse
-	39, // 86: Scailo.UsersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	39, // 87: Scailo.UsersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	39, // 88: Scailo.UsersService.Halt:output_type -> Scailo.IdentifierResponse
-	39, // 89: Scailo.UsersService.Discard:output_type -> Scailo.IdentifierResponse
-	39, // 90: Scailo.UsersService.Restore:output_type -> Scailo.IdentifierResponse
-	39, // 91: Scailo.UsersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	40, // 92: Scailo.UsersService.CreateMagicLinkForSignature:output_type -> Scailo.MagicLink
-	39, // 93: Scailo.UsersService.UpdatePassword:output_type -> Scailo.IdentifierResponse
-	39, // 94: Scailo.UsersService.UpdateOwnPassword:output_type -> Scailo.IdentifierResponse
-	39, // 95: Scailo.UsersService.UpdateProfilePicture:output_type -> Scailo.IdentifierResponse
-	39, // 96: Scailo.UsersService.UpdateSignature:output_type -> Scailo.IdentifierResponse
-	41, // 97: Scailo.UsersService.MFAEnable:output_type -> Scailo.ImageResponse
-	39, // 98: Scailo.UsersService.MFAReset:output_type -> Scailo.IdentifierResponse
-	4,  // 99: Scailo.UsersService.ViewByID:output_type -> Scailo.User
-	4,  // 100: Scailo.UsersService.ViewByUUID:output_type -> Scailo.User
-	4,  // 101: Scailo.UsersService.ViewEssentialByID:output_type -> Scailo.User
-	4,  // 102: Scailo.UsersService.ViewEssentialByUUID:output_type -> Scailo.User
-	4,  // 103: Scailo.UsersService.ViewByUsername:output_type -> Scailo.User
-	4,  // 104: Scailo.UsersService.ViewByCode:output_type -> Scailo.User
-	6,  // 105: Scailo.UsersService.ViewAll:output_type -> Scailo.UsersList
-	6,  // 106: Scailo.UsersService.ViewAllForEntityUUID:output_type -> Scailo.UsersList
-	8,  // 107: Scailo.UsersService.ViewWithPagination:output_type -> Scailo.UsersServicePaginationResponse
-	6,  // 108: Scailo.UsersService.ViewFromIDs:output_type -> Scailo.UsersList
-	6,  // 109: Scailo.UsersService.ViewFromUUIDs:output_type -> Scailo.UsersList
-	6,  // 110: Scailo.UsersService.ViewFromUsernames:output_type -> Scailo.UsersList
-	4,  // 111: Scailo.UsersService.ViewSelf:output_type -> Scailo.User
-	6,  // 112: Scailo.UsersService.ViewBirthdaysOn:output_type -> Scailo.UsersList
-	42, // 113: Scailo.UsersService.ViewSignature:output_type -> Scailo.Base64String
-	41, // 114: Scailo.UsersService.ViewProfilePicture:output_type -> Scailo.ImageResponse
-	41, // 115: Scailo.UsersService.ViewThumbnailPicture:output_type -> Scailo.ImageResponse
-	41, // 116: Scailo.UsersService.ViewVCard:output_type -> Scailo.ImageResponse
-	41, // 117: Scailo.UsersService.ViewQRImage:output_type -> Scailo.ImageResponse
-	43, // 118: Scailo.UsersService.ViewQRString:output_type -> Scailo.StringResponse
-	4,  // 119: Scailo.UsersService.IdentifyCroppedFace:output_type -> Scailo.User
-	4,  // 120: Scailo.UsersService.IdentifyFullFace:output_type -> Scailo.User
-	6,  // 121: Scailo.UsersService.SearchAll:output_type -> Scailo.UsersList
-	6,  // 122: Scailo.UsersService.Filter:output_type -> Scailo.UsersList
-	44, // 123: Scailo.UsersService.CountInStatus:output_type -> Scailo.CountResponse
-	44, // 124: Scailo.UsersService.Count:output_type -> Scailo.CountResponse
-	37, // 125: Scailo.UsersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	33, // 126: Scailo.UsersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	79, // [79:127] is the sub-list for method output_type
-	31, // [31:79] is the sub-list for method input_type
+	23, // 40: Scailo.UsersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 41: Scailo.UsersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 42: Scailo.UsersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	23, // 43: Scailo.UsersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	24, // 44: Scailo.UsersService.CreateMagicLinkForSignature:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	25, // 45: Scailo.UsersService.UpdatePassword:input_type -> Scailo.UpdatePasswordReq
+	26, // 46: Scailo.UsersService.UpdateOwnPassword:input_type -> Scailo.UpdateOwnPasswordReq
+	13, // 47: Scailo.UsersService.RequestPasswordResetEmail:input_type -> Scailo.UsersServicePasswordResetReq
+	27, // 48: Scailo.UsersService.UpdateProfilePicture:input_type -> Scailo.UploadPictureReq
+	27, // 49: Scailo.UsersService.UpdateSignature:input_type -> Scailo.UploadPictureReq
+	28, // 50: Scailo.UsersService.MFAEnable:input_type -> Scailo.IdentifierUUID
+	28, // 51: Scailo.UsersService.MFAReset:input_type -> Scailo.IdentifierUUID
+	29, // 52: Scailo.UsersService.ViewByID:input_type -> Scailo.IdentifierZeroable
+	28, // 53: Scailo.UsersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	30, // 54: Scailo.UsersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	28, // 55: Scailo.UsersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	31, // 56: Scailo.UsersService.ViewByUsername:input_type -> Scailo.SimpleSearchReq
+	31, // 57: Scailo.UsersService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	32, // 58: Scailo.UsersService.ViewAll:input_type -> Scailo.ActiveStatus
+	28, // 59: Scailo.UsersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 60: Scailo.UsersService.ViewWithPagination:input_type -> Scailo.UsersServicePaginationReq
+	33, // 61: Scailo.UsersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	34, // 62: Scailo.UsersService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
+	35, // 63: Scailo.UsersService.ViewFromUsernames:input_type -> Scailo.StringsList
+	36, // 64: Scailo.UsersService.ViewSelf:input_type -> Scailo.Empty
+	37, // 65: Scailo.UsersService.ViewBirthdaysOn:input_type -> Scailo.MonthAndDayFilter
+	28, // 66: Scailo.UsersService.ViewSignature:input_type -> Scailo.IdentifierUUID
+	28, // 67: Scailo.UsersService.ViewProfilePicture:input_type -> Scailo.IdentifierUUID
+	28, // 68: Scailo.UsersService.ViewThumbnailPicture:input_type -> Scailo.IdentifierUUID
+	28, // 69: Scailo.UsersService.ViewVCard:input_type -> Scailo.IdentifierUUID
+	28, // 70: Scailo.UsersService.ViewQRImage:input_type -> Scailo.IdentifierUUID
+	28, // 71: Scailo.UsersService.ViewQRString:input_type -> Scailo.IdentifierUUID
+	38, // 72: Scailo.UsersService.IdentifyCroppedFace:input_type -> Scailo.StandardFile
+	38, // 73: Scailo.UsersService.IdentifyFullFace:input_type -> Scailo.StandardFile
+	11, // 74: Scailo.UsersService.SearchAll:input_type -> Scailo.UsersServiceSearchAllReq
+	9,  // 75: Scailo.UsersService.Filter:input_type -> Scailo.UsersServiceFilterReq
+	39, // 76: Scailo.UsersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 77: Scailo.UsersService.Count:input_type -> Scailo.UsersServiceCountReq
+	9,  // 78: Scailo.UsersService.DownloadAsCSV:input_type -> Scailo.UsersServiceFilterReq
+	38, // 79: Scailo.UsersService.ImportFromCSV:input_type -> Scailo.StandardFile
+	40, // 80: Scailo.UsersService.RegisterMobileDevice:output_type -> Scailo.IdentifierResponse
+	40, // 81: Scailo.UsersService.Create:output_type -> Scailo.IdentifierResponse
+	40, // 82: Scailo.UsersService.Draft:output_type -> Scailo.IdentifierResponse
+	40, // 83: Scailo.UsersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	40, // 84: Scailo.UsersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	40, // 85: Scailo.UsersService.Verify:output_type -> Scailo.IdentifierResponse
+	40, // 86: Scailo.UsersService.Approve:output_type -> Scailo.IdentifierResponse
+	40, // 87: Scailo.UsersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	40, // 88: Scailo.UsersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	40, // 89: Scailo.UsersService.Halt:output_type -> Scailo.IdentifierResponse
+	40, // 90: Scailo.UsersService.Discard:output_type -> Scailo.IdentifierResponse
+	40, // 91: Scailo.UsersService.Restore:output_type -> Scailo.IdentifierResponse
+	40, // 92: Scailo.UsersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	41, // 93: Scailo.UsersService.CreateMagicLinkForSignature:output_type -> Scailo.MagicLink
+	40, // 94: Scailo.UsersService.UpdatePassword:output_type -> Scailo.IdentifierResponse
+	40, // 95: Scailo.UsersService.UpdateOwnPassword:output_type -> Scailo.IdentifierResponse
+	41, // 96: Scailo.UsersService.RequestPasswordResetEmail:output_type -> Scailo.MagicLink
+	40, // 97: Scailo.UsersService.UpdateProfilePicture:output_type -> Scailo.IdentifierResponse
+	40, // 98: Scailo.UsersService.UpdateSignature:output_type -> Scailo.IdentifierResponse
+	42, // 99: Scailo.UsersService.MFAEnable:output_type -> Scailo.ImageResponse
+	40, // 100: Scailo.UsersService.MFAReset:output_type -> Scailo.IdentifierResponse
+	4,  // 101: Scailo.UsersService.ViewByID:output_type -> Scailo.User
+	4,  // 102: Scailo.UsersService.ViewByUUID:output_type -> Scailo.User
+	4,  // 103: Scailo.UsersService.ViewEssentialByID:output_type -> Scailo.User
+	4,  // 104: Scailo.UsersService.ViewEssentialByUUID:output_type -> Scailo.User
+	4,  // 105: Scailo.UsersService.ViewByUsername:output_type -> Scailo.User
+	4,  // 106: Scailo.UsersService.ViewByCode:output_type -> Scailo.User
+	6,  // 107: Scailo.UsersService.ViewAll:output_type -> Scailo.UsersList
+	6,  // 108: Scailo.UsersService.ViewAllForEntityUUID:output_type -> Scailo.UsersList
+	8,  // 109: Scailo.UsersService.ViewWithPagination:output_type -> Scailo.UsersServicePaginationResponse
+	6,  // 110: Scailo.UsersService.ViewFromIDs:output_type -> Scailo.UsersList
+	6,  // 111: Scailo.UsersService.ViewFromUUIDs:output_type -> Scailo.UsersList
+	6,  // 112: Scailo.UsersService.ViewFromUsernames:output_type -> Scailo.UsersList
+	4,  // 113: Scailo.UsersService.ViewSelf:output_type -> Scailo.User
+	6,  // 114: Scailo.UsersService.ViewBirthdaysOn:output_type -> Scailo.UsersList
+	43, // 115: Scailo.UsersService.ViewSignature:output_type -> Scailo.Base64String
+	42, // 116: Scailo.UsersService.ViewProfilePicture:output_type -> Scailo.ImageResponse
+	42, // 117: Scailo.UsersService.ViewThumbnailPicture:output_type -> Scailo.ImageResponse
+	42, // 118: Scailo.UsersService.ViewVCard:output_type -> Scailo.ImageResponse
+	42, // 119: Scailo.UsersService.ViewQRImage:output_type -> Scailo.ImageResponse
+	44, // 120: Scailo.UsersService.ViewQRString:output_type -> Scailo.StringResponse
+	4,  // 121: Scailo.UsersService.IdentifyCroppedFace:output_type -> Scailo.User
+	4,  // 122: Scailo.UsersService.IdentifyFullFace:output_type -> Scailo.User
+	6,  // 123: Scailo.UsersService.SearchAll:output_type -> Scailo.UsersList
+	6,  // 124: Scailo.UsersService.Filter:output_type -> Scailo.UsersList
+	45, // 125: Scailo.UsersService.CountInStatus:output_type -> Scailo.CountResponse
+	45, // 126: Scailo.UsersService.Count:output_type -> Scailo.CountResponse
+	38, // 127: Scailo.UsersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	34, // 128: Scailo.UsersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	80, // [80:129] is the sub-list for method output_type
+	31, // [31:80] is the sub-list for method input_type
 	31, // [31:31] is the sub-list for extension type_name
 	31, // [31:31] is the sub-list for extension extendee
 	0,  // [0:31] is the sub-list for field type_name
@@ -2785,7 +3162,7 @@ func file_users_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_users_scailo_proto_rawDesc), len(file_users_scailo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

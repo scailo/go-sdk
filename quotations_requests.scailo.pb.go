@@ -241,13 +241,37 @@ func (QUOTATION_REQUEST_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 // Describes the parameters necessary to create a record
 type QuotationsRequestsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference ID of the quotation request
+	// @mandatory
+	//
+	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex "[0-9A-Za-z ]+$"
+	//
+	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The associated purchase enquiry
 	PurchaseEnquiryId uint64 `protobuf:"varint,12,opt,name=purchase_enquiry_id,json=purchaseEnquiryId,proto3" json:"purchase_enquiry_id,omitempty"`
@@ -381,11 +405,31 @@ type QuotationsRequestsServiceUpdateRequest struct {
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that stores if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
 	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference ID of the quotation request
+	// @mandatory
+	//
+	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
+	//
+	// @example "ABS-2023-001-REV"
+	//
+	// @regex "[0-9A-Za-z ]+$"
+	//
+	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The date until which quotations responses can be sent
 	LastDate string `protobuf:"bytes,13,opt,name=last_date,json=lastDate,proto3" json:"last_date,omitempty"`
@@ -623,23 +667,33 @@ func (x *QuotationRequestAncillaryParameters) GetCurrencyUuid() string {
 // Describes the parameters that are part of a standard response
 type QuotationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this quotation request
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// The status of this quotation request
+	// @description The current lifecycle status (e.g., DRAFT, VERIFIED, STANDING).
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Stores the logs of every operation performed on this quotation request
+	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The timestamp of when this quotation request was marked as completed
+	// @description UNIX timestamp of when the record transitioned to the COMPLETED state.
+	//
+	// @example 1698400000
 	CompletedOn uint64 `protobuf:"varint,6,opt,name=completed_on,json=completedOn,proto3" json:"completed_on,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The reference ID of the quotation request
+	// @description The user-provided reference ID.
+	//
+	// @example "ABS-2023-001"
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @description The system-generated immutable reference number.
+	//
+	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The associated purchase enquiry
 	PurchaseEnquiryId uint64 `protobuf:"varint,12,opt,name=purchase_enquiry_id,json=purchaseEnquiryId,proto3" json:"purchase_enquiry_id,omitempty"`
@@ -824,7 +878,15 @@ type QuotationsRequestsServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
+	//
+	// @example 15234
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// Stores the quotation request ID
 	QuotationRequestId uint64 `protobuf:"varint,10,opt,name=quotation_request_id,json=quotationRequestId,proto3" json:"quotation_request_id,omitempty"`
@@ -953,7 +1015,15 @@ type QuotationsRequestsServiceItemUpdateRequest struct {
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// The associated vault folder ID
+	// @optional
+	//
+	// @description Updated vault folder ID for documentation storage.
+	//
+	// @example 15235
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// Stores the name of the item
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
@@ -1076,17 +1146,21 @@ func (x *QuotationsRequestsServiceItemUpdateRequest) GetSpecifications() string 
 // Describes the parameters that constitute an item associated to a quotation request
 type QuotationRequestItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this quotation request
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Stores the approval metadata
+	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// Denotes if this record requires approval (or has been approved)
+	// @description The approval state of the record
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The associated vault folder ID
+	// @description Link to the document storage folder.
+	//
+	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
 	// Stores the quotation request ID
 	QuotationRequestId uint64 `protobuf:"varint,10,opt,name=quotation_request_id,json=quotationRequestId,proto3" json:"quotation_request_id,omitempty"`
@@ -1386,17 +1460,51 @@ func (x *QuotationRequestItemHistoryRequest) GetName() string {
 // Describes the request payload to retrieve approved or unapproved items.
 type QuotationRequestItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey QUOTATION_REQUEST_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.QUOTATION_REQUEST_ITEM_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The status of the items
 	Status QUOTATION_REQUEST_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.QUOTATION_REQUEST_ITEM_STATUS" json:"status,omitempty"`
@@ -1576,13 +1684,19 @@ func (x *QuotationRequestItemsSearchRequest) GetSearchKey() string {
 // Describes the response to a pagination items request
 type QuotationsRequestsServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*QuotationRequestItem `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1649,15 +1763,41 @@ func (x *QuotationsRequestsServicePaginatedItemsResponse) GetPayload() []*Quotat
 // Describes a pagination request to retrieve records
 type QuotationsRequestsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey QUOTATION_REQUEST_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.QUOTATION_REQUEST_SORT_KEY" json:"sort_key,omitempty"`
 	// The status of this quotation request
 	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
@@ -1740,13 +1880,19 @@ func (x *QuotationsRequestsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_
 // Describes the response to a pagination request
 type QuotationsRequestsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*QuotationRequest `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1813,43 +1959,177 @@ func (x *QuotationsRequestsServicePaginationResponse) GetPayload() []*QuotationR
 // Describes the base request payload of a filter search
 type QuotationsRequestsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey QUOTATION_REQUEST_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.QUOTATION_REQUEST_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this quotation request
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The reference ID of the quotation request
+	// @optional
+	//
+	// @description Fuzzy match for the user-defined reference ID.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @optional
+	//
+	// @description Fuzzy match for the system-generated ref number.
+	//
+	// @example "ABS-2023-X9Z2"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The associated purchase enquiry
 	PurchaseEnquiryId uint64 `protobuf:"varint,22,opt,name=purchase_enquiry_id,json=purchaseEnquiryId,proto3" json:"purchase_enquiry_id,omitempty"`
@@ -2048,35 +2328,147 @@ func (x *QuotationsRequestsServiceFilterReq) GetFormData() []*FormFieldDatumFilt
 // Describes the base request payload of a count search
 type QuotationsRequestsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of this quotation request
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The start range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
-	// The end range of completed timestamp
+	// @optional
+	//
+	// @description Filter records completed ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The reference ID of the quotation request
+	// @optional
+	//
+	// @description Fuzzy match for the user-defined reference ID.
+	//
+	// @example "ABS-2023-001"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The unique reference number that has been automatically generated
+	// @optional
+	//
+	// @description Fuzzy match for the system-generated ref number.
+	//
+	// @example "ABS-2023-X9Z2"
+	//
+	// @regex [0-9A-Za-z ]*$
+	//
+	// @format: Alphanumeric characters and spaces only. Can be left empty.
 	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
 	// The associated purchase enquiry
 	PurchaseEnquiryId uint64 `protobuf:"varint,22,opt,name=purchase_enquiry_id,json=purchaseEnquiryId,proto3" json:"purchase_enquiry_id,omitempty"`
@@ -2247,21 +2639,67 @@ func (x *QuotationsRequestsServiceCountReq) GetFormData() []*FormFieldDatumFilte
 // Describes the request payload for performing a generic search operation on records
 type QuotationsRequestsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey QUOTATION_REQUEST_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.QUOTATION_REQUEST_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Limit the search space to the given status
+	// @optional
+	//
+	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
+	//
+	// @example STANDING
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Describes the key with which the search operation needs to be performed
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
 	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2648,10 +3086,10 @@ const file_quotations_requests_scailo_proto_rawDesc = "" +
 	"\x06Filter\x12*.Scailo.QuotationsRequestsServiceFilterReq\x1a\x1e.Scailo.QuotationsRequestsList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12I\n" +
 	"\x05Count\x12).Scailo.QuotationsRequestsServiceCountReq\x1a\x15.Scailo.CountResponse\x12Q\n" +
-	"\rDownloadAsCSV\x12*.Scailo.QuotationsRequestsServiceFilterReq\x1a\x14.Scailo.StandardFileBo\n" +
-	"\n" +
-	"com.ScailoB\x1dQuotationsRequestsScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rDownloadAsCSV\x12*.Scailo.QuotationsRequestsServiceFilterReq\x1a\x14.Scailo.StandardFileBw\n" +
+	"\x0ecom.scailo.sdkB\x1dQuotationsRequestsScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_quotations_requests_scailo_proto_rawDescOnce sync.Once

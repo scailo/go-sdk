@@ -133,6 +133,8 @@ const (
 	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_EXPENSE MAGIC_LINK_RESOURCE_TYPE = 1500
 	// Denotes that the magic link was created for accepting a user's signature
 	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE MAGIC_LINK_RESOURCE_TYPE = 1600
+	// Denotes that the magic link was created for requesting a user's password reset email
+	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL MAGIC_LINK_RESOURCE_TYPE = 1610
 )
 
 // Enum value maps for MAGIC_LINK_RESOURCE_TYPE.
@@ -191,6 +193,7 @@ var (
 		1230: "MAGIC_LINK_RESOURCE_TYPE_VISITATION",
 		1500: "MAGIC_LINK_RESOURCE_TYPE_EXPENSE",
 		1600: "MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE",
+		1610: "MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL",
 	}
 	MAGIC_LINK_RESOURCE_TYPE_value = map[string]int32{
 		"MAGIC_LINK_RESOURCE_TYPE_ANY_UNSPECIFIED":                        0,
@@ -246,6 +249,7 @@ var (
 		"MAGIC_LINK_RESOURCE_TYPE_VISITATION":                             1230,
 		"MAGIC_LINK_RESOURCE_TYPE_EXPENSE":                                1500,
 		"MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE":                         1600,
+		"MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL":              1610,
 	}
 )
 
@@ -336,7 +340,9 @@ func (MAGIC_LINK_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 // Describes the data structure of each magic link on the platform
 type MagicLink struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this resource
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -346,6 +352,8 @@ type MagicLink struct {
 	ResourceType MAGIC_LINK_RESOURCE_TYPE `protobuf:"varint,21,opt,name=resource_type,json=resourceType,proto3,enum=Scailo.MAGIC_LINK_RESOURCE_TYPE" json:"resource_type,omitempty"`
 	// Stores the UNIX timestamp of when the link expires. If 0, then the link never expires
 	ExpiresAt uint64 `protobuf:"varint,30,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
+	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
 	Description string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
 	// Stores the code of the magic link that can be used to uniquely identify the magic link. This code will be used in the associated links, and will be used to uniquely identify the resource.
@@ -421,6 +429,13 @@ func (x *MagicLink) GetExpiresAt() uint64 {
 	return 0
 }
 
+func (x *MagicLink) GetMaxViews() int64 {
+	if x != nil {
+		return x.MaxViews
+	}
+	return 0
+}
+
 func (x *MagicLink) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -491,13 +506,19 @@ func (x *MagicLinksList) GetList() []*MagicLink {
 // Describes the data structure that responds to a pagination request
 type MagicLinkPaginationResp struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of records in this payload
+	// @description Number of records returned in the current response slice.
+	//
+	// @example 50
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that has been offset before fetching the records. This is the same value that has been sent as part of the pagination request
+	// @description The offset provided in the request.
+	//
+	// @example 0
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The total number of records that are available
+	// @description The total number of records matching the criteria.
+	//
+	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
-	// The list of records
+	// @description The array of records for the current page.
 	Payload       []*MagicLink `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -564,7 +585,15 @@ func (x *MagicLinkPaginationResp) GetPayload() []*MagicLink {
 // Describes the necessary data structure during creation of a magic link
 type MagicLinksServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores any comment that the user might add during this operation
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -574,6 +603,8 @@ type MagicLinksServiceCreateRequest struct {
 	ResourceType MAGIC_LINK_RESOURCE_TYPE `protobuf:"varint,21,opt,name=resource_type,json=resourceType,proto3,enum=Scailo.MAGIC_LINK_RESOURCE_TYPE" json:"resource_type,omitempty"`
 	// Stores the UNIX timestamp of when the link expires. If 0, then the link never expires
 	ExpiresAt uint64 `protobuf:"varint,30,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
+	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
 	Description   string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -645,6 +676,13 @@ func (x *MagicLinksServiceCreateRequest) GetExpiresAt() uint64 {
 	return 0
 }
 
+func (x *MagicLinksServiceCreateRequest) GetMaxViews() int64 {
+	if x != nil {
+		return x.MaxViews
+	}
+	return 0
+}
+
 func (x *MagicLinksServiceCreateRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -661,6 +699,8 @@ type MagicLinksServiceCreateRequestForSpecificResource struct {
 	ResourceUuid string `protobuf:"bytes,10,opt,name=resource_uuid,json=resourceUuid,proto3" json:"resource_uuid,omitempty"`
 	// Stores the UNIX timestamp of when the link expires. If 0, then the link never expires
 	ExpiresAt uint64 `protobuf:"varint,30,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
+	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
 	Description   string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -718,6 +758,13 @@ func (x *MagicLinksServiceCreateRequestForSpecificResource) GetExpiresAt() uint6
 	return 0
 }
 
+func (x *MagicLinksServiceCreateRequestForSpecificResource) GetMaxViews() int64 {
+	if x != nil {
+		return x.MaxViews
+	}
+	return 0
+}
+
 func (x *MagicLinksServiceCreateRequestForSpecificResource) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -734,6 +781,8 @@ type MagicLinksServiceUpdateRequest struct {
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Stores the UNIX timestamp of when the link expires. If 0, then the link never expires
 	ExpiresAt uint64 `protobuf:"varint,30,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
+	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
 	Description   string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -791,6 +840,13 @@ func (x *MagicLinksServiceUpdateRequest) GetExpiresAt() uint64 {
 	return 0
 }
 
+func (x *MagicLinksServiceUpdateRequest) GetMaxViews() int64 {
+	if x != nil {
+		return x.MaxViews
+	}
+	return 0
+}
+
 func (x *MagicLinksServiceUpdateRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -801,15 +857,41 @@ func (x *MagicLinksServiceUpdateRequest) GetDescription() string {
 // Describes a pagination request to retrieve records
 type MagicLinksServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response
+	// @mandatory
+	//
+	// @description Number of records to return per page.
+	//
+	// @example 50
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Must be a strictly positive integer (1 or greater).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The specific field key to sort the results by.
 	SortKey       MAGIC_LINK_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.MAGIC_LINK_SORT_KEY" json:"sort_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -883,25 +965,91 @@ func (x *MagicLinksServicePaginationReq) GetSortKey() MAGIC_LINK_SORT_KEY {
 // Describes the base request payload of a filter search
 type MagicLinksServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the pagination response
+	// @optional
+	//
+	// @description The field used for sorting.
 	SortKey MAGIC_LINK_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.MAGIC_LINK_SORT_KEY" json:"sort_key,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The type of the resource
 	ResourceType MAGIC_LINK_RESOURCE_TYPE `protobuf:"varint,21,opt,name=resource_type,json=resourceType,proto3,enum=Scailo.MAGIC_LINK_RESOURCE_TYPE" json:"resource_type,omitempty"`
@@ -1046,17 +1194,61 @@ func (x *MagicLinksServiceFilterReq) GetExpiresAtEnd() uint64 {
 // Describes the base request payload of a count search
 type MagicLinksServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by creation
+	// @optional
+	//
+	// @description Filter records created ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
-	// The minimum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
-	// The maximum timestamp that needs to be considered to filter by modification
+	// @optional
+	//
+	// @description Filter records modified ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// The entity UUID that is to be used to filter records
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// The type of the resource
 	ResourceType MAGIC_LINK_RESOURCE_TYPE `protobuf:"varint,21,opt,name=resource_type,json=resourceType,proto3,enum=Scailo.MAGIC_LINK_RESOURCE_TYPE" json:"resource_type,omitempty"`
@@ -1173,7 +1365,11 @@ func (x *MagicLinksServiceCountReq) GetExpiresAtEnd() uint64 {
 // Describes the request payload for performing a generic search operation on magic links
 type MagicLinksServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, then returns only active records. If false, then returns only inactive records
+	// @optional
+	//
+	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
+	//
+	// @example ANY
 	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
 	// The number of records that need to be sent in the response. Returns all records if it is set to -1
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
@@ -1183,7 +1379,15 @@ type MagicLinksServiceSearchAllReq struct {
 	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
 	// The sort key that is to be used to fetch the response
 	SortKey MAGIC_LINK_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.MAGIC_LINK_SORT_KEY" json:"sort_key,omitempty"`
-	// The entity UUID that is to be used to filter magic links
+	// @optional
+	//
+	// @description Filter by the organization UUID.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Describes the key with which the search operation needs to be performed
 	SearchKey string `protobuf:"bytes,10,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
@@ -1346,7 +1550,9 @@ func (x *MagicLinkServiceSearchByCodeReq) GetUserAgent() string {
 // Describes the access log of each magic link
 type MagicLinkAccessLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores a globally unique entity UUID. This will be set at the organization level
+	// @description The organization's globally unique identifier.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
 	// Stores the metadata of this user
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -1475,7 +1681,7 @@ var File_magic_links_scailo_proto protoreflect.FileDescriptor
 
 const file_magic_links_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18magic_links.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xb5\x02\n" +
+	"\x18magic_links.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xd2\x02\n" +
 	"\tMagicLink\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1484,7 +1690,8 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	" \x01(\tR\fresourceUuid\x12E\n" +
 	"\rresource_type\x18\x15 \x01(\x0e2 .Scailo.MAGIC_LINK_RESOURCE_TYPER\fresourceType\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12 \n" +
+	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
+	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
 	"\vdescription\x18# \x01(\tR\vdescription\x12\x12\n" +
 	"\x04code\x18( \x01(\tR\x04code\x12\x10\n" +
 	"\x03url\x18d \x01(\tR\x03url\"7\n" +
@@ -1494,7 +1701,7 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.MagicLinkR\apayload\"\x9b\x02\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.MagicLinkR\apayload\"\xb8\x02\n" +
 	"\x1eMagicLinksServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1503,20 +1710,23 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fresourceUuid\x12E\n" +
 	"\rresource_type\x18\x15 \x01(\x0e2 .Scailo.MAGIC_LINK_RESOURCE_TYPER\fresourceType\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12 \n" +
-	"\vdescription\x18# \x01(\tR\vdescription\"\xc6\x01\n" +
+	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
+	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
+	"\vdescription\x18# \x01(\tR\vdescription\"\xe3\x01\n" +
 	"1MagicLinksServiceCreateRequestForSpecificResource\x12!\n" +
 	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12-\n" +
 	"\rresource_uuid\x18\n" +
 	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fresourceUuid\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12 \n" +
-	"\vdescription\x18# \x01(\tR\vdescription\"\x9d\x01\n" +
+	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
+	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
+	"\vdescription\x18# \x01(\tR\vdescription\"\xba\x01\n" +
 	"\x1eMagicLinksServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12 \n" +
+	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
+	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
 	"\vdescription\x18# \x01(\tR\vdescription\"\xfd\x01\n" +
 	"\x1eMagicLinksServicePaginationReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
@@ -1582,7 +1792,7 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x0e \x01(\tR\tuserAgent\"I\n" +
 	"\x17MagicLinkAccessLogsList\x12.\n" +
-	"\x04list\x18\x01 \x03(\v2\x1a.Scailo.MagicLinkAccessLogR\x04list*\xad\x13\n" +
+	"\x04list\x18\x01 \x03(\v2\x1a.Scailo.MagicLinkAccessLogR\x04list*\xe6\x13\n" +
 	"\x18MAGIC_LINK_RESOURCE_TYPE\x12,\n" +
 	"(MAGIC_LINK_RESOURCE_TYPE_ANY_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fMAGIC_LINK_RESOURCE_TYPE_VENDOR\x10\n" +
@@ -1637,7 +1847,8 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	" MAGIC_LINK_RESOURCE_TYPE_ON_DUTY\x10\xc4\t\x12(\n" +
 	"#MAGIC_LINK_RESOURCE_TYPE_VISITATION\x10\xce\t\x12%\n" +
 	" MAGIC_LINK_RESOURCE_TYPE_EXPENSE\x10\xdc\v\x12,\n" +
-	"'MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE\x10\xc0\f*\xaa\x01\n" +
+	"'MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE\x10\xc0\f\x127\n" +
+	"2MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL\x10\xca\f*\xaa\x01\n" +
 	"\x13MAGIC_LINK_SORT_KEY\x12&\n" +
 	"\"MAGIC_LINK_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eMAGIC_LINK_SORT_KEY_CREATED_AT\x10\x01\x12#\n" +
@@ -1662,10 +1873,10 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\tSearchAll\x12%.Scailo.MagicLinksServiceSearchAllReq\x1a\x16.Scailo.MagicLinksList\x12D\n" +
 	"\x06Filter\x12\".Scailo.MagicLinksServiceFilterReq\x1a\x16.Scailo.MagicLinksList\x12A\n" +
 	"\x05Count\x12!.Scailo.MagicLinksServiceCountReq\x1a\x15.Scailo.CountResponse\x12I\n" +
-	"\rDownloadAsCSV\x12\".Scailo.MagicLinksServiceFilterReq\x1a\x14.Scailo.StandardFileBg\n" +
-	"\n" +
-	"com.ScailoB\x15MagicLinksScailoProtoP\x01Z\n" +
-	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\x06Scailo\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
+	"\rDownloadAsCSV\x12\".Scailo.MagicLinksServiceFilterReq\x1a\x14.Scailo.StandardFileBo\n" +
+	"\x0ecom.scailo.sdkB\x15MagicLinksScailoProtoP\x01Z\n" +
+	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
+	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
 
 var (
 	file_magic_links_scailo_proto_rawDescOnce sync.Once
