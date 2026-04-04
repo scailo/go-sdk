@@ -18,39 +18,40 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MerchandisesService_Create_FullMethodName                    = "/Scailo.MerchandisesService/Create"
-	MerchandisesService_SendToStore_FullMethodName               = "/Scailo.MerchandisesService/SendToStore"
-	MerchandisesService_Update_FullMethodName                    = "/Scailo.MerchandisesService/Update"
-	MerchandisesService_SendForRework_FullMethodName             = "/Scailo.MerchandisesService/SendForRework"
-	MerchandisesService_SendForQC_FullMethodName                 = "/Scailo.MerchandisesService/SendForQC"
-	MerchandisesService_SplitLot_FullMethodName                  = "/Scailo.MerchandisesService/SplitLot"
-	MerchandisesService_Partition_FullMethodName                 = "/Scailo.MerchandisesService/Partition"
-	MerchandisesService_Consume_FullMethodName                   = "/Scailo.MerchandisesService/Consume"
-	MerchandisesService_Reject_FullMethodName                    = "/Scailo.MerchandisesService/Reject"
-	MerchandisesService_Scrap_FullMethodName                     = "/Scailo.MerchandisesService/Scrap"
-	MerchandisesService_ReturnMaterial_FullMethodName            = "/Scailo.MerchandisesService/ReturnMaterial"
-	MerchandisesService_Discard_FullMethodName                   = "/Scailo.MerchandisesService/Discard"
-	MerchandisesService_CommentAdd_FullMethodName                = "/Scailo.MerchandisesService/CommentAdd"
-	MerchandisesService_CreateMagicLink_FullMethodName           = "/Scailo.MerchandisesService/CreateMagicLink"
-	MerchandisesService_ViewByID_FullMethodName                  = "/Scailo.MerchandisesService/ViewByID"
-	MerchandisesService_ViewByUUID_FullMethodName                = "/Scailo.MerchandisesService/ViewByUUID"
-	MerchandisesService_ViewEssentialByID_FullMethodName         = "/Scailo.MerchandisesService/ViewEssentialByID"
-	MerchandisesService_ViewEssentialByUUID_FullMethodName       = "/Scailo.MerchandisesService/ViewEssentialByUUID"
-	MerchandisesService_ViewFromIDs_FullMethodName               = "/Scailo.MerchandisesService/ViewFromIDs"
-	MerchandisesService_ViewFromUUIDs_FullMethodName             = "/Scailo.MerchandisesService/ViewFromUUIDs"
-	MerchandisesService_ViewAll_FullMethodName                   = "/Scailo.MerchandisesService/ViewAll"
-	MerchandisesService_ViewWithPagination_FullMethodName        = "/Scailo.MerchandisesService/ViewWithPagination"
-	MerchandisesService_DownloadQCReportByID_FullMethodName      = "/Scailo.MerchandisesService/DownloadQCReportByID"
-	MerchandisesService_DownloadQCReportByUUID_FullMethodName    = "/Scailo.MerchandisesService/DownloadQCReportByUUID"
-	MerchandisesService_DownloadLabelByID_FullMethodName         = "/Scailo.MerchandisesService/DownloadLabelByID"
-	MerchandisesService_DownloadLabelByUUID_FullMethodName       = "/Scailo.MerchandisesService/DownloadLabelByUUID"
-	MerchandisesService_ViewInventoryInteractions_FullMethodName = "/Scailo.MerchandisesService/ViewInventoryInteractions"
-	MerchandisesService_SearchAll_FullMethodName                 = "/Scailo.MerchandisesService/SearchAll"
-	MerchandisesService_Filter_FullMethodName                    = "/Scailo.MerchandisesService/Filter"
-	MerchandisesService_Count_FullMethodName                     = "/Scailo.MerchandisesService/Count"
-	MerchandisesService_DownloadAsCSV_FullMethodName             = "/Scailo.MerchandisesService/DownloadAsCSV"
-	MerchandisesService_DownloadImportTemplate_FullMethodName    = "/Scailo.MerchandisesService/DownloadImportTemplate"
-	MerchandisesService_ImportFromCSV_FullMethodName             = "/Scailo.MerchandisesService/ImportFromCSV"
+	MerchandisesService_Create_FullMethodName                     = "/Scailo.MerchandisesService/Create"
+	MerchandisesService_SendToStore_FullMethodName                = "/Scailo.MerchandisesService/SendToStore"
+	MerchandisesService_Update_FullMethodName                     = "/Scailo.MerchandisesService/Update"
+	MerchandisesService_SendForRework_FullMethodName              = "/Scailo.MerchandisesService/SendForRework"
+	MerchandisesService_SendForQC_FullMethodName                  = "/Scailo.MerchandisesService/SendForQC"
+	MerchandisesService_SplitLot_FullMethodName                   = "/Scailo.MerchandisesService/SplitLot"
+	MerchandisesService_Partition_FullMethodName                  = "/Scailo.MerchandisesService/Partition"
+	MerchandisesService_Consume_FullMethodName                    = "/Scailo.MerchandisesService/Consume"
+	MerchandisesService_Reject_FullMethodName                     = "/Scailo.MerchandisesService/Reject"
+	MerchandisesService_Scrap_FullMethodName                      = "/Scailo.MerchandisesService/Scrap"
+	MerchandisesService_ReturnMaterial_FullMethodName             = "/Scailo.MerchandisesService/ReturnMaterial"
+	MerchandisesService_Discard_FullMethodName                    = "/Scailo.MerchandisesService/Discard"
+	MerchandisesService_CommentAdd_FullMethodName                 = "/Scailo.MerchandisesService/CommentAdd"
+	MerchandisesService_CreateMagicLink_FullMethodName            = "/Scailo.MerchandisesService/CreateMagicLink"
+	MerchandisesService_ViewByID_FullMethodName                   = "/Scailo.MerchandisesService/ViewByID"
+	MerchandisesService_ViewByUUID_FullMethodName                 = "/Scailo.MerchandisesService/ViewByUUID"
+	MerchandisesService_ViewEssentialByID_FullMethodName          = "/Scailo.MerchandisesService/ViewEssentialByID"
+	MerchandisesService_ViewEssentialByUUID_FullMethodName        = "/Scailo.MerchandisesService/ViewEssentialByUUID"
+	MerchandisesService_ViewFromIDs_FullMethodName                = "/Scailo.MerchandisesService/ViewFromIDs"
+	MerchandisesService_ViewFromUUIDs_FullMethodName              = "/Scailo.MerchandisesService/ViewFromUUIDs"
+	MerchandisesService_ViewAll_FullMethodName                    = "/Scailo.MerchandisesService/ViewAll"
+	MerchandisesService_ViewWithPagination_FullMethodName         = "/Scailo.MerchandisesService/ViewWithPagination"
+	MerchandisesService_ViewVendorInvoiceUnitPrice_FullMethodName = "/Scailo.MerchandisesService/ViewVendorInvoiceUnitPrice"
+	MerchandisesService_DownloadQCReportByID_FullMethodName       = "/Scailo.MerchandisesService/DownloadQCReportByID"
+	MerchandisesService_DownloadQCReportByUUID_FullMethodName     = "/Scailo.MerchandisesService/DownloadQCReportByUUID"
+	MerchandisesService_DownloadLabelByID_FullMethodName          = "/Scailo.MerchandisesService/DownloadLabelByID"
+	MerchandisesService_DownloadLabelByUUID_FullMethodName        = "/Scailo.MerchandisesService/DownloadLabelByUUID"
+	MerchandisesService_ViewInventoryInteractions_FullMethodName  = "/Scailo.MerchandisesService/ViewInventoryInteractions"
+	MerchandisesService_SearchAll_FullMethodName                  = "/Scailo.MerchandisesService/SearchAll"
+	MerchandisesService_Filter_FullMethodName                     = "/Scailo.MerchandisesService/Filter"
+	MerchandisesService_Count_FullMethodName                      = "/Scailo.MerchandisesService/Count"
+	MerchandisesService_DownloadAsCSV_FullMethodName              = "/Scailo.MerchandisesService/DownloadAsCSV"
+	MerchandisesService_DownloadImportTemplate_FullMethodName     = "/Scailo.MerchandisesService/DownloadImportTemplate"
+	MerchandisesService_ImportFromCSV_FullMethodName              = "/Scailo.MerchandisesService/ImportFromCSV"
 )
 
 // MerchandisesServiceClient is the client API for MerchandisesService service.
@@ -105,6 +106,8 @@ type MerchandisesServiceClient interface {
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*MerchandisesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *MerchandisesServicePaginationReq, opts ...grpc.CallOption) (*MerchandisesServicePaginationResponse, error)
+	// View the unit price at which the inventory item was purchased (the corresponding vendor invoice price)
+	ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error)
 	// Download QC Report with the given Identifier
 	DownloadQCReportByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download QC Report with the given IdentifierUUID (can be used to allow public downloads)
@@ -359,6 +362,16 @@ func (c *merchandisesServiceClient) ViewWithPagination(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MerchandisesServicePaginationResponse)
 	err := c.cc.Invoke(ctx, MerchandisesService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *merchandisesServiceClient) ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, MerchandisesService_ViewVendorInvoiceUnitPrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -18,39 +18,40 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FeedstocksService_Create_FullMethodName                    = "/Scailo.FeedstocksService/Create"
-	FeedstocksService_SendToStore_FullMethodName               = "/Scailo.FeedstocksService/SendToStore"
-	FeedstocksService_Update_FullMethodName                    = "/Scailo.FeedstocksService/Update"
-	FeedstocksService_SendForRework_FullMethodName             = "/Scailo.FeedstocksService/SendForRework"
-	FeedstocksService_SendForQC_FullMethodName                 = "/Scailo.FeedstocksService/SendForQC"
-	FeedstocksService_SplitLot_FullMethodName                  = "/Scailo.FeedstocksService/SplitLot"
-	FeedstocksService_Partition_FullMethodName                 = "/Scailo.FeedstocksService/Partition"
-	FeedstocksService_Consume_FullMethodName                   = "/Scailo.FeedstocksService/Consume"
-	FeedstocksService_Reject_FullMethodName                    = "/Scailo.FeedstocksService/Reject"
-	FeedstocksService_Scrap_FullMethodName                     = "/Scailo.FeedstocksService/Scrap"
-	FeedstocksService_ReturnMaterial_FullMethodName            = "/Scailo.FeedstocksService/ReturnMaterial"
-	FeedstocksService_Discard_FullMethodName                   = "/Scailo.FeedstocksService/Discard"
-	FeedstocksService_CommentAdd_FullMethodName                = "/Scailo.FeedstocksService/CommentAdd"
-	FeedstocksService_CreateMagicLink_FullMethodName           = "/Scailo.FeedstocksService/CreateMagicLink"
-	FeedstocksService_ViewByID_FullMethodName                  = "/Scailo.FeedstocksService/ViewByID"
-	FeedstocksService_ViewByUUID_FullMethodName                = "/Scailo.FeedstocksService/ViewByUUID"
-	FeedstocksService_ViewEssentialByID_FullMethodName         = "/Scailo.FeedstocksService/ViewEssentialByID"
-	FeedstocksService_ViewEssentialByUUID_FullMethodName       = "/Scailo.FeedstocksService/ViewEssentialByUUID"
-	FeedstocksService_ViewFromIDs_FullMethodName               = "/Scailo.FeedstocksService/ViewFromIDs"
-	FeedstocksService_ViewFromUUIDs_FullMethodName             = "/Scailo.FeedstocksService/ViewFromUUIDs"
-	FeedstocksService_ViewAll_FullMethodName                   = "/Scailo.FeedstocksService/ViewAll"
-	FeedstocksService_ViewWithPagination_FullMethodName        = "/Scailo.FeedstocksService/ViewWithPagination"
-	FeedstocksService_DownloadQCReportByID_FullMethodName      = "/Scailo.FeedstocksService/DownloadQCReportByID"
-	FeedstocksService_DownloadQCReportByUUID_FullMethodName    = "/Scailo.FeedstocksService/DownloadQCReportByUUID"
-	FeedstocksService_DownloadLabelByID_FullMethodName         = "/Scailo.FeedstocksService/DownloadLabelByID"
-	FeedstocksService_DownloadLabelByUUID_FullMethodName       = "/Scailo.FeedstocksService/DownloadLabelByUUID"
-	FeedstocksService_ViewInventoryInteractions_FullMethodName = "/Scailo.FeedstocksService/ViewInventoryInteractions"
-	FeedstocksService_SearchAll_FullMethodName                 = "/Scailo.FeedstocksService/SearchAll"
-	FeedstocksService_Filter_FullMethodName                    = "/Scailo.FeedstocksService/Filter"
-	FeedstocksService_Count_FullMethodName                     = "/Scailo.FeedstocksService/Count"
-	FeedstocksService_DownloadAsCSV_FullMethodName             = "/Scailo.FeedstocksService/DownloadAsCSV"
-	FeedstocksService_DownloadImportTemplate_FullMethodName    = "/Scailo.FeedstocksService/DownloadImportTemplate"
-	FeedstocksService_ImportFromCSV_FullMethodName             = "/Scailo.FeedstocksService/ImportFromCSV"
+	FeedstocksService_Create_FullMethodName                     = "/Scailo.FeedstocksService/Create"
+	FeedstocksService_SendToStore_FullMethodName                = "/Scailo.FeedstocksService/SendToStore"
+	FeedstocksService_Update_FullMethodName                     = "/Scailo.FeedstocksService/Update"
+	FeedstocksService_SendForRework_FullMethodName              = "/Scailo.FeedstocksService/SendForRework"
+	FeedstocksService_SendForQC_FullMethodName                  = "/Scailo.FeedstocksService/SendForQC"
+	FeedstocksService_SplitLot_FullMethodName                   = "/Scailo.FeedstocksService/SplitLot"
+	FeedstocksService_Partition_FullMethodName                  = "/Scailo.FeedstocksService/Partition"
+	FeedstocksService_Consume_FullMethodName                    = "/Scailo.FeedstocksService/Consume"
+	FeedstocksService_Reject_FullMethodName                     = "/Scailo.FeedstocksService/Reject"
+	FeedstocksService_Scrap_FullMethodName                      = "/Scailo.FeedstocksService/Scrap"
+	FeedstocksService_ReturnMaterial_FullMethodName             = "/Scailo.FeedstocksService/ReturnMaterial"
+	FeedstocksService_Discard_FullMethodName                    = "/Scailo.FeedstocksService/Discard"
+	FeedstocksService_CommentAdd_FullMethodName                 = "/Scailo.FeedstocksService/CommentAdd"
+	FeedstocksService_CreateMagicLink_FullMethodName            = "/Scailo.FeedstocksService/CreateMagicLink"
+	FeedstocksService_ViewByID_FullMethodName                   = "/Scailo.FeedstocksService/ViewByID"
+	FeedstocksService_ViewByUUID_FullMethodName                 = "/Scailo.FeedstocksService/ViewByUUID"
+	FeedstocksService_ViewEssentialByID_FullMethodName          = "/Scailo.FeedstocksService/ViewEssentialByID"
+	FeedstocksService_ViewEssentialByUUID_FullMethodName        = "/Scailo.FeedstocksService/ViewEssentialByUUID"
+	FeedstocksService_ViewFromIDs_FullMethodName                = "/Scailo.FeedstocksService/ViewFromIDs"
+	FeedstocksService_ViewFromUUIDs_FullMethodName              = "/Scailo.FeedstocksService/ViewFromUUIDs"
+	FeedstocksService_ViewAll_FullMethodName                    = "/Scailo.FeedstocksService/ViewAll"
+	FeedstocksService_ViewWithPagination_FullMethodName         = "/Scailo.FeedstocksService/ViewWithPagination"
+	FeedstocksService_ViewVendorInvoiceUnitPrice_FullMethodName = "/Scailo.FeedstocksService/ViewVendorInvoiceUnitPrice"
+	FeedstocksService_DownloadQCReportByID_FullMethodName       = "/Scailo.FeedstocksService/DownloadQCReportByID"
+	FeedstocksService_DownloadQCReportByUUID_FullMethodName     = "/Scailo.FeedstocksService/DownloadQCReportByUUID"
+	FeedstocksService_DownloadLabelByID_FullMethodName          = "/Scailo.FeedstocksService/DownloadLabelByID"
+	FeedstocksService_DownloadLabelByUUID_FullMethodName        = "/Scailo.FeedstocksService/DownloadLabelByUUID"
+	FeedstocksService_ViewInventoryInteractions_FullMethodName  = "/Scailo.FeedstocksService/ViewInventoryInteractions"
+	FeedstocksService_SearchAll_FullMethodName                  = "/Scailo.FeedstocksService/SearchAll"
+	FeedstocksService_Filter_FullMethodName                     = "/Scailo.FeedstocksService/Filter"
+	FeedstocksService_Count_FullMethodName                      = "/Scailo.FeedstocksService/Count"
+	FeedstocksService_DownloadAsCSV_FullMethodName              = "/Scailo.FeedstocksService/DownloadAsCSV"
+	FeedstocksService_DownloadImportTemplate_FullMethodName     = "/Scailo.FeedstocksService/DownloadImportTemplate"
+	FeedstocksService_ImportFromCSV_FullMethodName              = "/Scailo.FeedstocksService/ImportFromCSV"
 )
 
 // FeedstocksServiceClient is the client API for FeedstocksService service.
@@ -105,6 +106,8 @@ type FeedstocksServiceClient interface {
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*FeedstocksList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *FeedstocksServicePaginationReq, opts ...grpc.CallOption) (*FeedstocksServicePaginationResponse, error)
+	// View the unit price at which the inventory item was purchased (the corresponding vendor invoice price)
+	ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error)
 	// Download QC Report with the given Identifier
 	DownloadQCReportByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download QC Report with the given IdentifierUUID (can be used to allow public downloads)
@@ -359,6 +362,16 @@ func (c *feedstocksServiceClient) ViewWithPagination(ctx context.Context, in *Fe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FeedstocksServicePaginationResponse)
 	err := c.cc.Invoke(ctx, FeedstocksService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feedstocksServiceClient) ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, FeedstocksService_ViewVendorInvoiceUnitPrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

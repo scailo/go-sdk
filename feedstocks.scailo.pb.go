@@ -2332,7 +2332,7 @@ const file_feedstocks_scailo_proto_rawDesc = "" +
 	"\"FEEDSTOCK_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12$\n" +
 	" FEEDSTOCK_REF_FROM_INITIAL_STOCK\x10\x01\x12$\n" +
 	" FEEDSTOCK_REF_FROM_GOODS_RECEIPT\x10\x02\x125\n" +
-	"1FEEDSTOCK_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\x9f\x13\n" +
+	"1FEEDSTOCK_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\xec\x13\n" +
 	"\x11FeedstocksService\x12L\n" +
 	"\x06Create\x12&.Scailo.FeedstocksServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\vSendToStore\x12+.Scailo.FeedstocksServiceSendToStoreRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
@@ -2357,7 +2357,8 @@ const file_feedstocks_scailo_proto_rawDesc = "" +
 	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x16.Scailo.FeedstocksList\x12D\n" +
 	"\rViewFromUUIDs\x12\x1b.Scailo.IdentifierUUIDsList\x1a\x16.Scailo.FeedstocksList\x127\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x16.Scailo.FeedstocksList\x12i\n" +
-	"\x12ViewWithPagination\x12&.Scailo.FeedstocksServicePaginationReq\x1a+.Scailo.FeedstocksServicePaginationResponse\x12@\n" +
+	"\x12ViewWithPagination\x12&.Scailo.FeedstocksServicePaginationReq\x1a+.Scailo.FeedstocksServicePaginationResponse\x12K\n" +
+	"\x1aViewVendorInvoiceUnitPrice\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.PriceResponse\x12@\n" +
 	"\x14DownloadQCReportByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.StandardFile\x12F\n" +
 	"\x16DownloadQCReportByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.StandardFile\x12=\n" +
 	"\x11DownloadLabelByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.StandardFile\x12C\n" +
@@ -2420,8 +2421,9 @@ var file_feedstocks_scailo_proto_goTypes = []any{
 	(*StandardFile)(nil),                                      // 29: Scailo.StandardFile
 	(*IdentifierResponse)(nil),                                // 30: Scailo.IdentifierResponse
 	(*MagicLink)(nil),                                         // 31: Scailo.MagicLink
-	(*InventoryInteractionsList)(nil),                         // 32: Scailo.InventoryInteractionsList
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
+	(*PriceResponse)(nil),                                     // 32: Scailo.PriceResponse
+	(*InventoryInteractionsList)(nil),                         // 33: Scailo.InventoryInteractionsList
+	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
 }
 var file_feedstocks_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.FeedstocksServiceCreateRequest.ref_from:type_name -> Scailo.FEEDSTOCK_REF_FROM
@@ -2478,52 +2480,54 @@ var file_feedstocks_scailo_proto_depIdxs = []int32{
 	26, // 51: Scailo.FeedstocksService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
 	27, // 52: Scailo.FeedstocksService.ViewAll:input_type -> Scailo.ActiveStatus
 	6,  // 53: Scailo.FeedstocksService.ViewWithPagination:input_type -> Scailo.FeedstocksServicePaginationReq
-	23, // 54: Scailo.FeedstocksService.DownloadQCReportByID:input_type -> Scailo.Identifier
-	24, // 55: Scailo.FeedstocksService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 56: Scailo.FeedstocksService.DownloadLabelByID:input_type -> Scailo.Identifier
-	24, // 57: Scailo.FeedstocksService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 58: Scailo.FeedstocksService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
-	10, // 59: Scailo.FeedstocksService.SearchAll:input_type -> Scailo.FeedstocksServiceSearchAllReq
-	8,  // 60: Scailo.FeedstocksService.Filter:input_type -> Scailo.FeedstocksServiceFilterReq
-	9,  // 61: Scailo.FeedstocksService.Count:input_type -> Scailo.FeedstocksServiceCountReq
-	8,  // 62: Scailo.FeedstocksService.DownloadAsCSV:input_type -> Scailo.FeedstocksServiceFilterReq
-	28, // 63: Scailo.FeedstocksService.DownloadImportTemplate:input_type -> Scailo.Empty
-	29, // 64: Scailo.FeedstocksService.ImportFromCSV:input_type -> Scailo.StandardFile
-	30, // 65: Scailo.FeedstocksService.Create:output_type -> Scailo.IdentifierResponse
-	30, // 66: Scailo.FeedstocksService.SendToStore:output_type -> Scailo.IdentifierResponse
-	30, // 67: Scailo.FeedstocksService.Update:output_type -> Scailo.IdentifierResponse
-	30, // 68: Scailo.FeedstocksService.SendForRework:output_type -> Scailo.IdentifierResponse
-	30, // 69: Scailo.FeedstocksService.SendForQC:output_type -> Scailo.IdentifierResponse
-	30, // 70: Scailo.FeedstocksService.SplitLot:output_type -> Scailo.IdentifierResponse
-	30, // 71: Scailo.FeedstocksService.Partition:output_type -> Scailo.IdentifierResponse
-	30, // 72: Scailo.FeedstocksService.Consume:output_type -> Scailo.IdentifierResponse
-	30, // 73: Scailo.FeedstocksService.Reject:output_type -> Scailo.IdentifierResponse
-	30, // 74: Scailo.FeedstocksService.Scrap:output_type -> Scailo.IdentifierResponse
-	30, // 75: Scailo.FeedstocksService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
-	30, // 76: Scailo.FeedstocksService.Discard:output_type -> Scailo.IdentifierResponse
-	30, // 77: Scailo.FeedstocksService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	31, // 78: Scailo.FeedstocksService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 79: Scailo.FeedstocksService.ViewByID:output_type -> Scailo.Feedstock
-	4,  // 80: Scailo.FeedstocksService.ViewByUUID:output_type -> Scailo.Feedstock
-	4,  // 81: Scailo.FeedstocksService.ViewEssentialByID:output_type -> Scailo.Feedstock
-	4,  // 82: Scailo.FeedstocksService.ViewEssentialByUUID:output_type -> Scailo.Feedstock
-	5,  // 83: Scailo.FeedstocksService.ViewFromIDs:output_type -> Scailo.FeedstocksList
-	5,  // 84: Scailo.FeedstocksService.ViewFromUUIDs:output_type -> Scailo.FeedstocksList
-	5,  // 85: Scailo.FeedstocksService.ViewAll:output_type -> Scailo.FeedstocksList
-	7,  // 86: Scailo.FeedstocksService.ViewWithPagination:output_type -> Scailo.FeedstocksServicePaginationResponse
-	29, // 87: Scailo.FeedstocksService.DownloadQCReportByID:output_type -> Scailo.StandardFile
-	29, // 88: Scailo.FeedstocksService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
-	29, // 89: Scailo.FeedstocksService.DownloadLabelByID:output_type -> Scailo.StandardFile
-	29, // 90: Scailo.FeedstocksService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	32, // 91: Scailo.FeedstocksService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
-	5,  // 92: Scailo.FeedstocksService.SearchAll:output_type -> Scailo.FeedstocksList
-	5,  // 93: Scailo.FeedstocksService.Filter:output_type -> Scailo.FeedstocksList
-	33, // 94: Scailo.FeedstocksService.Count:output_type -> Scailo.CountResponse
-	29, // 95: Scailo.FeedstocksService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	29, // 96: Scailo.FeedstocksService.DownloadImportTemplate:output_type -> Scailo.StandardFile
-	26, // 97: Scailo.FeedstocksService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	65, // [65:98] is the sub-list for method output_type
-	32, // [32:65] is the sub-list for method input_type
+	24, // 54: Scailo.FeedstocksService.ViewVendorInvoiceUnitPrice:input_type -> Scailo.IdentifierUUID
+	23, // 55: Scailo.FeedstocksService.DownloadQCReportByID:input_type -> Scailo.Identifier
+	24, // 56: Scailo.FeedstocksService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 57: Scailo.FeedstocksService.DownloadLabelByID:input_type -> Scailo.Identifier
+	24, // 58: Scailo.FeedstocksService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 59: Scailo.FeedstocksService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
+	10, // 60: Scailo.FeedstocksService.SearchAll:input_type -> Scailo.FeedstocksServiceSearchAllReq
+	8,  // 61: Scailo.FeedstocksService.Filter:input_type -> Scailo.FeedstocksServiceFilterReq
+	9,  // 62: Scailo.FeedstocksService.Count:input_type -> Scailo.FeedstocksServiceCountReq
+	8,  // 63: Scailo.FeedstocksService.DownloadAsCSV:input_type -> Scailo.FeedstocksServiceFilterReq
+	28, // 64: Scailo.FeedstocksService.DownloadImportTemplate:input_type -> Scailo.Empty
+	29, // 65: Scailo.FeedstocksService.ImportFromCSV:input_type -> Scailo.StandardFile
+	30, // 66: Scailo.FeedstocksService.Create:output_type -> Scailo.IdentifierResponse
+	30, // 67: Scailo.FeedstocksService.SendToStore:output_type -> Scailo.IdentifierResponse
+	30, // 68: Scailo.FeedstocksService.Update:output_type -> Scailo.IdentifierResponse
+	30, // 69: Scailo.FeedstocksService.SendForRework:output_type -> Scailo.IdentifierResponse
+	30, // 70: Scailo.FeedstocksService.SendForQC:output_type -> Scailo.IdentifierResponse
+	30, // 71: Scailo.FeedstocksService.SplitLot:output_type -> Scailo.IdentifierResponse
+	30, // 72: Scailo.FeedstocksService.Partition:output_type -> Scailo.IdentifierResponse
+	30, // 73: Scailo.FeedstocksService.Consume:output_type -> Scailo.IdentifierResponse
+	30, // 74: Scailo.FeedstocksService.Reject:output_type -> Scailo.IdentifierResponse
+	30, // 75: Scailo.FeedstocksService.Scrap:output_type -> Scailo.IdentifierResponse
+	30, // 76: Scailo.FeedstocksService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
+	30, // 77: Scailo.FeedstocksService.Discard:output_type -> Scailo.IdentifierResponse
+	30, // 78: Scailo.FeedstocksService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	31, // 79: Scailo.FeedstocksService.CreateMagicLink:output_type -> Scailo.MagicLink
+	4,  // 80: Scailo.FeedstocksService.ViewByID:output_type -> Scailo.Feedstock
+	4,  // 81: Scailo.FeedstocksService.ViewByUUID:output_type -> Scailo.Feedstock
+	4,  // 82: Scailo.FeedstocksService.ViewEssentialByID:output_type -> Scailo.Feedstock
+	4,  // 83: Scailo.FeedstocksService.ViewEssentialByUUID:output_type -> Scailo.Feedstock
+	5,  // 84: Scailo.FeedstocksService.ViewFromIDs:output_type -> Scailo.FeedstocksList
+	5,  // 85: Scailo.FeedstocksService.ViewFromUUIDs:output_type -> Scailo.FeedstocksList
+	5,  // 86: Scailo.FeedstocksService.ViewAll:output_type -> Scailo.FeedstocksList
+	7,  // 87: Scailo.FeedstocksService.ViewWithPagination:output_type -> Scailo.FeedstocksServicePaginationResponse
+	32, // 88: Scailo.FeedstocksService.ViewVendorInvoiceUnitPrice:output_type -> Scailo.PriceResponse
+	29, // 89: Scailo.FeedstocksService.DownloadQCReportByID:output_type -> Scailo.StandardFile
+	29, // 90: Scailo.FeedstocksService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
+	29, // 91: Scailo.FeedstocksService.DownloadLabelByID:output_type -> Scailo.StandardFile
+	29, // 92: Scailo.FeedstocksService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	33, // 93: Scailo.FeedstocksService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
+	5,  // 94: Scailo.FeedstocksService.SearchAll:output_type -> Scailo.FeedstocksList
+	5,  // 95: Scailo.FeedstocksService.Filter:output_type -> Scailo.FeedstocksList
+	34, // 96: Scailo.FeedstocksService.Count:output_type -> Scailo.CountResponse
+	29, // 97: Scailo.FeedstocksService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	29, // 98: Scailo.FeedstocksService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	26, // 99: Scailo.FeedstocksService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	66, // [66:100] is the sub-list for method output_type
+	32, // [32:66] is the sub-list for method input_type
 	32, // [32:32] is the sub-list for extension type_name
 	32, // [32:32] is the sub-list for extension extendee
 	0,  // [0:32] is the sub-list for field type_name

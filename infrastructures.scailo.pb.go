@@ -2332,7 +2332,7 @@ const file_infrastructures_scailo_proto_rawDesc = "" +
 	"'INFRASTRUCTURE_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12)\n" +
 	"%INFRASTRUCTURE_REF_FROM_INITIAL_STOCK\x10\x01\x12)\n" +
 	"%INFRASTRUCTURE_REF_FROM_GOODS_RECEIPT\x10\x02\x12:\n" +
-	"6INFRASTRUCTURE_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\xfe\x13\n" +
+	"6INFRASTRUCTURE_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\xcb\x14\n" +
 	"\x16InfrastructuresService\x12Q\n" +
 	"\x06Create\x12+.Scailo.InfrastructuresServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12[\n" +
 	"\vSendToStore\x120.Scailo.InfrastructuresServiceSendToStoreRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -2357,7 +2357,8 @@ const file_infrastructures_scailo_proto_rawDesc = "" +
 	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x1b.Scailo.InfrastructuresList\x12I\n" +
 	"\rViewFromUUIDs\x12\x1b.Scailo.IdentifierUUIDsList\x1a\x1b.Scailo.InfrastructuresList\x12<\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x1b.Scailo.InfrastructuresList\x12s\n" +
-	"\x12ViewWithPagination\x12+.Scailo.InfrastructuresServicePaginationReq\x1a0.Scailo.InfrastructuresServicePaginationResponse\x12@\n" +
+	"\x12ViewWithPagination\x12+.Scailo.InfrastructuresServicePaginationReq\x1a0.Scailo.InfrastructuresServicePaginationResponse\x12K\n" +
+	"\x1aViewVendorInvoiceUnitPrice\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.PriceResponse\x12@\n" +
 	"\x14DownloadQCReportByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.StandardFile\x12F\n" +
 	"\x16DownloadQCReportByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.StandardFile\x12=\n" +
 	"\x11DownloadLabelByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.StandardFile\x12C\n" +
@@ -2420,8 +2421,9 @@ var file_infrastructures_scailo_proto_goTypes = []any{
 	(*StandardFile)(nil),                                      // 29: Scailo.StandardFile
 	(*IdentifierResponse)(nil),                                // 30: Scailo.IdentifierResponse
 	(*MagicLink)(nil),                                         // 31: Scailo.MagicLink
-	(*InventoryInteractionsList)(nil),                         // 32: Scailo.InventoryInteractionsList
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
+	(*PriceResponse)(nil),                                     // 32: Scailo.PriceResponse
+	(*InventoryInteractionsList)(nil),                         // 33: Scailo.InventoryInteractionsList
+	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
 }
 var file_infrastructures_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.InfrastructuresServiceCreateRequest.ref_from:type_name -> Scailo.INFRASTRUCTURE_REF_FROM
@@ -2478,52 +2480,54 @@ var file_infrastructures_scailo_proto_depIdxs = []int32{
 	26, // 51: Scailo.InfrastructuresService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
 	27, // 52: Scailo.InfrastructuresService.ViewAll:input_type -> Scailo.ActiveStatus
 	6,  // 53: Scailo.InfrastructuresService.ViewWithPagination:input_type -> Scailo.InfrastructuresServicePaginationReq
-	23, // 54: Scailo.InfrastructuresService.DownloadQCReportByID:input_type -> Scailo.Identifier
-	24, // 55: Scailo.InfrastructuresService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 56: Scailo.InfrastructuresService.DownloadLabelByID:input_type -> Scailo.Identifier
-	24, // 57: Scailo.InfrastructuresService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 58: Scailo.InfrastructuresService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
-	10, // 59: Scailo.InfrastructuresService.SearchAll:input_type -> Scailo.InfrastructuresServiceSearchAllReq
-	8,  // 60: Scailo.InfrastructuresService.Filter:input_type -> Scailo.InfrastructuresServiceFilterReq
-	9,  // 61: Scailo.InfrastructuresService.Count:input_type -> Scailo.InfrastructuresServiceCountReq
-	8,  // 62: Scailo.InfrastructuresService.DownloadAsCSV:input_type -> Scailo.InfrastructuresServiceFilterReq
-	28, // 63: Scailo.InfrastructuresService.DownloadImportTemplate:input_type -> Scailo.Empty
-	29, // 64: Scailo.InfrastructuresService.ImportFromCSV:input_type -> Scailo.StandardFile
-	30, // 65: Scailo.InfrastructuresService.Create:output_type -> Scailo.IdentifierResponse
-	30, // 66: Scailo.InfrastructuresService.SendToStore:output_type -> Scailo.IdentifierResponse
-	30, // 67: Scailo.InfrastructuresService.Update:output_type -> Scailo.IdentifierResponse
-	30, // 68: Scailo.InfrastructuresService.SendForRework:output_type -> Scailo.IdentifierResponse
-	30, // 69: Scailo.InfrastructuresService.SendForQC:output_type -> Scailo.IdentifierResponse
-	30, // 70: Scailo.InfrastructuresService.SplitLot:output_type -> Scailo.IdentifierResponse
-	30, // 71: Scailo.InfrastructuresService.Partition:output_type -> Scailo.IdentifierResponse
-	30, // 72: Scailo.InfrastructuresService.Consume:output_type -> Scailo.IdentifierResponse
-	30, // 73: Scailo.InfrastructuresService.Reject:output_type -> Scailo.IdentifierResponse
-	30, // 74: Scailo.InfrastructuresService.Scrap:output_type -> Scailo.IdentifierResponse
-	30, // 75: Scailo.InfrastructuresService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
-	30, // 76: Scailo.InfrastructuresService.Discard:output_type -> Scailo.IdentifierResponse
-	30, // 77: Scailo.InfrastructuresService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	31, // 78: Scailo.InfrastructuresService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 79: Scailo.InfrastructuresService.ViewByID:output_type -> Scailo.Infrastructure
-	4,  // 80: Scailo.InfrastructuresService.ViewByUUID:output_type -> Scailo.Infrastructure
-	4,  // 81: Scailo.InfrastructuresService.ViewEssentialByID:output_type -> Scailo.Infrastructure
-	4,  // 82: Scailo.InfrastructuresService.ViewEssentialByUUID:output_type -> Scailo.Infrastructure
-	5,  // 83: Scailo.InfrastructuresService.ViewFromIDs:output_type -> Scailo.InfrastructuresList
-	5,  // 84: Scailo.InfrastructuresService.ViewFromUUIDs:output_type -> Scailo.InfrastructuresList
-	5,  // 85: Scailo.InfrastructuresService.ViewAll:output_type -> Scailo.InfrastructuresList
-	7,  // 86: Scailo.InfrastructuresService.ViewWithPagination:output_type -> Scailo.InfrastructuresServicePaginationResponse
-	29, // 87: Scailo.InfrastructuresService.DownloadQCReportByID:output_type -> Scailo.StandardFile
-	29, // 88: Scailo.InfrastructuresService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
-	29, // 89: Scailo.InfrastructuresService.DownloadLabelByID:output_type -> Scailo.StandardFile
-	29, // 90: Scailo.InfrastructuresService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	32, // 91: Scailo.InfrastructuresService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
-	5,  // 92: Scailo.InfrastructuresService.SearchAll:output_type -> Scailo.InfrastructuresList
-	5,  // 93: Scailo.InfrastructuresService.Filter:output_type -> Scailo.InfrastructuresList
-	33, // 94: Scailo.InfrastructuresService.Count:output_type -> Scailo.CountResponse
-	29, // 95: Scailo.InfrastructuresService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	29, // 96: Scailo.InfrastructuresService.DownloadImportTemplate:output_type -> Scailo.StandardFile
-	26, // 97: Scailo.InfrastructuresService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	65, // [65:98] is the sub-list for method output_type
-	32, // [32:65] is the sub-list for method input_type
+	24, // 54: Scailo.InfrastructuresService.ViewVendorInvoiceUnitPrice:input_type -> Scailo.IdentifierUUID
+	23, // 55: Scailo.InfrastructuresService.DownloadQCReportByID:input_type -> Scailo.Identifier
+	24, // 56: Scailo.InfrastructuresService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 57: Scailo.InfrastructuresService.DownloadLabelByID:input_type -> Scailo.Identifier
+	24, // 58: Scailo.InfrastructuresService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 59: Scailo.InfrastructuresService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
+	10, // 60: Scailo.InfrastructuresService.SearchAll:input_type -> Scailo.InfrastructuresServiceSearchAllReq
+	8,  // 61: Scailo.InfrastructuresService.Filter:input_type -> Scailo.InfrastructuresServiceFilterReq
+	9,  // 62: Scailo.InfrastructuresService.Count:input_type -> Scailo.InfrastructuresServiceCountReq
+	8,  // 63: Scailo.InfrastructuresService.DownloadAsCSV:input_type -> Scailo.InfrastructuresServiceFilterReq
+	28, // 64: Scailo.InfrastructuresService.DownloadImportTemplate:input_type -> Scailo.Empty
+	29, // 65: Scailo.InfrastructuresService.ImportFromCSV:input_type -> Scailo.StandardFile
+	30, // 66: Scailo.InfrastructuresService.Create:output_type -> Scailo.IdentifierResponse
+	30, // 67: Scailo.InfrastructuresService.SendToStore:output_type -> Scailo.IdentifierResponse
+	30, // 68: Scailo.InfrastructuresService.Update:output_type -> Scailo.IdentifierResponse
+	30, // 69: Scailo.InfrastructuresService.SendForRework:output_type -> Scailo.IdentifierResponse
+	30, // 70: Scailo.InfrastructuresService.SendForQC:output_type -> Scailo.IdentifierResponse
+	30, // 71: Scailo.InfrastructuresService.SplitLot:output_type -> Scailo.IdentifierResponse
+	30, // 72: Scailo.InfrastructuresService.Partition:output_type -> Scailo.IdentifierResponse
+	30, // 73: Scailo.InfrastructuresService.Consume:output_type -> Scailo.IdentifierResponse
+	30, // 74: Scailo.InfrastructuresService.Reject:output_type -> Scailo.IdentifierResponse
+	30, // 75: Scailo.InfrastructuresService.Scrap:output_type -> Scailo.IdentifierResponse
+	30, // 76: Scailo.InfrastructuresService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
+	30, // 77: Scailo.InfrastructuresService.Discard:output_type -> Scailo.IdentifierResponse
+	30, // 78: Scailo.InfrastructuresService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	31, // 79: Scailo.InfrastructuresService.CreateMagicLink:output_type -> Scailo.MagicLink
+	4,  // 80: Scailo.InfrastructuresService.ViewByID:output_type -> Scailo.Infrastructure
+	4,  // 81: Scailo.InfrastructuresService.ViewByUUID:output_type -> Scailo.Infrastructure
+	4,  // 82: Scailo.InfrastructuresService.ViewEssentialByID:output_type -> Scailo.Infrastructure
+	4,  // 83: Scailo.InfrastructuresService.ViewEssentialByUUID:output_type -> Scailo.Infrastructure
+	5,  // 84: Scailo.InfrastructuresService.ViewFromIDs:output_type -> Scailo.InfrastructuresList
+	5,  // 85: Scailo.InfrastructuresService.ViewFromUUIDs:output_type -> Scailo.InfrastructuresList
+	5,  // 86: Scailo.InfrastructuresService.ViewAll:output_type -> Scailo.InfrastructuresList
+	7,  // 87: Scailo.InfrastructuresService.ViewWithPagination:output_type -> Scailo.InfrastructuresServicePaginationResponse
+	32, // 88: Scailo.InfrastructuresService.ViewVendorInvoiceUnitPrice:output_type -> Scailo.PriceResponse
+	29, // 89: Scailo.InfrastructuresService.DownloadQCReportByID:output_type -> Scailo.StandardFile
+	29, // 90: Scailo.InfrastructuresService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
+	29, // 91: Scailo.InfrastructuresService.DownloadLabelByID:output_type -> Scailo.StandardFile
+	29, // 92: Scailo.InfrastructuresService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	33, // 93: Scailo.InfrastructuresService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
+	5,  // 94: Scailo.InfrastructuresService.SearchAll:output_type -> Scailo.InfrastructuresList
+	5,  // 95: Scailo.InfrastructuresService.Filter:output_type -> Scailo.InfrastructuresList
+	34, // 96: Scailo.InfrastructuresService.Count:output_type -> Scailo.CountResponse
+	29, // 97: Scailo.InfrastructuresService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	29, // 98: Scailo.InfrastructuresService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	26, // 99: Scailo.InfrastructuresService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	66, // [66:100] is the sub-list for method output_type
+	32, // [32:66] is the sub-list for method input_type
 	32, // [32:32] is the sub-list for extension type_name
 	32, // [32:32] is the sub-list for extension extendee
 	0,  // [0:32] is the sub-list for field type_name

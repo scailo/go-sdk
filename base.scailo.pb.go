@@ -1278,7 +1278,9 @@ func (x *StringResponse) GetValue() string {
 type PriceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stores the price as an integer (in cents)
-	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	// The ID of the corresponding currency
+	CurrencyId    uint64 `protobuf:"varint,10,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1316,6 +1318,13 @@ func (*PriceResponse) Descriptor() ([]byte, []int) {
 func (x *PriceResponse) GetValue() int64 {
 	if x != nil {
 		return x.Value
+	}
+	return 0
+}
+
+func (x *PriceResponse) GetCurrencyId() uint64 {
+	if x != nil {
+		return x.CurrencyId
 	}
 	return 0
 }
@@ -4100,9 +4109,12 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\rBytesResponse\x12\x14\n" +
 	"\x05value\x18\x01 \x01(\fR\x05value\"&\n" +
 	"\x0eStringResponse\x12\x14\n" +
-	"\x05value\x18\x01 \x01(\tR\x05value\"%\n" +
+	"\x05value\x18\x01 \x01(\tR\x05value\"F\n" +
 	"\rPriceResponse\x12\x14\n" +
-	"\x05value\x18\x01 \x01(\x03R\x05value\"`\n" +
+	"\x05value\x18\x01 \x01(\x03R\x05value\x12\x1f\n" +
+	"\vcurrency_id\x18\n" +
+	" \x01(\x04R\n" +
+	"currencyId\"`\n" +
 	"\rImageResponse\x12\x14\n" +
 	"\x05image\x18\x01 \x01(\fR\x05image\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x1c\n" +

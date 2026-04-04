@@ -40,6 +40,7 @@ const (
 	ComponentsService_ViewFromUUIDs_FullMethodName                  = "/Scailo.ComponentsService/ViewFromUUIDs"
 	ComponentsService_ViewAll_FullMethodName                        = "/Scailo.ComponentsService/ViewAll"
 	ComponentsService_ViewWithPagination_FullMethodName             = "/Scailo.ComponentsService/ViewWithPagination"
+	ComponentsService_ViewVendorInvoiceUnitPrice_FullMethodName     = "/Scailo.ComponentsService/ViewVendorInvoiceUnitPrice"
 	ComponentsService_ViewFamiliesInProductionPlan_FullMethodName   = "/Scailo.ComponentsService/ViewFamiliesInProductionPlan"
 	ComponentsService_FilterFamiliesInProductionPlan_FullMethodName = "/Scailo.ComponentsService/FilterFamiliesInProductionPlan"
 	ComponentsService_DownloadQCReportByID_FullMethodName           = "/Scailo.ComponentsService/DownloadQCReportByID"
@@ -107,6 +108,8 @@ type ComponentsServiceClient interface {
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*ComponentsList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *ComponentsServicePaginationReq, opts ...grpc.CallOption) (*ComponentsServicePaginationResponse, error)
+	// View the unit price at which the inventory item was purchased (the corresponding vendor invoice price)
+	ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error)
 	// View component families for the given production plan
 	ViewFamiliesInProductionPlan(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
 	// Filter component families for the given production plan
@@ -365,6 +368,16 @@ func (c *componentsServiceClient) ViewWithPagination(ctx context.Context, in *Co
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ComponentsServicePaginationResponse)
 	err := c.cc.Invoke(ctx, ComponentsService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *componentsServiceClient) ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, ComponentsService_ViewVendorInvoiceUnitPrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

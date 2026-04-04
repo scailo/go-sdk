@@ -18,39 +18,40 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EquipmentsService_Create_FullMethodName                    = "/Scailo.EquipmentsService/Create"
-	EquipmentsService_SendToStore_FullMethodName               = "/Scailo.EquipmentsService/SendToStore"
-	EquipmentsService_Update_FullMethodName                    = "/Scailo.EquipmentsService/Update"
-	EquipmentsService_SendForRework_FullMethodName             = "/Scailo.EquipmentsService/SendForRework"
-	EquipmentsService_SendForQC_FullMethodName                 = "/Scailo.EquipmentsService/SendForQC"
-	EquipmentsService_SplitLot_FullMethodName                  = "/Scailo.EquipmentsService/SplitLot"
-	EquipmentsService_Partition_FullMethodName                 = "/Scailo.EquipmentsService/Partition"
-	EquipmentsService_Consume_FullMethodName                   = "/Scailo.EquipmentsService/Consume"
-	EquipmentsService_Reject_FullMethodName                    = "/Scailo.EquipmentsService/Reject"
-	EquipmentsService_Scrap_FullMethodName                     = "/Scailo.EquipmentsService/Scrap"
-	EquipmentsService_ReturnMaterial_FullMethodName            = "/Scailo.EquipmentsService/ReturnMaterial"
-	EquipmentsService_Discard_FullMethodName                   = "/Scailo.EquipmentsService/Discard"
-	EquipmentsService_CommentAdd_FullMethodName                = "/Scailo.EquipmentsService/CommentAdd"
-	EquipmentsService_CreateMagicLink_FullMethodName           = "/Scailo.EquipmentsService/CreateMagicLink"
-	EquipmentsService_ViewByID_FullMethodName                  = "/Scailo.EquipmentsService/ViewByID"
-	EquipmentsService_ViewByUUID_FullMethodName                = "/Scailo.EquipmentsService/ViewByUUID"
-	EquipmentsService_ViewEssentialByID_FullMethodName         = "/Scailo.EquipmentsService/ViewEssentialByID"
-	EquipmentsService_ViewEssentialByUUID_FullMethodName       = "/Scailo.EquipmentsService/ViewEssentialByUUID"
-	EquipmentsService_ViewFromIDs_FullMethodName               = "/Scailo.EquipmentsService/ViewFromIDs"
-	EquipmentsService_ViewFromUUIDs_FullMethodName             = "/Scailo.EquipmentsService/ViewFromUUIDs"
-	EquipmentsService_ViewAll_FullMethodName                   = "/Scailo.EquipmentsService/ViewAll"
-	EquipmentsService_ViewWithPagination_FullMethodName        = "/Scailo.EquipmentsService/ViewWithPagination"
-	EquipmentsService_DownloadQCReportByID_FullMethodName      = "/Scailo.EquipmentsService/DownloadQCReportByID"
-	EquipmentsService_DownloadQCReportByUUID_FullMethodName    = "/Scailo.EquipmentsService/DownloadQCReportByUUID"
-	EquipmentsService_DownloadLabelByID_FullMethodName         = "/Scailo.EquipmentsService/DownloadLabelByID"
-	EquipmentsService_DownloadLabelByUUID_FullMethodName       = "/Scailo.EquipmentsService/DownloadLabelByUUID"
-	EquipmentsService_ViewInventoryInteractions_FullMethodName = "/Scailo.EquipmentsService/ViewInventoryInteractions"
-	EquipmentsService_SearchAll_FullMethodName                 = "/Scailo.EquipmentsService/SearchAll"
-	EquipmentsService_Filter_FullMethodName                    = "/Scailo.EquipmentsService/Filter"
-	EquipmentsService_Count_FullMethodName                     = "/Scailo.EquipmentsService/Count"
-	EquipmentsService_DownloadAsCSV_FullMethodName             = "/Scailo.EquipmentsService/DownloadAsCSV"
-	EquipmentsService_DownloadImportTemplate_FullMethodName    = "/Scailo.EquipmentsService/DownloadImportTemplate"
-	EquipmentsService_ImportFromCSV_FullMethodName             = "/Scailo.EquipmentsService/ImportFromCSV"
+	EquipmentsService_Create_FullMethodName                     = "/Scailo.EquipmentsService/Create"
+	EquipmentsService_SendToStore_FullMethodName                = "/Scailo.EquipmentsService/SendToStore"
+	EquipmentsService_Update_FullMethodName                     = "/Scailo.EquipmentsService/Update"
+	EquipmentsService_SendForRework_FullMethodName              = "/Scailo.EquipmentsService/SendForRework"
+	EquipmentsService_SendForQC_FullMethodName                  = "/Scailo.EquipmentsService/SendForQC"
+	EquipmentsService_SplitLot_FullMethodName                   = "/Scailo.EquipmentsService/SplitLot"
+	EquipmentsService_Partition_FullMethodName                  = "/Scailo.EquipmentsService/Partition"
+	EquipmentsService_Consume_FullMethodName                    = "/Scailo.EquipmentsService/Consume"
+	EquipmentsService_Reject_FullMethodName                     = "/Scailo.EquipmentsService/Reject"
+	EquipmentsService_Scrap_FullMethodName                      = "/Scailo.EquipmentsService/Scrap"
+	EquipmentsService_ReturnMaterial_FullMethodName             = "/Scailo.EquipmentsService/ReturnMaterial"
+	EquipmentsService_Discard_FullMethodName                    = "/Scailo.EquipmentsService/Discard"
+	EquipmentsService_CommentAdd_FullMethodName                 = "/Scailo.EquipmentsService/CommentAdd"
+	EquipmentsService_CreateMagicLink_FullMethodName            = "/Scailo.EquipmentsService/CreateMagicLink"
+	EquipmentsService_ViewByID_FullMethodName                   = "/Scailo.EquipmentsService/ViewByID"
+	EquipmentsService_ViewByUUID_FullMethodName                 = "/Scailo.EquipmentsService/ViewByUUID"
+	EquipmentsService_ViewEssentialByID_FullMethodName          = "/Scailo.EquipmentsService/ViewEssentialByID"
+	EquipmentsService_ViewEssentialByUUID_FullMethodName        = "/Scailo.EquipmentsService/ViewEssentialByUUID"
+	EquipmentsService_ViewFromIDs_FullMethodName                = "/Scailo.EquipmentsService/ViewFromIDs"
+	EquipmentsService_ViewFromUUIDs_FullMethodName              = "/Scailo.EquipmentsService/ViewFromUUIDs"
+	EquipmentsService_ViewAll_FullMethodName                    = "/Scailo.EquipmentsService/ViewAll"
+	EquipmentsService_ViewWithPagination_FullMethodName         = "/Scailo.EquipmentsService/ViewWithPagination"
+	EquipmentsService_ViewVendorInvoiceUnitPrice_FullMethodName = "/Scailo.EquipmentsService/ViewVendorInvoiceUnitPrice"
+	EquipmentsService_DownloadQCReportByID_FullMethodName       = "/Scailo.EquipmentsService/DownloadQCReportByID"
+	EquipmentsService_DownloadQCReportByUUID_FullMethodName     = "/Scailo.EquipmentsService/DownloadQCReportByUUID"
+	EquipmentsService_DownloadLabelByID_FullMethodName          = "/Scailo.EquipmentsService/DownloadLabelByID"
+	EquipmentsService_DownloadLabelByUUID_FullMethodName        = "/Scailo.EquipmentsService/DownloadLabelByUUID"
+	EquipmentsService_ViewInventoryInteractions_FullMethodName  = "/Scailo.EquipmentsService/ViewInventoryInteractions"
+	EquipmentsService_SearchAll_FullMethodName                  = "/Scailo.EquipmentsService/SearchAll"
+	EquipmentsService_Filter_FullMethodName                     = "/Scailo.EquipmentsService/Filter"
+	EquipmentsService_Count_FullMethodName                      = "/Scailo.EquipmentsService/Count"
+	EquipmentsService_DownloadAsCSV_FullMethodName              = "/Scailo.EquipmentsService/DownloadAsCSV"
+	EquipmentsService_DownloadImportTemplate_FullMethodName     = "/Scailo.EquipmentsService/DownloadImportTemplate"
+	EquipmentsService_ImportFromCSV_FullMethodName              = "/Scailo.EquipmentsService/ImportFromCSV"
 )
 
 // EquipmentsServiceClient is the client API for EquipmentsService service.
@@ -105,6 +106,8 @@ type EquipmentsServiceClient interface {
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*EquipmentsList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *EquipmentsServicePaginationReq, opts ...grpc.CallOption) (*EquipmentsServicePaginationResponse, error)
+	// View the unit price at which the inventory item was purchased (the corresponding vendor invoice price)
+	ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error)
 	// Download QC Report with the given Identifier
 	DownloadQCReportByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download QC Report with the given IdentifierUUID (can be used to allow public downloads)
@@ -359,6 +362,16 @@ func (c *equipmentsServiceClient) ViewWithPagination(ctx context.Context, in *Eq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EquipmentsServicePaginationResponse)
 	err := c.cc.Invoke(ctx, EquipmentsService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *equipmentsServiceClient) ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, EquipmentsService_ViewVendorInvoiceUnitPrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

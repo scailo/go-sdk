@@ -18,39 +18,40 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	InfrastructuresService_Create_FullMethodName                    = "/Scailo.InfrastructuresService/Create"
-	InfrastructuresService_SendToStore_FullMethodName               = "/Scailo.InfrastructuresService/SendToStore"
-	InfrastructuresService_Update_FullMethodName                    = "/Scailo.InfrastructuresService/Update"
-	InfrastructuresService_SendForRework_FullMethodName             = "/Scailo.InfrastructuresService/SendForRework"
-	InfrastructuresService_SendForQC_FullMethodName                 = "/Scailo.InfrastructuresService/SendForQC"
-	InfrastructuresService_SplitLot_FullMethodName                  = "/Scailo.InfrastructuresService/SplitLot"
-	InfrastructuresService_Partition_FullMethodName                 = "/Scailo.InfrastructuresService/Partition"
-	InfrastructuresService_Consume_FullMethodName                   = "/Scailo.InfrastructuresService/Consume"
-	InfrastructuresService_Reject_FullMethodName                    = "/Scailo.InfrastructuresService/Reject"
-	InfrastructuresService_Scrap_FullMethodName                     = "/Scailo.InfrastructuresService/Scrap"
-	InfrastructuresService_ReturnMaterial_FullMethodName            = "/Scailo.InfrastructuresService/ReturnMaterial"
-	InfrastructuresService_Discard_FullMethodName                   = "/Scailo.InfrastructuresService/Discard"
-	InfrastructuresService_CommentAdd_FullMethodName                = "/Scailo.InfrastructuresService/CommentAdd"
-	InfrastructuresService_CreateMagicLink_FullMethodName           = "/Scailo.InfrastructuresService/CreateMagicLink"
-	InfrastructuresService_ViewByID_FullMethodName                  = "/Scailo.InfrastructuresService/ViewByID"
-	InfrastructuresService_ViewByUUID_FullMethodName                = "/Scailo.InfrastructuresService/ViewByUUID"
-	InfrastructuresService_ViewEssentialByID_FullMethodName         = "/Scailo.InfrastructuresService/ViewEssentialByID"
-	InfrastructuresService_ViewEssentialByUUID_FullMethodName       = "/Scailo.InfrastructuresService/ViewEssentialByUUID"
-	InfrastructuresService_ViewFromIDs_FullMethodName               = "/Scailo.InfrastructuresService/ViewFromIDs"
-	InfrastructuresService_ViewFromUUIDs_FullMethodName             = "/Scailo.InfrastructuresService/ViewFromUUIDs"
-	InfrastructuresService_ViewAll_FullMethodName                   = "/Scailo.InfrastructuresService/ViewAll"
-	InfrastructuresService_ViewWithPagination_FullMethodName        = "/Scailo.InfrastructuresService/ViewWithPagination"
-	InfrastructuresService_DownloadQCReportByID_FullMethodName      = "/Scailo.InfrastructuresService/DownloadQCReportByID"
-	InfrastructuresService_DownloadQCReportByUUID_FullMethodName    = "/Scailo.InfrastructuresService/DownloadQCReportByUUID"
-	InfrastructuresService_DownloadLabelByID_FullMethodName         = "/Scailo.InfrastructuresService/DownloadLabelByID"
-	InfrastructuresService_DownloadLabelByUUID_FullMethodName       = "/Scailo.InfrastructuresService/DownloadLabelByUUID"
-	InfrastructuresService_ViewInventoryInteractions_FullMethodName = "/Scailo.InfrastructuresService/ViewInventoryInteractions"
-	InfrastructuresService_SearchAll_FullMethodName                 = "/Scailo.InfrastructuresService/SearchAll"
-	InfrastructuresService_Filter_FullMethodName                    = "/Scailo.InfrastructuresService/Filter"
-	InfrastructuresService_Count_FullMethodName                     = "/Scailo.InfrastructuresService/Count"
-	InfrastructuresService_DownloadAsCSV_FullMethodName             = "/Scailo.InfrastructuresService/DownloadAsCSV"
-	InfrastructuresService_DownloadImportTemplate_FullMethodName    = "/Scailo.InfrastructuresService/DownloadImportTemplate"
-	InfrastructuresService_ImportFromCSV_FullMethodName             = "/Scailo.InfrastructuresService/ImportFromCSV"
+	InfrastructuresService_Create_FullMethodName                     = "/Scailo.InfrastructuresService/Create"
+	InfrastructuresService_SendToStore_FullMethodName                = "/Scailo.InfrastructuresService/SendToStore"
+	InfrastructuresService_Update_FullMethodName                     = "/Scailo.InfrastructuresService/Update"
+	InfrastructuresService_SendForRework_FullMethodName              = "/Scailo.InfrastructuresService/SendForRework"
+	InfrastructuresService_SendForQC_FullMethodName                  = "/Scailo.InfrastructuresService/SendForQC"
+	InfrastructuresService_SplitLot_FullMethodName                   = "/Scailo.InfrastructuresService/SplitLot"
+	InfrastructuresService_Partition_FullMethodName                  = "/Scailo.InfrastructuresService/Partition"
+	InfrastructuresService_Consume_FullMethodName                    = "/Scailo.InfrastructuresService/Consume"
+	InfrastructuresService_Reject_FullMethodName                     = "/Scailo.InfrastructuresService/Reject"
+	InfrastructuresService_Scrap_FullMethodName                      = "/Scailo.InfrastructuresService/Scrap"
+	InfrastructuresService_ReturnMaterial_FullMethodName             = "/Scailo.InfrastructuresService/ReturnMaterial"
+	InfrastructuresService_Discard_FullMethodName                    = "/Scailo.InfrastructuresService/Discard"
+	InfrastructuresService_CommentAdd_FullMethodName                 = "/Scailo.InfrastructuresService/CommentAdd"
+	InfrastructuresService_CreateMagicLink_FullMethodName            = "/Scailo.InfrastructuresService/CreateMagicLink"
+	InfrastructuresService_ViewByID_FullMethodName                   = "/Scailo.InfrastructuresService/ViewByID"
+	InfrastructuresService_ViewByUUID_FullMethodName                 = "/Scailo.InfrastructuresService/ViewByUUID"
+	InfrastructuresService_ViewEssentialByID_FullMethodName          = "/Scailo.InfrastructuresService/ViewEssentialByID"
+	InfrastructuresService_ViewEssentialByUUID_FullMethodName        = "/Scailo.InfrastructuresService/ViewEssentialByUUID"
+	InfrastructuresService_ViewFromIDs_FullMethodName                = "/Scailo.InfrastructuresService/ViewFromIDs"
+	InfrastructuresService_ViewFromUUIDs_FullMethodName              = "/Scailo.InfrastructuresService/ViewFromUUIDs"
+	InfrastructuresService_ViewAll_FullMethodName                    = "/Scailo.InfrastructuresService/ViewAll"
+	InfrastructuresService_ViewWithPagination_FullMethodName         = "/Scailo.InfrastructuresService/ViewWithPagination"
+	InfrastructuresService_ViewVendorInvoiceUnitPrice_FullMethodName = "/Scailo.InfrastructuresService/ViewVendorInvoiceUnitPrice"
+	InfrastructuresService_DownloadQCReportByID_FullMethodName       = "/Scailo.InfrastructuresService/DownloadQCReportByID"
+	InfrastructuresService_DownloadQCReportByUUID_FullMethodName     = "/Scailo.InfrastructuresService/DownloadQCReportByUUID"
+	InfrastructuresService_DownloadLabelByID_FullMethodName          = "/Scailo.InfrastructuresService/DownloadLabelByID"
+	InfrastructuresService_DownloadLabelByUUID_FullMethodName        = "/Scailo.InfrastructuresService/DownloadLabelByUUID"
+	InfrastructuresService_ViewInventoryInteractions_FullMethodName  = "/Scailo.InfrastructuresService/ViewInventoryInteractions"
+	InfrastructuresService_SearchAll_FullMethodName                  = "/Scailo.InfrastructuresService/SearchAll"
+	InfrastructuresService_Filter_FullMethodName                     = "/Scailo.InfrastructuresService/Filter"
+	InfrastructuresService_Count_FullMethodName                      = "/Scailo.InfrastructuresService/Count"
+	InfrastructuresService_DownloadAsCSV_FullMethodName              = "/Scailo.InfrastructuresService/DownloadAsCSV"
+	InfrastructuresService_DownloadImportTemplate_FullMethodName     = "/Scailo.InfrastructuresService/DownloadImportTemplate"
+	InfrastructuresService_ImportFromCSV_FullMethodName              = "/Scailo.InfrastructuresService/ImportFromCSV"
 )
 
 // InfrastructuresServiceClient is the client API for InfrastructuresService service.
@@ -105,6 +106,8 @@ type InfrastructuresServiceClient interface {
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*InfrastructuresList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *InfrastructuresServicePaginationReq, opts ...grpc.CallOption) (*InfrastructuresServicePaginationResponse, error)
+	// View the unit price at which the inventory item was purchased (the corresponding vendor invoice price)
+	ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error)
 	// Download QC Report with the given Identifier
 	DownloadQCReportByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StandardFile, error)
 	// Download QC Report with the given IdentifierUUID (can be used to allow public downloads)
@@ -359,6 +362,16 @@ func (c *infrastructuresServiceClient) ViewWithPagination(ctx context.Context, i
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InfrastructuresServicePaginationResponse)
 	err := c.cc.Invoke(ctx, InfrastructuresService_ViewWithPagination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *infrastructuresServiceClient) ViewVendorInvoiceUnitPrice(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, InfrastructuresService_ViewVendorInvoiceUnitPrice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
