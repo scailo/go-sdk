@@ -2134,7 +2134,7 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x1dPROJECT_SORT_KEY_COMPLETED_ON\x10\x06\x12!\n" +
 	"\x1dPROJECT_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12%\n" +
-	"!PROJECT_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xce\x14\n" +
+	"!PROJECT_SORT_KEY_FINAL_REF_NUMBER\x10\v2\x90\x16\n" +
 	"\x0fProjectsService\x12J\n" +
 	"\x06Create\x12$.Scailo.ProjectsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.ProjectsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2160,7 +2160,8 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x13ViewProjectContacts\x12\x16.Scailo.IdentifierUUID\x1a\x1b.Scailo.ProjectContactsList\x12/\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x0f.Scailo.Project\x125\n" +
 	"\n" +
-	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x0f.Scailo.Project\x128\n" +
+	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x0f.Scailo.Project\x12=\n" +
+	"\x11ViewByReferenceID\x12\x17.Scailo.SimpleSearchReq\x1a\x0f.Scailo.Project\x128\n" +
 	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x0f.Scailo.Project\x12>\n" +
 	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x0f.Scailo.Project\x12<\n" +
 	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x14.Scailo.ProjectsList\x125\n" +
@@ -2172,7 +2173,9 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x06Filter\x12 .Scailo.ProjectsServiceFilterReq\x1a\x14.Scailo.ProjectsList\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12?\n" +
 	"\x05Count\x12\x1f.Scailo.ProjectsServiceCountReq\x1a\x15.Scailo.CountResponse\x12G\n" +
-	"\rDownloadAsCSV\x12 .Scailo.ProjectsServiceFilterReq\x1a\x14.Scailo.StandardFileBm\n" +
+	"\rDownloadAsCSV\x12 .Scailo.ProjectsServiceFilterReq\x1a\x14.Scailo.StandardFile\x12=\n" +
+	"\x16DownloadImportTemplate\x12\r.Scailo.Empty\x1a\x14.Scailo.StandardFile\x12B\n" +
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBm\n" +
 	"\x0ecom.scailo.sdkB\x13ProjectsScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
 	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -2220,12 +2223,15 @@ var file_projects_scailo_proto_goTypes = []any{
 	(*IdentifierWithUserComment)(nil),           // 25: Scailo.IdentifierWithUserComment
 	(*Identifier)(nil),                          // 26: Scailo.Identifier
 	(*IdentifierUUID)(nil),                      // 27: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                     // 28: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                        // 29: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),             // 30: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                  // 31: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                       // 32: Scailo.CountResponse
+	(*SimpleSearchReq)(nil),                     // 28: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                     // 29: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                        // 30: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),             // 31: Scailo.CountInSLCStatusRequest
+	(*Empty)(nil),                               // 32: Scailo.Empty
 	(*StandardFile)(nil),                        // 33: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                  // 34: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                       // 35: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                 // 36: Scailo.IdentifierUUIDsList
 }
 var file_projects_scailo_proto_depIdxs = []int32{
 	14, // 0: Scailo.ProjectsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2279,55 +2285,61 @@ var file_projects_scailo_proto_depIdxs = []int32{
 	27, // 48: Scailo.ProjectsService.ViewProjectContacts:input_type -> Scailo.IdentifierUUID
 	26, // 49: Scailo.ProjectsService.ViewByID:input_type -> Scailo.Identifier
 	27, // 50: Scailo.ProjectsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	26, // 51: Scailo.ProjectsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	27, // 52: Scailo.ProjectsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	28, // 53: Scailo.ProjectsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	29, // 54: Scailo.ProjectsService.ViewAll:input_type -> Scailo.ActiveStatus
-	27, // 55: Scailo.ProjectsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	6,  // 56: Scailo.ProjectsService.ViewWithPagination:input_type -> Scailo.ProjectsServicePaginationReq
-	27, // 57: Scailo.ProjectsService.ViewStatistics:input_type -> Scailo.IdentifierUUID
-	10, // 58: Scailo.ProjectsService.SearchAll:input_type -> Scailo.ProjectsServiceSearchAllReq
-	8,  // 59: Scailo.ProjectsService.Filter:input_type -> Scailo.ProjectsServiceFilterReq
-	30, // 60: Scailo.ProjectsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	9,  // 61: Scailo.ProjectsService.Count:input_type -> Scailo.ProjectsServiceCountReq
-	8,  // 62: Scailo.ProjectsService.DownloadAsCSV:input_type -> Scailo.ProjectsServiceFilterReq
-	31, // 63: Scailo.ProjectsService.Create:output_type -> Scailo.IdentifierResponse
-	31, // 64: Scailo.ProjectsService.Draft:output_type -> Scailo.IdentifierResponse
-	31, // 65: Scailo.ProjectsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	31, // 66: Scailo.ProjectsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	31, // 67: Scailo.ProjectsService.Verify:output_type -> Scailo.IdentifierResponse
-	31, // 68: Scailo.ProjectsService.Approve:output_type -> Scailo.IdentifierResponse
-	31, // 69: Scailo.ProjectsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	31, // 70: Scailo.ProjectsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	31, // 71: Scailo.ProjectsService.Halt:output_type -> Scailo.IdentifierResponse
-	31, // 72: Scailo.ProjectsService.Discard:output_type -> Scailo.IdentifierResponse
-	31, // 73: Scailo.ProjectsService.Restore:output_type -> Scailo.IdentifierResponse
-	31, // 74: Scailo.ProjectsService.Complete:output_type -> Scailo.IdentifierResponse
-	31, // 75: Scailo.ProjectsService.Repeat:output_type -> Scailo.IdentifierResponse
-	31, // 76: Scailo.ProjectsService.Reopen:output_type -> Scailo.IdentifierResponse
-	31, // 77: Scailo.ProjectsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	31, // 78: Scailo.ProjectsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	31, // 79: Scailo.ProjectsService.AddProjectContact:output_type -> Scailo.IdentifierResponse
-	31, // 80: Scailo.ProjectsService.ApproveProjectContact:output_type -> Scailo.IdentifierResponse
-	31, // 81: Scailo.ProjectsService.DeleteProjectContact:output_type -> Scailo.IdentifierResponse
-	12, // 82: Scailo.ProjectsService.ViewProjectContactByID:output_type -> Scailo.ProjectContact
-	13, // 83: Scailo.ProjectsService.ViewProjectContacts:output_type -> Scailo.ProjectContactsList
-	3,  // 84: Scailo.ProjectsService.ViewByID:output_type -> Scailo.Project
-	3,  // 85: Scailo.ProjectsService.ViewByUUID:output_type -> Scailo.Project
-	3,  // 86: Scailo.ProjectsService.ViewEssentialByID:output_type -> Scailo.Project
-	3,  // 87: Scailo.ProjectsService.ViewEssentialByUUID:output_type -> Scailo.Project
-	4,  // 88: Scailo.ProjectsService.ViewFromIDs:output_type -> Scailo.ProjectsList
-	4,  // 89: Scailo.ProjectsService.ViewAll:output_type -> Scailo.ProjectsList
-	4,  // 90: Scailo.ProjectsService.ViewAllForEntityUUID:output_type -> Scailo.ProjectsList
-	7,  // 91: Scailo.ProjectsService.ViewWithPagination:output_type -> Scailo.ProjectsServicePaginationResponse
-	5,  // 92: Scailo.ProjectsService.ViewStatistics:output_type -> Scailo.ProjectStatistics
-	4,  // 93: Scailo.ProjectsService.SearchAll:output_type -> Scailo.ProjectsList
-	4,  // 94: Scailo.ProjectsService.Filter:output_type -> Scailo.ProjectsList
-	32, // 95: Scailo.ProjectsService.CountInStatus:output_type -> Scailo.CountResponse
-	32, // 96: Scailo.ProjectsService.Count:output_type -> Scailo.CountResponse
-	33, // 97: Scailo.ProjectsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	63, // [63:98] is the sub-list for method output_type
-	28, // [28:63] is the sub-list for method input_type
+	28, // 51: Scailo.ProjectsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	26, // 52: Scailo.ProjectsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	27, // 53: Scailo.ProjectsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	29, // 54: Scailo.ProjectsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	30, // 55: Scailo.ProjectsService.ViewAll:input_type -> Scailo.ActiveStatus
+	27, // 56: Scailo.ProjectsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	6,  // 57: Scailo.ProjectsService.ViewWithPagination:input_type -> Scailo.ProjectsServicePaginationReq
+	27, // 58: Scailo.ProjectsService.ViewStatistics:input_type -> Scailo.IdentifierUUID
+	10, // 59: Scailo.ProjectsService.SearchAll:input_type -> Scailo.ProjectsServiceSearchAllReq
+	8,  // 60: Scailo.ProjectsService.Filter:input_type -> Scailo.ProjectsServiceFilterReq
+	31, // 61: Scailo.ProjectsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	9,  // 62: Scailo.ProjectsService.Count:input_type -> Scailo.ProjectsServiceCountReq
+	8,  // 63: Scailo.ProjectsService.DownloadAsCSV:input_type -> Scailo.ProjectsServiceFilterReq
+	32, // 64: Scailo.ProjectsService.DownloadImportTemplate:input_type -> Scailo.Empty
+	33, // 65: Scailo.ProjectsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	34, // 66: Scailo.ProjectsService.Create:output_type -> Scailo.IdentifierResponse
+	34, // 67: Scailo.ProjectsService.Draft:output_type -> Scailo.IdentifierResponse
+	34, // 68: Scailo.ProjectsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	34, // 69: Scailo.ProjectsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	34, // 70: Scailo.ProjectsService.Verify:output_type -> Scailo.IdentifierResponse
+	34, // 71: Scailo.ProjectsService.Approve:output_type -> Scailo.IdentifierResponse
+	34, // 72: Scailo.ProjectsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	34, // 73: Scailo.ProjectsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	34, // 74: Scailo.ProjectsService.Halt:output_type -> Scailo.IdentifierResponse
+	34, // 75: Scailo.ProjectsService.Discard:output_type -> Scailo.IdentifierResponse
+	34, // 76: Scailo.ProjectsService.Restore:output_type -> Scailo.IdentifierResponse
+	34, // 77: Scailo.ProjectsService.Complete:output_type -> Scailo.IdentifierResponse
+	34, // 78: Scailo.ProjectsService.Repeat:output_type -> Scailo.IdentifierResponse
+	34, // 79: Scailo.ProjectsService.Reopen:output_type -> Scailo.IdentifierResponse
+	34, // 80: Scailo.ProjectsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	34, // 81: Scailo.ProjectsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	34, // 82: Scailo.ProjectsService.AddProjectContact:output_type -> Scailo.IdentifierResponse
+	34, // 83: Scailo.ProjectsService.ApproveProjectContact:output_type -> Scailo.IdentifierResponse
+	34, // 84: Scailo.ProjectsService.DeleteProjectContact:output_type -> Scailo.IdentifierResponse
+	12, // 85: Scailo.ProjectsService.ViewProjectContactByID:output_type -> Scailo.ProjectContact
+	13, // 86: Scailo.ProjectsService.ViewProjectContacts:output_type -> Scailo.ProjectContactsList
+	3,  // 87: Scailo.ProjectsService.ViewByID:output_type -> Scailo.Project
+	3,  // 88: Scailo.ProjectsService.ViewByUUID:output_type -> Scailo.Project
+	3,  // 89: Scailo.ProjectsService.ViewByReferenceID:output_type -> Scailo.Project
+	3,  // 90: Scailo.ProjectsService.ViewEssentialByID:output_type -> Scailo.Project
+	3,  // 91: Scailo.ProjectsService.ViewEssentialByUUID:output_type -> Scailo.Project
+	4,  // 92: Scailo.ProjectsService.ViewFromIDs:output_type -> Scailo.ProjectsList
+	4,  // 93: Scailo.ProjectsService.ViewAll:output_type -> Scailo.ProjectsList
+	4,  // 94: Scailo.ProjectsService.ViewAllForEntityUUID:output_type -> Scailo.ProjectsList
+	7,  // 95: Scailo.ProjectsService.ViewWithPagination:output_type -> Scailo.ProjectsServicePaginationResponse
+	5,  // 96: Scailo.ProjectsService.ViewStatistics:output_type -> Scailo.ProjectStatistics
+	4,  // 97: Scailo.ProjectsService.SearchAll:output_type -> Scailo.ProjectsList
+	4,  // 98: Scailo.ProjectsService.Filter:output_type -> Scailo.ProjectsList
+	35, // 99: Scailo.ProjectsService.CountInStatus:output_type -> Scailo.CountResponse
+	35, // 100: Scailo.ProjectsService.Count:output_type -> Scailo.CountResponse
+	33, // 101: Scailo.ProjectsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	33, // 102: Scailo.ProjectsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	36, // 103: Scailo.ProjectsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	66, // [66:104] is the sub-list for method output_type
+	28, // [28:66] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
 	28, // [28:28] is the sub-list for extension extendee
 	0,  // [0:28] is the sub-list for field type_name

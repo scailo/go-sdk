@@ -41,6 +41,7 @@ const (
 	ProjectsService_ViewProjectContacts_FullMethodName    = "/Scailo.ProjectsService/ViewProjectContacts"
 	ProjectsService_ViewByID_FullMethodName               = "/Scailo.ProjectsService/ViewByID"
 	ProjectsService_ViewByUUID_FullMethodName             = "/Scailo.ProjectsService/ViewByUUID"
+	ProjectsService_ViewByReferenceID_FullMethodName      = "/Scailo.ProjectsService/ViewByReferenceID"
 	ProjectsService_ViewEssentialByID_FullMethodName      = "/Scailo.ProjectsService/ViewEssentialByID"
 	ProjectsService_ViewEssentialByUUID_FullMethodName    = "/Scailo.ProjectsService/ViewEssentialByUUID"
 	ProjectsService_ViewFromIDs_FullMethodName            = "/Scailo.ProjectsService/ViewFromIDs"
@@ -53,6 +54,8 @@ const (
 	ProjectsService_CountInStatus_FullMethodName          = "/Scailo.ProjectsService/CountInStatus"
 	ProjectsService_Count_FullMethodName                  = "/Scailo.ProjectsService/Count"
 	ProjectsService_DownloadAsCSV_FullMethodName          = "/Scailo.ProjectsService/DownloadAsCSV"
+	ProjectsService_DownloadImportTemplate_FullMethodName = "/Scailo.ProjectsService/DownloadImportTemplate"
+	ProjectsService_ImportFromCSV_FullMethodName          = "/Scailo.ProjectsService/ImportFromCSV"
 )
 
 // ProjectsServiceClient is the client API for ProjectsService service.
@@ -170,6 +173,8 @@ type ProjectsServiceClient interface {
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Project, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Project, error)
+	// View by Reference ID (returns the latest record in case of duplicates)
+	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Project, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Project, error)
 	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
@@ -195,6 +200,17 @@ type ProjectsServiceClient interface {
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records
 	DownloadAsCSV(ctx context.Context, in *ProjectsServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
+	// Download the CSV template that could be used to upload records
+	DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
+	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 
 type projectsServiceClient struct {
@@ -435,6 +451,16 @@ func (c *projectsServiceClient) ViewByUUID(ctx context.Context, in *IdentifierUU
 	return out, nil
 }
 
+func (c *projectsServiceClient) ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Project, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Project)
+	err := c.cc.Invoke(ctx, ProjectsService_ViewByReferenceID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *projectsServiceClient) ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Project, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Project)
@@ -549,6 +575,26 @@ func (c *projectsServiceClient) DownloadAsCSV(ctx context.Context, in *ProjectsS
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StandardFile)
 	err := c.cc.Invoke(ctx, ProjectsService_DownloadAsCSV_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectsServiceClient) DownloadImportTemplate(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, ProjectsService_DownloadImportTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectsServiceClient) ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierUUIDsList)
+	err := c.cc.Invoke(ctx, ProjectsService_ImportFromCSV_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
