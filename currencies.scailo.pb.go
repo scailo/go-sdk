@@ -1477,7 +1477,7 @@ const file_currencies_scailo_proto_rawDesc = "" +
 	"\"CURRENCY_SORT_KEY_APPROVER_ROLE_ID\x10\x05\x12\x1a\n" +
 	"\x16CURRENCY_SORT_KEY_NAME\x10\n" +
 	"\x12\x1c\n" +
-	"\x18CURRENCY_SORT_KEY_SYMBOL\x10\v2\x99\x0f\n" +
+	"\x18CURRENCY_SORT_KEY_SYMBOL\x10\v2\xd4\x0f\n" +
 	"\x11CurrenciesService\x12L\n" +
 	"\x06Create\x12&.Scailo.CurrenciesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x05Draft\x12&.Scailo.CurrenciesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -1497,7 +1497,8 @@ const file_currencies_scailo_proto_rawDesc = "" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x10.Scailo.Currency\x129\n" +
 	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x10.Scailo.Currency\x12?\n" +
 	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x10.Scailo.Currency\x12>\n" +
-	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x16.Scailo.CurrenciesList\x127\n" +
+	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x16.Scailo.CurrenciesList\x129\n" +
+	"\fViewBySymbol\x12\x17.Scailo.SimpleSearchReq\x1a\x10.Scailo.Currency\x127\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x16.Scailo.CurrenciesList\x12F\n" +
 	"\x14ViewAllForEntityUUID\x12\x16.Scailo.IdentifierUUID\x1a\x16.Scailo.CurrenciesList\x12i\n" +
 	"\x12ViewWithPagination\x12&.Scailo.CurrenciesServicePaginationReq\x1a+.Scailo.CurrenciesServicePaginationResponse\x12J\n" +
@@ -1546,12 +1547,13 @@ var file_currencies_scailo_proto_goTypes = []any{
 	(*Identifier)(nil),                          // 17: Scailo.Identifier
 	(*IdentifierUUID)(nil),                      // 18: Scailo.IdentifierUUID
 	(*IdentifiersList)(nil),                     // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                        // 20: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),             // 21: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                        // 22: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                  // 23: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                       // 24: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                 // 25: Scailo.IdentifierUUIDsList
+	(*SimpleSearchReq)(nil),                     // 20: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                        // 21: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),             // 22: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                        // 23: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                  // 24: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                       // 25: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                 // 26: Scailo.IdentifierUUIDsList
 }
 var file_currencies_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.Currency.metadata:type_name -> Scailo.EmployeeMetadata
@@ -1591,43 +1593,45 @@ var file_currencies_scailo_proto_depIdxs = []int32{
 	17, // 34: Scailo.CurrenciesService.ViewEssentialByID:input_type -> Scailo.Identifier
 	18, // 35: Scailo.CurrenciesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
 	19, // 36: Scailo.CurrenciesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 37: Scailo.CurrenciesService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 38: Scailo.CurrenciesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 39: Scailo.CurrenciesService.ViewWithPagination:input_type -> Scailo.CurrenciesServicePaginationReq
-	9,  // 40: Scailo.CurrenciesService.SearchAll:input_type -> Scailo.CurrenciesServiceSearchAllReq
-	7,  // 41: Scailo.CurrenciesService.Filter:input_type -> Scailo.CurrenciesServiceFilterReq
-	21, // 42: Scailo.CurrenciesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 43: Scailo.CurrenciesService.Count:input_type -> Scailo.CurrenciesServiceCountReq
-	7,  // 44: Scailo.CurrenciesService.DownloadAsCSV:input_type -> Scailo.CurrenciesServiceFilterReq
-	22, // 45: Scailo.CurrenciesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	23, // 46: Scailo.CurrenciesService.Create:output_type -> Scailo.IdentifierResponse
-	23, // 47: Scailo.CurrenciesService.Draft:output_type -> Scailo.IdentifierResponse
-	23, // 48: Scailo.CurrenciesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 49: Scailo.CurrenciesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	23, // 50: Scailo.CurrenciesService.Verify:output_type -> Scailo.IdentifierResponse
-	23, // 51: Scailo.CurrenciesService.Approve:output_type -> Scailo.IdentifierResponse
-	23, // 52: Scailo.CurrenciesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	23, // 53: Scailo.CurrenciesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 54: Scailo.CurrenciesService.Halt:output_type -> Scailo.IdentifierResponse
-	23, // 55: Scailo.CurrenciesService.Discard:output_type -> Scailo.IdentifierResponse
-	23, // 56: Scailo.CurrenciesService.Restore:output_type -> Scailo.IdentifierResponse
-	23, // 57: Scailo.CurrenciesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 58: Scailo.CurrenciesService.ViewByID:output_type -> Scailo.Currency
-	3,  // 59: Scailo.CurrenciesService.ViewByUUID:output_type -> Scailo.Currency
-	3,  // 60: Scailo.CurrenciesService.ViewEssentialByID:output_type -> Scailo.Currency
-	3,  // 61: Scailo.CurrenciesService.ViewEssentialByUUID:output_type -> Scailo.Currency
-	4,  // 62: Scailo.CurrenciesService.ViewFromIDs:output_type -> Scailo.CurrenciesList
-	4,  // 63: Scailo.CurrenciesService.ViewAll:output_type -> Scailo.CurrenciesList
-	4,  // 64: Scailo.CurrenciesService.ViewAllForEntityUUID:output_type -> Scailo.CurrenciesList
-	6,  // 65: Scailo.CurrenciesService.ViewWithPagination:output_type -> Scailo.CurrenciesServicePaginationResponse
-	4,  // 66: Scailo.CurrenciesService.SearchAll:output_type -> Scailo.CurrenciesList
-	4,  // 67: Scailo.CurrenciesService.Filter:output_type -> Scailo.CurrenciesList
-	24, // 68: Scailo.CurrenciesService.CountInStatus:output_type -> Scailo.CountResponse
-	24, // 69: Scailo.CurrenciesService.Count:output_type -> Scailo.CountResponse
-	22, // 70: Scailo.CurrenciesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	25, // 71: Scailo.CurrenciesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	46, // [46:72] is the sub-list for method output_type
-	20, // [20:46] is the sub-list for method input_type
+	20, // 37: Scailo.CurrenciesService.ViewBySymbol:input_type -> Scailo.SimpleSearchReq
+	21, // 38: Scailo.CurrenciesService.ViewAll:input_type -> Scailo.ActiveStatus
+	18, // 39: Scailo.CurrenciesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 40: Scailo.CurrenciesService.ViewWithPagination:input_type -> Scailo.CurrenciesServicePaginationReq
+	9,  // 41: Scailo.CurrenciesService.SearchAll:input_type -> Scailo.CurrenciesServiceSearchAllReq
+	7,  // 42: Scailo.CurrenciesService.Filter:input_type -> Scailo.CurrenciesServiceFilterReq
+	22, // 43: Scailo.CurrenciesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 44: Scailo.CurrenciesService.Count:input_type -> Scailo.CurrenciesServiceCountReq
+	7,  // 45: Scailo.CurrenciesService.DownloadAsCSV:input_type -> Scailo.CurrenciesServiceFilterReq
+	23, // 46: Scailo.CurrenciesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	24, // 47: Scailo.CurrenciesService.Create:output_type -> Scailo.IdentifierResponse
+	24, // 48: Scailo.CurrenciesService.Draft:output_type -> Scailo.IdentifierResponse
+	24, // 49: Scailo.CurrenciesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 50: Scailo.CurrenciesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	24, // 51: Scailo.CurrenciesService.Verify:output_type -> Scailo.IdentifierResponse
+	24, // 52: Scailo.CurrenciesService.Approve:output_type -> Scailo.IdentifierResponse
+	24, // 53: Scailo.CurrenciesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	24, // 54: Scailo.CurrenciesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 55: Scailo.CurrenciesService.Halt:output_type -> Scailo.IdentifierResponse
+	24, // 56: Scailo.CurrenciesService.Discard:output_type -> Scailo.IdentifierResponse
+	24, // 57: Scailo.CurrenciesService.Restore:output_type -> Scailo.IdentifierResponse
+	24, // 58: Scailo.CurrenciesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	3,  // 59: Scailo.CurrenciesService.ViewByID:output_type -> Scailo.Currency
+	3,  // 60: Scailo.CurrenciesService.ViewByUUID:output_type -> Scailo.Currency
+	3,  // 61: Scailo.CurrenciesService.ViewEssentialByID:output_type -> Scailo.Currency
+	3,  // 62: Scailo.CurrenciesService.ViewEssentialByUUID:output_type -> Scailo.Currency
+	4,  // 63: Scailo.CurrenciesService.ViewFromIDs:output_type -> Scailo.CurrenciesList
+	3,  // 64: Scailo.CurrenciesService.ViewBySymbol:output_type -> Scailo.Currency
+	4,  // 65: Scailo.CurrenciesService.ViewAll:output_type -> Scailo.CurrenciesList
+	4,  // 66: Scailo.CurrenciesService.ViewAllForEntityUUID:output_type -> Scailo.CurrenciesList
+	6,  // 67: Scailo.CurrenciesService.ViewWithPagination:output_type -> Scailo.CurrenciesServicePaginationResponse
+	4,  // 68: Scailo.CurrenciesService.SearchAll:output_type -> Scailo.CurrenciesList
+	4,  // 69: Scailo.CurrenciesService.Filter:output_type -> Scailo.CurrenciesList
+	25, // 70: Scailo.CurrenciesService.CountInStatus:output_type -> Scailo.CountResponse
+	25, // 71: Scailo.CurrenciesService.Count:output_type -> Scailo.CountResponse
+	23, // 72: Scailo.CurrenciesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	26, // 73: Scailo.CurrenciesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	47, // [47:74] is the sub-list for method output_type
+	20, // [20:47] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name

@@ -35,6 +35,7 @@ const (
 	CurrenciesService_ViewEssentialByID_FullMethodName    = "/Scailo.CurrenciesService/ViewEssentialByID"
 	CurrenciesService_ViewEssentialByUUID_FullMethodName  = "/Scailo.CurrenciesService/ViewEssentialByUUID"
 	CurrenciesService_ViewFromIDs_FullMethodName          = "/Scailo.CurrenciesService/ViewFromIDs"
+	CurrenciesService_ViewBySymbol_FullMethodName         = "/Scailo.CurrenciesService/ViewBySymbol"
 	CurrenciesService_ViewAll_FullMethodName              = "/Scailo.CurrenciesService/ViewAll"
 	CurrenciesService_ViewAllForEntityUUID_FullMethodName = "/Scailo.CurrenciesService/ViewAllForEntityUUID"
 	CurrenciesService_ViewWithPagination_FullMethodName   = "/Scailo.CurrenciesService/ViewWithPagination"
@@ -142,6 +143,8 @@ type CurrenciesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Currency, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*CurrenciesList, error)
+	// View by currency's code (logs aren't returned)
+	ViewBySymbol(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Currency, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*CurrenciesList, error)
 	// Returns all records belonging to a specific organization/entity UUID.
@@ -342,6 +345,16 @@ func (c *currenciesServiceClient) ViewFromIDs(ctx context.Context, in *Identifie
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CurrenciesList)
 	err := c.cc.Invoke(ctx, CurrenciesService_ViewFromIDs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currenciesServiceClient) ViewBySymbol(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Currency, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Currency)
+	err := c.cc.Invoke(ctx, CurrenciesService_ViewBySymbol_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
