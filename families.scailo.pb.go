@@ -543,22 +543,14 @@ type FamiliesServiceUpdateRequest struct {
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
 	// The name of the family that is to be used on prints
 	PrintName string `protobuf:"bytes,11,opt,name=print_name,json=printName,proto3" json:"print_name,omitempty"`
-	// The unique code that represents the family (can be updated only prior to the first approval)
-	Code string `protobuf:"bytes,12,opt,name=code,proto3" json:"code,omitempty"`
 	// The description of the family
 	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The type of the family (can be updated only prior to the first approval)
-	FamilyType FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
 	// The HSN/SAC code of the family
 	HsnSacCode string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
 	// Stores the ID of the associated unit of material
 	UomId uint64 `protobuf:"varint,17,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
 	// Stores the unit quantity
 	UnitQuantity uint64 `protobuf:"varint,18,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the parent family (can be updated only prior to the first approval)
-	ParentId uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Stores if the family is a leaf family (can be updated only prior to the first approval)
-	IsLeaf bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
 	// Stores the ID of the ledger
 	LedgerId uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
 	// Stores the ID of the tax group
@@ -647,25 +639,11 @@ func (x *FamiliesServiceUpdateRequest) GetPrintName() string {
 	return ""
 }
 
-func (x *FamiliesServiceUpdateRequest) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
 func (x *FamiliesServiceUpdateRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
-}
-
-func (x *FamiliesServiceUpdateRequest) GetFamilyType() FAMILY_TYPE {
-	if x != nil {
-		return x.FamilyType
-	}
-	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceUpdateRequest) GetHsnSacCode() string {
@@ -687,20 +665,6 @@ func (x *FamiliesServiceUpdateRequest) GetUnitQuantity() uint64 {
 		return x.UnitQuantity
 	}
 	return 0
-}
-
-func (x *FamiliesServiceUpdateRequest) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
-	}
-	return 0
-}
-
-func (x *FamiliesServiceUpdateRequest) GetIsLeaf() bool {
-	if x != nil {
-		return x.IsLeaf
-	}
-	return false
 }
 
 func (x *FamiliesServiceUpdateRequest) GetLedgerId() uint64 {
@@ -743,6 +707,97 @@ func (x *FamiliesServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequ
 		return x.FormData
 	}
 	return nil
+}
+
+// Describes the parameters necessary to update the identity of a family
+type FamiliesServiceUpdateIdentityRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// The ID of the record that needs to be updated
+	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// The unique code that represents the family (can be updated only prior to the first approval)
+	Code string `protobuf:"bytes,12,opt,name=code,proto3" json:"code,omitempty"`
+	// The type of the family (can be updated only prior to the first approval)
+	FamilyType FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
+	// Stores the ID of the parent family (can be updated only prior to the first approval)
+	ParentId uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	// Stores if the family is a leaf family (can be updated only prior to the first approval)
+	IsLeaf        bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) Reset() {
+	*x = FamiliesServiceUpdateIdentityRequest{}
+	mi := &file_families_scailo_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FamiliesServiceUpdateIdentityRequest) ProtoMessage() {}
+
+func (x *FamiliesServiceUpdateIdentityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_families_scailo_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FamiliesServiceUpdateIdentityRequest.ProtoReflect.Descriptor instead.
+func (*FamiliesServiceUpdateIdentityRequest) Descriptor() ([]byte, []int) {
+	return file_families_scailo_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetFamilyType() FAMILY_TYPE {
+	if x != nil {
+		return x.FamilyType
+	}
+	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetParentId() uint64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *FamiliesServiceUpdateIdentityRequest) GetIsLeaf() bool {
+	if x != nil {
+		return x.IsLeaf
+	}
+	return false
 }
 
 // Describes the parameters that are part of a family structure
@@ -804,7 +859,7 @@ type Family struct {
 
 func (x *Family) Reset() {
 	*x = Family{}
-	mi := &file_families_scailo_proto_msgTypes[3]
+	mi := &file_families_scailo_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -816,7 +871,7 @@ func (x *Family) String() string {
 func (*Family) ProtoMessage() {}
 
 func (x *Family) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[3]
+	mi := &file_families_scailo_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,7 +884,7 @@ func (x *Family) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Family.ProtoReflect.Descriptor instead.
 func (*Family) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{3}
+	return file_families_scailo_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Family) GetEntityUuid() string {
@@ -1004,7 +1059,7 @@ type FamiliesList struct {
 
 func (x *FamiliesList) Reset() {
 	*x = FamiliesList{}
-	mi := &file_families_scailo_proto_msgTypes[4]
+	mi := &file_families_scailo_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1016,7 +1071,7 @@ func (x *FamiliesList) String() string {
 func (*FamiliesList) ProtoMessage() {}
 
 func (x *FamiliesList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[4]
+	mi := &file_families_scailo_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1029,7 +1084,7 @@ func (x *FamiliesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamiliesList.ProtoReflect.Descriptor instead.
 func (*FamiliesList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{4}
+	return file_families_scailo_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *FamiliesList) GetList() []*Family {
@@ -1086,7 +1141,7 @@ type FamiliesServicePaginationReq struct {
 
 func (x *FamiliesServicePaginationReq) Reset() {
 	*x = FamiliesServicePaginationReq{}
-	mi := &file_families_scailo_proto_msgTypes[5]
+	mi := &file_families_scailo_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1098,7 +1153,7 @@ func (x *FamiliesServicePaginationReq) String() string {
 func (*FamiliesServicePaginationReq) ProtoMessage() {}
 
 func (x *FamiliesServicePaginationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[5]
+	mi := &file_families_scailo_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1111,7 +1166,7 @@ func (x *FamiliesServicePaginationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamiliesServicePaginationReq.ProtoReflect.Descriptor instead.
 func (*FamiliesServicePaginationReq) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{5}
+	return file_families_scailo_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *FamiliesServicePaginationReq) GetIsActive() BOOL_FILTER {
@@ -1179,7 +1234,7 @@ type FamiliesServicePaginationResponse struct {
 
 func (x *FamiliesServicePaginationResponse) Reset() {
 	*x = FamiliesServicePaginationResponse{}
-	mi := &file_families_scailo_proto_msgTypes[6]
+	mi := &file_families_scailo_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1191,7 +1246,7 @@ func (x *FamiliesServicePaginationResponse) String() string {
 func (*FamiliesServicePaginationResponse) ProtoMessage() {}
 
 func (x *FamiliesServicePaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[6]
+	mi := &file_families_scailo_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,7 +1259,7 @@ func (x *FamiliesServicePaginationResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use FamiliesServicePaginationResponse.ProtoReflect.Descriptor instead.
 func (*FamiliesServicePaginationResponse) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{6}
+	return file_families_scailo_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *FamiliesServicePaginationResponse) GetCount() uint64 {
@@ -1410,7 +1465,7 @@ type FamiliesServiceFilterReq struct {
 
 func (x *FamiliesServiceFilterReq) Reset() {
 	*x = FamiliesServiceFilterReq{}
-	mi := &file_families_scailo_proto_msgTypes[7]
+	mi := &file_families_scailo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1477,7 @@ func (x *FamiliesServiceFilterReq) String() string {
 func (*FamiliesServiceFilterReq) ProtoMessage() {}
 
 func (x *FamiliesServiceFilterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[7]
+	mi := &file_families_scailo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1490,7 @@ func (x *FamiliesServiceFilterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamiliesServiceFilterReq.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceFilterReq) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{7}
+	return file_families_scailo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *FamiliesServiceFilterReq) GetIsActive() BOOL_FILTER {
@@ -1807,7 +1862,7 @@ type FamiliesServiceCountReq struct {
 
 func (x *FamiliesServiceCountReq) Reset() {
 	*x = FamiliesServiceCountReq{}
-	mi := &file_families_scailo_proto_msgTypes[8]
+	mi := &file_families_scailo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1819,7 +1874,7 @@ func (x *FamiliesServiceCountReq) String() string {
 func (*FamiliesServiceCountReq) ProtoMessage() {}
 
 func (x *FamiliesServiceCountReq) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[8]
+	mi := &file_families_scailo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1832,7 +1887,7 @@ func (x *FamiliesServiceCountReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamiliesServiceCountReq.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceCountReq) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{8}
+	return file_families_scailo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *FamiliesServiceCountReq) GetIsActive() BOOL_FILTER {
@@ -2112,7 +2167,7 @@ type FamiliesServiceSearchAllReq struct {
 
 func (x *FamiliesServiceSearchAllReq) Reset() {
 	*x = FamiliesServiceSearchAllReq{}
-	mi := &file_families_scailo_proto_msgTypes[9]
+	mi := &file_families_scailo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2124,7 +2179,7 @@ func (x *FamiliesServiceSearchAllReq) String() string {
 func (*FamiliesServiceSearchAllReq) ProtoMessage() {}
 
 func (x *FamiliesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[9]
+	mi := &file_families_scailo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2137,7 +2192,7 @@ func (x *FamiliesServiceSearchAllReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamiliesServiceSearchAllReq.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceSearchAllReq) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{9}
+	return file_families_scailo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *FamiliesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
@@ -2244,7 +2299,7 @@ type FilterFamiliesReqForIdentifier struct {
 
 func (x *FilterFamiliesReqForIdentifier) Reset() {
 	*x = FilterFamiliesReqForIdentifier{}
-	mi := &file_families_scailo_proto_msgTypes[10]
+	mi := &file_families_scailo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2256,7 +2311,7 @@ func (x *FilterFamiliesReqForIdentifier) String() string {
 func (*FilterFamiliesReqForIdentifier) ProtoMessage() {}
 
 func (x *FilterFamiliesReqForIdentifier) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[10]
+	mi := &file_families_scailo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2269,7 +2324,7 @@ func (x *FilterFamiliesReqForIdentifier) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterFamiliesReqForIdentifier.ProtoReflect.Descriptor instead.
 func (*FilterFamiliesReqForIdentifier) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{10}
+	return file_families_scailo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FilterFamiliesReqForIdentifier) GetUuid() string {
@@ -2301,7 +2356,7 @@ type FamiliesServiceLabelCreateRequest struct {
 
 func (x *FamiliesServiceLabelCreateRequest) Reset() {
 	*x = FamiliesServiceLabelCreateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[11]
+	mi := &file_families_scailo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2313,7 +2368,7 @@ func (x *FamiliesServiceLabelCreateRequest) String() string {
 func (*FamiliesServiceLabelCreateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceLabelCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[11]
+	mi := &file_families_scailo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2326,7 +2381,7 @@ func (x *FamiliesServiceLabelCreateRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use FamiliesServiceLabelCreateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceLabelCreateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{11}
+	return file_families_scailo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *FamiliesServiceLabelCreateRequest) GetUserComment() string {
@@ -2375,7 +2430,7 @@ type FamilyLabel struct {
 
 func (x *FamilyLabel) Reset() {
 	*x = FamilyLabel{}
-	mi := &file_families_scailo_proto_msgTypes[12]
+	mi := &file_families_scailo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2387,7 +2442,7 @@ func (x *FamilyLabel) String() string {
 func (*FamilyLabel) ProtoMessage() {}
 
 func (x *FamilyLabel) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[12]
+	mi := &file_families_scailo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2400,7 +2455,7 @@ func (x *FamilyLabel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyLabel.ProtoReflect.Descriptor instead.
 func (*FamilyLabel) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{12}
+	return file_families_scailo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *FamilyLabel) GetEntityUuid() string {
@@ -2463,7 +2518,7 @@ type FamilyLabelsList struct {
 
 func (x *FamilyLabelsList) Reset() {
 	*x = FamilyLabelsList{}
-	mi := &file_families_scailo_proto_msgTypes[13]
+	mi := &file_families_scailo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2475,7 +2530,7 @@ func (x *FamilyLabelsList) String() string {
 func (*FamilyLabelsList) ProtoMessage() {}
 
 func (x *FamilyLabelsList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[13]
+	mi := &file_families_scailo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2488,7 +2543,7 @@ func (x *FamilyLabelsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyLabelsList.ProtoReflect.Descriptor instead.
 func (*FamilyLabelsList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{13}
+	return file_families_scailo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *FamilyLabelsList) GetList() []*FamilyLabel {
@@ -2513,7 +2568,7 @@ type FamiliesServiceStorageCreateRequest struct {
 
 func (x *FamiliesServiceStorageCreateRequest) Reset() {
 	*x = FamiliesServiceStorageCreateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[14]
+	mi := &file_families_scailo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2525,7 +2580,7 @@ func (x *FamiliesServiceStorageCreateRequest) String() string {
 func (*FamiliesServiceStorageCreateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceStorageCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[14]
+	mi := &file_families_scailo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2538,7 +2593,7 @@ func (x *FamiliesServiceStorageCreateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use FamiliesServiceStorageCreateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceStorageCreateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{14}
+	return file_families_scailo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *FamiliesServiceStorageCreateRequest) GetUserComment() string {
@@ -2587,7 +2642,7 @@ type FamilyStorage struct {
 
 func (x *FamilyStorage) Reset() {
 	*x = FamilyStorage{}
-	mi := &file_families_scailo_proto_msgTypes[15]
+	mi := &file_families_scailo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2599,7 +2654,7 @@ func (x *FamilyStorage) String() string {
 func (*FamilyStorage) ProtoMessage() {}
 
 func (x *FamilyStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[15]
+	mi := &file_families_scailo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2612,7 +2667,7 @@ func (x *FamilyStorage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyStorage.ProtoReflect.Descriptor instead.
 func (*FamilyStorage) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{15}
+	return file_families_scailo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *FamilyStorage) GetEntityUuid() string {
@@ -2675,7 +2730,7 @@ type FamilyStoragesList struct {
 
 func (x *FamilyStoragesList) Reset() {
 	*x = FamilyStoragesList{}
-	mi := &file_families_scailo_proto_msgTypes[16]
+	mi := &file_families_scailo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2687,7 +2742,7 @@ func (x *FamilyStoragesList) String() string {
 func (*FamilyStoragesList) ProtoMessage() {}
 
 func (x *FamilyStoragesList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[16]
+	mi := &file_families_scailo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2700,7 +2755,7 @@ func (x *FamilyStoragesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyStoragesList.ProtoReflect.Descriptor instead.
 func (*FamilyStoragesList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{16}
+	return file_families_scailo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *FamilyStoragesList) GetList() []*FamilyStorage {
@@ -2723,7 +2778,7 @@ type FamiliesServiceUnitConversionPresenceRequest struct {
 
 func (x *FamiliesServiceUnitConversionPresenceRequest) Reset() {
 	*x = FamiliesServiceUnitConversionPresenceRequest{}
-	mi := &file_families_scailo_proto_msgTypes[17]
+	mi := &file_families_scailo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2735,7 +2790,7 @@ func (x *FamiliesServiceUnitConversionPresenceRequest) String() string {
 func (*FamiliesServiceUnitConversionPresenceRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceUnitConversionPresenceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[17]
+	mi := &file_families_scailo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2748,7 +2803,7 @@ func (x *FamiliesServiceUnitConversionPresenceRequest) ProtoReflect() protorefle
 
 // Deprecated: Use FamiliesServiceUnitConversionPresenceRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceUnitConversionPresenceRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{17}
+	return file_families_scailo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *FamiliesServiceUnitConversionPresenceRequest) GetFamilyId() uint64 {
@@ -2784,7 +2839,7 @@ type FamiliesServiceUnitConversionCreateRequest struct {
 
 func (x *FamiliesServiceUnitConversionCreateRequest) Reset() {
 	*x = FamiliesServiceUnitConversionCreateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[18]
+	mi := &file_families_scailo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2796,7 +2851,7 @@ func (x *FamiliesServiceUnitConversionCreateRequest) String() string {
 func (*FamiliesServiceUnitConversionCreateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceUnitConversionCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[18]
+	mi := &file_families_scailo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2809,7 +2864,7 @@ func (x *FamiliesServiceUnitConversionCreateRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use FamiliesServiceUnitConversionCreateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceUnitConversionCreateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{18}
+	return file_families_scailo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *FamiliesServiceUnitConversionCreateRequest) GetUserComment() string {
@@ -2876,7 +2931,7 @@ type FamilyUnitConversion struct {
 
 func (x *FamilyUnitConversion) Reset() {
 	*x = FamilyUnitConversion{}
-	mi := &file_families_scailo_proto_msgTypes[19]
+	mi := &file_families_scailo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2888,7 +2943,7 @@ func (x *FamilyUnitConversion) String() string {
 func (*FamilyUnitConversion) ProtoMessage() {}
 
 func (x *FamilyUnitConversion) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[19]
+	mi := &file_families_scailo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2901,7 +2956,7 @@ func (x *FamilyUnitConversion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyUnitConversion.ProtoReflect.Descriptor instead.
 func (*FamilyUnitConversion) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{19}
+	return file_families_scailo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *FamilyUnitConversion) GetEntityUuid() string {
@@ -2978,7 +3033,7 @@ type FamilyUnitConversionsList struct {
 
 func (x *FamilyUnitConversionsList) Reset() {
 	*x = FamilyUnitConversionsList{}
-	mi := &file_families_scailo_proto_msgTypes[20]
+	mi := &file_families_scailo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2990,7 +3045,7 @@ func (x *FamilyUnitConversionsList) String() string {
 func (*FamilyUnitConversionsList) ProtoMessage() {}
 
 func (x *FamilyUnitConversionsList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[20]
+	mi := &file_families_scailo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3003,7 +3058,7 @@ func (x *FamilyUnitConversionsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyUnitConversionsList.ProtoReflect.Descriptor instead.
 func (*FamilyUnitConversionsList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{20}
+	return file_families_scailo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *FamilyUnitConversionsList) GetList() []*FamilyUnitConversion {
@@ -3028,7 +3083,7 @@ type FamiliesServiceQCGroupCreateRequest struct {
 
 func (x *FamiliesServiceQCGroupCreateRequest) Reset() {
 	*x = FamiliesServiceQCGroupCreateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[21]
+	mi := &file_families_scailo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3040,7 +3095,7 @@ func (x *FamiliesServiceQCGroupCreateRequest) String() string {
 func (*FamiliesServiceQCGroupCreateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceQCGroupCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[21]
+	mi := &file_families_scailo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3053,7 +3108,7 @@ func (x *FamiliesServiceQCGroupCreateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use FamiliesServiceQCGroupCreateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceQCGroupCreateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{21}
+	return file_families_scailo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *FamiliesServiceQCGroupCreateRequest) GetUserComment() string {
@@ -3102,7 +3157,7 @@ type FamilyQCGroup struct {
 
 func (x *FamilyQCGroup) Reset() {
 	*x = FamilyQCGroup{}
-	mi := &file_families_scailo_proto_msgTypes[22]
+	mi := &file_families_scailo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3114,7 +3169,7 @@ func (x *FamilyQCGroup) String() string {
 func (*FamilyQCGroup) ProtoMessage() {}
 
 func (x *FamilyQCGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[22]
+	mi := &file_families_scailo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3127,7 +3182,7 @@ func (x *FamilyQCGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyQCGroup.ProtoReflect.Descriptor instead.
 func (*FamilyQCGroup) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{22}
+	return file_families_scailo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *FamilyQCGroup) GetEntityUuid() string {
@@ -3190,7 +3245,7 @@ type FamilyQCGroupsList struct {
 
 func (x *FamilyQCGroupsList) Reset() {
 	*x = FamilyQCGroupsList{}
-	mi := &file_families_scailo_proto_msgTypes[23]
+	mi := &file_families_scailo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3202,7 +3257,7 @@ func (x *FamilyQCGroupsList) String() string {
 func (*FamilyQCGroupsList) ProtoMessage() {}
 
 func (x *FamilyQCGroupsList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[23]
+	mi := &file_families_scailo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3215,7 +3270,7 @@ func (x *FamilyQCGroupsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyQCGroupsList.ProtoReflect.Descriptor instead.
 func (*FamilyQCGroupsList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{23}
+	return file_families_scailo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *FamilyQCGroupsList) GetList() []*FamilyQCGroup {
@@ -3244,7 +3299,7 @@ type FamiliesServiceImageCreateRequest struct {
 
 func (x *FamiliesServiceImageCreateRequest) Reset() {
 	*x = FamiliesServiceImageCreateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[24]
+	mi := &file_families_scailo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3256,7 +3311,7 @@ func (x *FamiliesServiceImageCreateRequest) String() string {
 func (*FamiliesServiceImageCreateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceImageCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[24]
+	mi := &file_families_scailo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3269,7 +3324,7 @@ func (x *FamiliesServiceImageCreateRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use FamiliesServiceImageCreateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceImageCreateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{24}
+	return file_families_scailo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *FamiliesServiceImageCreateRequest) GetUserComment() string {
@@ -3324,7 +3379,7 @@ type FamiliesServiceImageUpdateRequest struct {
 
 func (x *FamiliesServiceImageUpdateRequest) Reset() {
 	*x = FamiliesServiceImageUpdateRequest{}
-	mi := &file_families_scailo_proto_msgTypes[25]
+	mi := &file_families_scailo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3336,7 +3391,7 @@ func (x *FamiliesServiceImageUpdateRequest) String() string {
 func (*FamiliesServiceImageUpdateRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceImageUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[25]
+	mi := &file_families_scailo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3349,7 +3404,7 @@ func (x *FamiliesServiceImageUpdateRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use FamiliesServiceImageUpdateRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceImageUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{25}
+	return file_families_scailo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *FamiliesServiceImageUpdateRequest) GetUserComment() string {
@@ -3409,7 +3464,7 @@ type FamilyImage struct {
 
 func (x *FamilyImage) Reset() {
 	*x = FamilyImage{}
-	mi := &file_families_scailo_proto_msgTypes[26]
+	mi := &file_families_scailo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3421,7 +3476,7 @@ func (x *FamilyImage) String() string {
 func (*FamilyImage) ProtoMessage() {}
 
 func (x *FamilyImage) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[26]
+	mi := &file_families_scailo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3434,7 +3489,7 @@ func (x *FamilyImage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyImage.ProtoReflect.Descriptor instead.
 func (*FamilyImage) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{26}
+	return file_families_scailo_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *FamilyImage) GetEntityUuid() string {
@@ -3511,7 +3566,7 @@ type FamilyImagesList struct {
 
 func (x *FamilyImagesList) Reset() {
 	*x = FamilyImagesList{}
-	mi := &file_families_scailo_proto_msgTypes[27]
+	mi := &file_families_scailo_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3523,7 +3578,7 @@ func (x *FamilyImagesList) String() string {
 func (*FamilyImagesList) ProtoMessage() {}
 
 func (x *FamilyImagesList) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[27]
+	mi := &file_families_scailo_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3536,7 +3591,7 @@ func (x *FamilyImagesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FamilyImagesList.ProtoReflect.Descriptor instead.
 func (*FamilyImagesList) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{27}
+	return file_families_scailo_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *FamilyImagesList) GetList() []*FamilyImage {
@@ -3561,7 +3616,7 @@ type FamiliesServiceUpdatePriceRequest struct {
 
 func (x *FamiliesServiceUpdatePriceRequest) Reset() {
 	*x = FamiliesServiceUpdatePriceRequest{}
-	mi := &file_families_scailo_proto_msgTypes[28]
+	mi := &file_families_scailo_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3573,7 +3628,7 @@ func (x *FamiliesServiceUpdatePriceRequest) String() string {
 func (*FamiliesServiceUpdatePriceRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceUpdatePriceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[28]
+	mi := &file_families_scailo_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3586,7 +3641,7 @@ func (x *FamiliesServiceUpdatePriceRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use FamiliesServiceUpdatePriceRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceUpdatePriceRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{28}
+	return file_families_scailo_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *FamiliesServiceUpdatePriceRequest) GetUserComment() string {
@@ -3625,7 +3680,7 @@ type FamiliesServiceUpdateMinStockToMaintainRequest struct {
 
 func (x *FamiliesServiceUpdateMinStockToMaintainRequest) Reset() {
 	*x = FamiliesServiceUpdateMinStockToMaintainRequest{}
-	mi := &file_families_scailo_proto_msgTypes[29]
+	mi := &file_families_scailo_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3637,7 +3692,7 @@ func (x *FamiliesServiceUpdateMinStockToMaintainRequest) String() string {
 func (*FamiliesServiceUpdateMinStockToMaintainRequest) ProtoMessage() {}
 
 func (x *FamiliesServiceUpdateMinStockToMaintainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_families_scailo_proto_msgTypes[29]
+	mi := &file_families_scailo_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3650,7 +3705,7 @@ func (x *FamiliesServiceUpdateMinStockToMaintainRequest) ProtoReflect() protoref
 
 // Deprecated: Use FamiliesServiceUpdateMinStockToMaintainRequest.ProtoReflect.Descriptor instead.
 func (*FamiliesServiceUpdateMinStockToMaintainRequest) Descriptor() ([]byte, []int) {
-	return file_families_scailo_proto_rawDescGZIP(), []int{29}
+	return file_families_scailo_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *FamiliesServiceUpdateMinStockToMaintainRequest) GetUserComment() string {
@@ -3706,7 +3761,7 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12:\n" +
 	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintain\x12O\n" +
 	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12@\n" +
-	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xe8\x06\n" +
+	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xd6\x05\n" +
 	"\x1cFamiliesServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
@@ -3715,24 +3770,27 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12&\n" +
 	"\n" +
-	"print_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tprintName\x12\x1b\n" +
-	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12)\n" +
-	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x124\n" +
-	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12)\n" +
+	"print_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tprintName\x12)\n" +
+	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12)\n" +
 	"\fhsn_sac_code\x18\x10 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"hsnSacCode\x12\x1e\n" +
 	"\x06uom_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12,\n" +
 	"\runit_quantity\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00R\funitQuantity\x12$\n" +
-	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bparentId\x12\x17\n" +
-	"\ais_leaf\x18\x14 \x01(\bR\x06isLeaf\x12$\n" +
 	"\tledger_id\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00R\bledgerId\x12)\n" +
 	"\ftax_group_id\x18\x17 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1d\n" +
 	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12:\n" +
 	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintain\x12O\n" +
 	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12@\n" +
-	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xa5\a\n" +
+	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xf4\x01\n" +
+	"$FamiliesServiceUpdateIdentityRequest\x12!\n" +
+	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
+	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x124\n" +
+	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
+	"familyType\x12$\n" +
+	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bparentId\x12\x17\n" +
+	"\ais_leaf\x18\x14 \x01(\bR\x06isLeaf\"\xa5\a\n" +
 	"\x06Family\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4018,11 +4076,12 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x14FAMILY_SORT_KEY_CODE\x10\f\x12!\n" +
 	"\x1dFAMILY_SORT_KEY_UNIT_QUANTITY\x10\r\x12\x19\n" +
 	"\x15FAMILY_SORT_KEY_PRICE\x10\x0e\x12#\n" +
-	"\x1fFAMILY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xaf)\n" +
+	"\x1fFAMILY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\x8b*\n" +
 	"\x0fFamiliesService\x12J\n" +
 	"\x06Create\x12$.Scailo.FamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.FamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
-	"\vDraftUpdate\x12$.Scailo.FamiliesServiceUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
+	"\vDraftUpdate\x12$.Scailo.FamiliesServiceUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
+	"\x0eUpdateIdentity\x12,.Scailo.FamiliesServiceUpdateIdentityRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
 	"\x13SendForVerification\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Verify\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\aApprove\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -4113,7 +4172,7 @@ func file_families_scailo_proto_rawDescGZIP() []byte {
 }
 
 var file_families_scailo_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_families_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_families_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_families_scailo_proto_goTypes = []any{
 	(FAMILY_TYPE)(0),                                       // 0: Scailo.FAMILY_TYPE
 	(CONSUMPTION_SEQUENCE)(0),                              // 1: Scailo.CONSUMPTION_SEQUENCE
@@ -4121,261 +4180,264 @@ var file_families_scailo_proto_goTypes = []any{
 	(*FamilyTypesList)(nil),                                // 3: Scailo.FamilyTypesList
 	(*FamiliesServiceCreateRequest)(nil),                   // 4: Scailo.FamiliesServiceCreateRequest
 	(*FamiliesServiceUpdateRequest)(nil),                   // 5: Scailo.FamiliesServiceUpdateRequest
-	(*Family)(nil),                                         // 6: Scailo.Family
-	(*FamiliesList)(nil),                                   // 7: Scailo.FamiliesList
-	(*FamiliesServicePaginationReq)(nil),                   // 8: Scailo.FamiliesServicePaginationReq
-	(*FamiliesServicePaginationResponse)(nil),              // 9: Scailo.FamiliesServicePaginationResponse
-	(*FamiliesServiceFilterReq)(nil),                       // 10: Scailo.FamiliesServiceFilterReq
-	(*FamiliesServiceCountReq)(nil),                        // 11: Scailo.FamiliesServiceCountReq
-	(*FamiliesServiceSearchAllReq)(nil),                    // 12: Scailo.FamiliesServiceSearchAllReq
-	(*FilterFamiliesReqForIdentifier)(nil),                 // 13: Scailo.FilterFamiliesReqForIdentifier
-	(*FamiliesServiceLabelCreateRequest)(nil),              // 14: Scailo.FamiliesServiceLabelCreateRequest
-	(*FamilyLabel)(nil),                                    // 15: Scailo.FamilyLabel
-	(*FamilyLabelsList)(nil),                               // 16: Scailo.FamilyLabelsList
-	(*FamiliesServiceStorageCreateRequest)(nil),            // 17: Scailo.FamiliesServiceStorageCreateRequest
-	(*FamilyStorage)(nil),                                  // 18: Scailo.FamilyStorage
-	(*FamilyStoragesList)(nil),                             // 19: Scailo.FamilyStoragesList
-	(*FamiliesServiceUnitConversionPresenceRequest)(nil),   // 20: Scailo.FamiliesServiceUnitConversionPresenceRequest
-	(*FamiliesServiceUnitConversionCreateRequest)(nil),     // 21: Scailo.FamiliesServiceUnitConversionCreateRequest
-	(*FamilyUnitConversion)(nil),                           // 22: Scailo.FamilyUnitConversion
-	(*FamilyUnitConversionsList)(nil),                      // 23: Scailo.FamilyUnitConversionsList
-	(*FamiliesServiceQCGroupCreateRequest)(nil),            // 24: Scailo.FamiliesServiceQCGroupCreateRequest
-	(*FamilyQCGroup)(nil),                                  // 25: Scailo.FamilyQCGroup
-	(*FamilyQCGroupsList)(nil),                             // 26: Scailo.FamilyQCGroupsList
-	(*FamiliesServiceImageCreateRequest)(nil),              // 27: Scailo.FamiliesServiceImageCreateRequest
-	(*FamiliesServiceImageUpdateRequest)(nil),              // 28: Scailo.FamiliesServiceImageUpdateRequest
-	(*FamilyImage)(nil),                                    // 29: Scailo.FamilyImage
-	(*FamilyImagesList)(nil),                               // 30: Scailo.FamilyImagesList
-	(*FamiliesServiceUpdatePriceRequest)(nil),              // 31: Scailo.FamiliesServiceUpdatePriceRequest
-	(*FamiliesServiceUpdateMinStockToMaintainRequest)(nil), // 32: Scailo.FamiliesServiceUpdateMinStockToMaintainRequest
-	(*FormFieldDatumCreateRequest)(nil),                    // 33: Scailo.FormFieldDatumCreateRequest
-	(*EmployeeMetadata)(nil),                               // 34: Scailo.EmployeeMetadata
-	(*ApprovalMetadata)(nil),                               // 35: Scailo.ApprovalMetadata
-	(STANDARD_LIFECYCLE_STATUS)(0),                         // 36: Scailo.STANDARD_LIFECYCLE_STATUS
-	(*LogbookLogConciseSLC)(nil),                           // 37: Scailo.LogbookLogConciseSLC
-	(*FormFieldDatum)(nil),                                 // 38: Scailo.FormFieldDatum
-	(BOOL_FILTER)(0),                                       // 39: Scailo.BOOL_FILTER
-	(SORT_ORDER)(0),                                        // 40: Scailo.SORT_ORDER
-	(*FormFieldDatumFilterRequest)(nil),                    // 41: Scailo.FormFieldDatumFilterRequest
-	(*IdentifierUUIDWithUserComment)(nil),                  // 42: Scailo.IdentifierUUIDWithUserComment
-	(*StandardFile)(nil),                                   // 43: Scailo.StandardFile
-	(*IdentifierWithUserComment)(nil),                      // 44: Scailo.IdentifierWithUserComment
-	(*Identifier)(nil),                                     // 45: Scailo.Identifier
-	(*IdentifiersList)(nil),                                // 46: Scailo.IdentifiersList
-	(*IdentifierUUID)(nil),                                 // 47: Scailo.IdentifierUUID
-	(*SimpleSearchReq)(nil),                                // 48: Scailo.SimpleSearchReq
-	(*ActiveStatus)(nil),                                   // 49: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                        // 50: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                             // 51: Scailo.IdentifierResponse
-	(*IdentifierUUIDsList)(nil),                            // 52: Scailo.IdentifierUUIDsList
-	(*AmendmentLogsList)(nil),                              // 53: Scailo.AmendmentLogsList
-	(*CountResponse)(nil),                                  // 54: Scailo.CountResponse
+	(*FamiliesServiceUpdateIdentityRequest)(nil),           // 6: Scailo.FamiliesServiceUpdateIdentityRequest
+	(*Family)(nil),                                         // 7: Scailo.Family
+	(*FamiliesList)(nil),                                   // 8: Scailo.FamiliesList
+	(*FamiliesServicePaginationReq)(nil),                   // 9: Scailo.FamiliesServicePaginationReq
+	(*FamiliesServicePaginationResponse)(nil),              // 10: Scailo.FamiliesServicePaginationResponse
+	(*FamiliesServiceFilterReq)(nil),                       // 11: Scailo.FamiliesServiceFilterReq
+	(*FamiliesServiceCountReq)(nil),                        // 12: Scailo.FamiliesServiceCountReq
+	(*FamiliesServiceSearchAllReq)(nil),                    // 13: Scailo.FamiliesServiceSearchAllReq
+	(*FilterFamiliesReqForIdentifier)(nil),                 // 14: Scailo.FilterFamiliesReqForIdentifier
+	(*FamiliesServiceLabelCreateRequest)(nil),              // 15: Scailo.FamiliesServiceLabelCreateRequest
+	(*FamilyLabel)(nil),                                    // 16: Scailo.FamilyLabel
+	(*FamilyLabelsList)(nil),                               // 17: Scailo.FamilyLabelsList
+	(*FamiliesServiceStorageCreateRequest)(nil),            // 18: Scailo.FamiliesServiceStorageCreateRequest
+	(*FamilyStorage)(nil),                                  // 19: Scailo.FamilyStorage
+	(*FamilyStoragesList)(nil),                             // 20: Scailo.FamilyStoragesList
+	(*FamiliesServiceUnitConversionPresenceRequest)(nil),   // 21: Scailo.FamiliesServiceUnitConversionPresenceRequest
+	(*FamiliesServiceUnitConversionCreateRequest)(nil),     // 22: Scailo.FamiliesServiceUnitConversionCreateRequest
+	(*FamilyUnitConversion)(nil),                           // 23: Scailo.FamilyUnitConversion
+	(*FamilyUnitConversionsList)(nil),                      // 24: Scailo.FamilyUnitConversionsList
+	(*FamiliesServiceQCGroupCreateRequest)(nil),            // 25: Scailo.FamiliesServiceQCGroupCreateRequest
+	(*FamilyQCGroup)(nil),                                  // 26: Scailo.FamilyQCGroup
+	(*FamilyQCGroupsList)(nil),                             // 27: Scailo.FamilyQCGroupsList
+	(*FamiliesServiceImageCreateRequest)(nil),              // 28: Scailo.FamiliesServiceImageCreateRequest
+	(*FamiliesServiceImageUpdateRequest)(nil),              // 29: Scailo.FamiliesServiceImageUpdateRequest
+	(*FamilyImage)(nil),                                    // 30: Scailo.FamilyImage
+	(*FamilyImagesList)(nil),                               // 31: Scailo.FamilyImagesList
+	(*FamiliesServiceUpdatePriceRequest)(nil),              // 32: Scailo.FamiliesServiceUpdatePriceRequest
+	(*FamiliesServiceUpdateMinStockToMaintainRequest)(nil), // 33: Scailo.FamiliesServiceUpdateMinStockToMaintainRequest
+	(*FormFieldDatumCreateRequest)(nil),                    // 34: Scailo.FormFieldDatumCreateRequest
+	(*EmployeeMetadata)(nil),                               // 35: Scailo.EmployeeMetadata
+	(*ApprovalMetadata)(nil),                               // 36: Scailo.ApprovalMetadata
+	(STANDARD_LIFECYCLE_STATUS)(0),                         // 37: Scailo.STANDARD_LIFECYCLE_STATUS
+	(*LogbookLogConciseSLC)(nil),                           // 38: Scailo.LogbookLogConciseSLC
+	(*FormFieldDatum)(nil),                                 // 39: Scailo.FormFieldDatum
+	(BOOL_FILTER)(0),                                       // 40: Scailo.BOOL_FILTER
+	(SORT_ORDER)(0),                                        // 41: Scailo.SORT_ORDER
+	(*FormFieldDatumFilterRequest)(nil),                    // 42: Scailo.FormFieldDatumFilterRequest
+	(*IdentifierUUIDWithUserComment)(nil),                  // 43: Scailo.IdentifierUUIDWithUserComment
+	(*StandardFile)(nil),                                   // 44: Scailo.StandardFile
+	(*IdentifierWithUserComment)(nil),                      // 45: Scailo.IdentifierWithUserComment
+	(*Identifier)(nil),                                     // 46: Scailo.Identifier
+	(*IdentifiersList)(nil),                                // 47: Scailo.IdentifiersList
+	(*IdentifierUUID)(nil),                                 // 48: Scailo.IdentifierUUID
+	(*SimpleSearchReq)(nil),                                // 49: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                                   // 50: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                        // 51: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                             // 52: Scailo.IdentifierResponse
+	(*IdentifierUUIDsList)(nil),                            // 53: Scailo.IdentifierUUIDsList
+	(*AmendmentLogsList)(nil),                              // 54: Scailo.AmendmentLogsList
+	(*CountResponse)(nil),                                  // 55: Scailo.CountResponse
 }
 var file_families_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.FamilyTypesList.list:type_name -> Scailo.FAMILY_TYPE
 	0,   // 1: Scailo.FamiliesServiceCreateRequest.family_type:type_name -> Scailo.FAMILY_TYPE
 	1,   // 2: Scailo.FamiliesServiceCreateRequest.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
-	33,  // 3: Scailo.FamiliesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	0,   // 4: Scailo.FamiliesServiceUpdateRequest.family_type:type_name -> Scailo.FAMILY_TYPE
-	1,   // 5: Scailo.FamiliesServiceUpdateRequest.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
-	33,  // 6: Scailo.FamiliesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	34,  // 7: Scailo.Family.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 8: Scailo.Family.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	36,  // 9: Scailo.Family.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	37,  // 10: Scailo.Family.logs:type_name -> Scailo.LogbookLogConciseSLC
+	34,  // 3: Scailo.FamiliesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	1,   // 4: Scailo.FamiliesServiceUpdateRequest.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
+	34,  // 5: Scailo.FamiliesServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	0,   // 6: Scailo.FamiliesServiceUpdateIdentityRequest.family_type:type_name -> Scailo.FAMILY_TYPE
+	35,  // 7: Scailo.Family.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 8: Scailo.Family.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	37,  // 9: Scailo.Family.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	38,  // 10: Scailo.Family.logs:type_name -> Scailo.LogbookLogConciseSLC
 	0,   // 11: Scailo.Family.family_type:type_name -> Scailo.FAMILY_TYPE
 	1,   // 12: Scailo.Family.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
-	38,  // 13: Scailo.Family.form_data:type_name -> Scailo.FormFieldDatum
-	6,   // 14: Scailo.FamiliesList.list:type_name -> Scailo.Family
-	39,  // 15: Scailo.FamiliesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40,  // 16: Scailo.FamiliesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	39,  // 13: Scailo.Family.form_data:type_name -> Scailo.FormFieldDatum
+	7,   // 14: Scailo.FamiliesList.list:type_name -> Scailo.Family
+	40,  // 15: Scailo.FamiliesServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41,  // 16: Scailo.FamiliesServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
 	2,   // 17: Scailo.FamiliesServicePaginationReq.sort_key:type_name -> Scailo.FAMILY_SORT_KEY
-	36,  // 18: Scailo.FamiliesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	6,   // 19: Scailo.FamiliesServicePaginationResponse.payload:type_name -> Scailo.Family
-	39,  // 20: Scailo.FamiliesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40,  // 21: Scailo.FamiliesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	37,  // 18: Scailo.FamiliesServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	7,   // 19: Scailo.FamiliesServicePaginationResponse.payload:type_name -> Scailo.Family
+	40,  // 20: Scailo.FamiliesServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41,  // 21: Scailo.FamiliesServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
 	2,   // 22: Scailo.FamiliesServiceFilterReq.sort_key:type_name -> Scailo.FAMILY_SORT_KEY
-	36,  // 23: Scailo.FamiliesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	36,  // 24: Scailo.FamiliesServiceFilterReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	37,  // 23: Scailo.FamiliesServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	37,  // 24: Scailo.FamiliesServiceFilterReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 25: Scailo.FamiliesServiceFilterReq.family_type:type_name -> Scailo.FAMILY_TYPE
 	0,   // 26: Scailo.FamiliesServiceFilterReq.multi_family_type:type_name -> Scailo.FAMILY_TYPE
-	39,  // 27: Scailo.FamiliesServiceFilterReq.is_leaf:type_name -> Scailo.BOOL_FILTER
+	40,  // 27: Scailo.FamiliesServiceFilterReq.is_leaf:type_name -> Scailo.BOOL_FILTER
 	1,   // 28: Scailo.FamiliesServiceFilterReq.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
-	41,  // 29: Scailo.FamiliesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	39,  // 30: Scailo.FamiliesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	36,  // 31: Scailo.FamiliesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	36,  // 32: Scailo.FamiliesServiceCountReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	42,  // 29: Scailo.FamiliesServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	40,  // 30: Scailo.FamiliesServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	37,  // 31: Scailo.FamiliesServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	37,  // 32: Scailo.FamiliesServiceCountReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 33: Scailo.FamiliesServiceCountReq.family_type:type_name -> Scailo.FAMILY_TYPE
 	0,   // 34: Scailo.FamiliesServiceCountReq.multi_family_type:type_name -> Scailo.FAMILY_TYPE
-	39,  // 35: Scailo.FamiliesServiceCountReq.is_leaf:type_name -> Scailo.BOOL_FILTER
+	40,  // 35: Scailo.FamiliesServiceCountReq.is_leaf:type_name -> Scailo.BOOL_FILTER
 	1,   // 36: Scailo.FamiliesServiceCountReq.consumption_sequence:type_name -> Scailo.CONSUMPTION_SEQUENCE
-	41,  // 37: Scailo.FamiliesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	39,  // 38: Scailo.FamiliesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	40,  // 39: Scailo.FamiliesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	42,  // 37: Scailo.FamiliesServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	40,  // 38: Scailo.FamiliesServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	41,  // 39: Scailo.FamiliesServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
 	2,   // 40: Scailo.FamiliesServiceSearchAllReq.sort_key:type_name -> Scailo.FAMILY_SORT_KEY
-	36,  // 41: Scailo.FamiliesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	36,  // 42: Scailo.FamiliesServiceSearchAllReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	37,  // 41: Scailo.FamiliesServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	37,  // 42: Scailo.FamiliesServiceSearchAllReq.multi_status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
 	0,   // 43: Scailo.FamiliesServiceSearchAllReq.family_type:type_name -> Scailo.FAMILY_TYPE
 	0,   // 44: Scailo.FamiliesServiceSearchAllReq.multi_family_type:type_name -> Scailo.FAMILY_TYPE
-	39,  // 45: Scailo.FamiliesServiceSearchAllReq.is_leaf:type_name -> Scailo.BOOL_FILTER
-	10,  // 46: Scailo.FilterFamiliesReqForIdentifier.filter:type_name -> Scailo.FamiliesServiceFilterReq
-	34,  // 47: Scailo.FamilyLabel.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 48: Scailo.FamilyLabel.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	15,  // 49: Scailo.FamilyLabelsList.list:type_name -> Scailo.FamilyLabel
-	34,  // 50: Scailo.FamilyStorage.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 51: Scailo.FamilyStorage.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	18,  // 52: Scailo.FamilyStoragesList.list:type_name -> Scailo.FamilyStorage
-	34,  // 53: Scailo.FamilyUnitConversion.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 54: Scailo.FamilyUnitConversion.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	22,  // 55: Scailo.FamilyUnitConversionsList.list:type_name -> Scailo.FamilyUnitConversion
-	34,  // 56: Scailo.FamilyQCGroup.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 57: Scailo.FamilyQCGroup.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	25,  // 58: Scailo.FamilyQCGroupsList.list:type_name -> Scailo.FamilyQCGroup
-	34,  // 59: Scailo.FamilyImage.metadata:type_name -> Scailo.EmployeeMetadata
-	35,  // 60: Scailo.FamilyImage.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	29,  // 61: Scailo.FamilyImagesList.list:type_name -> Scailo.FamilyImage
+	40,  // 45: Scailo.FamiliesServiceSearchAllReq.is_leaf:type_name -> Scailo.BOOL_FILTER
+	11,  // 46: Scailo.FilterFamiliesReqForIdentifier.filter:type_name -> Scailo.FamiliesServiceFilterReq
+	35,  // 47: Scailo.FamilyLabel.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 48: Scailo.FamilyLabel.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	16,  // 49: Scailo.FamilyLabelsList.list:type_name -> Scailo.FamilyLabel
+	35,  // 50: Scailo.FamilyStorage.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 51: Scailo.FamilyStorage.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	19,  // 52: Scailo.FamilyStoragesList.list:type_name -> Scailo.FamilyStorage
+	35,  // 53: Scailo.FamilyUnitConversion.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 54: Scailo.FamilyUnitConversion.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	23,  // 55: Scailo.FamilyUnitConversionsList.list:type_name -> Scailo.FamilyUnitConversion
+	35,  // 56: Scailo.FamilyQCGroup.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 57: Scailo.FamilyQCGroup.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	26,  // 58: Scailo.FamilyQCGroupsList.list:type_name -> Scailo.FamilyQCGroup
+	35,  // 59: Scailo.FamilyImage.metadata:type_name -> Scailo.EmployeeMetadata
+	36,  // 60: Scailo.FamilyImage.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	30,  // 61: Scailo.FamilyImagesList.list:type_name -> Scailo.FamilyImage
 	4,   // 62: Scailo.FamiliesService.Create:input_type -> Scailo.FamiliesServiceCreateRequest
 	4,   // 63: Scailo.FamiliesService.Draft:input_type -> Scailo.FamiliesServiceCreateRequest
 	5,   // 64: Scailo.FamiliesService.DraftUpdate:input_type -> Scailo.FamiliesServiceUpdateRequest
-	42,  // 65: Scailo.FamiliesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 66: Scailo.FamiliesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 67: Scailo.FamiliesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 68: Scailo.FamiliesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	5,   // 69: Scailo.FamiliesService.RevisionUpdate:input_type -> Scailo.FamiliesServiceUpdateRequest
-	42,  // 70: Scailo.FamiliesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 71: Scailo.FamiliesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 72: Scailo.FamiliesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 73: Scailo.FamiliesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	42,  // 74: Scailo.FamiliesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	31,  // 75: Scailo.FamiliesService.UpdatePrice:input_type -> Scailo.FamiliesServiceUpdatePriceRequest
-	43,  // 76: Scailo.FamiliesService.UploadPrices:input_type -> Scailo.StandardFile
-	32,  // 77: Scailo.FamiliesService.UpdateMinStockToMaintain:input_type -> Scailo.FamiliesServiceUpdateMinStockToMaintainRequest
-	43,  // 78: Scailo.FamiliesService.UploadMinStockToMaintain:input_type -> Scailo.StandardFile
-	10,  // 79: Scailo.FamiliesService.DownloadAsCSV:input_type -> Scailo.FamiliesServiceFilterReq
-	43,  // 80: Scailo.FamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	17,  // 81: Scailo.FamiliesService.AddStorage:input_type -> Scailo.FamiliesServiceStorageCreateRequest
-	44,  // 82: Scailo.FamiliesService.ApproveStorage:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 83: Scailo.FamiliesService.DeleteStorage:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 84: Scailo.FamiliesService.ViewStorageByID:input_type -> Scailo.Identifier
-	45,  // 85: Scailo.FamiliesService.ViewStorages:input_type -> Scailo.Identifier
-	14,  // 86: Scailo.FamiliesService.AddLabel:input_type -> Scailo.FamiliesServiceLabelCreateRequest
-	44,  // 87: Scailo.FamiliesService.ApproveLabel:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 88: Scailo.FamiliesService.DeleteLabel:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 89: Scailo.FamiliesService.ViewLabelByID:input_type -> Scailo.Identifier
-	45,  // 90: Scailo.FamiliesService.ViewLabels:input_type -> Scailo.Identifier
-	46,  // 91: Scailo.FamiliesService.ViewLabelsForFamilyIDs:input_type -> Scailo.IdentifiersList
-	21,  // 92: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
-	44,  // 93: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 94: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 95: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
-	45,  // 96: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
-	20,  // 97: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
-	24,  // 98: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
-	44,  // 99: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 100: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 101: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
-	45,  // 102: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
-	27,  // 103: Scailo.FamiliesService.AddImage:input_type -> Scailo.FamiliesServiceImageCreateRequest
-	28,  // 104: Scailo.FamiliesService.UpdateImage:input_type -> Scailo.FamiliesServiceImageUpdateRequest
-	44,  // 105: Scailo.FamiliesService.ApproveImage:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 106: Scailo.FamiliesService.DeleteImage:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 107: Scailo.FamiliesService.ViewImageByID:input_type -> Scailo.Identifier
-	45,  // 108: Scailo.FamiliesService.ViewImages:input_type -> Scailo.Identifier
-	45,  // 109: Scailo.FamiliesService.ViewPublicImages:input_type -> Scailo.Identifier
-	45,  // 110: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
-	47,  // 111: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	45,  // 112: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	48,  // 113: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
-	47,  // 114: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	46,  // 115: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	49,  // 116: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
-	47,  // 117: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	8,   // 118: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
-	3,   // 119: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
-	45,  // 120: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
-	12,  // 121: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
-	10,  // 122: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
-	48,  // 123: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
-	48,  // 124: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
-	48,  // 125: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
-	48,  // 126: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
-	48,  // 127: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
-	48,  // 128: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
-	48,  // 129: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
-	50,  // 130: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	11,  // 131: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
-	51,  // 132: Scailo.FamiliesService.Create:output_type -> Scailo.IdentifierResponse
-	51,  // 133: Scailo.FamiliesService.Draft:output_type -> Scailo.IdentifierResponse
-	51,  // 134: Scailo.FamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 135: Scailo.FamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	51,  // 136: Scailo.FamiliesService.Verify:output_type -> Scailo.IdentifierResponse
-	51,  // 137: Scailo.FamiliesService.Approve:output_type -> Scailo.IdentifierResponse
-	51,  // 138: Scailo.FamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	51,  // 139: Scailo.FamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 140: Scailo.FamiliesService.Halt:output_type -> Scailo.IdentifierResponse
-	51,  // 141: Scailo.FamiliesService.Discard:output_type -> Scailo.IdentifierResponse
-	51,  // 142: Scailo.FamiliesService.Restore:output_type -> Scailo.IdentifierResponse
-	51,  // 143: Scailo.FamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	51,  // 144: Scailo.FamiliesService.Amend:output_type -> Scailo.IdentifierResponse
-	51,  // 145: Scailo.FamiliesService.UpdatePrice:output_type -> Scailo.IdentifierResponse
-	52,  // 146: Scailo.FamiliesService.UploadPrices:output_type -> Scailo.IdentifierUUIDsList
-	51,  // 147: Scailo.FamiliesService.UpdateMinStockToMaintain:output_type -> Scailo.IdentifierResponse
-	52,  // 148: Scailo.FamiliesService.UploadMinStockToMaintain:output_type -> Scailo.IdentifierUUIDsList
-	43,  // 149: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	52,  // 150: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	51,  // 151: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
-	51,  // 152: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
-	51,  // 153: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
-	18,  // 154: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
-	19,  // 155: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
-	51,  // 156: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
-	51,  // 157: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
-	51,  // 158: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
-	15,  // 159: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
-	16,  // 160: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
-	16,  // 161: Scailo.FamiliesService.ViewLabelsForFamilyIDs:output_type -> Scailo.FamilyLabelsList
-	51,  // 162: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
-	51,  // 163: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
-	51,  // 164: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
-	22,  // 165: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
-	23,  // 166: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
-	22,  // 167: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
-	51,  // 168: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
-	51,  // 169: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
-	51,  // 170: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
-	25,  // 171: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
-	26,  // 172: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
-	51,  // 173: Scailo.FamiliesService.AddImage:output_type -> Scailo.IdentifierResponse
-	51,  // 174: Scailo.FamiliesService.UpdateImage:output_type -> Scailo.IdentifierResponse
-	51,  // 175: Scailo.FamiliesService.ApproveImage:output_type -> Scailo.IdentifierResponse
-	51,  // 176: Scailo.FamiliesService.DeleteImage:output_type -> Scailo.IdentifierResponse
-	29,  // 177: Scailo.FamiliesService.ViewImageByID:output_type -> Scailo.FamilyImage
-	30,  // 178: Scailo.FamiliesService.ViewImages:output_type -> Scailo.FamilyImagesList
-	30,  // 179: Scailo.FamiliesService.ViewPublicImages:output_type -> Scailo.FamilyImagesList
-	6,   // 180: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
-	6,   // 181: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
-	6,   // 182: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
-	6,   // 183: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
-	6,   // 184: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
-	7,   // 185: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
-	7,   // 186: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
-	7,   // 187: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
-	9,   // 188: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
-	7,   // 189: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
-	53,  // 190: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	7,   // 191: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
-	7,   // 192: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
-	7,   // 193: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
-	7,   // 194: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
-	7,   // 195: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
-	7,   // 196: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
-	7,   // 197: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
-	7,   // 198: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
-	7,   // 199: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
-	54,  // 200: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
-	54,  // 201: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
-	132, // [132:202] is the sub-list for method output_type
-	62,  // [62:132] is the sub-list for method input_type
+	6,   // 65: Scailo.FamiliesService.UpdateIdentity:input_type -> Scailo.FamiliesServiceUpdateIdentityRequest
+	43,  // 66: Scailo.FamiliesService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 67: Scailo.FamiliesService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 68: Scailo.FamiliesService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 69: Scailo.FamiliesService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	5,   // 70: Scailo.FamiliesService.RevisionUpdate:input_type -> Scailo.FamiliesServiceUpdateRequest
+	43,  // 71: Scailo.FamiliesService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 72: Scailo.FamiliesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 73: Scailo.FamiliesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 74: Scailo.FamiliesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	43,  // 75: Scailo.FamiliesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	32,  // 76: Scailo.FamiliesService.UpdatePrice:input_type -> Scailo.FamiliesServiceUpdatePriceRequest
+	44,  // 77: Scailo.FamiliesService.UploadPrices:input_type -> Scailo.StandardFile
+	33,  // 78: Scailo.FamiliesService.UpdateMinStockToMaintain:input_type -> Scailo.FamiliesServiceUpdateMinStockToMaintainRequest
+	44,  // 79: Scailo.FamiliesService.UploadMinStockToMaintain:input_type -> Scailo.StandardFile
+	11,  // 80: Scailo.FamiliesService.DownloadAsCSV:input_type -> Scailo.FamiliesServiceFilterReq
+	44,  // 81: Scailo.FamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	18,  // 82: Scailo.FamiliesService.AddStorage:input_type -> Scailo.FamiliesServiceStorageCreateRequest
+	45,  // 83: Scailo.FamiliesService.ApproveStorage:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 84: Scailo.FamiliesService.DeleteStorage:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 85: Scailo.FamiliesService.ViewStorageByID:input_type -> Scailo.Identifier
+	46,  // 86: Scailo.FamiliesService.ViewStorages:input_type -> Scailo.Identifier
+	15,  // 87: Scailo.FamiliesService.AddLabel:input_type -> Scailo.FamiliesServiceLabelCreateRequest
+	45,  // 88: Scailo.FamiliesService.ApproveLabel:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 89: Scailo.FamiliesService.DeleteLabel:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 90: Scailo.FamiliesService.ViewLabelByID:input_type -> Scailo.Identifier
+	46,  // 91: Scailo.FamiliesService.ViewLabels:input_type -> Scailo.Identifier
+	47,  // 92: Scailo.FamiliesService.ViewLabelsForFamilyIDs:input_type -> Scailo.IdentifiersList
+	22,  // 93: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
+	45,  // 94: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 95: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 96: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
+	46,  // 97: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
+	21,  // 98: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
+	25,  // 99: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
+	45,  // 100: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 101: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 102: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
+	46,  // 103: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
+	28,  // 104: Scailo.FamiliesService.AddImage:input_type -> Scailo.FamiliesServiceImageCreateRequest
+	29,  // 105: Scailo.FamiliesService.UpdateImage:input_type -> Scailo.FamiliesServiceImageUpdateRequest
+	45,  // 106: Scailo.FamiliesService.ApproveImage:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 107: Scailo.FamiliesService.DeleteImage:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 108: Scailo.FamiliesService.ViewImageByID:input_type -> Scailo.Identifier
+	46,  // 109: Scailo.FamiliesService.ViewImages:input_type -> Scailo.Identifier
+	46,  // 110: Scailo.FamiliesService.ViewPublicImages:input_type -> Scailo.Identifier
+	46,  // 111: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
+	48,  // 112: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	46,  // 113: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	49,  // 114: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
+	48,  // 115: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 116: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	50,  // 117: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
+	48,  // 118: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	9,   // 119: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
+	3,   // 120: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
+	46,  // 121: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
+	13,  // 122: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
+	11,  // 123: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
+	49,  // 124: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
+	49,  // 125: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
+	49,  // 126: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
+	49,  // 127: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
+	49,  // 128: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
+	49,  // 129: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
+	49,  // 130: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
+	51,  // 131: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	12,  // 132: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
+	52,  // 133: Scailo.FamiliesService.Create:output_type -> Scailo.IdentifierResponse
+	52,  // 134: Scailo.FamiliesService.Draft:output_type -> Scailo.IdentifierResponse
+	52,  // 135: Scailo.FamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 136: Scailo.FamiliesService.UpdateIdentity:output_type -> Scailo.IdentifierResponse
+	52,  // 137: Scailo.FamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	52,  // 138: Scailo.FamiliesService.Verify:output_type -> Scailo.IdentifierResponse
+	52,  // 139: Scailo.FamiliesService.Approve:output_type -> Scailo.IdentifierResponse
+	52,  // 140: Scailo.FamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	52,  // 141: Scailo.FamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 142: Scailo.FamiliesService.Halt:output_type -> Scailo.IdentifierResponse
+	52,  // 143: Scailo.FamiliesService.Discard:output_type -> Scailo.IdentifierResponse
+	52,  // 144: Scailo.FamiliesService.Restore:output_type -> Scailo.IdentifierResponse
+	52,  // 145: Scailo.FamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	52,  // 146: Scailo.FamiliesService.Amend:output_type -> Scailo.IdentifierResponse
+	52,  // 147: Scailo.FamiliesService.UpdatePrice:output_type -> Scailo.IdentifierResponse
+	53,  // 148: Scailo.FamiliesService.UploadPrices:output_type -> Scailo.IdentifierUUIDsList
+	52,  // 149: Scailo.FamiliesService.UpdateMinStockToMaintain:output_type -> Scailo.IdentifierResponse
+	53,  // 150: Scailo.FamiliesService.UploadMinStockToMaintain:output_type -> Scailo.IdentifierUUIDsList
+	44,  // 151: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	53,  // 152: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	52,  // 153: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
+	52,  // 154: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
+	52,  // 155: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
+	19,  // 156: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
+	20,  // 157: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
+	52,  // 158: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
+	52,  // 159: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
+	52,  // 160: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
+	16,  // 161: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
+	17,  // 162: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
+	17,  // 163: Scailo.FamiliesService.ViewLabelsForFamilyIDs:output_type -> Scailo.FamilyLabelsList
+	52,  // 164: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
+	52,  // 165: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
+	52,  // 166: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
+	23,  // 167: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
+	24,  // 168: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
+	23,  // 169: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
+	52,  // 170: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
+	52,  // 171: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
+	52,  // 172: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
+	26,  // 173: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
+	27,  // 174: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
+	52,  // 175: Scailo.FamiliesService.AddImage:output_type -> Scailo.IdentifierResponse
+	52,  // 176: Scailo.FamiliesService.UpdateImage:output_type -> Scailo.IdentifierResponse
+	52,  // 177: Scailo.FamiliesService.ApproveImage:output_type -> Scailo.IdentifierResponse
+	52,  // 178: Scailo.FamiliesService.DeleteImage:output_type -> Scailo.IdentifierResponse
+	30,  // 179: Scailo.FamiliesService.ViewImageByID:output_type -> Scailo.FamilyImage
+	31,  // 180: Scailo.FamiliesService.ViewImages:output_type -> Scailo.FamilyImagesList
+	31,  // 181: Scailo.FamiliesService.ViewPublicImages:output_type -> Scailo.FamilyImagesList
+	7,   // 182: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
+	7,   // 183: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
+	7,   // 184: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
+	7,   // 185: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
+	7,   // 186: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
+	8,   // 187: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
+	8,   // 188: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
+	8,   // 189: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
+	10,  // 190: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
+	8,   // 191: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
+	54,  // 192: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	8,   // 193: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
+	8,   // 194: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
+	8,   // 195: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
+	8,   // 196: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
+	8,   // 197: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
+	8,   // 198: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
+	8,   // 199: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
+	8,   // 200: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
+	8,   // 201: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
+	55,  // 202: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
+	55,  // 203: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
+	133, // [133:204] is the sub-list for method output_type
+	62,  // [62:133] is the sub-list for method input_type
 	62,  // [62:62] is the sub-list for extension type_name
 	62,  // [62:62] is the sub-list for extension extendee
 	0,   // [0:62] is the sub-list for field type_name
@@ -4394,7 +4456,7 @@ func file_families_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_families_scailo_proto_rawDesc), len(file_families_scailo_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   30,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

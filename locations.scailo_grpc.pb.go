@@ -35,6 +35,7 @@ const (
 	LocationsService_ViewEssentialByID_FullMethodName    = "/Scailo.LocationsService/ViewEssentialByID"
 	LocationsService_ViewEssentialByUUID_FullMethodName  = "/Scailo.LocationsService/ViewEssentialByUUID"
 	LocationsService_ViewFromIDs_FullMethodName          = "/Scailo.LocationsService/ViewFromIDs"
+	LocationsService_ViewByCode_FullMethodName           = "/Scailo.LocationsService/ViewByCode"
 	LocationsService_ViewAll_FullMethodName              = "/Scailo.LocationsService/ViewAll"
 	LocationsService_ViewAllForEntityUUID_FullMethodName = "/Scailo.LocationsService/ViewAllForEntityUUID"
 	LocationsService_ViewWithPagination_FullMethodName   = "/Scailo.LocationsService/ViewWithPagination"
@@ -142,6 +143,8 @@ type LocationsServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Location, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*LocationsList, error)
+	// View by location's code (logs aren't returned)
+	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Location, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*LocationsList, error)
 	// Returns all records belonging to a specific organization/entity UUID.
@@ -342,6 +345,16 @@ func (c *locationsServiceClient) ViewFromIDs(ctx context.Context, in *Identifier
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LocationsList)
 	err := c.cc.Invoke(ctx, LocationsService_ViewFromIDs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationsServiceClient) ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Location, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Location)
+	err := c.cc.Invoke(ctx, LocationsService_ViewByCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

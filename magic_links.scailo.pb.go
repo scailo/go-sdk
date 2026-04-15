@@ -606,7 +606,9 @@ type MagicLinksServiceCreateRequest struct {
 	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
 	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
-	Description   string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
+	// The optional domain prefix that is used to generate the magic link. If this is empty, then the default authless access domain is used. This is useful in case the URL needs to point at a custom domain.
+	DomainPrefix  string `protobuf:"bytes,100,opt,name=domain_prefix,json=domainPrefix,proto3" json:"domain_prefix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -690,6 +692,13 @@ func (x *MagicLinksServiceCreateRequest) GetDescription() string {
 	return ""
 }
 
+func (x *MagicLinksServiceCreateRequest) GetDomainPrefix() string {
+	if x != nil {
+		return x.DomainPrefix
+	}
+	return ""
+}
+
 // Describes the necessary data structure for creation of a magic link. This data structure is used within other services, while creating magic links for the given resource
 type MagicLinksServiceCreateRequestForSpecificResource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -702,7 +711,9 @@ type MagicLinksServiceCreateRequestForSpecificResource struct {
 	// The number of times that the magic link can be viewed. If -1, then the link can be viewed any number of times. If 0, then the link cannot be viewed at all.
 	MaxViews int64 `protobuf:"varint,31,opt,name=max_views,json=maxViews,proto3" json:"max_views,omitempty"`
 	// Stores an optional description of the magic link
-	Description   string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,35,opt,name=description,proto3" json:"description,omitempty"`
+	// The optional domain prefix that is used to generate the magic link. If this is empty, then the default authless access domain is used. This is useful in case the URL needs to point at a custom domain.
+	DomainPrefix  string `protobuf:"bytes,100,opt,name=domain_prefix,json=domainPrefix,proto3" json:"domain_prefix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -768,6 +779,13 @@ func (x *MagicLinksServiceCreateRequestForSpecificResource) GetMaxViews() int64 
 func (x *MagicLinksServiceCreateRequestForSpecificResource) GetDescription() string {
 	if x != nil {
 		return x.Description
+	}
+	return ""
+}
+
+func (x *MagicLinksServiceCreateRequestForSpecificResource) GetDomainPrefix() string {
+	if x != nil {
+		return x.DomainPrefix
 	}
 	return ""
 }
@@ -1701,7 +1719,7 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.MagicLinkR\apayload\"\xb8\x02\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.MagicLinkR\apayload\"\xdd\x02\n" +
 	"\x1eMagicLinksServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1712,7 +1730,8 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\n" +
 	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
 	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
-	"\vdescription\x18# \x01(\tR\vdescription\"\xe3\x01\n" +
+	"\vdescription\x18# \x01(\tR\vdescription\x12#\n" +
+	"\rdomain_prefix\x18d \x01(\tR\fdomainPrefix\"\x88\x02\n" +
 	"1MagicLinksServiceCreateRequestForSpecificResource\x12!\n" +
 	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12-\n" +
 	"\rresource_uuid\x18\n" +
@@ -1720,7 +1739,8 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\n" +
 	"expires_at\x18\x1e \x01(\x04R\texpiresAt\x12\x1b\n" +
 	"\tmax_views\x18\x1f \x01(\x03R\bmaxViews\x12 \n" +
-	"\vdescription\x18# \x01(\tR\vdescription\"\xba\x01\n" +
+	"\vdescription\x18# \x01(\tR\vdescription\x12#\n" +
+	"\rdomain_prefix\x18d \x01(\tR\fdomainPrefix\"\xba\x01\n" +
 	"\x1eMagicLinksServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1d\n" +

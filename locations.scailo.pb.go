@@ -1648,7 +1648,7 @@ const file_locations_scailo_proto_rawDesc = "" +
 	"\x12\x1a\n" +
 	"\x16LOCATION_SORT_KEY_CODE\x10\v\x12\x1b\n" +
 	"\x17LOCATION_SORT_KEY_EMAIL\x10\f\x12\x1b\n" +
-	"\x17LOCATION_SORT_KEY_PHONE\x10\r2\x89\x0f\n" +
+	"\x17LOCATION_SORT_KEY_PHONE\x10\r2\xc2\x0f\n" +
 	"\x10LocationsService\x12K\n" +
 	"\x06Create\x12%.Scailo.LocationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Draft\x12%.Scailo.LocationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
@@ -1668,7 +1668,9 @@ const file_locations_scailo_proto_rawDesc = "" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x10.Scailo.Location\x129\n" +
 	"\x11ViewEssentialByID\x12\x12.Scailo.Identifier\x1a\x10.Scailo.Location\x12?\n" +
 	"\x13ViewEssentialByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x10.Scailo.Location\x12=\n" +
-	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x15.Scailo.LocationsList\x126\n" +
+	"\vViewFromIDs\x12\x17.Scailo.IdentifiersList\x1a\x15.Scailo.LocationsList\x127\n" +
+	"\n" +
+	"ViewByCode\x12\x17.Scailo.SimpleSearchReq\x1a\x10.Scailo.Location\x126\n" +
 	"\aViewAll\x12\x14.Scailo.ActiveStatus\x1a\x15.Scailo.LocationsList\x12E\n" +
 	"\x14ViewAllForEntityUUID\x12\x16.Scailo.IdentifierUUID\x1a\x15.Scailo.LocationsList\x12g\n" +
 	"\x12ViewWithPagination\x12%.Scailo.LocationsServicePaginationReq\x1a*.Scailo.LocationsServicePaginationResponse\x12H\n" +
@@ -1720,12 +1722,13 @@ var file_locations_scailo_proto_goTypes = []any{
 	(*Identifier)(nil),                         // 20: Scailo.Identifier
 	(*IdentifierUUID)(nil),                     // 21: Scailo.IdentifierUUID
 	(*IdentifiersList)(nil),                    // 22: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                       // 23: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),            // 24: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                       // 25: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                 // 26: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                      // 27: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                // 28: Scailo.IdentifierUUIDsList
+	(*SimpleSearchReq)(nil),                    // 23: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                       // 24: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),            // 25: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                       // 26: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                 // 27: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                      // 28: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                // 29: Scailo.IdentifierUUIDsList
 }
 var file_locations_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.LocationsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -1773,43 +1776,45 @@ var file_locations_scailo_proto_depIdxs = []int32{
 	20, // 42: Scailo.LocationsService.ViewEssentialByID:input_type -> Scailo.Identifier
 	21, // 43: Scailo.LocationsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
 	22, // 44: Scailo.LocationsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 45: Scailo.LocationsService.ViewAll:input_type -> Scailo.ActiveStatus
-	21, // 46: Scailo.LocationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 47: Scailo.LocationsService.ViewWithPagination:input_type -> Scailo.LocationsServicePaginationReq
-	9,  // 48: Scailo.LocationsService.SearchAll:input_type -> Scailo.LocationsServiceSearchAllReq
-	7,  // 49: Scailo.LocationsService.Filter:input_type -> Scailo.LocationsServiceFilterReq
-	24, // 50: Scailo.LocationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 51: Scailo.LocationsService.Count:input_type -> Scailo.LocationsServiceCountReq
-	7,  // 52: Scailo.LocationsService.DownloadAsCSV:input_type -> Scailo.LocationsServiceFilterReq
-	25, // 53: Scailo.LocationsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	26, // 54: Scailo.LocationsService.Create:output_type -> Scailo.IdentifierResponse
-	26, // 55: Scailo.LocationsService.Draft:output_type -> Scailo.IdentifierResponse
-	26, // 56: Scailo.LocationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 57: Scailo.LocationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	26, // 58: Scailo.LocationsService.Verify:output_type -> Scailo.IdentifierResponse
-	26, // 59: Scailo.LocationsService.Approve:output_type -> Scailo.IdentifierResponse
-	26, // 60: Scailo.LocationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	26, // 61: Scailo.LocationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 62: Scailo.LocationsService.Halt:output_type -> Scailo.IdentifierResponse
-	26, // 63: Scailo.LocationsService.Discard:output_type -> Scailo.IdentifierResponse
-	26, // 64: Scailo.LocationsService.Restore:output_type -> Scailo.IdentifierResponse
-	26, // 65: Scailo.LocationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 66: Scailo.LocationsService.ViewByID:output_type -> Scailo.Location
-	3,  // 67: Scailo.LocationsService.ViewByUUID:output_type -> Scailo.Location
-	3,  // 68: Scailo.LocationsService.ViewEssentialByID:output_type -> Scailo.Location
-	3,  // 69: Scailo.LocationsService.ViewEssentialByUUID:output_type -> Scailo.Location
-	4,  // 70: Scailo.LocationsService.ViewFromIDs:output_type -> Scailo.LocationsList
-	4,  // 71: Scailo.LocationsService.ViewAll:output_type -> Scailo.LocationsList
-	4,  // 72: Scailo.LocationsService.ViewAllForEntityUUID:output_type -> Scailo.LocationsList
-	6,  // 73: Scailo.LocationsService.ViewWithPagination:output_type -> Scailo.LocationsServicePaginationResponse
-	4,  // 74: Scailo.LocationsService.SearchAll:output_type -> Scailo.LocationsList
-	4,  // 75: Scailo.LocationsService.Filter:output_type -> Scailo.LocationsList
-	27, // 76: Scailo.LocationsService.CountInStatus:output_type -> Scailo.CountResponse
-	27, // 77: Scailo.LocationsService.Count:output_type -> Scailo.CountResponse
-	25, // 78: Scailo.LocationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	28, // 79: Scailo.LocationsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	54, // [54:80] is the sub-list for method output_type
-	28, // [28:54] is the sub-list for method input_type
+	23, // 45: Scailo.LocationsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	24, // 46: Scailo.LocationsService.ViewAll:input_type -> Scailo.ActiveStatus
+	21, // 47: Scailo.LocationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 48: Scailo.LocationsService.ViewWithPagination:input_type -> Scailo.LocationsServicePaginationReq
+	9,  // 49: Scailo.LocationsService.SearchAll:input_type -> Scailo.LocationsServiceSearchAllReq
+	7,  // 50: Scailo.LocationsService.Filter:input_type -> Scailo.LocationsServiceFilterReq
+	25, // 51: Scailo.LocationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 52: Scailo.LocationsService.Count:input_type -> Scailo.LocationsServiceCountReq
+	7,  // 53: Scailo.LocationsService.DownloadAsCSV:input_type -> Scailo.LocationsServiceFilterReq
+	26, // 54: Scailo.LocationsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	27, // 55: Scailo.LocationsService.Create:output_type -> Scailo.IdentifierResponse
+	27, // 56: Scailo.LocationsService.Draft:output_type -> Scailo.IdentifierResponse
+	27, // 57: Scailo.LocationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 58: Scailo.LocationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	27, // 59: Scailo.LocationsService.Verify:output_type -> Scailo.IdentifierResponse
+	27, // 60: Scailo.LocationsService.Approve:output_type -> Scailo.IdentifierResponse
+	27, // 61: Scailo.LocationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	27, // 62: Scailo.LocationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 63: Scailo.LocationsService.Halt:output_type -> Scailo.IdentifierResponse
+	27, // 64: Scailo.LocationsService.Discard:output_type -> Scailo.IdentifierResponse
+	27, // 65: Scailo.LocationsService.Restore:output_type -> Scailo.IdentifierResponse
+	27, // 66: Scailo.LocationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	3,  // 67: Scailo.LocationsService.ViewByID:output_type -> Scailo.Location
+	3,  // 68: Scailo.LocationsService.ViewByUUID:output_type -> Scailo.Location
+	3,  // 69: Scailo.LocationsService.ViewEssentialByID:output_type -> Scailo.Location
+	3,  // 70: Scailo.LocationsService.ViewEssentialByUUID:output_type -> Scailo.Location
+	4,  // 71: Scailo.LocationsService.ViewFromIDs:output_type -> Scailo.LocationsList
+	3,  // 72: Scailo.LocationsService.ViewByCode:output_type -> Scailo.Location
+	4,  // 73: Scailo.LocationsService.ViewAll:output_type -> Scailo.LocationsList
+	4,  // 74: Scailo.LocationsService.ViewAllForEntityUUID:output_type -> Scailo.LocationsList
+	6,  // 75: Scailo.LocationsService.ViewWithPagination:output_type -> Scailo.LocationsServicePaginationResponse
+	4,  // 76: Scailo.LocationsService.SearchAll:output_type -> Scailo.LocationsList
+	4,  // 77: Scailo.LocationsService.Filter:output_type -> Scailo.LocationsList
+	28, // 78: Scailo.LocationsService.CountInStatus:output_type -> Scailo.CountResponse
+	28, // 79: Scailo.LocationsService.Count:output_type -> Scailo.CountResponse
+	26, // 80: Scailo.LocationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	29, // 81: Scailo.LocationsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	55, // [55:82] is the sub-list for method output_type
+	28, // [28:55] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
 	28, // [28:28] is the sub-list for extension extendee
 	0,  // [0:28] is the sub-list for field type_name

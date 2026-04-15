@@ -1973,7 +1973,7 @@ var File_projects_scailo_proto protoreflect.FileDescriptor
 
 const file_projects_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15projects.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xee\x02\n" +
+	"\x15projects.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xe2\x02\n" +
 	"\x1cProjectsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1981,9 +1981,9 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12$\n" +
-	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x127\n" +
-	"\vdescription\x18\r \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x89\x03\n" +
+	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x12+\n" +
+	"\vdescription\x18\r \x01(\tB\t\xbaH\x06r\x042\x02.+R\vdescription\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xfd\x02\n" +
 	"\x1cProjectsServiceUpdateRequest\x12!\n" +
 	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
@@ -1991,8 +1991,8 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12$\n" +
-	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x127\n" +
-	"\vdescription\x18\r \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vdescription\x12@\n" +
+	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x12+\n" +
+	"\vdescription\x18\r \x01(\tB\t\xbaH\x06r\x042\x02.+R\vdescription\x12@\n" +
 	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xa0\x04\n" +
 	"\aProject\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +

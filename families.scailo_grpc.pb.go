@@ -21,6 +21,7 @@ const (
 	FamiliesService_Create_FullMethodName                       = "/Scailo.FamiliesService/Create"
 	FamiliesService_Draft_FullMethodName                        = "/Scailo.FamiliesService/Draft"
 	FamiliesService_DraftUpdate_FullMethodName                  = "/Scailo.FamiliesService/DraftUpdate"
+	FamiliesService_UpdateIdentity_FullMethodName               = "/Scailo.FamiliesService/UpdateIdentity"
 	FamiliesService_SendForVerification_FullMethodName          = "/Scailo.FamiliesService/SendForVerification"
 	FamiliesService_Verify_FullMethodName                       = "/Scailo.FamiliesService/Verify"
 	FamiliesService_Approve_FullMethodName                      = "/Scailo.FamiliesService/Approve"
@@ -120,6 +121,19 @@ type FamiliesServiceClient interface {
 	// - `FAILED_PRECONDITION`: If the record is not in a `DRAFT` state.
 	// - `NOT_FOUND`: If the provided ID does not exist.
 	DraftUpdate(ctx context.Context, in *FamiliesServiceUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Code Generation Logic:
+	// If `parent_id` > 0, the system automatically prefixes the parent family's
+	// code to the provided `code` before persistence (e.g., "PARENT_CODE.SUB_CODE").
+	//
+	// Preconditions:
+	// - The family must be in `DRAFT` or `REVISION` state.
+	// - The family `amendment_count` must be 0 (never previously approved).
+	//
+	// Errors:
+	// - `FAILED_PRECONDITION`: If the family has been approved previously (amendment_count > 0).
+	// - `INVALID_ARGUMENT`: If the hierarchy (parent_id/is_leaf) is self-referential or cyclic.
+	// - `NOT_FOUND`: If the Family ID or the specified `parent_id` does not exist.
+	UpdateIdentity(ctx context.Context, in *FamiliesServiceUpdateIdentityRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Submits a record in `DRAFT` or `REVISION` status for verification.
 	//
 	// This triggers the first stage of the approval workflow.
@@ -341,6 +355,16 @@ func (c *familiesServiceClient) DraftUpdate(ctx context.Context, in *FamiliesSer
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, FamiliesService_DraftUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) UpdateIdentity(ctx context.Context, in *FamiliesServiceUpdateIdentityRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_UpdateIdentity_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
