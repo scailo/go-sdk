@@ -1719,10 +1719,19 @@ type ProductionIndentsServiceFilterReq struct {
 	IndentRefId uint64 `protobuf:"varint,29,opt,name=indent_ref_id,json=indentRefId,proto3" json:"indent_ref_id,omitempty"`
 	// The ID of the family
 	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The list of form data filters
-	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
+	FormData []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	// @optional
+	//
+	// @description If `true`, the response will include the associated custom form field values for each record.
+	// Set to `false` to improve performance when form data is not needed.
+	//
+	// @example true
+	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ProductionIndentsServiceFilterReq) Reset() {
@@ -1942,6 +1951,13 @@ func (x *ProductionIndentsServiceFilterReq) GetFormData() []*FormFieldDatumFilte
 		return x.FormData
 	}
 	return nil
+}
+
+func (x *ProductionIndentsServiceFilterReq) GetIncludeFormData() bool {
+	if x != nil {
+		return x.IncludeFormData
+	}
+	return false
 }
 
 // Describes the base request payload of a count search
@@ -3008,7 +3024,7 @@ const file_production_indents_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x122\n" +
-	"\apayload\x18\x04 \x03(\v2\x18.Scailo.ProductionIndentR\apayload\"\xcb\n" +
+	"\apayload\x18\x04 \x03(\v2\x18.Scailo.ProductionIndentR\apayload\"\xf8\n" +
 	"\n" +
 	"!ProductionIndentsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
@@ -3043,7 +3059,8 @@ const file_production_indents_scailo_proto_rawDesc = "" +
 	"\x0eindent_ref_for\x18\x1c \x01(\x0e2(.Scailo.PRODUCTION_INDENT_INDENT_REF_FORR\findentRefFor\x12\"\n" +
 	"\rindent_ref_id\x18\x1d \x01(\x04R\vindentRefId\x12\x1b\n" +
 	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\x8f\t\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x8f\t\n" +
 	" ProductionIndentsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +

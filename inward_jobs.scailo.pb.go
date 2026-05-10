@@ -2086,10 +2086,19 @@ type InwardJobsServiceFilterReq struct {
 	ProjectId uint64 `protobuf:"varint,25,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// The ID of the outward family
 	OutwardFamilyId uint64 `protobuf:"varint,30,opt,name=outward_family_id,json=outwardFamilyId,proto3" json:"outward_family_id,omitempty"`
-	// The list of form data filters
-	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
+	FormData []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	// @optional
+	//
+	// @description If `true`, the response will include the associated custom form field values for each record.
+	// Set to `false` to improve performance when form data is not needed.
+	//
+	// @example true
+	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *InwardJobsServiceFilterReq) Reset() {
@@ -2316,6 +2325,13 @@ func (x *InwardJobsServiceFilterReq) GetFormData() []*FormFieldDatumFilterReques
 		return x.FormData
 	}
 	return nil
+}
+
+func (x *InwardJobsServiceFilterReq) GetIncludeFormData() bool {
+	if x != nil {
+		return x.IncludeFormData
+	}
+	return false
 }
 
 // Describes the base request payload of a count search
@@ -4810,7 +4826,7 @@ const file_inward_jobs_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.InwardJobR\apayload\"\xb3\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.InwardJobR\apayload\"\xe0\n" +
 	"\n" +
 	"\x1aInwardJobsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
@@ -4845,7 +4861,8 @@ const file_inward_jobs_scailo_proto_rawDesc = "" +
 	"\n" +
 	"project_id\x18\x19 \x01(\x04R\tprojectId\x12*\n" +
 	"\x11outward_family_id\x18\x1e \x01(\x04R\x0foutwardFamilyId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xfe\b\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xfe\b\n" +
 	"\x19InwardJobsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +

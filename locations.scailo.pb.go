@@ -877,10 +877,19 @@ type LocationsServiceFilterReq struct {
 	ParentLocationId uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
 	// Stores if this is a leaf location or a non-leaf location
 	IsLeaf BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
-	// The list of form data filters
-	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
+	FormData []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	// @optional
+	//
+	// @description If `true`, the response will include the associated custom form field values for each record.
+	// Set to `false` to improve performance when form data is not needed.
+	//
+	// @example true
+	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationsServiceFilterReq) Reset() {
@@ -1065,6 +1074,13 @@ func (x *LocationsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest
 		return x.FormData
 	}
 	return nil
+}
+
+func (x *LocationsServiceFilterReq) GetIncludeFormData() bool {
+	if x != nil {
+		return x.IncludeFormData
+	}
+	return false
 }
 
 // Describes the base request payload of a count search
@@ -1574,7 +1590,7 @@ const file_locations_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12*\n" +
-	"\apayload\x18\x04 \x03(\v2\x10.Scailo.LocationR\apayload\"\xeb\a\n" +
+	"\apayload\x18\x04 \x03(\v2\x10.Scailo.LocationR\apayload\"\x98\b\n" +
 	"\x19LocationsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -1600,7 +1616,8 @@ const file_locations_scailo_proto_rawDesc = "" +
 	"\x05phone\x18\x17 \x01(\tR\x05phone\x12,\n" +
 	"\x12parent_location_id\x18\x18 \x01(\x04R\x10parentLocationId\x12,\n" +
 	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xb8\x06\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xb8\x06\n" +
 	"\x18LocationsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +

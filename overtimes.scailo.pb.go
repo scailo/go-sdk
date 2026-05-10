@@ -992,10 +992,19 @@ type OvertimesServiceFilterReq struct {
 	ToTimestampStart uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3" json:"to_timestamp_start,omitempty"`
 	// The end range of "to timestamp"
 	ToTimestampEnd uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3" json:"to_timestamp_end,omitempty"`
-	// The list of form data filters
-	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
+	FormData []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	// @optional
+	//
+	// @description If `true`, the response will include the associated custom form field values for each record.
+	// Set to `false` to improve performance when form data is not needed.
+	//
+	// @example true
+	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OvertimesServiceFilterReq) Reset() {
@@ -1201,6 +1210,13 @@ func (x *OvertimesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest
 		return x.FormData
 	}
 	return nil
+}
+
+func (x *OvertimesServiceFilterReq) GetIncludeFormData() bool {
+	if x != nil {
+		return x.IncludeFormData
+	}
+	return false
 }
 
 // Describes the base request payload of a count search
@@ -1764,7 +1780,7 @@ const file_overtimes_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12*\n" +
-	"\apayload\x18\x04 \x03(\v2\x10.Scailo.OvertimeR\apayload\"\xb1\t\n" +
+	"\apayload\x18\x04 \x03(\v2\x10.Scailo.OvertimeR\apayload\"\xde\t\n" +
 	"\x19OvertimesServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -1793,7 +1809,8 @@ const file_overtimes_scailo_proto_rawDesc = "" +
 	"\x12from_timestamp_end\x18\x19 \x01(\x04R\x10fromTimestampEnd\x12,\n" +
 	"\x12to_timestamp_start\x18\x1a \x01(\x04R\x10toTimestampStart\x12(\n" +
 	"\x10to_timestamp_end\x18\x1b \x01(\x04R\x0etoTimestampEnd\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xfe\a\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xfe\a\n" +
 	"\x18OvertimesServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +

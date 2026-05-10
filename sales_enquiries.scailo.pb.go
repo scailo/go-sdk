@@ -2214,10 +2214,19 @@ type SalesEnquiriesServiceFilterReq struct {
 	DeliveryDateStart string `protobuf:"bytes,42,opt,name=delivery_date_start,json=deliveryDateStart,proto3" json:"delivery_date_start,omitempty"`
 	// The end delivery date of the item in the sales enquiry
 	DeliveryDateEnd string `protobuf:"bytes,43,opt,name=delivery_date_end,json=deliveryDateEnd,proto3" json:"delivery_date_end,omitempty"`
-	// The list of form data filters
-	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
+	FormData []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	// @optional
+	//
+	// @description If `true`, the response will include the associated custom form field values for each record.
+	// Set to `false` to improve performance when form data is not needed.
+	//
+	// @example true
+	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *SalesEnquiriesServiceFilterReq) Reset() {
@@ -2437,6 +2446,13 @@ func (x *SalesEnquiriesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRe
 		return x.FormData
 	}
 	return nil
+}
+
+func (x *SalesEnquiriesServiceFilterReq) GetIncludeFormData() bool {
+	if x != nil {
+		return x.IncludeFormData
+	}
+	return false
 }
 
 // Describes the base request payload of a count search
@@ -3357,7 +3373,7 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12.\n" +
-	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesEnquiryR\apayload\"\x8b\n" +
+	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesEnquiryR\apayload\"\xb8\n" +
 	"\n" +
 	"\x1eSalesEnquiriesServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
@@ -3390,7 +3406,8 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x13delivery_date_exact\x18) \x01(\tR\x11deliveryDateExact\x12.\n" +
 	"\x13delivery_date_start\x18* \x01(\tR\x11deliveryDateStart\x12*\n" +
 	"\x11delivery_date_end\x18+ \x01(\tR\x0fdeliveryDateEnd\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xd3\b\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xd3\b\n" +
 	"\x1dSalesEnquiriesServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +

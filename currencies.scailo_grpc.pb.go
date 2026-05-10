@@ -143,7 +143,7 @@ type CurrenciesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Currency, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*CurrenciesList, error)
-	// View by currency's code (logs aren't returned)
+	// View by currency's symbol (logs aren't returned)
 	ViewBySymbol(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Currency, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*CurrenciesList, error)
