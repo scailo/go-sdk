@@ -1245,6 +1245,8 @@ type ProductsServiceFilterReq struct {
 	IsQcReportPublic BOOL_FILTER `protobuf:"varint,52,opt,name=is_qc_report_public,json=isQcReportPublic,proto3,enum=Scailo.BOOL_FILTER" json:"is_qc_report_public,omitempty"`
 	// Filter by the location ID
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	// Filter by the ID of the client for whom the item has been issued
+	ClientId uint64 `protobuf:"varint,82,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1521,6 +1523,13 @@ func (x *ProductsServiceFilterReq) GetLocationId() uint64 {
 	return 0
 }
 
+func (x *ProductsServiceFilterReq) GetClientId() uint64 {
+	if x != nil {
+		return x.ClientId
+	}
+	return 0
+}
+
 func (x *ProductsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest {
 	if x != nil {
 		return x.FormData
@@ -1640,6 +1649,8 @@ type ProductsServiceCountReq struct {
 	IsQcReportPublic BOOL_FILTER `protobuf:"varint,52,opt,name=is_qc_report_public,json=isQcReportPublic,proto3,enum=Scailo.BOOL_FILTER" json:"is_qc_report_public,omitempty"`
 	// Filter by the location ID
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	// Filter by the ID of the client for whom the item has been issued
+	ClientId uint64 `protobuf:"varint,82,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // --------------------------------------------------
 	// The list of form data filters
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1875,6 +1886,13 @@ func (x *ProductsServiceCountReq) GetIsQcReportPublic() BOOL_FILTER {
 func (x *ProductsServiceCountReq) GetLocationId() uint64 {
 	if x != nil {
 		return x.LocationId
+	}
+	return 0
+}
+
+func (x *ProductsServiceCountReq) GetClientId() uint64 {
+	if x != nil {
+		return x.ClientId
 	}
 	return 0
 }
@@ -2220,7 +2238,7 @@ const file_products_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12)\n" +
-	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.ProductR\apayload\"\xed\f\n" +
+	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.ProductR\apayload\"\x8a\r\n" +
 	"\x18ProductsServiceFilterReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
 	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
@@ -2259,9 +2277,10 @@ const file_products_scailo_proto_rawDesc = "" +
 	"storage_id\x183 \x01(\x04R\tstorageId\x12B\n" +
 	"\x13is_qc_report_public\x184 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x10isQcReportPublic\x12\x1f\n" +
 	"\vlocation_id\x186 \x01(\x04R\n" +
-	"locationId\x12A\n" +
+	"locationId\x12\x1b\n" +
+	"\tclient_id\x18R \x01(\x04R\bclientId\x12A\n" +
 	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x8c\v\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xa9\v\n" +
 	"\x17ProductsServiceCountReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
 	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
@@ -2295,7 +2314,8 @@ const file_products_scailo_proto_rawDesc = "" +
 	"storage_id\x183 \x01(\x04R\tstorageId\x12B\n" +
 	"\x13is_qc_report_public\x184 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x10isQcReportPublic\x12\x1f\n" +
 	"\vlocation_id\x186 \x01(\x04R\n" +
-	"locationId\x12A\n" +
+	"locationId\x12\x1b\n" +
+	"\tclient_id\x18R \x01(\x04R\bclientId\x12A\n" +
 	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xcd\x05\n" +
 	"\x1bProductsServiceSearchAllReq\x120\n" +
 	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
