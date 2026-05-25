@@ -59,6 +59,8 @@ const (
 	MeetingsService_SearchAll_FullMethodName                       = "/Scailo.MeetingsService/SearchAll"
 	MeetingsService_Filter_FullMethodName                          = "/Scailo.MeetingsService/Filter"
 	MeetingsService_Count_FullMethodName                           = "/Scailo.MeetingsService/Count"
+	MeetingsService_DownloadAsCSV_FullMethodName                   = "/Scailo.MeetingsService/DownloadAsCSV"
+	MeetingsService_ImportFromCSV_FullMethodName                   = "/Scailo.MeetingsService/ImportFromCSV"
 )
 
 // MeetingsServiceClient is the client API for MeetingsService service.
@@ -156,6 +158,16 @@ type MeetingsServiceClient interface {
 	Filter(ctx context.Context, in *MeetingsServiceFilterReq, opts ...grpc.CallOption) (*MeetingsList, error)
 	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *MeetingsServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
+	// CSV operations
+	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records
+	DownloadAsCSV(ctx context.Context, in *MeetingsServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
+	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 
 type meetingsServiceClient struct {
@@ -570,6 +582,26 @@ func (c *meetingsServiceClient) Count(ctx context.Context, in *MeetingsServiceCo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CountResponse)
 	err := c.cc.Invoke(ctx, MeetingsService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *meetingsServiceClient) DownloadAsCSV(ctx context.Context, in *MeetingsServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, MeetingsService_DownloadAsCSV_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *meetingsServiceClient) ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierUUIDsList)
+	err := c.cc.Invoke(ctx, MeetingsService_ImportFromCSV_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
