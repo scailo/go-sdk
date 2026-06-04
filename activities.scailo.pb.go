@@ -4204,7 +4204,7 @@ var File_activities_scailo_proto protoreflect.FileDescriptor
 
 const file_activities_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x17activities.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xc3\x02\n" +
+	"\x17activities.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xc3\x02\n" +
 	"\x14LogbookLogActivityLC\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\x12\x1c\n" +
@@ -4605,7 +4605,7 @@ const file_activities_scailo_proto_rawDesc = "" +
 	"#ACTIVITY_TIMER_SORT_KEY_EMPLOYEE_ID\x10\f\x12$\n" +
 	" ACTIVITY_TIMER_SORT_KEY_START_AT\x10\r\x12\"\n" +
 	"\x1eACTIVITY_TIMER_SORT_KEY_END_AT\x10\x0e\x121\n" +
-	"-ACTIVITY_TIMER_SORT_KEY_COMPLETION_PERCENTAGE\x10\x0f2\x83#\n" +
+	"-ACTIVITY_TIMER_SORT_KEY_COMPLETION_PERCENTAGE\x10\x0f2\xd6#\n" +
 	"\x11ActivitiesService\x12H\n" +
 	"\x06Create\x12&.Scailo.ActivitiesServiceCreateRequest\x1a\x16.Scailo.IdentifierUUID\x12H\n" +
 	"\x06Update\x12&.Scailo.ActivitiesServiceUpdateRequest\x1a\x16.Scailo.IdentifierUUID\x12G\n" +
@@ -4615,7 +4615,8 @@ const file_activities_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12K\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12J\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x16.Scailo.IdentifierUUID\x12U\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x16.Scailo.IdentifierUUID\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\tAddAction\x12,.Scailo.ActivitiesServiceActionCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12g\n" +
 	"\x12AddActionWithTimer\x125.Scailo.ActivitiesServiceActionWithTimerCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
 	"\fModifyAction\x12,.Scailo.ActivitiesServiceActionUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
@@ -4731,17 +4732,18 @@ var file_activities_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                              // 42: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                        // 43: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                        // 44: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierWithUserComment)(nil),                            // 45: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                  // 46: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                           // 47: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                       // 48: Scailo.IdentifierUUID
-	(*IdentifierUUIDWithFile)(nil),                               // 49: Scailo.IdentifierUUIDWithFile
-	(*IdentifiersList)(nil),                                      // 50: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                         // 51: Scailo.ActiveStatus
-	(*StandardFile)(nil),                                         // 52: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                   // 53: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                        // 54: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                                  // 55: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                             // 45: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                            // 46: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                  // 47: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                           // 48: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                       // 49: Scailo.IdentifierUUID
+	(*IdentifierUUIDWithFile)(nil),                               // 50: Scailo.IdentifierUUIDWithFile
+	(*IdentifiersList)(nil),                                      // 51: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                         // 52: Scailo.ActiveStatus
+	(*StandardFile)(nil),                                         // 53: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                   // 54: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                        // 55: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                                  // 56: Scailo.IdentifierUUIDsList
 }
 var file_activities_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogActivityLC.operation:type_name -> Scailo.ACTIVITY_LIFECYCLE
@@ -4791,112 +4793,114 @@ var file_activities_scailo_proto_depIdxs = []int32{
 	43, // 44: Scailo.ActivitiesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	43, // 45: Scailo.ActivitiesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	44, // 46: Scailo.ActivitiesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	15, // 47: Scailo.ActivitiesService.AddAction:input_type -> Scailo.ActivitiesServiceActionCreateRequest
-	23, // 48: Scailo.ActivitiesService.AddActionWithTimer:input_type -> Scailo.ActivitiesServiceActionWithTimerCreateRequest
-	16, // 49: Scailo.ActivitiesService.ModifyAction:input_type -> Scailo.ActivitiesServiceActionUpdateRequest
-	45, // 50: Scailo.ActivitiesService.DeleteAction:input_type -> Scailo.IdentifierWithUserComment
-	46, // 51: Scailo.ActivitiesService.ReorderActions:input_type -> Scailo.ReorderItemsRequest
-	47, // 52: Scailo.ActivitiesService.ViewActionByID:input_type -> Scailo.Identifier
-	47, // 53: Scailo.ActivitiesService.ViewActionStatistics:input_type -> Scailo.Identifier
-	48, // 54: Scailo.ActivitiesService.ViewActions:input_type -> Scailo.IdentifierUUID
-	20, // 55: Scailo.ActivitiesService.ViewActionHistory:input_type -> Scailo.ActivityActionHistoryRequest
-	21, // 56: Scailo.ActivitiesService.ViewPaginatedActions:input_type -> Scailo.ActivityActionsSearchRequest
-	21, // 57: Scailo.ActivitiesService.SearchActionsWithPagination:input_type -> Scailo.ActivityActionsSearchRequest
-	48, // 58: Scailo.ActivitiesService.DownloadActionsAsCSV:input_type -> Scailo.IdentifierUUID
-	49, // 59: Scailo.ActivitiesService.UploadActivityActions:input_type -> Scailo.IdentifierUUIDWithFile
-	24, // 60: Scailo.ActivitiesService.AddActivityTagAssociation:input_type -> Scailo.ActivitiesServiceActivityTagAssociationCreateRequest
-	45, // 61: Scailo.ActivitiesService.DeleteActivityTagAssociation:input_type -> Scailo.IdentifierWithUserComment
-	47, // 62: Scailo.ActivitiesService.ViewActivityTagAssociationByID:input_type -> Scailo.Identifier
-	48, // 63: Scailo.ActivitiesService.ViewActivityTagAssociations:input_type -> Scailo.IdentifierUUID
-	27, // 64: Scailo.ActivitiesService.AddOwner:input_type -> Scailo.ActivitiesServiceOwnerCreateRequest
-	45, // 65: Scailo.ActivitiesService.DeleteOwner:input_type -> Scailo.IdentifierWithUserComment
-	47, // 66: Scailo.ActivitiesService.ViewOwnerByID:input_type -> Scailo.Identifier
-	48, // 67: Scailo.ActivitiesService.ViewOwners:input_type -> Scailo.IdentifierUUID
-	30, // 68: Scailo.ActivitiesService.ImportOwnersFromTeam:input_type -> Scailo.ActivitiesServiceImportOwnersRequest
-	30, // 69: Scailo.ActivitiesService.ImportOwnersFromDepartment:input_type -> Scailo.ActivitiesServiceImportOwnersRequest
-	31, // 70: Scailo.ActivitiesService.AddSupervisor:input_type -> Scailo.ActivitiesServiceSupervisorCreateRequest
-	45, // 71: Scailo.ActivitiesService.DeleteSupervisor:input_type -> Scailo.IdentifierWithUserComment
-	47, // 72: Scailo.ActivitiesService.ViewSupervisorByID:input_type -> Scailo.Identifier
-	48, // 73: Scailo.ActivitiesService.ViewSupervisors:input_type -> Scailo.IdentifierUUID
-	34, // 74: Scailo.ActivitiesService.AddTimer:input_type -> Scailo.ActivitiesServiceTimerCreateRequest
-	35, // 75: Scailo.ActivitiesService.EndTimer:input_type -> Scailo.ActivitiesServiceTimerEndRequest
-	47, // 76: Scailo.ActivitiesService.ViewTimerByID:input_type -> Scailo.Identifier
-	48, // 77: Scailo.ActivitiesService.ViewTimers:input_type -> Scailo.IdentifierUUID
-	38, // 78: Scailo.ActivitiesService.ViewPaginatedTimers:input_type -> Scailo.ActivityTimersSearchRequest
-	38, // 79: Scailo.ActivitiesService.SearchTimersWithPagination:input_type -> Scailo.ActivityTimersSearchRequest
-	48, // 80: Scailo.ActivitiesService.DownloadTimersAsCSV:input_type -> Scailo.IdentifierUUID
-	47, // 81: Scailo.ActivitiesService.ViewByID:input_type -> Scailo.Identifier
-	48, // 82: Scailo.ActivitiesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	47, // 83: Scailo.ActivitiesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	48, // 84: Scailo.ActivitiesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	50, // 85: Scailo.ActivitiesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	51, // 86: Scailo.ActivitiesService.ViewAll:input_type -> Scailo.ActiveStatus
-	48, // 87: Scailo.ActivitiesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	10, // 88: Scailo.ActivitiesService.ViewWithPagination:input_type -> Scailo.ActivitiesServicePaginationReq
-	48, // 89: Scailo.ActivitiesService.ViewStatistics:input_type -> Scailo.IdentifierUUID
-	14, // 90: Scailo.ActivitiesService.SearchAll:input_type -> Scailo.ActivitiesServiceSearchAllReq
-	12, // 91: Scailo.ActivitiesService.Filter:input_type -> Scailo.ActivitiesServiceFilterReq
-	13, // 92: Scailo.ActivitiesService.Count:input_type -> Scailo.ActivitiesServiceCountReq
-	12, // 93: Scailo.ActivitiesService.DownloadAsCSV:input_type -> Scailo.ActivitiesServiceFilterReq
-	52, // 94: Scailo.ActivitiesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	48, // 95: Scailo.ActivitiesService.Create:output_type -> Scailo.IdentifierUUID
-	48, // 96: Scailo.ActivitiesService.Update:output_type -> Scailo.IdentifierUUID
-	48, // 97: Scailo.ActivitiesService.Cancel:output_type -> Scailo.IdentifierUUID
-	48, // 98: Scailo.ActivitiesService.Complete:output_type -> Scailo.IdentifierUUID
-	48, // 99: Scailo.ActivitiesService.Reopen:output_type -> Scailo.IdentifierUUID
-	48, // 100: Scailo.ActivitiesService.Repeat:output_type -> Scailo.IdentifierUUID
-	48, // 101: Scailo.ActivitiesService.CommentAdd:output_type -> Scailo.IdentifierUUID
-	48, // 102: Scailo.ActivitiesService.SendEmail:output_type -> Scailo.IdentifierUUID
-	53, // 103: Scailo.ActivitiesService.AddAction:output_type -> Scailo.IdentifierResponse
-	53, // 104: Scailo.ActivitiesService.AddActionWithTimer:output_type -> Scailo.IdentifierResponse
-	53, // 105: Scailo.ActivitiesService.ModifyAction:output_type -> Scailo.IdentifierResponse
-	53, // 106: Scailo.ActivitiesService.DeleteAction:output_type -> Scailo.IdentifierResponse
-	53, // 107: Scailo.ActivitiesService.ReorderActions:output_type -> Scailo.IdentifierResponse
-	17, // 108: Scailo.ActivitiesService.ViewActionByID:output_type -> Scailo.ActivityAction
-	18, // 109: Scailo.ActivitiesService.ViewActionStatistics:output_type -> Scailo.ActivityActionStatistics
-	19, // 110: Scailo.ActivitiesService.ViewActions:output_type -> Scailo.ActivityActionsList
-	19, // 111: Scailo.ActivitiesService.ViewActionHistory:output_type -> Scailo.ActivityActionsList
-	22, // 112: Scailo.ActivitiesService.ViewPaginatedActions:output_type -> Scailo.ActivitiesServicePaginatedActionsResponse
-	22, // 113: Scailo.ActivitiesService.SearchActionsWithPagination:output_type -> Scailo.ActivitiesServicePaginatedActionsResponse
-	52, // 114: Scailo.ActivitiesService.DownloadActionsAsCSV:output_type -> Scailo.StandardFile
-	50, // 115: Scailo.ActivitiesService.UploadActivityActions:output_type -> Scailo.IdentifiersList
-	53, // 116: Scailo.ActivitiesService.AddActivityTagAssociation:output_type -> Scailo.IdentifierResponse
-	53, // 117: Scailo.ActivitiesService.DeleteActivityTagAssociation:output_type -> Scailo.IdentifierResponse
-	25, // 118: Scailo.ActivitiesService.ViewActivityTagAssociationByID:output_type -> Scailo.ActivityTagAssociation
-	26, // 119: Scailo.ActivitiesService.ViewActivityTagAssociations:output_type -> Scailo.ActivityTagAssociationsList
-	53, // 120: Scailo.ActivitiesService.AddOwner:output_type -> Scailo.IdentifierResponse
-	53, // 121: Scailo.ActivitiesService.DeleteOwner:output_type -> Scailo.IdentifierResponse
-	28, // 122: Scailo.ActivitiesService.ViewOwnerByID:output_type -> Scailo.ActivityOwner
-	29, // 123: Scailo.ActivitiesService.ViewOwners:output_type -> Scailo.ActivityOwnersList
-	53, // 124: Scailo.ActivitiesService.ImportOwnersFromTeam:output_type -> Scailo.IdentifierResponse
-	53, // 125: Scailo.ActivitiesService.ImportOwnersFromDepartment:output_type -> Scailo.IdentifierResponse
-	53, // 126: Scailo.ActivitiesService.AddSupervisor:output_type -> Scailo.IdentifierResponse
-	53, // 127: Scailo.ActivitiesService.DeleteSupervisor:output_type -> Scailo.IdentifierResponse
-	32, // 128: Scailo.ActivitiesService.ViewSupervisorByID:output_type -> Scailo.ActivitySupervisor
-	33, // 129: Scailo.ActivitiesService.ViewSupervisors:output_type -> Scailo.ActivitySupervisorsList
-	53, // 130: Scailo.ActivitiesService.AddTimer:output_type -> Scailo.IdentifierResponse
-	53, // 131: Scailo.ActivitiesService.EndTimer:output_type -> Scailo.IdentifierResponse
-	36, // 132: Scailo.ActivitiesService.ViewTimerByID:output_type -> Scailo.ActivityTimer
-	37, // 133: Scailo.ActivitiesService.ViewTimers:output_type -> Scailo.ActivityTimersList
-	39, // 134: Scailo.ActivitiesService.ViewPaginatedTimers:output_type -> Scailo.ActivitiesServicePaginatedTimersResponse
-	39, // 135: Scailo.ActivitiesService.SearchTimersWithPagination:output_type -> Scailo.ActivitiesServicePaginatedTimersResponse
-	52, // 136: Scailo.ActivitiesService.DownloadTimersAsCSV:output_type -> Scailo.StandardFile
-	7,  // 137: Scailo.ActivitiesService.ViewByID:output_type -> Scailo.Activity
-	7,  // 138: Scailo.ActivitiesService.ViewByUUID:output_type -> Scailo.Activity
-	7,  // 139: Scailo.ActivitiesService.ViewEssentialByID:output_type -> Scailo.Activity
-	7,  // 140: Scailo.ActivitiesService.ViewEssentialByUUID:output_type -> Scailo.Activity
-	8,  // 141: Scailo.ActivitiesService.ViewFromIDs:output_type -> Scailo.ActivitiesList
-	8,  // 142: Scailo.ActivitiesService.ViewAll:output_type -> Scailo.ActivitiesList
-	8,  // 143: Scailo.ActivitiesService.ViewAllForEntityUUID:output_type -> Scailo.ActivitiesList
-	11, // 144: Scailo.ActivitiesService.ViewWithPagination:output_type -> Scailo.ActivitiesServicePaginationResponse
-	9,  // 145: Scailo.ActivitiesService.ViewStatistics:output_type -> Scailo.ActivityStatistics
-	8,  // 146: Scailo.ActivitiesService.SearchAll:output_type -> Scailo.ActivitiesList
-	8,  // 147: Scailo.ActivitiesService.Filter:output_type -> Scailo.ActivitiesList
-	54, // 148: Scailo.ActivitiesService.Count:output_type -> Scailo.CountResponse
-	52, // 149: Scailo.ActivitiesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	55, // 150: Scailo.ActivitiesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	95, // [95:151] is the sub-list for method output_type
-	39, // [39:95] is the sub-list for method input_type
+	45, // 47: Scailo.ActivitiesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	15, // 48: Scailo.ActivitiesService.AddAction:input_type -> Scailo.ActivitiesServiceActionCreateRequest
+	23, // 49: Scailo.ActivitiesService.AddActionWithTimer:input_type -> Scailo.ActivitiesServiceActionWithTimerCreateRequest
+	16, // 50: Scailo.ActivitiesService.ModifyAction:input_type -> Scailo.ActivitiesServiceActionUpdateRequest
+	46, // 51: Scailo.ActivitiesService.DeleteAction:input_type -> Scailo.IdentifierWithUserComment
+	47, // 52: Scailo.ActivitiesService.ReorderActions:input_type -> Scailo.ReorderItemsRequest
+	48, // 53: Scailo.ActivitiesService.ViewActionByID:input_type -> Scailo.Identifier
+	48, // 54: Scailo.ActivitiesService.ViewActionStatistics:input_type -> Scailo.Identifier
+	49, // 55: Scailo.ActivitiesService.ViewActions:input_type -> Scailo.IdentifierUUID
+	20, // 56: Scailo.ActivitiesService.ViewActionHistory:input_type -> Scailo.ActivityActionHistoryRequest
+	21, // 57: Scailo.ActivitiesService.ViewPaginatedActions:input_type -> Scailo.ActivityActionsSearchRequest
+	21, // 58: Scailo.ActivitiesService.SearchActionsWithPagination:input_type -> Scailo.ActivityActionsSearchRequest
+	49, // 59: Scailo.ActivitiesService.DownloadActionsAsCSV:input_type -> Scailo.IdentifierUUID
+	50, // 60: Scailo.ActivitiesService.UploadActivityActions:input_type -> Scailo.IdentifierUUIDWithFile
+	24, // 61: Scailo.ActivitiesService.AddActivityTagAssociation:input_type -> Scailo.ActivitiesServiceActivityTagAssociationCreateRequest
+	46, // 62: Scailo.ActivitiesService.DeleteActivityTagAssociation:input_type -> Scailo.IdentifierWithUserComment
+	48, // 63: Scailo.ActivitiesService.ViewActivityTagAssociationByID:input_type -> Scailo.Identifier
+	49, // 64: Scailo.ActivitiesService.ViewActivityTagAssociations:input_type -> Scailo.IdentifierUUID
+	27, // 65: Scailo.ActivitiesService.AddOwner:input_type -> Scailo.ActivitiesServiceOwnerCreateRequest
+	46, // 66: Scailo.ActivitiesService.DeleteOwner:input_type -> Scailo.IdentifierWithUserComment
+	48, // 67: Scailo.ActivitiesService.ViewOwnerByID:input_type -> Scailo.Identifier
+	49, // 68: Scailo.ActivitiesService.ViewOwners:input_type -> Scailo.IdentifierUUID
+	30, // 69: Scailo.ActivitiesService.ImportOwnersFromTeam:input_type -> Scailo.ActivitiesServiceImportOwnersRequest
+	30, // 70: Scailo.ActivitiesService.ImportOwnersFromDepartment:input_type -> Scailo.ActivitiesServiceImportOwnersRequest
+	31, // 71: Scailo.ActivitiesService.AddSupervisor:input_type -> Scailo.ActivitiesServiceSupervisorCreateRequest
+	46, // 72: Scailo.ActivitiesService.DeleteSupervisor:input_type -> Scailo.IdentifierWithUserComment
+	48, // 73: Scailo.ActivitiesService.ViewSupervisorByID:input_type -> Scailo.Identifier
+	49, // 74: Scailo.ActivitiesService.ViewSupervisors:input_type -> Scailo.IdentifierUUID
+	34, // 75: Scailo.ActivitiesService.AddTimer:input_type -> Scailo.ActivitiesServiceTimerCreateRequest
+	35, // 76: Scailo.ActivitiesService.EndTimer:input_type -> Scailo.ActivitiesServiceTimerEndRequest
+	48, // 77: Scailo.ActivitiesService.ViewTimerByID:input_type -> Scailo.Identifier
+	49, // 78: Scailo.ActivitiesService.ViewTimers:input_type -> Scailo.IdentifierUUID
+	38, // 79: Scailo.ActivitiesService.ViewPaginatedTimers:input_type -> Scailo.ActivityTimersSearchRequest
+	38, // 80: Scailo.ActivitiesService.SearchTimersWithPagination:input_type -> Scailo.ActivityTimersSearchRequest
+	49, // 81: Scailo.ActivitiesService.DownloadTimersAsCSV:input_type -> Scailo.IdentifierUUID
+	48, // 82: Scailo.ActivitiesService.ViewByID:input_type -> Scailo.Identifier
+	49, // 83: Scailo.ActivitiesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	48, // 84: Scailo.ActivitiesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	49, // 85: Scailo.ActivitiesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	51, // 86: Scailo.ActivitiesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	52, // 87: Scailo.ActivitiesService.ViewAll:input_type -> Scailo.ActiveStatus
+	49, // 88: Scailo.ActivitiesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	10, // 89: Scailo.ActivitiesService.ViewWithPagination:input_type -> Scailo.ActivitiesServicePaginationReq
+	49, // 90: Scailo.ActivitiesService.ViewStatistics:input_type -> Scailo.IdentifierUUID
+	14, // 91: Scailo.ActivitiesService.SearchAll:input_type -> Scailo.ActivitiesServiceSearchAllReq
+	12, // 92: Scailo.ActivitiesService.Filter:input_type -> Scailo.ActivitiesServiceFilterReq
+	13, // 93: Scailo.ActivitiesService.Count:input_type -> Scailo.ActivitiesServiceCountReq
+	12, // 94: Scailo.ActivitiesService.DownloadAsCSV:input_type -> Scailo.ActivitiesServiceFilterReq
+	53, // 95: Scailo.ActivitiesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	49, // 96: Scailo.ActivitiesService.Create:output_type -> Scailo.IdentifierUUID
+	49, // 97: Scailo.ActivitiesService.Update:output_type -> Scailo.IdentifierUUID
+	49, // 98: Scailo.ActivitiesService.Cancel:output_type -> Scailo.IdentifierUUID
+	49, // 99: Scailo.ActivitiesService.Complete:output_type -> Scailo.IdentifierUUID
+	49, // 100: Scailo.ActivitiesService.Reopen:output_type -> Scailo.IdentifierUUID
+	49, // 101: Scailo.ActivitiesService.Repeat:output_type -> Scailo.IdentifierUUID
+	49, // 102: Scailo.ActivitiesService.CommentAdd:output_type -> Scailo.IdentifierUUID
+	49, // 103: Scailo.ActivitiesService.SendEmail:output_type -> Scailo.IdentifierUUID
+	54, // 104: Scailo.ActivitiesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	54, // 105: Scailo.ActivitiesService.AddAction:output_type -> Scailo.IdentifierResponse
+	54, // 106: Scailo.ActivitiesService.AddActionWithTimer:output_type -> Scailo.IdentifierResponse
+	54, // 107: Scailo.ActivitiesService.ModifyAction:output_type -> Scailo.IdentifierResponse
+	54, // 108: Scailo.ActivitiesService.DeleteAction:output_type -> Scailo.IdentifierResponse
+	54, // 109: Scailo.ActivitiesService.ReorderActions:output_type -> Scailo.IdentifierResponse
+	17, // 110: Scailo.ActivitiesService.ViewActionByID:output_type -> Scailo.ActivityAction
+	18, // 111: Scailo.ActivitiesService.ViewActionStatistics:output_type -> Scailo.ActivityActionStatistics
+	19, // 112: Scailo.ActivitiesService.ViewActions:output_type -> Scailo.ActivityActionsList
+	19, // 113: Scailo.ActivitiesService.ViewActionHistory:output_type -> Scailo.ActivityActionsList
+	22, // 114: Scailo.ActivitiesService.ViewPaginatedActions:output_type -> Scailo.ActivitiesServicePaginatedActionsResponse
+	22, // 115: Scailo.ActivitiesService.SearchActionsWithPagination:output_type -> Scailo.ActivitiesServicePaginatedActionsResponse
+	53, // 116: Scailo.ActivitiesService.DownloadActionsAsCSV:output_type -> Scailo.StandardFile
+	51, // 117: Scailo.ActivitiesService.UploadActivityActions:output_type -> Scailo.IdentifiersList
+	54, // 118: Scailo.ActivitiesService.AddActivityTagAssociation:output_type -> Scailo.IdentifierResponse
+	54, // 119: Scailo.ActivitiesService.DeleteActivityTagAssociation:output_type -> Scailo.IdentifierResponse
+	25, // 120: Scailo.ActivitiesService.ViewActivityTagAssociationByID:output_type -> Scailo.ActivityTagAssociation
+	26, // 121: Scailo.ActivitiesService.ViewActivityTagAssociations:output_type -> Scailo.ActivityTagAssociationsList
+	54, // 122: Scailo.ActivitiesService.AddOwner:output_type -> Scailo.IdentifierResponse
+	54, // 123: Scailo.ActivitiesService.DeleteOwner:output_type -> Scailo.IdentifierResponse
+	28, // 124: Scailo.ActivitiesService.ViewOwnerByID:output_type -> Scailo.ActivityOwner
+	29, // 125: Scailo.ActivitiesService.ViewOwners:output_type -> Scailo.ActivityOwnersList
+	54, // 126: Scailo.ActivitiesService.ImportOwnersFromTeam:output_type -> Scailo.IdentifierResponse
+	54, // 127: Scailo.ActivitiesService.ImportOwnersFromDepartment:output_type -> Scailo.IdentifierResponse
+	54, // 128: Scailo.ActivitiesService.AddSupervisor:output_type -> Scailo.IdentifierResponse
+	54, // 129: Scailo.ActivitiesService.DeleteSupervisor:output_type -> Scailo.IdentifierResponse
+	32, // 130: Scailo.ActivitiesService.ViewSupervisorByID:output_type -> Scailo.ActivitySupervisor
+	33, // 131: Scailo.ActivitiesService.ViewSupervisors:output_type -> Scailo.ActivitySupervisorsList
+	54, // 132: Scailo.ActivitiesService.AddTimer:output_type -> Scailo.IdentifierResponse
+	54, // 133: Scailo.ActivitiesService.EndTimer:output_type -> Scailo.IdentifierResponse
+	36, // 134: Scailo.ActivitiesService.ViewTimerByID:output_type -> Scailo.ActivityTimer
+	37, // 135: Scailo.ActivitiesService.ViewTimers:output_type -> Scailo.ActivityTimersList
+	39, // 136: Scailo.ActivitiesService.ViewPaginatedTimers:output_type -> Scailo.ActivitiesServicePaginatedTimersResponse
+	39, // 137: Scailo.ActivitiesService.SearchTimersWithPagination:output_type -> Scailo.ActivitiesServicePaginatedTimersResponse
+	53, // 138: Scailo.ActivitiesService.DownloadTimersAsCSV:output_type -> Scailo.StandardFile
+	7,  // 139: Scailo.ActivitiesService.ViewByID:output_type -> Scailo.Activity
+	7,  // 140: Scailo.ActivitiesService.ViewByUUID:output_type -> Scailo.Activity
+	7,  // 141: Scailo.ActivitiesService.ViewEssentialByID:output_type -> Scailo.Activity
+	7,  // 142: Scailo.ActivitiesService.ViewEssentialByUUID:output_type -> Scailo.Activity
+	8,  // 143: Scailo.ActivitiesService.ViewFromIDs:output_type -> Scailo.ActivitiesList
+	8,  // 144: Scailo.ActivitiesService.ViewAll:output_type -> Scailo.ActivitiesList
+	8,  // 145: Scailo.ActivitiesService.ViewAllForEntityUUID:output_type -> Scailo.ActivitiesList
+	11, // 146: Scailo.ActivitiesService.ViewWithPagination:output_type -> Scailo.ActivitiesServicePaginationResponse
+	9,  // 147: Scailo.ActivitiesService.ViewStatistics:output_type -> Scailo.ActivityStatistics
+	8,  // 148: Scailo.ActivitiesService.SearchAll:output_type -> Scailo.ActivitiesList
+	8,  // 149: Scailo.ActivitiesService.Filter:output_type -> Scailo.ActivitiesList
+	55, // 150: Scailo.ActivitiesService.Count:output_type -> Scailo.CountResponse
+	53, // 151: Scailo.ActivitiesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	56, // 152: Scailo.ActivitiesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	96, // [96:153] is the sub-list for method output_type
+	39, // [39:96] is the sub-list for method input_type
 	39, // [39:39] is the sub-list for extension type_name
 	39, // [39:39] is the sub-list for extension extendee
 	0,  // [0:39] is the sub-list for field type_name
@@ -4908,6 +4912,7 @@ func file_activities_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

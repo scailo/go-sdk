@@ -3163,7 +3163,7 @@ var File_goods_dispatches_scailo_proto protoreflect.FileDescriptor
 
 const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1dgoods_dispatches.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x9c\x03\n" +
+	"\x1dgoods_dispatches.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x9c\x03\n" +
 	"#GoodsDispatchesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3428,7 +3428,7 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\x1dGOODS_DISPATCH_BILLING_STATUS\x121\n" +
 	"-GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED\x10\x00\x12(\n" +
 	"$GOODS_DISPATCH_BILLING_STATUS_BILLED\x10\x01\x12*\n" +
-	"&GOODS_DISPATCH_BILLING_STATUS_UNBILLED\x10\x022\xf5'\n" +
+	"&GOODS_DISPATCH_BILLING_STATUS_UNBILLED\x10\x022\xc8(\n" +
 	"\x16GoodsDispatchesService\x12Q\n" +
 	"\x06Create\x12+.Scailo.GoodsDispatchesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\x05Draft\x12+.Scailo.GoodsDispatchesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -3446,7 +3446,8 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
 	"\bAutofill\x12-.Scailo.GoodsDispatchesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12u\n" +
@@ -3548,25 +3549,26 @@ var file_goods_dispatches_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                                // 35: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                              // 36: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                              // 37: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierUUID)(nil),                                             // 38: Scailo.IdentifierUUID
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                                  // 40: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                        // 41: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                 // 42: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                            // 43: Scailo.SimpleSearchReq
-	(*IdentifierWithSearchKey)(nil),                                    // 44: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                      // 45: Scailo.Empty
-	(*IdentifiersList)(nil),                                            // 46: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                               // 47: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                             // 48: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                    // 49: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                         // 50: Scailo.IdentifierResponse
-	(*BooleanResponse)(nil),                                            // 51: Scailo.BooleanResponse
-	(*MagicLink)(nil),                                                  // 52: Scailo.MagicLink
-	(*StandardFile)(nil),                                               // 53: Scailo.StandardFile
-	(*FamiliesList)(nil),                                               // 54: Scailo.FamiliesList
-	(*DualQuantitiesResponse)(nil),                                     // 55: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                              // 56: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                                   // 38: Scailo.VaultFolderAttachRequest
+	(*IdentifierUUID)(nil),                                             // 39: Scailo.IdentifierUUID
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 40: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                                  // 41: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                        // 42: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                 // 43: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                            // 44: Scailo.SimpleSearchReq
+	(*IdentifierWithSearchKey)(nil),                                    // 45: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                      // 46: Scailo.Empty
+	(*IdentifiersList)(nil),                                            // 47: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                               // 48: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                             // 49: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                    // 50: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                         // 51: Scailo.IdentifierResponse
+	(*BooleanResponse)(nil),                                            // 52: Scailo.BooleanResponse
+	(*MagicLink)(nil),                                                  // 53: Scailo.MagicLink
+	(*StandardFile)(nil),                                               // 54: Scailo.StandardFile
+	(*FamiliesList)(nil),                                               // 55: Scailo.FamiliesList
+	(*DualQuantitiesResponse)(nil),                                     // 56: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                              // 57: Scailo.CountResponse
 }
 var file_goods_dispatches_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.GoodsDispatchesServiceCreateRequest.ref_from:type_name -> Scailo.GOODS_DISPATCH_REF_FROM
@@ -3629,110 +3631,112 @@ var file_goods_dispatches_scailo_proto_depIdxs = []int32{
 	36,  // 57: Scailo.GoodsDispatchesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	36,  // 58: Scailo.GoodsDispatchesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	37,  // 59: Scailo.GoodsDispatchesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	7,   // 60: Scailo.GoodsDispatchesService.Autofill:input_type -> Scailo.GoodsDispatchesServiceAutofillRequest
-	38,  // 61: Scailo.GoodsDispatchesService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	39,  // 62: Scailo.GoodsDispatchesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	12,  // 63: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:input_type -> Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest
-	10,  // 64: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
-	13,  // 65: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemUpdateRequest
-	40,  // 66: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
-	40,  // 67: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 68: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:input_type -> Scailo.ReorderItemsRequest
-	42,  // 69: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:input_type -> Scailo.Identifier
-	43,  // 70: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
-	44,  // 71: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
-	44,  // 72: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
-	17,  // 73: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:input_type -> Scailo.GoodsDispatchItemHistoryRequest
-	19,  // 74: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	19,  // 75: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	19,  // 76: Scailo.GoodsDispatchesService.SearchItemsWithPagination:input_type -> Scailo.GoodsDispatchItemsSearchRequest
-	38,  // 77: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	45,  // 78: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	42,  // 79: Scailo.GoodsDispatchesService.ViewByID:input_type -> Scailo.Identifier
-	38,  // 80: Scailo.GoodsDispatchesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	43,  // 81: Scailo.GoodsDispatchesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	42,  // 82: Scailo.GoodsDispatchesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	38,  // 83: Scailo.GoodsDispatchesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	46,  // 84: Scailo.GoodsDispatchesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	38,  // 85: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	47,  // 86: Scailo.GoodsDispatchesService.ViewAll:input_type -> Scailo.ActiveStatus
-	38,  // 87: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	22,  // 88: Scailo.GoodsDispatchesService.ViewWithPagination:input_type -> Scailo.GoodsDispatchesServicePaginationReq
-	44,  // 89: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	48,  // 90: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	18,  // 91: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:input_type -> Scailo.GoodsDispatchItemProspectiveInfoRequest
-	38,  // 92: Scailo.GoodsDispatchesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	38,  // 93: Scailo.GoodsDispatchesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	38,  // 94: Scailo.GoodsDispatchesService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	38,  // 95: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
-	38,  // 96: Scailo.GoodsDispatchesService.IsBilled:input_type -> Scailo.IdentifierUUID
-	21,  // 97: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
-	26,  // 98: Scailo.GoodsDispatchesService.SearchAll:input_type -> Scailo.GoodsDispatchesServiceSearchAllReq
-	24,  // 99: Scailo.GoodsDispatchesService.Filter:input_type -> Scailo.GoodsDispatchesServiceFilterReq
-	49,  // 100: Scailo.GoodsDispatchesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	25,  // 101: Scailo.GoodsDispatchesService.Count:input_type -> Scailo.GoodsDispatchesServiceCountReq
-	24,  // 102: Scailo.GoodsDispatchesService.DownloadAsCSV:input_type -> Scailo.GoodsDispatchesServiceFilterReq
-	50,  // 103: Scailo.GoodsDispatchesService.Create:output_type -> Scailo.IdentifierResponse
-	50,  // 104: Scailo.GoodsDispatchesService.Draft:output_type -> Scailo.IdentifierResponse
-	50,  // 105: Scailo.GoodsDispatchesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	50,  // 106: Scailo.GoodsDispatchesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	50,  // 107: Scailo.GoodsDispatchesService.Verify:output_type -> Scailo.IdentifierResponse
-	50,  // 108: Scailo.GoodsDispatchesService.Approve:output_type -> Scailo.IdentifierResponse
-	50,  // 109: Scailo.GoodsDispatchesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	50,  // 110: Scailo.GoodsDispatchesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	50,  // 111: Scailo.GoodsDispatchesService.Halt:output_type -> Scailo.IdentifierResponse
-	50,  // 112: Scailo.GoodsDispatchesService.Discard:output_type -> Scailo.IdentifierResponse
-	50,  // 113: Scailo.GoodsDispatchesService.Restore:output_type -> Scailo.IdentifierResponse
-	50,  // 114: Scailo.GoodsDispatchesService.Complete:output_type -> Scailo.IdentifierResponse
-	50,  // 115: Scailo.GoodsDispatchesService.Repeat:output_type -> Scailo.IdentifierResponse
-	50,  // 116: Scailo.GoodsDispatchesService.Reopen:output_type -> Scailo.IdentifierResponse
-	50,  // 117: Scailo.GoodsDispatchesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	50,  // 118: Scailo.GoodsDispatchesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	50,  // 119: Scailo.GoodsDispatchesService.Autofill:output_type -> Scailo.IdentifierResponse
-	51,  // 120: Scailo.GoodsDispatchesService.IsCompletable:output_type -> Scailo.BooleanResponse
-	52,  // 121: Scailo.GoodsDispatchesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	50,  // 122: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
-	50,  // 123: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	50,  // 124: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	50,  // 125: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	50,  // 126: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
-	50,  // 127: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
-	14,  // 128: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:output_type -> Scailo.GoodsDispatchItem
-	14,  // 129: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:output_type -> Scailo.GoodsDispatchItem
-	16,  // 130: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
-	16,  // 131: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
-	16,  // 132: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:output_type -> Scailo.GoodsDispatchesItemsList
-	20,  // 133: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	20,  // 134: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	20,  // 135: Scailo.GoodsDispatchesService.SearchItemsWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
-	53,  // 136: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	53,  // 137: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	9,   // 138: Scailo.GoodsDispatchesService.ViewByID:output_type -> Scailo.GoodsDispatch
-	9,   // 139: Scailo.GoodsDispatchesService.ViewByUUID:output_type -> Scailo.GoodsDispatch
-	9,   // 140: Scailo.GoodsDispatchesService.ViewByReferenceID:output_type -> Scailo.GoodsDispatch
-	9,   // 141: Scailo.GoodsDispatchesService.ViewEssentialByID:output_type -> Scailo.GoodsDispatch
-	9,   // 142: Scailo.GoodsDispatchesService.ViewEssentialByUUID:output_type -> Scailo.GoodsDispatch
-	15,  // 143: Scailo.GoodsDispatchesService.ViewFromIDs:output_type -> Scailo.GoodsDispatchesList
-	8,   // 144: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:output_type -> Scailo.GoodsDispatchAncillaryParameters
-	15,  // 145: Scailo.GoodsDispatchesService.ViewAll:output_type -> Scailo.GoodsDispatchesList
-	15,  // 146: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:output_type -> Scailo.GoodsDispatchesList
-	23,  // 147: Scailo.GoodsDispatchesService.ViewWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginationResponse
-	54,  // 148: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	54,  // 149: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	10,  // 150: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:output_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
-	51,  // 151: Scailo.GoodsDispatchesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	53,  // 152: Scailo.GoodsDispatchesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	53,  // 153: Scailo.GoodsDispatchesService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	50,  // 154: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
-	51,  // 155: Scailo.GoodsDispatchesService.IsBilled:output_type -> Scailo.BooleanResponse
-	55,  // 156: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	15,  // 157: Scailo.GoodsDispatchesService.SearchAll:output_type -> Scailo.GoodsDispatchesList
-	15,  // 158: Scailo.GoodsDispatchesService.Filter:output_type -> Scailo.GoodsDispatchesList
-	56,  // 159: Scailo.GoodsDispatchesService.CountInStatus:output_type -> Scailo.CountResponse
-	56,  // 160: Scailo.GoodsDispatchesService.Count:output_type -> Scailo.CountResponse
-	53,  // 161: Scailo.GoodsDispatchesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	103, // [103:162] is the sub-list for method output_type
-	44,  // [44:103] is the sub-list for method input_type
+	38,  // 60: Scailo.GoodsDispatchesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	7,   // 61: Scailo.GoodsDispatchesService.Autofill:input_type -> Scailo.GoodsDispatchesServiceAutofillRequest
+	39,  // 62: Scailo.GoodsDispatchesService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	40,  // 63: Scailo.GoodsDispatchesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	12,  // 64: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:input_type -> Scailo.GoodsDispatchesServiceMultipleItemsCreateRequest
+	10,  // 65: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
+	13,  // 66: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:input_type -> Scailo.GoodsDispatchesServiceItemUpdateRequest
+	41,  // 67: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 68: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:input_type -> Scailo.IdentifierWithUserComment
+	42,  // 69: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:input_type -> Scailo.ReorderItemsRequest
+	43,  // 70: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:input_type -> Scailo.Identifier
+	44,  // 71: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
+	45,  // 72: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
+	45,  // 73: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:input_type -> Scailo.IdentifierWithSearchKey
+	17,  // 74: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:input_type -> Scailo.GoodsDispatchItemHistoryRequest
+	19,  // 75: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	19,  // 76: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	19,  // 77: Scailo.GoodsDispatchesService.SearchItemsWithPagination:input_type -> Scailo.GoodsDispatchItemsSearchRequest
+	39,  // 78: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	46,  // 79: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	43,  // 80: Scailo.GoodsDispatchesService.ViewByID:input_type -> Scailo.Identifier
+	39,  // 81: Scailo.GoodsDispatchesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	44,  // 82: Scailo.GoodsDispatchesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	43,  // 83: Scailo.GoodsDispatchesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	39,  // 84: Scailo.GoodsDispatchesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 85: Scailo.GoodsDispatchesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	39,  // 86: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	48,  // 87: Scailo.GoodsDispatchesService.ViewAll:input_type -> Scailo.ActiveStatus
+	39,  // 88: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	22,  // 89: Scailo.GoodsDispatchesService.ViewWithPagination:input_type -> Scailo.GoodsDispatchesServicePaginationReq
+	45,  // 90: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	49,  // 91: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	18,  // 92: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:input_type -> Scailo.GoodsDispatchItemProspectiveInfoRequest
+	39,  // 93: Scailo.GoodsDispatchesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	39,  // 94: Scailo.GoodsDispatchesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	39,  // 95: Scailo.GoodsDispatchesService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	39,  // 96: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:input_type -> Scailo.IdentifierUUID
+	39,  // 97: Scailo.GoodsDispatchesService.IsBilled:input_type -> Scailo.IdentifierUUID
+	21,  // 98: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest
+	26,  // 99: Scailo.GoodsDispatchesService.SearchAll:input_type -> Scailo.GoodsDispatchesServiceSearchAllReq
+	24,  // 100: Scailo.GoodsDispatchesService.Filter:input_type -> Scailo.GoodsDispatchesServiceFilterReq
+	50,  // 101: Scailo.GoodsDispatchesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	25,  // 102: Scailo.GoodsDispatchesService.Count:input_type -> Scailo.GoodsDispatchesServiceCountReq
+	24,  // 103: Scailo.GoodsDispatchesService.DownloadAsCSV:input_type -> Scailo.GoodsDispatchesServiceFilterReq
+	51,  // 104: Scailo.GoodsDispatchesService.Create:output_type -> Scailo.IdentifierResponse
+	51,  // 105: Scailo.GoodsDispatchesService.Draft:output_type -> Scailo.IdentifierResponse
+	51,  // 106: Scailo.GoodsDispatchesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	51,  // 107: Scailo.GoodsDispatchesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	51,  // 108: Scailo.GoodsDispatchesService.Verify:output_type -> Scailo.IdentifierResponse
+	51,  // 109: Scailo.GoodsDispatchesService.Approve:output_type -> Scailo.IdentifierResponse
+	51,  // 110: Scailo.GoodsDispatchesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	51,  // 111: Scailo.GoodsDispatchesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	51,  // 112: Scailo.GoodsDispatchesService.Halt:output_type -> Scailo.IdentifierResponse
+	51,  // 113: Scailo.GoodsDispatchesService.Discard:output_type -> Scailo.IdentifierResponse
+	51,  // 114: Scailo.GoodsDispatchesService.Restore:output_type -> Scailo.IdentifierResponse
+	51,  // 115: Scailo.GoodsDispatchesService.Complete:output_type -> Scailo.IdentifierResponse
+	51,  // 116: Scailo.GoodsDispatchesService.Repeat:output_type -> Scailo.IdentifierResponse
+	51,  // 117: Scailo.GoodsDispatchesService.Reopen:output_type -> Scailo.IdentifierResponse
+	51,  // 118: Scailo.GoodsDispatchesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	51,  // 119: Scailo.GoodsDispatchesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	51,  // 120: Scailo.GoodsDispatchesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	51,  // 121: Scailo.GoodsDispatchesService.Autofill:output_type -> Scailo.IdentifierResponse
+	52,  // 122: Scailo.GoodsDispatchesService.IsCompletable:output_type -> Scailo.BooleanResponse
+	53,  // 123: Scailo.GoodsDispatchesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	51,  // 124: Scailo.GoodsDispatchesService.AddMultipleGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
+	51,  // 125: Scailo.GoodsDispatchesService.AddGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	51,  // 126: Scailo.GoodsDispatchesService.ModifyGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	51,  // 127: Scailo.GoodsDispatchesService.ApproveGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	51,  // 128: Scailo.GoodsDispatchesService.DeleteGoodsDispatchItem:output_type -> Scailo.IdentifierResponse
+	51,  // 129: Scailo.GoodsDispatchesService.ReorderGoodsDispatchItems:output_type -> Scailo.IdentifierResponse
+	14,  // 130: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByID:output_type -> Scailo.GoodsDispatchItem
+	14,  // 131: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemByInventoryHash:output_type -> Scailo.GoodsDispatchItem
+	16,  // 132: Scailo.GoodsDispatchesService.ViewApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
+	16,  // 133: Scailo.GoodsDispatchesService.ViewUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesItemsList
+	16,  // 134: Scailo.GoodsDispatchesService.ViewGoodsDispatchItemHistory:output_type -> Scailo.GoodsDispatchesItemsList
+	20,  // 135: Scailo.GoodsDispatchesService.ViewPaginatedApprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	20,  // 136: Scailo.GoodsDispatchesService.ViewPaginatedUnapprovedGoodsDispatchItems:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	20,  // 137: Scailo.GoodsDispatchesService.SearchItemsWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginatedItemsResponse
+	54,  // 138: Scailo.GoodsDispatchesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	54,  // 139: Scailo.GoodsDispatchesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	9,   // 140: Scailo.GoodsDispatchesService.ViewByID:output_type -> Scailo.GoodsDispatch
+	9,   // 141: Scailo.GoodsDispatchesService.ViewByUUID:output_type -> Scailo.GoodsDispatch
+	9,   // 142: Scailo.GoodsDispatchesService.ViewByReferenceID:output_type -> Scailo.GoodsDispatch
+	9,   // 143: Scailo.GoodsDispatchesService.ViewEssentialByID:output_type -> Scailo.GoodsDispatch
+	9,   // 144: Scailo.GoodsDispatchesService.ViewEssentialByUUID:output_type -> Scailo.GoodsDispatch
+	15,  // 145: Scailo.GoodsDispatchesService.ViewFromIDs:output_type -> Scailo.GoodsDispatchesList
+	8,   // 146: Scailo.GoodsDispatchesService.ViewAncillaryParametersByUUID:output_type -> Scailo.GoodsDispatchAncillaryParameters
+	15,  // 147: Scailo.GoodsDispatchesService.ViewAll:output_type -> Scailo.GoodsDispatchesList
+	15,  // 148: Scailo.GoodsDispatchesService.ViewAllForEntityUUID:output_type -> Scailo.GoodsDispatchesList
+	23,  // 149: Scailo.GoodsDispatchesService.ViewWithPagination:output_type -> Scailo.GoodsDispatchesServicePaginationResponse
+	55,  // 150: Scailo.GoodsDispatchesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	55,  // 151: Scailo.GoodsDispatchesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	10,  // 152: Scailo.GoodsDispatchesService.ViewProspectiveGoodsDispatchItem:output_type -> Scailo.GoodsDispatchesServiceItemCreateRequest
+	52,  // 153: Scailo.GoodsDispatchesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	54,  // 154: Scailo.GoodsDispatchesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	54,  // 155: Scailo.GoodsDispatchesService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	51,  // 156: Scailo.GoodsDispatchesService.ViewAssociatedSalesInvoiceInfo:output_type -> Scailo.IdentifierResponse
+	52,  // 157: Scailo.GoodsDispatchesService.IsBilled:output_type -> Scailo.BooleanResponse
+	56,  // 158: Scailo.GoodsDispatchesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	15,  // 159: Scailo.GoodsDispatchesService.SearchAll:output_type -> Scailo.GoodsDispatchesList
+	15,  // 160: Scailo.GoodsDispatchesService.Filter:output_type -> Scailo.GoodsDispatchesList
+	57,  // 161: Scailo.GoodsDispatchesService.CountInStatus:output_type -> Scailo.CountResponse
+	57,  // 162: Scailo.GoodsDispatchesService.Count:output_type -> Scailo.CountResponse
+	54,  // 163: Scailo.GoodsDispatchesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	104, // [104:164] is the sub-list for method output_type
+	44,  // [44:104] is the sub-list for method input_type
 	44,  // [44:44] is the sub-list for extension type_name
 	44,  // [44:44] is the sub-list for extension extendee
 	0,   // [0:44] is the sub-list for field type_name
@@ -3747,6 +3751,7 @@ func file_goods_dispatches_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

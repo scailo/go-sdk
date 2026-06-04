@@ -2986,7 +2986,7 @@ var File_qc_samples_scailo_proto protoreflect.FileDescriptor
 
 const file_qc_samples_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x17qc_samples.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x16qc_groups.scailo.proto\"\xc4\x02\n" +
+	"\x17qc_samples.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x16qc_groups.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc4\x02\n" +
 	"\x14LogbookLogQCSampleLC\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\x12\x1c\n" +
@@ -3265,7 +3265,7 @@ const file_qc_samples_scailo_proto_rawDesc = "" +
 	"'QC_SAMPLE_PARAMETER_SORT_KEY_CHECKED_AT\x10\v\x12-\n" +
 	")QC_SAMPLE_PARAMETER_SORT_KEY_QC_SAMPLE_ID\x10\f\x12,\n" +
 	"(QC_SAMPLE_PARAMETER_SORT_KEY_QC_PARAM_ID\x10\r\x12'\n" +
-	"#QC_SAMPLE_PARAMETER_SORT_KEY_UOM_ID\x10\x0e2\xea\x15\n" +
+	"#QC_SAMPLE_PARAMETER_SORT_KEY_UOM_ID\x10\x0e2\xbd\x16\n" +
 	"\x10QCSamplesService\x12L\n" +
 	"\x06Create\x12%.Scailo.QCSamplesServiceCreateRequest\x1a\x1b.Scailo.IdentifierUUIDsList\x12K\n" +
 	"\x06Update\x12%.Scailo.QCSamplesServiceUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
@@ -3277,7 +3277,8 @@ const file_qc_samples_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12]\n" +
 	"\x0fUpdateParameter\x12..Scailo.QCSamplesServiceParameterUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12`\n" +
 	"\x10UpdateParameters\x123.Scailo.QCSamplesServiceParameterUpdateRequestsList\x1a\x17.Scailo.IdentifiersList\x12B\n" +
@@ -3360,17 +3361,18 @@ var file_qc_samples_scailo_proto_goTypes = []any{
 	(QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE)(0),                  // 34: Scailo.QC_GROUP_ITEM_ACCEPTABLE_VALUE_TYPE
 	(*IdentifierUUIDWithUserComment)(nil),                     // 35: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 36: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 37: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 38: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 39: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 40: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 41: Scailo.ActiveStatus
-	(*IdentifierUUIDsList)(nil),                               // 42: Scailo.IdentifierUUIDsList
-	(*IdentifierResponse)(nil),                                // 43: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 44: Scailo.MagicLink
-	(*StandardFile)(nil),                                      // 45: Scailo.StandardFile
-	(*BooleanResponse)(nil),                                   // 46: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 47: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 37: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 38: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 39: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 40: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 41: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 42: Scailo.ActiveStatus
+	(*IdentifierUUIDsList)(nil),                               // 43: Scailo.IdentifierUUIDsList
+	(*IdentifierResponse)(nil),                                // 44: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 45: Scailo.MagicLink
+	(*StandardFile)(nil),                                      // 46: Scailo.StandardFile
+	(*BooleanResponse)(nil),                                   // 47: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 48: Scailo.CountResponse
 }
 var file_qc_samples_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogQCSampleLC.operation:type_name -> Scailo.QC_SAMPLE_LIFECYCLE
@@ -3423,68 +3425,70 @@ var file_qc_samples_scailo_proto_depIdxs = []int32{
 	35, // 47: Scailo.QCSamplesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	35, // 48: Scailo.QCSamplesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	36, // 49: Scailo.QCSamplesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	37, // 50: Scailo.QCSamplesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	16, // 51: Scailo.QCSamplesService.UpdateParameter:input_type -> Scailo.QCSamplesServiceParameterUpdateRequest
-	17, // 52: Scailo.QCSamplesService.UpdateParameters:input_type -> Scailo.QCSamplesServiceParameterUpdateRequestsList
-	38, // 53: Scailo.QCSamplesService.ViewParameterByID:input_type -> Scailo.Identifier
-	39, // 54: Scailo.QCSamplesService.ViewParameters:input_type -> Scailo.IdentifierUUID
-	20, // 55: Scailo.QCSamplesService.ViewParameterHistory:input_type -> Scailo.QCSampleParameterHistoryRequest
-	23, // 56: Scailo.QCSamplesService.ViewPaginatedParameters:input_type -> Scailo.QCSampleParametersSearchRequest
-	23, // 57: Scailo.QCSamplesService.SearchParametersWithPagination:input_type -> Scailo.QCSampleParametersSearchRequest
-	39, // 58: Scailo.QCSamplesService.DownloadParametersAsCSV:input_type -> Scailo.IdentifierUUID
-	38, // 59: Scailo.QCSamplesService.ViewByID:input_type -> Scailo.Identifier
-	39, // 60: Scailo.QCSamplesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	38, // 61: Scailo.QCSamplesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	39, // 62: Scailo.QCSamplesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	40, // 63: Scailo.QCSamplesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	39, // 64: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	41, // 65: Scailo.QCSamplesService.ViewAll:input_type -> Scailo.ActiveStatus
-	39, // 66: Scailo.QCSamplesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	11, // 67: Scailo.QCSamplesService.ViewWithPagination:input_type -> Scailo.QCSamplesServicePaginationReq
-	39, // 68: Scailo.QCSamplesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	39, // 69: Scailo.QCSamplesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	15, // 70: Scailo.QCSamplesService.SearchAll:input_type -> Scailo.QCSamplesServiceSearchAllReq
-	13, // 71: Scailo.QCSamplesService.Filter:input_type -> Scailo.QCSamplesServiceFilterReq
-	14, // 72: Scailo.QCSamplesService.Count:input_type -> Scailo.QCSamplesServiceCountReq
-	39, // 73: Scailo.QCSamplesService.CountsForInventoryItem:input_type -> Scailo.IdentifierUUID
-	13, // 74: Scailo.QCSamplesService.DownloadAsCSV:input_type -> Scailo.QCSamplesServiceFilterReq
-	42, // 75: Scailo.QCSamplesService.Create:output_type -> Scailo.IdentifierUUIDsList
-	43, // 76: Scailo.QCSamplesService.Update:output_type -> Scailo.IdentifierResponse
-	43, // 77: Scailo.QCSamplesService.Finish:output_type -> Scailo.IdentifierResponse
-	43, // 78: Scailo.QCSamplesService.Accept:output_type -> Scailo.IdentifierResponse
-	43, // 79: Scailo.QCSamplesService.AcceptWithDeviation:output_type -> Scailo.IdentifierResponse
-	43, // 80: Scailo.QCSamplesService.Reject:output_type -> Scailo.IdentifierResponse
-	43, // 81: Scailo.QCSamplesService.Cancel:output_type -> Scailo.IdentifierResponse
-	43, // 82: Scailo.QCSamplesService.Reopen:output_type -> Scailo.IdentifierResponse
-	43, // 83: Scailo.QCSamplesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	43, // 84: Scailo.QCSamplesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	44, // 85: Scailo.QCSamplesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	43, // 86: Scailo.QCSamplesService.UpdateParameter:output_type -> Scailo.IdentifierResponse
-	40, // 87: Scailo.QCSamplesService.UpdateParameters:output_type -> Scailo.IdentifiersList
-	18, // 88: Scailo.QCSamplesService.ViewParameterByID:output_type -> Scailo.QCSampleParameter
-	19, // 89: Scailo.QCSamplesService.ViewParameters:output_type -> Scailo.QCSampleParametersList
-	22, // 90: Scailo.QCSamplesService.ViewParameterHistory:output_type -> Scailo.QCSampleParameterHistoryList
-	24, // 91: Scailo.QCSamplesService.ViewPaginatedParameters:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
-	24, // 92: Scailo.QCSamplesService.SearchParametersWithPagination:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
-	45, // 93: Scailo.QCSamplesService.DownloadParametersAsCSV:output_type -> Scailo.StandardFile
-	7,  // 94: Scailo.QCSamplesService.ViewByID:output_type -> Scailo.QCSample
-	7,  // 95: Scailo.QCSamplesService.ViewByUUID:output_type -> Scailo.QCSample
-	7,  // 96: Scailo.QCSamplesService.ViewEssentialByID:output_type -> Scailo.QCSample
-	7,  // 97: Scailo.QCSamplesService.ViewEssentialByUUID:output_type -> Scailo.QCSample
-	9,  // 98: Scailo.QCSamplesService.ViewFromIDs:output_type -> Scailo.QCSamplesList
-	6,  // 99: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QCSampleAncillaryParameters
-	9,  // 100: Scailo.QCSamplesService.ViewAll:output_type -> Scailo.QCSamplesList
-	9,  // 101: Scailo.QCSamplesService.ViewAllForEntityUUID:output_type -> Scailo.QCSamplesList
-	12, // 102: Scailo.QCSamplesService.ViewWithPagination:output_type -> Scailo.QCSamplesServicePaginationResponse
-	46, // 103: Scailo.QCSamplesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	45, // 104: Scailo.QCSamplesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	10, // 105: Scailo.QCSamplesService.SearchAll:output_type -> Scailo.QCSamplesWithMetadataList
-	9,  // 106: Scailo.QCSamplesService.Filter:output_type -> Scailo.QCSamplesList
-	47, // 107: Scailo.QCSamplesService.Count:output_type -> Scailo.CountResponse
-	25, // 108: Scailo.QCSamplesService.CountsForInventoryItem:output_type -> Scailo.QCSamplesCountStatistics
-	45, // 109: Scailo.QCSamplesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	75, // [75:110] is the sub-list for method output_type
-	40, // [40:75] is the sub-list for method input_type
+	37, // 50: Scailo.QCSamplesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	38, // 51: Scailo.QCSamplesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	16, // 52: Scailo.QCSamplesService.UpdateParameter:input_type -> Scailo.QCSamplesServiceParameterUpdateRequest
+	17, // 53: Scailo.QCSamplesService.UpdateParameters:input_type -> Scailo.QCSamplesServiceParameterUpdateRequestsList
+	39, // 54: Scailo.QCSamplesService.ViewParameterByID:input_type -> Scailo.Identifier
+	40, // 55: Scailo.QCSamplesService.ViewParameters:input_type -> Scailo.IdentifierUUID
+	20, // 56: Scailo.QCSamplesService.ViewParameterHistory:input_type -> Scailo.QCSampleParameterHistoryRequest
+	23, // 57: Scailo.QCSamplesService.ViewPaginatedParameters:input_type -> Scailo.QCSampleParametersSearchRequest
+	23, // 58: Scailo.QCSamplesService.SearchParametersWithPagination:input_type -> Scailo.QCSampleParametersSearchRequest
+	40, // 59: Scailo.QCSamplesService.DownloadParametersAsCSV:input_type -> Scailo.IdentifierUUID
+	39, // 60: Scailo.QCSamplesService.ViewByID:input_type -> Scailo.Identifier
+	40, // 61: Scailo.QCSamplesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	39, // 62: Scailo.QCSamplesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	40, // 63: Scailo.QCSamplesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	41, // 64: Scailo.QCSamplesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	40, // 65: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	42, // 66: Scailo.QCSamplesService.ViewAll:input_type -> Scailo.ActiveStatus
+	40, // 67: Scailo.QCSamplesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	11, // 68: Scailo.QCSamplesService.ViewWithPagination:input_type -> Scailo.QCSamplesServicePaginationReq
+	40, // 69: Scailo.QCSamplesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	40, // 70: Scailo.QCSamplesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	15, // 71: Scailo.QCSamplesService.SearchAll:input_type -> Scailo.QCSamplesServiceSearchAllReq
+	13, // 72: Scailo.QCSamplesService.Filter:input_type -> Scailo.QCSamplesServiceFilterReq
+	14, // 73: Scailo.QCSamplesService.Count:input_type -> Scailo.QCSamplesServiceCountReq
+	40, // 74: Scailo.QCSamplesService.CountsForInventoryItem:input_type -> Scailo.IdentifierUUID
+	13, // 75: Scailo.QCSamplesService.DownloadAsCSV:input_type -> Scailo.QCSamplesServiceFilterReq
+	43, // 76: Scailo.QCSamplesService.Create:output_type -> Scailo.IdentifierUUIDsList
+	44, // 77: Scailo.QCSamplesService.Update:output_type -> Scailo.IdentifierResponse
+	44, // 78: Scailo.QCSamplesService.Finish:output_type -> Scailo.IdentifierResponse
+	44, // 79: Scailo.QCSamplesService.Accept:output_type -> Scailo.IdentifierResponse
+	44, // 80: Scailo.QCSamplesService.AcceptWithDeviation:output_type -> Scailo.IdentifierResponse
+	44, // 81: Scailo.QCSamplesService.Reject:output_type -> Scailo.IdentifierResponse
+	44, // 82: Scailo.QCSamplesService.Cancel:output_type -> Scailo.IdentifierResponse
+	44, // 83: Scailo.QCSamplesService.Reopen:output_type -> Scailo.IdentifierResponse
+	44, // 84: Scailo.QCSamplesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	44, // 85: Scailo.QCSamplesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	44, // 86: Scailo.QCSamplesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	45, // 87: Scailo.QCSamplesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	44, // 88: Scailo.QCSamplesService.UpdateParameter:output_type -> Scailo.IdentifierResponse
+	41, // 89: Scailo.QCSamplesService.UpdateParameters:output_type -> Scailo.IdentifiersList
+	18, // 90: Scailo.QCSamplesService.ViewParameterByID:output_type -> Scailo.QCSampleParameter
+	19, // 91: Scailo.QCSamplesService.ViewParameters:output_type -> Scailo.QCSampleParametersList
+	22, // 92: Scailo.QCSamplesService.ViewParameterHistory:output_type -> Scailo.QCSampleParameterHistoryList
+	24, // 93: Scailo.QCSamplesService.ViewPaginatedParameters:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
+	24, // 94: Scailo.QCSamplesService.SearchParametersWithPagination:output_type -> Scailo.QCSamplesServicePaginatedParametersResponse
+	46, // 95: Scailo.QCSamplesService.DownloadParametersAsCSV:output_type -> Scailo.StandardFile
+	7,  // 96: Scailo.QCSamplesService.ViewByID:output_type -> Scailo.QCSample
+	7,  // 97: Scailo.QCSamplesService.ViewByUUID:output_type -> Scailo.QCSample
+	7,  // 98: Scailo.QCSamplesService.ViewEssentialByID:output_type -> Scailo.QCSample
+	7,  // 99: Scailo.QCSamplesService.ViewEssentialByUUID:output_type -> Scailo.QCSample
+	9,  // 100: Scailo.QCSamplesService.ViewFromIDs:output_type -> Scailo.QCSamplesList
+	6,  // 101: Scailo.QCSamplesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QCSampleAncillaryParameters
+	9,  // 102: Scailo.QCSamplesService.ViewAll:output_type -> Scailo.QCSamplesList
+	9,  // 103: Scailo.QCSamplesService.ViewAllForEntityUUID:output_type -> Scailo.QCSamplesList
+	12, // 104: Scailo.QCSamplesService.ViewWithPagination:output_type -> Scailo.QCSamplesServicePaginationResponse
+	47, // 105: Scailo.QCSamplesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	46, // 106: Scailo.QCSamplesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	10, // 107: Scailo.QCSamplesService.SearchAll:output_type -> Scailo.QCSamplesWithMetadataList
+	9,  // 108: Scailo.QCSamplesService.Filter:output_type -> Scailo.QCSamplesList
+	48, // 109: Scailo.QCSamplesService.Count:output_type -> Scailo.CountResponse
+	25, // 110: Scailo.QCSamplesService.CountsForInventoryItem:output_type -> Scailo.QCSamplesCountStatistics
+	46, // 111: Scailo.QCSamplesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	76, // [76:112] is the sub-list for method output_type
+	40, // [40:76] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
 	40, // [40:40] is the sub-list for extension extendee
 	0,  // [0:40] is the sub-list for field type_name
@@ -3500,6 +3504,7 @@ func file_qc_samples_scailo_proto_init() {
 	file_inventory_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_qc_groups_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

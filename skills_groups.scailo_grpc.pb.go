@@ -33,6 +33,7 @@ const (
 	SkillsGroupsService_Repeat_FullMethodName                        = "/Scailo.SkillsGroupsService/Repeat"
 	SkillsGroupsService_Reopen_FullMethodName                        = "/Scailo.SkillsGroupsService/Reopen"
 	SkillsGroupsService_CommentAdd_FullMethodName                    = "/Scailo.SkillsGroupsService/CommentAdd"
+	SkillsGroupsService_AttachVaultFolder_FullMethodName             = "/Scailo.SkillsGroupsService/AttachVaultFolder"
 	SkillsGroupsService_Clone_FullMethodName                         = "/Scailo.SkillsGroupsService/Clone"
 	SkillsGroupsService_AddSkillGroupItem_FullMethodName             = "/Scailo.SkillsGroupsService/AddSkillGroupItem"
 	SkillsGroupsService_ModifySkillGroupItem_FullMethodName          = "/Scailo.SkillsGroupsService/ModifySkillGroupItem"
@@ -163,6 +164,17 @@ type SkillsGroupsServiceClient interface {
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Clone skill group from an existing skill group (denoted by the identifier)
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add a param to a skill group
@@ -384,6 +396,16 @@ func (c *skillsGroupsServiceClient) CommentAdd(ctx context.Context, in *Identifi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, SkillsGroupsService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skillsGroupsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SkillsGroupsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

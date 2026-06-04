@@ -2819,7 +2819,7 @@ var File_inward_jobs_free_issue_materials_scailo_proto protoreflect.FileDescript
 
 const file_inward_jobs_free_issue_materials_scailo_proto_rawDesc = "" +
 	"\n" +
-	"-inward_jobs_free_issue_materials.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x8f\x03\n" +
+	"-inward_jobs_free_issue_materials.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x8f\x03\n" +
 	"0InwardJobsFreeIssueMaterialsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3048,7 +3048,7 @@ const file_inward_jobs_free_issue_materials_scailo_proto_rawDesc = "" +
 	"4INWARD_JOB_FREE_ISSUE_MATERIAL_SORT_KEY_COMPLETED_ON\x10\x06\x128\n" +
 	"4INWARD_JOB_FREE_ISSUE_MATERIAL_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12<\n" +
-	"8INWARD_JOB_FREE_ISSUE_MATERIAL_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xaa*\n" +
+	"8INWARD_JOB_FREE_ISSUE_MATERIAL_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xfd*\n" +
 	"#InwardJobsFreeIssueMaterialsService\x12^\n" +
 	"\x06Create\x128.Scailo.InwardJobsFreeIssueMaterialsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12]\n" +
 	"\x05Draft\x128.Scailo.InwardJobsFreeIssueMaterialsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12c\n" +
@@ -3066,7 +3066,8 @@ const file_inward_jobs_free_issue_materials_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12b\n" +
 	"\bAutofill\x12:.Scailo.InwardJobsFreeIssueMaterialsServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12}\n" +
@@ -3161,25 +3162,26 @@ var file_inward_jobs_free_issue_materials_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                                             // 32: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                                           // 33: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                                           // 34: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),                       // 35: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                                          // 36: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                                               // 37: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                                     // 38: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                              // 39: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                                 // 40: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                                   // 41: Scailo.Empty
-	(*SimpleSearchReq)(nil),                                                         // 42: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                                         // 43: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                                            // 44: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                                          // 45: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                                 // 46: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                                      // 47: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                                               // 48: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                                         // 49: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                                            // 50: Scailo.StandardFile
-	(*FamiliesList)(nil),                                                            // 51: Scailo.FamiliesList
-	(*DualQuantitiesResponse)(nil),                                                  // 52: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                                           // 53: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                                                // 35: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),                       // 36: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                                          // 37: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                                               // 38: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                                     // 39: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                              // 40: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                                 // 41: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                                   // 42: Scailo.Empty
+	(*SimpleSearchReq)(nil),                                                         // 43: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                                         // 44: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                                            // 45: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                                          // 46: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                                 // 47: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                                      // 48: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                                               // 49: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                                         // 50: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                                            // 51: Scailo.StandardFile
+	(*FamiliesList)(nil),                                                            // 52: Scailo.FamiliesList
+	(*DualQuantitiesResponse)(nil),                                                  // 53: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                                           // 54: Scailo.CountResponse
 }
 var file_inward_jobs_free_issue_materials_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.InwardJobsFreeIssueMaterialsServiceCreateRequest.ref_from:type_name -> Scailo.INWARD_JOB_FREE_ISSUE_MATERIAL_REF_FROM
@@ -3238,102 +3240,104 @@ var file_inward_jobs_free_issue_materials_scailo_proto_depIdxs = []int32{
 	33, // 53: Scailo.InwardJobsFreeIssueMaterialsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	33, // 54: Scailo.InwardJobsFreeIssueMaterialsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	34, // 55: Scailo.InwardJobsFreeIssueMaterialsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	35, // 56: Scailo.InwardJobsFreeIssueMaterialsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	6,  // 57: Scailo.InwardJobsFreeIssueMaterialsService.Autofill:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceAutofillRequest
-	36, // 58: Scailo.InwardJobsFreeIssueMaterialsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	9,  // 59: Scailo.InwardJobsFreeIssueMaterialsService.AddInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemCreateRequest
-	10, // 60: Scailo.InwardJobsFreeIssueMaterialsService.ModifyInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemUpdateRequest
-	37, // 61: Scailo.InwardJobsFreeIssueMaterialsService.ApproveInwardJobFreeIssueMaterialItem:input_type -> Scailo.IdentifierWithUserComment
-	37, // 62: Scailo.InwardJobsFreeIssueMaterialsService.DeleteInwardJobFreeIssueMaterialItem:input_type -> Scailo.IdentifierWithUserComment
-	38, // 63: Scailo.InwardJobsFreeIssueMaterialsService.ReorderInwardJobFreeIssueMaterialItems:input_type -> Scailo.ReorderItemsRequest
-	39, // 64: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemByID:input_type -> Scailo.Identifier
-	40, // 65: Scailo.InwardJobsFreeIssueMaterialsService.ViewApprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.IdentifierWithSearchKey
-	40, // 66: Scailo.InwardJobsFreeIssueMaterialsService.ViewUnapprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.IdentifierWithSearchKey
-	14, // 67: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemHistory:input_type -> Scailo.InwardJobFreeIssueMaterialItemHistoryRequest
-	16, // 68: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedApprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
-	16, // 69: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedUnapprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
-	16, // 70: Scailo.InwardJobsFreeIssueMaterialsService.SearchItemsWithPagination:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
-	36, // 71: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	41, // 72: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	39, // 73: Scailo.InwardJobsFreeIssueMaterialsService.ViewByID:input_type -> Scailo.Identifier
-	36, // 74: Scailo.InwardJobsFreeIssueMaterialsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 75: Scailo.InwardJobsFreeIssueMaterialsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	39, // 76: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	36, // 77: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	43, // 78: Scailo.InwardJobsFreeIssueMaterialsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	36, // 79: Scailo.InwardJobsFreeIssueMaterialsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	44, // 80: Scailo.InwardJobsFreeIssueMaterialsService.ViewAll:input_type -> Scailo.ActiveStatus
-	36, // 81: Scailo.InwardJobsFreeIssueMaterialsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19, // 82: Scailo.InwardJobsFreeIssueMaterialsService.ViewWithPagination:input_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginationReq
-	40, // 83: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	45, // 84: Scailo.InwardJobsFreeIssueMaterialsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15, // 85: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobFreeIssueMaterialItemProspectiveInfoRequest
-	36, // 86: Scailo.InwardJobsFreeIssueMaterialsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	36, // 87: Scailo.InwardJobsFreeIssueMaterialsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 88: Scailo.InwardJobsFreeIssueMaterialsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 89: Scailo.InwardJobsFreeIssueMaterialsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceAlreadyAddedQuantityForSourceRequest
-	23, // 90: Scailo.InwardJobsFreeIssueMaterialsService.SearchAll:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceSearchAllReq
-	21, // 91: Scailo.InwardJobsFreeIssueMaterialsService.Filter:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceFilterReq
-	46, // 92: Scailo.InwardJobsFreeIssueMaterialsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22, // 93: Scailo.InwardJobsFreeIssueMaterialsService.Count:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceCountReq
-	21, // 94: Scailo.InwardJobsFreeIssueMaterialsService.DownloadAsCSV:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceFilterReq
-	47, // 95: Scailo.InwardJobsFreeIssueMaterialsService.Create:output_type -> Scailo.IdentifierResponse
-	47, // 96: Scailo.InwardJobsFreeIssueMaterialsService.Draft:output_type -> Scailo.IdentifierResponse
-	47, // 97: Scailo.InwardJobsFreeIssueMaterialsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 98: Scailo.InwardJobsFreeIssueMaterialsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	47, // 99: Scailo.InwardJobsFreeIssueMaterialsService.Verify:output_type -> Scailo.IdentifierResponse
-	47, // 100: Scailo.InwardJobsFreeIssueMaterialsService.Approve:output_type -> Scailo.IdentifierResponse
-	47, // 101: Scailo.InwardJobsFreeIssueMaterialsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	47, // 102: Scailo.InwardJobsFreeIssueMaterialsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 103: Scailo.InwardJobsFreeIssueMaterialsService.Halt:output_type -> Scailo.IdentifierResponse
-	47, // 104: Scailo.InwardJobsFreeIssueMaterialsService.Discard:output_type -> Scailo.IdentifierResponse
-	47, // 105: Scailo.InwardJobsFreeIssueMaterialsService.Restore:output_type -> Scailo.IdentifierResponse
-	47, // 106: Scailo.InwardJobsFreeIssueMaterialsService.Complete:output_type -> Scailo.IdentifierResponse
-	47, // 107: Scailo.InwardJobsFreeIssueMaterialsService.Repeat:output_type -> Scailo.IdentifierResponse
-	47, // 108: Scailo.InwardJobsFreeIssueMaterialsService.Reopen:output_type -> Scailo.IdentifierResponse
-	47, // 109: Scailo.InwardJobsFreeIssueMaterialsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	47, // 110: Scailo.InwardJobsFreeIssueMaterialsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	48, // 111: Scailo.InwardJobsFreeIssueMaterialsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	47, // 112: Scailo.InwardJobsFreeIssueMaterialsService.Autofill:output_type -> Scailo.IdentifierResponse
-	49, // 113: Scailo.InwardJobsFreeIssueMaterialsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	47, // 114: Scailo.InwardJobsFreeIssueMaterialsService.AddInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
-	47, // 115: Scailo.InwardJobsFreeIssueMaterialsService.ModifyInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
-	47, // 116: Scailo.InwardJobsFreeIssueMaterialsService.ApproveInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
-	47, // 117: Scailo.InwardJobsFreeIssueMaterialsService.DeleteInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
-	47, // 118: Scailo.InwardJobsFreeIssueMaterialsService.ReorderInwardJobFreeIssueMaterialItems:output_type -> Scailo.IdentifierResponse
-	11, // 119: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemByID:output_type -> Scailo.InwardJobFreeIssueMaterialItem
-	13, // 120: Scailo.InwardJobsFreeIssueMaterialsService.ViewApprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
-	13, // 121: Scailo.InwardJobsFreeIssueMaterialsService.ViewUnapprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
-	13, // 122: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemHistory:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
-	17, // 123: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedApprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
-	17, // 124: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedUnapprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
-	17, // 125: Scailo.InwardJobsFreeIssueMaterialsService.SearchItemsWithPagination:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
-	50, // 126: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	50, // 127: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	8,  // 128: Scailo.InwardJobsFreeIssueMaterialsService.ViewByID:output_type -> Scailo.InwardJobFreeIssueMaterial
-	8,  // 129: Scailo.InwardJobsFreeIssueMaterialsService.ViewByUUID:output_type -> Scailo.InwardJobFreeIssueMaterial
-	8,  // 130: Scailo.InwardJobsFreeIssueMaterialsService.ViewByReferenceID:output_type -> Scailo.InwardJobFreeIssueMaterial
-	8,  // 131: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByID:output_type -> Scailo.InwardJobFreeIssueMaterial
-	8,  // 132: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByUUID:output_type -> Scailo.InwardJobFreeIssueMaterial
-	12, // 133: Scailo.InwardJobsFreeIssueMaterialsService.ViewFromIDs:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
-	7,  // 134: Scailo.InwardJobsFreeIssueMaterialsService.ViewAncillaryParametersByUUID:output_type -> Scailo.InwardJobFreeIssueMaterialAncillaryParameters
-	12, // 135: Scailo.InwardJobsFreeIssueMaterialsService.ViewAll:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
-	12, // 136: Scailo.InwardJobsFreeIssueMaterialsService.ViewAllForEntityUUID:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
-	20, // 137: Scailo.InwardJobsFreeIssueMaterialsService.ViewWithPagination:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginationResponse
-	51, // 138: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	51, // 139: Scailo.InwardJobsFreeIssueMaterialsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,  // 140: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveInwardJobFreeIssueMaterialItem:output_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemCreateRequest
-	49, // 141: Scailo.InwardJobsFreeIssueMaterialsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	50, // 142: Scailo.InwardJobsFreeIssueMaterialsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	50, // 143: Scailo.InwardJobsFreeIssueMaterialsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	52, // 144: Scailo.InwardJobsFreeIssueMaterialsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	12, // 145: Scailo.InwardJobsFreeIssueMaterialsService.SearchAll:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
-	12, // 146: Scailo.InwardJobsFreeIssueMaterialsService.Filter:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
-	53, // 147: Scailo.InwardJobsFreeIssueMaterialsService.CountInStatus:output_type -> Scailo.CountResponse
-	53, // 148: Scailo.InwardJobsFreeIssueMaterialsService.Count:output_type -> Scailo.CountResponse
-	50, // 149: Scailo.InwardJobsFreeIssueMaterialsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	95, // [95:150] is the sub-list for method output_type
-	40, // [40:95] is the sub-list for method input_type
+	35, // 56: Scailo.InwardJobsFreeIssueMaterialsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	36, // 57: Scailo.InwardJobsFreeIssueMaterialsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	6,  // 58: Scailo.InwardJobsFreeIssueMaterialsService.Autofill:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceAutofillRequest
+	37, // 59: Scailo.InwardJobsFreeIssueMaterialsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	9,  // 60: Scailo.InwardJobsFreeIssueMaterialsService.AddInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemCreateRequest
+	10, // 61: Scailo.InwardJobsFreeIssueMaterialsService.ModifyInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemUpdateRequest
+	38, // 62: Scailo.InwardJobsFreeIssueMaterialsService.ApproveInwardJobFreeIssueMaterialItem:input_type -> Scailo.IdentifierWithUserComment
+	38, // 63: Scailo.InwardJobsFreeIssueMaterialsService.DeleteInwardJobFreeIssueMaterialItem:input_type -> Scailo.IdentifierWithUserComment
+	39, // 64: Scailo.InwardJobsFreeIssueMaterialsService.ReorderInwardJobFreeIssueMaterialItems:input_type -> Scailo.ReorderItemsRequest
+	40, // 65: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemByID:input_type -> Scailo.Identifier
+	41, // 66: Scailo.InwardJobsFreeIssueMaterialsService.ViewApprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.IdentifierWithSearchKey
+	41, // 67: Scailo.InwardJobsFreeIssueMaterialsService.ViewUnapprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.IdentifierWithSearchKey
+	14, // 68: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemHistory:input_type -> Scailo.InwardJobFreeIssueMaterialItemHistoryRequest
+	16, // 69: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedApprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
+	16, // 70: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedUnapprovedInwardJobFreeIssueMaterialItems:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
+	16, // 71: Scailo.InwardJobsFreeIssueMaterialsService.SearchItemsWithPagination:input_type -> Scailo.InwardJobFreeIssueMaterialItemsSearchRequest
+	37, // 72: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	42, // 73: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	40, // 74: Scailo.InwardJobsFreeIssueMaterialsService.ViewByID:input_type -> Scailo.Identifier
+	37, // 75: Scailo.InwardJobsFreeIssueMaterialsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 76: Scailo.InwardJobsFreeIssueMaterialsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	40, // 77: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	37, // 78: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	44, // 79: Scailo.InwardJobsFreeIssueMaterialsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	37, // 80: Scailo.InwardJobsFreeIssueMaterialsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	45, // 81: Scailo.InwardJobsFreeIssueMaterialsService.ViewAll:input_type -> Scailo.ActiveStatus
+	37, // 82: Scailo.InwardJobsFreeIssueMaterialsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	19, // 83: Scailo.InwardJobsFreeIssueMaterialsService.ViewWithPagination:input_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginationReq
+	41, // 84: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	46, // 85: Scailo.InwardJobsFreeIssueMaterialsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	15, // 86: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveInwardJobFreeIssueMaterialItem:input_type -> Scailo.InwardJobFreeIssueMaterialItemProspectiveInfoRequest
+	37, // 87: Scailo.InwardJobsFreeIssueMaterialsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	37, // 88: Scailo.InwardJobsFreeIssueMaterialsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 89: Scailo.InwardJobsFreeIssueMaterialsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 90: Scailo.InwardJobsFreeIssueMaterialsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceAlreadyAddedQuantityForSourceRequest
+	23, // 91: Scailo.InwardJobsFreeIssueMaterialsService.SearchAll:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceSearchAllReq
+	21, // 92: Scailo.InwardJobsFreeIssueMaterialsService.Filter:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceFilterReq
+	47, // 93: Scailo.InwardJobsFreeIssueMaterialsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	22, // 94: Scailo.InwardJobsFreeIssueMaterialsService.Count:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceCountReq
+	21, // 95: Scailo.InwardJobsFreeIssueMaterialsService.DownloadAsCSV:input_type -> Scailo.InwardJobsFreeIssueMaterialsServiceFilterReq
+	48, // 96: Scailo.InwardJobsFreeIssueMaterialsService.Create:output_type -> Scailo.IdentifierResponse
+	48, // 97: Scailo.InwardJobsFreeIssueMaterialsService.Draft:output_type -> Scailo.IdentifierResponse
+	48, // 98: Scailo.InwardJobsFreeIssueMaterialsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 99: Scailo.InwardJobsFreeIssueMaterialsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	48, // 100: Scailo.InwardJobsFreeIssueMaterialsService.Verify:output_type -> Scailo.IdentifierResponse
+	48, // 101: Scailo.InwardJobsFreeIssueMaterialsService.Approve:output_type -> Scailo.IdentifierResponse
+	48, // 102: Scailo.InwardJobsFreeIssueMaterialsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	48, // 103: Scailo.InwardJobsFreeIssueMaterialsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 104: Scailo.InwardJobsFreeIssueMaterialsService.Halt:output_type -> Scailo.IdentifierResponse
+	48, // 105: Scailo.InwardJobsFreeIssueMaterialsService.Discard:output_type -> Scailo.IdentifierResponse
+	48, // 106: Scailo.InwardJobsFreeIssueMaterialsService.Restore:output_type -> Scailo.IdentifierResponse
+	48, // 107: Scailo.InwardJobsFreeIssueMaterialsService.Complete:output_type -> Scailo.IdentifierResponse
+	48, // 108: Scailo.InwardJobsFreeIssueMaterialsService.Repeat:output_type -> Scailo.IdentifierResponse
+	48, // 109: Scailo.InwardJobsFreeIssueMaterialsService.Reopen:output_type -> Scailo.IdentifierResponse
+	48, // 110: Scailo.InwardJobsFreeIssueMaterialsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	48, // 111: Scailo.InwardJobsFreeIssueMaterialsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	48, // 112: Scailo.InwardJobsFreeIssueMaterialsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	49, // 113: Scailo.InwardJobsFreeIssueMaterialsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	48, // 114: Scailo.InwardJobsFreeIssueMaterialsService.Autofill:output_type -> Scailo.IdentifierResponse
+	50, // 115: Scailo.InwardJobsFreeIssueMaterialsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	48, // 116: Scailo.InwardJobsFreeIssueMaterialsService.AddInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
+	48, // 117: Scailo.InwardJobsFreeIssueMaterialsService.ModifyInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
+	48, // 118: Scailo.InwardJobsFreeIssueMaterialsService.ApproveInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
+	48, // 119: Scailo.InwardJobsFreeIssueMaterialsService.DeleteInwardJobFreeIssueMaterialItem:output_type -> Scailo.IdentifierResponse
+	48, // 120: Scailo.InwardJobsFreeIssueMaterialsService.ReorderInwardJobFreeIssueMaterialItems:output_type -> Scailo.IdentifierResponse
+	11, // 121: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemByID:output_type -> Scailo.InwardJobFreeIssueMaterialItem
+	13, // 122: Scailo.InwardJobsFreeIssueMaterialsService.ViewApprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
+	13, // 123: Scailo.InwardJobsFreeIssueMaterialsService.ViewUnapprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
+	13, // 124: Scailo.InwardJobsFreeIssueMaterialsService.ViewInwardJobFreeIssueMaterialItemHistory:output_type -> Scailo.InwardJobsFreeIssueMaterialsItemsList
+	17, // 125: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedApprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
+	17, // 126: Scailo.InwardJobsFreeIssueMaterialsService.ViewPaginatedUnapprovedInwardJobFreeIssueMaterialItems:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
+	17, // 127: Scailo.InwardJobsFreeIssueMaterialsService.SearchItemsWithPagination:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginatedItemsResponse
+	51, // 128: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	51, // 129: Scailo.InwardJobsFreeIssueMaterialsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	8,  // 130: Scailo.InwardJobsFreeIssueMaterialsService.ViewByID:output_type -> Scailo.InwardJobFreeIssueMaterial
+	8,  // 131: Scailo.InwardJobsFreeIssueMaterialsService.ViewByUUID:output_type -> Scailo.InwardJobFreeIssueMaterial
+	8,  // 132: Scailo.InwardJobsFreeIssueMaterialsService.ViewByReferenceID:output_type -> Scailo.InwardJobFreeIssueMaterial
+	8,  // 133: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByID:output_type -> Scailo.InwardJobFreeIssueMaterial
+	8,  // 134: Scailo.InwardJobsFreeIssueMaterialsService.ViewEssentialByUUID:output_type -> Scailo.InwardJobFreeIssueMaterial
+	12, // 135: Scailo.InwardJobsFreeIssueMaterialsService.ViewFromIDs:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
+	7,  // 136: Scailo.InwardJobsFreeIssueMaterialsService.ViewAncillaryParametersByUUID:output_type -> Scailo.InwardJobFreeIssueMaterialAncillaryParameters
+	12, // 137: Scailo.InwardJobsFreeIssueMaterialsService.ViewAll:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
+	12, // 138: Scailo.InwardJobsFreeIssueMaterialsService.ViewAllForEntityUUID:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
+	20, // 139: Scailo.InwardJobsFreeIssueMaterialsService.ViewWithPagination:output_type -> Scailo.InwardJobsFreeIssueMaterialsServicePaginationResponse
+	52, // 140: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	52, // 141: Scailo.InwardJobsFreeIssueMaterialsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,  // 142: Scailo.InwardJobsFreeIssueMaterialsService.ViewProspectiveInwardJobFreeIssueMaterialItem:output_type -> Scailo.InwardJobsFreeIssueMaterialsServiceItemCreateRequest
+	50, // 143: Scailo.InwardJobsFreeIssueMaterialsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	51, // 144: Scailo.InwardJobsFreeIssueMaterialsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	51, // 145: Scailo.InwardJobsFreeIssueMaterialsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	53, // 146: Scailo.InwardJobsFreeIssueMaterialsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	12, // 147: Scailo.InwardJobsFreeIssueMaterialsService.SearchAll:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
+	12, // 148: Scailo.InwardJobsFreeIssueMaterialsService.Filter:output_type -> Scailo.InwardJobsFreeIssueMaterialsList
+	54, // 149: Scailo.InwardJobsFreeIssueMaterialsService.CountInStatus:output_type -> Scailo.CountResponse
+	54, // 150: Scailo.InwardJobsFreeIssueMaterialsService.Count:output_type -> Scailo.CountResponse
+	51, // 151: Scailo.InwardJobsFreeIssueMaterialsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	96, // [96:152] is the sub-list for method output_type
+	40, // [40:96] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
 	40, // [40:40] is the sub-list for extension extendee
 	0,  // [0:40] is the sub-list for field type_name
@@ -3348,6 +3352,7 @@ func file_inward_jobs_free_issue_materials_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1906,7 +1906,7 @@ var File_on_duties_scailo_proto protoreflect.FileDescriptor
 
 const file_on_duties_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x16on_duties.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xcc\x03\n" +
+	"\x16on_duties.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcc\x03\n" +
 	"\x1cOnDutiesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2059,7 +2059,7 @@ const file_on_duties_scailo_proto_rawDesc = "" +
 	"!ON_DUTY_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12\x1c\n" +
 	"\x18ON_DUTY_SORT_KEY_USER_ID\x10\f\x12$\n" +
 	" ON_DUTY_SORT_KEY_ENTRY_TIMESTAMP\x10\r\x12#\n" +
-	"\x1fON_DUTY_SORT_KEY_EXIT_TIMESTAMP\x10\x0e2\xa0\x16\n" +
+	"\x1fON_DUTY_SORT_KEY_EXIT_TIMESTAMP\x10\x0e2\xf3\x16\n" +
 	"\x0fOnDutiesService\x12J\n" +
 	"\x06Create\x12$.Scailo.OnDutiesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.OnDutiesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2075,7 +2075,8 @@ const file_on_duties_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12X\n" +
 	"\x10RecordImageEntry\x12(.Scailo.OnDutiesServiceImageEntryRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x0fRecordImageExit\x12'.Scailo.OnDutiesServiceImageExitRequest\x1a\x1a.Scailo.IdentifierResponse\x12.\n" +
@@ -2142,19 +2143,20 @@ var file_on_duties_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 19: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 20: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 21: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 23: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 26: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 27: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 28: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 29: Scailo.MagicLink
-	(*ImageResponse)(nil),                                     // 30: Scailo.ImageResponse
-	(*BooleanResponse)(nil),                                   // 31: Scailo.BooleanResponse
-	(*GPSCoordinatesResponse)(nil),                            // 32: Scailo.GPSCoordinatesResponse
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 34: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                          // 22: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 23: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 24: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 25: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 26: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 27: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 28: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 29: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 30: Scailo.MagicLink
+	(*ImageResponse)(nil),                                     // 31: Scailo.ImageResponse
+	(*BooleanResponse)(nil),                                   // 32: Scailo.BooleanResponse
+	(*GPSCoordinatesResponse)(nil),                            // 33: Scailo.GPSCoordinatesResponse
+	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
+	(*StandardFile)(nil),                                      // 35: Scailo.StandardFile
 }
 var file_on_duties_scailo_proto_depIdxs = []int32{
 	12, // 0: Scailo.OnDutiesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2196,70 +2198,72 @@ var file_on_duties_scailo_proto_depIdxs = []int32{
 	21, // 36: Scailo.OnDutiesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 37: Scailo.OnDutiesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 38: Scailo.OnDutiesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 39: Scailo.OnDutiesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	3,  // 40: Scailo.OnDutiesService.RecordImageEntry:input_type -> Scailo.OnDutiesServiceImageEntryRequest
-	4,  // 41: Scailo.OnDutiesService.RecordImageExit:input_type -> Scailo.OnDutiesServiceImageExitRequest
-	23, // 42: Scailo.OnDutiesService.ViewByID:input_type -> Scailo.Identifier
-	24, // 43: Scailo.OnDutiesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 44: Scailo.OnDutiesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	24, // 45: Scailo.OnDutiesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 46: Scailo.OnDutiesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	26, // 47: Scailo.OnDutiesService.ViewAll:input_type -> Scailo.ActiveStatus
-	24, // 48: Scailo.OnDutiesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 49: Scailo.OnDutiesService.ViewWithPagination:input_type -> Scailo.OnDutiesServicePaginationReq
-	24, // 50: Scailo.OnDutiesService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
-	24, // 51: Scailo.OnDutiesService.ConfirmEntryImage:input_type -> Scailo.IdentifierUUID
-	24, // 52: Scailo.OnDutiesService.ViewExitImage:input_type -> Scailo.IdentifierUUID
-	24, // 53: Scailo.OnDutiesService.ConfirmExitImage:input_type -> Scailo.IdentifierUUID
-	24, // 54: Scailo.OnDutiesService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 55: Scailo.OnDutiesService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 56: Scailo.OnDutiesService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	24, // 57: Scailo.OnDutiesService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	11, // 58: Scailo.OnDutiesService.SearchAll:input_type -> Scailo.OnDutiesServiceSearchAllReq
-	9,  // 59: Scailo.OnDutiesService.Filter:input_type -> Scailo.OnDutiesServiceFilterReq
-	27, // 60: Scailo.OnDutiesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 61: Scailo.OnDutiesService.Count:input_type -> Scailo.OnDutiesServiceCountReq
-	9,  // 62: Scailo.OnDutiesService.DownloadAsCSV:input_type -> Scailo.OnDutiesServiceFilterReq
-	28, // 63: Scailo.OnDutiesService.Create:output_type -> Scailo.IdentifierResponse
-	28, // 64: Scailo.OnDutiesService.Draft:output_type -> Scailo.IdentifierResponse
-	28, // 65: Scailo.OnDutiesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 66: Scailo.OnDutiesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	28, // 67: Scailo.OnDutiesService.Verify:output_type -> Scailo.IdentifierResponse
-	28, // 68: Scailo.OnDutiesService.Approve:output_type -> Scailo.IdentifierResponse
-	28, // 69: Scailo.OnDutiesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	28, // 70: Scailo.OnDutiesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 71: Scailo.OnDutiesService.Halt:output_type -> Scailo.IdentifierResponse
-	28, // 72: Scailo.OnDutiesService.Discard:output_type -> Scailo.IdentifierResponse
-	28, // 73: Scailo.OnDutiesService.Restore:output_type -> Scailo.IdentifierResponse
-	28, // 74: Scailo.OnDutiesService.Complete:output_type -> Scailo.IdentifierResponse
-	28, // 75: Scailo.OnDutiesService.Repeat:output_type -> Scailo.IdentifierResponse
-	28, // 76: Scailo.OnDutiesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	29, // 77: Scailo.OnDutiesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	28, // 78: Scailo.OnDutiesService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
-	28, // 79: Scailo.OnDutiesService.RecordImageExit:output_type -> Scailo.IdentifierResponse
-	5,  // 80: Scailo.OnDutiesService.ViewByID:output_type -> Scailo.OnDuty
-	5,  // 81: Scailo.OnDutiesService.ViewByUUID:output_type -> Scailo.OnDuty
-	5,  // 82: Scailo.OnDutiesService.ViewEssentialByID:output_type -> Scailo.OnDuty
-	5,  // 83: Scailo.OnDutiesService.ViewEssentialByUUID:output_type -> Scailo.OnDuty
-	6,  // 84: Scailo.OnDutiesService.ViewFromIDs:output_type -> Scailo.OnDutiesList
-	6,  // 85: Scailo.OnDutiesService.ViewAll:output_type -> Scailo.OnDutiesList
-	6,  // 86: Scailo.OnDutiesService.ViewAllForEntityUUID:output_type -> Scailo.OnDutiesList
-	8,  // 87: Scailo.OnDutiesService.ViewWithPagination:output_type -> Scailo.OnDutiesServicePaginationResponse
-	30, // 88: Scailo.OnDutiesService.ViewEntryImage:output_type -> Scailo.ImageResponse
-	31, // 89: Scailo.OnDutiesService.ConfirmEntryImage:output_type -> Scailo.BooleanResponse
-	30, // 90: Scailo.OnDutiesService.ViewExitImage:output_type -> Scailo.ImageResponse
-	31, // 91: Scailo.OnDutiesService.ConfirmExitImage:output_type -> Scailo.BooleanResponse
-	32, // 92: Scailo.OnDutiesService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	32, // 93: Scailo.OnDutiesService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	30, // 94: Scailo.OnDutiesService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
-	30, // 95: Scailo.OnDutiesService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
-	6,  // 96: Scailo.OnDutiesService.SearchAll:output_type -> Scailo.OnDutiesList
-	6,  // 97: Scailo.OnDutiesService.Filter:output_type -> Scailo.OnDutiesList
-	33, // 98: Scailo.OnDutiesService.CountInStatus:output_type -> Scailo.CountResponse
-	33, // 99: Scailo.OnDutiesService.Count:output_type -> Scailo.CountResponse
-	34, // 100: Scailo.OnDutiesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	63, // [63:101] is the sub-list for method output_type
-	25, // [25:63] is the sub-list for method input_type
+	22, // 39: Scailo.OnDutiesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	23, // 40: Scailo.OnDutiesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	3,  // 41: Scailo.OnDutiesService.RecordImageEntry:input_type -> Scailo.OnDutiesServiceImageEntryRequest
+	4,  // 42: Scailo.OnDutiesService.RecordImageExit:input_type -> Scailo.OnDutiesServiceImageExitRequest
+	24, // 43: Scailo.OnDutiesService.ViewByID:input_type -> Scailo.Identifier
+	25, // 44: Scailo.OnDutiesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 45: Scailo.OnDutiesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	25, // 46: Scailo.OnDutiesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 47: Scailo.OnDutiesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	27, // 48: Scailo.OnDutiesService.ViewAll:input_type -> Scailo.ActiveStatus
+	25, // 49: Scailo.OnDutiesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 50: Scailo.OnDutiesService.ViewWithPagination:input_type -> Scailo.OnDutiesServicePaginationReq
+	25, // 51: Scailo.OnDutiesService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
+	25, // 52: Scailo.OnDutiesService.ConfirmEntryImage:input_type -> Scailo.IdentifierUUID
+	25, // 53: Scailo.OnDutiesService.ViewExitImage:input_type -> Scailo.IdentifierUUID
+	25, // 54: Scailo.OnDutiesService.ConfirmExitImage:input_type -> Scailo.IdentifierUUID
+	25, // 55: Scailo.OnDutiesService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 56: Scailo.OnDutiesService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 57: Scailo.OnDutiesService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	25, // 58: Scailo.OnDutiesService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	11, // 59: Scailo.OnDutiesService.SearchAll:input_type -> Scailo.OnDutiesServiceSearchAllReq
+	9,  // 60: Scailo.OnDutiesService.Filter:input_type -> Scailo.OnDutiesServiceFilterReq
+	28, // 61: Scailo.OnDutiesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 62: Scailo.OnDutiesService.Count:input_type -> Scailo.OnDutiesServiceCountReq
+	9,  // 63: Scailo.OnDutiesService.DownloadAsCSV:input_type -> Scailo.OnDutiesServiceFilterReq
+	29, // 64: Scailo.OnDutiesService.Create:output_type -> Scailo.IdentifierResponse
+	29, // 65: Scailo.OnDutiesService.Draft:output_type -> Scailo.IdentifierResponse
+	29, // 66: Scailo.OnDutiesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 67: Scailo.OnDutiesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	29, // 68: Scailo.OnDutiesService.Verify:output_type -> Scailo.IdentifierResponse
+	29, // 69: Scailo.OnDutiesService.Approve:output_type -> Scailo.IdentifierResponse
+	29, // 70: Scailo.OnDutiesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	29, // 71: Scailo.OnDutiesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 72: Scailo.OnDutiesService.Halt:output_type -> Scailo.IdentifierResponse
+	29, // 73: Scailo.OnDutiesService.Discard:output_type -> Scailo.IdentifierResponse
+	29, // 74: Scailo.OnDutiesService.Restore:output_type -> Scailo.IdentifierResponse
+	29, // 75: Scailo.OnDutiesService.Complete:output_type -> Scailo.IdentifierResponse
+	29, // 76: Scailo.OnDutiesService.Repeat:output_type -> Scailo.IdentifierResponse
+	29, // 77: Scailo.OnDutiesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	29, // 78: Scailo.OnDutiesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	30, // 79: Scailo.OnDutiesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	29, // 80: Scailo.OnDutiesService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
+	29, // 81: Scailo.OnDutiesService.RecordImageExit:output_type -> Scailo.IdentifierResponse
+	5,  // 82: Scailo.OnDutiesService.ViewByID:output_type -> Scailo.OnDuty
+	5,  // 83: Scailo.OnDutiesService.ViewByUUID:output_type -> Scailo.OnDuty
+	5,  // 84: Scailo.OnDutiesService.ViewEssentialByID:output_type -> Scailo.OnDuty
+	5,  // 85: Scailo.OnDutiesService.ViewEssentialByUUID:output_type -> Scailo.OnDuty
+	6,  // 86: Scailo.OnDutiesService.ViewFromIDs:output_type -> Scailo.OnDutiesList
+	6,  // 87: Scailo.OnDutiesService.ViewAll:output_type -> Scailo.OnDutiesList
+	6,  // 88: Scailo.OnDutiesService.ViewAllForEntityUUID:output_type -> Scailo.OnDutiesList
+	8,  // 89: Scailo.OnDutiesService.ViewWithPagination:output_type -> Scailo.OnDutiesServicePaginationResponse
+	31, // 90: Scailo.OnDutiesService.ViewEntryImage:output_type -> Scailo.ImageResponse
+	32, // 91: Scailo.OnDutiesService.ConfirmEntryImage:output_type -> Scailo.BooleanResponse
+	31, // 92: Scailo.OnDutiesService.ViewExitImage:output_type -> Scailo.ImageResponse
+	32, // 93: Scailo.OnDutiesService.ConfirmExitImage:output_type -> Scailo.BooleanResponse
+	33, // 94: Scailo.OnDutiesService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	33, // 95: Scailo.OnDutiesService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	31, // 96: Scailo.OnDutiesService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
+	31, // 97: Scailo.OnDutiesService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
+	6,  // 98: Scailo.OnDutiesService.SearchAll:output_type -> Scailo.OnDutiesList
+	6,  // 99: Scailo.OnDutiesService.Filter:output_type -> Scailo.OnDutiesList
+	34, // 100: Scailo.OnDutiesService.CountInStatus:output_type -> Scailo.CountResponse
+	34, // 101: Scailo.OnDutiesService.Count:output_type -> Scailo.CountResponse
+	35, // 102: Scailo.OnDutiesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	64, // [64:103] is the sub-list for method output_type
+	25, // [25:64] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2273,6 +2277,7 @@ func file_on_duties_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

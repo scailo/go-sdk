@@ -1906,7 +1906,7 @@ var File_attendances_scailo_proto protoreflect.FileDescriptor
 
 const file_attendances_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18attendances.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xcf\x03\n" +
+	"\x18attendances.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcf\x03\n" +
 	"\x1fAttendancesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2060,7 +2060,7 @@ const file_attendances_scailo_proto_rawDesc = "" +
 	"$ATTENDANCE_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12\x1f\n" +
 	"\x1bATTENDANCE_SORT_KEY_USER_ID\x10\f\x12'\n" +
 	"#ATTENDANCE_SORT_KEY_ENTRY_TIMESTAMP\x10\r\x12&\n" +
-	"\"ATTENDANCE_SORT_KEY_EXIT_TIMESTAMP\x10\x0e2\xf5\x17\n" +
+	"\"ATTENDANCE_SORT_KEY_EXIT_TIMESTAMP\x10\x0e2\xc8\x18\n" +
 	"\x12AttendancesService\x12M\n" +
 	"\x06Create\x12'.Scailo.AttendancesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.AttendancesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -2076,7 +2076,8 @@ const file_attendances_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12[\n" +
 	"\x10RecordImageEntry\x12+.Scailo.AttendancesServiceImageEntryRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x0fRecordImageExit\x12*.Scailo.AttendancesServiceImageExitRequest\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
@@ -2145,19 +2146,20 @@ var file_attendances_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 19: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 20: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 21: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 23: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 26: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 27: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 28: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 29: Scailo.MagicLink
-	(*ImageResponse)(nil),                                     // 30: Scailo.ImageResponse
-	(*BooleanResponse)(nil),                                   // 31: Scailo.BooleanResponse
-	(*GPSCoordinatesResponse)(nil),                            // 32: Scailo.GPSCoordinatesResponse
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 34: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                          // 22: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 23: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 24: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 25: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 26: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 27: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 28: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 29: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 30: Scailo.MagicLink
+	(*ImageResponse)(nil),                                     // 31: Scailo.ImageResponse
+	(*BooleanResponse)(nil),                                   // 32: Scailo.BooleanResponse
+	(*GPSCoordinatesResponse)(nil),                            // 33: Scailo.GPSCoordinatesResponse
+	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
+	(*StandardFile)(nil),                                      // 35: Scailo.StandardFile
 }
 var file_attendances_scailo_proto_depIdxs = []int32{
 	12, // 0: Scailo.AttendancesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2199,74 +2201,76 @@ var file_attendances_scailo_proto_depIdxs = []int32{
 	21, // 36: Scailo.AttendancesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 37: Scailo.AttendancesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 38: Scailo.AttendancesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 39: Scailo.AttendancesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	3,  // 40: Scailo.AttendancesService.RecordImageEntry:input_type -> Scailo.AttendancesServiceImageEntryRequest
-	4,  // 41: Scailo.AttendancesService.RecordImageExit:input_type -> Scailo.AttendancesServiceImageExitRequest
-	23, // 42: Scailo.AttendancesService.ViewByID:input_type -> Scailo.Identifier
-	24, // 43: Scailo.AttendancesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 44: Scailo.AttendancesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	24, // 45: Scailo.AttendancesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 46: Scailo.AttendancesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	26, // 47: Scailo.AttendancesService.ViewAll:input_type -> Scailo.ActiveStatus
-	24, // 48: Scailo.AttendancesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 49: Scailo.AttendancesService.ViewWithPagination:input_type -> Scailo.AttendancesServicePaginationReq
-	24, // 50: Scailo.AttendancesService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
-	24, // 51: Scailo.AttendancesService.ConfirmEntryImage:input_type -> Scailo.IdentifierUUID
-	24, // 52: Scailo.AttendancesService.ViewExitImage:input_type -> Scailo.IdentifierUUID
-	24, // 53: Scailo.AttendancesService.ConfirmExitImage:input_type -> Scailo.IdentifierUUID
-	24, // 54: Scailo.AttendancesService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 55: Scailo.AttendancesService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 56: Scailo.AttendancesService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	24, // 57: Scailo.AttendancesService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	23, // 58: Scailo.AttendancesService.ViewOpenAttendanceForUser:input_type -> Scailo.Identifier
-	11, // 59: Scailo.AttendancesService.SearchAll:input_type -> Scailo.AttendancesServiceSearchAllReq
-	9,  // 60: Scailo.AttendancesService.Filter:input_type -> Scailo.AttendancesServiceFilterReq
-	23, // 61: Scailo.AttendancesService.EmployeeHasOpenAttendance:input_type -> Scailo.Identifier
-	27, // 62: Scailo.AttendancesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 63: Scailo.AttendancesService.Count:input_type -> Scailo.AttendancesServiceCountReq
-	9,  // 64: Scailo.AttendancesService.DownloadAsCSV:input_type -> Scailo.AttendancesServiceFilterReq
-	28, // 65: Scailo.AttendancesService.Create:output_type -> Scailo.IdentifierResponse
-	28, // 66: Scailo.AttendancesService.Draft:output_type -> Scailo.IdentifierResponse
-	28, // 67: Scailo.AttendancesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 68: Scailo.AttendancesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	28, // 69: Scailo.AttendancesService.Verify:output_type -> Scailo.IdentifierResponse
-	28, // 70: Scailo.AttendancesService.Approve:output_type -> Scailo.IdentifierResponse
-	28, // 71: Scailo.AttendancesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	28, // 72: Scailo.AttendancesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 73: Scailo.AttendancesService.Halt:output_type -> Scailo.IdentifierResponse
-	28, // 74: Scailo.AttendancesService.Discard:output_type -> Scailo.IdentifierResponse
-	28, // 75: Scailo.AttendancesService.Restore:output_type -> Scailo.IdentifierResponse
-	28, // 76: Scailo.AttendancesService.Complete:output_type -> Scailo.IdentifierResponse
-	28, // 77: Scailo.AttendancesService.Repeat:output_type -> Scailo.IdentifierResponse
-	28, // 78: Scailo.AttendancesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	29, // 79: Scailo.AttendancesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	28, // 80: Scailo.AttendancesService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
-	28, // 81: Scailo.AttendancesService.RecordImageExit:output_type -> Scailo.IdentifierResponse
-	5,  // 82: Scailo.AttendancesService.ViewByID:output_type -> Scailo.Attendance
-	5,  // 83: Scailo.AttendancesService.ViewByUUID:output_type -> Scailo.Attendance
-	5,  // 84: Scailo.AttendancesService.ViewEssentialByID:output_type -> Scailo.Attendance
-	5,  // 85: Scailo.AttendancesService.ViewEssentialByUUID:output_type -> Scailo.Attendance
-	6,  // 86: Scailo.AttendancesService.ViewFromIDs:output_type -> Scailo.AttendancesList
-	6,  // 87: Scailo.AttendancesService.ViewAll:output_type -> Scailo.AttendancesList
-	6,  // 88: Scailo.AttendancesService.ViewAllForEntityUUID:output_type -> Scailo.AttendancesList
-	8,  // 89: Scailo.AttendancesService.ViewWithPagination:output_type -> Scailo.AttendancesServicePaginationResponse
-	30, // 90: Scailo.AttendancesService.ViewEntryImage:output_type -> Scailo.ImageResponse
-	31, // 91: Scailo.AttendancesService.ConfirmEntryImage:output_type -> Scailo.BooleanResponse
-	30, // 92: Scailo.AttendancesService.ViewExitImage:output_type -> Scailo.ImageResponse
-	31, // 93: Scailo.AttendancesService.ConfirmExitImage:output_type -> Scailo.BooleanResponse
-	32, // 94: Scailo.AttendancesService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	32, // 95: Scailo.AttendancesService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	30, // 96: Scailo.AttendancesService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
-	30, // 97: Scailo.AttendancesService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
-	5,  // 98: Scailo.AttendancesService.ViewOpenAttendanceForUser:output_type -> Scailo.Attendance
-	6,  // 99: Scailo.AttendancesService.SearchAll:output_type -> Scailo.AttendancesList
-	6,  // 100: Scailo.AttendancesService.Filter:output_type -> Scailo.AttendancesList
-	31, // 101: Scailo.AttendancesService.EmployeeHasOpenAttendance:output_type -> Scailo.BooleanResponse
-	33, // 102: Scailo.AttendancesService.CountInStatus:output_type -> Scailo.CountResponse
-	33, // 103: Scailo.AttendancesService.Count:output_type -> Scailo.CountResponse
-	34, // 104: Scailo.AttendancesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	65, // [65:105] is the sub-list for method output_type
-	25, // [25:65] is the sub-list for method input_type
+	22, // 39: Scailo.AttendancesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	23, // 40: Scailo.AttendancesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	3,  // 41: Scailo.AttendancesService.RecordImageEntry:input_type -> Scailo.AttendancesServiceImageEntryRequest
+	4,  // 42: Scailo.AttendancesService.RecordImageExit:input_type -> Scailo.AttendancesServiceImageExitRequest
+	24, // 43: Scailo.AttendancesService.ViewByID:input_type -> Scailo.Identifier
+	25, // 44: Scailo.AttendancesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 45: Scailo.AttendancesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	25, // 46: Scailo.AttendancesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 47: Scailo.AttendancesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	27, // 48: Scailo.AttendancesService.ViewAll:input_type -> Scailo.ActiveStatus
+	25, // 49: Scailo.AttendancesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 50: Scailo.AttendancesService.ViewWithPagination:input_type -> Scailo.AttendancesServicePaginationReq
+	25, // 51: Scailo.AttendancesService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
+	25, // 52: Scailo.AttendancesService.ConfirmEntryImage:input_type -> Scailo.IdentifierUUID
+	25, // 53: Scailo.AttendancesService.ViewExitImage:input_type -> Scailo.IdentifierUUID
+	25, // 54: Scailo.AttendancesService.ConfirmExitImage:input_type -> Scailo.IdentifierUUID
+	25, // 55: Scailo.AttendancesService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 56: Scailo.AttendancesService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 57: Scailo.AttendancesService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	25, // 58: Scailo.AttendancesService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	24, // 59: Scailo.AttendancesService.ViewOpenAttendanceForUser:input_type -> Scailo.Identifier
+	11, // 60: Scailo.AttendancesService.SearchAll:input_type -> Scailo.AttendancesServiceSearchAllReq
+	9,  // 61: Scailo.AttendancesService.Filter:input_type -> Scailo.AttendancesServiceFilterReq
+	24, // 62: Scailo.AttendancesService.EmployeeHasOpenAttendance:input_type -> Scailo.Identifier
+	28, // 63: Scailo.AttendancesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 64: Scailo.AttendancesService.Count:input_type -> Scailo.AttendancesServiceCountReq
+	9,  // 65: Scailo.AttendancesService.DownloadAsCSV:input_type -> Scailo.AttendancesServiceFilterReq
+	29, // 66: Scailo.AttendancesService.Create:output_type -> Scailo.IdentifierResponse
+	29, // 67: Scailo.AttendancesService.Draft:output_type -> Scailo.IdentifierResponse
+	29, // 68: Scailo.AttendancesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 69: Scailo.AttendancesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	29, // 70: Scailo.AttendancesService.Verify:output_type -> Scailo.IdentifierResponse
+	29, // 71: Scailo.AttendancesService.Approve:output_type -> Scailo.IdentifierResponse
+	29, // 72: Scailo.AttendancesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	29, // 73: Scailo.AttendancesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 74: Scailo.AttendancesService.Halt:output_type -> Scailo.IdentifierResponse
+	29, // 75: Scailo.AttendancesService.Discard:output_type -> Scailo.IdentifierResponse
+	29, // 76: Scailo.AttendancesService.Restore:output_type -> Scailo.IdentifierResponse
+	29, // 77: Scailo.AttendancesService.Complete:output_type -> Scailo.IdentifierResponse
+	29, // 78: Scailo.AttendancesService.Repeat:output_type -> Scailo.IdentifierResponse
+	29, // 79: Scailo.AttendancesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	29, // 80: Scailo.AttendancesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	30, // 81: Scailo.AttendancesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	29, // 82: Scailo.AttendancesService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
+	29, // 83: Scailo.AttendancesService.RecordImageExit:output_type -> Scailo.IdentifierResponse
+	5,  // 84: Scailo.AttendancesService.ViewByID:output_type -> Scailo.Attendance
+	5,  // 85: Scailo.AttendancesService.ViewByUUID:output_type -> Scailo.Attendance
+	5,  // 86: Scailo.AttendancesService.ViewEssentialByID:output_type -> Scailo.Attendance
+	5,  // 87: Scailo.AttendancesService.ViewEssentialByUUID:output_type -> Scailo.Attendance
+	6,  // 88: Scailo.AttendancesService.ViewFromIDs:output_type -> Scailo.AttendancesList
+	6,  // 89: Scailo.AttendancesService.ViewAll:output_type -> Scailo.AttendancesList
+	6,  // 90: Scailo.AttendancesService.ViewAllForEntityUUID:output_type -> Scailo.AttendancesList
+	8,  // 91: Scailo.AttendancesService.ViewWithPagination:output_type -> Scailo.AttendancesServicePaginationResponse
+	31, // 92: Scailo.AttendancesService.ViewEntryImage:output_type -> Scailo.ImageResponse
+	32, // 93: Scailo.AttendancesService.ConfirmEntryImage:output_type -> Scailo.BooleanResponse
+	31, // 94: Scailo.AttendancesService.ViewExitImage:output_type -> Scailo.ImageResponse
+	32, // 95: Scailo.AttendancesService.ConfirmExitImage:output_type -> Scailo.BooleanResponse
+	33, // 96: Scailo.AttendancesService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	33, // 97: Scailo.AttendancesService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	31, // 98: Scailo.AttendancesService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
+	31, // 99: Scailo.AttendancesService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
+	5,  // 100: Scailo.AttendancesService.ViewOpenAttendanceForUser:output_type -> Scailo.Attendance
+	6,  // 101: Scailo.AttendancesService.SearchAll:output_type -> Scailo.AttendancesList
+	6,  // 102: Scailo.AttendancesService.Filter:output_type -> Scailo.AttendancesList
+	32, // 103: Scailo.AttendancesService.EmployeeHasOpenAttendance:output_type -> Scailo.BooleanResponse
+	34, // 104: Scailo.AttendancesService.CountInStatus:output_type -> Scailo.CountResponse
+	34, // 105: Scailo.AttendancesService.Count:output_type -> Scailo.CountResponse
+	35, // 106: Scailo.AttendancesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	66, // [66:107] is the sub-list for method output_type
+	25, // [25:66] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2280,6 +2284,7 @@ func file_attendances_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

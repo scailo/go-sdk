@@ -1568,7 +1568,7 @@ var File_notes_scailo_proto protoreflect.FileDescriptor
 
 const file_notes_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12notes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xbb\x02\n" +
+	"\x12notes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xbb\x02\n" +
 	"\x10LogbookLogNoteLC\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\x12\x1c\n" +
@@ -1719,7 +1719,8 @@ const file_notes_scailo_proto_rawDesc = "" +
 	"\x19NOTE_SORT_KEY_MODIFIED_AT\x10\x02\x12\x1e\n" +
 	"\x1aNOTE_SORT_KEY_COMPLETED_ON\x10\x06\x12\x17\n" +
 	"\x13NOTE_SORT_KEY_TITLE\x10\n" +
-	"2\xfc\t\n" +
+	"2\xcf\n" +
+	"\n" +
 	"\fNotesService\x12C\n" +
 	"\x06Create\x12!.Scailo.NotesServiceCreateRequest\x1a\x16.Scailo.IdentifierUUID\x12C\n" +
 	"\x06Update\x12!.Scailo.NotesServiceUpdateRequest\x1a\x16.Scailo.IdentifierUUID\x12G\n" +
@@ -1729,7 +1730,8 @@ const file_notes_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12K\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12J\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x16.Scailo.IdentifierUUID\x12,\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x16.Scailo.IdentifierUUID\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12,\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\f.Scailo.Note\x122\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\f.Scailo.Note\x125\n" +
@@ -1778,11 +1780,13 @@ var file_notes_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                        // 14: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),  // 15: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),  // 16: Scailo.IdentifierWithEmailAttributes
-	(*Identifier)(nil),                     // 17: Scailo.Identifier
-	(*IdentifierUUID)(nil),                 // 18: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                   // 20: Scailo.ActiveStatus
-	(*CountResponse)(nil),                  // 21: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),       // 17: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                     // 18: Scailo.Identifier
+	(*IdentifierUUID)(nil),                 // 19: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                // 20: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                   // 21: Scailo.ActiveStatus
+	(*IdentifierResponse)(nil),             // 22: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                  // 23: Scailo.CountResponse
 }
 var file_notes_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogNoteLC.operation:type_name -> Scailo.NOTE_LIFECYCLE
@@ -1813,38 +1817,40 @@ var file_notes_scailo_proto_depIdxs = []int32{
 	15, // 25: Scailo.NotesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	15, // 26: Scailo.NotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 27: Scailo.NotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	17, // 28: Scailo.NotesService.ViewByID:input_type -> Scailo.Identifier
-	18, // 29: Scailo.NotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 30: Scailo.NotesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	18, // 31: Scailo.NotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 32: Scailo.NotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 33: Scailo.NotesService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 34: Scailo.NotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 35: Scailo.NotesService.ViewWithPagination:input_type -> Scailo.NotesServicePaginationReq
-	11, // 36: Scailo.NotesService.SearchAll:input_type -> Scailo.NotesServiceSearchAllReq
-	9,  // 37: Scailo.NotesService.Filter:input_type -> Scailo.NotesServiceFilterReq
-	10, // 38: Scailo.NotesService.Count:input_type -> Scailo.NotesServiceCountReq
-	18, // 39: Scailo.NotesService.Create:output_type -> Scailo.IdentifierUUID
-	18, // 40: Scailo.NotesService.Update:output_type -> Scailo.IdentifierUUID
-	18, // 41: Scailo.NotesService.Cancel:output_type -> Scailo.IdentifierUUID
-	18, // 42: Scailo.NotesService.Complete:output_type -> Scailo.IdentifierUUID
-	18, // 43: Scailo.NotesService.Reopen:output_type -> Scailo.IdentifierUUID
-	18, // 44: Scailo.NotesService.Repeat:output_type -> Scailo.IdentifierUUID
-	18, // 45: Scailo.NotesService.CommentAdd:output_type -> Scailo.IdentifierUUID
-	18, // 46: Scailo.NotesService.SendEmail:output_type -> Scailo.IdentifierUUID
-	5,  // 47: Scailo.NotesService.ViewByID:output_type -> Scailo.Note
-	5,  // 48: Scailo.NotesService.ViewByUUID:output_type -> Scailo.Note
-	5,  // 49: Scailo.NotesService.ViewEssentialByID:output_type -> Scailo.Note
-	5,  // 50: Scailo.NotesService.ViewEssentialByUUID:output_type -> Scailo.Note
-	6,  // 51: Scailo.NotesService.ViewFromIDs:output_type -> Scailo.NotesList
-	6,  // 52: Scailo.NotesService.ViewAll:output_type -> Scailo.NotesList
-	6,  // 53: Scailo.NotesService.ViewAllForEntityUUID:output_type -> Scailo.NotesList
-	8,  // 54: Scailo.NotesService.ViewWithPagination:output_type -> Scailo.NotesServicePaginationResponse
-	6,  // 55: Scailo.NotesService.SearchAll:output_type -> Scailo.NotesList
-	6,  // 56: Scailo.NotesService.Filter:output_type -> Scailo.NotesList
-	21, // 57: Scailo.NotesService.Count:output_type -> Scailo.CountResponse
-	39, // [39:58] is the sub-list for method output_type
-	20, // [20:39] is the sub-list for method input_type
+	17, // 28: Scailo.NotesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	18, // 29: Scailo.NotesService.ViewByID:input_type -> Scailo.Identifier
+	19, // 30: Scailo.NotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 31: Scailo.NotesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	19, // 32: Scailo.NotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	20, // 33: Scailo.NotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	21, // 34: Scailo.NotesService.ViewAll:input_type -> Scailo.ActiveStatus
+	19, // 35: Scailo.NotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 36: Scailo.NotesService.ViewWithPagination:input_type -> Scailo.NotesServicePaginationReq
+	11, // 37: Scailo.NotesService.SearchAll:input_type -> Scailo.NotesServiceSearchAllReq
+	9,  // 38: Scailo.NotesService.Filter:input_type -> Scailo.NotesServiceFilterReq
+	10, // 39: Scailo.NotesService.Count:input_type -> Scailo.NotesServiceCountReq
+	19, // 40: Scailo.NotesService.Create:output_type -> Scailo.IdentifierUUID
+	19, // 41: Scailo.NotesService.Update:output_type -> Scailo.IdentifierUUID
+	19, // 42: Scailo.NotesService.Cancel:output_type -> Scailo.IdentifierUUID
+	19, // 43: Scailo.NotesService.Complete:output_type -> Scailo.IdentifierUUID
+	19, // 44: Scailo.NotesService.Reopen:output_type -> Scailo.IdentifierUUID
+	19, // 45: Scailo.NotesService.Repeat:output_type -> Scailo.IdentifierUUID
+	19, // 46: Scailo.NotesService.CommentAdd:output_type -> Scailo.IdentifierUUID
+	19, // 47: Scailo.NotesService.SendEmail:output_type -> Scailo.IdentifierUUID
+	22, // 48: Scailo.NotesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	5,  // 49: Scailo.NotesService.ViewByID:output_type -> Scailo.Note
+	5,  // 50: Scailo.NotesService.ViewByUUID:output_type -> Scailo.Note
+	5,  // 51: Scailo.NotesService.ViewEssentialByID:output_type -> Scailo.Note
+	5,  // 52: Scailo.NotesService.ViewEssentialByUUID:output_type -> Scailo.Note
+	6,  // 53: Scailo.NotesService.ViewFromIDs:output_type -> Scailo.NotesList
+	6,  // 54: Scailo.NotesService.ViewAll:output_type -> Scailo.NotesList
+	6,  // 55: Scailo.NotesService.ViewAllForEntityUUID:output_type -> Scailo.NotesList
+	8,  // 56: Scailo.NotesService.ViewWithPagination:output_type -> Scailo.NotesServicePaginationResponse
+	6,  // 57: Scailo.NotesService.SearchAll:output_type -> Scailo.NotesList
+	6,  // 58: Scailo.NotesService.Filter:output_type -> Scailo.NotesList
+	23, // 59: Scailo.NotesService.Count:output_type -> Scailo.CountResponse
+	40, // [40:60] is the sub-list for method output_type
+	20, // [20:40] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -1856,6 +1862,7 @@ func file_notes_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

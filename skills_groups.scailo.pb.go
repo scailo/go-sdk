@@ -2080,7 +2080,7 @@ var File_skills_groups_scailo_proto protoreflect.FileDescriptor
 
 const file_skills_groups_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1askills_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xd7\x02\n" +
+	"\x1askills_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xd7\x02\n" +
 	" SkillsGroupsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2252,7 +2252,7 @@ const file_skills_groups_scailo_proto_rawDesc = "" +
 	"!SKILL_GROUP_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1d\n" +
 	"\x19SKILL_GROUP_SORT_KEY_NAME\x10\n" +
 	"\x12 \n" +
-	"\x1cSKILL_GROUP_SORT_KEY_ROLE_ID\x10\v2\xdd\x1a\n" +
+	"\x1cSKILL_GROUP_SORT_KEY_ROLE_ID\x10\v2\xb0\x1b\n" +
 	"\x13SkillsGroupsService\x12N\n" +
 	"\x06Create\x12(.Scailo.SkillsGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.SkillsGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -2269,7 +2269,8 @@ const file_skills_groups_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12]\n" +
 	"\x11AddSkillGroupItem\x12,.Scailo.SkillsGroupsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12`\n" +
 	"\x14ModifySkillGroupItem\x12,.Scailo.SkillsGroupsServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -2346,22 +2347,23 @@ var file_skills_groups_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                               // 23: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),           // 24: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),         // 25: Scailo.IdentifierUUIDWithUserComment
-	(*CloneRequest)(nil),                          // 26: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),             // 27: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                   // 28: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                            // 29: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),               // 30: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                        // 31: Scailo.IdentifierUUID
-	(*Empty)(nil),                                 // 32: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                // 33: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                       // 34: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                       // 35: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                          // 36: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),               // 37: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                          // 38: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                    // 39: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                         // 40: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                   // 41: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),              // 26: Scailo.VaultFolderAttachRequest
+	(*CloneRequest)(nil),                          // 27: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),             // 28: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                   // 29: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                            // 30: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),               // 31: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                        // 32: Scailo.IdentifierUUID
+	(*Empty)(nil),                                 // 33: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                // 34: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                       // 35: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                       // 36: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                          // 37: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),               // 38: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                          // 39: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                    // 40: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                         // 41: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                   // 42: Scailo.IdentifierUUIDsList
 }
 var file_skills_groups_scailo_proto_depIdxs = []int32{
 	16, // 0: Scailo.SkillsGroupsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2411,81 +2413,83 @@ var file_skills_groups_scailo_proto_depIdxs = []int32{
 	25, // 44: Scailo.SkillsGroupsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 45: Scailo.SkillsGroupsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 46: Scailo.SkillsGroupsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	26, // 47: Scailo.SkillsGroupsService.Clone:input_type -> Scailo.CloneRequest
-	5,  // 48: Scailo.SkillsGroupsService.AddSkillGroupItem:input_type -> Scailo.SkillsGroupsServiceItemCreateRequest
-	6,  // 49: Scailo.SkillsGroupsService.ModifySkillGroupItem:input_type -> Scailo.SkillsGroupsServiceItemUpdateRequest
-	27, // 50: Scailo.SkillsGroupsService.ApproveSkillGroupItem:input_type -> Scailo.IdentifierWithUserComment
-	27, // 51: Scailo.SkillsGroupsService.DeleteSkillGroupItem:input_type -> Scailo.IdentifierWithUserComment
-	28, // 52: Scailo.SkillsGroupsService.ReorderSkillGroupItems:input_type -> Scailo.ReorderItemsRequest
-	29, // 53: Scailo.SkillsGroupsService.ViewSkillGroupItemByID:input_type -> Scailo.Identifier
-	30, // 54: Scailo.SkillsGroupsService.ViewApprovedSkillGroupItems:input_type -> Scailo.IdentifierWithSearchKey
-	30, // 55: Scailo.SkillsGroupsService.ViewUnapprovedSkillGroupItems:input_type -> Scailo.IdentifierWithSearchKey
-	10, // 56: Scailo.SkillsGroupsService.ViewSkillGroupItemHistory:input_type -> Scailo.SkillGroupItemHistoryRequest
-	31, // 57: Scailo.SkillsGroupsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	32, // 58: Scailo.SkillsGroupsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	33, // 59: Scailo.SkillsGroupsService.UploadSkillGroupItems:input_type -> Scailo.IdentifierUUIDWithFile
-	29, // 60: Scailo.SkillsGroupsService.ViewByID:input_type -> Scailo.Identifier
-	31, // 61: Scailo.SkillsGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	34, // 62: Scailo.SkillsGroupsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
-	29, // 63: Scailo.SkillsGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	31, // 64: Scailo.SkillsGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 65: Scailo.SkillsGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	36, // 66: Scailo.SkillsGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
-	31, // 67: Scailo.SkillsGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	11, // 68: Scailo.SkillsGroupsService.ViewWithPagination:input_type -> Scailo.SkillsGroupsServicePaginationReq
-	29, // 69: Scailo.SkillsGroupsService.ViewForRoleID:input_type -> Scailo.Identifier
-	15, // 70: Scailo.SkillsGroupsService.SearchAll:input_type -> Scailo.SkillsGroupsServiceSearchAllReq
-	13, // 71: Scailo.SkillsGroupsService.Filter:input_type -> Scailo.SkillsGroupsServiceFilterReq
-	37, // 72: Scailo.SkillsGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	14, // 73: Scailo.SkillsGroupsService.Count:input_type -> Scailo.SkillsGroupsServiceCountReq
-	13, // 74: Scailo.SkillsGroupsService.DownloadAsCSV:input_type -> Scailo.SkillsGroupsServiceFilterReq
-	38, // 75: Scailo.SkillsGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	39, // 76: Scailo.SkillsGroupsService.Create:output_type -> Scailo.IdentifierResponse
-	39, // 77: Scailo.SkillsGroupsService.Draft:output_type -> Scailo.IdentifierResponse
-	39, // 78: Scailo.SkillsGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	39, // 79: Scailo.SkillsGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	39, // 80: Scailo.SkillsGroupsService.Verify:output_type -> Scailo.IdentifierResponse
-	39, // 81: Scailo.SkillsGroupsService.Approve:output_type -> Scailo.IdentifierResponse
-	39, // 82: Scailo.SkillsGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	39, // 83: Scailo.SkillsGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	39, // 84: Scailo.SkillsGroupsService.Halt:output_type -> Scailo.IdentifierResponse
-	39, // 85: Scailo.SkillsGroupsService.Discard:output_type -> Scailo.IdentifierResponse
-	39, // 86: Scailo.SkillsGroupsService.Restore:output_type -> Scailo.IdentifierResponse
-	39, // 87: Scailo.SkillsGroupsService.Complete:output_type -> Scailo.IdentifierResponse
-	39, // 88: Scailo.SkillsGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
-	39, // 89: Scailo.SkillsGroupsService.Reopen:output_type -> Scailo.IdentifierResponse
-	39, // 90: Scailo.SkillsGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	39, // 91: Scailo.SkillsGroupsService.Clone:output_type -> Scailo.IdentifierResponse
-	39, // 92: Scailo.SkillsGroupsService.AddSkillGroupItem:output_type -> Scailo.IdentifierResponse
-	39, // 93: Scailo.SkillsGroupsService.ModifySkillGroupItem:output_type -> Scailo.IdentifierResponse
-	39, // 94: Scailo.SkillsGroupsService.ApproveSkillGroupItem:output_type -> Scailo.IdentifierResponse
-	39, // 95: Scailo.SkillsGroupsService.DeleteSkillGroupItem:output_type -> Scailo.IdentifierResponse
-	39, // 96: Scailo.SkillsGroupsService.ReorderSkillGroupItems:output_type -> Scailo.IdentifierResponse
-	7,  // 97: Scailo.SkillsGroupsService.ViewSkillGroupItemByID:output_type -> Scailo.SkillGroupItem
-	9,  // 98: Scailo.SkillsGroupsService.ViewApprovedSkillGroupItems:output_type -> Scailo.SkillsGroupsItemsList
-	9,  // 99: Scailo.SkillsGroupsService.ViewUnapprovedSkillGroupItems:output_type -> Scailo.SkillsGroupsItemsList
-	9,  // 100: Scailo.SkillsGroupsService.ViewSkillGroupItemHistory:output_type -> Scailo.SkillsGroupsItemsList
-	38, // 101: Scailo.SkillsGroupsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	38, // 102: Scailo.SkillsGroupsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	35, // 103: Scailo.SkillsGroupsService.UploadSkillGroupItems:output_type -> Scailo.IdentifiersList
-	4,  // 104: Scailo.SkillsGroupsService.ViewByID:output_type -> Scailo.SkillGroup
-	4,  // 105: Scailo.SkillsGroupsService.ViewByUUID:output_type -> Scailo.SkillGroup
-	4,  // 106: Scailo.SkillsGroupsService.ViewByCode:output_type -> Scailo.SkillGroup
-	4,  // 107: Scailo.SkillsGroupsService.ViewEssentialByID:output_type -> Scailo.SkillGroup
-	4,  // 108: Scailo.SkillsGroupsService.ViewEssentialByUUID:output_type -> Scailo.SkillGroup
-	8,  // 109: Scailo.SkillsGroupsService.ViewFromIDs:output_type -> Scailo.SkillsGroupsList
-	8,  // 110: Scailo.SkillsGroupsService.ViewAll:output_type -> Scailo.SkillsGroupsList
-	8,  // 111: Scailo.SkillsGroupsService.ViewAllForEntityUUID:output_type -> Scailo.SkillsGroupsList
-	12, // 112: Scailo.SkillsGroupsService.ViewWithPagination:output_type -> Scailo.SkillsGroupsServicePaginationResponse
-	4,  // 113: Scailo.SkillsGroupsService.ViewForRoleID:output_type -> Scailo.SkillGroup
-	8,  // 114: Scailo.SkillsGroupsService.SearchAll:output_type -> Scailo.SkillsGroupsList
-	8,  // 115: Scailo.SkillsGroupsService.Filter:output_type -> Scailo.SkillsGroupsList
-	40, // 116: Scailo.SkillsGroupsService.CountInStatus:output_type -> Scailo.CountResponse
-	40, // 117: Scailo.SkillsGroupsService.Count:output_type -> Scailo.CountResponse
-	38, // 118: Scailo.SkillsGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	41, // 119: Scailo.SkillsGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	76, // [76:120] is the sub-list for method output_type
-	32, // [32:76] is the sub-list for method input_type
+	26, // 47: Scailo.SkillsGroupsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	27, // 48: Scailo.SkillsGroupsService.Clone:input_type -> Scailo.CloneRequest
+	5,  // 49: Scailo.SkillsGroupsService.AddSkillGroupItem:input_type -> Scailo.SkillsGroupsServiceItemCreateRequest
+	6,  // 50: Scailo.SkillsGroupsService.ModifySkillGroupItem:input_type -> Scailo.SkillsGroupsServiceItemUpdateRequest
+	28, // 51: Scailo.SkillsGroupsService.ApproveSkillGroupItem:input_type -> Scailo.IdentifierWithUserComment
+	28, // 52: Scailo.SkillsGroupsService.DeleteSkillGroupItem:input_type -> Scailo.IdentifierWithUserComment
+	29, // 53: Scailo.SkillsGroupsService.ReorderSkillGroupItems:input_type -> Scailo.ReorderItemsRequest
+	30, // 54: Scailo.SkillsGroupsService.ViewSkillGroupItemByID:input_type -> Scailo.Identifier
+	31, // 55: Scailo.SkillsGroupsService.ViewApprovedSkillGroupItems:input_type -> Scailo.IdentifierWithSearchKey
+	31, // 56: Scailo.SkillsGroupsService.ViewUnapprovedSkillGroupItems:input_type -> Scailo.IdentifierWithSearchKey
+	10, // 57: Scailo.SkillsGroupsService.ViewSkillGroupItemHistory:input_type -> Scailo.SkillGroupItemHistoryRequest
+	32, // 58: Scailo.SkillsGroupsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	33, // 59: Scailo.SkillsGroupsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	34, // 60: Scailo.SkillsGroupsService.UploadSkillGroupItems:input_type -> Scailo.IdentifierUUIDWithFile
+	30, // 61: Scailo.SkillsGroupsService.ViewByID:input_type -> Scailo.Identifier
+	32, // 62: Scailo.SkillsGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	35, // 63: Scailo.SkillsGroupsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	30, // 64: Scailo.SkillsGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	32, // 65: Scailo.SkillsGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 66: Scailo.SkillsGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	37, // 67: Scailo.SkillsGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
+	32, // 68: Scailo.SkillsGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	11, // 69: Scailo.SkillsGroupsService.ViewWithPagination:input_type -> Scailo.SkillsGroupsServicePaginationReq
+	30, // 70: Scailo.SkillsGroupsService.ViewForRoleID:input_type -> Scailo.Identifier
+	15, // 71: Scailo.SkillsGroupsService.SearchAll:input_type -> Scailo.SkillsGroupsServiceSearchAllReq
+	13, // 72: Scailo.SkillsGroupsService.Filter:input_type -> Scailo.SkillsGroupsServiceFilterReq
+	38, // 73: Scailo.SkillsGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	14, // 74: Scailo.SkillsGroupsService.Count:input_type -> Scailo.SkillsGroupsServiceCountReq
+	13, // 75: Scailo.SkillsGroupsService.DownloadAsCSV:input_type -> Scailo.SkillsGroupsServiceFilterReq
+	39, // 76: Scailo.SkillsGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	40, // 77: Scailo.SkillsGroupsService.Create:output_type -> Scailo.IdentifierResponse
+	40, // 78: Scailo.SkillsGroupsService.Draft:output_type -> Scailo.IdentifierResponse
+	40, // 79: Scailo.SkillsGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	40, // 80: Scailo.SkillsGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	40, // 81: Scailo.SkillsGroupsService.Verify:output_type -> Scailo.IdentifierResponse
+	40, // 82: Scailo.SkillsGroupsService.Approve:output_type -> Scailo.IdentifierResponse
+	40, // 83: Scailo.SkillsGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	40, // 84: Scailo.SkillsGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	40, // 85: Scailo.SkillsGroupsService.Halt:output_type -> Scailo.IdentifierResponse
+	40, // 86: Scailo.SkillsGroupsService.Discard:output_type -> Scailo.IdentifierResponse
+	40, // 87: Scailo.SkillsGroupsService.Restore:output_type -> Scailo.IdentifierResponse
+	40, // 88: Scailo.SkillsGroupsService.Complete:output_type -> Scailo.IdentifierResponse
+	40, // 89: Scailo.SkillsGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
+	40, // 90: Scailo.SkillsGroupsService.Reopen:output_type -> Scailo.IdentifierResponse
+	40, // 91: Scailo.SkillsGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	40, // 92: Scailo.SkillsGroupsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	40, // 93: Scailo.SkillsGroupsService.Clone:output_type -> Scailo.IdentifierResponse
+	40, // 94: Scailo.SkillsGroupsService.AddSkillGroupItem:output_type -> Scailo.IdentifierResponse
+	40, // 95: Scailo.SkillsGroupsService.ModifySkillGroupItem:output_type -> Scailo.IdentifierResponse
+	40, // 96: Scailo.SkillsGroupsService.ApproveSkillGroupItem:output_type -> Scailo.IdentifierResponse
+	40, // 97: Scailo.SkillsGroupsService.DeleteSkillGroupItem:output_type -> Scailo.IdentifierResponse
+	40, // 98: Scailo.SkillsGroupsService.ReorderSkillGroupItems:output_type -> Scailo.IdentifierResponse
+	7,  // 99: Scailo.SkillsGroupsService.ViewSkillGroupItemByID:output_type -> Scailo.SkillGroupItem
+	9,  // 100: Scailo.SkillsGroupsService.ViewApprovedSkillGroupItems:output_type -> Scailo.SkillsGroupsItemsList
+	9,  // 101: Scailo.SkillsGroupsService.ViewUnapprovedSkillGroupItems:output_type -> Scailo.SkillsGroupsItemsList
+	9,  // 102: Scailo.SkillsGroupsService.ViewSkillGroupItemHistory:output_type -> Scailo.SkillsGroupsItemsList
+	39, // 103: Scailo.SkillsGroupsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	39, // 104: Scailo.SkillsGroupsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	36, // 105: Scailo.SkillsGroupsService.UploadSkillGroupItems:output_type -> Scailo.IdentifiersList
+	4,  // 106: Scailo.SkillsGroupsService.ViewByID:output_type -> Scailo.SkillGroup
+	4,  // 107: Scailo.SkillsGroupsService.ViewByUUID:output_type -> Scailo.SkillGroup
+	4,  // 108: Scailo.SkillsGroupsService.ViewByCode:output_type -> Scailo.SkillGroup
+	4,  // 109: Scailo.SkillsGroupsService.ViewEssentialByID:output_type -> Scailo.SkillGroup
+	4,  // 110: Scailo.SkillsGroupsService.ViewEssentialByUUID:output_type -> Scailo.SkillGroup
+	8,  // 111: Scailo.SkillsGroupsService.ViewFromIDs:output_type -> Scailo.SkillsGroupsList
+	8,  // 112: Scailo.SkillsGroupsService.ViewAll:output_type -> Scailo.SkillsGroupsList
+	8,  // 113: Scailo.SkillsGroupsService.ViewAllForEntityUUID:output_type -> Scailo.SkillsGroupsList
+	12, // 114: Scailo.SkillsGroupsService.ViewWithPagination:output_type -> Scailo.SkillsGroupsServicePaginationResponse
+	4,  // 115: Scailo.SkillsGroupsService.ViewForRoleID:output_type -> Scailo.SkillGroup
+	8,  // 116: Scailo.SkillsGroupsService.SearchAll:output_type -> Scailo.SkillsGroupsList
+	8,  // 117: Scailo.SkillsGroupsService.Filter:output_type -> Scailo.SkillsGroupsList
+	41, // 118: Scailo.SkillsGroupsService.CountInStatus:output_type -> Scailo.CountResponse
+	41, // 119: Scailo.SkillsGroupsService.Count:output_type -> Scailo.CountResponse
+	39, // 120: Scailo.SkillsGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	42, // 121: Scailo.SkillsGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	77, // [77:122] is the sub-list for method output_type
+	32, // [32:77] is the sub-list for method input_type
 	32, // [32:32] is the sub-list for extension type_name
 	32, // [32:32] is the sub-list for extension extendee
 	0,  // [0:32] is the sub-list for field type_name
@@ -2498,6 +2502,7 @@ func file_skills_groups_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

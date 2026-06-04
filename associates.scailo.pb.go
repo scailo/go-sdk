@@ -1780,7 +1780,7 @@ var File_associates_scailo_proto protoreflect.FileDescriptor
 
 const file_associates_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x17associates.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\x8b\x05\n" +
+	"\x17associates.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\x8b\x05\n" +
 	"\tAssociate\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1982,13 +1982,14 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x1eASSOCIATE_SORT_KEY_MIDDLE_NAME\x10\v\x12 \n" +
 	"\x1cASSOCIATE_SORT_KEY_LAST_NAME\x10\f\x12\x1f\n" +
 	"\x1bASSOCIATE_SORT_KEY_ORG_NAME\x10\r\x12 \n" +
-	"\x1cASSOCIATE_SORT_KEY_JOB_TITLE\x10\x0e2\xb3\v\n" +
+	"\x1cASSOCIATE_SORT_KEY_JOB_TITLE\x10\x0e2\x86\f\n" +
 	"\x11AssociatesService\x12O\n" +
 	"\rImportFromReq\x12&.Scailo.AssociatesServiceImportRequest\x1a\x16.Scailo.AssociatesList\x12C\n" +
 	"\x06Create\x12&.Scailo.AssociatesServiceCreateRequest\x1a\x11.Scailo.Associate\x12C\n" +
 	"\x06Update\x12&.Scailo.AssociatesServiceUpdateRequest\x1a\x11.Scailo.Associate\x12L\n" +
 	"\aDiscard\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
-	"\aRestore\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x121\n" +
+	"\aRestore\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x121\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x11.Scailo.Associate\x127\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x11.Scailo.Associate\x12:\n" +
@@ -2041,17 +2042,18 @@ var file_associates_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                       // 13: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                        // 14: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),  // 15: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                     // 16: Scailo.Identifier
-	(*IdentifierUUID)(nil),                 // 17: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                // 18: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                   // 19: Scailo.ActiveStatus
-	(*Empty)(nil),                          // 20: Scailo.Empty
-	(*StandardFile)(nil),                   // 21: Scailo.StandardFile
-	(*IdentifierResponse)(nil),             // 22: Scailo.IdentifierResponse
-	(*BytesResponse)(nil),                  // 23: Scailo.BytesResponse
-	(*BooleanResponse)(nil),                // 24: Scailo.BooleanResponse
-	(*CountResponse)(nil),                  // 25: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),            // 26: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),       // 16: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                     // 17: Scailo.Identifier
+	(*IdentifierUUID)(nil),                 // 18: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                // 19: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                   // 20: Scailo.ActiveStatus
+	(*Empty)(nil),                          // 21: Scailo.Empty
+	(*StandardFile)(nil),                   // 22: Scailo.StandardFile
+	(*IdentifierResponse)(nil),             // 23: Scailo.IdentifierResponse
+	(*BytesResponse)(nil),                  // 24: Scailo.BytesResponse
+	(*BooleanResponse)(nil),                // 25: Scailo.BooleanResponse
+	(*CountResponse)(nil),                  // 26: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),            // 27: Scailo.IdentifierUUIDsList
 }
 var file_associates_scailo_proto_depIdxs = []int32{
 	12, // 0: Scailo.Associate.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2079,45 +2081,47 @@ var file_associates_scailo_proto_depIdxs = []int32{
 	7,  // 22: Scailo.AssociatesService.Update:input_type -> Scailo.AssociatesServiceUpdateRequest
 	15, // 23: Scailo.AssociatesService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
 	15, // 24: Scailo.AssociatesService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	16, // 25: Scailo.AssociatesService.ViewByID:input_type -> Scailo.Identifier
-	17, // 26: Scailo.AssociatesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	16, // 27: Scailo.AssociatesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	17, // 28: Scailo.AssociatesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 29: Scailo.AssociatesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	16, // 30: Scailo.AssociatesService.DownloadVCard:input_type -> Scailo.Identifier
-	19, // 31: Scailo.AssociatesService.ViewAll:input_type -> Scailo.ActiveStatus
-	17, // 32: Scailo.AssociatesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	8,  // 33: Scailo.AssociatesService.ViewWithPagination:input_type -> Scailo.AssociatesServicePaginationReq
-	20, // 34: Scailo.AssociatesService.CheckModifyPermission:input_type -> Scailo.Empty
-	20, // 35: Scailo.AssociatesService.CheckAddPermission:input_type -> Scailo.Empty
-	11, // 36: Scailo.AssociatesService.SearchAll:input_type -> Scailo.AssociatesServiceSearchAllReq
-	9,  // 37: Scailo.AssociatesService.Filter:input_type -> Scailo.AssociatesServiceFilterReq
-	10, // 38: Scailo.AssociatesService.Count:input_type -> Scailo.AssociatesServiceCountReq
-	9,  // 39: Scailo.AssociatesService.DownloadAsCSV:input_type -> Scailo.AssociatesServiceFilterReq
-	21, // 40: Scailo.AssociatesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	3,  // 41: Scailo.AssociatesService.ImportFromReq:output_type -> Scailo.AssociatesList
-	2,  // 42: Scailo.AssociatesService.Create:output_type -> Scailo.Associate
-	2,  // 43: Scailo.AssociatesService.Update:output_type -> Scailo.Associate
-	22, // 44: Scailo.AssociatesService.Discard:output_type -> Scailo.IdentifierResponse
-	22, // 45: Scailo.AssociatesService.Restore:output_type -> Scailo.IdentifierResponse
-	2,  // 46: Scailo.AssociatesService.ViewByID:output_type -> Scailo.Associate
-	2,  // 47: Scailo.AssociatesService.ViewByUUID:output_type -> Scailo.Associate
-	2,  // 48: Scailo.AssociatesService.ViewEssentialByID:output_type -> Scailo.Associate
-	2,  // 49: Scailo.AssociatesService.ViewEssentialByUUID:output_type -> Scailo.Associate
-	3,  // 50: Scailo.AssociatesService.ViewFromIDs:output_type -> Scailo.AssociatesList
-	23, // 51: Scailo.AssociatesService.DownloadVCard:output_type -> Scailo.BytesResponse
-	3,  // 52: Scailo.AssociatesService.ViewAll:output_type -> Scailo.AssociatesList
-	3,  // 53: Scailo.AssociatesService.ViewAllForEntityUUID:output_type -> Scailo.AssociatesList
-	4,  // 54: Scailo.AssociatesService.ViewWithPagination:output_type -> Scailo.AssociatePaginationResp
-	24, // 55: Scailo.AssociatesService.CheckModifyPermission:output_type -> Scailo.BooleanResponse
-	24, // 56: Scailo.AssociatesService.CheckAddPermission:output_type -> Scailo.BooleanResponse
-	3,  // 57: Scailo.AssociatesService.SearchAll:output_type -> Scailo.AssociatesList
-	3,  // 58: Scailo.AssociatesService.Filter:output_type -> Scailo.AssociatesList
-	25, // 59: Scailo.AssociatesService.Count:output_type -> Scailo.CountResponse
-	21, // 60: Scailo.AssociatesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	26, // 61: Scailo.AssociatesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	41, // [41:62] is the sub-list for method output_type
-	20, // [20:41] is the sub-list for method input_type
+	16, // 25: Scailo.AssociatesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	17, // 26: Scailo.AssociatesService.ViewByID:input_type -> Scailo.Identifier
+	18, // 27: Scailo.AssociatesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	17, // 28: Scailo.AssociatesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	18, // 29: Scailo.AssociatesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	19, // 30: Scailo.AssociatesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	17, // 31: Scailo.AssociatesService.DownloadVCard:input_type -> Scailo.Identifier
+	20, // 32: Scailo.AssociatesService.ViewAll:input_type -> Scailo.ActiveStatus
+	18, // 33: Scailo.AssociatesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	8,  // 34: Scailo.AssociatesService.ViewWithPagination:input_type -> Scailo.AssociatesServicePaginationReq
+	21, // 35: Scailo.AssociatesService.CheckModifyPermission:input_type -> Scailo.Empty
+	21, // 36: Scailo.AssociatesService.CheckAddPermission:input_type -> Scailo.Empty
+	11, // 37: Scailo.AssociatesService.SearchAll:input_type -> Scailo.AssociatesServiceSearchAllReq
+	9,  // 38: Scailo.AssociatesService.Filter:input_type -> Scailo.AssociatesServiceFilterReq
+	10, // 39: Scailo.AssociatesService.Count:input_type -> Scailo.AssociatesServiceCountReq
+	9,  // 40: Scailo.AssociatesService.DownloadAsCSV:input_type -> Scailo.AssociatesServiceFilterReq
+	22, // 41: Scailo.AssociatesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	3,  // 42: Scailo.AssociatesService.ImportFromReq:output_type -> Scailo.AssociatesList
+	2,  // 43: Scailo.AssociatesService.Create:output_type -> Scailo.Associate
+	2,  // 44: Scailo.AssociatesService.Update:output_type -> Scailo.Associate
+	23, // 45: Scailo.AssociatesService.Discard:output_type -> Scailo.IdentifierResponse
+	23, // 46: Scailo.AssociatesService.Restore:output_type -> Scailo.IdentifierResponse
+	23, // 47: Scailo.AssociatesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	2,  // 48: Scailo.AssociatesService.ViewByID:output_type -> Scailo.Associate
+	2,  // 49: Scailo.AssociatesService.ViewByUUID:output_type -> Scailo.Associate
+	2,  // 50: Scailo.AssociatesService.ViewEssentialByID:output_type -> Scailo.Associate
+	2,  // 51: Scailo.AssociatesService.ViewEssentialByUUID:output_type -> Scailo.Associate
+	3,  // 52: Scailo.AssociatesService.ViewFromIDs:output_type -> Scailo.AssociatesList
+	24, // 53: Scailo.AssociatesService.DownloadVCard:output_type -> Scailo.BytesResponse
+	3,  // 54: Scailo.AssociatesService.ViewAll:output_type -> Scailo.AssociatesList
+	3,  // 55: Scailo.AssociatesService.ViewAllForEntityUUID:output_type -> Scailo.AssociatesList
+	4,  // 56: Scailo.AssociatesService.ViewWithPagination:output_type -> Scailo.AssociatePaginationResp
+	25, // 57: Scailo.AssociatesService.CheckModifyPermission:output_type -> Scailo.BooleanResponse
+	25, // 58: Scailo.AssociatesService.CheckAddPermission:output_type -> Scailo.BooleanResponse
+	3,  // 59: Scailo.AssociatesService.SearchAll:output_type -> Scailo.AssociatesList
+	3,  // 60: Scailo.AssociatesService.Filter:output_type -> Scailo.AssociatesList
+	26, // 61: Scailo.AssociatesService.Count:output_type -> Scailo.CountResponse
+	22, // 62: Scailo.AssociatesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	27, // 63: Scailo.AssociatesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	42, // [42:64] is the sub-list for method output_type
+	20, // [20:42] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -2129,6 +2133,7 @@ func file_associates_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

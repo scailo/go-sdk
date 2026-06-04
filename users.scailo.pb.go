@@ -2656,7 +2656,7 @@ var File_users_scailo_proto protoreflect.FileDescriptor
 
 const file_users_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xc8\t\n" +
+	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc8\t\n" +
 	"\x19UsersServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2907,7 +2907,7 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\x12USER_SORT_KEY_NAME\x10\v\x12\x16\n" +
 	"\x12USER_SORT_KEY_CODE\x10\f\x12\x17\n" +
 	"\x13USER_SORT_KEY_EMAIL\x10\r\x12\x17\n" +
-	"\x13USER_SORT_KEY_PHONE\x10\x0e2\xe2\x1a\n" +
+	"\x13USER_SORT_KEY_PHONE\x10\x0e2\xb5\x1b\n" +
 	"\fUsersService\x12c\n" +
 	"\x14RegisterMobileDevice\x12/.Scailo.UsersServiceRegisterMobileDeviceRequest\x1a\x1a.Scailo.IdentifierResponse\x12G\n" +
 	"\x06Create\x12!.Scailo.UsersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12F\n" +
@@ -2922,7 +2922,8 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\aDiscard\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\aRestore\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
 	"\x1bCreateMagicLinkForSignature\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12G\n" +
 	"\x0eUpdatePassword\x12\x19.Scailo.UpdatePasswordReq\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x11UpdateOwnPassword\x12\x1c.Scailo.UpdateOwnPasswordReq\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -3004,28 +3005,29 @@ var file_users_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 21: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 22: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 23: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 24: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*UpdatePasswordReq)(nil),                                 // 25: Scailo.UpdatePasswordReq
-	(*UpdateOwnPasswordReq)(nil),                              // 26: Scailo.UpdateOwnPasswordReq
-	(*UploadPictureReq)(nil),                                  // 27: Scailo.UploadPictureReq
-	(*IdentifierUUID)(nil),                                    // 28: Scailo.IdentifierUUID
-	(*IdentifierZeroable)(nil),                                // 29: Scailo.IdentifierZeroable
-	(*Identifier)(nil),                                        // 30: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                   // 31: Scailo.SimpleSearchReq
-	(*ActiveStatus)(nil),                                      // 32: Scailo.ActiveStatus
-	(*IdentifiersList)(nil),                                   // 33: Scailo.IdentifiersList
-	(*IdentifierUUIDsList)(nil),                               // 34: Scailo.IdentifierUUIDsList
-	(*StringsList)(nil),                                       // 35: Scailo.StringsList
-	(*Empty)(nil),                                             // 36: Scailo.Empty
-	(*MonthAndDayFilter)(nil),                                 // 37: Scailo.MonthAndDayFilter
-	(*StandardFile)(nil),                                      // 38: Scailo.StandardFile
-	(*CountInSLCStatusRequest)(nil),                           // 39: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 40: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 41: Scailo.MagicLink
-	(*ImageResponse)(nil),                                     // 42: Scailo.ImageResponse
-	(*Base64String)(nil),                                      // 43: Scailo.Base64String
-	(*StringResponse)(nil),                                    // 44: Scailo.StringResponse
-	(*CountResponse)(nil),                                     // 45: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 24: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 25: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*UpdatePasswordReq)(nil),                                 // 26: Scailo.UpdatePasswordReq
+	(*UpdateOwnPasswordReq)(nil),                              // 27: Scailo.UpdateOwnPasswordReq
+	(*UploadPictureReq)(nil),                                  // 28: Scailo.UploadPictureReq
+	(*IdentifierUUID)(nil),                                    // 29: Scailo.IdentifierUUID
+	(*IdentifierZeroable)(nil),                                // 30: Scailo.IdentifierZeroable
+	(*Identifier)(nil),                                        // 31: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                   // 32: Scailo.SimpleSearchReq
+	(*ActiveStatus)(nil),                                      // 33: Scailo.ActiveStatus
+	(*IdentifiersList)(nil),                                   // 34: Scailo.IdentifiersList
+	(*IdentifierUUIDsList)(nil),                               // 35: Scailo.IdentifierUUIDsList
+	(*StringsList)(nil),                                       // 36: Scailo.StringsList
+	(*Empty)(nil),                                             // 37: Scailo.Empty
+	(*MonthAndDayFilter)(nil),                                 // 38: Scailo.MonthAndDayFilter
+	(*StandardFile)(nil),                                      // 39: Scailo.StandardFile
+	(*CountInSLCStatusRequest)(nil),                           // 40: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 41: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 42: Scailo.MagicLink
+	(*ImageResponse)(nil),                                     // 43: Scailo.ImageResponse
+	(*Base64String)(nil),                                      // 44: Scailo.Base64String
+	(*StringResponse)(nil),                                    // 45: Scailo.StringResponse
+	(*CountResponse)(nil),                                     // 46: Scailo.CountResponse
 }
 var file_users_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.UsersServiceCreateRequest.user_type:type_name -> Scailo.USER_TYPE
@@ -3072,93 +3074,95 @@ var file_users_scailo_proto_depIdxs = []int32{
 	23, // 41: Scailo.UsersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
 	23, // 42: Scailo.UsersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
 	23, // 43: Scailo.UsersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	24, // 44: Scailo.UsersService.CreateMagicLinkForSignature:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	25, // 45: Scailo.UsersService.UpdatePassword:input_type -> Scailo.UpdatePasswordReq
-	26, // 46: Scailo.UsersService.UpdateOwnPassword:input_type -> Scailo.UpdateOwnPasswordReq
-	13, // 47: Scailo.UsersService.RequestPasswordResetEmail:input_type -> Scailo.UsersServicePasswordResetReq
-	27, // 48: Scailo.UsersService.UpdateProfilePicture:input_type -> Scailo.UploadPictureReq
-	27, // 49: Scailo.UsersService.UpdateSignature:input_type -> Scailo.UploadPictureReq
-	28, // 50: Scailo.UsersService.MFAEnable:input_type -> Scailo.IdentifierUUID
-	28, // 51: Scailo.UsersService.MFAReset:input_type -> Scailo.IdentifierUUID
-	29, // 52: Scailo.UsersService.ViewByID:input_type -> Scailo.IdentifierZeroable
-	28, // 53: Scailo.UsersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	30, // 54: Scailo.UsersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	28, // 55: Scailo.UsersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	31, // 56: Scailo.UsersService.ViewByUsername:input_type -> Scailo.SimpleSearchReq
-	31, // 57: Scailo.UsersService.ViewByCode:input_type -> Scailo.SimpleSearchReq
-	32, // 58: Scailo.UsersService.ViewAll:input_type -> Scailo.ActiveStatus
-	28, // 59: Scailo.UsersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 60: Scailo.UsersService.ViewWithPagination:input_type -> Scailo.UsersServicePaginationReq
-	33, // 61: Scailo.UsersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	34, // 62: Scailo.UsersService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
-	35, // 63: Scailo.UsersService.ViewFromUsernames:input_type -> Scailo.StringsList
-	36, // 64: Scailo.UsersService.ViewSelf:input_type -> Scailo.Empty
-	37, // 65: Scailo.UsersService.ViewBirthdaysOn:input_type -> Scailo.MonthAndDayFilter
-	28, // 66: Scailo.UsersService.ViewSignature:input_type -> Scailo.IdentifierUUID
-	28, // 67: Scailo.UsersService.ViewProfilePicture:input_type -> Scailo.IdentifierUUID
-	28, // 68: Scailo.UsersService.ViewThumbnailPicture:input_type -> Scailo.IdentifierUUID
-	28, // 69: Scailo.UsersService.ViewVCard:input_type -> Scailo.IdentifierUUID
-	28, // 70: Scailo.UsersService.ViewQRImage:input_type -> Scailo.IdentifierUUID
-	28, // 71: Scailo.UsersService.ViewQRString:input_type -> Scailo.IdentifierUUID
-	38, // 72: Scailo.UsersService.IdentifyCroppedFace:input_type -> Scailo.StandardFile
-	38, // 73: Scailo.UsersService.IdentifyFullFace:input_type -> Scailo.StandardFile
-	11, // 74: Scailo.UsersService.SearchAll:input_type -> Scailo.UsersServiceSearchAllReq
-	9,  // 75: Scailo.UsersService.Filter:input_type -> Scailo.UsersServiceFilterReq
-	39, // 76: Scailo.UsersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 77: Scailo.UsersService.Count:input_type -> Scailo.UsersServiceCountReq
-	9,  // 78: Scailo.UsersService.DownloadAsCSV:input_type -> Scailo.UsersServiceFilterReq
-	38, // 79: Scailo.UsersService.ImportFromCSV:input_type -> Scailo.StandardFile
-	40, // 80: Scailo.UsersService.RegisterMobileDevice:output_type -> Scailo.IdentifierResponse
-	40, // 81: Scailo.UsersService.Create:output_type -> Scailo.IdentifierResponse
-	40, // 82: Scailo.UsersService.Draft:output_type -> Scailo.IdentifierResponse
-	40, // 83: Scailo.UsersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 84: Scailo.UsersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	40, // 85: Scailo.UsersService.Verify:output_type -> Scailo.IdentifierResponse
-	40, // 86: Scailo.UsersService.Approve:output_type -> Scailo.IdentifierResponse
-	40, // 87: Scailo.UsersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	40, // 88: Scailo.UsersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 89: Scailo.UsersService.Halt:output_type -> Scailo.IdentifierResponse
-	40, // 90: Scailo.UsersService.Discard:output_type -> Scailo.IdentifierResponse
-	40, // 91: Scailo.UsersService.Restore:output_type -> Scailo.IdentifierResponse
-	40, // 92: Scailo.UsersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	41, // 93: Scailo.UsersService.CreateMagicLinkForSignature:output_type -> Scailo.MagicLink
-	40, // 94: Scailo.UsersService.UpdatePassword:output_type -> Scailo.IdentifierResponse
-	40, // 95: Scailo.UsersService.UpdateOwnPassword:output_type -> Scailo.IdentifierResponse
-	41, // 96: Scailo.UsersService.RequestPasswordResetEmail:output_type -> Scailo.MagicLink
-	40, // 97: Scailo.UsersService.UpdateProfilePicture:output_type -> Scailo.IdentifierResponse
-	40, // 98: Scailo.UsersService.UpdateSignature:output_type -> Scailo.IdentifierResponse
-	42, // 99: Scailo.UsersService.MFAEnable:output_type -> Scailo.ImageResponse
-	40, // 100: Scailo.UsersService.MFAReset:output_type -> Scailo.IdentifierResponse
-	4,  // 101: Scailo.UsersService.ViewByID:output_type -> Scailo.User
-	4,  // 102: Scailo.UsersService.ViewByUUID:output_type -> Scailo.User
-	4,  // 103: Scailo.UsersService.ViewEssentialByID:output_type -> Scailo.User
-	4,  // 104: Scailo.UsersService.ViewEssentialByUUID:output_type -> Scailo.User
-	4,  // 105: Scailo.UsersService.ViewByUsername:output_type -> Scailo.User
-	4,  // 106: Scailo.UsersService.ViewByCode:output_type -> Scailo.User
-	6,  // 107: Scailo.UsersService.ViewAll:output_type -> Scailo.UsersList
-	6,  // 108: Scailo.UsersService.ViewAllForEntityUUID:output_type -> Scailo.UsersList
-	8,  // 109: Scailo.UsersService.ViewWithPagination:output_type -> Scailo.UsersServicePaginationResponse
-	6,  // 110: Scailo.UsersService.ViewFromIDs:output_type -> Scailo.UsersList
-	6,  // 111: Scailo.UsersService.ViewFromUUIDs:output_type -> Scailo.UsersList
-	6,  // 112: Scailo.UsersService.ViewFromUsernames:output_type -> Scailo.UsersList
-	4,  // 113: Scailo.UsersService.ViewSelf:output_type -> Scailo.User
-	6,  // 114: Scailo.UsersService.ViewBirthdaysOn:output_type -> Scailo.UsersList
-	43, // 115: Scailo.UsersService.ViewSignature:output_type -> Scailo.Base64String
-	42, // 116: Scailo.UsersService.ViewProfilePicture:output_type -> Scailo.ImageResponse
-	42, // 117: Scailo.UsersService.ViewThumbnailPicture:output_type -> Scailo.ImageResponse
-	42, // 118: Scailo.UsersService.ViewVCard:output_type -> Scailo.ImageResponse
-	42, // 119: Scailo.UsersService.ViewQRImage:output_type -> Scailo.ImageResponse
-	44, // 120: Scailo.UsersService.ViewQRString:output_type -> Scailo.StringResponse
-	4,  // 121: Scailo.UsersService.IdentifyCroppedFace:output_type -> Scailo.User
-	4,  // 122: Scailo.UsersService.IdentifyFullFace:output_type -> Scailo.User
-	6,  // 123: Scailo.UsersService.SearchAll:output_type -> Scailo.UsersList
-	6,  // 124: Scailo.UsersService.Filter:output_type -> Scailo.UsersList
-	45, // 125: Scailo.UsersService.CountInStatus:output_type -> Scailo.CountResponse
-	45, // 126: Scailo.UsersService.Count:output_type -> Scailo.CountResponse
-	38, // 127: Scailo.UsersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	34, // 128: Scailo.UsersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	80, // [80:129] is the sub-list for method output_type
-	31, // [31:80] is the sub-list for method input_type
+	24, // 44: Scailo.UsersService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	25, // 45: Scailo.UsersService.CreateMagicLinkForSignature:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	26, // 46: Scailo.UsersService.UpdatePassword:input_type -> Scailo.UpdatePasswordReq
+	27, // 47: Scailo.UsersService.UpdateOwnPassword:input_type -> Scailo.UpdateOwnPasswordReq
+	13, // 48: Scailo.UsersService.RequestPasswordResetEmail:input_type -> Scailo.UsersServicePasswordResetReq
+	28, // 49: Scailo.UsersService.UpdateProfilePicture:input_type -> Scailo.UploadPictureReq
+	28, // 50: Scailo.UsersService.UpdateSignature:input_type -> Scailo.UploadPictureReq
+	29, // 51: Scailo.UsersService.MFAEnable:input_type -> Scailo.IdentifierUUID
+	29, // 52: Scailo.UsersService.MFAReset:input_type -> Scailo.IdentifierUUID
+	30, // 53: Scailo.UsersService.ViewByID:input_type -> Scailo.IdentifierZeroable
+	29, // 54: Scailo.UsersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	31, // 55: Scailo.UsersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	29, // 56: Scailo.UsersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	32, // 57: Scailo.UsersService.ViewByUsername:input_type -> Scailo.SimpleSearchReq
+	32, // 58: Scailo.UsersService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	33, // 59: Scailo.UsersService.ViewAll:input_type -> Scailo.ActiveStatus
+	29, // 60: Scailo.UsersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 61: Scailo.UsersService.ViewWithPagination:input_type -> Scailo.UsersServicePaginationReq
+	34, // 62: Scailo.UsersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	35, // 63: Scailo.UsersService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
+	36, // 64: Scailo.UsersService.ViewFromUsernames:input_type -> Scailo.StringsList
+	37, // 65: Scailo.UsersService.ViewSelf:input_type -> Scailo.Empty
+	38, // 66: Scailo.UsersService.ViewBirthdaysOn:input_type -> Scailo.MonthAndDayFilter
+	29, // 67: Scailo.UsersService.ViewSignature:input_type -> Scailo.IdentifierUUID
+	29, // 68: Scailo.UsersService.ViewProfilePicture:input_type -> Scailo.IdentifierUUID
+	29, // 69: Scailo.UsersService.ViewThumbnailPicture:input_type -> Scailo.IdentifierUUID
+	29, // 70: Scailo.UsersService.ViewVCard:input_type -> Scailo.IdentifierUUID
+	29, // 71: Scailo.UsersService.ViewQRImage:input_type -> Scailo.IdentifierUUID
+	29, // 72: Scailo.UsersService.ViewQRString:input_type -> Scailo.IdentifierUUID
+	39, // 73: Scailo.UsersService.IdentifyCroppedFace:input_type -> Scailo.StandardFile
+	39, // 74: Scailo.UsersService.IdentifyFullFace:input_type -> Scailo.StandardFile
+	11, // 75: Scailo.UsersService.SearchAll:input_type -> Scailo.UsersServiceSearchAllReq
+	9,  // 76: Scailo.UsersService.Filter:input_type -> Scailo.UsersServiceFilterReq
+	40, // 77: Scailo.UsersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 78: Scailo.UsersService.Count:input_type -> Scailo.UsersServiceCountReq
+	9,  // 79: Scailo.UsersService.DownloadAsCSV:input_type -> Scailo.UsersServiceFilterReq
+	39, // 80: Scailo.UsersService.ImportFromCSV:input_type -> Scailo.StandardFile
+	41, // 81: Scailo.UsersService.RegisterMobileDevice:output_type -> Scailo.IdentifierResponse
+	41, // 82: Scailo.UsersService.Create:output_type -> Scailo.IdentifierResponse
+	41, // 83: Scailo.UsersService.Draft:output_type -> Scailo.IdentifierResponse
+	41, // 84: Scailo.UsersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 85: Scailo.UsersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	41, // 86: Scailo.UsersService.Verify:output_type -> Scailo.IdentifierResponse
+	41, // 87: Scailo.UsersService.Approve:output_type -> Scailo.IdentifierResponse
+	41, // 88: Scailo.UsersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	41, // 89: Scailo.UsersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 90: Scailo.UsersService.Halt:output_type -> Scailo.IdentifierResponse
+	41, // 91: Scailo.UsersService.Discard:output_type -> Scailo.IdentifierResponse
+	41, // 92: Scailo.UsersService.Restore:output_type -> Scailo.IdentifierResponse
+	41, // 93: Scailo.UsersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	41, // 94: Scailo.UsersService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	42, // 95: Scailo.UsersService.CreateMagicLinkForSignature:output_type -> Scailo.MagicLink
+	41, // 96: Scailo.UsersService.UpdatePassword:output_type -> Scailo.IdentifierResponse
+	41, // 97: Scailo.UsersService.UpdateOwnPassword:output_type -> Scailo.IdentifierResponse
+	42, // 98: Scailo.UsersService.RequestPasswordResetEmail:output_type -> Scailo.MagicLink
+	41, // 99: Scailo.UsersService.UpdateProfilePicture:output_type -> Scailo.IdentifierResponse
+	41, // 100: Scailo.UsersService.UpdateSignature:output_type -> Scailo.IdentifierResponse
+	43, // 101: Scailo.UsersService.MFAEnable:output_type -> Scailo.ImageResponse
+	41, // 102: Scailo.UsersService.MFAReset:output_type -> Scailo.IdentifierResponse
+	4,  // 103: Scailo.UsersService.ViewByID:output_type -> Scailo.User
+	4,  // 104: Scailo.UsersService.ViewByUUID:output_type -> Scailo.User
+	4,  // 105: Scailo.UsersService.ViewEssentialByID:output_type -> Scailo.User
+	4,  // 106: Scailo.UsersService.ViewEssentialByUUID:output_type -> Scailo.User
+	4,  // 107: Scailo.UsersService.ViewByUsername:output_type -> Scailo.User
+	4,  // 108: Scailo.UsersService.ViewByCode:output_type -> Scailo.User
+	6,  // 109: Scailo.UsersService.ViewAll:output_type -> Scailo.UsersList
+	6,  // 110: Scailo.UsersService.ViewAllForEntityUUID:output_type -> Scailo.UsersList
+	8,  // 111: Scailo.UsersService.ViewWithPagination:output_type -> Scailo.UsersServicePaginationResponse
+	6,  // 112: Scailo.UsersService.ViewFromIDs:output_type -> Scailo.UsersList
+	6,  // 113: Scailo.UsersService.ViewFromUUIDs:output_type -> Scailo.UsersList
+	6,  // 114: Scailo.UsersService.ViewFromUsernames:output_type -> Scailo.UsersList
+	4,  // 115: Scailo.UsersService.ViewSelf:output_type -> Scailo.User
+	6,  // 116: Scailo.UsersService.ViewBirthdaysOn:output_type -> Scailo.UsersList
+	44, // 117: Scailo.UsersService.ViewSignature:output_type -> Scailo.Base64String
+	43, // 118: Scailo.UsersService.ViewProfilePicture:output_type -> Scailo.ImageResponse
+	43, // 119: Scailo.UsersService.ViewThumbnailPicture:output_type -> Scailo.ImageResponse
+	43, // 120: Scailo.UsersService.ViewVCard:output_type -> Scailo.ImageResponse
+	43, // 121: Scailo.UsersService.ViewQRImage:output_type -> Scailo.ImageResponse
+	45, // 122: Scailo.UsersService.ViewQRString:output_type -> Scailo.StringResponse
+	4,  // 123: Scailo.UsersService.IdentifyCroppedFace:output_type -> Scailo.User
+	4,  // 124: Scailo.UsersService.IdentifyFullFace:output_type -> Scailo.User
+	6,  // 125: Scailo.UsersService.SearchAll:output_type -> Scailo.UsersList
+	6,  // 126: Scailo.UsersService.Filter:output_type -> Scailo.UsersList
+	46, // 127: Scailo.UsersService.CountInStatus:output_type -> Scailo.CountResponse
+	46, // 128: Scailo.UsersService.Count:output_type -> Scailo.CountResponse
+	39, // 129: Scailo.UsersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	35, // 130: Scailo.UsersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	81, // [81:131] is the sub-list for method output_type
+	31, // [31:81] is the sub-list for method input_type
 	31, // [31:31] is the sub-list for extension type_name
 	31, // [31:31] is the sub-list for extension extendee
 	0,  // [0:31] is the sub-list for field type_name
@@ -3172,6 +3176,7 @@ func file_users_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

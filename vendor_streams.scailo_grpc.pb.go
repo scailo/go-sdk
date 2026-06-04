@@ -25,6 +25,7 @@ const (
 	VendorStreamsService_Reopen_FullMethodName                                  = "/Scailo.VendorStreamsService/Reopen"
 	VendorStreamsService_Repeat_FullMethodName                                  = "/Scailo.VendorStreamsService/Repeat"
 	VendorStreamsService_CommentAdd_FullMethodName                              = "/Scailo.VendorStreamsService/CommentAdd"
+	VendorStreamsService_AttachVaultFolder_FullMethodName                       = "/Scailo.VendorStreamsService/AttachVaultFolder"
 	VendorStreamsService_AddMessage_FullMethodName                              = "/Scailo.VendorStreamsService/AddMessage"
 	VendorStreamsService_SaveMessageForLater_FullMethodName                     = "/Scailo.VendorStreamsService/SaveMessageForLater"
 	VendorStreamsService_DeleteMessage_FullMethodName                           = "/Scailo.VendorStreamsService/DeleteMessage"
@@ -77,6 +78,17 @@ type VendorStreamsServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierUUID, error)
 	// Add comment
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierUUID, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add a message to an vendor stream
 	AddMessage(ctx context.Context, in *VendorStreamsServiceMessageCreateRequest, opts ...grpc.CallOption) (*IdentifierUUID, error)
 	// Saves a message for viewing it later
@@ -212,6 +224,16 @@ func (c *vendorStreamsServiceClient) CommentAdd(ctx context.Context, in *Identif
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierUUID)
 	err := c.cc.Invoke(ctx, VendorStreamsService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vendorStreamsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VendorStreamsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

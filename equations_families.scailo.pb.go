@@ -2283,7 +2283,7 @@ var File_equations_families_scailo_proto protoreflect.FileDescriptor
 
 const file_equations_families_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1fequations_families.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x18magic_links.scailo.proto\"\x81\x02\n" +
+	"\x1fequations_families.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x81\x02\n" +
 	"%EquationsFamiliesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2477,7 +2477,7 @@ const file_equations_families_scailo_proto_rawDesc = "" +
 	"%EQUATION_FAMILY_SORT_KEY_COMPLETED_ON\x10\x06\x12!\n" +
 	"\x1dEQUATION_FAMILY_SORT_KEY_NAME\x10\n" +
 	"\x12&\n" +
-	"\"EQUATION_FAMILY_SORT_KEY_FAMILY_ID\x10\v2\xcf#\n" +
+	"\"EQUATION_FAMILY_SORT_KEY_FAMILY_ID\x10\v2\xa2$\n" +
 	"\x18EquationsFamiliesService\x12S\n" +
 	"\x06Create\x12-.Scailo.EquationsFamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
 	"\x05Draft\x12-.Scailo.EquationsFamiliesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -2494,7 +2494,8 @@ const file_equations_families_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12f\n" +
 	"\x15AddEquationFamilyItem\x121.Scailo.EquationsFamiliesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12i\n" +
@@ -2581,27 +2582,28 @@ var file_equations_families_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                          // 23: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                           // 24: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                     // 25: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 26: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*CloneRequest)(nil),                                      // 27: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),                         // 28: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 29: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 30: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 31: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 32: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 33: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 34: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 35: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 36: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 37: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 38: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 39: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                                      // 40: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                // 41: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 42: Scailo.MagicLink
-	(*FamiliesList)(nil),                                      // 43: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                   // 44: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 45: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                               // 46: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                          // 26: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 27: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*CloneRequest)(nil),                                      // 28: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),                         // 29: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 30: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 31: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 32: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 33: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 34: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 35: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 36: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 37: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 38: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 39: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 40: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                                      // 41: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                // 42: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 43: Scailo.MagicLink
+	(*FamiliesList)(nil),                                      // 44: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                   // 45: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 46: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                               // 47: Scailo.IdentifierUUIDsList
 }
 var file_equations_families_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.EquationFamily.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2648,101 +2650,103 @@ var file_equations_families_scailo_proto_depIdxs = []int32{
 	25, // 41: Scailo.EquationsFamiliesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.EquationsFamiliesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 43: Scailo.EquationsFamiliesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	26, // 44: Scailo.EquationsFamiliesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	27, // 45: Scailo.EquationsFamiliesService.Clone:input_type -> Scailo.CloneRequest
-	6,  // 46: Scailo.EquationsFamiliesService.AddEquationFamilyItem:input_type -> Scailo.EquationsFamiliesServiceItemCreateRequest
-	7,  // 47: Scailo.EquationsFamiliesService.ModifyEquationFamilyItem:input_type -> Scailo.EquationsFamiliesServiceItemUpdateRequest
-	28, // 48: Scailo.EquationsFamiliesService.ApproveEquationFamilyItem:input_type -> Scailo.IdentifierWithUserComment
-	28, // 49: Scailo.EquationsFamiliesService.DeleteEquationFamilyItem:input_type -> Scailo.IdentifierWithUserComment
-	29, // 50: Scailo.EquationsFamiliesService.ReorderEquationFamilyItems:input_type -> Scailo.ReorderItemsRequest
-	30, // 51: Scailo.EquationsFamiliesService.ViewEquationFamilyItemByID:input_type -> Scailo.Identifier
-	31, // 52: Scailo.EquationsFamiliesService.ViewApprovedEquationFamilyItems:input_type -> Scailo.IdentifierWithSearchKey
-	31, // 53: Scailo.EquationsFamiliesService.ViewUnapprovedEquationFamilyItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 54: Scailo.EquationsFamiliesService.ViewEquationFamilyItemHistory:input_type -> Scailo.EquationFamilyItemHistoryRequest
-	12, // 55: Scailo.EquationsFamiliesService.ViewPaginatedApprovedEquationFamilyItems:input_type -> Scailo.EquationFamilyItemsSearchRequest
-	12, // 56: Scailo.EquationsFamiliesService.ViewPaginatedUnapprovedEquationFamilyItems:input_type -> Scailo.EquationFamilyItemsSearchRequest
-	12, // 57: Scailo.EquationsFamiliesService.SearchItemsWithPagination:input_type -> Scailo.EquationFamilyItemsSearchRequest
-	32, // 58: Scailo.EquationsFamiliesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	33, // 59: Scailo.EquationsFamiliesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	32, // 60: Scailo.EquationsFamiliesService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
-	34, // 61: Scailo.EquationsFamiliesService.UploadEquationFamilyItems:input_type -> Scailo.IdentifierUUIDWithFile
-	30, // 62: Scailo.EquationsFamiliesService.ViewByID:input_type -> Scailo.Identifier
-	32, // 63: Scailo.EquationsFamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 64: Scailo.EquationsFamiliesService.ViewByName:input_type -> Scailo.SimpleSearchReq
-	30, // 65: Scailo.EquationsFamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	32, // 66: Scailo.EquationsFamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 67: Scailo.EquationsFamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	37, // 68: Scailo.EquationsFamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
-	32, // 69: Scailo.EquationsFamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 70: Scailo.EquationsFamiliesService.ViewWithPagination:input_type -> Scailo.EquationsFamiliesServicePaginationReq
-	30, // 71: Scailo.EquationsFamiliesService.ViewForFamilyID:input_type -> Scailo.Identifier
-	36, // 72: Scailo.EquationsFamiliesService.ViewForFamilyIDs:input_type -> Scailo.IdentifiersList
-	31, // 73: Scailo.EquationsFamiliesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	38, // 74: Scailo.EquationsFamiliesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	32, // 75: Scailo.EquationsFamiliesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	32, // 76: Scailo.EquationsFamiliesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 77: Scailo.EquationsFamiliesService.SearchAll:input_type -> Scailo.EquationsFamiliesServiceSearchAllReq
-	16, // 78: Scailo.EquationsFamiliesService.Filter:input_type -> Scailo.EquationsFamiliesServiceFilterReq
-	39, // 79: Scailo.EquationsFamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 80: Scailo.EquationsFamiliesService.Count:input_type -> Scailo.EquationsFamiliesServiceCountReq
-	16, // 81: Scailo.EquationsFamiliesService.DownloadAsCSV:input_type -> Scailo.EquationsFamiliesServiceFilterReq
-	40, // 82: Scailo.EquationsFamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	41, // 83: Scailo.EquationsFamiliesService.Create:output_type -> Scailo.IdentifierResponse
-	41, // 84: Scailo.EquationsFamiliesService.Draft:output_type -> Scailo.IdentifierResponse
-	41, // 85: Scailo.EquationsFamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	41, // 86: Scailo.EquationsFamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	41, // 87: Scailo.EquationsFamiliesService.Verify:output_type -> Scailo.IdentifierResponse
-	41, // 88: Scailo.EquationsFamiliesService.Approve:output_type -> Scailo.IdentifierResponse
-	41, // 89: Scailo.EquationsFamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	41, // 90: Scailo.EquationsFamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	41, // 91: Scailo.EquationsFamiliesService.Halt:output_type -> Scailo.IdentifierResponse
-	41, // 92: Scailo.EquationsFamiliesService.Discard:output_type -> Scailo.IdentifierResponse
-	41, // 93: Scailo.EquationsFamiliesService.Restore:output_type -> Scailo.IdentifierResponse
-	41, // 94: Scailo.EquationsFamiliesService.Complete:output_type -> Scailo.IdentifierResponse
-	41, // 95: Scailo.EquationsFamiliesService.Repeat:output_type -> Scailo.IdentifierResponse
-	41, // 96: Scailo.EquationsFamiliesService.Reopen:output_type -> Scailo.IdentifierResponse
-	41, // 97: Scailo.EquationsFamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	42, // 98: Scailo.EquationsFamiliesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	41, // 99: Scailo.EquationsFamiliesService.Clone:output_type -> Scailo.IdentifierResponse
-	41, // 100: Scailo.EquationsFamiliesService.AddEquationFamilyItem:output_type -> Scailo.IdentifierResponse
-	41, // 101: Scailo.EquationsFamiliesService.ModifyEquationFamilyItem:output_type -> Scailo.IdentifierResponse
-	41, // 102: Scailo.EquationsFamiliesService.ApproveEquationFamilyItem:output_type -> Scailo.IdentifierResponse
-	41, // 103: Scailo.EquationsFamiliesService.DeleteEquationFamilyItem:output_type -> Scailo.IdentifierResponse
-	41, // 104: Scailo.EquationsFamiliesService.ReorderEquationFamilyItems:output_type -> Scailo.IdentifierResponse
-	8,  // 105: Scailo.EquationsFamiliesService.ViewEquationFamilyItemByID:output_type -> Scailo.EquationFamilyItem
-	10, // 106: Scailo.EquationsFamiliesService.ViewApprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesItemsList
-	10, // 107: Scailo.EquationsFamiliesService.ViewUnapprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesItemsList
-	10, // 108: Scailo.EquationsFamiliesService.ViewEquationFamilyItemHistory:output_type -> Scailo.EquationsFamiliesItemsList
-	13, // 109: Scailo.EquationsFamiliesService.ViewPaginatedApprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
-	13, // 110: Scailo.EquationsFamiliesService.ViewPaginatedUnapprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
-	13, // 111: Scailo.EquationsFamiliesService.SearchItemsWithPagination:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
-	40, // 112: Scailo.EquationsFamiliesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	40, // 113: Scailo.EquationsFamiliesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	40, // 114: Scailo.EquationsFamiliesService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
-	36, // 115: Scailo.EquationsFamiliesService.UploadEquationFamilyItems:output_type -> Scailo.IdentifiersList
-	5,  // 116: Scailo.EquationsFamiliesService.ViewByID:output_type -> Scailo.EquationFamily
-	5,  // 117: Scailo.EquationsFamiliesService.ViewByUUID:output_type -> Scailo.EquationFamily
-	5,  // 118: Scailo.EquationsFamiliesService.ViewByName:output_type -> Scailo.EquationFamily
-	5,  // 119: Scailo.EquationsFamiliesService.ViewEssentialByID:output_type -> Scailo.EquationFamily
-	5,  // 120: Scailo.EquationsFamiliesService.ViewEssentialByUUID:output_type -> Scailo.EquationFamily
-	9,  // 121: Scailo.EquationsFamiliesService.ViewFromIDs:output_type -> Scailo.EquationsFamiliesList
-	9,  // 122: Scailo.EquationsFamiliesService.ViewAll:output_type -> Scailo.EquationsFamiliesList
-	9,  // 123: Scailo.EquationsFamiliesService.ViewAllForEntityUUID:output_type -> Scailo.EquationsFamiliesList
-	15, // 124: Scailo.EquationsFamiliesService.ViewWithPagination:output_type -> Scailo.EquationsFamiliesServicePaginationResponse
-	5,  // 125: Scailo.EquationsFamiliesService.ViewForFamilyID:output_type -> Scailo.EquationFamily
-	9,  // 126: Scailo.EquationsFamiliesService.ViewForFamilyIDs:output_type -> Scailo.EquationsFamiliesList
-	43, // 127: Scailo.EquationsFamiliesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	43, // 128: Scailo.EquationsFamiliesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	44, // 129: Scailo.EquationsFamiliesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	40, // 130: Scailo.EquationsFamiliesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	9,  // 131: Scailo.EquationsFamiliesService.SearchAll:output_type -> Scailo.EquationsFamiliesList
-	9,  // 132: Scailo.EquationsFamiliesService.Filter:output_type -> Scailo.EquationsFamiliesList
-	45, // 133: Scailo.EquationsFamiliesService.CountInStatus:output_type -> Scailo.CountResponse
-	45, // 134: Scailo.EquationsFamiliesService.Count:output_type -> Scailo.CountResponse
-	40, // 135: Scailo.EquationsFamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	46, // 136: Scailo.EquationsFamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	83, // [83:137] is the sub-list for method output_type
-	29, // [29:83] is the sub-list for method input_type
+	26, // 44: Scailo.EquationsFamiliesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	27, // 45: Scailo.EquationsFamiliesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	28, // 46: Scailo.EquationsFamiliesService.Clone:input_type -> Scailo.CloneRequest
+	6,  // 47: Scailo.EquationsFamiliesService.AddEquationFamilyItem:input_type -> Scailo.EquationsFamiliesServiceItemCreateRequest
+	7,  // 48: Scailo.EquationsFamiliesService.ModifyEquationFamilyItem:input_type -> Scailo.EquationsFamiliesServiceItemUpdateRequest
+	29, // 49: Scailo.EquationsFamiliesService.ApproveEquationFamilyItem:input_type -> Scailo.IdentifierWithUserComment
+	29, // 50: Scailo.EquationsFamiliesService.DeleteEquationFamilyItem:input_type -> Scailo.IdentifierWithUserComment
+	30, // 51: Scailo.EquationsFamiliesService.ReorderEquationFamilyItems:input_type -> Scailo.ReorderItemsRequest
+	31, // 52: Scailo.EquationsFamiliesService.ViewEquationFamilyItemByID:input_type -> Scailo.Identifier
+	32, // 53: Scailo.EquationsFamiliesService.ViewApprovedEquationFamilyItems:input_type -> Scailo.IdentifierWithSearchKey
+	32, // 54: Scailo.EquationsFamiliesService.ViewUnapprovedEquationFamilyItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 55: Scailo.EquationsFamiliesService.ViewEquationFamilyItemHistory:input_type -> Scailo.EquationFamilyItemHistoryRequest
+	12, // 56: Scailo.EquationsFamiliesService.ViewPaginatedApprovedEquationFamilyItems:input_type -> Scailo.EquationFamilyItemsSearchRequest
+	12, // 57: Scailo.EquationsFamiliesService.ViewPaginatedUnapprovedEquationFamilyItems:input_type -> Scailo.EquationFamilyItemsSearchRequest
+	12, // 58: Scailo.EquationsFamiliesService.SearchItemsWithPagination:input_type -> Scailo.EquationFamilyItemsSearchRequest
+	33, // 59: Scailo.EquationsFamiliesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	34, // 60: Scailo.EquationsFamiliesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	33, // 61: Scailo.EquationsFamiliesService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
+	35, // 62: Scailo.EquationsFamiliesService.UploadEquationFamilyItems:input_type -> Scailo.IdentifierUUIDWithFile
+	31, // 63: Scailo.EquationsFamiliesService.ViewByID:input_type -> Scailo.Identifier
+	33, // 64: Scailo.EquationsFamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 65: Scailo.EquationsFamiliesService.ViewByName:input_type -> Scailo.SimpleSearchReq
+	31, // 66: Scailo.EquationsFamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	33, // 67: Scailo.EquationsFamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 68: Scailo.EquationsFamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	38, // 69: Scailo.EquationsFamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
+	33, // 70: Scailo.EquationsFamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14, // 71: Scailo.EquationsFamiliesService.ViewWithPagination:input_type -> Scailo.EquationsFamiliesServicePaginationReq
+	31, // 72: Scailo.EquationsFamiliesService.ViewForFamilyID:input_type -> Scailo.Identifier
+	37, // 73: Scailo.EquationsFamiliesService.ViewForFamilyIDs:input_type -> Scailo.IdentifiersList
+	32, // 74: Scailo.EquationsFamiliesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	39, // 75: Scailo.EquationsFamiliesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	33, // 76: Scailo.EquationsFamiliesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	33, // 77: Scailo.EquationsFamiliesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 78: Scailo.EquationsFamiliesService.SearchAll:input_type -> Scailo.EquationsFamiliesServiceSearchAllReq
+	16, // 79: Scailo.EquationsFamiliesService.Filter:input_type -> Scailo.EquationsFamiliesServiceFilterReq
+	40, // 80: Scailo.EquationsFamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17, // 81: Scailo.EquationsFamiliesService.Count:input_type -> Scailo.EquationsFamiliesServiceCountReq
+	16, // 82: Scailo.EquationsFamiliesService.DownloadAsCSV:input_type -> Scailo.EquationsFamiliesServiceFilterReq
+	41, // 83: Scailo.EquationsFamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	42, // 84: Scailo.EquationsFamiliesService.Create:output_type -> Scailo.IdentifierResponse
+	42, // 85: Scailo.EquationsFamiliesService.Draft:output_type -> Scailo.IdentifierResponse
+	42, // 86: Scailo.EquationsFamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	42, // 87: Scailo.EquationsFamiliesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	42, // 88: Scailo.EquationsFamiliesService.Verify:output_type -> Scailo.IdentifierResponse
+	42, // 89: Scailo.EquationsFamiliesService.Approve:output_type -> Scailo.IdentifierResponse
+	42, // 90: Scailo.EquationsFamiliesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	42, // 91: Scailo.EquationsFamiliesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	42, // 92: Scailo.EquationsFamiliesService.Halt:output_type -> Scailo.IdentifierResponse
+	42, // 93: Scailo.EquationsFamiliesService.Discard:output_type -> Scailo.IdentifierResponse
+	42, // 94: Scailo.EquationsFamiliesService.Restore:output_type -> Scailo.IdentifierResponse
+	42, // 95: Scailo.EquationsFamiliesService.Complete:output_type -> Scailo.IdentifierResponse
+	42, // 96: Scailo.EquationsFamiliesService.Repeat:output_type -> Scailo.IdentifierResponse
+	42, // 97: Scailo.EquationsFamiliesService.Reopen:output_type -> Scailo.IdentifierResponse
+	42, // 98: Scailo.EquationsFamiliesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	42, // 99: Scailo.EquationsFamiliesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	43, // 100: Scailo.EquationsFamiliesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	42, // 101: Scailo.EquationsFamiliesService.Clone:output_type -> Scailo.IdentifierResponse
+	42, // 102: Scailo.EquationsFamiliesService.AddEquationFamilyItem:output_type -> Scailo.IdentifierResponse
+	42, // 103: Scailo.EquationsFamiliesService.ModifyEquationFamilyItem:output_type -> Scailo.IdentifierResponse
+	42, // 104: Scailo.EquationsFamiliesService.ApproveEquationFamilyItem:output_type -> Scailo.IdentifierResponse
+	42, // 105: Scailo.EquationsFamiliesService.DeleteEquationFamilyItem:output_type -> Scailo.IdentifierResponse
+	42, // 106: Scailo.EquationsFamiliesService.ReorderEquationFamilyItems:output_type -> Scailo.IdentifierResponse
+	8,  // 107: Scailo.EquationsFamiliesService.ViewEquationFamilyItemByID:output_type -> Scailo.EquationFamilyItem
+	10, // 108: Scailo.EquationsFamiliesService.ViewApprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesItemsList
+	10, // 109: Scailo.EquationsFamiliesService.ViewUnapprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesItemsList
+	10, // 110: Scailo.EquationsFamiliesService.ViewEquationFamilyItemHistory:output_type -> Scailo.EquationsFamiliesItemsList
+	13, // 111: Scailo.EquationsFamiliesService.ViewPaginatedApprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
+	13, // 112: Scailo.EquationsFamiliesService.ViewPaginatedUnapprovedEquationFamilyItems:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
+	13, // 113: Scailo.EquationsFamiliesService.SearchItemsWithPagination:output_type -> Scailo.EquationsFamiliesServicePaginatedItemsResponse
+	41, // 114: Scailo.EquationsFamiliesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	41, // 115: Scailo.EquationsFamiliesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	41, // 116: Scailo.EquationsFamiliesService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
+	37, // 117: Scailo.EquationsFamiliesService.UploadEquationFamilyItems:output_type -> Scailo.IdentifiersList
+	5,  // 118: Scailo.EquationsFamiliesService.ViewByID:output_type -> Scailo.EquationFamily
+	5,  // 119: Scailo.EquationsFamiliesService.ViewByUUID:output_type -> Scailo.EquationFamily
+	5,  // 120: Scailo.EquationsFamiliesService.ViewByName:output_type -> Scailo.EquationFamily
+	5,  // 121: Scailo.EquationsFamiliesService.ViewEssentialByID:output_type -> Scailo.EquationFamily
+	5,  // 122: Scailo.EquationsFamiliesService.ViewEssentialByUUID:output_type -> Scailo.EquationFamily
+	9,  // 123: Scailo.EquationsFamiliesService.ViewFromIDs:output_type -> Scailo.EquationsFamiliesList
+	9,  // 124: Scailo.EquationsFamiliesService.ViewAll:output_type -> Scailo.EquationsFamiliesList
+	9,  // 125: Scailo.EquationsFamiliesService.ViewAllForEntityUUID:output_type -> Scailo.EquationsFamiliesList
+	15, // 126: Scailo.EquationsFamiliesService.ViewWithPagination:output_type -> Scailo.EquationsFamiliesServicePaginationResponse
+	5,  // 127: Scailo.EquationsFamiliesService.ViewForFamilyID:output_type -> Scailo.EquationFamily
+	9,  // 128: Scailo.EquationsFamiliesService.ViewForFamilyIDs:output_type -> Scailo.EquationsFamiliesList
+	44, // 129: Scailo.EquationsFamiliesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	44, // 130: Scailo.EquationsFamiliesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	45, // 131: Scailo.EquationsFamiliesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	41, // 132: Scailo.EquationsFamiliesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	9,  // 133: Scailo.EquationsFamiliesService.SearchAll:output_type -> Scailo.EquationsFamiliesList
+	9,  // 134: Scailo.EquationsFamiliesService.Filter:output_type -> Scailo.EquationsFamiliesList
+	46, // 135: Scailo.EquationsFamiliesService.CountInStatus:output_type -> Scailo.CountResponse
+	46, // 136: Scailo.EquationsFamiliesService.Count:output_type -> Scailo.CountResponse
+	41, // 137: Scailo.EquationsFamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	47, // 138: Scailo.EquationsFamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	84, // [84:139] is the sub-list for method output_type
+	29, // [29:84] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2756,6 +2760,7 @@ func file_equations_families_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_families_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

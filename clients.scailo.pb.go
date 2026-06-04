@@ -1988,7 +1988,7 @@ var File_clients_scailo_proto protoreflect.FileDescriptor
 
 const file_clients_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x14clients.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xcc\x02\n" +
+	"\x14clients.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcc\x02\n" +
 	"\x1bClientsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2150,7 +2150,7 @@ const file_clients_scailo_proto_rawDesc = "" +
 	"\x12CLIENT_USER_STATUS\x12&\n" +
 	"\"CLIENT_USER_STATUS_ANY_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLIENT_USER_STATUS_APPROVED\x10\x01\x12!\n" +
-	"\x1dCLIENT_USER_STATUS_UNAPPROVED\x10\x022\xd1\x13\n" +
+	"\x1dCLIENT_USER_STATUS_UNAPPROVED\x10\x022\xa4\x14\n" +
 	"\x0eClientsService\x12I\n" +
 	"\x06Create\x12#.Scailo.ClientsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12H\n" +
 	"\x05Draft\x12#.Scailo.ClientsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
@@ -2164,7 +2164,8 @@ const file_clients_scailo_proto_rawDesc = "" +
 	"\aDiscard\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\aRestore\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\rAddClientUser\x12'.Scailo.ClientsServiceUserCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
 	"\x11ApproveClientUser\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
 	"\x10DeleteClientUser\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12<\n" +
@@ -2233,17 +2234,18 @@ var file_clients_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                              // 23: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),          // 24: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),        // 25: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithUserComment)(nil),            // 26: Scailo.IdentifierWithUserComment
-	(*Identifier)(nil),                           // 27: Scailo.Identifier
-	(*IdentifierUUID)(nil),                       // 28: Scailo.IdentifierUUID
-	(*SimpleSearchReq)(nil),                      // 29: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                      // 30: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                         // 31: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),              // 32: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                         // 33: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                   // 34: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                        // 35: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                  // 36: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),             // 26: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),            // 27: Scailo.IdentifierWithUserComment
+	(*Identifier)(nil),                           // 28: Scailo.Identifier
+	(*IdentifierUUID)(nil),                       // 29: Scailo.IdentifierUUID
+	(*SimpleSearchReq)(nil),                      // 30: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                      // 31: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                         // 32: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),              // 33: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                         // 34: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                   // 35: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                        // 36: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                  // 37: Scailo.IdentifierUUIDsList
 }
 var file_clients_scailo_proto_depIdxs = []int32{
 	16, // 0: Scailo.ClientsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2289,64 +2291,66 @@ var file_clients_scailo_proto_depIdxs = []int32{
 	25, // 40: Scailo.ClientsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 41: Scailo.ClientsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.ClientsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	11, // 43: Scailo.ClientsService.AddClientUser:input_type -> Scailo.ClientsServiceUserCreateRequest
-	26, // 44: Scailo.ClientsService.ApproveClientUser:input_type -> Scailo.IdentifierWithUserComment
-	26, // 45: Scailo.ClientsService.DeleteClientUser:input_type -> Scailo.IdentifierWithUserComment
-	27, // 46: Scailo.ClientsService.ViewClientUserByID:input_type -> Scailo.Identifier
-	27, // 47: Scailo.ClientsService.ViewClientUsers:input_type -> Scailo.Identifier
-	14, // 48: Scailo.ClientsService.SearchClientUsersWithPagination:input_type -> Scailo.ClientUsersSearchRequest
-	27, // 49: Scailo.ClientsService.ViewByID:input_type -> Scailo.Identifier
-	28, // 50: Scailo.ClientsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	27, // 51: Scailo.ClientsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	28, // 52: Scailo.ClientsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	29, // 53: Scailo.ClientsService.ViewEssentialByEmail:input_type -> Scailo.SimpleSearchReq
-	29, // 54: Scailo.ClientsService.ViewEssentialByPhone:input_type -> Scailo.SimpleSearchReq
-	30, // 55: Scailo.ClientsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	31, // 56: Scailo.ClientsService.ViewAll:input_type -> Scailo.ActiveStatus
-	28, // 57: Scailo.ClientsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	6,  // 58: Scailo.ClientsService.ViewWithPagination:input_type -> Scailo.ClientsServicePaginationReq
-	10, // 59: Scailo.ClientsService.SearchAll:input_type -> Scailo.ClientsServiceSearchAllReq
-	8,  // 60: Scailo.ClientsService.Filter:input_type -> Scailo.ClientsServiceFilterReq
-	32, // 61: Scailo.ClientsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	9,  // 62: Scailo.ClientsService.Count:input_type -> Scailo.ClientsServiceCountReq
-	8,  // 63: Scailo.ClientsService.DownloadAsCSV:input_type -> Scailo.ClientsServiceFilterReq
-	33, // 64: Scailo.ClientsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	34, // 65: Scailo.ClientsService.Create:output_type -> Scailo.IdentifierResponse
-	34, // 66: Scailo.ClientsService.Draft:output_type -> Scailo.IdentifierResponse
-	34, // 67: Scailo.ClientsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	34, // 68: Scailo.ClientsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	34, // 69: Scailo.ClientsService.Verify:output_type -> Scailo.IdentifierResponse
-	34, // 70: Scailo.ClientsService.Approve:output_type -> Scailo.IdentifierResponse
-	34, // 71: Scailo.ClientsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	34, // 72: Scailo.ClientsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	34, // 73: Scailo.ClientsService.Halt:output_type -> Scailo.IdentifierResponse
-	34, // 74: Scailo.ClientsService.Discard:output_type -> Scailo.IdentifierResponse
-	34, // 75: Scailo.ClientsService.Restore:output_type -> Scailo.IdentifierResponse
-	34, // 76: Scailo.ClientsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	34, // 77: Scailo.ClientsService.AddClientUser:output_type -> Scailo.IdentifierResponse
-	34, // 78: Scailo.ClientsService.ApproveClientUser:output_type -> Scailo.IdentifierResponse
-	34, // 79: Scailo.ClientsService.DeleteClientUser:output_type -> Scailo.IdentifierResponse
-	12, // 80: Scailo.ClientsService.ViewClientUserByID:output_type -> Scailo.ClientUser
-	13, // 81: Scailo.ClientsService.ViewClientUsers:output_type -> Scailo.ClientUsersList
-	15, // 82: Scailo.ClientsService.SearchClientUsersWithPagination:output_type -> Scailo.ClientsServicePaginatedUsersResponse
-	4,  // 83: Scailo.ClientsService.ViewByID:output_type -> Scailo.Client
-	4,  // 84: Scailo.ClientsService.ViewByUUID:output_type -> Scailo.Client
-	4,  // 85: Scailo.ClientsService.ViewEssentialByID:output_type -> Scailo.Client
-	4,  // 86: Scailo.ClientsService.ViewEssentialByUUID:output_type -> Scailo.Client
-	4,  // 87: Scailo.ClientsService.ViewEssentialByEmail:output_type -> Scailo.Client
-	4,  // 88: Scailo.ClientsService.ViewEssentialByPhone:output_type -> Scailo.Client
-	5,  // 89: Scailo.ClientsService.ViewFromIDs:output_type -> Scailo.ClientsList
-	5,  // 90: Scailo.ClientsService.ViewAll:output_type -> Scailo.ClientsList
-	5,  // 91: Scailo.ClientsService.ViewAllForEntityUUID:output_type -> Scailo.ClientsList
-	7,  // 92: Scailo.ClientsService.ViewWithPagination:output_type -> Scailo.ClientsServicePaginationResponse
-	5,  // 93: Scailo.ClientsService.SearchAll:output_type -> Scailo.ClientsList
-	5,  // 94: Scailo.ClientsService.Filter:output_type -> Scailo.ClientsList
-	35, // 95: Scailo.ClientsService.CountInStatus:output_type -> Scailo.CountResponse
-	35, // 96: Scailo.ClientsService.Count:output_type -> Scailo.CountResponse
-	33, // 97: Scailo.ClientsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	36, // 98: Scailo.ClientsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	65, // [65:99] is the sub-list for method output_type
-	31, // [31:65] is the sub-list for method input_type
+	26, // 43: Scailo.ClientsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	11, // 44: Scailo.ClientsService.AddClientUser:input_type -> Scailo.ClientsServiceUserCreateRequest
+	27, // 45: Scailo.ClientsService.ApproveClientUser:input_type -> Scailo.IdentifierWithUserComment
+	27, // 46: Scailo.ClientsService.DeleteClientUser:input_type -> Scailo.IdentifierWithUserComment
+	28, // 47: Scailo.ClientsService.ViewClientUserByID:input_type -> Scailo.Identifier
+	28, // 48: Scailo.ClientsService.ViewClientUsers:input_type -> Scailo.Identifier
+	14, // 49: Scailo.ClientsService.SearchClientUsersWithPagination:input_type -> Scailo.ClientUsersSearchRequest
+	28, // 50: Scailo.ClientsService.ViewByID:input_type -> Scailo.Identifier
+	29, // 51: Scailo.ClientsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	28, // 52: Scailo.ClientsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	29, // 53: Scailo.ClientsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	30, // 54: Scailo.ClientsService.ViewEssentialByEmail:input_type -> Scailo.SimpleSearchReq
+	30, // 55: Scailo.ClientsService.ViewEssentialByPhone:input_type -> Scailo.SimpleSearchReq
+	31, // 56: Scailo.ClientsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	32, // 57: Scailo.ClientsService.ViewAll:input_type -> Scailo.ActiveStatus
+	29, // 58: Scailo.ClientsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	6,  // 59: Scailo.ClientsService.ViewWithPagination:input_type -> Scailo.ClientsServicePaginationReq
+	10, // 60: Scailo.ClientsService.SearchAll:input_type -> Scailo.ClientsServiceSearchAllReq
+	8,  // 61: Scailo.ClientsService.Filter:input_type -> Scailo.ClientsServiceFilterReq
+	33, // 62: Scailo.ClientsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	9,  // 63: Scailo.ClientsService.Count:input_type -> Scailo.ClientsServiceCountReq
+	8,  // 64: Scailo.ClientsService.DownloadAsCSV:input_type -> Scailo.ClientsServiceFilterReq
+	34, // 65: Scailo.ClientsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	35, // 66: Scailo.ClientsService.Create:output_type -> Scailo.IdentifierResponse
+	35, // 67: Scailo.ClientsService.Draft:output_type -> Scailo.IdentifierResponse
+	35, // 68: Scailo.ClientsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	35, // 69: Scailo.ClientsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	35, // 70: Scailo.ClientsService.Verify:output_type -> Scailo.IdentifierResponse
+	35, // 71: Scailo.ClientsService.Approve:output_type -> Scailo.IdentifierResponse
+	35, // 72: Scailo.ClientsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	35, // 73: Scailo.ClientsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	35, // 74: Scailo.ClientsService.Halt:output_type -> Scailo.IdentifierResponse
+	35, // 75: Scailo.ClientsService.Discard:output_type -> Scailo.IdentifierResponse
+	35, // 76: Scailo.ClientsService.Restore:output_type -> Scailo.IdentifierResponse
+	35, // 77: Scailo.ClientsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	35, // 78: Scailo.ClientsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	35, // 79: Scailo.ClientsService.AddClientUser:output_type -> Scailo.IdentifierResponse
+	35, // 80: Scailo.ClientsService.ApproveClientUser:output_type -> Scailo.IdentifierResponse
+	35, // 81: Scailo.ClientsService.DeleteClientUser:output_type -> Scailo.IdentifierResponse
+	12, // 82: Scailo.ClientsService.ViewClientUserByID:output_type -> Scailo.ClientUser
+	13, // 83: Scailo.ClientsService.ViewClientUsers:output_type -> Scailo.ClientUsersList
+	15, // 84: Scailo.ClientsService.SearchClientUsersWithPagination:output_type -> Scailo.ClientsServicePaginatedUsersResponse
+	4,  // 85: Scailo.ClientsService.ViewByID:output_type -> Scailo.Client
+	4,  // 86: Scailo.ClientsService.ViewByUUID:output_type -> Scailo.Client
+	4,  // 87: Scailo.ClientsService.ViewEssentialByID:output_type -> Scailo.Client
+	4,  // 88: Scailo.ClientsService.ViewEssentialByUUID:output_type -> Scailo.Client
+	4,  // 89: Scailo.ClientsService.ViewEssentialByEmail:output_type -> Scailo.Client
+	4,  // 90: Scailo.ClientsService.ViewEssentialByPhone:output_type -> Scailo.Client
+	5,  // 91: Scailo.ClientsService.ViewFromIDs:output_type -> Scailo.ClientsList
+	5,  // 92: Scailo.ClientsService.ViewAll:output_type -> Scailo.ClientsList
+	5,  // 93: Scailo.ClientsService.ViewAllForEntityUUID:output_type -> Scailo.ClientsList
+	7,  // 94: Scailo.ClientsService.ViewWithPagination:output_type -> Scailo.ClientsServicePaginationResponse
+	5,  // 95: Scailo.ClientsService.SearchAll:output_type -> Scailo.ClientsList
+	5,  // 96: Scailo.ClientsService.Filter:output_type -> Scailo.ClientsList
+	36, // 97: Scailo.ClientsService.CountInStatus:output_type -> Scailo.CountResponse
+	36, // 98: Scailo.ClientsService.Count:output_type -> Scailo.CountResponse
+	34, // 99: Scailo.ClientsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	37, // 100: Scailo.ClientsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	66, // [66:101] is the sub-list for method output_type
+	31, // [31:66] is the sub-list for method input_type
 	31, // [31:31] is the sub-list for extension type_name
 	31, // [31:31] is the sub-list for extension extendee
 	0,  // [0:31] is the sub-list for field type_name
@@ -2359,6 +2363,7 @@ func file_clients_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

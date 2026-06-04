@@ -2750,7 +2750,7 @@ var File_replaceable_indents_scailo_proto protoreflect.FileDescriptor
 
 const file_replaceable_indents_scailo_proto_rawDesc = "" +
 	"\n" +
-	" replaceable_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xf5\x03\n" +
+	" replaceable_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xf5\x03\n" +
 	"&ReplaceableIndentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2987,7 +2987,7 @@ const file_replaceable_indents_scailo_proto_rawDesc = "" +
 	"\x1eREPLACEABLE_INDENT_ITEM_STATUS\x122\n" +
 	".REPLACEABLE_INDENT_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12+\n" +
 	"'REPLACEABLE_INDENT_ITEM_STATUS_APPROVED\x10\x01\x12-\n" +
-	")REPLACEABLE_INDENT_ITEM_STATUS_UNAPPROVED\x10\x022\xae&\n" +
+	")REPLACEABLE_INDENT_ITEM_STATUS_UNAPPROVED\x10\x022\x81'\n" +
 	"\x19ReplaceableIndentsService\x12T\n" +
 	"\x06Create\x12..Scailo.ReplaceableIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
 	"\x05Draft\x12..Scailo.ReplaceableIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
@@ -3005,7 +3005,8 @@ const file_replaceable_indents_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12X\n" +
 	"\bAutofill\x120.Scailo.ReplaceableIndentsServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12j\n" +
@@ -3099,26 +3100,27 @@ var file_replaceable_indents_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 31: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 32: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 33: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 34: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                    // 35: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                         // 36: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 37: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 38: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 39: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                             // 40: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 41: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 42: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 43: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 44: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 45: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 46: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 47: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 48: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 49: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 50: Scailo.StandardFile
-	(*FamiliesList)(nil),                                      // 51: Scailo.FamiliesList
-	(*QuantityResponse)(nil),                                  // 52: Scailo.QuantityResponse
-	(*CountResponse)(nil),                                     // 53: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 34: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 35: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                    // 36: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                         // 37: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 38: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 39: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 40: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                             // 41: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 42: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 43: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 44: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 45: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 46: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 47: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 48: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 49: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 50: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 51: Scailo.StandardFile
+	(*FamiliesList)(nil),                                      // 52: Scailo.FamiliesList
+	(*QuantityResponse)(nil),                                  // 53: Scailo.QuantityResponse
+	(*CountResponse)(nil),                                     // 54: Scailo.CountResponse
 }
 var file_replaceable_indents_scailo_proto_depIdxs = []int32{
 	23, // 0: Scailo.ReplaceableIndentsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3172,102 +3174,104 @@ var file_replaceable_indents_scailo_proto_depIdxs = []int32{
 	32, // 48: Scailo.ReplaceableIndentsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 49: Scailo.ReplaceableIndentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	33, // 50: Scailo.ReplaceableIndentsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	34, // 51: Scailo.ReplaceableIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	5,  // 52: Scailo.ReplaceableIndentsService.Autofill:input_type -> Scailo.ReplaceableIndentsServiceAutofillRequest
-	35, // 53: Scailo.ReplaceableIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	7,  // 54: Scailo.ReplaceableIndentsService.AddReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentsServiceItemCreateRequest
-	8,  // 55: Scailo.ReplaceableIndentsService.ModifyReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentsServiceItemUpdateRequest
-	36, // 56: Scailo.ReplaceableIndentsService.ApproveReplaceableIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	36, // 57: Scailo.ReplaceableIndentsService.DeleteReplaceableIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	37, // 58: Scailo.ReplaceableIndentsService.ReorderReplaceableIndentItems:input_type -> Scailo.ReorderItemsRequest
-	38, // 59: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemByID:input_type -> Scailo.Identifier
-	39, // 60: Scailo.ReplaceableIndentsService.ViewApprovedReplaceableIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	39, // 61: Scailo.ReplaceableIndentsService.ViewUnapprovedReplaceableIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	12, // 62: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemHistory:input_type -> Scailo.ReplaceableIndentItemHistoryRequest
-	19, // 63: Scailo.ReplaceableIndentsService.ViewPaginatedApprovedReplaceableIndentItems:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
-	19, // 64: Scailo.ReplaceableIndentsService.ViewPaginatedUnapprovedReplaceableIndentItems:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
-	19, // 65: Scailo.ReplaceableIndentsService.SearchItemsWithPagination:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
-	35, // 66: Scailo.ReplaceableIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	40, // 67: Scailo.ReplaceableIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	41, // 68: Scailo.ReplaceableIndentsService.UploadReplaceableIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
-	38, // 69: Scailo.ReplaceableIndentsService.ViewByID:input_type -> Scailo.Identifier
-	35, // 70: Scailo.ReplaceableIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 71: Scailo.ReplaceableIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	38, // 72: Scailo.ReplaceableIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35, // 73: Scailo.ReplaceableIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	43, // 74: Scailo.ReplaceableIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	44, // 75: Scailo.ReplaceableIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	35, // 76: Scailo.ReplaceableIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 77: Scailo.ReplaceableIndentsService.ViewWithPagination:input_type -> Scailo.ReplaceableIndentsServicePaginationReq
-	39, // 78: Scailo.ReplaceableIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	45, // 79: Scailo.ReplaceableIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	13, // 80: Scailo.ReplaceableIndentsService.ViewProspectiveReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentItemProspectiveInfoRequest
-	35, // 81: Scailo.ReplaceableIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	35, // 82: Scailo.ReplaceableIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 83: Scailo.ReplaceableIndentsService.ViewIssuedStatistics:input_type -> Scailo.IdentifierUUID
-	13, // 84: Scailo.ReplaceableIndentsService.ViewAddedQuantityForFamily:input_type -> Scailo.ReplaceableIndentItemProspectiveInfoRequest
-	18, // 85: Scailo.ReplaceableIndentsService.SearchAll:input_type -> Scailo.ReplaceableIndentsServiceSearchAllReq
-	16, // 86: Scailo.ReplaceableIndentsService.Filter:input_type -> Scailo.ReplaceableIndentsServiceFilterReq
-	46, // 87: Scailo.ReplaceableIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 88: Scailo.ReplaceableIndentsService.Count:input_type -> Scailo.ReplaceableIndentsServiceCountReq
-	16, // 89: Scailo.ReplaceableIndentsService.DownloadAsCSV:input_type -> Scailo.ReplaceableIndentsServiceFilterReq
-	47, // 90: Scailo.ReplaceableIndentsService.Create:output_type -> Scailo.IdentifierResponse
-	47, // 91: Scailo.ReplaceableIndentsService.Draft:output_type -> Scailo.IdentifierResponse
-	47, // 92: Scailo.ReplaceableIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 93: Scailo.ReplaceableIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	47, // 94: Scailo.ReplaceableIndentsService.Verify:output_type -> Scailo.IdentifierResponse
-	47, // 95: Scailo.ReplaceableIndentsService.Approve:output_type -> Scailo.IdentifierResponse
-	47, // 96: Scailo.ReplaceableIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	47, // 97: Scailo.ReplaceableIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 98: Scailo.ReplaceableIndentsService.Halt:output_type -> Scailo.IdentifierResponse
-	47, // 99: Scailo.ReplaceableIndentsService.Discard:output_type -> Scailo.IdentifierResponse
-	47, // 100: Scailo.ReplaceableIndentsService.Restore:output_type -> Scailo.IdentifierResponse
-	47, // 101: Scailo.ReplaceableIndentsService.Complete:output_type -> Scailo.IdentifierResponse
-	47, // 102: Scailo.ReplaceableIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	47, // 103: Scailo.ReplaceableIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
-	47, // 104: Scailo.ReplaceableIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	47, // 105: Scailo.ReplaceableIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	48, // 106: Scailo.ReplaceableIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	47, // 107: Scailo.ReplaceableIndentsService.Autofill:output_type -> Scailo.IdentifierResponse
-	49, // 108: Scailo.ReplaceableIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	47, // 109: Scailo.ReplaceableIndentsService.AddReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
-	47, // 110: Scailo.ReplaceableIndentsService.ModifyReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
-	47, // 111: Scailo.ReplaceableIndentsService.ApproveReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
-	47, // 112: Scailo.ReplaceableIndentsService.DeleteReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
-	47, // 113: Scailo.ReplaceableIndentsService.ReorderReplaceableIndentItems:output_type -> Scailo.IdentifierResponse
-	9,  // 114: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemByID:output_type -> Scailo.ReplaceableIndentItem
-	11, // 115: Scailo.ReplaceableIndentsService.ViewApprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsItemsList
-	11, // 116: Scailo.ReplaceableIndentsService.ViewUnapprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsItemsList
-	11, // 117: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemHistory:output_type -> Scailo.ReplaceableIndentsItemsList
-	20, // 118: Scailo.ReplaceableIndentsService.ViewPaginatedApprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
-	20, // 119: Scailo.ReplaceableIndentsService.ViewPaginatedUnapprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
-	20, // 120: Scailo.ReplaceableIndentsService.SearchItemsWithPagination:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
-	50, // 121: Scailo.ReplaceableIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	50, // 122: Scailo.ReplaceableIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	43, // 123: Scailo.ReplaceableIndentsService.UploadReplaceableIndentItems:output_type -> Scailo.IdentifiersList
-	6,  // 124: Scailo.ReplaceableIndentsService.ViewByID:output_type -> Scailo.ReplaceableIndent
-	6,  // 125: Scailo.ReplaceableIndentsService.ViewByUUID:output_type -> Scailo.ReplaceableIndent
-	6,  // 126: Scailo.ReplaceableIndentsService.ViewByReferenceID:output_type -> Scailo.ReplaceableIndent
-	6,  // 127: Scailo.ReplaceableIndentsService.ViewEssentialByID:output_type -> Scailo.ReplaceableIndent
-	6,  // 128: Scailo.ReplaceableIndentsService.ViewEssentialByUUID:output_type -> Scailo.ReplaceableIndent
-	10, // 129: Scailo.ReplaceableIndentsService.ViewFromIDs:output_type -> Scailo.ReplaceableIndentsList
-	10, // 130: Scailo.ReplaceableIndentsService.ViewAll:output_type -> Scailo.ReplaceableIndentsList
-	10, // 131: Scailo.ReplaceableIndentsService.ViewAllForEntityUUID:output_type -> Scailo.ReplaceableIndentsList
-	15, // 132: Scailo.ReplaceableIndentsService.ViewWithPagination:output_type -> Scailo.ReplaceableIndentsServicePaginationResponse
-	51, // 133: Scailo.ReplaceableIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	51, // 134: Scailo.ReplaceableIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	7,  // 135: Scailo.ReplaceableIndentsService.ViewProspectiveReplaceableIndentItem:output_type -> Scailo.ReplaceableIndentsServiceItemCreateRequest
-	49, // 136: Scailo.ReplaceableIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	50, // 137: Scailo.ReplaceableIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	22, // 138: Scailo.ReplaceableIndentsService.ViewIssuedStatistics:output_type -> Scailo.ReplaceableIndentIssuedStatisticsList
-	52, // 139: Scailo.ReplaceableIndentsService.ViewAddedQuantityForFamily:output_type -> Scailo.QuantityResponse
-	10, // 140: Scailo.ReplaceableIndentsService.SearchAll:output_type -> Scailo.ReplaceableIndentsList
-	10, // 141: Scailo.ReplaceableIndentsService.Filter:output_type -> Scailo.ReplaceableIndentsList
-	53, // 142: Scailo.ReplaceableIndentsService.CountInStatus:output_type -> Scailo.CountResponse
-	53, // 143: Scailo.ReplaceableIndentsService.Count:output_type -> Scailo.CountResponse
-	50, // 144: Scailo.ReplaceableIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	90, // [90:145] is the sub-list for method output_type
-	35, // [35:90] is the sub-list for method input_type
+	34, // 51: Scailo.ReplaceableIndentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	35, // 52: Scailo.ReplaceableIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	5,  // 53: Scailo.ReplaceableIndentsService.Autofill:input_type -> Scailo.ReplaceableIndentsServiceAutofillRequest
+	36, // 54: Scailo.ReplaceableIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	7,  // 55: Scailo.ReplaceableIndentsService.AddReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentsServiceItemCreateRequest
+	8,  // 56: Scailo.ReplaceableIndentsService.ModifyReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentsServiceItemUpdateRequest
+	37, // 57: Scailo.ReplaceableIndentsService.ApproveReplaceableIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	37, // 58: Scailo.ReplaceableIndentsService.DeleteReplaceableIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	38, // 59: Scailo.ReplaceableIndentsService.ReorderReplaceableIndentItems:input_type -> Scailo.ReorderItemsRequest
+	39, // 60: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemByID:input_type -> Scailo.Identifier
+	40, // 61: Scailo.ReplaceableIndentsService.ViewApprovedReplaceableIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	40, // 62: Scailo.ReplaceableIndentsService.ViewUnapprovedReplaceableIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	12, // 63: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemHistory:input_type -> Scailo.ReplaceableIndentItemHistoryRequest
+	19, // 64: Scailo.ReplaceableIndentsService.ViewPaginatedApprovedReplaceableIndentItems:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
+	19, // 65: Scailo.ReplaceableIndentsService.ViewPaginatedUnapprovedReplaceableIndentItems:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
+	19, // 66: Scailo.ReplaceableIndentsService.SearchItemsWithPagination:input_type -> Scailo.ReplaceableIndentItemsSearchRequest
+	36, // 67: Scailo.ReplaceableIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	41, // 68: Scailo.ReplaceableIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	42, // 69: Scailo.ReplaceableIndentsService.UploadReplaceableIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
+	39, // 70: Scailo.ReplaceableIndentsService.ViewByID:input_type -> Scailo.Identifier
+	36, // 71: Scailo.ReplaceableIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 72: Scailo.ReplaceableIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	39, // 73: Scailo.ReplaceableIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36, // 74: Scailo.ReplaceableIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	44, // 75: Scailo.ReplaceableIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	45, // 76: Scailo.ReplaceableIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	36, // 77: Scailo.ReplaceableIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14, // 78: Scailo.ReplaceableIndentsService.ViewWithPagination:input_type -> Scailo.ReplaceableIndentsServicePaginationReq
+	40, // 79: Scailo.ReplaceableIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	46, // 80: Scailo.ReplaceableIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	13, // 81: Scailo.ReplaceableIndentsService.ViewProspectiveReplaceableIndentItem:input_type -> Scailo.ReplaceableIndentItemProspectiveInfoRequest
+	36, // 82: Scailo.ReplaceableIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	36, // 83: Scailo.ReplaceableIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 84: Scailo.ReplaceableIndentsService.ViewIssuedStatistics:input_type -> Scailo.IdentifierUUID
+	13, // 85: Scailo.ReplaceableIndentsService.ViewAddedQuantityForFamily:input_type -> Scailo.ReplaceableIndentItemProspectiveInfoRequest
+	18, // 86: Scailo.ReplaceableIndentsService.SearchAll:input_type -> Scailo.ReplaceableIndentsServiceSearchAllReq
+	16, // 87: Scailo.ReplaceableIndentsService.Filter:input_type -> Scailo.ReplaceableIndentsServiceFilterReq
+	47, // 88: Scailo.ReplaceableIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17, // 89: Scailo.ReplaceableIndentsService.Count:input_type -> Scailo.ReplaceableIndentsServiceCountReq
+	16, // 90: Scailo.ReplaceableIndentsService.DownloadAsCSV:input_type -> Scailo.ReplaceableIndentsServiceFilterReq
+	48, // 91: Scailo.ReplaceableIndentsService.Create:output_type -> Scailo.IdentifierResponse
+	48, // 92: Scailo.ReplaceableIndentsService.Draft:output_type -> Scailo.IdentifierResponse
+	48, // 93: Scailo.ReplaceableIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 94: Scailo.ReplaceableIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	48, // 95: Scailo.ReplaceableIndentsService.Verify:output_type -> Scailo.IdentifierResponse
+	48, // 96: Scailo.ReplaceableIndentsService.Approve:output_type -> Scailo.IdentifierResponse
+	48, // 97: Scailo.ReplaceableIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	48, // 98: Scailo.ReplaceableIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 99: Scailo.ReplaceableIndentsService.Halt:output_type -> Scailo.IdentifierResponse
+	48, // 100: Scailo.ReplaceableIndentsService.Discard:output_type -> Scailo.IdentifierResponse
+	48, // 101: Scailo.ReplaceableIndentsService.Restore:output_type -> Scailo.IdentifierResponse
+	48, // 102: Scailo.ReplaceableIndentsService.Complete:output_type -> Scailo.IdentifierResponse
+	48, // 103: Scailo.ReplaceableIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	48, // 104: Scailo.ReplaceableIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
+	48, // 105: Scailo.ReplaceableIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	48, // 106: Scailo.ReplaceableIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	48, // 107: Scailo.ReplaceableIndentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	49, // 108: Scailo.ReplaceableIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	48, // 109: Scailo.ReplaceableIndentsService.Autofill:output_type -> Scailo.IdentifierResponse
+	50, // 110: Scailo.ReplaceableIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	48, // 111: Scailo.ReplaceableIndentsService.AddReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
+	48, // 112: Scailo.ReplaceableIndentsService.ModifyReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
+	48, // 113: Scailo.ReplaceableIndentsService.ApproveReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
+	48, // 114: Scailo.ReplaceableIndentsService.DeleteReplaceableIndentItem:output_type -> Scailo.IdentifierResponse
+	48, // 115: Scailo.ReplaceableIndentsService.ReorderReplaceableIndentItems:output_type -> Scailo.IdentifierResponse
+	9,  // 116: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemByID:output_type -> Scailo.ReplaceableIndentItem
+	11, // 117: Scailo.ReplaceableIndentsService.ViewApprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsItemsList
+	11, // 118: Scailo.ReplaceableIndentsService.ViewUnapprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsItemsList
+	11, // 119: Scailo.ReplaceableIndentsService.ViewReplaceableIndentItemHistory:output_type -> Scailo.ReplaceableIndentsItemsList
+	20, // 120: Scailo.ReplaceableIndentsService.ViewPaginatedApprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
+	20, // 121: Scailo.ReplaceableIndentsService.ViewPaginatedUnapprovedReplaceableIndentItems:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
+	20, // 122: Scailo.ReplaceableIndentsService.SearchItemsWithPagination:output_type -> Scailo.ReplaceableIndentsServicePaginatedItemsResponse
+	51, // 123: Scailo.ReplaceableIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	51, // 124: Scailo.ReplaceableIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	44, // 125: Scailo.ReplaceableIndentsService.UploadReplaceableIndentItems:output_type -> Scailo.IdentifiersList
+	6,  // 126: Scailo.ReplaceableIndentsService.ViewByID:output_type -> Scailo.ReplaceableIndent
+	6,  // 127: Scailo.ReplaceableIndentsService.ViewByUUID:output_type -> Scailo.ReplaceableIndent
+	6,  // 128: Scailo.ReplaceableIndentsService.ViewByReferenceID:output_type -> Scailo.ReplaceableIndent
+	6,  // 129: Scailo.ReplaceableIndentsService.ViewEssentialByID:output_type -> Scailo.ReplaceableIndent
+	6,  // 130: Scailo.ReplaceableIndentsService.ViewEssentialByUUID:output_type -> Scailo.ReplaceableIndent
+	10, // 131: Scailo.ReplaceableIndentsService.ViewFromIDs:output_type -> Scailo.ReplaceableIndentsList
+	10, // 132: Scailo.ReplaceableIndentsService.ViewAll:output_type -> Scailo.ReplaceableIndentsList
+	10, // 133: Scailo.ReplaceableIndentsService.ViewAllForEntityUUID:output_type -> Scailo.ReplaceableIndentsList
+	15, // 134: Scailo.ReplaceableIndentsService.ViewWithPagination:output_type -> Scailo.ReplaceableIndentsServicePaginationResponse
+	52, // 135: Scailo.ReplaceableIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	52, // 136: Scailo.ReplaceableIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	7,  // 137: Scailo.ReplaceableIndentsService.ViewProspectiveReplaceableIndentItem:output_type -> Scailo.ReplaceableIndentsServiceItemCreateRequest
+	50, // 138: Scailo.ReplaceableIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	51, // 139: Scailo.ReplaceableIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	22, // 140: Scailo.ReplaceableIndentsService.ViewIssuedStatistics:output_type -> Scailo.ReplaceableIndentIssuedStatisticsList
+	53, // 141: Scailo.ReplaceableIndentsService.ViewAddedQuantityForFamily:output_type -> Scailo.QuantityResponse
+	10, // 142: Scailo.ReplaceableIndentsService.SearchAll:output_type -> Scailo.ReplaceableIndentsList
+	10, // 143: Scailo.ReplaceableIndentsService.Filter:output_type -> Scailo.ReplaceableIndentsList
+	54, // 144: Scailo.ReplaceableIndentsService.CountInStatus:output_type -> Scailo.CountResponse
+	54, // 145: Scailo.ReplaceableIndentsService.Count:output_type -> Scailo.CountResponse
+	51, // 146: Scailo.ReplaceableIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	91, // [91:147] is the sub-list for method output_type
+	35, // [35:91] is the sub-list for method input_type
 	35, // [35:35] is the sub-list for extension type_name
 	35, // [35:35] is the sub-list for extension extendee
 	0,  // [0:35] is the sub-list for field type_name
@@ -3282,6 +3286,7 @@ func file_replaceable_indents_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

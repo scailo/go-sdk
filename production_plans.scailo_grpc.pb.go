@@ -34,6 +34,7 @@ const (
 	ProductionPlansService_Reopen_FullMethodName                                     = "/Scailo.ProductionPlansService/Reopen"
 	ProductionPlansService_CommentAdd_FullMethodName                                 = "/Scailo.ProductionPlansService/CommentAdd"
 	ProductionPlansService_SendEmail_FullMethodName                                  = "/Scailo.ProductionPlansService/SendEmail"
+	ProductionPlansService_AttachVaultFolder_FullMethodName                          = "/Scailo.ProductionPlansService/AttachVaultFolder"
 	ProductionPlansService_CreateMagicLink_FullMethodName                            = "/Scailo.ProductionPlansService/CreateMagicLink"
 	ProductionPlansService_Autofill_FullMethodName                                   = "/Scailo.ProductionPlansService/Autofill"
 	ProductionPlansService_IsCompletable_FullMethodName                              = "/Scailo.ProductionPlansService/IsCompletable"
@@ -180,6 +181,17 @@ type ProductionPlansServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
@@ -434,6 +446,16 @@ func (c *productionPlansServiceClient) SendEmail(ctx context.Context, in *Identi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, ProductionPlansService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productionPlansServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, ProductionPlansService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

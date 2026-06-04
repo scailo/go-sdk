@@ -2240,7 +2240,7 @@ var File_workflows_rules_scailo_proto protoreflect.FileDescriptor
 
 const file_workflows_rules_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1cworkflows_rules.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xb9\x04\n" +
+	"\x1cworkflows_rules.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xb9\x04\n" +
 	"\"WorkflowsRulesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2481,7 +2481,7 @@ const file_workflows_rules_scailo_proto_rawDesc = "" +
 	"#WORKFLOW_RULE_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1f\n" +
 	"\x1bWORKFLOW_RULE_SORT_KEY_NAME\x10\n" +
 	"\x12'\n" +
-	"#WORKFLOW_RULE_SORT_KEY_SERVICE_NAME\x10\v2\xf7\x0e\n" +
+	"#WORKFLOW_RULE_SORT_KEY_SERVICE_NAME\x10\v2\xca\x0f\n" +
 	"\x15WorkflowsRulesService\x12P\n" +
 	"\x06Create\x12*.Scailo.WorkflowsRulesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\x05Draft\x12*.Scailo.WorkflowsRulesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
@@ -2498,7 +2498,8 @@ const file_workflows_rules_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x124\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x124\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.WorkflowRule\x12:\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.WorkflowRule\x12;\n" +
@@ -2549,12 +2550,13 @@ var file_workflows_rules_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                // 18: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                 // 19: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),           // 20: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                              // 21: Scailo.Identifier
-	(*IdentifierUUID)(nil),                          // 22: Scailo.IdentifierUUID
-	(*ActiveStatus)(nil),                            // 23: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                 // 24: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                      // 25: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                           // 26: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                // 21: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                              // 22: Scailo.Identifier
+	(*IdentifierUUID)(nil),                          // 23: Scailo.IdentifierUUID
+	(*ActiveStatus)(nil),                            // 24: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                 // 25: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                      // 26: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                           // 27: Scailo.CountResponse
 }
 var file_workflows_rules_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.WorkflowsRulesServiceCreateRequest.service_name:type_name -> Scailo.WORKFLOW_RULE_SERVICE_NAME
@@ -2614,41 +2616,43 @@ var file_workflows_rules_scailo_proto_depIdxs = []int32{
 	20, // 54: Scailo.WorkflowsRulesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 55: Scailo.WorkflowsRulesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 56: Scailo.WorkflowsRulesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	21, // 57: Scailo.WorkflowsRulesService.ViewByID:input_type -> Scailo.Identifier
-	22, // 58: Scailo.WorkflowsRulesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 59: Scailo.WorkflowsRulesService.ViewAll:input_type -> Scailo.ActiveStatus
-	22, // 60: Scailo.WorkflowsRulesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	8,  // 61: Scailo.WorkflowsRulesService.ViewWithPagination:input_type -> Scailo.WorkflowsRulesServicePaginationReq
-	12, // 62: Scailo.WorkflowsRulesService.SearchAll:input_type -> Scailo.WorkflowsRulesServiceSearchAllReq
-	10, // 63: Scailo.WorkflowsRulesService.Filter:input_type -> Scailo.WorkflowsRulesServiceFilterReq
-	24, // 64: Scailo.WorkflowsRulesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	11, // 65: Scailo.WorkflowsRulesService.Count:input_type -> Scailo.WorkflowsRulesServiceCountReq
-	25, // 66: Scailo.WorkflowsRulesService.Create:output_type -> Scailo.IdentifierResponse
-	25, // 67: Scailo.WorkflowsRulesService.Draft:output_type -> Scailo.IdentifierResponse
-	25, // 68: Scailo.WorkflowsRulesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 69: Scailo.WorkflowsRulesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	25, // 70: Scailo.WorkflowsRulesService.Verify:output_type -> Scailo.IdentifierResponse
-	25, // 71: Scailo.WorkflowsRulesService.Approve:output_type -> Scailo.IdentifierResponse
-	25, // 72: Scailo.WorkflowsRulesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	25, // 73: Scailo.WorkflowsRulesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 74: Scailo.WorkflowsRulesService.Halt:output_type -> Scailo.IdentifierResponse
-	25, // 75: Scailo.WorkflowsRulesService.Discard:output_type -> Scailo.IdentifierResponse
-	25, // 76: Scailo.WorkflowsRulesService.Restore:output_type -> Scailo.IdentifierResponse
-	25, // 77: Scailo.WorkflowsRulesService.Complete:output_type -> Scailo.IdentifierResponse
-	25, // 78: Scailo.WorkflowsRulesService.Repeat:output_type -> Scailo.IdentifierResponse
-	25, // 79: Scailo.WorkflowsRulesService.Reopen:output_type -> Scailo.IdentifierResponse
-	25, // 80: Scailo.WorkflowsRulesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	6,  // 81: Scailo.WorkflowsRulesService.ViewByID:output_type -> Scailo.WorkflowRule
-	6,  // 82: Scailo.WorkflowsRulesService.ViewByUUID:output_type -> Scailo.WorkflowRule
-	7,  // 83: Scailo.WorkflowsRulesService.ViewAll:output_type -> Scailo.WorkflowsRulesList
-	7,  // 84: Scailo.WorkflowsRulesService.ViewAllForEntityUUID:output_type -> Scailo.WorkflowsRulesList
-	9,  // 85: Scailo.WorkflowsRulesService.ViewWithPagination:output_type -> Scailo.WorkflowsRulesServicePaginationResponse
-	7,  // 86: Scailo.WorkflowsRulesService.SearchAll:output_type -> Scailo.WorkflowsRulesList
-	7,  // 87: Scailo.WorkflowsRulesService.Filter:output_type -> Scailo.WorkflowsRulesList
-	26, // 88: Scailo.WorkflowsRulesService.CountInStatus:output_type -> Scailo.CountResponse
-	26, // 89: Scailo.WorkflowsRulesService.Count:output_type -> Scailo.CountResponse
-	66, // [66:90] is the sub-list for method output_type
-	42, // [42:66] is the sub-list for method input_type
+	21, // 57: Scailo.WorkflowsRulesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	22, // 58: Scailo.WorkflowsRulesService.ViewByID:input_type -> Scailo.Identifier
+	23, // 59: Scailo.WorkflowsRulesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 60: Scailo.WorkflowsRulesService.ViewAll:input_type -> Scailo.ActiveStatus
+	23, // 61: Scailo.WorkflowsRulesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	8,  // 62: Scailo.WorkflowsRulesService.ViewWithPagination:input_type -> Scailo.WorkflowsRulesServicePaginationReq
+	12, // 63: Scailo.WorkflowsRulesService.SearchAll:input_type -> Scailo.WorkflowsRulesServiceSearchAllReq
+	10, // 64: Scailo.WorkflowsRulesService.Filter:input_type -> Scailo.WorkflowsRulesServiceFilterReq
+	25, // 65: Scailo.WorkflowsRulesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	11, // 66: Scailo.WorkflowsRulesService.Count:input_type -> Scailo.WorkflowsRulesServiceCountReq
+	26, // 67: Scailo.WorkflowsRulesService.Create:output_type -> Scailo.IdentifierResponse
+	26, // 68: Scailo.WorkflowsRulesService.Draft:output_type -> Scailo.IdentifierResponse
+	26, // 69: Scailo.WorkflowsRulesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 70: Scailo.WorkflowsRulesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	26, // 71: Scailo.WorkflowsRulesService.Verify:output_type -> Scailo.IdentifierResponse
+	26, // 72: Scailo.WorkflowsRulesService.Approve:output_type -> Scailo.IdentifierResponse
+	26, // 73: Scailo.WorkflowsRulesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	26, // 74: Scailo.WorkflowsRulesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 75: Scailo.WorkflowsRulesService.Halt:output_type -> Scailo.IdentifierResponse
+	26, // 76: Scailo.WorkflowsRulesService.Discard:output_type -> Scailo.IdentifierResponse
+	26, // 77: Scailo.WorkflowsRulesService.Restore:output_type -> Scailo.IdentifierResponse
+	26, // 78: Scailo.WorkflowsRulesService.Complete:output_type -> Scailo.IdentifierResponse
+	26, // 79: Scailo.WorkflowsRulesService.Repeat:output_type -> Scailo.IdentifierResponse
+	26, // 80: Scailo.WorkflowsRulesService.Reopen:output_type -> Scailo.IdentifierResponse
+	26, // 81: Scailo.WorkflowsRulesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	26, // 82: Scailo.WorkflowsRulesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	6,  // 83: Scailo.WorkflowsRulesService.ViewByID:output_type -> Scailo.WorkflowRule
+	6,  // 84: Scailo.WorkflowsRulesService.ViewByUUID:output_type -> Scailo.WorkflowRule
+	7,  // 85: Scailo.WorkflowsRulesService.ViewAll:output_type -> Scailo.WorkflowsRulesList
+	7,  // 86: Scailo.WorkflowsRulesService.ViewAllForEntityUUID:output_type -> Scailo.WorkflowsRulesList
+	9,  // 87: Scailo.WorkflowsRulesService.ViewWithPagination:output_type -> Scailo.WorkflowsRulesServicePaginationResponse
+	7,  // 88: Scailo.WorkflowsRulesService.SearchAll:output_type -> Scailo.WorkflowsRulesList
+	7,  // 89: Scailo.WorkflowsRulesService.Filter:output_type -> Scailo.WorkflowsRulesList
+	27, // 90: Scailo.WorkflowsRulesService.CountInStatus:output_type -> Scailo.CountResponse
+	27, // 91: Scailo.WorkflowsRulesService.Count:output_type -> Scailo.CountResponse
+	67, // [67:92] is the sub-list for method output_type
+	42, // [42:67] is the sub-list for method input_type
 	42, // [42:42] is the sub-list for extension type_name
 	42, // [42:42] is the sub-list for extension extendee
 	0,  // [0:42] is the sub-list for field type_name
@@ -2660,6 +2664,7 @@ func file_workflows_rules_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

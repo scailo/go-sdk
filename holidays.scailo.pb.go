@@ -1964,7 +1964,7 @@ var File_holidays_scailo_proto protoreflect.FileDescriptor
 
 const file_holidays_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15holidays.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xbd\x02\n" +
+	"\x15holidays.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xbd\x02\n" +
 	"\x1cHolidaysServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2130,7 +2130,7 @@ const file_holidays_scailo_proto_rawDesc = "" +
 	"\x12 \n" +
 	"\x1cHOLIDAY_SORT_KEY_DESCRIPTION\x10\v\x12\x1d\n" +
 	"\x19HOLIDAY_SORT_KEY_START_ON\x10\f\x12\x1b\n" +
-	"\x17HOLIDAY_SORT_KEY_END_ON\x10\r2\xd1\x17\n" +
+	"\x17HOLIDAY_SORT_KEY_END_ON\x10\r2\xa4\x18\n" +
 	"\x0fHolidaysService\x12J\n" +
 	"\x06Create\x12$.Scailo.HolidaysServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.HolidaysServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2146,7 +2146,8 @@ const file_holidays_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12b\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12b\n" +
 	"\x14AddHolidayShiftGroup\x12..Scailo.HolidaysServiceShiftGroupCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12e\n" +
 	"\x17ModifyHolidayShiftGroup\x12..Scailo.HolidaysServiceShiftGroupUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x18ApproveHolidayShiftGroup\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -2214,18 +2215,19 @@ var file_holidays_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                      // 20: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                       // 21: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                 // 22: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithUserComment)(nil),                     // 23: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                           // 24: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                    // 25: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                       // 26: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                // 27: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                               // 28: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                  // 29: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                       // 30: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                                  // 31: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                            // 32: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                 // 33: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                           // 34: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                      // 23: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                     // 24: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                           // 25: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                    // 26: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                       // 27: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                // 28: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                               // 29: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                  // 30: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                       // 31: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                                  // 32: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                            // 33: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                 // 34: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                           // 35: Scailo.IdentifierUUIDsList
 }
 var file_holidays_scailo_proto_depIdxs = []int32{
 	16, // 0: Scailo.Holiday.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2266,70 +2268,72 @@ var file_holidays_scailo_proto_depIdxs = []int32{
 	22, // 35: Scailo.HolidaysService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	22, // 36: Scailo.HolidaysService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	22, // 37: Scailo.HolidaysService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	4,  // 38: Scailo.HolidaysService.AddHolidayShiftGroup:input_type -> Scailo.HolidaysServiceShiftGroupCreateRequest
-	5,  // 39: Scailo.HolidaysService.ModifyHolidayShiftGroup:input_type -> Scailo.HolidaysServiceShiftGroupUpdateRequest
-	23, // 40: Scailo.HolidaysService.ApproveHolidayShiftGroup:input_type -> Scailo.IdentifierWithUserComment
-	23, // 41: Scailo.HolidaysService.DeleteHolidayShiftGroup:input_type -> Scailo.IdentifierWithUserComment
-	24, // 42: Scailo.HolidaysService.ReorderHolidayShiftsGroups:input_type -> Scailo.ReorderItemsRequest
-	25, // 43: Scailo.HolidaysService.ViewHolidayShiftGroupByID:input_type -> Scailo.Identifier
-	26, // 44: Scailo.HolidaysService.ViewApprovedHolidayShiftsGroups:input_type -> Scailo.IdentifierWithSearchKey
-	26, // 45: Scailo.HolidaysService.ViewUnapprovedHolidayShiftsGroups:input_type -> Scailo.IdentifierWithSearchKey
-	9,  // 46: Scailo.HolidaysService.ViewHolidayShiftsGroupsHistory:input_type -> Scailo.HolidaysShiftsGroupsHistoryRequest
-	25, // 47: Scailo.HolidaysService.ViewByID:input_type -> Scailo.Identifier
-	27, // 48: Scailo.HolidaysService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 49: Scailo.HolidaysService.ViewEssentialByID:input_type -> Scailo.Identifier
-	27, // 50: Scailo.HolidaysService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	28, // 51: Scailo.HolidaysService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	29, // 52: Scailo.HolidaysService.ViewAll:input_type -> Scailo.ActiveStatus
-	27, // 53: Scailo.HolidaysService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	10, // 54: Scailo.HolidaysService.ViewWithPagination:input_type -> Scailo.HolidaysServicePaginationReq
-	15, // 55: Scailo.HolidaysService.ViewHolidaysOn:input_type -> Scailo.HolidaysServiceViewHolidaysOnTimestampRequest
-	14, // 56: Scailo.HolidaysService.SearchAll:input_type -> Scailo.HolidaysServiceSearchAllReq
-	12, // 57: Scailo.HolidaysService.Filter:input_type -> Scailo.HolidaysServiceFilterReq
-	30, // 58: Scailo.HolidaysService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	13, // 59: Scailo.HolidaysService.Count:input_type -> Scailo.HolidaysServiceCountReq
-	12, // 60: Scailo.HolidaysService.DownloadAsCSV:input_type -> Scailo.HolidaysServiceFilterReq
-	31, // 61: Scailo.HolidaysService.ImportFromCSV:input_type -> Scailo.StandardFile
-	32, // 62: Scailo.HolidaysService.Create:output_type -> Scailo.IdentifierResponse
-	32, // 63: Scailo.HolidaysService.Draft:output_type -> Scailo.IdentifierResponse
-	32, // 64: Scailo.HolidaysService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	32, // 65: Scailo.HolidaysService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	32, // 66: Scailo.HolidaysService.Verify:output_type -> Scailo.IdentifierResponse
-	32, // 67: Scailo.HolidaysService.Approve:output_type -> Scailo.IdentifierResponse
-	32, // 68: Scailo.HolidaysService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	32, // 69: Scailo.HolidaysService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	32, // 70: Scailo.HolidaysService.Halt:output_type -> Scailo.IdentifierResponse
-	32, // 71: Scailo.HolidaysService.Discard:output_type -> Scailo.IdentifierResponse
-	32, // 72: Scailo.HolidaysService.Restore:output_type -> Scailo.IdentifierResponse
-	32, // 73: Scailo.HolidaysService.Complete:output_type -> Scailo.IdentifierResponse
-	32, // 74: Scailo.HolidaysService.Repeat:output_type -> Scailo.IdentifierResponse
-	32, // 75: Scailo.HolidaysService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	32, // 76: Scailo.HolidaysService.AddHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
-	32, // 77: Scailo.HolidaysService.ModifyHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
-	32, // 78: Scailo.HolidaysService.ApproveHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
-	32, // 79: Scailo.HolidaysService.DeleteHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
-	32, // 80: Scailo.HolidaysService.ReorderHolidayShiftsGroups:output_type -> Scailo.IdentifierResponse
-	6,  // 81: Scailo.HolidaysService.ViewHolidayShiftGroupByID:output_type -> Scailo.HolidayShiftGroup
-	8,  // 82: Scailo.HolidaysService.ViewApprovedHolidayShiftsGroups:output_type -> Scailo.HolidaysShiftsGroupsList
-	8,  // 83: Scailo.HolidaysService.ViewUnapprovedHolidayShiftsGroups:output_type -> Scailo.HolidaysShiftsGroupsList
-	8,  // 84: Scailo.HolidaysService.ViewHolidayShiftsGroupsHistory:output_type -> Scailo.HolidaysShiftsGroupsList
-	3,  // 85: Scailo.HolidaysService.ViewByID:output_type -> Scailo.Holiday
-	3,  // 86: Scailo.HolidaysService.ViewByUUID:output_type -> Scailo.Holiday
-	3,  // 87: Scailo.HolidaysService.ViewEssentialByID:output_type -> Scailo.Holiday
-	3,  // 88: Scailo.HolidaysService.ViewEssentialByUUID:output_type -> Scailo.Holiday
-	7,  // 89: Scailo.HolidaysService.ViewFromIDs:output_type -> Scailo.HolidaysList
-	7,  // 90: Scailo.HolidaysService.ViewAll:output_type -> Scailo.HolidaysList
-	7,  // 91: Scailo.HolidaysService.ViewAllForEntityUUID:output_type -> Scailo.HolidaysList
-	11, // 92: Scailo.HolidaysService.ViewWithPagination:output_type -> Scailo.HolidaysServicePaginationResponse
-	7,  // 93: Scailo.HolidaysService.ViewHolidaysOn:output_type -> Scailo.HolidaysList
-	7,  // 94: Scailo.HolidaysService.SearchAll:output_type -> Scailo.HolidaysList
-	7,  // 95: Scailo.HolidaysService.Filter:output_type -> Scailo.HolidaysList
-	33, // 96: Scailo.HolidaysService.CountInStatus:output_type -> Scailo.CountResponse
-	33, // 97: Scailo.HolidaysService.Count:output_type -> Scailo.CountResponse
-	31, // 98: Scailo.HolidaysService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	34, // 99: Scailo.HolidaysService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	62, // [62:100] is the sub-list for method output_type
-	24, // [24:62] is the sub-list for method input_type
+	23, // 38: Scailo.HolidaysService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	4,  // 39: Scailo.HolidaysService.AddHolidayShiftGroup:input_type -> Scailo.HolidaysServiceShiftGroupCreateRequest
+	5,  // 40: Scailo.HolidaysService.ModifyHolidayShiftGroup:input_type -> Scailo.HolidaysServiceShiftGroupUpdateRequest
+	24, // 41: Scailo.HolidaysService.ApproveHolidayShiftGroup:input_type -> Scailo.IdentifierWithUserComment
+	24, // 42: Scailo.HolidaysService.DeleteHolidayShiftGroup:input_type -> Scailo.IdentifierWithUserComment
+	25, // 43: Scailo.HolidaysService.ReorderHolidayShiftsGroups:input_type -> Scailo.ReorderItemsRequest
+	26, // 44: Scailo.HolidaysService.ViewHolidayShiftGroupByID:input_type -> Scailo.Identifier
+	27, // 45: Scailo.HolidaysService.ViewApprovedHolidayShiftsGroups:input_type -> Scailo.IdentifierWithSearchKey
+	27, // 46: Scailo.HolidaysService.ViewUnapprovedHolidayShiftsGroups:input_type -> Scailo.IdentifierWithSearchKey
+	9,  // 47: Scailo.HolidaysService.ViewHolidayShiftsGroupsHistory:input_type -> Scailo.HolidaysShiftsGroupsHistoryRequest
+	26, // 48: Scailo.HolidaysService.ViewByID:input_type -> Scailo.Identifier
+	28, // 49: Scailo.HolidaysService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 50: Scailo.HolidaysService.ViewEssentialByID:input_type -> Scailo.Identifier
+	28, // 51: Scailo.HolidaysService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	29, // 52: Scailo.HolidaysService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	30, // 53: Scailo.HolidaysService.ViewAll:input_type -> Scailo.ActiveStatus
+	28, // 54: Scailo.HolidaysService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	10, // 55: Scailo.HolidaysService.ViewWithPagination:input_type -> Scailo.HolidaysServicePaginationReq
+	15, // 56: Scailo.HolidaysService.ViewHolidaysOn:input_type -> Scailo.HolidaysServiceViewHolidaysOnTimestampRequest
+	14, // 57: Scailo.HolidaysService.SearchAll:input_type -> Scailo.HolidaysServiceSearchAllReq
+	12, // 58: Scailo.HolidaysService.Filter:input_type -> Scailo.HolidaysServiceFilterReq
+	31, // 59: Scailo.HolidaysService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	13, // 60: Scailo.HolidaysService.Count:input_type -> Scailo.HolidaysServiceCountReq
+	12, // 61: Scailo.HolidaysService.DownloadAsCSV:input_type -> Scailo.HolidaysServiceFilterReq
+	32, // 62: Scailo.HolidaysService.ImportFromCSV:input_type -> Scailo.StandardFile
+	33, // 63: Scailo.HolidaysService.Create:output_type -> Scailo.IdentifierResponse
+	33, // 64: Scailo.HolidaysService.Draft:output_type -> Scailo.IdentifierResponse
+	33, // 65: Scailo.HolidaysService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	33, // 66: Scailo.HolidaysService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	33, // 67: Scailo.HolidaysService.Verify:output_type -> Scailo.IdentifierResponse
+	33, // 68: Scailo.HolidaysService.Approve:output_type -> Scailo.IdentifierResponse
+	33, // 69: Scailo.HolidaysService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	33, // 70: Scailo.HolidaysService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	33, // 71: Scailo.HolidaysService.Halt:output_type -> Scailo.IdentifierResponse
+	33, // 72: Scailo.HolidaysService.Discard:output_type -> Scailo.IdentifierResponse
+	33, // 73: Scailo.HolidaysService.Restore:output_type -> Scailo.IdentifierResponse
+	33, // 74: Scailo.HolidaysService.Complete:output_type -> Scailo.IdentifierResponse
+	33, // 75: Scailo.HolidaysService.Repeat:output_type -> Scailo.IdentifierResponse
+	33, // 76: Scailo.HolidaysService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	33, // 77: Scailo.HolidaysService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	33, // 78: Scailo.HolidaysService.AddHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
+	33, // 79: Scailo.HolidaysService.ModifyHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
+	33, // 80: Scailo.HolidaysService.ApproveHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
+	33, // 81: Scailo.HolidaysService.DeleteHolidayShiftGroup:output_type -> Scailo.IdentifierResponse
+	33, // 82: Scailo.HolidaysService.ReorderHolidayShiftsGroups:output_type -> Scailo.IdentifierResponse
+	6,  // 83: Scailo.HolidaysService.ViewHolidayShiftGroupByID:output_type -> Scailo.HolidayShiftGroup
+	8,  // 84: Scailo.HolidaysService.ViewApprovedHolidayShiftsGroups:output_type -> Scailo.HolidaysShiftsGroupsList
+	8,  // 85: Scailo.HolidaysService.ViewUnapprovedHolidayShiftsGroups:output_type -> Scailo.HolidaysShiftsGroupsList
+	8,  // 86: Scailo.HolidaysService.ViewHolidayShiftsGroupsHistory:output_type -> Scailo.HolidaysShiftsGroupsList
+	3,  // 87: Scailo.HolidaysService.ViewByID:output_type -> Scailo.Holiday
+	3,  // 88: Scailo.HolidaysService.ViewByUUID:output_type -> Scailo.Holiday
+	3,  // 89: Scailo.HolidaysService.ViewEssentialByID:output_type -> Scailo.Holiday
+	3,  // 90: Scailo.HolidaysService.ViewEssentialByUUID:output_type -> Scailo.Holiday
+	7,  // 91: Scailo.HolidaysService.ViewFromIDs:output_type -> Scailo.HolidaysList
+	7,  // 92: Scailo.HolidaysService.ViewAll:output_type -> Scailo.HolidaysList
+	7,  // 93: Scailo.HolidaysService.ViewAllForEntityUUID:output_type -> Scailo.HolidaysList
+	11, // 94: Scailo.HolidaysService.ViewWithPagination:output_type -> Scailo.HolidaysServicePaginationResponse
+	7,  // 95: Scailo.HolidaysService.ViewHolidaysOn:output_type -> Scailo.HolidaysList
+	7,  // 96: Scailo.HolidaysService.SearchAll:output_type -> Scailo.HolidaysList
+	7,  // 97: Scailo.HolidaysService.Filter:output_type -> Scailo.HolidaysList
+	34, // 98: Scailo.HolidaysService.CountInStatus:output_type -> Scailo.CountResponse
+	34, // 99: Scailo.HolidaysService.Count:output_type -> Scailo.CountResponse
+	32, // 100: Scailo.HolidaysService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	35, // 101: Scailo.HolidaysService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	63, // [63:102] is the sub-list for method output_type
+	24, // [24:63] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
 	24, // [24:24] is the sub-list for extension extendee
 	0,  // [0:24] is the sub-list for field type_name
@@ -2341,6 +2345,7 @@ func file_holidays_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

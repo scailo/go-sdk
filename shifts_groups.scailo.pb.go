@@ -1802,7 +1802,7 @@ var File_shifts_groups_scailo_proto protoreflect.FileDescriptor
 
 const file_shifts_groups_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1ashifts_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\x98\x02\n" +
+	"\x1ashifts_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\x98\x02\n" +
 	" ShiftsGroupsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1942,7 +1942,7 @@ const file_shifts_groups_scailo_proto_rawDesc = "" +
 	"!SHIFT_GROUP_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1d\n" +
 	"\x19SHIFT_GROUP_SORT_KEY_NAME\x10\n" +
 	"\x12\x1d\n" +
-	"\x19SHIFT_GROUP_SORT_KEY_CODE\x10\v2\xa6\x17\n" +
+	"\x19SHIFT_GROUP_SORT_KEY_CODE\x10\v2\xf9\x17\n" +
 	"\x13ShiftsGroupsService\x12N\n" +
 	"\x06Create\x12(.Scailo.ShiftsGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.ShiftsGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -1958,7 +1958,8 @@ const file_shifts_groups_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12d\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12d\n" +
 	"\x12AddShiftGroupShift\x122.Scailo.ShiftsGroupsServiceShiftGroupCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12g\n" +
 	"\x15ModifyShiftGroupShift\x122.Scailo.ShiftsGroupsServiceShiftGroupUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12W\n" +
 	"\x16ApproveShiftGroupShift\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -2024,18 +2025,19 @@ var file_shifts_groups_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                   // 19: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                    // 20: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),              // 21: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithUserComment)(nil),                  // 22: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                        // 23: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                 // 24: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                    // 25: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                             // 26: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                            // 27: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                               // 28: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                    // 29: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                               // 30: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                         // 31: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                              // 32: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                        // 33: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                   // 22: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                  // 23: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                        // 24: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                 // 25: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                    // 26: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                             // 27: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                            // 28: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                               // 29: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                    // 30: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                               // 31: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                         // 32: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                              // 33: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                        // 34: Scailo.IdentifierUUIDsList
 }
 var file_shifts_groups_scailo_proto_depIdxs = []int32{
 	15, // 0: Scailo.ShiftGroup.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2076,68 +2078,70 @@ var file_shifts_groups_scailo_proto_depIdxs = []int32{
 	21, // 35: Scailo.ShiftsGroupsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 36: Scailo.ShiftsGroupsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 37: Scailo.ShiftsGroupsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	4,  // 38: Scailo.ShiftsGroupsService.AddShiftGroupShift:input_type -> Scailo.ShiftsGroupsServiceShiftGroupCreateRequest
-	5,  // 39: Scailo.ShiftsGroupsService.ModifyShiftGroupShift:input_type -> Scailo.ShiftsGroupsServiceShiftGroupUpdateRequest
-	22, // 40: Scailo.ShiftsGroupsService.ApproveShiftGroupShift:input_type -> Scailo.IdentifierWithUserComment
-	22, // 41: Scailo.ShiftsGroupsService.DeleteShiftGroupShift:input_type -> Scailo.IdentifierWithUserComment
-	23, // 42: Scailo.ShiftsGroupsService.ReorderShiftGroupShifts:input_type -> Scailo.ReorderItemsRequest
-	24, // 43: Scailo.ShiftsGroupsService.ViewShiftGroupShiftByID:input_type -> Scailo.Identifier
-	25, // 44: Scailo.ShiftsGroupsService.ViewApprovedShiftGroupShifts:input_type -> Scailo.IdentifierWithSearchKey
-	25, // 45: Scailo.ShiftsGroupsService.ViewUnapprovedShiftGroupShifts:input_type -> Scailo.IdentifierWithSearchKey
-	9,  // 46: Scailo.ShiftsGroupsService.ViewShiftGroupShiftsHistory:input_type -> Scailo.ShiftsGroupsShiftsHistoryRequest
-	24, // 47: Scailo.ShiftsGroupsService.ViewByID:input_type -> Scailo.Identifier
-	26, // 48: Scailo.ShiftsGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 49: Scailo.ShiftsGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	26, // 50: Scailo.ShiftsGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	27, // 51: Scailo.ShiftsGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	28, // 52: Scailo.ShiftsGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
-	26, // 53: Scailo.ShiftsGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	10, // 54: Scailo.ShiftsGroupsService.ViewWithPagination:input_type -> Scailo.ShiftsGroupsServicePaginationReq
-	14, // 55: Scailo.ShiftsGroupsService.SearchAll:input_type -> Scailo.ShiftsGroupsServiceSearchAllReq
-	12, // 56: Scailo.ShiftsGroupsService.Filter:input_type -> Scailo.ShiftsGroupsServiceFilterReq
-	29, // 57: Scailo.ShiftsGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	13, // 58: Scailo.ShiftsGroupsService.Count:input_type -> Scailo.ShiftsGroupsServiceCountReq
-	12, // 59: Scailo.ShiftsGroupsService.DownloadAsCSV:input_type -> Scailo.ShiftsGroupsServiceFilterReq
-	30, // 60: Scailo.ShiftsGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	31, // 61: Scailo.ShiftsGroupsService.Create:output_type -> Scailo.IdentifierResponse
-	31, // 62: Scailo.ShiftsGroupsService.Draft:output_type -> Scailo.IdentifierResponse
-	31, // 63: Scailo.ShiftsGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	31, // 64: Scailo.ShiftsGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	31, // 65: Scailo.ShiftsGroupsService.Verify:output_type -> Scailo.IdentifierResponse
-	31, // 66: Scailo.ShiftsGroupsService.Approve:output_type -> Scailo.IdentifierResponse
-	31, // 67: Scailo.ShiftsGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	31, // 68: Scailo.ShiftsGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	31, // 69: Scailo.ShiftsGroupsService.Halt:output_type -> Scailo.IdentifierResponse
-	31, // 70: Scailo.ShiftsGroupsService.Discard:output_type -> Scailo.IdentifierResponse
-	31, // 71: Scailo.ShiftsGroupsService.Restore:output_type -> Scailo.IdentifierResponse
-	31, // 72: Scailo.ShiftsGroupsService.Complete:output_type -> Scailo.IdentifierResponse
-	31, // 73: Scailo.ShiftsGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
-	31, // 74: Scailo.ShiftsGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	31, // 75: Scailo.ShiftsGroupsService.AddShiftGroupShift:output_type -> Scailo.IdentifierResponse
-	31, // 76: Scailo.ShiftsGroupsService.ModifyShiftGroupShift:output_type -> Scailo.IdentifierResponse
-	31, // 77: Scailo.ShiftsGroupsService.ApproveShiftGroupShift:output_type -> Scailo.IdentifierResponse
-	31, // 78: Scailo.ShiftsGroupsService.DeleteShiftGroupShift:output_type -> Scailo.IdentifierResponse
-	31, // 79: Scailo.ShiftsGroupsService.ReorderShiftGroupShifts:output_type -> Scailo.IdentifierResponse
-	6,  // 80: Scailo.ShiftsGroupsService.ViewShiftGroupShiftByID:output_type -> Scailo.ShiftGroupShift
-	8,  // 81: Scailo.ShiftsGroupsService.ViewApprovedShiftGroupShifts:output_type -> Scailo.ShiftsGroupsShiftsList
-	8,  // 82: Scailo.ShiftsGroupsService.ViewUnapprovedShiftGroupShifts:output_type -> Scailo.ShiftsGroupsShiftsList
-	8,  // 83: Scailo.ShiftsGroupsService.ViewShiftGroupShiftsHistory:output_type -> Scailo.ShiftsGroupsShiftsList
-	3,  // 84: Scailo.ShiftsGroupsService.ViewByID:output_type -> Scailo.ShiftGroup
-	3,  // 85: Scailo.ShiftsGroupsService.ViewByUUID:output_type -> Scailo.ShiftGroup
-	3,  // 86: Scailo.ShiftsGroupsService.ViewEssentialByID:output_type -> Scailo.ShiftGroup
-	3,  // 87: Scailo.ShiftsGroupsService.ViewEssentialByUUID:output_type -> Scailo.ShiftGroup
-	7,  // 88: Scailo.ShiftsGroupsService.ViewFromIDs:output_type -> Scailo.ShiftsGroupsList
-	7,  // 89: Scailo.ShiftsGroupsService.ViewAll:output_type -> Scailo.ShiftsGroupsList
-	7,  // 90: Scailo.ShiftsGroupsService.ViewAllForEntityUUID:output_type -> Scailo.ShiftsGroupsList
-	11, // 91: Scailo.ShiftsGroupsService.ViewWithPagination:output_type -> Scailo.ShiftsGroupsServicePaginationResponse
-	7,  // 92: Scailo.ShiftsGroupsService.SearchAll:output_type -> Scailo.ShiftsGroupsList
-	7,  // 93: Scailo.ShiftsGroupsService.Filter:output_type -> Scailo.ShiftsGroupsList
-	32, // 94: Scailo.ShiftsGroupsService.CountInStatus:output_type -> Scailo.CountResponse
-	32, // 95: Scailo.ShiftsGroupsService.Count:output_type -> Scailo.CountResponse
-	30, // 96: Scailo.ShiftsGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	33, // 97: Scailo.ShiftsGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	61, // [61:98] is the sub-list for method output_type
-	24, // [24:61] is the sub-list for method input_type
+	22, // 38: Scailo.ShiftsGroupsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	4,  // 39: Scailo.ShiftsGroupsService.AddShiftGroupShift:input_type -> Scailo.ShiftsGroupsServiceShiftGroupCreateRequest
+	5,  // 40: Scailo.ShiftsGroupsService.ModifyShiftGroupShift:input_type -> Scailo.ShiftsGroupsServiceShiftGroupUpdateRequest
+	23, // 41: Scailo.ShiftsGroupsService.ApproveShiftGroupShift:input_type -> Scailo.IdentifierWithUserComment
+	23, // 42: Scailo.ShiftsGroupsService.DeleteShiftGroupShift:input_type -> Scailo.IdentifierWithUserComment
+	24, // 43: Scailo.ShiftsGroupsService.ReorderShiftGroupShifts:input_type -> Scailo.ReorderItemsRequest
+	25, // 44: Scailo.ShiftsGroupsService.ViewShiftGroupShiftByID:input_type -> Scailo.Identifier
+	26, // 45: Scailo.ShiftsGroupsService.ViewApprovedShiftGroupShifts:input_type -> Scailo.IdentifierWithSearchKey
+	26, // 46: Scailo.ShiftsGroupsService.ViewUnapprovedShiftGroupShifts:input_type -> Scailo.IdentifierWithSearchKey
+	9,  // 47: Scailo.ShiftsGroupsService.ViewShiftGroupShiftsHistory:input_type -> Scailo.ShiftsGroupsShiftsHistoryRequest
+	25, // 48: Scailo.ShiftsGroupsService.ViewByID:input_type -> Scailo.Identifier
+	27, // 49: Scailo.ShiftsGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 50: Scailo.ShiftsGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	27, // 51: Scailo.ShiftsGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	28, // 52: Scailo.ShiftsGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	29, // 53: Scailo.ShiftsGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
+	27, // 54: Scailo.ShiftsGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	10, // 55: Scailo.ShiftsGroupsService.ViewWithPagination:input_type -> Scailo.ShiftsGroupsServicePaginationReq
+	14, // 56: Scailo.ShiftsGroupsService.SearchAll:input_type -> Scailo.ShiftsGroupsServiceSearchAllReq
+	12, // 57: Scailo.ShiftsGroupsService.Filter:input_type -> Scailo.ShiftsGroupsServiceFilterReq
+	30, // 58: Scailo.ShiftsGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	13, // 59: Scailo.ShiftsGroupsService.Count:input_type -> Scailo.ShiftsGroupsServiceCountReq
+	12, // 60: Scailo.ShiftsGroupsService.DownloadAsCSV:input_type -> Scailo.ShiftsGroupsServiceFilterReq
+	31, // 61: Scailo.ShiftsGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	32, // 62: Scailo.ShiftsGroupsService.Create:output_type -> Scailo.IdentifierResponse
+	32, // 63: Scailo.ShiftsGroupsService.Draft:output_type -> Scailo.IdentifierResponse
+	32, // 64: Scailo.ShiftsGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	32, // 65: Scailo.ShiftsGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	32, // 66: Scailo.ShiftsGroupsService.Verify:output_type -> Scailo.IdentifierResponse
+	32, // 67: Scailo.ShiftsGroupsService.Approve:output_type -> Scailo.IdentifierResponse
+	32, // 68: Scailo.ShiftsGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	32, // 69: Scailo.ShiftsGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	32, // 70: Scailo.ShiftsGroupsService.Halt:output_type -> Scailo.IdentifierResponse
+	32, // 71: Scailo.ShiftsGroupsService.Discard:output_type -> Scailo.IdentifierResponse
+	32, // 72: Scailo.ShiftsGroupsService.Restore:output_type -> Scailo.IdentifierResponse
+	32, // 73: Scailo.ShiftsGroupsService.Complete:output_type -> Scailo.IdentifierResponse
+	32, // 74: Scailo.ShiftsGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
+	32, // 75: Scailo.ShiftsGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	32, // 76: Scailo.ShiftsGroupsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	32, // 77: Scailo.ShiftsGroupsService.AddShiftGroupShift:output_type -> Scailo.IdentifierResponse
+	32, // 78: Scailo.ShiftsGroupsService.ModifyShiftGroupShift:output_type -> Scailo.IdentifierResponse
+	32, // 79: Scailo.ShiftsGroupsService.ApproveShiftGroupShift:output_type -> Scailo.IdentifierResponse
+	32, // 80: Scailo.ShiftsGroupsService.DeleteShiftGroupShift:output_type -> Scailo.IdentifierResponse
+	32, // 81: Scailo.ShiftsGroupsService.ReorderShiftGroupShifts:output_type -> Scailo.IdentifierResponse
+	6,  // 82: Scailo.ShiftsGroupsService.ViewShiftGroupShiftByID:output_type -> Scailo.ShiftGroupShift
+	8,  // 83: Scailo.ShiftsGroupsService.ViewApprovedShiftGroupShifts:output_type -> Scailo.ShiftsGroupsShiftsList
+	8,  // 84: Scailo.ShiftsGroupsService.ViewUnapprovedShiftGroupShifts:output_type -> Scailo.ShiftsGroupsShiftsList
+	8,  // 85: Scailo.ShiftsGroupsService.ViewShiftGroupShiftsHistory:output_type -> Scailo.ShiftsGroupsShiftsList
+	3,  // 86: Scailo.ShiftsGroupsService.ViewByID:output_type -> Scailo.ShiftGroup
+	3,  // 87: Scailo.ShiftsGroupsService.ViewByUUID:output_type -> Scailo.ShiftGroup
+	3,  // 88: Scailo.ShiftsGroupsService.ViewEssentialByID:output_type -> Scailo.ShiftGroup
+	3,  // 89: Scailo.ShiftsGroupsService.ViewEssentialByUUID:output_type -> Scailo.ShiftGroup
+	7,  // 90: Scailo.ShiftsGroupsService.ViewFromIDs:output_type -> Scailo.ShiftsGroupsList
+	7,  // 91: Scailo.ShiftsGroupsService.ViewAll:output_type -> Scailo.ShiftsGroupsList
+	7,  // 92: Scailo.ShiftsGroupsService.ViewAllForEntityUUID:output_type -> Scailo.ShiftsGroupsList
+	11, // 93: Scailo.ShiftsGroupsService.ViewWithPagination:output_type -> Scailo.ShiftsGroupsServicePaginationResponse
+	7,  // 94: Scailo.ShiftsGroupsService.SearchAll:output_type -> Scailo.ShiftsGroupsList
+	7,  // 95: Scailo.ShiftsGroupsService.Filter:output_type -> Scailo.ShiftsGroupsList
+	33, // 96: Scailo.ShiftsGroupsService.CountInStatus:output_type -> Scailo.CountResponse
+	33, // 97: Scailo.ShiftsGroupsService.Count:output_type -> Scailo.CountResponse
+	31, // 98: Scailo.ShiftsGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	34, // 99: Scailo.ShiftsGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	62, // [62:100] is the sub-list for method output_type
+	24, // [24:62] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
 	24, // [24:24] is the sub-list for extension extendee
 	0,  // [0:24] is the sub-list for field type_name
@@ -2149,6 +2153,7 @@ func file_shifts_groups_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

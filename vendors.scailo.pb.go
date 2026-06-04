@@ -3238,7 +3238,7 @@ var File_vendors_scailo_proto protoreflect.FileDescriptor
 
 const file_vendors_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x14vendors.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xcc\x02\n" +
+	"\x14vendors.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcc\x02\n" +
 	"\x1bVendorsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3521,7 +3521,7 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\x12VENDOR_USER_STATUS\x12&\n" +
 	"\"VENDOR_USER_STATUS_ANY_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bVENDOR_USER_STATUS_APPROVED\x10\x01\x12!\n" +
-	"\x1dVENDOR_USER_STATUS_UNAPPROVED\x10\x022\xcb\x1f\n" +
+	"\x1dVENDOR_USER_STATUS_UNAPPROVED\x10\x022\x9e \n" +
 	"\x0eVendorsService\x12I\n" +
 	"\x06Create\x12#.Scailo.VendorsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12H\n" +
 	"\x05Draft\x12#.Scailo.VendorsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
@@ -3536,7 +3536,8 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\aRestore\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12T\n" +
 	"\rAddVendorItem\x12'.Scailo.VendorsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12W\n" +
 	"\x10ModifyVendorItem\x12'.Scailo.VendorsServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -3636,179 +3637,182 @@ var file_vendors_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 36: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 37: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 38: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 40: Scailo.IdentifierWithUserComment
-	(*Identifier)(nil),                                        // 41: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 42: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 43: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 44: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 45: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 46: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 47: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 48: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                                      // 49: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                // 50: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 51: Scailo.MagicLink
-	(*CountResponse)(nil),                                     // 52: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                               // 53: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                          // 39: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 40: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 41: Scailo.IdentifierWithUserComment
+	(*Identifier)(nil),                                        // 42: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 43: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 44: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 45: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 46: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 47: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 48: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 49: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                                      // 50: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                // 51: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 52: Scailo.MagicLink
+	(*CountResponse)(nil),                                     // 53: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                               // 54: Scailo.IdentifierUUIDsList
 }
 var file_vendors_scailo_proto_depIdxs = []int32{
-	28, // 0: Scailo.VendorsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	28, // 1: Scailo.VendorsServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	29, // 2: Scailo.Vendor.metadata:type_name -> Scailo.EmployeeMetadata
-	30, // 3: Scailo.Vendor.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	31, // 4: Scailo.Vendor.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	32, // 5: Scailo.Vendor.logs:type_name -> Scailo.LogbookLogConciseSLC
-	33, // 6: Scailo.Vendor.form_data:type_name -> Scailo.FormFieldDatum
-	0,  // 7: Scailo.VendorsServiceItemCreateRequest.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	0,  // 8: Scailo.VendorsServiceItemCreateRequest.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	0,  // 9: Scailo.VendorsServiceItemUpdateRequest.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	0,  // 10: Scailo.VendorsServiceItemUpdateRequest.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	29, // 11: Scailo.VendorItem.metadata:type_name -> Scailo.EmployeeMetadata
-	30, // 12: Scailo.VendorItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	0,  // 13: Scailo.VendorItem.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	0,  // 14: Scailo.VendorItem.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
-	7,  // 15: Scailo.VendorsList.list:type_name -> Scailo.Vendor
-	10, // 16: Scailo.VendorItemsList.list:type_name -> Scailo.VendorItem
-	34, // 17: Scailo.VendorsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	35, // 18: Scailo.VendorsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 19: Scailo.VendorsServicePaginationReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
-	31, // 20: Scailo.VendorsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	7,  // 21: Scailo.VendorsServicePaginationResponse.payload:type_name -> Scailo.Vendor
-	34, // 22: Scailo.VendorsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	35, // 23: Scailo.VendorsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 24: Scailo.VendorsServiceFilterReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
-	31, // 25: Scailo.VendorsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	36, // 26: Scailo.VendorsServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	34, // 27: Scailo.VendorsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	31, // 28: Scailo.VendorsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	36, // 29: Scailo.VendorsServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	34, // 30: Scailo.VendorsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	35, // 31: Scailo.VendorsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 32: Scailo.VendorsServiceSearchAllReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
-	31, // 33: Scailo.VendorsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	34, // 34: Scailo.VendorItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	35, // 35: Scailo.VendorItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	2,  // 36: Scailo.VendorItemsSearchRequest.sort_key:type_name -> Scailo.VENDOR_ITEM_SORT_KEY
-	3,  // 37: Scailo.VendorItemsSearchRequest.status:type_name -> Scailo.VENDOR_ITEM_STATUS
-	10, // 38: Scailo.VendorsServicePaginatedItemsResponse.payload:type_name -> Scailo.VendorItem
-	10, // 39: Scailo.VendorItemRequired.item:type_name -> Scailo.VendorItem
-	21, // 40: Scailo.VendorsServicePaginatedRequiredItemsResponse.payload:type_name -> Scailo.VendorItemRequired
-	29, // 41: Scailo.VendorUser.metadata:type_name -> Scailo.EmployeeMetadata
-	30, // 42: Scailo.VendorUser.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	24, // 43: Scailo.VendorUsersList.list:type_name -> Scailo.VendorUser
-	34, // 44: Scailo.VendorUsersSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	4,  // 45: Scailo.VendorUsersSearchRequest.status:type_name -> Scailo.VENDOR_USER_STATUS
-	24, // 46: Scailo.VendorsServicePaginatedUsersResponse.payload:type_name -> Scailo.VendorUser
-	5,  // 47: Scailo.VendorsService.Create:input_type -> Scailo.VendorsServiceCreateRequest
-	5,  // 48: Scailo.VendorsService.Draft:input_type -> Scailo.VendorsServiceCreateRequest
-	6,  // 49: Scailo.VendorsService.DraftUpdate:input_type -> Scailo.VendorsServiceUpdateRequest
-	37, // 50: Scailo.VendorsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 51: Scailo.VendorsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 52: Scailo.VendorsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 53: Scailo.VendorsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	6,  // 54: Scailo.VendorsService.RevisionUpdate:input_type -> Scailo.VendorsServiceUpdateRequest
-	37, // 55: Scailo.VendorsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 56: Scailo.VendorsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 57: Scailo.VendorsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 58: Scailo.VendorsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38, // 59: Scailo.VendorsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	39, // 60: Scailo.VendorsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	8,  // 61: Scailo.VendorsService.AddVendorItem:input_type -> Scailo.VendorsServiceItemCreateRequest
-	9,  // 62: Scailo.VendorsService.ModifyVendorItem:input_type -> Scailo.VendorsServiceItemUpdateRequest
-	40, // 63: Scailo.VendorsService.ApproveVendorItem:input_type -> Scailo.IdentifierWithUserComment
-	40, // 64: Scailo.VendorsService.DeleteVendorItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 65: Scailo.VendorsService.ViewVendorItemByID:input_type -> Scailo.Identifier
-	19, // 66: Scailo.VendorsService.ViewPaginatedApprovedVendorItems:input_type -> Scailo.VendorItemsSearchRequest
-	19, // 67: Scailo.VendorsService.ViewPaginatedUnapprovedVendorItems:input_type -> Scailo.VendorItemsSearchRequest
-	13, // 68: Scailo.VendorsService.ViewVendorItemHistory:input_type -> Scailo.VendorItemHistoryRequest
-	19, // 69: Scailo.VendorsService.SearchItemsWithPagination:input_type -> Scailo.VendorItemsSearchRequest
-	19, // 70: Scailo.VendorsService.SearchRequiredItemsWithPagination:input_type -> Scailo.VendorItemsSearchRequest
-	42, // 71: Scailo.VendorsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	43, // 72: Scailo.VendorsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	44, // 73: Scailo.VendorsService.UploadVendorItems:input_type -> Scailo.IdentifierUUIDWithFile
-	23, // 74: Scailo.VendorsService.AddVendorUser:input_type -> Scailo.VendorsServiceUserCreateRequest
-	40, // 75: Scailo.VendorsService.ApproveVendorUser:input_type -> Scailo.IdentifierWithUserComment
-	40, // 76: Scailo.VendorsService.DeleteVendorUser:input_type -> Scailo.IdentifierWithUserComment
-	41, // 77: Scailo.VendorsService.ViewVendorUserByID:input_type -> Scailo.Identifier
-	41, // 78: Scailo.VendorsService.ViewVendorUsers:input_type -> Scailo.Identifier
-	26, // 79: Scailo.VendorsService.SearchVendorUsersWithPagination:input_type -> Scailo.VendorUsersSearchRequest
-	41, // 80: Scailo.VendorsService.ViewByID:input_type -> Scailo.Identifier
-	42, // 81: Scailo.VendorsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	45, // 82: Scailo.VendorsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
-	41, // 83: Scailo.VendorsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	42, // 84: Scailo.VendorsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	45, // 85: Scailo.VendorsService.ViewEssentialByEmail:input_type -> Scailo.SimpleSearchReq
-	45, // 86: Scailo.VendorsService.ViewEssentialByPhone:input_type -> Scailo.SimpleSearchReq
-	46, // 87: Scailo.VendorsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	47, // 88: Scailo.VendorsService.ViewAll:input_type -> Scailo.ActiveStatus
-	42, // 89: Scailo.VendorsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 90: Scailo.VendorsService.ViewWithPagination:input_type -> Scailo.VendorsServicePaginationReq
-	41, // 91: Scailo.VendorsService.ViewVendorsForFamily:input_type -> Scailo.Identifier
-	42, // 92: Scailo.VendorsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 93: Scailo.VendorsService.SearchAll:input_type -> Scailo.VendorsServiceSearchAllReq
-	16, // 94: Scailo.VendorsService.Filter:input_type -> Scailo.VendorsServiceFilterReq
-	48, // 95: Scailo.VendorsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 96: Scailo.VendorsService.Count:input_type -> Scailo.VendorsServiceCountReq
-	16, // 97: Scailo.VendorsService.DownloadAsCSV:input_type -> Scailo.VendorsServiceFilterReq
-	49, // 98: Scailo.VendorsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	50, // 99: Scailo.VendorsService.Create:output_type -> Scailo.IdentifierResponse
-	50, // 100: Scailo.VendorsService.Draft:output_type -> Scailo.IdentifierResponse
-	50, // 101: Scailo.VendorsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	50, // 102: Scailo.VendorsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	50, // 103: Scailo.VendorsService.Verify:output_type -> Scailo.IdentifierResponse
-	50, // 104: Scailo.VendorsService.Approve:output_type -> Scailo.IdentifierResponse
-	50, // 105: Scailo.VendorsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	50, // 106: Scailo.VendorsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	50, // 107: Scailo.VendorsService.Halt:output_type -> Scailo.IdentifierResponse
-	50, // 108: Scailo.VendorsService.Discard:output_type -> Scailo.IdentifierResponse
-	50, // 109: Scailo.VendorsService.Restore:output_type -> Scailo.IdentifierResponse
-	50, // 110: Scailo.VendorsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	50, // 111: Scailo.VendorsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	51, // 112: Scailo.VendorsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	50, // 113: Scailo.VendorsService.AddVendorItem:output_type -> Scailo.IdentifierResponse
-	50, // 114: Scailo.VendorsService.ModifyVendorItem:output_type -> Scailo.IdentifierResponse
-	50, // 115: Scailo.VendorsService.ApproveVendorItem:output_type -> Scailo.IdentifierResponse
-	50, // 116: Scailo.VendorsService.DeleteVendorItem:output_type -> Scailo.IdentifierResponse
-	10, // 117: Scailo.VendorsService.ViewVendorItemByID:output_type -> Scailo.VendorItem
-	20, // 118: Scailo.VendorsService.ViewPaginatedApprovedVendorItems:output_type -> Scailo.VendorsServicePaginatedItemsResponse
-	20, // 119: Scailo.VendorsService.ViewPaginatedUnapprovedVendorItems:output_type -> Scailo.VendorsServicePaginatedItemsResponse
-	12, // 120: Scailo.VendorsService.ViewVendorItemHistory:output_type -> Scailo.VendorItemsList
-	20, // 121: Scailo.VendorsService.SearchItemsWithPagination:output_type -> Scailo.VendorsServicePaginatedItemsResponse
-	22, // 122: Scailo.VendorsService.SearchRequiredItemsWithPagination:output_type -> Scailo.VendorsServicePaginatedRequiredItemsResponse
-	49, // 123: Scailo.VendorsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	49, // 124: Scailo.VendorsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	46, // 125: Scailo.VendorsService.UploadVendorItems:output_type -> Scailo.IdentifiersList
-	50, // 126: Scailo.VendorsService.AddVendorUser:output_type -> Scailo.IdentifierResponse
-	50, // 127: Scailo.VendorsService.ApproveVendorUser:output_type -> Scailo.IdentifierResponse
-	50, // 128: Scailo.VendorsService.DeleteVendorUser:output_type -> Scailo.IdentifierResponse
-	24, // 129: Scailo.VendorsService.ViewVendorUserByID:output_type -> Scailo.VendorUser
-	25, // 130: Scailo.VendorsService.ViewVendorUsers:output_type -> Scailo.VendorUsersList
-	27, // 131: Scailo.VendorsService.SearchVendorUsersWithPagination:output_type -> Scailo.VendorsServicePaginatedUsersResponse
-	7,  // 132: Scailo.VendorsService.ViewByID:output_type -> Scailo.Vendor
-	7,  // 133: Scailo.VendorsService.ViewByUUID:output_type -> Scailo.Vendor
-	7,  // 134: Scailo.VendorsService.ViewByCode:output_type -> Scailo.Vendor
-	7,  // 135: Scailo.VendorsService.ViewEssentialByID:output_type -> Scailo.Vendor
-	7,  // 136: Scailo.VendorsService.ViewEssentialByUUID:output_type -> Scailo.Vendor
-	7,  // 137: Scailo.VendorsService.ViewEssentialByEmail:output_type -> Scailo.Vendor
-	7,  // 138: Scailo.VendorsService.ViewEssentialByPhone:output_type -> Scailo.Vendor
-	11, // 139: Scailo.VendorsService.ViewFromIDs:output_type -> Scailo.VendorsList
-	11, // 140: Scailo.VendorsService.ViewAll:output_type -> Scailo.VendorsList
-	11, // 141: Scailo.VendorsService.ViewAllForEntityUUID:output_type -> Scailo.VendorsList
-	15, // 142: Scailo.VendorsService.ViewWithPagination:output_type -> Scailo.VendorsServicePaginationResponse
-	11, // 143: Scailo.VendorsService.ViewVendorsForFamily:output_type -> Scailo.VendorsList
-	49, // 144: Scailo.VendorsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	11, // 145: Scailo.VendorsService.SearchAll:output_type -> Scailo.VendorsList
-	11, // 146: Scailo.VendorsService.Filter:output_type -> Scailo.VendorsList
-	52, // 147: Scailo.VendorsService.CountInStatus:output_type -> Scailo.CountResponse
-	52, // 148: Scailo.VendorsService.Count:output_type -> Scailo.CountResponse
-	49, // 149: Scailo.VendorsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	53, // 150: Scailo.VendorsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	99, // [99:151] is the sub-list for method output_type
-	47, // [47:99] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	28,  // 0: Scailo.VendorsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	28,  // 1: Scailo.VendorsServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	29,  // 2: Scailo.Vendor.metadata:type_name -> Scailo.EmployeeMetadata
+	30,  // 3: Scailo.Vendor.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	31,  // 4: Scailo.Vendor.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	32,  // 5: Scailo.Vendor.logs:type_name -> Scailo.LogbookLogConciseSLC
+	33,  // 6: Scailo.Vendor.form_data:type_name -> Scailo.FormFieldDatum
+	0,   // 7: Scailo.VendorsServiceItemCreateRequest.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	0,   // 8: Scailo.VendorsServiceItemCreateRequest.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	0,   // 9: Scailo.VendorsServiceItemUpdateRequest.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	0,   // 10: Scailo.VendorsServiceItemUpdateRequest.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	29,  // 11: Scailo.VendorItem.metadata:type_name -> Scailo.EmployeeMetadata
+	30,  // 12: Scailo.VendorItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	0,   // 13: Scailo.VendorItem.price_deviation_rel_lower_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	0,   // 14: Scailo.VendorItem.price_deviation_rel_upper_limit_type:type_name -> Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE
+	7,   // 15: Scailo.VendorsList.list:type_name -> Scailo.Vendor
+	10,  // 16: Scailo.VendorItemsList.list:type_name -> Scailo.VendorItem
+	34,  // 17: Scailo.VendorsServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 18: Scailo.VendorsServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 19: Scailo.VendorsServicePaginationReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
+	31,  // 20: Scailo.VendorsServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	7,   // 21: Scailo.VendorsServicePaginationResponse.payload:type_name -> Scailo.Vendor
+	34,  // 22: Scailo.VendorsServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 23: Scailo.VendorsServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 24: Scailo.VendorsServiceFilterReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
+	31,  // 25: Scailo.VendorsServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	36,  // 26: Scailo.VendorsServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	34,  // 27: Scailo.VendorsServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	31,  // 28: Scailo.VendorsServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	36,  // 29: Scailo.VendorsServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	34,  // 30: Scailo.VendorsServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 31: Scailo.VendorsServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 32: Scailo.VendorsServiceSearchAllReq.sort_key:type_name -> Scailo.VENDOR_SORT_KEY
+	31,  // 33: Scailo.VendorsServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	34,  // 34: Scailo.VendorItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	35,  // 35: Scailo.VendorItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	2,   // 36: Scailo.VendorItemsSearchRequest.sort_key:type_name -> Scailo.VENDOR_ITEM_SORT_KEY
+	3,   // 37: Scailo.VendorItemsSearchRequest.status:type_name -> Scailo.VENDOR_ITEM_STATUS
+	10,  // 38: Scailo.VendorsServicePaginatedItemsResponse.payload:type_name -> Scailo.VendorItem
+	10,  // 39: Scailo.VendorItemRequired.item:type_name -> Scailo.VendorItem
+	21,  // 40: Scailo.VendorsServicePaginatedRequiredItemsResponse.payload:type_name -> Scailo.VendorItemRequired
+	29,  // 41: Scailo.VendorUser.metadata:type_name -> Scailo.EmployeeMetadata
+	30,  // 42: Scailo.VendorUser.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	24,  // 43: Scailo.VendorUsersList.list:type_name -> Scailo.VendorUser
+	34,  // 44: Scailo.VendorUsersSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	4,   // 45: Scailo.VendorUsersSearchRequest.status:type_name -> Scailo.VENDOR_USER_STATUS
+	24,  // 46: Scailo.VendorsServicePaginatedUsersResponse.payload:type_name -> Scailo.VendorUser
+	5,   // 47: Scailo.VendorsService.Create:input_type -> Scailo.VendorsServiceCreateRequest
+	5,   // 48: Scailo.VendorsService.Draft:input_type -> Scailo.VendorsServiceCreateRequest
+	6,   // 49: Scailo.VendorsService.DraftUpdate:input_type -> Scailo.VendorsServiceUpdateRequest
+	37,  // 50: Scailo.VendorsService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 51: Scailo.VendorsService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 52: Scailo.VendorsService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 53: Scailo.VendorsService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	6,   // 54: Scailo.VendorsService.RevisionUpdate:input_type -> Scailo.VendorsServiceUpdateRequest
+	37,  // 55: Scailo.VendorsService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 56: Scailo.VendorsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 57: Scailo.VendorsService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 58: Scailo.VendorsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	38,  // 59: Scailo.VendorsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	39,  // 60: Scailo.VendorsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	40,  // 61: Scailo.VendorsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	8,   // 62: Scailo.VendorsService.AddVendorItem:input_type -> Scailo.VendorsServiceItemCreateRequest
+	9,   // 63: Scailo.VendorsService.ModifyVendorItem:input_type -> Scailo.VendorsServiceItemUpdateRequest
+	41,  // 64: Scailo.VendorsService.ApproveVendorItem:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 65: Scailo.VendorsService.DeleteVendorItem:input_type -> Scailo.IdentifierWithUserComment
+	42,  // 66: Scailo.VendorsService.ViewVendorItemByID:input_type -> Scailo.Identifier
+	19,  // 67: Scailo.VendorsService.ViewPaginatedApprovedVendorItems:input_type -> Scailo.VendorItemsSearchRequest
+	19,  // 68: Scailo.VendorsService.ViewPaginatedUnapprovedVendorItems:input_type -> Scailo.VendorItemsSearchRequest
+	13,  // 69: Scailo.VendorsService.ViewVendorItemHistory:input_type -> Scailo.VendorItemHistoryRequest
+	19,  // 70: Scailo.VendorsService.SearchItemsWithPagination:input_type -> Scailo.VendorItemsSearchRequest
+	19,  // 71: Scailo.VendorsService.SearchRequiredItemsWithPagination:input_type -> Scailo.VendorItemsSearchRequest
+	43,  // 72: Scailo.VendorsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	44,  // 73: Scailo.VendorsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	45,  // 74: Scailo.VendorsService.UploadVendorItems:input_type -> Scailo.IdentifierUUIDWithFile
+	23,  // 75: Scailo.VendorsService.AddVendorUser:input_type -> Scailo.VendorsServiceUserCreateRequest
+	41,  // 76: Scailo.VendorsService.ApproveVendorUser:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 77: Scailo.VendorsService.DeleteVendorUser:input_type -> Scailo.IdentifierWithUserComment
+	42,  // 78: Scailo.VendorsService.ViewVendorUserByID:input_type -> Scailo.Identifier
+	42,  // 79: Scailo.VendorsService.ViewVendorUsers:input_type -> Scailo.Identifier
+	26,  // 80: Scailo.VendorsService.SearchVendorUsersWithPagination:input_type -> Scailo.VendorUsersSearchRequest
+	42,  // 81: Scailo.VendorsService.ViewByID:input_type -> Scailo.Identifier
+	43,  // 82: Scailo.VendorsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	46,  // 83: Scailo.VendorsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	42,  // 84: Scailo.VendorsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	43,  // 85: Scailo.VendorsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	46,  // 86: Scailo.VendorsService.ViewEssentialByEmail:input_type -> Scailo.SimpleSearchReq
+	46,  // 87: Scailo.VendorsService.ViewEssentialByPhone:input_type -> Scailo.SimpleSearchReq
+	47,  // 88: Scailo.VendorsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	48,  // 89: Scailo.VendorsService.ViewAll:input_type -> Scailo.ActiveStatus
+	43,  // 90: Scailo.VendorsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14,  // 91: Scailo.VendorsService.ViewWithPagination:input_type -> Scailo.VendorsServicePaginationReq
+	42,  // 92: Scailo.VendorsService.ViewVendorsForFamily:input_type -> Scailo.Identifier
+	43,  // 93: Scailo.VendorsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18,  // 94: Scailo.VendorsService.SearchAll:input_type -> Scailo.VendorsServiceSearchAllReq
+	16,  // 95: Scailo.VendorsService.Filter:input_type -> Scailo.VendorsServiceFilterReq
+	49,  // 96: Scailo.VendorsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17,  // 97: Scailo.VendorsService.Count:input_type -> Scailo.VendorsServiceCountReq
+	16,  // 98: Scailo.VendorsService.DownloadAsCSV:input_type -> Scailo.VendorsServiceFilterReq
+	50,  // 99: Scailo.VendorsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	51,  // 100: Scailo.VendorsService.Create:output_type -> Scailo.IdentifierResponse
+	51,  // 101: Scailo.VendorsService.Draft:output_type -> Scailo.IdentifierResponse
+	51,  // 102: Scailo.VendorsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	51,  // 103: Scailo.VendorsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	51,  // 104: Scailo.VendorsService.Verify:output_type -> Scailo.IdentifierResponse
+	51,  // 105: Scailo.VendorsService.Approve:output_type -> Scailo.IdentifierResponse
+	51,  // 106: Scailo.VendorsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	51,  // 107: Scailo.VendorsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	51,  // 108: Scailo.VendorsService.Halt:output_type -> Scailo.IdentifierResponse
+	51,  // 109: Scailo.VendorsService.Discard:output_type -> Scailo.IdentifierResponse
+	51,  // 110: Scailo.VendorsService.Restore:output_type -> Scailo.IdentifierResponse
+	51,  // 111: Scailo.VendorsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	51,  // 112: Scailo.VendorsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	51,  // 113: Scailo.VendorsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	52,  // 114: Scailo.VendorsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	51,  // 115: Scailo.VendorsService.AddVendorItem:output_type -> Scailo.IdentifierResponse
+	51,  // 116: Scailo.VendorsService.ModifyVendorItem:output_type -> Scailo.IdentifierResponse
+	51,  // 117: Scailo.VendorsService.ApproveVendorItem:output_type -> Scailo.IdentifierResponse
+	51,  // 118: Scailo.VendorsService.DeleteVendorItem:output_type -> Scailo.IdentifierResponse
+	10,  // 119: Scailo.VendorsService.ViewVendorItemByID:output_type -> Scailo.VendorItem
+	20,  // 120: Scailo.VendorsService.ViewPaginatedApprovedVendorItems:output_type -> Scailo.VendorsServicePaginatedItemsResponse
+	20,  // 121: Scailo.VendorsService.ViewPaginatedUnapprovedVendorItems:output_type -> Scailo.VendorsServicePaginatedItemsResponse
+	12,  // 122: Scailo.VendorsService.ViewVendorItemHistory:output_type -> Scailo.VendorItemsList
+	20,  // 123: Scailo.VendorsService.SearchItemsWithPagination:output_type -> Scailo.VendorsServicePaginatedItemsResponse
+	22,  // 124: Scailo.VendorsService.SearchRequiredItemsWithPagination:output_type -> Scailo.VendorsServicePaginatedRequiredItemsResponse
+	50,  // 125: Scailo.VendorsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	50,  // 126: Scailo.VendorsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	47,  // 127: Scailo.VendorsService.UploadVendorItems:output_type -> Scailo.IdentifiersList
+	51,  // 128: Scailo.VendorsService.AddVendorUser:output_type -> Scailo.IdentifierResponse
+	51,  // 129: Scailo.VendorsService.ApproveVendorUser:output_type -> Scailo.IdentifierResponse
+	51,  // 130: Scailo.VendorsService.DeleteVendorUser:output_type -> Scailo.IdentifierResponse
+	24,  // 131: Scailo.VendorsService.ViewVendorUserByID:output_type -> Scailo.VendorUser
+	25,  // 132: Scailo.VendorsService.ViewVendorUsers:output_type -> Scailo.VendorUsersList
+	27,  // 133: Scailo.VendorsService.SearchVendorUsersWithPagination:output_type -> Scailo.VendorsServicePaginatedUsersResponse
+	7,   // 134: Scailo.VendorsService.ViewByID:output_type -> Scailo.Vendor
+	7,   // 135: Scailo.VendorsService.ViewByUUID:output_type -> Scailo.Vendor
+	7,   // 136: Scailo.VendorsService.ViewByCode:output_type -> Scailo.Vendor
+	7,   // 137: Scailo.VendorsService.ViewEssentialByID:output_type -> Scailo.Vendor
+	7,   // 138: Scailo.VendorsService.ViewEssentialByUUID:output_type -> Scailo.Vendor
+	7,   // 139: Scailo.VendorsService.ViewEssentialByEmail:output_type -> Scailo.Vendor
+	7,   // 140: Scailo.VendorsService.ViewEssentialByPhone:output_type -> Scailo.Vendor
+	11,  // 141: Scailo.VendorsService.ViewFromIDs:output_type -> Scailo.VendorsList
+	11,  // 142: Scailo.VendorsService.ViewAll:output_type -> Scailo.VendorsList
+	11,  // 143: Scailo.VendorsService.ViewAllForEntityUUID:output_type -> Scailo.VendorsList
+	15,  // 144: Scailo.VendorsService.ViewWithPagination:output_type -> Scailo.VendorsServicePaginationResponse
+	11,  // 145: Scailo.VendorsService.ViewVendorsForFamily:output_type -> Scailo.VendorsList
+	50,  // 146: Scailo.VendorsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	11,  // 147: Scailo.VendorsService.SearchAll:output_type -> Scailo.VendorsList
+	11,  // 148: Scailo.VendorsService.Filter:output_type -> Scailo.VendorsList
+	53,  // 149: Scailo.VendorsService.CountInStatus:output_type -> Scailo.CountResponse
+	53,  // 150: Scailo.VendorsService.Count:output_type -> Scailo.CountResponse
+	50,  // 151: Scailo.VendorsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	54,  // 152: Scailo.VendorsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	100, // [100:153] is the sub-list for method output_type
+	47,  // [47:100] is the sub-list for method input_type
+	47,  // [47:47] is the sub-list for extension type_name
+	47,  // [47:47] is the sub-list for extension extendee
+	0,   // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_vendors_scailo_proto_init() }
@@ -3819,6 +3823,7 @@ func file_vendors_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -26,6 +26,7 @@ const (
 	ActivitiesService_Repeat_FullMethodName                         = "/Scailo.ActivitiesService/Repeat"
 	ActivitiesService_CommentAdd_FullMethodName                     = "/Scailo.ActivitiesService/CommentAdd"
 	ActivitiesService_SendEmail_FullMethodName                      = "/Scailo.ActivitiesService/SendEmail"
+	ActivitiesService_AttachVaultFolder_FullMethodName              = "/Scailo.ActivitiesService/AttachVaultFolder"
 	ActivitiesService_AddAction_FullMethodName                      = "/Scailo.ActivitiesService/AddAction"
 	ActivitiesService_AddActionWithTimer_FullMethodName             = "/Scailo.ActivitiesService/AddActionWithTimer"
 	ActivitiesService_ModifyAction_FullMethodName                   = "/Scailo.ActivitiesService/ModifyAction"
@@ -98,6 +99,17 @@ type ActivitiesServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierUUID, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierUUID, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an action to an activity
 	AddAction(ctx context.Context, in *ActivitiesServiceActionCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an action with an activity timer to an activity
@@ -288,6 +300,16 @@ func (c *activitiesServiceClient) SendEmail(ctx context.Context, in *IdentifierW
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierUUID)
 	err := c.cc.Invoke(ctx, ActivitiesService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *activitiesServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, ActivitiesService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -1508,7 +1508,7 @@ var File_skills_params_scailo_proto protoreflect.FileDescriptor
 
 const file_skills_params_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1askills_params.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xc3\x02\n" +
+	"\x1askills_params.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc3\x02\n" +
 	" SkillsParamsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1626,7 +1626,7 @@ const file_skills_params_scailo_proto_rawDesc = "" +
 	"!SKILL_PARAM_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1d\n" +
 	"\x19SKILL_PARAM_SORT_KEY_NAME\x10\n" +
 	"\x12\x1d\n" +
-	"\x19SKILL_PARAM_SORT_KEY_CODE\x10\v2\xdd\x10\n" +
+	"\x19SKILL_PARAM_SORT_KEY_CODE\x10\v2\xb0\x11\n" +
 	"\x13SkillsParamsService\x12N\n" +
 	"\x06Create\x12(.Scailo.SkillsParamsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.SkillsParamsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -1642,7 +1642,8 @@ const file_skills_params_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x12.Scailo.SkillParam\x128\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x12.Scailo.SkillParam\x12;\n" +
@@ -1697,15 +1698,16 @@ var file_skills_params_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                               // 17: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),           // 18: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),         // 19: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                            // 20: Scailo.Identifier
-	(*IdentifierUUID)(nil),                        // 21: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                       // 22: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                          // 23: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),               // 24: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                          // 25: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                    // 26: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                         // 27: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                   // 28: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),              // 20: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                            // 21: Scailo.Identifier
+	(*IdentifierUUID)(nil),                        // 22: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                       // 23: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                          // 24: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),               // 25: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                          // 26: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                    // 27: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                         // 28: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                   // 29: Scailo.IdentifierUUIDsList
 }
 var file_skills_params_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.SkillsParamsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -1747,50 +1749,52 @@ var file_skills_params_scailo_proto_depIdxs = []int32{
 	19, // 36: Scailo.SkillsParamsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 37: Scailo.SkillsParamsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 38: Scailo.SkillsParamsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	20, // 39: Scailo.SkillsParamsService.ViewByID:input_type -> Scailo.Identifier
-	21, // 40: Scailo.SkillsParamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 41: Scailo.SkillsParamsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	21, // 42: Scailo.SkillsParamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 43: Scailo.SkillsParamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 44: Scailo.SkillsParamsService.ViewAll:input_type -> Scailo.ActiveStatus
-	21, // 45: Scailo.SkillsParamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 46: Scailo.SkillsParamsService.ViewWithPagination:input_type -> Scailo.SkillsParamsServicePaginationReq
-	9,  // 47: Scailo.SkillsParamsService.SearchAll:input_type -> Scailo.SkillsParamsServiceSearchAllReq
-	7,  // 48: Scailo.SkillsParamsService.Filter:input_type -> Scailo.SkillsParamsServiceFilterReq
-	24, // 49: Scailo.SkillsParamsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 50: Scailo.SkillsParamsService.Count:input_type -> Scailo.SkillsParamsServiceCountReq
-	7,  // 51: Scailo.SkillsParamsService.DownloadAsCSV:input_type -> Scailo.SkillsParamsServiceFilterReq
-	25, // 52: Scailo.SkillsParamsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	26, // 53: Scailo.SkillsParamsService.Create:output_type -> Scailo.IdentifierResponse
-	26, // 54: Scailo.SkillsParamsService.Draft:output_type -> Scailo.IdentifierResponse
-	26, // 55: Scailo.SkillsParamsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 56: Scailo.SkillsParamsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	26, // 57: Scailo.SkillsParamsService.Verify:output_type -> Scailo.IdentifierResponse
-	26, // 58: Scailo.SkillsParamsService.Approve:output_type -> Scailo.IdentifierResponse
-	26, // 59: Scailo.SkillsParamsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	26, // 60: Scailo.SkillsParamsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 61: Scailo.SkillsParamsService.Halt:output_type -> Scailo.IdentifierResponse
-	26, // 62: Scailo.SkillsParamsService.Discard:output_type -> Scailo.IdentifierResponse
-	26, // 63: Scailo.SkillsParamsService.Restore:output_type -> Scailo.IdentifierResponse
-	26, // 64: Scailo.SkillsParamsService.Complete:output_type -> Scailo.IdentifierResponse
-	26, // 65: Scailo.SkillsParamsService.Repeat:output_type -> Scailo.IdentifierResponse
-	26, // 66: Scailo.SkillsParamsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 67: Scailo.SkillsParamsService.ViewByID:output_type -> Scailo.SkillParam
-	3,  // 68: Scailo.SkillsParamsService.ViewByUUID:output_type -> Scailo.SkillParam
-	3,  // 69: Scailo.SkillsParamsService.ViewEssentialByID:output_type -> Scailo.SkillParam
-	3,  // 70: Scailo.SkillsParamsService.ViewEssentialByUUID:output_type -> Scailo.SkillParam
-	4,  // 71: Scailo.SkillsParamsService.ViewFromIDs:output_type -> Scailo.SkillsParamsList
-	4,  // 72: Scailo.SkillsParamsService.ViewAll:output_type -> Scailo.SkillsParamsList
-	4,  // 73: Scailo.SkillsParamsService.ViewAllForEntityUUID:output_type -> Scailo.SkillsParamsList
-	6,  // 74: Scailo.SkillsParamsService.ViewWithPagination:output_type -> Scailo.SkillsParamsServicePaginationResponse
-	4,  // 75: Scailo.SkillsParamsService.SearchAll:output_type -> Scailo.SkillsParamsList
-	4,  // 76: Scailo.SkillsParamsService.Filter:output_type -> Scailo.SkillsParamsList
-	27, // 77: Scailo.SkillsParamsService.CountInStatus:output_type -> Scailo.CountResponse
-	27, // 78: Scailo.SkillsParamsService.Count:output_type -> Scailo.CountResponse
-	25, // 79: Scailo.SkillsParamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	28, // 80: Scailo.SkillsParamsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	53, // [53:81] is the sub-list for method output_type
-	25, // [25:53] is the sub-list for method input_type
+	20, // 39: Scailo.SkillsParamsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	21, // 40: Scailo.SkillsParamsService.ViewByID:input_type -> Scailo.Identifier
+	22, // 41: Scailo.SkillsParamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	21, // 42: Scailo.SkillsParamsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	22, // 43: Scailo.SkillsParamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 44: Scailo.SkillsParamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	24, // 45: Scailo.SkillsParamsService.ViewAll:input_type -> Scailo.ActiveStatus
+	22, // 46: Scailo.SkillsParamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 47: Scailo.SkillsParamsService.ViewWithPagination:input_type -> Scailo.SkillsParamsServicePaginationReq
+	9,  // 48: Scailo.SkillsParamsService.SearchAll:input_type -> Scailo.SkillsParamsServiceSearchAllReq
+	7,  // 49: Scailo.SkillsParamsService.Filter:input_type -> Scailo.SkillsParamsServiceFilterReq
+	25, // 50: Scailo.SkillsParamsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 51: Scailo.SkillsParamsService.Count:input_type -> Scailo.SkillsParamsServiceCountReq
+	7,  // 52: Scailo.SkillsParamsService.DownloadAsCSV:input_type -> Scailo.SkillsParamsServiceFilterReq
+	26, // 53: Scailo.SkillsParamsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	27, // 54: Scailo.SkillsParamsService.Create:output_type -> Scailo.IdentifierResponse
+	27, // 55: Scailo.SkillsParamsService.Draft:output_type -> Scailo.IdentifierResponse
+	27, // 56: Scailo.SkillsParamsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 57: Scailo.SkillsParamsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	27, // 58: Scailo.SkillsParamsService.Verify:output_type -> Scailo.IdentifierResponse
+	27, // 59: Scailo.SkillsParamsService.Approve:output_type -> Scailo.IdentifierResponse
+	27, // 60: Scailo.SkillsParamsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	27, // 61: Scailo.SkillsParamsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 62: Scailo.SkillsParamsService.Halt:output_type -> Scailo.IdentifierResponse
+	27, // 63: Scailo.SkillsParamsService.Discard:output_type -> Scailo.IdentifierResponse
+	27, // 64: Scailo.SkillsParamsService.Restore:output_type -> Scailo.IdentifierResponse
+	27, // 65: Scailo.SkillsParamsService.Complete:output_type -> Scailo.IdentifierResponse
+	27, // 66: Scailo.SkillsParamsService.Repeat:output_type -> Scailo.IdentifierResponse
+	27, // 67: Scailo.SkillsParamsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	27, // 68: Scailo.SkillsParamsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 69: Scailo.SkillsParamsService.ViewByID:output_type -> Scailo.SkillParam
+	3,  // 70: Scailo.SkillsParamsService.ViewByUUID:output_type -> Scailo.SkillParam
+	3,  // 71: Scailo.SkillsParamsService.ViewEssentialByID:output_type -> Scailo.SkillParam
+	3,  // 72: Scailo.SkillsParamsService.ViewEssentialByUUID:output_type -> Scailo.SkillParam
+	4,  // 73: Scailo.SkillsParamsService.ViewFromIDs:output_type -> Scailo.SkillsParamsList
+	4,  // 74: Scailo.SkillsParamsService.ViewAll:output_type -> Scailo.SkillsParamsList
+	4,  // 75: Scailo.SkillsParamsService.ViewAllForEntityUUID:output_type -> Scailo.SkillsParamsList
+	6,  // 76: Scailo.SkillsParamsService.ViewWithPagination:output_type -> Scailo.SkillsParamsServicePaginationResponse
+	4,  // 77: Scailo.SkillsParamsService.SearchAll:output_type -> Scailo.SkillsParamsList
+	4,  // 78: Scailo.SkillsParamsService.Filter:output_type -> Scailo.SkillsParamsList
+	28, // 79: Scailo.SkillsParamsService.CountInStatus:output_type -> Scailo.CountResponse
+	28, // 80: Scailo.SkillsParamsService.Count:output_type -> Scailo.CountResponse
+	26, // 81: Scailo.SkillsParamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	29, // 82: Scailo.SkillsParamsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	54, // [54:83] is the sub-list for method output_type
+	25, // [25:54] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -1803,6 +1807,7 @@ func file_skills_params_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1725,7 +1725,7 @@ var File_overtimes_scailo_proto protoreflect.FileDescriptor
 
 const file_overtimes_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x16overtimes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xc7\x03\n" +
+	"\x16overtimes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc7\x03\n" +
 	"\x1dOvertimesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1862,7 +1862,7 @@ const file_overtimes_scailo_proto_rawDesc = "" +
 	"\"OVERTIME_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12\x1d\n" +
 	"\x19OVERTIME_SORT_KEY_USER_ID\x10\f\x12$\n" +
 	" OVERTIME_SORT_KEY_FROM_TIMESTAMP\x10\r\x12\"\n" +
-	"\x1eOVERTIME_SORT_KEY_TO_TIMESTAMP\x10\x0e2\xe1\x0f\n" +
+	"\x1eOVERTIME_SORT_KEY_TO_TIMESTAMP\x10\x0e2\xb4\x10\n" +
 	"\x10OvertimesService\x12K\n" +
 	"\x06Create\x12%.Scailo.OvertimesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Draft\x12%.Scailo.OvertimesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
@@ -1878,7 +1878,8 @@ const file_overtimes_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x120\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x120\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x10.Scailo.Overtime\x126\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x10.Scailo.Overtime\x129\n" +
@@ -1932,14 +1933,15 @@ var file_overtimes_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                            // 17: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),        // 18: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),      // 19: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                         // 20: Scailo.Identifier
-	(*IdentifierUUID)(nil),                     // 21: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                    // 22: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                       // 23: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),            // 24: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                 // 25: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                      // 26: Scailo.CountResponse
-	(*StandardFile)(nil),                       // 27: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),           // 20: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                         // 21: Scailo.Identifier
+	(*IdentifierUUID)(nil),                     // 22: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                    // 23: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                       // 24: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),            // 25: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                 // 26: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                      // 27: Scailo.CountResponse
+	(*StandardFile)(nil),                       // 28: Scailo.StandardFile
 }
 var file_overtimes_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.OvertimesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -1981,48 +1983,50 @@ var file_overtimes_scailo_proto_depIdxs = []int32{
 	19, // 36: Scailo.OvertimesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 37: Scailo.OvertimesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 38: Scailo.OvertimesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	20, // 39: Scailo.OvertimesService.ViewByID:input_type -> Scailo.Identifier
-	21, // 40: Scailo.OvertimesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 41: Scailo.OvertimesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	21, // 42: Scailo.OvertimesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 43: Scailo.OvertimesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 44: Scailo.OvertimesService.ViewAll:input_type -> Scailo.ActiveStatus
-	21, // 45: Scailo.OvertimesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 46: Scailo.OvertimesService.ViewWithPagination:input_type -> Scailo.OvertimesServicePaginationReq
-	9,  // 47: Scailo.OvertimesService.SearchAll:input_type -> Scailo.OvertimesServiceSearchAllReq
-	7,  // 48: Scailo.OvertimesService.Filter:input_type -> Scailo.OvertimesServiceFilterReq
-	24, // 49: Scailo.OvertimesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 50: Scailo.OvertimesService.Count:input_type -> Scailo.OvertimesServiceCountReq
-	7,  // 51: Scailo.OvertimesService.DownloadAsCSV:input_type -> Scailo.OvertimesServiceFilterReq
-	25, // 52: Scailo.OvertimesService.Create:output_type -> Scailo.IdentifierResponse
-	25, // 53: Scailo.OvertimesService.Draft:output_type -> Scailo.IdentifierResponse
-	25, // 54: Scailo.OvertimesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 55: Scailo.OvertimesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	25, // 56: Scailo.OvertimesService.Verify:output_type -> Scailo.IdentifierResponse
-	25, // 57: Scailo.OvertimesService.Approve:output_type -> Scailo.IdentifierResponse
-	25, // 58: Scailo.OvertimesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	25, // 59: Scailo.OvertimesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 60: Scailo.OvertimesService.Halt:output_type -> Scailo.IdentifierResponse
-	25, // 61: Scailo.OvertimesService.Discard:output_type -> Scailo.IdentifierResponse
-	25, // 62: Scailo.OvertimesService.Restore:output_type -> Scailo.IdentifierResponse
-	25, // 63: Scailo.OvertimesService.Complete:output_type -> Scailo.IdentifierResponse
-	25, // 64: Scailo.OvertimesService.Repeat:output_type -> Scailo.IdentifierResponse
-	25, // 65: Scailo.OvertimesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 66: Scailo.OvertimesService.ViewByID:output_type -> Scailo.Overtime
-	3,  // 67: Scailo.OvertimesService.ViewByUUID:output_type -> Scailo.Overtime
-	3,  // 68: Scailo.OvertimesService.ViewEssentialByID:output_type -> Scailo.Overtime
-	3,  // 69: Scailo.OvertimesService.ViewEssentialByUUID:output_type -> Scailo.Overtime
-	4,  // 70: Scailo.OvertimesService.ViewFromIDs:output_type -> Scailo.OvertimesList
-	4,  // 71: Scailo.OvertimesService.ViewAll:output_type -> Scailo.OvertimesList
-	4,  // 72: Scailo.OvertimesService.ViewAllForEntityUUID:output_type -> Scailo.OvertimesList
-	6,  // 73: Scailo.OvertimesService.ViewWithPagination:output_type -> Scailo.OvertimesServicePaginationResponse
-	4,  // 74: Scailo.OvertimesService.SearchAll:output_type -> Scailo.OvertimesList
-	4,  // 75: Scailo.OvertimesService.Filter:output_type -> Scailo.OvertimesList
-	26, // 76: Scailo.OvertimesService.CountInStatus:output_type -> Scailo.CountResponse
-	26, // 77: Scailo.OvertimesService.Count:output_type -> Scailo.CountResponse
-	27, // 78: Scailo.OvertimesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	52, // [52:79] is the sub-list for method output_type
-	25, // [25:52] is the sub-list for method input_type
+	20, // 39: Scailo.OvertimesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	21, // 40: Scailo.OvertimesService.ViewByID:input_type -> Scailo.Identifier
+	22, // 41: Scailo.OvertimesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	21, // 42: Scailo.OvertimesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	22, // 43: Scailo.OvertimesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 44: Scailo.OvertimesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	24, // 45: Scailo.OvertimesService.ViewAll:input_type -> Scailo.ActiveStatus
+	22, // 46: Scailo.OvertimesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 47: Scailo.OvertimesService.ViewWithPagination:input_type -> Scailo.OvertimesServicePaginationReq
+	9,  // 48: Scailo.OvertimesService.SearchAll:input_type -> Scailo.OvertimesServiceSearchAllReq
+	7,  // 49: Scailo.OvertimesService.Filter:input_type -> Scailo.OvertimesServiceFilterReq
+	25, // 50: Scailo.OvertimesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 51: Scailo.OvertimesService.Count:input_type -> Scailo.OvertimesServiceCountReq
+	7,  // 52: Scailo.OvertimesService.DownloadAsCSV:input_type -> Scailo.OvertimesServiceFilterReq
+	26, // 53: Scailo.OvertimesService.Create:output_type -> Scailo.IdentifierResponse
+	26, // 54: Scailo.OvertimesService.Draft:output_type -> Scailo.IdentifierResponse
+	26, // 55: Scailo.OvertimesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 56: Scailo.OvertimesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	26, // 57: Scailo.OvertimesService.Verify:output_type -> Scailo.IdentifierResponse
+	26, // 58: Scailo.OvertimesService.Approve:output_type -> Scailo.IdentifierResponse
+	26, // 59: Scailo.OvertimesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	26, // 60: Scailo.OvertimesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 61: Scailo.OvertimesService.Halt:output_type -> Scailo.IdentifierResponse
+	26, // 62: Scailo.OvertimesService.Discard:output_type -> Scailo.IdentifierResponse
+	26, // 63: Scailo.OvertimesService.Restore:output_type -> Scailo.IdentifierResponse
+	26, // 64: Scailo.OvertimesService.Complete:output_type -> Scailo.IdentifierResponse
+	26, // 65: Scailo.OvertimesService.Repeat:output_type -> Scailo.IdentifierResponse
+	26, // 66: Scailo.OvertimesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	26, // 67: Scailo.OvertimesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 68: Scailo.OvertimesService.ViewByID:output_type -> Scailo.Overtime
+	3,  // 69: Scailo.OvertimesService.ViewByUUID:output_type -> Scailo.Overtime
+	3,  // 70: Scailo.OvertimesService.ViewEssentialByID:output_type -> Scailo.Overtime
+	3,  // 71: Scailo.OvertimesService.ViewEssentialByUUID:output_type -> Scailo.Overtime
+	4,  // 72: Scailo.OvertimesService.ViewFromIDs:output_type -> Scailo.OvertimesList
+	4,  // 73: Scailo.OvertimesService.ViewAll:output_type -> Scailo.OvertimesList
+	4,  // 74: Scailo.OvertimesService.ViewAllForEntityUUID:output_type -> Scailo.OvertimesList
+	6,  // 75: Scailo.OvertimesService.ViewWithPagination:output_type -> Scailo.OvertimesServicePaginationResponse
+	4,  // 76: Scailo.OvertimesService.SearchAll:output_type -> Scailo.OvertimesList
+	4,  // 77: Scailo.OvertimesService.Filter:output_type -> Scailo.OvertimesList
+	27, // 78: Scailo.OvertimesService.CountInStatus:output_type -> Scailo.CountResponse
+	27, // 79: Scailo.OvertimesService.Count:output_type -> Scailo.CountResponse
+	28, // 80: Scailo.OvertimesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	53, // [53:81] is the sub-list for method output_type
+	25, // [25:53] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2035,6 +2039,7 @@ func file_overtimes_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

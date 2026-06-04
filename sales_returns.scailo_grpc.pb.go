@@ -34,6 +34,7 @@ const (
 	SalesReturnsService_Reopen_FullMethodName                                  = "/Scailo.SalesReturnsService/Reopen"
 	SalesReturnsService_CommentAdd_FullMethodName                              = "/Scailo.SalesReturnsService/CommentAdd"
 	SalesReturnsService_SendEmail_FullMethodName                               = "/Scailo.SalesReturnsService/SendEmail"
+	SalesReturnsService_AttachVaultFolder_FullMethodName                       = "/Scailo.SalesReturnsService/AttachVaultFolder"
 	SalesReturnsService_IsCompletable_FullMethodName                           = "/Scailo.SalesReturnsService/IsCompletable"
 	SalesReturnsService_CreateMagicLink_FullMethodName                         = "/Scailo.SalesReturnsService/CreateMagicLink"
 	SalesReturnsService_AddSalesReturnItem_FullMethodName                      = "/Scailo.SalesReturnsService/AddSalesReturnItem"
@@ -180,6 +181,17 @@ type SalesReturnsServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Checks if the Sales Return can be marked as completed
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
@@ -435,6 +447,16 @@ func (c *salesReturnsServiceClient) SendEmail(ctx context.Context, in *Identifie
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, SalesReturnsService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesReturnsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesReturnsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

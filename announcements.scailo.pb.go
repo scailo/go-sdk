@@ -1554,7 +1554,7 @@ var File_announcements_scailo_proto protoreflect.FileDescriptor
 
 const file_announcements_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1aannouncements.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xc2\x02\n" +
+	"\x1aannouncements.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xc2\x02\n" +
 	"!AnnouncementsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1684,7 +1684,7 @@ const file_announcements_scailo_proto_rawDesc = "" +
 	"\x12%\n" +
 	"!ANNOUNCEMENT_SORT_KEY_DESCRIPTION\x10\v\x12\"\n" +
 	"\x1eANNOUNCEMENT_SORT_KEY_START_ON\x10\f\x12 \n" +
-	"\x1cANNOUNCEMENT_SORT_KEY_END_ON\x10\r2\xf5\x10\n" +
+	"\x1cANNOUNCEMENT_SORT_KEY_END_ON\x10\r2\xc8\x11\n" +
 	"\x14AnnouncementsService\x12O\n" +
 	"\x06Create\x12).Scailo.AnnouncementsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\x05Draft\x12).Scailo.AnnouncementsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -1700,7 +1700,8 @@ const file_announcements_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x124\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x124\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.Announcement\x12:\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x14.Scailo.Announcement\x12=\n" +
@@ -1752,15 +1753,16 @@ var file_announcements_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                               // 14: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                // 15: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),          // 16: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                             // 17: Scailo.Identifier
-	(*IdentifierUUID)(nil),                         // 18: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                        // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                           // 20: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                // 21: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                           // 22: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                     // 23: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                          // 24: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                    // 25: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),               // 17: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                             // 18: Scailo.Identifier
+	(*IdentifierUUID)(nil),                         // 19: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                        // 20: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                           // 21: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                // 22: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                           // 23: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                     // 24: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                          // 25: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                    // 26: Scailo.IdentifierUUIDsList
 }
 var file_announcements_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.Announcement.metadata:type_name -> Scailo.EmployeeMetadata
@@ -1797,50 +1799,52 @@ var file_announcements_scailo_proto_depIdxs = []int32{
 	16, // 31: Scailo.AnnouncementsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 32: Scailo.AnnouncementsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 33: Scailo.AnnouncementsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 34: Scailo.AnnouncementsService.ViewByID:input_type -> Scailo.Identifier
-	18, // 35: Scailo.AnnouncementsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 36: Scailo.AnnouncementsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	18, // 37: Scailo.AnnouncementsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 38: Scailo.AnnouncementsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 39: Scailo.AnnouncementsService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 40: Scailo.AnnouncementsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 41: Scailo.AnnouncementsService.ViewWithPagination:input_type -> Scailo.AnnouncementsServicePaginationReq
-	9,  // 42: Scailo.AnnouncementsService.SearchAll:input_type -> Scailo.AnnouncementsServiceSearchAllReq
-	7,  // 43: Scailo.AnnouncementsService.Filter:input_type -> Scailo.AnnouncementsServiceFilterReq
-	21, // 44: Scailo.AnnouncementsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 45: Scailo.AnnouncementsService.Count:input_type -> Scailo.AnnouncementsServiceCountReq
-	7,  // 46: Scailo.AnnouncementsService.DownloadAsCSV:input_type -> Scailo.AnnouncementsServiceFilterReq
-	22, // 47: Scailo.AnnouncementsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	23, // 48: Scailo.AnnouncementsService.Create:output_type -> Scailo.IdentifierResponse
-	23, // 49: Scailo.AnnouncementsService.Draft:output_type -> Scailo.IdentifierResponse
-	23, // 50: Scailo.AnnouncementsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 51: Scailo.AnnouncementsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	23, // 52: Scailo.AnnouncementsService.Verify:output_type -> Scailo.IdentifierResponse
-	23, // 53: Scailo.AnnouncementsService.Approve:output_type -> Scailo.IdentifierResponse
-	23, // 54: Scailo.AnnouncementsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	23, // 55: Scailo.AnnouncementsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 56: Scailo.AnnouncementsService.Halt:output_type -> Scailo.IdentifierResponse
-	23, // 57: Scailo.AnnouncementsService.Discard:output_type -> Scailo.IdentifierResponse
-	23, // 58: Scailo.AnnouncementsService.Restore:output_type -> Scailo.IdentifierResponse
-	23, // 59: Scailo.AnnouncementsService.Complete:output_type -> Scailo.IdentifierResponse
-	23, // 60: Scailo.AnnouncementsService.Repeat:output_type -> Scailo.IdentifierResponse
-	23, // 61: Scailo.AnnouncementsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 62: Scailo.AnnouncementsService.ViewByID:output_type -> Scailo.Announcement
-	3,  // 63: Scailo.AnnouncementsService.ViewByUUID:output_type -> Scailo.Announcement
-	3,  // 64: Scailo.AnnouncementsService.ViewEssentialByID:output_type -> Scailo.Announcement
-	3,  // 65: Scailo.AnnouncementsService.ViewEssentialByUUID:output_type -> Scailo.Announcement
-	4,  // 66: Scailo.AnnouncementsService.ViewFromIDs:output_type -> Scailo.AnnouncementsList
-	4,  // 67: Scailo.AnnouncementsService.ViewAll:output_type -> Scailo.AnnouncementsList
-	4,  // 68: Scailo.AnnouncementsService.ViewAllForEntityUUID:output_type -> Scailo.AnnouncementsList
-	6,  // 69: Scailo.AnnouncementsService.ViewWithPagination:output_type -> Scailo.AnnouncementsServicePaginationResponse
-	4,  // 70: Scailo.AnnouncementsService.SearchAll:output_type -> Scailo.AnnouncementsList
-	4,  // 71: Scailo.AnnouncementsService.Filter:output_type -> Scailo.AnnouncementsList
-	24, // 72: Scailo.AnnouncementsService.CountInStatus:output_type -> Scailo.CountResponse
-	24, // 73: Scailo.AnnouncementsService.Count:output_type -> Scailo.CountResponse
-	22, // 74: Scailo.AnnouncementsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	25, // 75: Scailo.AnnouncementsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	48, // [48:76] is the sub-list for method output_type
-	20, // [20:48] is the sub-list for method input_type
+	17, // 34: Scailo.AnnouncementsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	18, // 35: Scailo.AnnouncementsService.ViewByID:input_type -> Scailo.Identifier
+	19, // 36: Scailo.AnnouncementsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 37: Scailo.AnnouncementsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	19, // 38: Scailo.AnnouncementsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	20, // 39: Scailo.AnnouncementsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	21, // 40: Scailo.AnnouncementsService.ViewAll:input_type -> Scailo.ActiveStatus
+	19, // 41: Scailo.AnnouncementsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 42: Scailo.AnnouncementsService.ViewWithPagination:input_type -> Scailo.AnnouncementsServicePaginationReq
+	9,  // 43: Scailo.AnnouncementsService.SearchAll:input_type -> Scailo.AnnouncementsServiceSearchAllReq
+	7,  // 44: Scailo.AnnouncementsService.Filter:input_type -> Scailo.AnnouncementsServiceFilterReq
+	22, // 45: Scailo.AnnouncementsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 46: Scailo.AnnouncementsService.Count:input_type -> Scailo.AnnouncementsServiceCountReq
+	7,  // 47: Scailo.AnnouncementsService.DownloadAsCSV:input_type -> Scailo.AnnouncementsServiceFilterReq
+	23, // 48: Scailo.AnnouncementsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	24, // 49: Scailo.AnnouncementsService.Create:output_type -> Scailo.IdentifierResponse
+	24, // 50: Scailo.AnnouncementsService.Draft:output_type -> Scailo.IdentifierResponse
+	24, // 51: Scailo.AnnouncementsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 52: Scailo.AnnouncementsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	24, // 53: Scailo.AnnouncementsService.Verify:output_type -> Scailo.IdentifierResponse
+	24, // 54: Scailo.AnnouncementsService.Approve:output_type -> Scailo.IdentifierResponse
+	24, // 55: Scailo.AnnouncementsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	24, // 56: Scailo.AnnouncementsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 57: Scailo.AnnouncementsService.Halt:output_type -> Scailo.IdentifierResponse
+	24, // 58: Scailo.AnnouncementsService.Discard:output_type -> Scailo.IdentifierResponse
+	24, // 59: Scailo.AnnouncementsService.Restore:output_type -> Scailo.IdentifierResponse
+	24, // 60: Scailo.AnnouncementsService.Complete:output_type -> Scailo.IdentifierResponse
+	24, // 61: Scailo.AnnouncementsService.Repeat:output_type -> Scailo.IdentifierResponse
+	24, // 62: Scailo.AnnouncementsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	24, // 63: Scailo.AnnouncementsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 64: Scailo.AnnouncementsService.ViewByID:output_type -> Scailo.Announcement
+	3,  // 65: Scailo.AnnouncementsService.ViewByUUID:output_type -> Scailo.Announcement
+	3,  // 66: Scailo.AnnouncementsService.ViewEssentialByID:output_type -> Scailo.Announcement
+	3,  // 67: Scailo.AnnouncementsService.ViewEssentialByUUID:output_type -> Scailo.Announcement
+	4,  // 68: Scailo.AnnouncementsService.ViewFromIDs:output_type -> Scailo.AnnouncementsList
+	4,  // 69: Scailo.AnnouncementsService.ViewAll:output_type -> Scailo.AnnouncementsList
+	4,  // 70: Scailo.AnnouncementsService.ViewAllForEntityUUID:output_type -> Scailo.AnnouncementsList
+	6,  // 71: Scailo.AnnouncementsService.ViewWithPagination:output_type -> Scailo.AnnouncementsServicePaginationResponse
+	4,  // 72: Scailo.AnnouncementsService.SearchAll:output_type -> Scailo.AnnouncementsList
+	4,  // 73: Scailo.AnnouncementsService.Filter:output_type -> Scailo.AnnouncementsList
+	25, // 74: Scailo.AnnouncementsService.CountInStatus:output_type -> Scailo.CountResponse
+	25, // 75: Scailo.AnnouncementsService.Count:output_type -> Scailo.CountResponse
+	23, // 76: Scailo.AnnouncementsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	26, // 77: Scailo.AnnouncementsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	49, // [49:78] is the sub-list for method output_type
+	20, // [20:49] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -1852,6 +1856,7 @@ func file_announcements_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

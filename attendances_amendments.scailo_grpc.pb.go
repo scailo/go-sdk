@@ -32,6 +32,7 @@ const (
 	AttendancesAmendmentsService_Complete_FullMethodName             = "/Scailo.AttendancesAmendmentsService/Complete"
 	AttendancesAmendmentsService_Repeat_FullMethodName               = "/Scailo.AttendancesAmendmentsService/Repeat"
 	AttendancesAmendmentsService_CommentAdd_FullMethodName           = "/Scailo.AttendancesAmendmentsService/CommentAdd"
+	AttendancesAmendmentsService_AttachVaultFolder_FullMethodName    = "/Scailo.AttendancesAmendmentsService/AttachVaultFolder"
 	AttendancesAmendmentsService_ViewByID_FullMethodName             = "/Scailo.AttendancesAmendmentsService/ViewByID"
 	AttendancesAmendmentsService_ViewByUUID_FullMethodName           = "/Scailo.AttendancesAmendmentsService/ViewByUUID"
 	AttendancesAmendmentsService_ViewEssentialByID_FullMethodName    = "/Scailo.AttendancesAmendmentsService/ViewEssentialByID"
@@ -145,6 +146,17 @@ type AttendancesAmendmentsServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AttendanceAmendment, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
@@ -318,6 +330,16 @@ func (c *attendancesAmendmentsServiceClient) CommentAdd(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, AttendancesAmendmentsService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attendancesAmendmentsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, AttendancesAmendmentsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -3571,7 +3571,7 @@ var File_debit_notes_scailo_proto protoreflect.FileDescriptor
 
 const file_debit_notes_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18debit_notes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x9c\x04\n" +
+	"\x18debit_notes.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x9c\x04\n" +
 	"\x1eDebitNotesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3878,7 +3878,7 @@ const file_debit_notes_scailo_proto_rawDesc = "" +
 	" DEBIT_NOTE_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12(\n" +
 	"$DEBIT_NOTE_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12#\n" +
-	"\x1fDEBIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\xb6(\n" +
+	"\x1fDEBIT_NOTE_SORT_KEY_TOTAL_VALUE\x10\x1e2\x89)\n" +
 	"\x11DebitNotesService\x12L\n" +
 	"\x06Create\x12&.Scailo.DebitNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x05Draft\x12&.Scailo.DebitNotesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -3896,7 +3896,8 @@ const file_debit_notes_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\bAutofill\x12(.Scailo.DebitNotesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12l\n" +
 	"\x19AddMultipleDebitNoteItems\x123.Scailo.DebitNotesServiceMultipleItemsCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
@@ -4005,27 +4006,28 @@ var file_debit_notes_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                           // 39: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                         // 40: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                         // 41: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),     // 42: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                             // 43: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                   // 44: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                            // 45: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                               // 46: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                        // 47: Scailo.IdentifierUUID
-	(*Empty)(nil),                                                 // 48: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                // 49: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                       // 50: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                       // 51: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                          // 52: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                        // 53: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                               // 54: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                    // 55: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                             // 56: Scailo.MagicLink
-	(*StandardFile)(nil),                                          // 57: Scailo.StandardFile
-	(*FamiliesList)(nil),                                          // 58: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                       // 59: Scailo.BooleanResponse
-	(*DualQuantitiesResponse)(nil),                                // 60: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                         // 61: Scailo.CountResponse
-	(*SumResponse)(nil),                                           // 62: Scailo.SumResponse
+	(*VaultFolderAttachRequest)(nil),                              // 42: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),     // 43: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                             // 44: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                   // 45: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                            // 46: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                               // 47: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                        // 48: Scailo.IdentifierUUID
+	(*Empty)(nil),                                                 // 49: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                // 50: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                       // 51: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                       // 52: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                          // 53: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                        // 54: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                               // 55: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                    // 56: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                             // 57: Scailo.MagicLink
+	(*StandardFile)(nil),                                          // 58: Scailo.StandardFile
+	(*FamiliesList)(nil),                                          // 59: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                       // 60: Scailo.BooleanResponse
+	(*DualQuantitiesResponse)(nil),                                // 61: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                         // 62: Scailo.CountResponse
+	(*SumResponse)(nil),                                           // 63: Scailo.SumResponse
 }
 var file_debit_notes_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.DebitNotesServiceCreateRequest.ref_from:type_name -> Scailo.DEBIT_NOTE_REF_FROM
@@ -4089,116 +4091,118 @@ var file_debit_notes_scailo_proto_depIdxs = []int32{
 	40,  // 58: Scailo.DebitNotesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	40,  // 59: Scailo.DebitNotesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	41,  // 60: Scailo.DebitNotesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	6,   // 61: Scailo.DebitNotesService.Autofill:input_type -> Scailo.DebitNotesServiceAutofillRequest
-	42,  // 62: Scailo.DebitNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	11,  // 63: Scailo.DebitNotesService.AddMultipleDebitNoteItems:input_type -> Scailo.DebitNotesServiceMultipleItemsCreateRequest
-	9,   // 64: Scailo.DebitNotesService.AddDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemCreateRequest
-	12,  // 65: Scailo.DebitNotesService.ModifyDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemUpdateRequest
-	43,  // 66: Scailo.DebitNotesService.ApproveDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	43,  // 67: Scailo.DebitNotesService.DeleteDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
-	44,  // 68: Scailo.DebitNotesService.ReorderDebitNoteItems:input_type -> Scailo.ReorderItemsRequest
-	45,  // 69: Scailo.DebitNotesService.ViewDebitNoteItemByID:input_type -> Scailo.Identifier
-	46,  // 70: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	46,  // 71: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
-	16,  // 72: Scailo.DebitNotesService.ViewDebitNoteItemHistory:input_type -> Scailo.DebitNoteItemHistoryRequest
-	19,  // 73: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
-	19,  // 74: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
-	19,  // 75: Scailo.DebitNotesService.SearchItemsWithPagination:input_type -> Scailo.DebitNoteItemsSearchRequest
-	47,  // 76: Scailo.DebitNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	48,  // 77: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	49,  // 78: Scailo.DebitNotesService.UploadDebitNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
-	26,  // 79: Scailo.DebitNotesService.AddDebitNoteReference:input_type -> Scailo.DebitNotesServiceReferenceCreateRequest
-	43,  // 80: Scailo.DebitNotesService.ApproveDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	43,  // 81: Scailo.DebitNotesService.DeleteDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
-	45,  // 82: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:input_type -> Scailo.Identifier
-	45,  // 83: Scailo.DebitNotesService.ViewDebitNoteReferences:input_type -> Scailo.Identifier
-	45,  // 84: Scailo.DebitNotesService.ViewByID:input_type -> Scailo.Identifier
-	47,  // 85: Scailo.DebitNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	50,  // 86: Scailo.DebitNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	45,  // 87: Scailo.DebitNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	47,  // 88: Scailo.DebitNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	51,  // 89: Scailo.DebitNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	47,  // 90: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	52,  // 91: Scailo.DebitNotesService.ViewAll:input_type -> Scailo.ActiveStatus
-	47,  // 92: Scailo.DebitNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	21,  // 93: Scailo.DebitNotesService.ViewWithPagination:input_type -> Scailo.DebitNotesServicePaginationReq
-	46,  // 94: Scailo.DebitNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	53,  // 95: Scailo.DebitNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	17,  // 96: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:input_type -> Scailo.DebitNoteItemProspectiveInfoRequest
-	47,  // 97: Scailo.DebitNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
-	47,  // 98: Scailo.DebitNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	47,  // 99: Scailo.DebitNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18,  // 100: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
-	25,  // 101: Scailo.DebitNotesService.SearchAll:input_type -> Scailo.DebitNotesServiceSearchAllReq
-	23,  // 102: Scailo.DebitNotesService.Filter:input_type -> Scailo.DebitNotesServiceFilterReq
-	54,  // 103: Scailo.DebitNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	24,  // 104: Scailo.DebitNotesService.Count:input_type -> Scailo.DebitNotesServiceCountReq
-	24,  // 105: Scailo.DebitNotesService.AccruedValue:input_type -> Scailo.DebitNotesServiceCountReq
-	23,  // 106: Scailo.DebitNotesService.DownloadAsCSV:input_type -> Scailo.DebitNotesServiceFilterReq
-	55,  // 107: Scailo.DebitNotesService.Create:output_type -> Scailo.IdentifierResponse
-	55,  // 108: Scailo.DebitNotesService.Draft:output_type -> Scailo.IdentifierResponse
-	55,  // 109: Scailo.DebitNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	55,  // 110: Scailo.DebitNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	55,  // 111: Scailo.DebitNotesService.Verify:output_type -> Scailo.IdentifierResponse
-	55,  // 112: Scailo.DebitNotesService.Approve:output_type -> Scailo.IdentifierResponse
-	55,  // 113: Scailo.DebitNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	55,  // 114: Scailo.DebitNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	55,  // 115: Scailo.DebitNotesService.Halt:output_type -> Scailo.IdentifierResponse
-	55,  // 116: Scailo.DebitNotesService.Discard:output_type -> Scailo.IdentifierResponse
-	55,  // 117: Scailo.DebitNotesService.Restore:output_type -> Scailo.IdentifierResponse
-	55,  // 118: Scailo.DebitNotesService.Complete:output_type -> Scailo.IdentifierResponse
-	55,  // 119: Scailo.DebitNotesService.Repeat:output_type -> Scailo.IdentifierResponse
-	55,  // 120: Scailo.DebitNotesService.Reopen:output_type -> Scailo.IdentifierResponse
-	55,  // 121: Scailo.DebitNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	55,  // 122: Scailo.DebitNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	55,  // 123: Scailo.DebitNotesService.Autofill:output_type -> Scailo.IdentifierResponse
-	56,  // 124: Scailo.DebitNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	55,  // 125: Scailo.DebitNotesService.AddMultipleDebitNoteItems:output_type -> Scailo.IdentifierResponse
-	55,  // 126: Scailo.DebitNotesService.AddDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	55,  // 127: Scailo.DebitNotesService.ModifyDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	55,  // 128: Scailo.DebitNotesService.ApproveDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	55,  // 129: Scailo.DebitNotesService.DeleteDebitNoteItem:output_type -> Scailo.IdentifierResponse
-	55,  // 130: Scailo.DebitNotesService.ReorderDebitNoteItems:output_type -> Scailo.IdentifierResponse
-	13,  // 131: Scailo.DebitNotesService.ViewDebitNoteItemByID:output_type -> Scailo.DebitNoteItem
-	15,  // 132: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
-	15,  // 133: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
-	15,  // 134: Scailo.DebitNotesService.ViewDebitNoteItemHistory:output_type -> Scailo.DebitNoteItemsList
-	20,  // 135: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	20,  // 136: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	20,  // 137: Scailo.DebitNotesService.SearchItemsWithPagination:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
-	57,  // 138: Scailo.DebitNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	57,  // 139: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	51,  // 140: Scailo.DebitNotesService.UploadDebitNoteItems:output_type -> Scailo.IdentifiersList
-	55,  // 141: Scailo.DebitNotesService.AddDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	55,  // 142: Scailo.DebitNotesService.ApproveDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	55,  // 143: Scailo.DebitNotesService.DeleteDebitNoteReference:output_type -> Scailo.IdentifierResponse
-	27,  // 144: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:output_type -> Scailo.DebitNoteReference
-	28,  // 145: Scailo.DebitNotesService.ViewDebitNoteReferences:output_type -> Scailo.DebitNoteReferencesList
-	8,   // 146: Scailo.DebitNotesService.ViewByID:output_type -> Scailo.DebitNote
-	8,   // 147: Scailo.DebitNotesService.ViewByUUID:output_type -> Scailo.DebitNote
-	8,   // 148: Scailo.DebitNotesService.ViewByReferenceID:output_type -> Scailo.DebitNote
-	8,   // 149: Scailo.DebitNotesService.ViewEssentialByID:output_type -> Scailo.DebitNote
-	8,   // 150: Scailo.DebitNotesService.ViewEssentialByUUID:output_type -> Scailo.DebitNote
-	14,  // 151: Scailo.DebitNotesService.ViewFromIDs:output_type -> Scailo.DebitNotesList
-	7,   // 152: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.DebitNoteAncillaryParameters
-	14,  // 153: Scailo.DebitNotesService.ViewAll:output_type -> Scailo.DebitNotesList
-	14,  // 154: Scailo.DebitNotesService.ViewAllForEntityUUID:output_type -> Scailo.DebitNotesList
-	22,  // 155: Scailo.DebitNotesService.ViewWithPagination:output_type -> Scailo.DebitNotesServicePaginationResponse
-	58,  // 156: Scailo.DebitNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	58,  // 157: Scailo.DebitNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 158: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:output_type -> Scailo.DebitNotesServiceItemCreateRequest
-	30,  // 159: Scailo.DebitNotesService.ViewReturnedStatistics:output_type -> Scailo.DebitNoteReturnStatisticsList
-	59,  // 160: Scailo.DebitNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	57,  // 161: Scailo.DebitNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	60,  // 162: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	14,  // 163: Scailo.DebitNotesService.SearchAll:output_type -> Scailo.DebitNotesList
-	14,  // 164: Scailo.DebitNotesService.Filter:output_type -> Scailo.DebitNotesList
-	61,  // 165: Scailo.DebitNotesService.CountInStatus:output_type -> Scailo.CountResponse
-	61,  // 166: Scailo.DebitNotesService.Count:output_type -> Scailo.CountResponse
-	62,  // 167: Scailo.DebitNotesService.AccruedValue:output_type -> Scailo.SumResponse
-	57,  // 168: Scailo.DebitNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	107, // [107:169] is the sub-list for method output_type
-	45,  // [45:107] is the sub-list for method input_type
+	42,  // 61: Scailo.DebitNotesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	6,   // 62: Scailo.DebitNotesService.Autofill:input_type -> Scailo.DebitNotesServiceAutofillRequest
+	43,  // 63: Scailo.DebitNotesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	11,  // 64: Scailo.DebitNotesService.AddMultipleDebitNoteItems:input_type -> Scailo.DebitNotesServiceMultipleItemsCreateRequest
+	9,   // 65: Scailo.DebitNotesService.AddDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemCreateRequest
+	12,  // 66: Scailo.DebitNotesService.ModifyDebitNoteItem:input_type -> Scailo.DebitNotesServiceItemUpdateRequest
+	44,  // 67: Scailo.DebitNotesService.ApproveDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 68: Scailo.DebitNotesService.DeleteDebitNoteItem:input_type -> Scailo.IdentifierWithUserComment
+	45,  // 69: Scailo.DebitNotesService.ReorderDebitNoteItems:input_type -> Scailo.ReorderItemsRequest
+	46,  // 70: Scailo.DebitNotesService.ViewDebitNoteItemByID:input_type -> Scailo.Identifier
+	47,  // 71: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	47,  // 72: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:input_type -> Scailo.IdentifierWithSearchKey
+	16,  // 73: Scailo.DebitNotesService.ViewDebitNoteItemHistory:input_type -> Scailo.DebitNoteItemHistoryRequest
+	19,  // 74: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
+	19,  // 75: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:input_type -> Scailo.DebitNoteItemsSearchRequest
+	19,  // 76: Scailo.DebitNotesService.SearchItemsWithPagination:input_type -> Scailo.DebitNoteItemsSearchRequest
+	48,  // 77: Scailo.DebitNotesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	49,  // 78: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	50,  // 79: Scailo.DebitNotesService.UploadDebitNoteItems:input_type -> Scailo.IdentifierUUIDWithFile
+	26,  // 80: Scailo.DebitNotesService.AddDebitNoteReference:input_type -> Scailo.DebitNotesServiceReferenceCreateRequest
+	44,  // 81: Scailo.DebitNotesService.ApproveDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	44,  // 82: Scailo.DebitNotesService.DeleteDebitNoteReference:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 83: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:input_type -> Scailo.Identifier
+	46,  // 84: Scailo.DebitNotesService.ViewDebitNoteReferences:input_type -> Scailo.Identifier
+	46,  // 85: Scailo.DebitNotesService.ViewByID:input_type -> Scailo.Identifier
+	48,  // 86: Scailo.DebitNotesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	51,  // 87: Scailo.DebitNotesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	46,  // 88: Scailo.DebitNotesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	48,  // 89: Scailo.DebitNotesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	52,  // 90: Scailo.DebitNotesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	48,  // 91: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	53,  // 92: Scailo.DebitNotesService.ViewAll:input_type -> Scailo.ActiveStatus
+	48,  // 93: Scailo.DebitNotesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	21,  // 94: Scailo.DebitNotesService.ViewWithPagination:input_type -> Scailo.DebitNotesServicePaginationReq
+	47,  // 95: Scailo.DebitNotesService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	54,  // 96: Scailo.DebitNotesService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	17,  // 97: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:input_type -> Scailo.DebitNoteItemProspectiveInfoRequest
+	48,  // 98: Scailo.DebitNotesService.ViewReturnedStatistics:input_type -> Scailo.IdentifierUUID
+	48,  // 99: Scailo.DebitNotesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	48,  // 100: Scailo.DebitNotesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18,  // 101: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.DebitNotesServiceAlreadyAddedQuantityForSourceRequest
+	25,  // 102: Scailo.DebitNotesService.SearchAll:input_type -> Scailo.DebitNotesServiceSearchAllReq
+	23,  // 103: Scailo.DebitNotesService.Filter:input_type -> Scailo.DebitNotesServiceFilterReq
+	55,  // 104: Scailo.DebitNotesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	24,  // 105: Scailo.DebitNotesService.Count:input_type -> Scailo.DebitNotesServiceCountReq
+	24,  // 106: Scailo.DebitNotesService.AccruedValue:input_type -> Scailo.DebitNotesServiceCountReq
+	23,  // 107: Scailo.DebitNotesService.DownloadAsCSV:input_type -> Scailo.DebitNotesServiceFilterReq
+	56,  // 108: Scailo.DebitNotesService.Create:output_type -> Scailo.IdentifierResponse
+	56,  // 109: Scailo.DebitNotesService.Draft:output_type -> Scailo.IdentifierResponse
+	56,  // 110: Scailo.DebitNotesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 111: Scailo.DebitNotesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	56,  // 112: Scailo.DebitNotesService.Verify:output_type -> Scailo.IdentifierResponse
+	56,  // 113: Scailo.DebitNotesService.Approve:output_type -> Scailo.IdentifierResponse
+	56,  // 114: Scailo.DebitNotesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	56,  // 115: Scailo.DebitNotesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	56,  // 116: Scailo.DebitNotesService.Halt:output_type -> Scailo.IdentifierResponse
+	56,  // 117: Scailo.DebitNotesService.Discard:output_type -> Scailo.IdentifierResponse
+	56,  // 118: Scailo.DebitNotesService.Restore:output_type -> Scailo.IdentifierResponse
+	56,  // 119: Scailo.DebitNotesService.Complete:output_type -> Scailo.IdentifierResponse
+	56,  // 120: Scailo.DebitNotesService.Repeat:output_type -> Scailo.IdentifierResponse
+	56,  // 121: Scailo.DebitNotesService.Reopen:output_type -> Scailo.IdentifierResponse
+	56,  // 122: Scailo.DebitNotesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	56,  // 123: Scailo.DebitNotesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	56,  // 124: Scailo.DebitNotesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	56,  // 125: Scailo.DebitNotesService.Autofill:output_type -> Scailo.IdentifierResponse
+	57,  // 126: Scailo.DebitNotesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	56,  // 127: Scailo.DebitNotesService.AddMultipleDebitNoteItems:output_type -> Scailo.IdentifierResponse
+	56,  // 128: Scailo.DebitNotesService.AddDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	56,  // 129: Scailo.DebitNotesService.ModifyDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	56,  // 130: Scailo.DebitNotesService.ApproveDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	56,  // 131: Scailo.DebitNotesService.DeleteDebitNoteItem:output_type -> Scailo.IdentifierResponse
+	56,  // 132: Scailo.DebitNotesService.ReorderDebitNoteItems:output_type -> Scailo.IdentifierResponse
+	13,  // 133: Scailo.DebitNotesService.ViewDebitNoteItemByID:output_type -> Scailo.DebitNoteItem
+	15,  // 134: Scailo.DebitNotesService.ViewApprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
+	15,  // 135: Scailo.DebitNotesService.ViewUnapprovedDebitNoteItems:output_type -> Scailo.DebitNoteItemsList
+	15,  // 136: Scailo.DebitNotesService.ViewDebitNoteItemHistory:output_type -> Scailo.DebitNoteItemsList
+	20,  // 137: Scailo.DebitNotesService.ViewPaginatedApprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	20,  // 138: Scailo.DebitNotesService.ViewPaginatedUnapprovedDebitNoteItems:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	20,  // 139: Scailo.DebitNotesService.SearchItemsWithPagination:output_type -> Scailo.DebitNotesServicePaginatedItemsResponse
+	58,  // 140: Scailo.DebitNotesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	58,  // 141: Scailo.DebitNotesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	52,  // 142: Scailo.DebitNotesService.UploadDebitNoteItems:output_type -> Scailo.IdentifiersList
+	56,  // 143: Scailo.DebitNotesService.AddDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	56,  // 144: Scailo.DebitNotesService.ApproveDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	56,  // 145: Scailo.DebitNotesService.DeleteDebitNoteReference:output_type -> Scailo.IdentifierResponse
+	27,  // 146: Scailo.DebitNotesService.ViewDebitNoteReferenceByID:output_type -> Scailo.DebitNoteReference
+	28,  // 147: Scailo.DebitNotesService.ViewDebitNoteReferences:output_type -> Scailo.DebitNoteReferencesList
+	8,   // 148: Scailo.DebitNotesService.ViewByID:output_type -> Scailo.DebitNote
+	8,   // 149: Scailo.DebitNotesService.ViewByUUID:output_type -> Scailo.DebitNote
+	8,   // 150: Scailo.DebitNotesService.ViewByReferenceID:output_type -> Scailo.DebitNote
+	8,   // 151: Scailo.DebitNotesService.ViewEssentialByID:output_type -> Scailo.DebitNote
+	8,   // 152: Scailo.DebitNotesService.ViewEssentialByUUID:output_type -> Scailo.DebitNote
+	14,  // 153: Scailo.DebitNotesService.ViewFromIDs:output_type -> Scailo.DebitNotesList
+	7,   // 154: Scailo.DebitNotesService.ViewAncillaryParametersByUUID:output_type -> Scailo.DebitNoteAncillaryParameters
+	14,  // 155: Scailo.DebitNotesService.ViewAll:output_type -> Scailo.DebitNotesList
+	14,  // 156: Scailo.DebitNotesService.ViewAllForEntityUUID:output_type -> Scailo.DebitNotesList
+	22,  // 157: Scailo.DebitNotesService.ViewWithPagination:output_type -> Scailo.DebitNotesServicePaginationResponse
+	59,  // 158: Scailo.DebitNotesService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	59,  // 159: Scailo.DebitNotesService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 160: Scailo.DebitNotesService.ViewProspectiveDebitNoteItem:output_type -> Scailo.DebitNotesServiceItemCreateRequest
+	30,  // 161: Scailo.DebitNotesService.ViewReturnedStatistics:output_type -> Scailo.DebitNoteReturnStatisticsList
+	60,  // 162: Scailo.DebitNotesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	58,  // 163: Scailo.DebitNotesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	61,  // 164: Scailo.DebitNotesService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	14,  // 165: Scailo.DebitNotesService.SearchAll:output_type -> Scailo.DebitNotesList
+	14,  // 166: Scailo.DebitNotesService.Filter:output_type -> Scailo.DebitNotesList
+	62,  // 167: Scailo.DebitNotesService.CountInStatus:output_type -> Scailo.CountResponse
+	62,  // 168: Scailo.DebitNotesService.Count:output_type -> Scailo.CountResponse
+	63,  // 169: Scailo.DebitNotesService.AccruedValue:output_type -> Scailo.SumResponse
+	58,  // 170: Scailo.DebitNotesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	108, // [108:171] is the sub-list for method output_type
+	45,  // [45:108] is the sub-list for method input_type
 	45,  // [45:45] is the sub-list for extension type_name
 	45,  // [45:45] is the sub-list for extension extendee
 	0,   // [0:45] is the sub-list for field type_name
@@ -4213,6 +4217,7 @@ func file_debit_notes_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -3223,7 +3223,7 @@ var File_salaries_scailo_proto protoreflect.FileDescriptor
 
 const file_salaries_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15salaries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xf6\b\n" +
+	"\x15salaries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xf6\b\n" +
 	"\x1cSalariesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3520,7 +3520,7 @@ const file_salaries_scailo_proto_rawDesc = "" +
 	"\x1fSALARY_SORT_KEY_BANK_ACCOUNT_ID\x10\r\x12\x1f\n" +
 	"\x1bSALARY_SORT_KEY_CURRENCY_ID\x10\x0e\x12$\n" +
 	" SALARY_SORT_KEY_PAYROLL_GROUP_ID\x10\x0f\x12 \n" +
-	"\x1cSALARY_SORT_KEY_TAX_GROUP_ID\x10\x102\x87*\n" +
+	"\x1cSALARY_SORT_KEY_TAX_GROUP_ID\x10\x102\xda*\n" +
 	"\x0fSalariesService\x12J\n" +
 	"\x06Create\x12$.Scailo.SalariesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.SalariesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -3538,7 +3538,8 @@ const file_salaries_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\bAutofill\x12&.Scailo.SalariesServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12e\n" +
 	"\x15AddSalaryAdditionItem\x120.Scailo.SalariesServiceAdditionItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12h\n" +
 	"\x18ModifySalaryAdditionItem\x120.Scailo.SalariesServiceAdditionItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
@@ -3643,17 +3644,18 @@ var file_salaries_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                   // 37: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                 // 38: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                 // 39: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierWithUserComment)(nil),                     // 40: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                           // 41: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                    // 42: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                       // 43: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                // 44: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                               // 45: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                  // 46: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                       // 47: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                            // 48: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                 // 49: Scailo.CountResponse
-	(*StandardFile)(nil),                                  // 50: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                      // 40: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                     // 41: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                           // 42: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                    // 43: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                       // 44: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                // 45: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                               // 46: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                  // 47: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                       // 48: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                            // 49: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                 // 50: Scailo.CountResponse
+	(*StandardFile)(nil),                                  // 51: Scailo.StandardFile
 }
 var file_salaries_scailo_proto_depIdxs = []int32{
 	29, // 0: Scailo.SalariesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3709,112 +3711,114 @@ var file_salaries_scailo_proto_depIdxs = []int32{
 	38, // 50: Scailo.SalariesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	38, // 51: Scailo.SalariesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	39, // 52: Scailo.SalariesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	3,  // 53: Scailo.SalariesService.Autofill:input_type -> Scailo.SalariesServiceAutofillRequest
-	6,  // 54: Scailo.SalariesService.AddSalaryAdditionItem:input_type -> Scailo.SalariesServiceAdditionItemCreateRequest
-	7,  // 55: Scailo.SalariesService.ModifySalaryAdditionItem:input_type -> Scailo.SalariesServiceAdditionItemUpdateRequest
-	40, // 56: Scailo.SalariesService.ApproveSalaryAdditionItem:input_type -> Scailo.IdentifierWithUserComment
-	40, // 57: Scailo.SalariesService.DeleteSalaryAdditionItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 58: Scailo.SalariesService.ReorderSalaryAdditionItems:input_type -> Scailo.ReorderItemsRequest
-	42, // 59: Scailo.SalariesService.ViewSalaryAdditionItemByID:input_type -> Scailo.Identifier
-	43, // 60: Scailo.SalariesService.ViewApprovedSalaryAdditionItems:input_type -> Scailo.IdentifierWithSearchKey
-	43, // 61: Scailo.SalariesService.ViewUnapprovedSalaryAdditionItems:input_type -> Scailo.IdentifierWithSearchKey
-	10, // 62: Scailo.SalariesService.ViewSalaryAdditionItemHistory:input_type -> Scailo.SalaryAdditionItemHistoryRequest
-	11, // 63: Scailo.SalariesService.ViewProspectiveSalaryAdditionItem:input_type -> Scailo.SalaryAdditionItemProspectiveInfoRequest
-	12, // 64: Scailo.SalariesService.AddSalaryDeductionItem:input_type -> Scailo.SalariesServiceDeductionItemCreateRequest
-	13, // 65: Scailo.SalariesService.ModifySalaryDeductionItem:input_type -> Scailo.SalariesServiceDeductionItemUpdateRequest
-	40, // 66: Scailo.SalariesService.ApproveSalaryDeductionItem:input_type -> Scailo.IdentifierWithUserComment
-	40, // 67: Scailo.SalariesService.DeleteSalaryDeductionItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 68: Scailo.SalariesService.ReorderSalaryDeductionItems:input_type -> Scailo.ReorderItemsRequest
-	42, // 69: Scailo.SalariesService.ViewSalaryDeductionItemByID:input_type -> Scailo.Identifier
-	43, // 70: Scailo.SalariesService.ViewApprovedSalaryDeductionItems:input_type -> Scailo.IdentifierWithSearchKey
-	43, // 71: Scailo.SalariesService.ViewUnapprovedSalaryDeductionItems:input_type -> Scailo.IdentifierWithSearchKey
-	16, // 72: Scailo.SalariesService.ViewSalaryDeductionItemHistory:input_type -> Scailo.SalaryDeductionItemHistoryRequest
-	17, // 73: Scailo.SalariesService.ViewProspectiveSalaryDeductionItem:input_type -> Scailo.SalaryDeductionItemProspectiveInfoRequest
-	18, // 74: Scailo.SalariesService.AddSalaryReimbursementItem:input_type -> Scailo.SalariesServiceReimbursementItemCreateRequest
-	19, // 75: Scailo.SalariesService.ModifySalaryReimbursementItem:input_type -> Scailo.SalariesServiceReimbursementItemUpdateRequest
-	40, // 76: Scailo.SalariesService.ApproveSalaryReimbursementItem:input_type -> Scailo.IdentifierWithUserComment
-	40, // 77: Scailo.SalariesService.DeleteSalaryReimbursementItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 78: Scailo.SalariesService.ReorderSalaryReimbursementItems:input_type -> Scailo.ReorderItemsRequest
-	42, // 79: Scailo.SalariesService.ViewSalaryReimbursementItemByID:input_type -> Scailo.Identifier
-	43, // 80: Scailo.SalariesService.ViewApprovedSalaryReimbursementItems:input_type -> Scailo.IdentifierWithSearchKey
-	43, // 81: Scailo.SalariesService.ViewUnapprovedSalaryReimbursementItems:input_type -> Scailo.IdentifierWithSearchKey
-	22, // 82: Scailo.SalariesService.ViewSalaryReimbursementItemHistory:input_type -> Scailo.SalaryReimbursementItemHistoryRequest
-	23, // 83: Scailo.SalariesService.ViewProspectiveSalaryReimbursementItem:input_type -> Scailo.SalaryReimbursementItemProspectiveInfoRequest
-	42, // 84: Scailo.SalariesService.ViewByID:input_type -> Scailo.Identifier
-	44, // 85: Scailo.SalariesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 86: Scailo.SalariesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	44, // 87: Scailo.SalariesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	45, // 88: Scailo.SalariesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	46, // 89: Scailo.SalariesService.ViewAll:input_type -> Scailo.ActiveStatus
-	44, // 90: Scailo.SalariesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	24, // 91: Scailo.SalariesService.ViewWithPagination:input_type -> Scailo.SalariesServicePaginationReq
-	28, // 92: Scailo.SalariesService.SearchAll:input_type -> Scailo.SalariesServiceSearchAllReq
-	26, // 93: Scailo.SalariesService.Filter:input_type -> Scailo.SalariesServiceFilterReq
-	47, // 94: Scailo.SalariesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	27, // 95: Scailo.SalariesService.Count:input_type -> Scailo.SalariesServiceCountReq
-	26, // 96: Scailo.SalariesService.DownloadAsCSV:input_type -> Scailo.SalariesServiceFilterReq
-	48, // 97: Scailo.SalariesService.Create:output_type -> Scailo.IdentifierResponse
-	48, // 98: Scailo.SalariesService.Draft:output_type -> Scailo.IdentifierResponse
-	48, // 99: Scailo.SalariesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	48, // 100: Scailo.SalariesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	48, // 101: Scailo.SalariesService.Verify:output_type -> Scailo.IdentifierResponse
-	48, // 102: Scailo.SalariesService.Approve:output_type -> Scailo.IdentifierResponse
-	48, // 103: Scailo.SalariesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	48, // 104: Scailo.SalariesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	48, // 105: Scailo.SalariesService.Halt:output_type -> Scailo.IdentifierResponse
-	48, // 106: Scailo.SalariesService.Discard:output_type -> Scailo.IdentifierResponse
-	48, // 107: Scailo.SalariesService.Restore:output_type -> Scailo.IdentifierResponse
-	48, // 108: Scailo.SalariesService.Complete:output_type -> Scailo.IdentifierResponse
-	48, // 109: Scailo.SalariesService.Repeat:output_type -> Scailo.IdentifierResponse
-	48, // 110: Scailo.SalariesService.Reopen:output_type -> Scailo.IdentifierResponse
-	48, // 111: Scailo.SalariesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	48, // 112: Scailo.SalariesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	48, // 113: Scailo.SalariesService.Autofill:output_type -> Scailo.IdentifierResponse
-	48, // 114: Scailo.SalariesService.AddSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
-	48, // 115: Scailo.SalariesService.ModifySalaryAdditionItem:output_type -> Scailo.IdentifierResponse
-	48, // 116: Scailo.SalariesService.ApproveSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
-	48, // 117: Scailo.SalariesService.DeleteSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
-	48, // 118: Scailo.SalariesService.ReorderSalaryAdditionItems:output_type -> Scailo.IdentifierResponse
-	8,  // 119: Scailo.SalariesService.ViewSalaryAdditionItemByID:output_type -> Scailo.SalaryAdditionItem
-	9,  // 120: Scailo.SalariesService.ViewApprovedSalaryAdditionItems:output_type -> Scailo.SalariesAdditionItemsList
-	9,  // 121: Scailo.SalariesService.ViewUnapprovedSalaryAdditionItems:output_type -> Scailo.SalariesAdditionItemsList
-	9,  // 122: Scailo.SalariesService.ViewSalaryAdditionItemHistory:output_type -> Scailo.SalariesAdditionItemsList
-	6,  // 123: Scailo.SalariesService.ViewProspectiveSalaryAdditionItem:output_type -> Scailo.SalariesServiceAdditionItemCreateRequest
-	48, // 124: Scailo.SalariesService.AddSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
-	48, // 125: Scailo.SalariesService.ModifySalaryDeductionItem:output_type -> Scailo.IdentifierResponse
-	48, // 126: Scailo.SalariesService.ApproveSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
-	48, // 127: Scailo.SalariesService.DeleteSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
-	48, // 128: Scailo.SalariesService.ReorderSalaryDeductionItems:output_type -> Scailo.IdentifierResponse
-	14, // 129: Scailo.SalariesService.ViewSalaryDeductionItemByID:output_type -> Scailo.SalaryDeductionItem
-	15, // 130: Scailo.SalariesService.ViewApprovedSalaryDeductionItems:output_type -> Scailo.SalariesDeductionItemsList
-	15, // 131: Scailo.SalariesService.ViewUnapprovedSalaryDeductionItems:output_type -> Scailo.SalariesDeductionItemsList
-	15, // 132: Scailo.SalariesService.ViewSalaryDeductionItemHistory:output_type -> Scailo.SalariesDeductionItemsList
-	12, // 133: Scailo.SalariesService.ViewProspectiveSalaryDeductionItem:output_type -> Scailo.SalariesServiceDeductionItemCreateRequest
-	48, // 134: Scailo.SalariesService.AddSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
-	48, // 135: Scailo.SalariesService.ModifySalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
-	48, // 136: Scailo.SalariesService.ApproveSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
-	48, // 137: Scailo.SalariesService.DeleteSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
-	48, // 138: Scailo.SalariesService.ReorderSalaryReimbursementItems:output_type -> Scailo.IdentifierResponse
-	20, // 139: Scailo.SalariesService.ViewSalaryReimbursementItemByID:output_type -> Scailo.SalaryReimbursementItem
-	21, // 140: Scailo.SalariesService.ViewApprovedSalaryReimbursementItems:output_type -> Scailo.SalariesReimbursementItemsList
-	21, // 141: Scailo.SalariesService.ViewUnapprovedSalaryReimbursementItems:output_type -> Scailo.SalariesReimbursementItemsList
-	21, // 142: Scailo.SalariesService.ViewSalaryReimbursementItemHistory:output_type -> Scailo.SalariesReimbursementItemsList
-	18, // 143: Scailo.SalariesService.ViewProspectiveSalaryReimbursementItem:output_type -> Scailo.SalariesServiceReimbursementItemCreateRequest
-	4,  // 144: Scailo.SalariesService.ViewByID:output_type -> Scailo.Salary
-	4,  // 145: Scailo.SalariesService.ViewByUUID:output_type -> Scailo.Salary
-	4,  // 146: Scailo.SalariesService.ViewEssentialByID:output_type -> Scailo.Salary
-	4,  // 147: Scailo.SalariesService.ViewEssentialByUUID:output_type -> Scailo.Salary
-	5,  // 148: Scailo.SalariesService.ViewFromIDs:output_type -> Scailo.SalariesList
-	5,  // 149: Scailo.SalariesService.ViewAll:output_type -> Scailo.SalariesList
-	5,  // 150: Scailo.SalariesService.ViewAllForEntityUUID:output_type -> Scailo.SalariesList
-	25, // 151: Scailo.SalariesService.ViewWithPagination:output_type -> Scailo.SalariesServicePaginationResponse
-	5,  // 152: Scailo.SalariesService.SearchAll:output_type -> Scailo.SalariesList
-	5,  // 153: Scailo.SalariesService.Filter:output_type -> Scailo.SalariesList
-	49, // 154: Scailo.SalariesService.CountInStatus:output_type -> Scailo.CountResponse
-	49, // 155: Scailo.SalariesService.Count:output_type -> Scailo.CountResponse
-	50, // 156: Scailo.SalariesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	97, // [97:157] is the sub-list for method output_type
-	37, // [37:97] is the sub-list for method input_type
+	40, // 53: Scailo.SalariesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	3,  // 54: Scailo.SalariesService.Autofill:input_type -> Scailo.SalariesServiceAutofillRequest
+	6,  // 55: Scailo.SalariesService.AddSalaryAdditionItem:input_type -> Scailo.SalariesServiceAdditionItemCreateRequest
+	7,  // 56: Scailo.SalariesService.ModifySalaryAdditionItem:input_type -> Scailo.SalariesServiceAdditionItemUpdateRequest
+	41, // 57: Scailo.SalariesService.ApproveSalaryAdditionItem:input_type -> Scailo.IdentifierWithUserComment
+	41, // 58: Scailo.SalariesService.DeleteSalaryAdditionItem:input_type -> Scailo.IdentifierWithUserComment
+	42, // 59: Scailo.SalariesService.ReorderSalaryAdditionItems:input_type -> Scailo.ReorderItemsRequest
+	43, // 60: Scailo.SalariesService.ViewSalaryAdditionItemByID:input_type -> Scailo.Identifier
+	44, // 61: Scailo.SalariesService.ViewApprovedSalaryAdditionItems:input_type -> Scailo.IdentifierWithSearchKey
+	44, // 62: Scailo.SalariesService.ViewUnapprovedSalaryAdditionItems:input_type -> Scailo.IdentifierWithSearchKey
+	10, // 63: Scailo.SalariesService.ViewSalaryAdditionItemHistory:input_type -> Scailo.SalaryAdditionItemHistoryRequest
+	11, // 64: Scailo.SalariesService.ViewProspectiveSalaryAdditionItem:input_type -> Scailo.SalaryAdditionItemProspectiveInfoRequest
+	12, // 65: Scailo.SalariesService.AddSalaryDeductionItem:input_type -> Scailo.SalariesServiceDeductionItemCreateRequest
+	13, // 66: Scailo.SalariesService.ModifySalaryDeductionItem:input_type -> Scailo.SalariesServiceDeductionItemUpdateRequest
+	41, // 67: Scailo.SalariesService.ApproveSalaryDeductionItem:input_type -> Scailo.IdentifierWithUserComment
+	41, // 68: Scailo.SalariesService.DeleteSalaryDeductionItem:input_type -> Scailo.IdentifierWithUserComment
+	42, // 69: Scailo.SalariesService.ReorderSalaryDeductionItems:input_type -> Scailo.ReorderItemsRequest
+	43, // 70: Scailo.SalariesService.ViewSalaryDeductionItemByID:input_type -> Scailo.Identifier
+	44, // 71: Scailo.SalariesService.ViewApprovedSalaryDeductionItems:input_type -> Scailo.IdentifierWithSearchKey
+	44, // 72: Scailo.SalariesService.ViewUnapprovedSalaryDeductionItems:input_type -> Scailo.IdentifierWithSearchKey
+	16, // 73: Scailo.SalariesService.ViewSalaryDeductionItemHistory:input_type -> Scailo.SalaryDeductionItemHistoryRequest
+	17, // 74: Scailo.SalariesService.ViewProspectiveSalaryDeductionItem:input_type -> Scailo.SalaryDeductionItemProspectiveInfoRequest
+	18, // 75: Scailo.SalariesService.AddSalaryReimbursementItem:input_type -> Scailo.SalariesServiceReimbursementItemCreateRequest
+	19, // 76: Scailo.SalariesService.ModifySalaryReimbursementItem:input_type -> Scailo.SalariesServiceReimbursementItemUpdateRequest
+	41, // 77: Scailo.SalariesService.ApproveSalaryReimbursementItem:input_type -> Scailo.IdentifierWithUserComment
+	41, // 78: Scailo.SalariesService.DeleteSalaryReimbursementItem:input_type -> Scailo.IdentifierWithUserComment
+	42, // 79: Scailo.SalariesService.ReorderSalaryReimbursementItems:input_type -> Scailo.ReorderItemsRequest
+	43, // 80: Scailo.SalariesService.ViewSalaryReimbursementItemByID:input_type -> Scailo.Identifier
+	44, // 81: Scailo.SalariesService.ViewApprovedSalaryReimbursementItems:input_type -> Scailo.IdentifierWithSearchKey
+	44, // 82: Scailo.SalariesService.ViewUnapprovedSalaryReimbursementItems:input_type -> Scailo.IdentifierWithSearchKey
+	22, // 83: Scailo.SalariesService.ViewSalaryReimbursementItemHistory:input_type -> Scailo.SalaryReimbursementItemHistoryRequest
+	23, // 84: Scailo.SalariesService.ViewProspectiveSalaryReimbursementItem:input_type -> Scailo.SalaryReimbursementItemProspectiveInfoRequest
+	43, // 85: Scailo.SalariesService.ViewByID:input_type -> Scailo.Identifier
+	45, // 86: Scailo.SalariesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 87: Scailo.SalariesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	45, // 88: Scailo.SalariesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	46, // 89: Scailo.SalariesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	47, // 90: Scailo.SalariesService.ViewAll:input_type -> Scailo.ActiveStatus
+	45, // 91: Scailo.SalariesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	24, // 92: Scailo.SalariesService.ViewWithPagination:input_type -> Scailo.SalariesServicePaginationReq
+	28, // 93: Scailo.SalariesService.SearchAll:input_type -> Scailo.SalariesServiceSearchAllReq
+	26, // 94: Scailo.SalariesService.Filter:input_type -> Scailo.SalariesServiceFilterReq
+	48, // 95: Scailo.SalariesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	27, // 96: Scailo.SalariesService.Count:input_type -> Scailo.SalariesServiceCountReq
+	26, // 97: Scailo.SalariesService.DownloadAsCSV:input_type -> Scailo.SalariesServiceFilterReq
+	49, // 98: Scailo.SalariesService.Create:output_type -> Scailo.IdentifierResponse
+	49, // 99: Scailo.SalariesService.Draft:output_type -> Scailo.IdentifierResponse
+	49, // 100: Scailo.SalariesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	49, // 101: Scailo.SalariesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	49, // 102: Scailo.SalariesService.Verify:output_type -> Scailo.IdentifierResponse
+	49, // 103: Scailo.SalariesService.Approve:output_type -> Scailo.IdentifierResponse
+	49, // 104: Scailo.SalariesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	49, // 105: Scailo.SalariesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	49, // 106: Scailo.SalariesService.Halt:output_type -> Scailo.IdentifierResponse
+	49, // 107: Scailo.SalariesService.Discard:output_type -> Scailo.IdentifierResponse
+	49, // 108: Scailo.SalariesService.Restore:output_type -> Scailo.IdentifierResponse
+	49, // 109: Scailo.SalariesService.Complete:output_type -> Scailo.IdentifierResponse
+	49, // 110: Scailo.SalariesService.Repeat:output_type -> Scailo.IdentifierResponse
+	49, // 111: Scailo.SalariesService.Reopen:output_type -> Scailo.IdentifierResponse
+	49, // 112: Scailo.SalariesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	49, // 113: Scailo.SalariesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	49, // 114: Scailo.SalariesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	49, // 115: Scailo.SalariesService.Autofill:output_type -> Scailo.IdentifierResponse
+	49, // 116: Scailo.SalariesService.AddSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
+	49, // 117: Scailo.SalariesService.ModifySalaryAdditionItem:output_type -> Scailo.IdentifierResponse
+	49, // 118: Scailo.SalariesService.ApproveSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
+	49, // 119: Scailo.SalariesService.DeleteSalaryAdditionItem:output_type -> Scailo.IdentifierResponse
+	49, // 120: Scailo.SalariesService.ReorderSalaryAdditionItems:output_type -> Scailo.IdentifierResponse
+	8,  // 121: Scailo.SalariesService.ViewSalaryAdditionItemByID:output_type -> Scailo.SalaryAdditionItem
+	9,  // 122: Scailo.SalariesService.ViewApprovedSalaryAdditionItems:output_type -> Scailo.SalariesAdditionItemsList
+	9,  // 123: Scailo.SalariesService.ViewUnapprovedSalaryAdditionItems:output_type -> Scailo.SalariesAdditionItemsList
+	9,  // 124: Scailo.SalariesService.ViewSalaryAdditionItemHistory:output_type -> Scailo.SalariesAdditionItemsList
+	6,  // 125: Scailo.SalariesService.ViewProspectiveSalaryAdditionItem:output_type -> Scailo.SalariesServiceAdditionItemCreateRequest
+	49, // 126: Scailo.SalariesService.AddSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
+	49, // 127: Scailo.SalariesService.ModifySalaryDeductionItem:output_type -> Scailo.IdentifierResponse
+	49, // 128: Scailo.SalariesService.ApproveSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
+	49, // 129: Scailo.SalariesService.DeleteSalaryDeductionItem:output_type -> Scailo.IdentifierResponse
+	49, // 130: Scailo.SalariesService.ReorderSalaryDeductionItems:output_type -> Scailo.IdentifierResponse
+	14, // 131: Scailo.SalariesService.ViewSalaryDeductionItemByID:output_type -> Scailo.SalaryDeductionItem
+	15, // 132: Scailo.SalariesService.ViewApprovedSalaryDeductionItems:output_type -> Scailo.SalariesDeductionItemsList
+	15, // 133: Scailo.SalariesService.ViewUnapprovedSalaryDeductionItems:output_type -> Scailo.SalariesDeductionItemsList
+	15, // 134: Scailo.SalariesService.ViewSalaryDeductionItemHistory:output_type -> Scailo.SalariesDeductionItemsList
+	12, // 135: Scailo.SalariesService.ViewProspectiveSalaryDeductionItem:output_type -> Scailo.SalariesServiceDeductionItemCreateRequest
+	49, // 136: Scailo.SalariesService.AddSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
+	49, // 137: Scailo.SalariesService.ModifySalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
+	49, // 138: Scailo.SalariesService.ApproveSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
+	49, // 139: Scailo.SalariesService.DeleteSalaryReimbursementItem:output_type -> Scailo.IdentifierResponse
+	49, // 140: Scailo.SalariesService.ReorderSalaryReimbursementItems:output_type -> Scailo.IdentifierResponse
+	20, // 141: Scailo.SalariesService.ViewSalaryReimbursementItemByID:output_type -> Scailo.SalaryReimbursementItem
+	21, // 142: Scailo.SalariesService.ViewApprovedSalaryReimbursementItems:output_type -> Scailo.SalariesReimbursementItemsList
+	21, // 143: Scailo.SalariesService.ViewUnapprovedSalaryReimbursementItems:output_type -> Scailo.SalariesReimbursementItemsList
+	21, // 144: Scailo.SalariesService.ViewSalaryReimbursementItemHistory:output_type -> Scailo.SalariesReimbursementItemsList
+	18, // 145: Scailo.SalariesService.ViewProspectiveSalaryReimbursementItem:output_type -> Scailo.SalariesServiceReimbursementItemCreateRequest
+	4,  // 146: Scailo.SalariesService.ViewByID:output_type -> Scailo.Salary
+	4,  // 147: Scailo.SalariesService.ViewByUUID:output_type -> Scailo.Salary
+	4,  // 148: Scailo.SalariesService.ViewEssentialByID:output_type -> Scailo.Salary
+	4,  // 149: Scailo.SalariesService.ViewEssentialByUUID:output_type -> Scailo.Salary
+	5,  // 150: Scailo.SalariesService.ViewFromIDs:output_type -> Scailo.SalariesList
+	5,  // 151: Scailo.SalariesService.ViewAll:output_type -> Scailo.SalariesList
+	5,  // 152: Scailo.SalariesService.ViewAllForEntityUUID:output_type -> Scailo.SalariesList
+	25, // 153: Scailo.SalariesService.ViewWithPagination:output_type -> Scailo.SalariesServicePaginationResponse
+	5,  // 154: Scailo.SalariesService.SearchAll:output_type -> Scailo.SalariesList
+	5,  // 155: Scailo.SalariesService.Filter:output_type -> Scailo.SalariesList
+	50, // 156: Scailo.SalariesService.CountInStatus:output_type -> Scailo.CountResponse
+	50, // 157: Scailo.SalariesService.Count:output_type -> Scailo.CountResponse
+	51, // 158: Scailo.SalariesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	98, // [98:159] is the sub-list for method output_type
+	37, // [37:98] is the sub-list for method input_type
 	37, // [37:37] is the sub-list for extension type_name
 	37, // [37:37] is the sub-list for extension extendee
 	0,  // [0:37] is the sub-list for field type_name
@@ -3827,6 +3831,7 @@ func file_salaries_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

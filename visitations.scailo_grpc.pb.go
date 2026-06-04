@@ -32,6 +32,7 @@ const (
 	VisitationsService_Complete_FullMethodName                       = "/Scailo.VisitationsService/Complete"
 	VisitationsService_Repeat_FullMethodName                         = "/Scailo.VisitationsService/Repeat"
 	VisitationsService_CommentAdd_FullMethodName                     = "/Scailo.VisitationsService/CommentAdd"
+	VisitationsService_AttachVaultFolder_FullMethodName              = "/Scailo.VisitationsService/AttachVaultFolder"
 	VisitationsService_CreateMagicLink_FullMethodName                = "/Scailo.VisitationsService/CreateMagicLink"
 	VisitationsService_RecordImageEntry_FullMethodName               = "/Scailo.VisitationsService/RecordImageEntry"
 	VisitationsService_RecordImageExit_FullMethodName                = "/Scailo.VisitationsService/RecordImageExit"
@@ -156,6 +157,17 @@ type VisitationsServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
@@ -353,6 +365,16 @@ func (c *visitationsServiceClient) CommentAdd(ctx context.Context, in *Identifie
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, VisitationsService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitationsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, VisitationsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

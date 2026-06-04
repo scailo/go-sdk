@@ -3137,7 +3137,7 @@ var File_quotations_responses_scailo_proto protoreflect.FileDescriptor
 
 const file_quotations_responses_scailo_proto_rawDesc = "" +
 	"\n" +
-	"!quotations_responses.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x8e\x04\n" +
+	"!quotations_responses.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x8e\x04\n" +
 	"'QuotationsResponsesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3411,7 +3411,7 @@ const file_quotations_responses_scailo_proto_rawDesc = "" +
 	"(QUOTATION_RESPONSE_SORT_KEY_COMPLETED_ON\x10\x06\x12,\n" +
 	"(QUOTATION_RESPONSE_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x120\n" +
-	",QUOTATION_RESPONSE_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xbd \n" +
+	",QUOTATION_RESPONSE_SORT_KEY_FINAL_REF_NUMBER\x10\v2\x90!\n" +
 	"\x1aQuotationsResponsesService\x12U\n" +
 	"\x06Create\x12/.Scailo.QuotationsResponsesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\x05Draft\x12/.Scailo.QuotationsResponsesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
@@ -3428,7 +3428,8 @@ const file_quotations_responses_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12k\n" +
 	"\x18AddQuotationResponseItem\x123.Scailo.QuotationsResponsesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12n\n" +
 	"\x1bModifyQuotationResponseItem\x123.Scailo.QuotationsResponsesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12]\n" +
@@ -3511,21 +3512,22 @@ var file_quotations_responses_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 28: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 29: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 30: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 31: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 32: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 33: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 34: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 35: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 36: Scailo.IdentifierUUID
-	(*SimpleSearchReq)(nil),                                   // 37: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 38: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 39: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 40: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 41: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 42: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 43: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 44: Scailo.StandardFile
-	(*CountResponse)(nil),                                     // 45: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 31: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 32: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 33: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 34: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 35: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 36: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 37: Scailo.IdentifierUUID
+	(*SimpleSearchReq)(nil),                                   // 38: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 39: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 40: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 41: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 42: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 43: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 44: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 45: Scailo.StandardFile
+	(*CountResponse)(nil),                                     // 46: Scailo.CountResponse
 }
 var file_quotations_responses_scailo_proto_depIdxs = []int32{
 	21, // 0: Scailo.QuotationsResponsesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3580,85 +3582,87 @@ var file_quotations_responses_scailo_proto_depIdxs = []int32{
 	30, // 49: Scailo.QuotationsResponsesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	30, // 50: Scailo.QuotationsResponsesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	30, // 51: Scailo.QuotationsResponsesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	31, // 52: Scailo.QuotationsResponsesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	7,  // 53: Scailo.QuotationsResponsesService.AddQuotationResponseItem:input_type -> Scailo.QuotationsResponsesServiceItemCreateRequest
-	8,  // 54: Scailo.QuotationsResponsesService.ModifyQuotationResponseItem:input_type -> Scailo.QuotationsResponsesServiceItemUpdateRequest
-	32, // 55: Scailo.QuotationsResponsesService.ApproveQuotationResponseItem:input_type -> Scailo.IdentifierWithUserComment
-	32, // 56: Scailo.QuotationsResponsesService.DeleteQuotationResponseItem:input_type -> Scailo.IdentifierWithUserComment
-	33, // 57: Scailo.QuotationsResponsesService.ReorderQuotationResponseItems:input_type -> Scailo.ReorderItemsRequest
-	34, // 58: Scailo.QuotationsResponsesService.ViewQuotationResponseItemByID:input_type -> Scailo.Identifier
-	35, // 59: Scailo.QuotationsResponsesService.ViewApprovedQuotationResponseItems:input_type -> Scailo.IdentifierWithSearchKey
-	35, // 60: Scailo.QuotationsResponsesService.ViewUnapprovedQuotationResponseItems:input_type -> Scailo.IdentifierWithSearchKey
-	12, // 61: Scailo.QuotationsResponsesService.ViewQuotationResponseItemHistory:input_type -> Scailo.QuotationResponseItemHistoryRequest
-	20, // 62: Scailo.QuotationsResponsesService.FilterItems:input_type -> Scailo.QuotationsResponsesServiceItemsFilterReq
-	13, // 63: Scailo.QuotationsResponsesService.ViewPaginatedApprovedQuotationResponseItems:input_type -> Scailo.QuotationResponseItemsSearchRequest
-	13, // 64: Scailo.QuotationsResponsesService.ViewPaginatedUnapprovedQuotationResponseItems:input_type -> Scailo.QuotationResponseItemsSearchRequest
-	13, // 65: Scailo.QuotationsResponsesService.SearchItemsWithPagination:input_type -> Scailo.QuotationResponseItemsSearchRequest
-	34, // 66: Scailo.QuotationsResponsesService.ViewByID:input_type -> Scailo.Identifier
-	36, // 67: Scailo.QuotationsResponsesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	37, // 68: Scailo.QuotationsResponsesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	34, // 69: Scailo.QuotationsResponsesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	36, // 70: Scailo.QuotationsResponsesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	38, // 71: Scailo.QuotationsResponsesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	36, // 72: Scailo.QuotationsResponsesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 73: Scailo.QuotationsResponsesService.ViewAll:input_type -> Scailo.ActiveStatus
-	36, // 74: Scailo.QuotationsResponsesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 75: Scailo.QuotationsResponsesService.ViewWithPagination:input_type -> Scailo.QuotationsResponsesServicePaginationReq
-	36, // 76: Scailo.QuotationsResponsesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	36, // 77: Scailo.QuotationsResponsesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 78: Scailo.QuotationsResponsesService.SearchAll:input_type -> Scailo.QuotationsResponsesServiceSearchAllReq
-	17, // 79: Scailo.QuotationsResponsesService.Filter:input_type -> Scailo.QuotationsResponsesServiceFilterReq
-	40, // 80: Scailo.QuotationsResponsesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 81: Scailo.QuotationsResponsesService.Count:input_type -> Scailo.QuotationsResponsesServiceCountReq
-	17, // 82: Scailo.QuotationsResponsesService.DownloadAsCSV:input_type -> Scailo.QuotationsResponsesServiceFilterReq
-	41, // 83: Scailo.QuotationsResponsesService.Create:output_type -> Scailo.IdentifierResponse
-	41, // 84: Scailo.QuotationsResponsesService.Draft:output_type -> Scailo.IdentifierResponse
-	41, // 85: Scailo.QuotationsResponsesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	41, // 86: Scailo.QuotationsResponsesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	41, // 87: Scailo.QuotationsResponsesService.Verify:output_type -> Scailo.IdentifierResponse
-	41, // 88: Scailo.QuotationsResponsesService.Approve:output_type -> Scailo.IdentifierResponse
-	41, // 89: Scailo.QuotationsResponsesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	41, // 90: Scailo.QuotationsResponsesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	41, // 91: Scailo.QuotationsResponsesService.Halt:output_type -> Scailo.IdentifierResponse
-	41, // 92: Scailo.QuotationsResponsesService.Discard:output_type -> Scailo.IdentifierResponse
-	41, // 93: Scailo.QuotationsResponsesService.Restore:output_type -> Scailo.IdentifierResponse
-	41, // 94: Scailo.QuotationsResponsesService.Complete:output_type -> Scailo.IdentifierResponse
-	41, // 95: Scailo.QuotationsResponsesService.Repeat:output_type -> Scailo.IdentifierResponse
-	41, // 96: Scailo.QuotationsResponsesService.Reopen:output_type -> Scailo.IdentifierResponse
-	41, // 97: Scailo.QuotationsResponsesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	42, // 98: Scailo.QuotationsResponsesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	41, // 99: Scailo.QuotationsResponsesService.AddQuotationResponseItem:output_type -> Scailo.IdentifierResponse
-	41, // 100: Scailo.QuotationsResponsesService.ModifyQuotationResponseItem:output_type -> Scailo.IdentifierResponse
-	41, // 101: Scailo.QuotationsResponsesService.ApproveQuotationResponseItem:output_type -> Scailo.IdentifierResponse
-	41, // 102: Scailo.QuotationsResponsesService.DeleteQuotationResponseItem:output_type -> Scailo.IdentifierResponse
-	41, // 103: Scailo.QuotationsResponsesService.ReorderQuotationResponseItems:output_type -> Scailo.IdentifierResponse
-	9,  // 104: Scailo.QuotationsResponsesService.ViewQuotationResponseItemByID:output_type -> Scailo.QuotationResponseItem
-	11, // 105: Scailo.QuotationsResponsesService.ViewApprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesItemsList
-	11, // 106: Scailo.QuotationsResponsesService.ViewUnapprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesItemsList
-	11, // 107: Scailo.QuotationsResponsesService.ViewQuotationResponseItemHistory:output_type -> Scailo.QuotationsResponsesItemsList
-	11, // 108: Scailo.QuotationsResponsesService.FilterItems:output_type -> Scailo.QuotationsResponsesItemsList
-	14, // 109: Scailo.QuotationsResponsesService.ViewPaginatedApprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
-	14, // 110: Scailo.QuotationsResponsesService.ViewPaginatedUnapprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
-	14, // 111: Scailo.QuotationsResponsesService.SearchItemsWithPagination:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
-	6,  // 112: Scailo.QuotationsResponsesService.ViewByID:output_type -> Scailo.QuotationResponse
-	6,  // 113: Scailo.QuotationsResponsesService.ViewByUUID:output_type -> Scailo.QuotationResponse
-	6,  // 114: Scailo.QuotationsResponsesService.ViewByReferenceID:output_type -> Scailo.QuotationResponse
-	6,  // 115: Scailo.QuotationsResponsesService.ViewEssentialByID:output_type -> Scailo.QuotationResponse
-	6,  // 116: Scailo.QuotationsResponsesService.ViewEssentialByUUID:output_type -> Scailo.QuotationResponse
-	10, // 117: Scailo.QuotationsResponsesService.ViewFromIDs:output_type -> Scailo.QuotationsResponsesList
-	5,  // 118: Scailo.QuotationsResponsesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QuotationResponseAncillaryParameters
-	10, // 119: Scailo.QuotationsResponsesService.ViewAll:output_type -> Scailo.QuotationsResponsesList
-	10, // 120: Scailo.QuotationsResponsesService.ViewAllForEntityUUID:output_type -> Scailo.QuotationsResponsesList
-	16, // 121: Scailo.QuotationsResponsesService.ViewWithPagination:output_type -> Scailo.QuotationsResponsesServicePaginationResponse
-	43, // 122: Scailo.QuotationsResponsesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	44, // 123: Scailo.QuotationsResponsesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	10, // 124: Scailo.QuotationsResponsesService.SearchAll:output_type -> Scailo.QuotationsResponsesList
-	10, // 125: Scailo.QuotationsResponsesService.Filter:output_type -> Scailo.QuotationsResponsesList
-	45, // 126: Scailo.QuotationsResponsesService.CountInStatus:output_type -> Scailo.CountResponse
-	45, // 127: Scailo.QuotationsResponsesService.Count:output_type -> Scailo.CountResponse
-	44, // 128: Scailo.QuotationsResponsesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	83, // [83:129] is the sub-list for method output_type
-	37, // [37:83] is the sub-list for method input_type
+	31, // 52: Scailo.QuotationsResponsesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	32, // 53: Scailo.QuotationsResponsesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	7,  // 54: Scailo.QuotationsResponsesService.AddQuotationResponseItem:input_type -> Scailo.QuotationsResponsesServiceItemCreateRequest
+	8,  // 55: Scailo.QuotationsResponsesService.ModifyQuotationResponseItem:input_type -> Scailo.QuotationsResponsesServiceItemUpdateRequest
+	33, // 56: Scailo.QuotationsResponsesService.ApproveQuotationResponseItem:input_type -> Scailo.IdentifierWithUserComment
+	33, // 57: Scailo.QuotationsResponsesService.DeleteQuotationResponseItem:input_type -> Scailo.IdentifierWithUserComment
+	34, // 58: Scailo.QuotationsResponsesService.ReorderQuotationResponseItems:input_type -> Scailo.ReorderItemsRequest
+	35, // 59: Scailo.QuotationsResponsesService.ViewQuotationResponseItemByID:input_type -> Scailo.Identifier
+	36, // 60: Scailo.QuotationsResponsesService.ViewApprovedQuotationResponseItems:input_type -> Scailo.IdentifierWithSearchKey
+	36, // 61: Scailo.QuotationsResponsesService.ViewUnapprovedQuotationResponseItems:input_type -> Scailo.IdentifierWithSearchKey
+	12, // 62: Scailo.QuotationsResponsesService.ViewQuotationResponseItemHistory:input_type -> Scailo.QuotationResponseItemHistoryRequest
+	20, // 63: Scailo.QuotationsResponsesService.FilterItems:input_type -> Scailo.QuotationsResponsesServiceItemsFilterReq
+	13, // 64: Scailo.QuotationsResponsesService.ViewPaginatedApprovedQuotationResponseItems:input_type -> Scailo.QuotationResponseItemsSearchRequest
+	13, // 65: Scailo.QuotationsResponsesService.ViewPaginatedUnapprovedQuotationResponseItems:input_type -> Scailo.QuotationResponseItemsSearchRequest
+	13, // 66: Scailo.QuotationsResponsesService.SearchItemsWithPagination:input_type -> Scailo.QuotationResponseItemsSearchRequest
+	35, // 67: Scailo.QuotationsResponsesService.ViewByID:input_type -> Scailo.Identifier
+	37, // 68: Scailo.QuotationsResponsesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	38, // 69: Scailo.QuotationsResponsesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	35, // 70: Scailo.QuotationsResponsesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	37, // 71: Scailo.QuotationsResponsesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	39, // 72: Scailo.QuotationsResponsesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	37, // 73: Scailo.QuotationsResponsesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 74: Scailo.QuotationsResponsesService.ViewAll:input_type -> Scailo.ActiveStatus
+	37, // 75: Scailo.QuotationsResponsesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 76: Scailo.QuotationsResponsesService.ViewWithPagination:input_type -> Scailo.QuotationsResponsesServicePaginationReq
+	37, // 77: Scailo.QuotationsResponsesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	37, // 78: Scailo.QuotationsResponsesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	19, // 79: Scailo.QuotationsResponsesService.SearchAll:input_type -> Scailo.QuotationsResponsesServiceSearchAllReq
+	17, // 80: Scailo.QuotationsResponsesService.Filter:input_type -> Scailo.QuotationsResponsesServiceFilterReq
+	41, // 81: Scailo.QuotationsResponsesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 82: Scailo.QuotationsResponsesService.Count:input_type -> Scailo.QuotationsResponsesServiceCountReq
+	17, // 83: Scailo.QuotationsResponsesService.DownloadAsCSV:input_type -> Scailo.QuotationsResponsesServiceFilterReq
+	42, // 84: Scailo.QuotationsResponsesService.Create:output_type -> Scailo.IdentifierResponse
+	42, // 85: Scailo.QuotationsResponsesService.Draft:output_type -> Scailo.IdentifierResponse
+	42, // 86: Scailo.QuotationsResponsesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	42, // 87: Scailo.QuotationsResponsesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	42, // 88: Scailo.QuotationsResponsesService.Verify:output_type -> Scailo.IdentifierResponse
+	42, // 89: Scailo.QuotationsResponsesService.Approve:output_type -> Scailo.IdentifierResponse
+	42, // 90: Scailo.QuotationsResponsesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	42, // 91: Scailo.QuotationsResponsesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	42, // 92: Scailo.QuotationsResponsesService.Halt:output_type -> Scailo.IdentifierResponse
+	42, // 93: Scailo.QuotationsResponsesService.Discard:output_type -> Scailo.IdentifierResponse
+	42, // 94: Scailo.QuotationsResponsesService.Restore:output_type -> Scailo.IdentifierResponse
+	42, // 95: Scailo.QuotationsResponsesService.Complete:output_type -> Scailo.IdentifierResponse
+	42, // 96: Scailo.QuotationsResponsesService.Repeat:output_type -> Scailo.IdentifierResponse
+	42, // 97: Scailo.QuotationsResponsesService.Reopen:output_type -> Scailo.IdentifierResponse
+	42, // 98: Scailo.QuotationsResponsesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	42, // 99: Scailo.QuotationsResponsesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	43, // 100: Scailo.QuotationsResponsesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	42, // 101: Scailo.QuotationsResponsesService.AddQuotationResponseItem:output_type -> Scailo.IdentifierResponse
+	42, // 102: Scailo.QuotationsResponsesService.ModifyQuotationResponseItem:output_type -> Scailo.IdentifierResponse
+	42, // 103: Scailo.QuotationsResponsesService.ApproveQuotationResponseItem:output_type -> Scailo.IdentifierResponse
+	42, // 104: Scailo.QuotationsResponsesService.DeleteQuotationResponseItem:output_type -> Scailo.IdentifierResponse
+	42, // 105: Scailo.QuotationsResponsesService.ReorderQuotationResponseItems:output_type -> Scailo.IdentifierResponse
+	9,  // 106: Scailo.QuotationsResponsesService.ViewQuotationResponseItemByID:output_type -> Scailo.QuotationResponseItem
+	11, // 107: Scailo.QuotationsResponsesService.ViewApprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesItemsList
+	11, // 108: Scailo.QuotationsResponsesService.ViewUnapprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesItemsList
+	11, // 109: Scailo.QuotationsResponsesService.ViewQuotationResponseItemHistory:output_type -> Scailo.QuotationsResponsesItemsList
+	11, // 110: Scailo.QuotationsResponsesService.FilterItems:output_type -> Scailo.QuotationsResponsesItemsList
+	14, // 111: Scailo.QuotationsResponsesService.ViewPaginatedApprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
+	14, // 112: Scailo.QuotationsResponsesService.ViewPaginatedUnapprovedQuotationResponseItems:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
+	14, // 113: Scailo.QuotationsResponsesService.SearchItemsWithPagination:output_type -> Scailo.QuotationsResponsesServicePaginatedItemsResponse
+	6,  // 114: Scailo.QuotationsResponsesService.ViewByID:output_type -> Scailo.QuotationResponse
+	6,  // 115: Scailo.QuotationsResponsesService.ViewByUUID:output_type -> Scailo.QuotationResponse
+	6,  // 116: Scailo.QuotationsResponsesService.ViewByReferenceID:output_type -> Scailo.QuotationResponse
+	6,  // 117: Scailo.QuotationsResponsesService.ViewEssentialByID:output_type -> Scailo.QuotationResponse
+	6,  // 118: Scailo.QuotationsResponsesService.ViewEssentialByUUID:output_type -> Scailo.QuotationResponse
+	10, // 119: Scailo.QuotationsResponsesService.ViewFromIDs:output_type -> Scailo.QuotationsResponsesList
+	5,  // 120: Scailo.QuotationsResponsesService.ViewAncillaryParametersByUUID:output_type -> Scailo.QuotationResponseAncillaryParameters
+	10, // 121: Scailo.QuotationsResponsesService.ViewAll:output_type -> Scailo.QuotationsResponsesList
+	10, // 122: Scailo.QuotationsResponsesService.ViewAllForEntityUUID:output_type -> Scailo.QuotationsResponsesList
+	16, // 123: Scailo.QuotationsResponsesService.ViewWithPagination:output_type -> Scailo.QuotationsResponsesServicePaginationResponse
+	44, // 124: Scailo.QuotationsResponsesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	45, // 125: Scailo.QuotationsResponsesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	10, // 126: Scailo.QuotationsResponsesService.SearchAll:output_type -> Scailo.QuotationsResponsesList
+	10, // 127: Scailo.QuotationsResponsesService.Filter:output_type -> Scailo.QuotationsResponsesList
+	46, // 128: Scailo.QuotationsResponsesService.CountInStatus:output_type -> Scailo.CountResponse
+	46, // 129: Scailo.QuotationsResponsesService.Count:output_type -> Scailo.CountResponse
+	45, // 130: Scailo.QuotationsResponsesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	84, // [84:131] is the sub-list for method output_type
+	37, // [37:84] is the sub-list for method input_type
 	37, // [37:37] is the sub-list for extension type_name
 	37, // [37:37] is the sub-list for extension extendee
 	0,  // [0:37] is the sub-list for field type_name
@@ -3672,6 +3676,7 @@ func file_quotations_responses_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

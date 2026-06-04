@@ -34,6 +34,7 @@ const (
 	SalesOrdersService_Reopen_FullMethodName                                 = "/Scailo.SalesOrdersService/Reopen"
 	SalesOrdersService_CommentAdd_FullMethodName                             = "/Scailo.SalesOrdersService/CommentAdd"
 	SalesOrdersService_SendEmail_FullMethodName                              = "/Scailo.SalesOrdersService/SendEmail"
+	SalesOrdersService_AttachVaultFolder_FullMethodName                      = "/Scailo.SalesOrdersService/AttachVaultFolder"
 	SalesOrdersService_Autofill_FullMethodName                               = "/Scailo.SalesOrdersService/Autofill"
 	SalesOrdersService_Amend_FullMethodName                                  = "/Scailo.SalesOrdersService/Amend"
 	SalesOrdersService_CreateMagicLink_FullMethodName                        = "/Scailo.SalesOrdersService/CreateMagicLink"
@@ -193,6 +194,17 @@ type SalesOrdersServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Autofill the sales order
 	Autofill(ctx context.Context, in *SalesOrdersServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Amend the sales order and send for revision
@@ -477,6 +489,16 @@ func (c *salesOrdersServiceClient) SendEmail(ctx context.Context, in *Identifier
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, SalesOrdersService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salesOrdersServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalesOrdersService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

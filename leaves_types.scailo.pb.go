@@ -1429,7 +1429,7 @@ var File_leaves_types_scailo_proto protoreflect.FileDescriptor
 
 const file_leaves_types_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x19leaves_types.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xa1\x02\n" +
+	"\x19leaves_types.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xa1\x02\n" +
 	"\x1fLeavesTypesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1542,7 +1542,7 @@ const file_leaves_types_scailo_proto_rawDesc = "" +
 	" LEAVE_TYPE_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1c\n" +
 	"\x18LEAVE_TYPE_SORT_KEY_NAME\x10\n" +
 	"\x12\x1c\n" +
-	"\x18LEAVE_TYPE_SORT_KEY_CODE\x10\v2\xc9\x10\n" +
+	"\x18LEAVE_TYPE_SORT_KEY_CODE\x10\v2\x9c\x11\n" +
 	"\x12LeavesTypesService\x12M\n" +
 	"\x06Create\x12'.Scailo.LeavesTypesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.LeavesTypesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -1558,7 +1558,8 @@ const file_leaves_types_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x121\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x121\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x11.Scailo.LeaveType\x127\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x11.Scailo.LeaveType\x12:\n" +
@@ -1610,15 +1611,16 @@ var file_leaves_types_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                             // 14: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                              // 15: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),        // 16: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                           // 17: Scailo.Identifier
-	(*IdentifierUUID)(nil),                       // 18: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                      // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                         // 20: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),              // 21: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                         // 22: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                   // 23: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                        // 24: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                  // 25: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),             // 17: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                           // 18: Scailo.Identifier
+	(*IdentifierUUID)(nil),                       // 19: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                      // 20: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                         // 21: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),              // 22: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                         // 23: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                   // 24: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                        // 25: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                  // 26: Scailo.IdentifierUUIDsList
 }
 var file_leaves_types_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.LeaveType.metadata:type_name -> Scailo.EmployeeMetadata
@@ -1655,50 +1657,52 @@ var file_leaves_types_scailo_proto_depIdxs = []int32{
 	16, // 31: Scailo.LeavesTypesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 32: Scailo.LeavesTypesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 33: Scailo.LeavesTypesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 34: Scailo.LeavesTypesService.ViewByID:input_type -> Scailo.Identifier
-	18, // 35: Scailo.LeavesTypesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 36: Scailo.LeavesTypesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	18, // 37: Scailo.LeavesTypesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 38: Scailo.LeavesTypesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 39: Scailo.LeavesTypesService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 40: Scailo.LeavesTypesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 41: Scailo.LeavesTypesService.ViewWithPagination:input_type -> Scailo.LeavesTypesServicePaginationReq
-	9,  // 42: Scailo.LeavesTypesService.SearchAll:input_type -> Scailo.LeavesTypesServiceSearchAllReq
-	7,  // 43: Scailo.LeavesTypesService.Filter:input_type -> Scailo.LeavesTypesServiceFilterReq
-	21, // 44: Scailo.LeavesTypesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 45: Scailo.LeavesTypesService.Count:input_type -> Scailo.LeavesTypesServiceCountReq
-	7,  // 46: Scailo.LeavesTypesService.DownloadAsCSV:input_type -> Scailo.LeavesTypesServiceFilterReq
-	22, // 47: Scailo.LeavesTypesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	23, // 48: Scailo.LeavesTypesService.Create:output_type -> Scailo.IdentifierResponse
-	23, // 49: Scailo.LeavesTypesService.Draft:output_type -> Scailo.IdentifierResponse
-	23, // 50: Scailo.LeavesTypesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 51: Scailo.LeavesTypesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	23, // 52: Scailo.LeavesTypesService.Verify:output_type -> Scailo.IdentifierResponse
-	23, // 53: Scailo.LeavesTypesService.Approve:output_type -> Scailo.IdentifierResponse
-	23, // 54: Scailo.LeavesTypesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	23, // 55: Scailo.LeavesTypesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 56: Scailo.LeavesTypesService.Halt:output_type -> Scailo.IdentifierResponse
-	23, // 57: Scailo.LeavesTypesService.Discard:output_type -> Scailo.IdentifierResponse
-	23, // 58: Scailo.LeavesTypesService.Restore:output_type -> Scailo.IdentifierResponse
-	23, // 59: Scailo.LeavesTypesService.Complete:output_type -> Scailo.IdentifierResponse
-	23, // 60: Scailo.LeavesTypesService.Repeat:output_type -> Scailo.IdentifierResponse
-	23, // 61: Scailo.LeavesTypesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 62: Scailo.LeavesTypesService.ViewByID:output_type -> Scailo.LeaveType
-	3,  // 63: Scailo.LeavesTypesService.ViewByUUID:output_type -> Scailo.LeaveType
-	3,  // 64: Scailo.LeavesTypesService.ViewEssentialByID:output_type -> Scailo.LeaveType
-	3,  // 65: Scailo.LeavesTypesService.ViewEssentialByUUID:output_type -> Scailo.LeaveType
-	4,  // 66: Scailo.LeavesTypesService.ViewFromIDs:output_type -> Scailo.LeavesTypesList
-	4,  // 67: Scailo.LeavesTypesService.ViewAll:output_type -> Scailo.LeavesTypesList
-	4,  // 68: Scailo.LeavesTypesService.ViewAllForEntityUUID:output_type -> Scailo.LeavesTypesList
-	6,  // 69: Scailo.LeavesTypesService.ViewWithPagination:output_type -> Scailo.LeavesTypesServicePaginationResponse
-	4,  // 70: Scailo.LeavesTypesService.SearchAll:output_type -> Scailo.LeavesTypesList
-	4,  // 71: Scailo.LeavesTypesService.Filter:output_type -> Scailo.LeavesTypesList
-	24, // 72: Scailo.LeavesTypesService.CountInStatus:output_type -> Scailo.CountResponse
-	24, // 73: Scailo.LeavesTypesService.Count:output_type -> Scailo.CountResponse
-	22, // 74: Scailo.LeavesTypesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	25, // 75: Scailo.LeavesTypesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	48, // [48:76] is the sub-list for method output_type
-	20, // [20:48] is the sub-list for method input_type
+	17, // 34: Scailo.LeavesTypesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	18, // 35: Scailo.LeavesTypesService.ViewByID:input_type -> Scailo.Identifier
+	19, // 36: Scailo.LeavesTypesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 37: Scailo.LeavesTypesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	19, // 38: Scailo.LeavesTypesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	20, // 39: Scailo.LeavesTypesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	21, // 40: Scailo.LeavesTypesService.ViewAll:input_type -> Scailo.ActiveStatus
+	19, // 41: Scailo.LeavesTypesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 42: Scailo.LeavesTypesService.ViewWithPagination:input_type -> Scailo.LeavesTypesServicePaginationReq
+	9,  // 43: Scailo.LeavesTypesService.SearchAll:input_type -> Scailo.LeavesTypesServiceSearchAllReq
+	7,  // 44: Scailo.LeavesTypesService.Filter:input_type -> Scailo.LeavesTypesServiceFilterReq
+	22, // 45: Scailo.LeavesTypesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 46: Scailo.LeavesTypesService.Count:input_type -> Scailo.LeavesTypesServiceCountReq
+	7,  // 47: Scailo.LeavesTypesService.DownloadAsCSV:input_type -> Scailo.LeavesTypesServiceFilterReq
+	23, // 48: Scailo.LeavesTypesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	24, // 49: Scailo.LeavesTypesService.Create:output_type -> Scailo.IdentifierResponse
+	24, // 50: Scailo.LeavesTypesService.Draft:output_type -> Scailo.IdentifierResponse
+	24, // 51: Scailo.LeavesTypesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 52: Scailo.LeavesTypesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	24, // 53: Scailo.LeavesTypesService.Verify:output_type -> Scailo.IdentifierResponse
+	24, // 54: Scailo.LeavesTypesService.Approve:output_type -> Scailo.IdentifierResponse
+	24, // 55: Scailo.LeavesTypesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	24, // 56: Scailo.LeavesTypesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 57: Scailo.LeavesTypesService.Halt:output_type -> Scailo.IdentifierResponse
+	24, // 58: Scailo.LeavesTypesService.Discard:output_type -> Scailo.IdentifierResponse
+	24, // 59: Scailo.LeavesTypesService.Restore:output_type -> Scailo.IdentifierResponse
+	24, // 60: Scailo.LeavesTypesService.Complete:output_type -> Scailo.IdentifierResponse
+	24, // 61: Scailo.LeavesTypesService.Repeat:output_type -> Scailo.IdentifierResponse
+	24, // 62: Scailo.LeavesTypesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	24, // 63: Scailo.LeavesTypesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 64: Scailo.LeavesTypesService.ViewByID:output_type -> Scailo.LeaveType
+	3,  // 65: Scailo.LeavesTypesService.ViewByUUID:output_type -> Scailo.LeaveType
+	3,  // 66: Scailo.LeavesTypesService.ViewEssentialByID:output_type -> Scailo.LeaveType
+	3,  // 67: Scailo.LeavesTypesService.ViewEssentialByUUID:output_type -> Scailo.LeaveType
+	4,  // 68: Scailo.LeavesTypesService.ViewFromIDs:output_type -> Scailo.LeavesTypesList
+	4,  // 69: Scailo.LeavesTypesService.ViewAll:output_type -> Scailo.LeavesTypesList
+	4,  // 70: Scailo.LeavesTypesService.ViewAllForEntityUUID:output_type -> Scailo.LeavesTypesList
+	6,  // 71: Scailo.LeavesTypesService.ViewWithPagination:output_type -> Scailo.LeavesTypesServicePaginationResponse
+	4,  // 72: Scailo.LeavesTypesService.SearchAll:output_type -> Scailo.LeavesTypesList
+	4,  // 73: Scailo.LeavesTypesService.Filter:output_type -> Scailo.LeavesTypesList
+	25, // 74: Scailo.LeavesTypesService.CountInStatus:output_type -> Scailo.CountResponse
+	25, // 75: Scailo.LeavesTypesService.Count:output_type -> Scailo.CountResponse
+	23, // 76: Scailo.LeavesTypesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	26, // 77: Scailo.LeavesTypesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	49, // [49:78] is the sub-list for method output_type
+	20, // [20:49] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -1710,6 +1714,7 @@ func file_leaves_types_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

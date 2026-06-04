@@ -3082,7 +3082,7 @@ var File_work_orders_scailo_proto protoreflect.FileDescriptor
 
 const file_work_orders_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18work_orders.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x93\x03\n" +
+	"\x18work_orders.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x93\x03\n" +
 	"\x1eWorkOrdersServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3335,7 +3335,7 @@ const file_work_orders_scailo_proto_rawDesc = "" +
 	"\x16WORK_ORDER_ITEM_STATUS\x12*\n" +
 	"&WORK_ORDER_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fWORK_ORDER_ITEM_STATUS_APPROVED\x10\x01\x12%\n" +
-	"!WORK_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\xf3$\n" +
+	"!WORK_ORDER_ITEM_STATUS_UNAPPROVED\x10\x022\xc6%\n" +
 	"\x11WorkOrdersService\x12L\n" +
 	"\x06Create\x12&.Scailo.WorkOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x05Draft\x12&.Scailo.WorkOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -3353,7 +3353,8 @@ const file_work_orders_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12P\n" +
 	"\bAutofill\x12(.Scailo.WorkOrdersServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
@@ -3455,190 +3456,193 @@ var file_work_orders_scailo_proto_goTypes = []any{
 	(*IdentifierUUIDWithUserComment)(nil),                     // 36: Scailo.IdentifierUUIDWithUserComment
 	(*RepeatWithDeliveryDate)(nil),                            // 37: Scailo.RepeatWithDeliveryDate
 	(*IdentifierWithEmailAttributes)(nil),                     // 38: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                    // 40: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                         // 41: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 42: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 43: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 44: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                             // 45: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 46: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 47: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 48: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 49: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 50: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 51: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 52: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 53: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 54: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 55: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 56: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                      // 57: Scailo.FamiliesList
-	(*CountResponse)(nil),                                     // 58: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 39: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 40: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                    // 41: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                         // 42: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 43: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 44: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 45: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                             // 46: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 47: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 48: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 49: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 50: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 51: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 52: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 53: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 54: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 55: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 56: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 57: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                      // 58: Scailo.FamiliesList
+	(*CountResponse)(nil),                                     // 59: Scailo.CountResponse
 }
 var file_work_orders_scailo_proto_depIdxs = []int32{
-	0,  // 0: Scailo.WorkOrdersServiceCreateRequest.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
-	27, // 1: Scailo.WorkOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	27, // 2: Scailo.WorkOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
-	28, // 3: Scailo.WorkOrder.metadata:type_name -> Scailo.EmployeeMetadata
-	29, // 4: Scailo.WorkOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	30, // 5: Scailo.WorkOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	31, // 6: Scailo.WorkOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
-	0,  // 7: Scailo.WorkOrder.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
-	11, // 8: Scailo.WorkOrder.list:type_name -> Scailo.WorkOrderItem
-	32, // 9: Scailo.WorkOrder.form_data:type_name -> Scailo.FormFieldDatum
-	28, // 10: Scailo.WorkOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
-	29, // 11: Scailo.WorkOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
-	8,  // 12: Scailo.WorkOrdersList.list:type_name -> Scailo.WorkOrder
-	11, // 13: Scailo.WorkOrdersItemsList.list:type_name -> Scailo.WorkOrderItem
-	33, // 14: Scailo.WorkOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34, // 15: Scailo.WorkOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 16: Scailo.WorkOrdersServicePaginationReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
-	30, // 17: Scailo.WorkOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	8,  // 18: Scailo.WorkOrdersServicePaginationResponse.payload:type_name -> Scailo.WorkOrder
-	33, // 19: Scailo.WorkOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34, // 20: Scailo.WorkOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 21: Scailo.WorkOrdersServiceFilterReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
-	30, // 22: Scailo.WorkOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,  // 23: Scailo.WorkOrdersServiceFilterReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
-	35, // 24: Scailo.WorkOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	33, // 25: Scailo.WorkOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
-	30, // 26: Scailo.WorkOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,  // 27: Scailo.WorkOrdersServiceCountReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
-	35, // 28: Scailo.WorkOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
-	33, // 29: Scailo.WorkOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
-	34, // 30: Scailo.WorkOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
-	1,  // 31: Scailo.WorkOrdersServiceSearchAllReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
-	30, // 32: Scailo.WorkOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
-	0,  // 33: Scailo.WorkOrdersServiceSearchAllReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
-	33, // 34: Scailo.WorkOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
-	34, // 35: Scailo.WorkOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
-	2,  // 36: Scailo.WorkOrderItemsSearchRequest.sort_key:type_name -> Scailo.WORK_ORDER_ITEM_SORT_KEY
-	3,  // 37: Scailo.WorkOrderItemsSearchRequest.status:type_name -> Scailo.WORK_ORDER_ITEM_STATUS
-	11, // 38: Scailo.WorkOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.WorkOrderItem
-	23, // 39: Scailo.WorkOrderRequirementStatisticsList.list:type_name -> Scailo.WorkOrderRequirementStatistics
-	25, // 40: Scailo.WorkOrderProductionStatisticsList.list:type_name -> Scailo.WorkOrderProductionStatistics
-	4,  // 41: Scailo.WorkOrdersService.Create:input_type -> Scailo.WorkOrdersServiceCreateRequest
-	4,  // 42: Scailo.WorkOrdersService.Draft:input_type -> Scailo.WorkOrdersServiceCreateRequest
-	5,  // 43: Scailo.WorkOrdersService.DraftUpdate:input_type -> Scailo.WorkOrdersServiceUpdateRequest
-	36, // 44: Scailo.WorkOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 45: Scailo.WorkOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 46: Scailo.WorkOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 47: Scailo.WorkOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
-	5,  // 48: Scailo.WorkOrdersService.RevisionUpdate:input_type -> Scailo.WorkOrdersServiceUpdateRequest
-	36, // 49: Scailo.WorkOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 50: Scailo.WorkOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 51: Scailo.WorkOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 52: Scailo.WorkOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
-	37, // 53: Scailo.WorkOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
-	36, // 54: Scailo.WorkOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
-	36, // 55: Scailo.WorkOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	38, // 56: Scailo.WorkOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	39, // 57: Scailo.WorkOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	6,  // 58: Scailo.WorkOrdersService.Autofill:input_type -> Scailo.WorkOrdersServiceAutofillRequest
-	36, // 59: Scailo.WorkOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	40, // 60: Scailo.WorkOrdersService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	9,  // 61: Scailo.WorkOrdersService.AddWorkOrderItem:input_type -> Scailo.WorkOrdersServiceItemCreateRequest
-	10, // 62: Scailo.WorkOrdersService.ModifyWorkOrderItem:input_type -> Scailo.WorkOrdersServiceItemUpdateRequest
-	41, // 63: Scailo.WorkOrdersService.ApproveWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 64: Scailo.WorkOrdersService.DeleteWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	42, // 65: Scailo.WorkOrdersService.ReorderWorkOrderItems:input_type -> Scailo.ReorderItemsRequest
-	43, // 66: Scailo.WorkOrdersService.ViewWorkOrderItemByID:input_type -> Scailo.Identifier
-	44, // 67: Scailo.WorkOrdersService.ViewApprovedWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	44, // 68: Scailo.WorkOrdersService.ViewUnapprovedWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	14, // 69: Scailo.WorkOrdersService.ViewWorkOrderItemHistory:input_type -> Scailo.WorkOrderItemHistoryRequest
-	21, // 70: Scailo.WorkOrdersService.ViewPaginatedApprovedWorkOrderItems:input_type -> Scailo.WorkOrderItemsSearchRequest
-	21, // 71: Scailo.WorkOrdersService.ViewPaginatedUnapprovedWorkOrderItems:input_type -> Scailo.WorkOrderItemsSearchRequest
-	21, // 72: Scailo.WorkOrdersService.SearchItemsWithPagination:input_type -> Scailo.WorkOrderItemsSearchRequest
-	40, // 73: Scailo.WorkOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	45, // 74: Scailo.WorkOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	46, // 75: Scailo.WorkOrdersService.UploadWorkOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
-	43, // 76: Scailo.WorkOrdersService.ViewByID:input_type -> Scailo.Identifier
-	40, // 77: Scailo.WorkOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	47, // 78: Scailo.WorkOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	43, // 79: Scailo.WorkOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	40, // 80: Scailo.WorkOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	48, // 81: Scailo.WorkOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	40, // 82: Scailo.WorkOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	49, // 83: Scailo.WorkOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
-	40, // 84: Scailo.WorkOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	16, // 85: Scailo.WorkOrdersService.ViewWithPagination:input_type -> Scailo.WorkOrdersServicePaginationReq
-	43, // 86: Scailo.WorkOrdersService.ViewAmendments:input_type -> Scailo.Identifier
-	44, // 87: Scailo.WorkOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	50, // 88: Scailo.WorkOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15, // 89: Scailo.WorkOrdersService.ViewProspectiveWorkOrderItem:input_type -> Scailo.WorkOrderItemProspectiveInfoRequest
-	40, // 90: Scailo.WorkOrdersService.ViewRequirementStatistics:input_type -> Scailo.IdentifierUUID
-	40, // 91: Scailo.WorkOrdersService.ViewProductionStatistics:input_type -> Scailo.IdentifierUUID
-	40, // 92: Scailo.WorkOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	40, // 93: Scailo.WorkOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 94: Scailo.WorkOrdersService.SearchAll:input_type -> Scailo.WorkOrdersServiceSearchAllReq
-	18, // 95: Scailo.WorkOrdersService.Filter:input_type -> Scailo.WorkOrdersServiceFilterReq
-	51, // 96: Scailo.WorkOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	19, // 97: Scailo.WorkOrdersService.Count:input_type -> Scailo.WorkOrdersServiceCountReq
-	18, // 98: Scailo.WorkOrdersService.DownloadAsCSV:input_type -> Scailo.WorkOrdersServiceFilterReq
-	52, // 99: Scailo.WorkOrdersService.Create:output_type -> Scailo.IdentifierResponse
-	52, // 100: Scailo.WorkOrdersService.Draft:output_type -> Scailo.IdentifierResponse
-	52, // 101: Scailo.WorkOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	52, // 102: Scailo.WorkOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	52, // 103: Scailo.WorkOrdersService.Verify:output_type -> Scailo.IdentifierResponse
-	52, // 104: Scailo.WorkOrdersService.Approve:output_type -> Scailo.IdentifierResponse
-	52, // 105: Scailo.WorkOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	52, // 106: Scailo.WorkOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	52, // 107: Scailo.WorkOrdersService.Halt:output_type -> Scailo.IdentifierResponse
-	52, // 108: Scailo.WorkOrdersService.Discard:output_type -> Scailo.IdentifierResponse
-	52, // 109: Scailo.WorkOrdersService.Restore:output_type -> Scailo.IdentifierResponse
-	52, // 110: Scailo.WorkOrdersService.Complete:output_type -> Scailo.IdentifierResponse
-	52, // 111: Scailo.WorkOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
-	52, // 112: Scailo.WorkOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
-	52, // 113: Scailo.WorkOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	52, // 114: Scailo.WorkOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
-	53, // 115: Scailo.WorkOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
-	52, // 116: Scailo.WorkOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
-	52, // 117: Scailo.WorkOrdersService.Amend:output_type -> Scailo.IdentifierResponse
-	54, // 118: Scailo.WorkOrdersService.IsCompletable:output_type -> Scailo.BooleanResponse
-	52, // 119: Scailo.WorkOrdersService.AddWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	52, // 120: Scailo.WorkOrdersService.ModifyWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	52, // 121: Scailo.WorkOrdersService.ApproveWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	52, // 122: Scailo.WorkOrdersService.DeleteWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	52, // 123: Scailo.WorkOrdersService.ReorderWorkOrderItems:output_type -> Scailo.IdentifierResponse
-	11, // 124: Scailo.WorkOrdersService.ViewWorkOrderItemByID:output_type -> Scailo.WorkOrderItem
-	13, // 125: Scailo.WorkOrdersService.ViewApprovedWorkOrderItems:output_type -> Scailo.WorkOrdersItemsList
-	13, // 126: Scailo.WorkOrdersService.ViewUnapprovedWorkOrderItems:output_type -> Scailo.WorkOrdersItemsList
-	13, // 127: Scailo.WorkOrdersService.ViewWorkOrderItemHistory:output_type -> Scailo.WorkOrdersItemsList
-	22, // 128: Scailo.WorkOrdersService.ViewPaginatedApprovedWorkOrderItems:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
-	22, // 129: Scailo.WorkOrdersService.ViewPaginatedUnapprovedWorkOrderItems:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
-	22, // 130: Scailo.WorkOrdersService.SearchItemsWithPagination:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
-	55, // 131: Scailo.WorkOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	55, // 132: Scailo.WorkOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	48, // 133: Scailo.WorkOrdersService.UploadWorkOrderItems:output_type -> Scailo.IdentifiersList
-	8,  // 134: Scailo.WorkOrdersService.ViewByID:output_type -> Scailo.WorkOrder
-	8,  // 135: Scailo.WorkOrdersService.ViewByUUID:output_type -> Scailo.WorkOrder
-	8,  // 136: Scailo.WorkOrdersService.ViewByReferenceID:output_type -> Scailo.WorkOrder
-	8,  // 137: Scailo.WorkOrdersService.ViewEssentialByID:output_type -> Scailo.WorkOrder
-	8,  // 138: Scailo.WorkOrdersService.ViewEssentialByUUID:output_type -> Scailo.WorkOrder
-	12, // 139: Scailo.WorkOrdersService.ViewFromIDs:output_type -> Scailo.WorkOrdersList
-	7,  // 140: Scailo.WorkOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.WorkOrderAncillaryParameters
-	12, // 141: Scailo.WorkOrdersService.ViewAll:output_type -> Scailo.WorkOrdersList
-	12, // 142: Scailo.WorkOrdersService.ViewAllForEntityUUID:output_type -> Scailo.WorkOrdersList
-	17, // 143: Scailo.WorkOrdersService.ViewWithPagination:output_type -> Scailo.WorkOrdersServicePaginationResponse
-	56, // 144: Scailo.WorkOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	57, // 145: Scailo.WorkOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	57, // 146: Scailo.WorkOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,  // 147: Scailo.WorkOrdersService.ViewProspectiveWorkOrderItem:output_type -> Scailo.WorkOrdersServiceItemCreateRequest
-	24, // 148: Scailo.WorkOrdersService.ViewRequirementStatistics:output_type -> Scailo.WorkOrderRequirementStatisticsList
-	26, // 149: Scailo.WorkOrdersService.ViewProductionStatistics:output_type -> Scailo.WorkOrderProductionStatisticsList
-	54, // 150: Scailo.WorkOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	55, // 151: Scailo.WorkOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
-	12, // 152: Scailo.WorkOrdersService.SearchAll:output_type -> Scailo.WorkOrdersList
-	12, // 153: Scailo.WorkOrdersService.Filter:output_type -> Scailo.WorkOrdersList
-	58, // 154: Scailo.WorkOrdersService.CountInStatus:output_type -> Scailo.CountResponse
-	58, // 155: Scailo.WorkOrdersService.Count:output_type -> Scailo.CountResponse
-	55, // 156: Scailo.WorkOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	99, // [99:157] is the sub-list for method output_type
-	41, // [41:99] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	0,   // 0: Scailo.WorkOrdersServiceCreateRequest.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
+	27,  // 1: Scailo.WorkOrdersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	27,  // 2: Scailo.WorkOrdersServiceUpdateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
+	28,  // 3: Scailo.WorkOrder.metadata:type_name -> Scailo.EmployeeMetadata
+	29,  // 4: Scailo.WorkOrder.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	30,  // 5: Scailo.WorkOrder.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	31,  // 6: Scailo.WorkOrder.logs:type_name -> Scailo.LogbookLogConciseSLC
+	0,   // 7: Scailo.WorkOrder.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
+	11,  // 8: Scailo.WorkOrder.list:type_name -> Scailo.WorkOrderItem
+	32,  // 9: Scailo.WorkOrder.form_data:type_name -> Scailo.FormFieldDatum
+	28,  // 10: Scailo.WorkOrderItem.metadata:type_name -> Scailo.EmployeeMetadata
+	29,  // 11: Scailo.WorkOrderItem.approval_metadata:type_name -> Scailo.ApprovalMetadata
+	8,   // 12: Scailo.WorkOrdersList.list:type_name -> Scailo.WorkOrder
+	11,  // 13: Scailo.WorkOrdersItemsList.list:type_name -> Scailo.WorkOrderItem
+	33,  // 14: Scailo.WorkOrdersServicePaginationReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 15: Scailo.WorkOrdersServicePaginationReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 16: Scailo.WorkOrdersServicePaginationReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
+	30,  // 17: Scailo.WorkOrdersServicePaginationReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	8,   // 18: Scailo.WorkOrdersServicePaginationResponse.payload:type_name -> Scailo.WorkOrder
+	33,  // 19: Scailo.WorkOrdersServiceFilterReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 20: Scailo.WorkOrdersServiceFilterReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 21: Scailo.WorkOrdersServiceFilterReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
+	30,  // 22: Scailo.WorkOrdersServiceFilterReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 23: Scailo.WorkOrdersServiceFilterReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
+	35,  // 24: Scailo.WorkOrdersServiceFilterReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	33,  // 25: Scailo.WorkOrdersServiceCountReq.is_active:type_name -> Scailo.BOOL_FILTER
+	30,  // 26: Scailo.WorkOrdersServiceCountReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 27: Scailo.WorkOrdersServiceCountReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
+	35,  // 28: Scailo.WorkOrdersServiceCountReq.form_data:type_name -> Scailo.FormFieldDatumFilterRequest
+	33,  // 29: Scailo.WorkOrdersServiceSearchAllReq.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 30: Scailo.WorkOrdersServiceSearchAllReq.sort_order:type_name -> Scailo.SORT_ORDER
+	1,   // 31: Scailo.WorkOrdersServiceSearchAllReq.sort_key:type_name -> Scailo.WORK_ORDER_SORT_KEY
+	30,  // 32: Scailo.WorkOrdersServiceSearchAllReq.status:type_name -> Scailo.STANDARD_LIFECYCLE_STATUS
+	0,   // 33: Scailo.WorkOrdersServiceSearchAllReq.ref_from:type_name -> Scailo.WORK_ORDER_REF_FROM
+	33,  // 34: Scailo.WorkOrderItemsSearchRequest.is_active:type_name -> Scailo.BOOL_FILTER
+	34,  // 35: Scailo.WorkOrderItemsSearchRequest.sort_order:type_name -> Scailo.SORT_ORDER
+	2,   // 36: Scailo.WorkOrderItemsSearchRequest.sort_key:type_name -> Scailo.WORK_ORDER_ITEM_SORT_KEY
+	3,   // 37: Scailo.WorkOrderItemsSearchRequest.status:type_name -> Scailo.WORK_ORDER_ITEM_STATUS
+	11,  // 38: Scailo.WorkOrdersServicePaginatedItemsResponse.payload:type_name -> Scailo.WorkOrderItem
+	23,  // 39: Scailo.WorkOrderRequirementStatisticsList.list:type_name -> Scailo.WorkOrderRequirementStatistics
+	25,  // 40: Scailo.WorkOrderProductionStatisticsList.list:type_name -> Scailo.WorkOrderProductionStatistics
+	4,   // 41: Scailo.WorkOrdersService.Create:input_type -> Scailo.WorkOrdersServiceCreateRequest
+	4,   // 42: Scailo.WorkOrdersService.Draft:input_type -> Scailo.WorkOrdersServiceCreateRequest
+	5,   // 43: Scailo.WorkOrdersService.DraftUpdate:input_type -> Scailo.WorkOrdersServiceUpdateRequest
+	36,  // 44: Scailo.WorkOrdersService.SendForVerification:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 45: Scailo.WorkOrdersService.Verify:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 46: Scailo.WorkOrdersService.Approve:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 47: Scailo.WorkOrdersService.SendForRevision:input_type -> Scailo.IdentifierUUIDWithUserComment
+	5,   // 48: Scailo.WorkOrdersService.RevisionUpdate:input_type -> Scailo.WorkOrdersServiceUpdateRequest
+	36,  // 49: Scailo.WorkOrdersService.Halt:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 50: Scailo.WorkOrdersService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 51: Scailo.WorkOrdersService.Restore:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 52: Scailo.WorkOrdersService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
+	37,  // 53: Scailo.WorkOrdersService.Repeat:input_type -> Scailo.RepeatWithDeliveryDate
+	36,  // 54: Scailo.WorkOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36,  // 55: Scailo.WorkOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
+	38,  // 56: Scailo.WorkOrdersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
+	39,  // 57: Scailo.WorkOrdersService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	40,  // 58: Scailo.WorkOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	6,   // 59: Scailo.WorkOrdersService.Autofill:input_type -> Scailo.WorkOrdersServiceAutofillRequest
+	36,  // 60: Scailo.WorkOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	41,  // 61: Scailo.WorkOrdersService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	9,   // 62: Scailo.WorkOrdersService.AddWorkOrderItem:input_type -> Scailo.WorkOrdersServiceItemCreateRequest
+	10,  // 63: Scailo.WorkOrdersService.ModifyWorkOrderItem:input_type -> Scailo.WorkOrdersServiceItemUpdateRequest
+	42,  // 64: Scailo.WorkOrdersService.ApproveWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	42,  // 65: Scailo.WorkOrdersService.DeleteWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	43,  // 66: Scailo.WorkOrdersService.ReorderWorkOrderItems:input_type -> Scailo.ReorderItemsRequest
+	44,  // 67: Scailo.WorkOrdersService.ViewWorkOrderItemByID:input_type -> Scailo.Identifier
+	45,  // 68: Scailo.WorkOrdersService.ViewApprovedWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	45,  // 69: Scailo.WorkOrdersService.ViewUnapprovedWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	14,  // 70: Scailo.WorkOrdersService.ViewWorkOrderItemHistory:input_type -> Scailo.WorkOrderItemHistoryRequest
+	21,  // 71: Scailo.WorkOrdersService.ViewPaginatedApprovedWorkOrderItems:input_type -> Scailo.WorkOrderItemsSearchRequest
+	21,  // 72: Scailo.WorkOrdersService.ViewPaginatedUnapprovedWorkOrderItems:input_type -> Scailo.WorkOrderItemsSearchRequest
+	21,  // 73: Scailo.WorkOrdersService.SearchItemsWithPagination:input_type -> Scailo.WorkOrderItemsSearchRequest
+	41,  // 74: Scailo.WorkOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	46,  // 75: Scailo.WorkOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	47,  // 76: Scailo.WorkOrdersService.UploadWorkOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
+	44,  // 77: Scailo.WorkOrdersService.ViewByID:input_type -> Scailo.Identifier
+	41,  // 78: Scailo.WorkOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	48,  // 79: Scailo.WorkOrdersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	44,  // 80: Scailo.WorkOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	41,  // 81: Scailo.WorkOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	49,  // 82: Scailo.WorkOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	41,  // 83: Scailo.WorkOrdersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	50,  // 84: Scailo.WorkOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
+	41,  // 85: Scailo.WorkOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	16,  // 86: Scailo.WorkOrdersService.ViewWithPagination:input_type -> Scailo.WorkOrdersServicePaginationReq
+	44,  // 87: Scailo.WorkOrdersService.ViewAmendments:input_type -> Scailo.Identifier
+	45,  // 88: Scailo.WorkOrdersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	51,  // 89: Scailo.WorkOrdersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	15,  // 90: Scailo.WorkOrdersService.ViewProspectiveWorkOrderItem:input_type -> Scailo.WorkOrderItemProspectiveInfoRequest
+	41,  // 91: Scailo.WorkOrdersService.ViewRequirementStatistics:input_type -> Scailo.IdentifierUUID
+	41,  // 92: Scailo.WorkOrdersService.ViewProductionStatistics:input_type -> Scailo.IdentifierUUID
+	41,  // 93: Scailo.WorkOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	41,  // 94: Scailo.WorkOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	20,  // 95: Scailo.WorkOrdersService.SearchAll:input_type -> Scailo.WorkOrdersServiceSearchAllReq
+	18,  // 96: Scailo.WorkOrdersService.Filter:input_type -> Scailo.WorkOrdersServiceFilterReq
+	52,  // 97: Scailo.WorkOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	19,  // 98: Scailo.WorkOrdersService.Count:input_type -> Scailo.WorkOrdersServiceCountReq
+	18,  // 99: Scailo.WorkOrdersService.DownloadAsCSV:input_type -> Scailo.WorkOrdersServiceFilterReq
+	53,  // 100: Scailo.WorkOrdersService.Create:output_type -> Scailo.IdentifierResponse
+	53,  // 101: Scailo.WorkOrdersService.Draft:output_type -> Scailo.IdentifierResponse
+	53,  // 102: Scailo.WorkOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	53,  // 103: Scailo.WorkOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	53,  // 104: Scailo.WorkOrdersService.Verify:output_type -> Scailo.IdentifierResponse
+	53,  // 105: Scailo.WorkOrdersService.Approve:output_type -> Scailo.IdentifierResponse
+	53,  // 106: Scailo.WorkOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	53,  // 107: Scailo.WorkOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	53,  // 108: Scailo.WorkOrdersService.Halt:output_type -> Scailo.IdentifierResponse
+	53,  // 109: Scailo.WorkOrdersService.Discard:output_type -> Scailo.IdentifierResponse
+	53,  // 110: Scailo.WorkOrdersService.Restore:output_type -> Scailo.IdentifierResponse
+	53,  // 111: Scailo.WorkOrdersService.Complete:output_type -> Scailo.IdentifierResponse
+	53,  // 112: Scailo.WorkOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
+	53,  // 113: Scailo.WorkOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
+	53,  // 114: Scailo.WorkOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	53,  // 115: Scailo.WorkOrdersService.SendEmail:output_type -> Scailo.IdentifierResponse
+	53,  // 116: Scailo.WorkOrdersService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	54,  // 117: Scailo.WorkOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
+	53,  // 118: Scailo.WorkOrdersService.Autofill:output_type -> Scailo.IdentifierResponse
+	53,  // 119: Scailo.WorkOrdersService.Amend:output_type -> Scailo.IdentifierResponse
+	55,  // 120: Scailo.WorkOrdersService.IsCompletable:output_type -> Scailo.BooleanResponse
+	53,  // 121: Scailo.WorkOrdersService.AddWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	53,  // 122: Scailo.WorkOrdersService.ModifyWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	53,  // 123: Scailo.WorkOrdersService.ApproveWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	53,  // 124: Scailo.WorkOrdersService.DeleteWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	53,  // 125: Scailo.WorkOrdersService.ReorderWorkOrderItems:output_type -> Scailo.IdentifierResponse
+	11,  // 126: Scailo.WorkOrdersService.ViewWorkOrderItemByID:output_type -> Scailo.WorkOrderItem
+	13,  // 127: Scailo.WorkOrdersService.ViewApprovedWorkOrderItems:output_type -> Scailo.WorkOrdersItemsList
+	13,  // 128: Scailo.WorkOrdersService.ViewUnapprovedWorkOrderItems:output_type -> Scailo.WorkOrdersItemsList
+	13,  // 129: Scailo.WorkOrdersService.ViewWorkOrderItemHistory:output_type -> Scailo.WorkOrdersItemsList
+	22,  // 130: Scailo.WorkOrdersService.ViewPaginatedApprovedWorkOrderItems:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
+	22,  // 131: Scailo.WorkOrdersService.ViewPaginatedUnapprovedWorkOrderItems:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
+	22,  // 132: Scailo.WorkOrdersService.SearchItemsWithPagination:output_type -> Scailo.WorkOrdersServicePaginatedItemsResponse
+	56,  // 133: Scailo.WorkOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	56,  // 134: Scailo.WorkOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	49,  // 135: Scailo.WorkOrdersService.UploadWorkOrderItems:output_type -> Scailo.IdentifiersList
+	8,   // 136: Scailo.WorkOrdersService.ViewByID:output_type -> Scailo.WorkOrder
+	8,   // 137: Scailo.WorkOrdersService.ViewByUUID:output_type -> Scailo.WorkOrder
+	8,   // 138: Scailo.WorkOrdersService.ViewByReferenceID:output_type -> Scailo.WorkOrder
+	8,   // 139: Scailo.WorkOrdersService.ViewEssentialByID:output_type -> Scailo.WorkOrder
+	8,   // 140: Scailo.WorkOrdersService.ViewEssentialByUUID:output_type -> Scailo.WorkOrder
+	12,  // 141: Scailo.WorkOrdersService.ViewFromIDs:output_type -> Scailo.WorkOrdersList
+	7,   // 142: Scailo.WorkOrdersService.ViewAncillaryParametersByUUID:output_type -> Scailo.WorkOrderAncillaryParameters
+	12,  // 143: Scailo.WorkOrdersService.ViewAll:output_type -> Scailo.WorkOrdersList
+	12,  // 144: Scailo.WorkOrdersService.ViewAllForEntityUUID:output_type -> Scailo.WorkOrdersList
+	17,  // 145: Scailo.WorkOrdersService.ViewWithPagination:output_type -> Scailo.WorkOrdersServicePaginationResponse
+	57,  // 146: Scailo.WorkOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	58,  // 147: Scailo.WorkOrdersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	58,  // 148: Scailo.WorkOrdersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 149: Scailo.WorkOrdersService.ViewProspectiveWorkOrderItem:output_type -> Scailo.WorkOrdersServiceItemCreateRequest
+	24,  // 150: Scailo.WorkOrdersService.ViewRequirementStatistics:output_type -> Scailo.WorkOrderRequirementStatisticsList
+	26,  // 151: Scailo.WorkOrdersService.ViewProductionStatistics:output_type -> Scailo.WorkOrderProductionStatisticsList
+	55,  // 152: Scailo.WorkOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	56,  // 153: Scailo.WorkOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
+	12,  // 154: Scailo.WorkOrdersService.SearchAll:output_type -> Scailo.WorkOrdersList
+	12,  // 155: Scailo.WorkOrdersService.Filter:output_type -> Scailo.WorkOrdersList
+	59,  // 156: Scailo.WorkOrdersService.CountInStatus:output_type -> Scailo.CountResponse
+	59,  // 157: Scailo.WorkOrdersService.Count:output_type -> Scailo.CountResponse
+	56,  // 158: Scailo.WorkOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	100, // [100:159] is the sub-list for method output_type
+	41,  // [41:100] is the sub-list for method input_type
+	41,  // [41:41] is the sub-list for extension type_name
+	41,  // [41:41] is the sub-list for extension extendee
+	0,   // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_work_orders_scailo_proto_init() }
@@ -3650,6 +3654,7 @@ func file_work_orders_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

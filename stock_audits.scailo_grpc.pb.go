@@ -34,6 +34,7 @@ const (
 	StockAuditsService_Reopen_FullMethodName                                 = "/Scailo.StockAuditsService/Reopen"
 	StockAuditsService_CommentAdd_FullMethodName                             = "/Scailo.StockAuditsService/CommentAdd"
 	StockAuditsService_SendEmail_FullMethodName                              = "/Scailo.StockAuditsService/SendEmail"
+	StockAuditsService_AttachVaultFolder_FullMethodName                      = "/Scailo.StockAuditsService/AttachVaultFolder"
 	StockAuditsService_CreateMagicLink_FullMethodName                        = "/Scailo.StockAuditsService/CreateMagicLink"
 	StockAuditsService_IsCompletable_FullMethodName                          = "/Scailo.StockAuditsService/IsCompletable"
 	StockAuditsService_AddStockAuditItem_FullMethodName                      = "/Scailo.StockAuditsService/AddStockAuditItem"
@@ -175,6 +176,17 @@ type StockAuditsServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
@@ -419,6 +431,16 @@ func (c *stockAuditsServiceClient) SendEmail(ctx context.Context, in *Identifier
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, StockAuditsService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *stockAuditsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, StockAuditsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

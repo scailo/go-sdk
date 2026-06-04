@@ -1496,7 +1496,7 @@ var File_departments_scailo_proto protoreflect.FileDescriptor
 
 const file_departments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18departments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xa6\x02\n" +
+	"\x18departments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xa6\x02\n" +
 	"\x1fDepartmentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -1619,7 +1619,7 @@ const file_departments_scailo_proto_rawDesc = "" +
 	"\x18DEPARTMENT_SORT_KEY_NAME\x10\n" +
 	"\x12\x1c\n" +
 	"\x18DEPARTMENT_SORT_KEY_CODE\x10\v\x12$\n" +
-	" DEPARTMENT_SORT_KEY_HEAD_USER_ID\x10\f2\x9a\x11\n" +
+	" DEPARTMENT_SORT_KEY_HEAD_USER_ID\x10\f2\xed\x11\n" +
 	"\x12DepartmentsService\x12M\n" +
 	"\x06Create\x12'.Scailo.DepartmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.DepartmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -1636,7 +1636,8 @@ const file_departments_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x12.Scailo.Department\x128\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x12.Scailo.Department\x12;\n" +
@@ -1688,15 +1689,16 @@ var file_departments_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                             // 14: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                              // 15: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),        // 16: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                           // 17: Scailo.Identifier
-	(*IdentifierUUID)(nil),                       // 18: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                      // 19: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                         // 20: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),              // 21: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                         // 22: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                   // 23: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                        // 24: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                  // 25: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),             // 17: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                           // 18: Scailo.Identifier
+	(*IdentifierUUID)(nil),                       // 19: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                      // 20: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                         // 21: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),              // 22: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                         // 23: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                   // 24: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                        // 25: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                  // 26: Scailo.IdentifierUUIDsList
 }
 var file_departments_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.Department.metadata:type_name -> Scailo.EmployeeMetadata
@@ -1734,51 +1736,53 @@ var file_departments_scailo_proto_depIdxs = []int32{
 	16, // 32: Scailo.DepartmentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 33: Scailo.DepartmentsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	16, // 34: Scailo.DepartmentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	17, // 35: Scailo.DepartmentsService.ViewByID:input_type -> Scailo.Identifier
-	18, // 36: Scailo.DepartmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 37: Scailo.DepartmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	18, // 38: Scailo.DepartmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 39: Scailo.DepartmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	20, // 40: Scailo.DepartmentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	18, // 41: Scailo.DepartmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 42: Scailo.DepartmentsService.ViewWithPagination:input_type -> Scailo.DepartmentsServicePaginationReq
-	9,  // 43: Scailo.DepartmentsService.SearchAll:input_type -> Scailo.DepartmentsServiceSearchAllReq
-	7,  // 44: Scailo.DepartmentsService.Filter:input_type -> Scailo.DepartmentsServiceFilterReq
-	21, // 45: Scailo.DepartmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 46: Scailo.DepartmentsService.Count:input_type -> Scailo.DepartmentsServiceCountReq
-	7,  // 47: Scailo.DepartmentsService.DownloadAsCSV:input_type -> Scailo.DepartmentsServiceFilterReq
-	22, // 48: Scailo.DepartmentsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	23, // 49: Scailo.DepartmentsService.Create:output_type -> Scailo.IdentifierResponse
-	23, // 50: Scailo.DepartmentsService.Draft:output_type -> Scailo.IdentifierResponse
-	23, // 51: Scailo.DepartmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 52: Scailo.DepartmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	23, // 53: Scailo.DepartmentsService.Verify:output_type -> Scailo.IdentifierResponse
-	23, // 54: Scailo.DepartmentsService.Approve:output_type -> Scailo.IdentifierResponse
-	23, // 55: Scailo.DepartmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	23, // 56: Scailo.DepartmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	23, // 57: Scailo.DepartmentsService.Halt:output_type -> Scailo.IdentifierResponse
-	23, // 58: Scailo.DepartmentsService.Discard:output_type -> Scailo.IdentifierResponse
-	23, // 59: Scailo.DepartmentsService.Restore:output_type -> Scailo.IdentifierResponse
-	23, // 60: Scailo.DepartmentsService.Complete:output_type -> Scailo.IdentifierResponse
-	23, // 61: Scailo.DepartmentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	23, // 62: Scailo.DepartmentsService.Reopen:output_type -> Scailo.IdentifierResponse
-	23, // 63: Scailo.DepartmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 64: Scailo.DepartmentsService.ViewByID:output_type -> Scailo.Department
-	3,  // 65: Scailo.DepartmentsService.ViewByUUID:output_type -> Scailo.Department
-	3,  // 66: Scailo.DepartmentsService.ViewEssentialByID:output_type -> Scailo.Department
-	3,  // 67: Scailo.DepartmentsService.ViewEssentialByUUID:output_type -> Scailo.Department
-	4,  // 68: Scailo.DepartmentsService.ViewFromIDs:output_type -> Scailo.DepartmentsList
-	4,  // 69: Scailo.DepartmentsService.ViewAll:output_type -> Scailo.DepartmentsList
-	4,  // 70: Scailo.DepartmentsService.ViewAllForEntityUUID:output_type -> Scailo.DepartmentsList
-	6,  // 71: Scailo.DepartmentsService.ViewWithPagination:output_type -> Scailo.DepartmentsServicePaginationResponse
-	4,  // 72: Scailo.DepartmentsService.SearchAll:output_type -> Scailo.DepartmentsList
-	4,  // 73: Scailo.DepartmentsService.Filter:output_type -> Scailo.DepartmentsList
-	24, // 74: Scailo.DepartmentsService.CountInStatus:output_type -> Scailo.CountResponse
-	24, // 75: Scailo.DepartmentsService.Count:output_type -> Scailo.CountResponse
-	22, // 76: Scailo.DepartmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	25, // 77: Scailo.DepartmentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	49, // [49:78] is the sub-list for method output_type
-	20, // [20:49] is the sub-list for method input_type
+	17, // 35: Scailo.DepartmentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	18, // 36: Scailo.DepartmentsService.ViewByID:input_type -> Scailo.Identifier
+	19, // 37: Scailo.DepartmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 38: Scailo.DepartmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	19, // 39: Scailo.DepartmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	20, // 40: Scailo.DepartmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	21, // 41: Scailo.DepartmentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	19, // 42: Scailo.DepartmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 43: Scailo.DepartmentsService.ViewWithPagination:input_type -> Scailo.DepartmentsServicePaginationReq
+	9,  // 44: Scailo.DepartmentsService.SearchAll:input_type -> Scailo.DepartmentsServiceSearchAllReq
+	7,  // 45: Scailo.DepartmentsService.Filter:input_type -> Scailo.DepartmentsServiceFilterReq
+	22, // 46: Scailo.DepartmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 47: Scailo.DepartmentsService.Count:input_type -> Scailo.DepartmentsServiceCountReq
+	7,  // 48: Scailo.DepartmentsService.DownloadAsCSV:input_type -> Scailo.DepartmentsServiceFilterReq
+	23, // 49: Scailo.DepartmentsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	24, // 50: Scailo.DepartmentsService.Create:output_type -> Scailo.IdentifierResponse
+	24, // 51: Scailo.DepartmentsService.Draft:output_type -> Scailo.IdentifierResponse
+	24, // 52: Scailo.DepartmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 53: Scailo.DepartmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	24, // 54: Scailo.DepartmentsService.Verify:output_type -> Scailo.IdentifierResponse
+	24, // 55: Scailo.DepartmentsService.Approve:output_type -> Scailo.IdentifierResponse
+	24, // 56: Scailo.DepartmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	24, // 57: Scailo.DepartmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	24, // 58: Scailo.DepartmentsService.Halt:output_type -> Scailo.IdentifierResponse
+	24, // 59: Scailo.DepartmentsService.Discard:output_type -> Scailo.IdentifierResponse
+	24, // 60: Scailo.DepartmentsService.Restore:output_type -> Scailo.IdentifierResponse
+	24, // 61: Scailo.DepartmentsService.Complete:output_type -> Scailo.IdentifierResponse
+	24, // 62: Scailo.DepartmentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	24, // 63: Scailo.DepartmentsService.Reopen:output_type -> Scailo.IdentifierResponse
+	24, // 64: Scailo.DepartmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	24, // 65: Scailo.DepartmentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 66: Scailo.DepartmentsService.ViewByID:output_type -> Scailo.Department
+	3,  // 67: Scailo.DepartmentsService.ViewByUUID:output_type -> Scailo.Department
+	3,  // 68: Scailo.DepartmentsService.ViewEssentialByID:output_type -> Scailo.Department
+	3,  // 69: Scailo.DepartmentsService.ViewEssentialByUUID:output_type -> Scailo.Department
+	4,  // 70: Scailo.DepartmentsService.ViewFromIDs:output_type -> Scailo.DepartmentsList
+	4,  // 71: Scailo.DepartmentsService.ViewAll:output_type -> Scailo.DepartmentsList
+	4,  // 72: Scailo.DepartmentsService.ViewAllForEntityUUID:output_type -> Scailo.DepartmentsList
+	6,  // 73: Scailo.DepartmentsService.ViewWithPagination:output_type -> Scailo.DepartmentsServicePaginationResponse
+	4,  // 74: Scailo.DepartmentsService.SearchAll:output_type -> Scailo.DepartmentsList
+	4,  // 75: Scailo.DepartmentsService.Filter:output_type -> Scailo.DepartmentsList
+	25, // 76: Scailo.DepartmentsService.CountInStatus:output_type -> Scailo.CountResponse
+	25, // 77: Scailo.DepartmentsService.Count:output_type -> Scailo.CountResponse
+	23, // 78: Scailo.DepartmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	26, // 79: Scailo.DepartmentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	50, // [50:80] is the sub-list for method output_type
+	20, // [20:50] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -1790,6 +1794,7 @@ func file_departments_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

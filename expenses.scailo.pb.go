@@ -2651,7 +2651,7 @@ var File_expenses_scailo_proto protoreflect.FileDescriptor
 
 const file_expenses_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15expenses.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x96\x04\n" +
+	"\x15expenses.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x96\x04\n" +
 	"\x1cExpensesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2891,7 +2891,7 @@ const file_expenses_scailo_proto_rawDesc = "" +
 	"\x12%\n" +
 	"!EXPENSE_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12 \n" +
 	"\x1cEXPENSE_SORT_KEY_CURRENCY_ID\x10\f\x12$\n" +
-	" EXPENSE_SORT_KEY_PAID_BY_USER_ID\x10\r2\xb8\x1d\n" +
+	" EXPENSE_SORT_KEY_PAID_BY_USER_ID\x10\r2\x8b\x1e\n" +
 	"\x0fExpensesService\x12J\n" +
 	"\x06Create\x12$.Scailo.ExpensesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.ExpensesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2909,7 +2909,8 @@ const file_expenses_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12V\n" +
 	"\x0eAddExpenseItem\x12(.Scailo.ExpensesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x11ModifyExpenseItem\x12(.Scailo.ExpensesServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -2992,23 +2993,24 @@ var file_expenses_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 27: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 28: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 29: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 30: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 31: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 32: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 33: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 34: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 35: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 36: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 37: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 38: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 39: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 40: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 41: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 42: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 43: Scailo.MagicLink
-	(*StandardFile)(nil),                                      // 44: Scailo.StandardFile
-	(*BooleanResponse)(nil),                                   // 45: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 46: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 30: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 31: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 32: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 33: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 34: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 35: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 36: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 37: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 38: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 39: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 40: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 41: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 42: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 43: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 44: Scailo.MagicLink
+	(*StandardFile)(nil),                                      // 45: Scailo.StandardFile
+	(*BooleanResponse)(nil),                                   // 46: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 47: Scailo.CountResponse
 }
 var file_expenses_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.ExpensesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3061,88 +3063,90 @@ var file_expenses_scailo_proto_depIdxs = []int32{
 	28, // 47: Scailo.ExpensesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	28, // 48: Scailo.ExpensesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 49: Scailo.ExpensesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	30, // 50: Scailo.ExpensesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	6,  // 51: Scailo.ExpensesService.AddExpenseItem:input_type -> Scailo.ExpensesServiceItemCreateRequest
-	7,  // 52: Scailo.ExpensesService.ModifyExpenseItem:input_type -> Scailo.ExpensesServiceItemUpdateRequest
-	31, // 53: Scailo.ExpensesService.ApproveExpenseItem:input_type -> Scailo.IdentifierWithUserComment
-	31, // 54: Scailo.ExpensesService.DeleteExpenseItem:input_type -> Scailo.IdentifierWithUserComment
-	32, // 55: Scailo.ExpensesService.ReorderExpenseItems:input_type -> Scailo.ReorderItemsRequest
-	33, // 56: Scailo.ExpensesService.ViewExpenseItemByID:input_type -> Scailo.Identifier
-	34, // 57: Scailo.ExpensesService.ViewApprovedExpenseItems:input_type -> Scailo.IdentifierWithSearchKey
-	34, // 58: Scailo.ExpensesService.ViewUnapprovedExpenseItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 59: Scailo.ExpensesService.ViewExpenseItemHistory:input_type -> Scailo.ExpenseItemHistoryRequest
-	12, // 60: Scailo.ExpensesService.ViewPaginatedApprovedExpenseItems:input_type -> Scailo.ExpenseItemsSearchRequest
-	12, // 61: Scailo.ExpensesService.ViewPaginatedUnapprovedExpenseItems:input_type -> Scailo.ExpenseItemsSearchRequest
-	12, // 62: Scailo.ExpensesService.SearchItemsWithPagination:input_type -> Scailo.ExpenseItemsSearchRequest
-	35, // 63: Scailo.ExpensesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	36, // 64: Scailo.ExpensesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	37, // 65: Scailo.ExpensesService.UploadExpenseItems:input_type -> Scailo.IdentifierUUIDWithFile
-	33, // 66: Scailo.ExpensesService.ViewByID:input_type -> Scailo.Identifier
-	35, // 67: Scailo.ExpensesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	38, // 68: Scailo.ExpensesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	33, // 69: Scailo.ExpensesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35, // 70: Scailo.ExpensesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 71: Scailo.ExpensesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	40, // 72: Scailo.ExpensesService.ViewAll:input_type -> Scailo.ActiveStatus
-	35, // 73: Scailo.ExpensesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 74: Scailo.ExpensesService.ViewWithPagination:input_type -> Scailo.ExpensesServicePaginationReq
-	35, // 75: Scailo.ExpensesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	35, // 76: Scailo.ExpensesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 77: Scailo.ExpensesService.SearchAll:input_type -> Scailo.ExpensesServiceSearchAllReq
-	16, // 78: Scailo.ExpensesService.Filter:input_type -> Scailo.ExpensesServiceFilterReq
-	41, // 79: Scailo.ExpensesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 80: Scailo.ExpensesService.Count:input_type -> Scailo.ExpensesServiceCountReq
-	16, // 81: Scailo.ExpensesService.DownloadAsCSV:input_type -> Scailo.ExpensesServiceFilterReq
-	42, // 82: Scailo.ExpensesService.Create:output_type -> Scailo.IdentifierResponse
-	42, // 83: Scailo.ExpensesService.Draft:output_type -> Scailo.IdentifierResponse
-	42, // 84: Scailo.ExpensesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	42, // 85: Scailo.ExpensesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	42, // 86: Scailo.ExpensesService.Verify:output_type -> Scailo.IdentifierResponse
-	42, // 87: Scailo.ExpensesService.Approve:output_type -> Scailo.IdentifierResponse
-	42, // 88: Scailo.ExpensesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	42, // 89: Scailo.ExpensesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	42, // 90: Scailo.ExpensesService.Halt:output_type -> Scailo.IdentifierResponse
-	42, // 91: Scailo.ExpensesService.Discard:output_type -> Scailo.IdentifierResponse
-	42, // 92: Scailo.ExpensesService.Restore:output_type -> Scailo.IdentifierResponse
-	42, // 93: Scailo.ExpensesService.Complete:output_type -> Scailo.IdentifierResponse
-	42, // 94: Scailo.ExpensesService.Repeat:output_type -> Scailo.IdentifierResponse
-	42, // 95: Scailo.ExpensesService.Reopen:output_type -> Scailo.IdentifierResponse
-	42, // 96: Scailo.ExpensesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	42, // 97: Scailo.ExpensesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	43, // 98: Scailo.ExpensesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	42, // 99: Scailo.ExpensesService.AddExpenseItem:output_type -> Scailo.IdentifierResponse
-	42, // 100: Scailo.ExpensesService.ModifyExpenseItem:output_type -> Scailo.IdentifierResponse
-	42, // 101: Scailo.ExpensesService.ApproveExpenseItem:output_type -> Scailo.IdentifierResponse
-	42, // 102: Scailo.ExpensesService.DeleteExpenseItem:output_type -> Scailo.IdentifierResponse
-	42, // 103: Scailo.ExpensesService.ReorderExpenseItems:output_type -> Scailo.IdentifierResponse
-	8,  // 104: Scailo.ExpensesService.ViewExpenseItemByID:output_type -> Scailo.ExpenseItem
-	10, // 105: Scailo.ExpensesService.ViewApprovedExpenseItems:output_type -> Scailo.ExpensesItemsList
-	10, // 106: Scailo.ExpensesService.ViewUnapprovedExpenseItems:output_type -> Scailo.ExpensesItemsList
-	10, // 107: Scailo.ExpensesService.ViewExpenseItemHistory:output_type -> Scailo.ExpensesItemsList
-	13, // 108: Scailo.ExpensesService.ViewPaginatedApprovedExpenseItems:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
-	13, // 109: Scailo.ExpensesService.ViewPaginatedUnapprovedExpenseItems:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
-	13, // 110: Scailo.ExpensesService.SearchItemsWithPagination:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
-	44, // 111: Scailo.ExpensesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	44, // 112: Scailo.ExpensesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	39, // 113: Scailo.ExpensesService.UploadExpenseItems:output_type -> Scailo.IdentifiersList
-	5,  // 114: Scailo.ExpensesService.ViewByID:output_type -> Scailo.Expense
-	5,  // 115: Scailo.ExpensesService.ViewByUUID:output_type -> Scailo.Expense
-	5,  // 116: Scailo.ExpensesService.ViewByReferenceID:output_type -> Scailo.Expense
-	5,  // 117: Scailo.ExpensesService.ViewEssentialByID:output_type -> Scailo.Expense
-	5,  // 118: Scailo.ExpensesService.ViewEssentialByUUID:output_type -> Scailo.Expense
-	9,  // 119: Scailo.ExpensesService.ViewFromIDs:output_type -> Scailo.ExpensesList
-	9,  // 120: Scailo.ExpensesService.ViewAll:output_type -> Scailo.ExpensesList
-	9,  // 121: Scailo.ExpensesService.ViewAllForEntityUUID:output_type -> Scailo.ExpensesList
-	15, // 122: Scailo.ExpensesService.ViewWithPagination:output_type -> Scailo.ExpensesServicePaginationResponse
-	45, // 123: Scailo.ExpensesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	44, // 124: Scailo.ExpensesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	9,  // 125: Scailo.ExpensesService.SearchAll:output_type -> Scailo.ExpensesList
-	9,  // 126: Scailo.ExpensesService.Filter:output_type -> Scailo.ExpensesList
-	46, // 127: Scailo.ExpensesService.CountInStatus:output_type -> Scailo.CountResponse
-	46, // 128: Scailo.ExpensesService.Count:output_type -> Scailo.CountResponse
-	44, // 129: Scailo.ExpensesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	82, // [82:130] is the sub-list for method output_type
-	34, // [34:82] is the sub-list for method input_type
+	30, // 50: Scailo.ExpensesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	31, // 51: Scailo.ExpensesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	6,  // 52: Scailo.ExpensesService.AddExpenseItem:input_type -> Scailo.ExpensesServiceItemCreateRequest
+	7,  // 53: Scailo.ExpensesService.ModifyExpenseItem:input_type -> Scailo.ExpensesServiceItemUpdateRequest
+	32, // 54: Scailo.ExpensesService.ApproveExpenseItem:input_type -> Scailo.IdentifierWithUserComment
+	32, // 55: Scailo.ExpensesService.DeleteExpenseItem:input_type -> Scailo.IdentifierWithUserComment
+	33, // 56: Scailo.ExpensesService.ReorderExpenseItems:input_type -> Scailo.ReorderItemsRequest
+	34, // 57: Scailo.ExpensesService.ViewExpenseItemByID:input_type -> Scailo.Identifier
+	35, // 58: Scailo.ExpensesService.ViewApprovedExpenseItems:input_type -> Scailo.IdentifierWithSearchKey
+	35, // 59: Scailo.ExpensesService.ViewUnapprovedExpenseItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 60: Scailo.ExpensesService.ViewExpenseItemHistory:input_type -> Scailo.ExpenseItemHistoryRequest
+	12, // 61: Scailo.ExpensesService.ViewPaginatedApprovedExpenseItems:input_type -> Scailo.ExpenseItemsSearchRequest
+	12, // 62: Scailo.ExpensesService.ViewPaginatedUnapprovedExpenseItems:input_type -> Scailo.ExpenseItemsSearchRequest
+	12, // 63: Scailo.ExpensesService.SearchItemsWithPagination:input_type -> Scailo.ExpenseItemsSearchRequest
+	36, // 64: Scailo.ExpensesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	37, // 65: Scailo.ExpensesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	38, // 66: Scailo.ExpensesService.UploadExpenseItems:input_type -> Scailo.IdentifierUUIDWithFile
+	34, // 67: Scailo.ExpensesService.ViewByID:input_type -> Scailo.Identifier
+	36, // 68: Scailo.ExpensesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	39, // 69: Scailo.ExpensesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	34, // 70: Scailo.ExpensesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36, // 71: Scailo.ExpensesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 72: Scailo.ExpensesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	41, // 73: Scailo.ExpensesService.ViewAll:input_type -> Scailo.ActiveStatus
+	36, // 74: Scailo.ExpensesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14, // 75: Scailo.ExpensesService.ViewWithPagination:input_type -> Scailo.ExpensesServicePaginationReq
+	36, // 76: Scailo.ExpensesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	36, // 77: Scailo.ExpensesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 78: Scailo.ExpensesService.SearchAll:input_type -> Scailo.ExpensesServiceSearchAllReq
+	16, // 79: Scailo.ExpensesService.Filter:input_type -> Scailo.ExpensesServiceFilterReq
+	42, // 80: Scailo.ExpensesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17, // 81: Scailo.ExpensesService.Count:input_type -> Scailo.ExpensesServiceCountReq
+	16, // 82: Scailo.ExpensesService.DownloadAsCSV:input_type -> Scailo.ExpensesServiceFilterReq
+	43, // 83: Scailo.ExpensesService.Create:output_type -> Scailo.IdentifierResponse
+	43, // 84: Scailo.ExpensesService.Draft:output_type -> Scailo.IdentifierResponse
+	43, // 85: Scailo.ExpensesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	43, // 86: Scailo.ExpensesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	43, // 87: Scailo.ExpensesService.Verify:output_type -> Scailo.IdentifierResponse
+	43, // 88: Scailo.ExpensesService.Approve:output_type -> Scailo.IdentifierResponse
+	43, // 89: Scailo.ExpensesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	43, // 90: Scailo.ExpensesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	43, // 91: Scailo.ExpensesService.Halt:output_type -> Scailo.IdentifierResponse
+	43, // 92: Scailo.ExpensesService.Discard:output_type -> Scailo.IdentifierResponse
+	43, // 93: Scailo.ExpensesService.Restore:output_type -> Scailo.IdentifierResponse
+	43, // 94: Scailo.ExpensesService.Complete:output_type -> Scailo.IdentifierResponse
+	43, // 95: Scailo.ExpensesService.Repeat:output_type -> Scailo.IdentifierResponse
+	43, // 96: Scailo.ExpensesService.Reopen:output_type -> Scailo.IdentifierResponse
+	43, // 97: Scailo.ExpensesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	43, // 98: Scailo.ExpensesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	43, // 99: Scailo.ExpensesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	44, // 100: Scailo.ExpensesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	43, // 101: Scailo.ExpensesService.AddExpenseItem:output_type -> Scailo.IdentifierResponse
+	43, // 102: Scailo.ExpensesService.ModifyExpenseItem:output_type -> Scailo.IdentifierResponse
+	43, // 103: Scailo.ExpensesService.ApproveExpenseItem:output_type -> Scailo.IdentifierResponse
+	43, // 104: Scailo.ExpensesService.DeleteExpenseItem:output_type -> Scailo.IdentifierResponse
+	43, // 105: Scailo.ExpensesService.ReorderExpenseItems:output_type -> Scailo.IdentifierResponse
+	8,  // 106: Scailo.ExpensesService.ViewExpenseItemByID:output_type -> Scailo.ExpenseItem
+	10, // 107: Scailo.ExpensesService.ViewApprovedExpenseItems:output_type -> Scailo.ExpensesItemsList
+	10, // 108: Scailo.ExpensesService.ViewUnapprovedExpenseItems:output_type -> Scailo.ExpensesItemsList
+	10, // 109: Scailo.ExpensesService.ViewExpenseItemHistory:output_type -> Scailo.ExpensesItemsList
+	13, // 110: Scailo.ExpensesService.ViewPaginatedApprovedExpenseItems:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
+	13, // 111: Scailo.ExpensesService.ViewPaginatedUnapprovedExpenseItems:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
+	13, // 112: Scailo.ExpensesService.SearchItemsWithPagination:output_type -> Scailo.ExpensesServicePaginatedItemsResponse
+	45, // 113: Scailo.ExpensesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	45, // 114: Scailo.ExpensesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	40, // 115: Scailo.ExpensesService.UploadExpenseItems:output_type -> Scailo.IdentifiersList
+	5,  // 116: Scailo.ExpensesService.ViewByID:output_type -> Scailo.Expense
+	5,  // 117: Scailo.ExpensesService.ViewByUUID:output_type -> Scailo.Expense
+	5,  // 118: Scailo.ExpensesService.ViewByReferenceID:output_type -> Scailo.Expense
+	5,  // 119: Scailo.ExpensesService.ViewEssentialByID:output_type -> Scailo.Expense
+	5,  // 120: Scailo.ExpensesService.ViewEssentialByUUID:output_type -> Scailo.Expense
+	9,  // 121: Scailo.ExpensesService.ViewFromIDs:output_type -> Scailo.ExpensesList
+	9,  // 122: Scailo.ExpensesService.ViewAll:output_type -> Scailo.ExpensesList
+	9,  // 123: Scailo.ExpensesService.ViewAllForEntityUUID:output_type -> Scailo.ExpensesList
+	15, // 124: Scailo.ExpensesService.ViewWithPagination:output_type -> Scailo.ExpensesServicePaginationResponse
+	46, // 125: Scailo.ExpensesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	45, // 126: Scailo.ExpensesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	9,  // 127: Scailo.ExpensesService.SearchAll:output_type -> Scailo.ExpensesList
+	9,  // 128: Scailo.ExpensesService.Filter:output_type -> Scailo.ExpensesList
+	47, // 129: Scailo.ExpensesService.CountInStatus:output_type -> Scailo.CountResponse
+	47, // 130: Scailo.ExpensesService.Count:output_type -> Scailo.CountResponse
+	45, // 131: Scailo.ExpensesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	83, // [83:132] is the sub-list for method output_type
+	34, // [34:83] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name
@@ -3156,6 +3160,7 @@ func file_expenses_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

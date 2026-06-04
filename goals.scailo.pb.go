@@ -2760,7 +2760,7 @@ var File_goals_scailo_proto protoreflect.FileDescriptor
 
 const file_goals_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12goals.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xb3\x03\n" +
+	"\x12goals.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xb3\x03\n" +
 	"\x19GoalsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2999,7 +2999,7 @@ const file_goals_scailo_proto_rawDesc = "" +
 	"\x1aGOAL_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1e\n" +
 	"\x1aGOAL_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12\"\n" +
-	"\x1eGOAL_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xb5\x1a\n" +
+	"\x1eGOAL_SORT_KEY_FINAL_REF_NUMBER\x10\v2\x88\x1b\n" +
 	"\fGoalsService\x12G\n" +
 	"\x06Create\x12!.Scailo.GoalsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12F\n" +
 	"\x05Draft\x12!.Scailo.GoalsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
@@ -3016,7 +3016,8 @@ const file_goals_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\vAddGoalItem\x12%.Scailo.GoalsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
 	"\x0eModifyGoalItem\x12%.Scailo.GoalsServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
@@ -3097,21 +3098,22 @@ var file_goals_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                            // 27: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),        // 28: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),      // 29: Scailo.IdentifierUUIDWithUserComment
-	(*CloneRequest)(nil),                       // 30: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),          // 31: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                // 32: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                         // 33: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),            // 34: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                     // 35: Scailo.IdentifierUUID
-	(*Empty)(nil),                              // 36: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),             // 37: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                    // 38: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                    // 39: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                       // 40: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),            // 41: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                 // 42: Scailo.IdentifierResponse
-	(*StandardFile)(nil),                       // 43: Scailo.StandardFile
-	(*CountResponse)(nil),                      // 44: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),           // 30: Scailo.VaultFolderAttachRequest
+	(*CloneRequest)(nil),                       // 31: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),          // 32: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                // 33: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                         // 34: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),            // 35: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                     // 36: Scailo.IdentifierUUID
+	(*Empty)(nil),                              // 37: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),             // 38: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                    // 39: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                    // 40: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                       // 41: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),            // 42: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                 // 43: Scailo.IdentifierResponse
+	(*StandardFile)(nil),                       // 44: Scailo.StandardFile
+	(*CountResponse)(nil),                      // 45: Scailo.CountResponse
 }
 var file_goals_scailo_proto_depIdxs = []int32{
 	20, // 0: Scailo.GoalsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3166,83 +3168,85 @@ var file_goals_scailo_proto_depIdxs = []int32{
 	29, // 49: Scailo.GoalsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 50: Scailo.GoalsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 51: Scailo.GoalsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	30, // 52: Scailo.GoalsService.Clone:input_type -> Scailo.CloneRequest
-	7,  // 53: Scailo.GoalsService.AddGoalItem:input_type -> Scailo.GoalsServiceItemCreateRequest
-	8,  // 54: Scailo.GoalsService.ModifyGoalItem:input_type -> Scailo.GoalsServiceItemUpdateRequest
-	31, // 55: Scailo.GoalsService.ApproveGoalItem:input_type -> Scailo.IdentifierWithUserComment
-	31, // 56: Scailo.GoalsService.DeleteGoalItem:input_type -> Scailo.IdentifierWithUserComment
-	32, // 57: Scailo.GoalsService.ReorderGoalItems:input_type -> Scailo.ReorderItemsRequest
-	33, // 58: Scailo.GoalsService.ViewGoalItemByID:input_type -> Scailo.Identifier
-	34, // 59: Scailo.GoalsService.ViewApprovedGoalItems:input_type -> Scailo.IdentifierWithSearchKey
-	34, // 60: Scailo.GoalsService.ViewUnapprovedGoalItems:input_type -> Scailo.IdentifierWithSearchKey
-	12, // 61: Scailo.GoalsService.ViewGoalItemHistory:input_type -> Scailo.GoalItemHistoryRequest
-	13, // 62: Scailo.GoalsService.ViewPaginatedApprovedGoalItems:input_type -> Scailo.GoalItemsSearchRequest
-	13, // 63: Scailo.GoalsService.ViewPaginatedUnapprovedGoalItems:input_type -> Scailo.GoalItemsSearchRequest
-	13, // 64: Scailo.GoalsService.SearchItemsWithPagination:input_type -> Scailo.GoalItemsSearchRequest
-	35, // 65: Scailo.GoalsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	36, // 66: Scailo.GoalsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	37, // 67: Scailo.GoalsService.UploadGoalItems:input_type -> Scailo.IdentifierUUIDWithFile
-	33, // 68: Scailo.GoalsService.ViewByID:input_type -> Scailo.Identifier
-	35, // 69: Scailo.GoalsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	38, // 70: Scailo.GoalsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	33, // 71: Scailo.GoalsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35, // 72: Scailo.GoalsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 73: Scailo.GoalsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	40, // 74: Scailo.GoalsService.ViewAll:input_type -> Scailo.ActiveStatus
-	35, // 75: Scailo.GoalsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 76: Scailo.GoalsService.ViewWithPagination:input_type -> Scailo.GoalsServicePaginationReq
-	19, // 77: Scailo.GoalsService.SearchAll:input_type -> Scailo.GoalsServiceSearchAllReq
-	17, // 78: Scailo.GoalsService.Filter:input_type -> Scailo.GoalsServiceFilterReq
-	41, // 79: Scailo.GoalsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 80: Scailo.GoalsService.Count:input_type -> Scailo.GoalsServiceCountReq
-	17, // 81: Scailo.GoalsService.DownloadAsCSV:input_type -> Scailo.GoalsServiceFilterReq
-	42, // 82: Scailo.GoalsService.Create:output_type -> Scailo.IdentifierResponse
-	42, // 83: Scailo.GoalsService.Draft:output_type -> Scailo.IdentifierResponse
-	42, // 84: Scailo.GoalsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	42, // 85: Scailo.GoalsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	42, // 86: Scailo.GoalsService.Verify:output_type -> Scailo.IdentifierResponse
-	42, // 87: Scailo.GoalsService.Approve:output_type -> Scailo.IdentifierResponse
-	42, // 88: Scailo.GoalsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	42, // 89: Scailo.GoalsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	42, // 90: Scailo.GoalsService.Halt:output_type -> Scailo.IdentifierResponse
-	42, // 91: Scailo.GoalsService.Discard:output_type -> Scailo.IdentifierResponse
-	42, // 92: Scailo.GoalsService.Restore:output_type -> Scailo.IdentifierResponse
-	42, // 93: Scailo.GoalsService.Complete:output_type -> Scailo.IdentifierResponse
-	42, // 94: Scailo.GoalsService.Repeat:output_type -> Scailo.IdentifierResponse
-	42, // 95: Scailo.GoalsService.Reopen:output_type -> Scailo.IdentifierResponse
-	42, // 96: Scailo.GoalsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	42, // 97: Scailo.GoalsService.Clone:output_type -> Scailo.IdentifierResponse
-	42, // 98: Scailo.GoalsService.AddGoalItem:output_type -> Scailo.IdentifierResponse
-	42, // 99: Scailo.GoalsService.ModifyGoalItem:output_type -> Scailo.IdentifierResponse
-	42, // 100: Scailo.GoalsService.ApproveGoalItem:output_type -> Scailo.IdentifierResponse
-	42, // 101: Scailo.GoalsService.DeleteGoalItem:output_type -> Scailo.IdentifierResponse
-	42, // 102: Scailo.GoalsService.ReorderGoalItems:output_type -> Scailo.IdentifierResponse
-	9,  // 103: Scailo.GoalsService.ViewGoalItemByID:output_type -> Scailo.GoalItem
-	11, // 104: Scailo.GoalsService.ViewApprovedGoalItems:output_type -> Scailo.GoalsItemsList
-	11, // 105: Scailo.GoalsService.ViewUnapprovedGoalItems:output_type -> Scailo.GoalsItemsList
-	11, // 106: Scailo.GoalsService.ViewGoalItemHistory:output_type -> Scailo.GoalsItemsList
-	14, // 107: Scailo.GoalsService.ViewPaginatedApprovedGoalItems:output_type -> Scailo.GoalsServicePaginatedItemsResponse
-	14, // 108: Scailo.GoalsService.ViewPaginatedUnapprovedGoalItems:output_type -> Scailo.GoalsServicePaginatedItemsResponse
-	14, // 109: Scailo.GoalsService.SearchItemsWithPagination:output_type -> Scailo.GoalsServicePaginatedItemsResponse
-	43, // 110: Scailo.GoalsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	43, // 111: Scailo.GoalsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	39, // 112: Scailo.GoalsService.UploadGoalItems:output_type -> Scailo.IdentifiersList
-	6,  // 113: Scailo.GoalsService.ViewByID:output_type -> Scailo.Goal
-	6,  // 114: Scailo.GoalsService.ViewByUUID:output_type -> Scailo.Goal
-	6,  // 115: Scailo.GoalsService.ViewByReferenceID:output_type -> Scailo.Goal
-	6,  // 116: Scailo.GoalsService.ViewEssentialByID:output_type -> Scailo.Goal
-	6,  // 117: Scailo.GoalsService.ViewEssentialByUUID:output_type -> Scailo.Goal
-	10, // 118: Scailo.GoalsService.ViewFromIDs:output_type -> Scailo.GoalsList
-	10, // 119: Scailo.GoalsService.ViewAll:output_type -> Scailo.GoalsList
-	10, // 120: Scailo.GoalsService.ViewAllForEntityUUID:output_type -> Scailo.GoalsList
-	16, // 121: Scailo.GoalsService.ViewWithPagination:output_type -> Scailo.GoalsServicePaginationResponse
-	10, // 122: Scailo.GoalsService.SearchAll:output_type -> Scailo.GoalsList
-	10, // 123: Scailo.GoalsService.Filter:output_type -> Scailo.GoalsList
-	44, // 124: Scailo.GoalsService.CountInStatus:output_type -> Scailo.CountResponse
-	44, // 125: Scailo.GoalsService.Count:output_type -> Scailo.CountResponse
-	43, // 126: Scailo.GoalsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	82, // [82:127] is the sub-list for method output_type
-	37, // [37:82] is the sub-list for method input_type
+	30, // 52: Scailo.GoalsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	31, // 53: Scailo.GoalsService.Clone:input_type -> Scailo.CloneRequest
+	7,  // 54: Scailo.GoalsService.AddGoalItem:input_type -> Scailo.GoalsServiceItemCreateRequest
+	8,  // 55: Scailo.GoalsService.ModifyGoalItem:input_type -> Scailo.GoalsServiceItemUpdateRequest
+	32, // 56: Scailo.GoalsService.ApproveGoalItem:input_type -> Scailo.IdentifierWithUserComment
+	32, // 57: Scailo.GoalsService.DeleteGoalItem:input_type -> Scailo.IdentifierWithUserComment
+	33, // 58: Scailo.GoalsService.ReorderGoalItems:input_type -> Scailo.ReorderItemsRequest
+	34, // 59: Scailo.GoalsService.ViewGoalItemByID:input_type -> Scailo.Identifier
+	35, // 60: Scailo.GoalsService.ViewApprovedGoalItems:input_type -> Scailo.IdentifierWithSearchKey
+	35, // 61: Scailo.GoalsService.ViewUnapprovedGoalItems:input_type -> Scailo.IdentifierWithSearchKey
+	12, // 62: Scailo.GoalsService.ViewGoalItemHistory:input_type -> Scailo.GoalItemHistoryRequest
+	13, // 63: Scailo.GoalsService.ViewPaginatedApprovedGoalItems:input_type -> Scailo.GoalItemsSearchRequest
+	13, // 64: Scailo.GoalsService.ViewPaginatedUnapprovedGoalItems:input_type -> Scailo.GoalItemsSearchRequest
+	13, // 65: Scailo.GoalsService.SearchItemsWithPagination:input_type -> Scailo.GoalItemsSearchRequest
+	36, // 66: Scailo.GoalsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	37, // 67: Scailo.GoalsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	38, // 68: Scailo.GoalsService.UploadGoalItems:input_type -> Scailo.IdentifierUUIDWithFile
+	34, // 69: Scailo.GoalsService.ViewByID:input_type -> Scailo.Identifier
+	36, // 70: Scailo.GoalsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	39, // 71: Scailo.GoalsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	34, // 72: Scailo.GoalsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36, // 73: Scailo.GoalsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 74: Scailo.GoalsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	41, // 75: Scailo.GoalsService.ViewAll:input_type -> Scailo.ActiveStatus
+	36, // 76: Scailo.GoalsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 77: Scailo.GoalsService.ViewWithPagination:input_type -> Scailo.GoalsServicePaginationReq
+	19, // 78: Scailo.GoalsService.SearchAll:input_type -> Scailo.GoalsServiceSearchAllReq
+	17, // 79: Scailo.GoalsService.Filter:input_type -> Scailo.GoalsServiceFilterReq
+	42, // 80: Scailo.GoalsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 81: Scailo.GoalsService.Count:input_type -> Scailo.GoalsServiceCountReq
+	17, // 82: Scailo.GoalsService.DownloadAsCSV:input_type -> Scailo.GoalsServiceFilterReq
+	43, // 83: Scailo.GoalsService.Create:output_type -> Scailo.IdentifierResponse
+	43, // 84: Scailo.GoalsService.Draft:output_type -> Scailo.IdentifierResponse
+	43, // 85: Scailo.GoalsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	43, // 86: Scailo.GoalsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	43, // 87: Scailo.GoalsService.Verify:output_type -> Scailo.IdentifierResponse
+	43, // 88: Scailo.GoalsService.Approve:output_type -> Scailo.IdentifierResponse
+	43, // 89: Scailo.GoalsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	43, // 90: Scailo.GoalsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	43, // 91: Scailo.GoalsService.Halt:output_type -> Scailo.IdentifierResponse
+	43, // 92: Scailo.GoalsService.Discard:output_type -> Scailo.IdentifierResponse
+	43, // 93: Scailo.GoalsService.Restore:output_type -> Scailo.IdentifierResponse
+	43, // 94: Scailo.GoalsService.Complete:output_type -> Scailo.IdentifierResponse
+	43, // 95: Scailo.GoalsService.Repeat:output_type -> Scailo.IdentifierResponse
+	43, // 96: Scailo.GoalsService.Reopen:output_type -> Scailo.IdentifierResponse
+	43, // 97: Scailo.GoalsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	43, // 98: Scailo.GoalsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	43, // 99: Scailo.GoalsService.Clone:output_type -> Scailo.IdentifierResponse
+	43, // 100: Scailo.GoalsService.AddGoalItem:output_type -> Scailo.IdentifierResponse
+	43, // 101: Scailo.GoalsService.ModifyGoalItem:output_type -> Scailo.IdentifierResponse
+	43, // 102: Scailo.GoalsService.ApproveGoalItem:output_type -> Scailo.IdentifierResponse
+	43, // 103: Scailo.GoalsService.DeleteGoalItem:output_type -> Scailo.IdentifierResponse
+	43, // 104: Scailo.GoalsService.ReorderGoalItems:output_type -> Scailo.IdentifierResponse
+	9,  // 105: Scailo.GoalsService.ViewGoalItemByID:output_type -> Scailo.GoalItem
+	11, // 106: Scailo.GoalsService.ViewApprovedGoalItems:output_type -> Scailo.GoalsItemsList
+	11, // 107: Scailo.GoalsService.ViewUnapprovedGoalItems:output_type -> Scailo.GoalsItemsList
+	11, // 108: Scailo.GoalsService.ViewGoalItemHistory:output_type -> Scailo.GoalsItemsList
+	14, // 109: Scailo.GoalsService.ViewPaginatedApprovedGoalItems:output_type -> Scailo.GoalsServicePaginatedItemsResponse
+	14, // 110: Scailo.GoalsService.ViewPaginatedUnapprovedGoalItems:output_type -> Scailo.GoalsServicePaginatedItemsResponse
+	14, // 111: Scailo.GoalsService.SearchItemsWithPagination:output_type -> Scailo.GoalsServicePaginatedItemsResponse
+	44, // 112: Scailo.GoalsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	44, // 113: Scailo.GoalsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	40, // 114: Scailo.GoalsService.UploadGoalItems:output_type -> Scailo.IdentifiersList
+	6,  // 115: Scailo.GoalsService.ViewByID:output_type -> Scailo.Goal
+	6,  // 116: Scailo.GoalsService.ViewByUUID:output_type -> Scailo.Goal
+	6,  // 117: Scailo.GoalsService.ViewByReferenceID:output_type -> Scailo.Goal
+	6,  // 118: Scailo.GoalsService.ViewEssentialByID:output_type -> Scailo.Goal
+	6,  // 119: Scailo.GoalsService.ViewEssentialByUUID:output_type -> Scailo.Goal
+	10, // 120: Scailo.GoalsService.ViewFromIDs:output_type -> Scailo.GoalsList
+	10, // 121: Scailo.GoalsService.ViewAll:output_type -> Scailo.GoalsList
+	10, // 122: Scailo.GoalsService.ViewAllForEntityUUID:output_type -> Scailo.GoalsList
+	16, // 123: Scailo.GoalsService.ViewWithPagination:output_type -> Scailo.GoalsServicePaginationResponse
+	10, // 124: Scailo.GoalsService.SearchAll:output_type -> Scailo.GoalsList
+	10, // 125: Scailo.GoalsService.Filter:output_type -> Scailo.GoalsList
+	45, // 126: Scailo.GoalsService.CountInStatus:output_type -> Scailo.CountResponse
+	45, // 127: Scailo.GoalsService.Count:output_type -> Scailo.CountResponse
+	44, // 128: Scailo.GoalsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	83, // [83:129] is the sub-list for method output_type
+	37, // [37:83] is the sub-list for method input_type
 	37, // [37:37] is the sub-list for extension type_name
 	37, // [37:37] is the sub-list for extension extendee
 	0,  // [0:37] is the sub-list for field type_name
@@ -3255,6 +3259,7 @@ func file_goals_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

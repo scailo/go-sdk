@@ -31,6 +31,7 @@ const (
 	FamiliesService_Discard_FullMethodName                      = "/Scailo.FamiliesService/Discard"
 	FamiliesService_Restore_FullMethodName                      = "/Scailo.FamiliesService/Restore"
 	FamiliesService_CommentAdd_FullMethodName                   = "/Scailo.FamiliesService/CommentAdd"
+	FamiliesService_AttachVaultFolder_FullMethodName            = "/Scailo.FamiliesService/AttachVaultFolder"
 	FamiliesService_Amend_FullMethodName                        = "/Scailo.FamiliesService/Amend"
 	FamiliesService_UpdatePrice_FullMethodName                  = "/Scailo.FamiliesService/UpdatePrice"
 	FamiliesService_UploadPrices_FullMethodName                 = "/Scailo.FamiliesService/UploadPrices"
@@ -190,6 +191,17 @@ type FamiliesServiceClient interface {
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Amend the family and send for revision
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Updates the price of the family with the given UUID
@@ -455,6 +467,16 @@ func (c *familiesServiceClient) CommentAdd(ctx context.Context, in *IdentifierUU
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, FamiliesService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, FamiliesService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

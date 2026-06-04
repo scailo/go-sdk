@@ -1964,7 +1964,7 @@ var File_visitations_scailo_proto protoreflect.FileDescriptor
 
 const file_visitations_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18visitations.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xfb\x03\n" +
+	"\x18visitations.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xfb\x03\n" +
 	"\x1fVisitationsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2126,7 +2126,7 @@ const file_visitations_scailo_proto_rawDesc = "" +
 	"\x1bVISITATION_SORT_KEY_USER_ID\x10\f\x12$\n" +
 	" VISITATION_SORT_KEY_ASSOCIATE_ID\x10\r\x12'\n" +
 	"#VISITATION_SORT_KEY_ENTRY_TIMESTAMP\x10\x0e\x12&\n" +
-	"\"VISITATION_SORT_KEY_EXIT_TIMESTAMP\x10\x0f2\xad\x17\n" +
+	"\"VISITATION_SORT_KEY_EXIT_TIMESTAMP\x10\x0f2\x80\x18\n" +
 	"\x12VisitationsService\x12M\n" +
 	"\x06Create\x12'.Scailo.VisitationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.VisitationsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -2142,7 +2142,8 @@ const file_visitations_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12[\n" +
 	"\x10RecordImageEntry\x12+.Scailo.VisitationsServiceImageEntryRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x0fRecordImageExit\x12*.Scailo.VisitationsServiceImageExitRequest\x1a\x1a.Scailo.IdentifierResponse\x122\n" +
@@ -2211,19 +2212,20 @@ var file_visitations_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 19: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 20: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 21: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 23: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 26: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 27: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 28: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 29: Scailo.MagicLink
-	(*ImageResponse)(nil),                                     // 30: Scailo.ImageResponse
-	(*GPSCoordinatesResponse)(nil),                            // 31: Scailo.GPSCoordinatesResponse
-	(*BooleanResponse)(nil),                                   // 32: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 33: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 34: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                          // 22: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 23: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 24: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 25: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 26: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 27: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 28: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 29: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 30: Scailo.MagicLink
+	(*ImageResponse)(nil),                                     // 31: Scailo.ImageResponse
+	(*GPSCoordinatesResponse)(nil),                            // 32: Scailo.GPSCoordinatesResponse
+	(*BooleanResponse)(nil),                                   // 33: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
+	(*StandardFile)(nil),                                      // 35: Scailo.StandardFile
 }
 var file_visitations_scailo_proto_depIdxs = []int32{
 	12, // 0: Scailo.VisitationsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2265,72 +2267,74 @@ var file_visitations_scailo_proto_depIdxs = []int32{
 	21, // 36: Scailo.VisitationsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 37: Scailo.VisitationsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	21, // 38: Scailo.VisitationsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 39: Scailo.VisitationsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	3,  // 40: Scailo.VisitationsService.RecordImageEntry:input_type -> Scailo.VisitationsServiceImageEntryRequest
-	4,  // 41: Scailo.VisitationsService.RecordImageExit:input_type -> Scailo.VisitationsServiceImageExitRequest
-	23, // 42: Scailo.VisitationsService.ViewByID:input_type -> Scailo.Identifier
-	24, // 43: Scailo.VisitationsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 44: Scailo.VisitationsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	24, // 45: Scailo.VisitationsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 46: Scailo.VisitationsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	26, // 47: Scailo.VisitationsService.ViewAll:input_type -> Scailo.ActiveStatus
-	24, // 48: Scailo.VisitationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 49: Scailo.VisitationsService.ViewWithPagination:input_type -> Scailo.VisitationsServicePaginationReq
-	24, // 50: Scailo.VisitationsService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
-	24, // 51: Scailo.VisitationsService.ViewExitImage:input_type -> Scailo.IdentifierUUID
-	24, // 52: Scailo.VisitationsService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 53: Scailo.VisitationsService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
-	24, // 54: Scailo.VisitationsService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	24, // 55: Scailo.VisitationsService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
-	24, // 56: Scailo.VisitationsService.ViewQRCode:input_type -> Scailo.IdentifierUUID
-	23, // 57: Scailo.VisitationsService.ViewOpenVisitationForAssociate:input_type -> Scailo.Identifier
-	11, // 58: Scailo.VisitationsService.SearchAll:input_type -> Scailo.VisitationsServiceSearchAllReq
-	9,  // 59: Scailo.VisitationsService.Filter:input_type -> Scailo.VisitationsServiceFilterReq
-	23, // 60: Scailo.VisitationsService.AssociateHasOpenVisitation:input_type -> Scailo.Identifier
-	27, // 61: Scailo.VisitationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 62: Scailo.VisitationsService.Count:input_type -> Scailo.VisitationsServiceCountReq
-	9,  // 63: Scailo.VisitationsService.DownloadAsCSV:input_type -> Scailo.VisitationsServiceFilterReq
-	28, // 64: Scailo.VisitationsService.Create:output_type -> Scailo.IdentifierResponse
-	28, // 65: Scailo.VisitationsService.Draft:output_type -> Scailo.IdentifierResponse
-	28, // 66: Scailo.VisitationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 67: Scailo.VisitationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	28, // 68: Scailo.VisitationsService.Verify:output_type -> Scailo.IdentifierResponse
-	28, // 69: Scailo.VisitationsService.Approve:output_type -> Scailo.IdentifierResponse
-	28, // 70: Scailo.VisitationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	28, // 71: Scailo.VisitationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	28, // 72: Scailo.VisitationsService.Halt:output_type -> Scailo.IdentifierResponse
-	28, // 73: Scailo.VisitationsService.Discard:output_type -> Scailo.IdentifierResponse
-	28, // 74: Scailo.VisitationsService.Restore:output_type -> Scailo.IdentifierResponse
-	28, // 75: Scailo.VisitationsService.Complete:output_type -> Scailo.IdentifierResponse
-	28, // 76: Scailo.VisitationsService.Repeat:output_type -> Scailo.IdentifierResponse
-	28, // 77: Scailo.VisitationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	29, // 78: Scailo.VisitationsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	28, // 79: Scailo.VisitationsService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
-	28, // 80: Scailo.VisitationsService.RecordImageExit:output_type -> Scailo.IdentifierResponse
-	5,  // 81: Scailo.VisitationsService.ViewByID:output_type -> Scailo.Visitation
-	5,  // 82: Scailo.VisitationsService.ViewByUUID:output_type -> Scailo.Visitation
-	5,  // 83: Scailo.VisitationsService.ViewEssentialByID:output_type -> Scailo.Visitation
-	5,  // 84: Scailo.VisitationsService.ViewEssentialByUUID:output_type -> Scailo.Visitation
-	6,  // 85: Scailo.VisitationsService.ViewFromIDs:output_type -> Scailo.VisitationsList
-	6,  // 86: Scailo.VisitationsService.ViewAll:output_type -> Scailo.VisitationsList
-	6,  // 87: Scailo.VisitationsService.ViewAllForEntityUUID:output_type -> Scailo.VisitationsList
-	8,  // 88: Scailo.VisitationsService.ViewWithPagination:output_type -> Scailo.VisitationsServicePaginationResponse
-	30, // 89: Scailo.VisitationsService.ViewEntryImage:output_type -> Scailo.ImageResponse
-	30, // 90: Scailo.VisitationsService.ViewExitImage:output_type -> Scailo.ImageResponse
-	31, // 91: Scailo.VisitationsService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	31, // 92: Scailo.VisitationsService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
-	30, // 93: Scailo.VisitationsService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
-	30, // 94: Scailo.VisitationsService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
-	30, // 95: Scailo.VisitationsService.ViewQRCode:output_type -> Scailo.ImageResponse
-	5,  // 96: Scailo.VisitationsService.ViewOpenVisitationForAssociate:output_type -> Scailo.Visitation
-	6,  // 97: Scailo.VisitationsService.SearchAll:output_type -> Scailo.VisitationsList
-	6,  // 98: Scailo.VisitationsService.Filter:output_type -> Scailo.VisitationsList
-	32, // 99: Scailo.VisitationsService.AssociateHasOpenVisitation:output_type -> Scailo.BooleanResponse
-	33, // 100: Scailo.VisitationsService.CountInStatus:output_type -> Scailo.CountResponse
-	33, // 101: Scailo.VisitationsService.Count:output_type -> Scailo.CountResponse
-	34, // 102: Scailo.VisitationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	64, // [64:103] is the sub-list for method output_type
-	25, // [25:64] is the sub-list for method input_type
+	22, // 39: Scailo.VisitationsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	23, // 40: Scailo.VisitationsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	3,  // 41: Scailo.VisitationsService.RecordImageEntry:input_type -> Scailo.VisitationsServiceImageEntryRequest
+	4,  // 42: Scailo.VisitationsService.RecordImageExit:input_type -> Scailo.VisitationsServiceImageExitRequest
+	24, // 43: Scailo.VisitationsService.ViewByID:input_type -> Scailo.Identifier
+	25, // 44: Scailo.VisitationsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 45: Scailo.VisitationsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	25, // 46: Scailo.VisitationsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 47: Scailo.VisitationsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	27, // 48: Scailo.VisitationsService.ViewAll:input_type -> Scailo.ActiveStatus
+	25, // 49: Scailo.VisitationsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 50: Scailo.VisitationsService.ViewWithPagination:input_type -> Scailo.VisitationsServicePaginationReq
+	25, // 51: Scailo.VisitationsService.ViewEntryImage:input_type -> Scailo.IdentifierUUID
+	25, // 52: Scailo.VisitationsService.ViewExitImage:input_type -> Scailo.IdentifierUUID
+	25, // 53: Scailo.VisitationsService.ViewEntryGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 54: Scailo.VisitationsService.ViewExitGPSCoordinates:input_type -> Scailo.IdentifierUUID
+	25, // 55: Scailo.VisitationsService.ViewEntryGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	25, // 56: Scailo.VisitationsService.ViewExitGPSStaticImage:input_type -> Scailo.IdentifierUUID
+	25, // 57: Scailo.VisitationsService.ViewQRCode:input_type -> Scailo.IdentifierUUID
+	24, // 58: Scailo.VisitationsService.ViewOpenVisitationForAssociate:input_type -> Scailo.Identifier
+	11, // 59: Scailo.VisitationsService.SearchAll:input_type -> Scailo.VisitationsServiceSearchAllReq
+	9,  // 60: Scailo.VisitationsService.Filter:input_type -> Scailo.VisitationsServiceFilterReq
+	24, // 61: Scailo.VisitationsService.AssociateHasOpenVisitation:input_type -> Scailo.Identifier
+	28, // 62: Scailo.VisitationsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 63: Scailo.VisitationsService.Count:input_type -> Scailo.VisitationsServiceCountReq
+	9,  // 64: Scailo.VisitationsService.DownloadAsCSV:input_type -> Scailo.VisitationsServiceFilterReq
+	29, // 65: Scailo.VisitationsService.Create:output_type -> Scailo.IdentifierResponse
+	29, // 66: Scailo.VisitationsService.Draft:output_type -> Scailo.IdentifierResponse
+	29, // 67: Scailo.VisitationsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 68: Scailo.VisitationsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	29, // 69: Scailo.VisitationsService.Verify:output_type -> Scailo.IdentifierResponse
+	29, // 70: Scailo.VisitationsService.Approve:output_type -> Scailo.IdentifierResponse
+	29, // 71: Scailo.VisitationsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	29, // 72: Scailo.VisitationsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	29, // 73: Scailo.VisitationsService.Halt:output_type -> Scailo.IdentifierResponse
+	29, // 74: Scailo.VisitationsService.Discard:output_type -> Scailo.IdentifierResponse
+	29, // 75: Scailo.VisitationsService.Restore:output_type -> Scailo.IdentifierResponse
+	29, // 76: Scailo.VisitationsService.Complete:output_type -> Scailo.IdentifierResponse
+	29, // 77: Scailo.VisitationsService.Repeat:output_type -> Scailo.IdentifierResponse
+	29, // 78: Scailo.VisitationsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	29, // 79: Scailo.VisitationsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	30, // 80: Scailo.VisitationsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	29, // 81: Scailo.VisitationsService.RecordImageEntry:output_type -> Scailo.IdentifierResponse
+	29, // 82: Scailo.VisitationsService.RecordImageExit:output_type -> Scailo.IdentifierResponse
+	5,  // 83: Scailo.VisitationsService.ViewByID:output_type -> Scailo.Visitation
+	5,  // 84: Scailo.VisitationsService.ViewByUUID:output_type -> Scailo.Visitation
+	5,  // 85: Scailo.VisitationsService.ViewEssentialByID:output_type -> Scailo.Visitation
+	5,  // 86: Scailo.VisitationsService.ViewEssentialByUUID:output_type -> Scailo.Visitation
+	6,  // 87: Scailo.VisitationsService.ViewFromIDs:output_type -> Scailo.VisitationsList
+	6,  // 88: Scailo.VisitationsService.ViewAll:output_type -> Scailo.VisitationsList
+	6,  // 89: Scailo.VisitationsService.ViewAllForEntityUUID:output_type -> Scailo.VisitationsList
+	8,  // 90: Scailo.VisitationsService.ViewWithPagination:output_type -> Scailo.VisitationsServicePaginationResponse
+	31, // 91: Scailo.VisitationsService.ViewEntryImage:output_type -> Scailo.ImageResponse
+	31, // 92: Scailo.VisitationsService.ViewExitImage:output_type -> Scailo.ImageResponse
+	32, // 93: Scailo.VisitationsService.ViewEntryGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	32, // 94: Scailo.VisitationsService.ViewExitGPSCoordinates:output_type -> Scailo.GPSCoordinatesResponse
+	31, // 95: Scailo.VisitationsService.ViewEntryGPSStaticImage:output_type -> Scailo.ImageResponse
+	31, // 96: Scailo.VisitationsService.ViewExitGPSStaticImage:output_type -> Scailo.ImageResponse
+	31, // 97: Scailo.VisitationsService.ViewQRCode:output_type -> Scailo.ImageResponse
+	5,  // 98: Scailo.VisitationsService.ViewOpenVisitationForAssociate:output_type -> Scailo.Visitation
+	6,  // 99: Scailo.VisitationsService.SearchAll:output_type -> Scailo.VisitationsList
+	6,  // 100: Scailo.VisitationsService.Filter:output_type -> Scailo.VisitationsList
+	33, // 101: Scailo.VisitationsService.AssociateHasOpenVisitation:output_type -> Scailo.BooleanResponse
+	34, // 102: Scailo.VisitationsService.CountInStatus:output_type -> Scailo.CountResponse
+	34, // 103: Scailo.VisitationsService.Count:output_type -> Scailo.CountResponse
+	35, // 104: Scailo.VisitationsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	65, // [65:105] is the sub-list for method output_type
+	25, // [25:65] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2344,6 +2348,7 @@ func file_visitations_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

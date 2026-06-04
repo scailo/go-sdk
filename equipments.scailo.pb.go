@@ -2144,7 +2144,7 @@ var File_equipments_scailo_proto protoreflect.FileDescriptor
 
 const file_equipments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x17equipments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xad\x05\n" +
+	"\x17equipments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xad\x05\n" +
 	"\x1eEquipmentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2349,7 +2349,7 @@ const file_equipments_scailo_proto_rawDesc = "" +
 	"\"EQUIPMENT_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12$\n" +
 	" EQUIPMENT_REF_FROM_INITIAL_STOCK\x10\x01\x12$\n" +
 	" EQUIPMENT_REF_FROM_GOODS_RECEIPT\x10\x02\x125\n" +
-	"1EQUIPMENT_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\xec\x13\n" +
+	"1EQUIPMENT_REF_FROM_INWARD_JOB_FREE_ISSUE_MATERIAL\x10\x032\xbf\x14\n" +
 	"\x11EquipmentsService\x12L\n" +
 	"\x06Create\x12&.Scailo.EquipmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\vSendToStore\x12+.Scailo.EquipmentsServiceSendToStoreRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
@@ -2364,7 +2364,8 @@ const file_equipments_scailo_proto_rawDesc = "" +
 	"\x0eReturnMaterial\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\aDiscard\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x121\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x11.Scailo.Equipment\x127\n" +
 	"\n" +
@@ -2428,19 +2429,20 @@ var file_equipments_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 19: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 20: Scailo.IdentifierUUIDWithUserComment
 	(*InventoryPartitionRequest)(nil),                         // 21: Scailo.InventoryPartitionRequest
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 23: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
-	(*IdentifierUUIDsList)(nil),                               // 26: Scailo.IdentifierUUIDsList
-	(*ActiveStatus)(nil),                                      // 27: Scailo.ActiveStatus
-	(*Empty)(nil),                                             // 28: Scailo.Empty
-	(*StandardFile)(nil),                                      // 29: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                // 30: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 31: Scailo.MagicLink
-	(*PriceResponse)(nil),                                     // 32: Scailo.PriceResponse
-	(*InventoryInteractionsList)(nil),                         // 33: Scailo.InventoryInteractionsList
-	(*CountResponse)(nil),                                     // 34: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 22: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 23: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 24: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 25: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 26: Scailo.IdentifiersList
+	(*IdentifierUUIDsList)(nil),                               // 27: Scailo.IdentifierUUIDsList
+	(*ActiveStatus)(nil),                                      // 28: Scailo.ActiveStatus
+	(*Empty)(nil),                                             // 29: Scailo.Empty
+	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                // 31: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 32: Scailo.MagicLink
+	(*PriceResponse)(nil),                                     // 33: Scailo.PriceResponse
+	(*InventoryInteractionsList)(nil),                         // 34: Scailo.InventoryInteractionsList
+	(*CountResponse)(nil),                                     // 35: Scailo.CountResponse
 }
 var file_equipments_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.EquipmentsServiceCreateRequest.ref_from:type_name -> Scailo.EQUIPMENT_REF_FROM
@@ -2488,63 +2490,65 @@ var file_equipments_scailo_proto_depIdxs = []int32{
 	20, // 42: Scailo.EquipmentsService.ReturnMaterial:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 43: Scailo.EquipmentsService.Discard:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 44: Scailo.EquipmentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	22, // 45: Scailo.EquipmentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	23, // 46: Scailo.EquipmentsService.ViewByID:input_type -> Scailo.Identifier
-	24, // 47: Scailo.EquipmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 48: Scailo.EquipmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	24, // 49: Scailo.EquipmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 50: Scailo.EquipmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	26, // 51: Scailo.EquipmentsService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
-	27, // 52: Scailo.EquipmentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	6,  // 53: Scailo.EquipmentsService.ViewWithPagination:input_type -> Scailo.EquipmentsServicePaginationReq
-	24, // 54: Scailo.EquipmentsService.ViewVendorInvoiceUnitPrice:input_type -> Scailo.IdentifierUUID
-	23, // 55: Scailo.EquipmentsService.DownloadQCReportByID:input_type -> Scailo.Identifier
-	24, // 56: Scailo.EquipmentsService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 57: Scailo.EquipmentsService.DownloadLabelByID:input_type -> Scailo.Identifier
-	24, // 58: Scailo.EquipmentsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 59: Scailo.EquipmentsService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
-	10, // 60: Scailo.EquipmentsService.SearchAll:input_type -> Scailo.EquipmentsServiceSearchAllReq
-	8,  // 61: Scailo.EquipmentsService.Filter:input_type -> Scailo.EquipmentsServiceFilterReq
-	9,  // 62: Scailo.EquipmentsService.Count:input_type -> Scailo.EquipmentsServiceCountReq
-	8,  // 63: Scailo.EquipmentsService.DownloadAsCSV:input_type -> Scailo.EquipmentsServiceFilterReq
-	28, // 64: Scailo.EquipmentsService.DownloadImportTemplate:input_type -> Scailo.Empty
-	29, // 65: Scailo.EquipmentsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	30, // 66: Scailo.EquipmentsService.Create:output_type -> Scailo.IdentifierResponse
-	30, // 67: Scailo.EquipmentsService.SendToStore:output_type -> Scailo.IdentifierResponse
-	30, // 68: Scailo.EquipmentsService.Update:output_type -> Scailo.IdentifierResponse
-	30, // 69: Scailo.EquipmentsService.SendForRework:output_type -> Scailo.IdentifierResponse
-	30, // 70: Scailo.EquipmentsService.SendForQC:output_type -> Scailo.IdentifierResponse
-	30, // 71: Scailo.EquipmentsService.SplitLot:output_type -> Scailo.IdentifierResponse
-	30, // 72: Scailo.EquipmentsService.Partition:output_type -> Scailo.IdentifierResponse
-	30, // 73: Scailo.EquipmentsService.Consume:output_type -> Scailo.IdentifierResponse
-	30, // 74: Scailo.EquipmentsService.Reject:output_type -> Scailo.IdentifierResponse
-	30, // 75: Scailo.EquipmentsService.Scrap:output_type -> Scailo.IdentifierResponse
-	30, // 76: Scailo.EquipmentsService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
-	30, // 77: Scailo.EquipmentsService.Discard:output_type -> Scailo.IdentifierResponse
-	30, // 78: Scailo.EquipmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	31, // 79: Scailo.EquipmentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	4,  // 80: Scailo.EquipmentsService.ViewByID:output_type -> Scailo.Equipment
-	4,  // 81: Scailo.EquipmentsService.ViewByUUID:output_type -> Scailo.Equipment
-	4,  // 82: Scailo.EquipmentsService.ViewEssentialByID:output_type -> Scailo.Equipment
-	4,  // 83: Scailo.EquipmentsService.ViewEssentialByUUID:output_type -> Scailo.Equipment
-	5,  // 84: Scailo.EquipmentsService.ViewFromIDs:output_type -> Scailo.EquipmentsList
-	5,  // 85: Scailo.EquipmentsService.ViewFromUUIDs:output_type -> Scailo.EquipmentsList
-	5,  // 86: Scailo.EquipmentsService.ViewAll:output_type -> Scailo.EquipmentsList
-	7,  // 87: Scailo.EquipmentsService.ViewWithPagination:output_type -> Scailo.EquipmentsServicePaginationResponse
-	32, // 88: Scailo.EquipmentsService.ViewVendorInvoiceUnitPrice:output_type -> Scailo.PriceResponse
-	29, // 89: Scailo.EquipmentsService.DownloadQCReportByID:output_type -> Scailo.StandardFile
-	29, // 90: Scailo.EquipmentsService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
-	29, // 91: Scailo.EquipmentsService.DownloadLabelByID:output_type -> Scailo.StandardFile
-	29, // 92: Scailo.EquipmentsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	33, // 93: Scailo.EquipmentsService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
-	5,  // 94: Scailo.EquipmentsService.SearchAll:output_type -> Scailo.EquipmentsList
-	5,  // 95: Scailo.EquipmentsService.Filter:output_type -> Scailo.EquipmentsList
-	34, // 96: Scailo.EquipmentsService.Count:output_type -> Scailo.CountResponse
-	29, // 97: Scailo.EquipmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	29, // 98: Scailo.EquipmentsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
-	26, // 99: Scailo.EquipmentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	66, // [66:100] is the sub-list for method output_type
-	32, // [32:66] is the sub-list for method input_type
+	22, // 45: Scailo.EquipmentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	23, // 46: Scailo.EquipmentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	24, // 47: Scailo.EquipmentsService.ViewByID:input_type -> Scailo.Identifier
+	25, // 48: Scailo.EquipmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 49: Scailo.EquipmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	25, // 50: Scailo.EquipmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 51: Scailo.EquipmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	27, // 52: Scailo.EquipmentsService.ViewFromUUIDs:input_type -> Scailo.IdentifierUUIDsList
+	28, // 53: Scailo.EquipmentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	6,  // 54: Scailo.EquipmentsService.ViewWithPagination:input_type -> Scailo.EquipmentsServicePaginationReq
+	25, // 55: Scailo.EquipmentsService.ViewVendorInvoiceUnitPrice:input_type -> Scailo.IdentifierUUID
+	24, // 56: Scailo.EquipmentsService.DownloadQCReportByID:input_type -> Scailo.Identifier
+	25, // 57: Scailo.EquipmentsService.DownloadQCReportByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 58: Scailo.EquipmentsService.DownloadLabelByID:input_type -> Scailo.Identifier
+	25, // 59: Scailo.EquipmentsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 60: Scailo.EquipmentsService.ViewInventoryInteractions:input_type -> Scailo.IdentifierUUID
+	10, // 61: Scailo.EquipmentsService.SearchAll:input_type -> Scailo.EquipmentsServiceSearchAllReq
+	8,  // 62: Scailo.EquipmentsService.Filter:input_type -> Scailo.EquipmentsServiceFilterReq
+	9,  // 63: Scailo.EquipmentsService.Count:input_type -> Scailo.EquipmentsServiceCountReq
+	8,  // 64: Scailo.EquipmentsService.DownloadAsCSV:input_type -> Scailo.EquipmentsServiceFilterReq
+	29, // 65: Scailo.EquipmentsService.DownloadImportTemplate:input_type -> Scailo.Empty
+	30, // 66: Scailo.EquipmentsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	31, // 67: Scailo.EquipmentsService.Create:output_type -> Scailo.IdentifierResponse
+	31, // 68: Scailo.EquipmentsService.SendToStore:output_type -> Scailo.IdentifierResponse
+	31, // 69: Scailo.EquipmentsService.Update:output_type -> Scailo.IdentifierResponse
+	31, // 70: Scailo.EquipmentsService.SendForRework:output_type -> Scailo.IdentifierResponse
+	31, // 71: Scailo.EquipmentsService.SendForQC:output_type -> Scailo.IdentifierResponse
+	31, // 72: Scailo.EquipmentsService.SplitLot:output_type -> Scailo.IdentifierResponse
+	31, // 73: Scailo.EquipmentsService.Partition:output_type -> Scailo.IdentifierResponse
+	31, // 74: Scailo.EquipmentsService.Consume:output_type -> Scailo.IdentifierResponse
+	31, // 75: Scailo.EquipmentsService.Reject:output_type -> Scailo.IdentifierResponse
+	31, // 76: Scailo.EquipmentsService.Scrap:output_type -> Scailo.IdentifierResponse
+	31, // 77: Scailo.EquipmentsService.ReturnMaterial:output_type -> Scailo.IdentifierResponse
+	31, // 78: Scailo.EquipmentsService.Discard:output_type -> Scailo.IdentifierResponse
+	31, // 79: Scailo.EquipmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	31, // 80: Scailo.EquipmentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	32, // 81: Scailo.EquipmentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	4,  // 82: Scailo.EquipmentsService.ViewByID:output_type -> Scailo.Equipment
+	4,  // 83: Scailo.EquipmentsService.ViewByUUID:output_type -> Scailo.Equipment
+	4,  // 84: Scailo.EquipmentsService.ViewEssentialByID:output_type -> Scailo.Equipment
+	4,  // 85: Scailo.EquipmentsService.ViewEssentialByUUID:output_type -> Scailo.Equipment
+	5,  // 86: Scailo.EquipmentsService.ViewFromIDs:output_type -> Scailo.EquipmentsList
+	5,  // 87: Scailo.EquipmentsService.ViewFromUUIDs:output_type -> Scailo.EquipmentsList
+	5,  // 88: Scailo.EquipmentsService.ViewAll:output_type -> Scailo.EquipmentsList
+	7,  // 89: Scailo.EquipmentsService.ViewWithPagination:output_type -> Scailo.EquipmentsServicePaginationResponse
+	33, // 90: Scailo.EquipmentsService.ViewVendorInvoiceUnitPrice:output_type -> Scailo.PriceResponse
+	30, // 91: Scailo.EquipmentsService.DownloadQCReportByID:output_type -> Scailo.StandardFile
+	30, // 92: Scailo.EquipmentsService.DownloadQCReportByUUID:output_type -> Scailo.StandardFile
+	30, // 93: Scailo.EquipmentsService.DownloadLabelByID:output_type -> Scailo.StandardFile
+	30, // 94: Scailo.EquipmentsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	34, // 95: Scailo.EquipmentsService.ViewInventoryInteractions:output_type -> Scailo.InventoryInteractionsList
+	5,  // 96: Scailo.EquipmentsService.SearchAll:output_type -> Scailo.EquipmentsList
+	5,  // 97: Scailo.EquipmentsService.Filter:output_type -> Scailo.EquipmentsList
+	35, // 98: Scailo.EquipmentsService.Count:output_type -> Scailo.CountResponse
+	30, // 99: Scailo.EquipmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	30, // 100: Scailo.EquipmentsService.DownloadImportTemplate:output_type -> Scailo.StandardFile
+	27, // 101: Scailo.EquipmentsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	67, // [67:102] is the sub-list for method output_type
+	32, // [32:67] is the sub-list for method input_type
 	32, // [32:32] is the sub-list for extension type_name
 	32, // [32:32] is the sub-list for extension extendee
 	0,  // [0:32] is the sub-list for field type_name
@@ -2558,6 +2562,7 @@ func file_equipments_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

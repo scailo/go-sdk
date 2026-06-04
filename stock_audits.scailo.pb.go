@@ -2464,7 +2464,7 @@ var File_stock_audits_scailo_proto protoreflect.FileDescriptor
 
 const file_stock_audits_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x19stock_audits.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xbc\x02\n" +
+	"\x19stock_audits.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xbc\x02\n" +
 	"\x1fStockAuditsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2666,7 +2666,7 @@ const file_stock_audits_scailo_proto_rawDesc = "" +
 	"\x17STOCK_AUDIT_ITEM_STATUS\x12+\n" +
 	"'STOCK_AUDIT_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12$\n" +
 	" STOCK_AUDIT_ITEM_STATUS_APPROVED\x10\x01\x12&\n" +
-	"\"STOCK_AUDIT_ITEM_STATUS_UNAPPROVED\x10\x022\xc9\"\n" +
+	"\"STOCK_AUDIT_ITEM_STATUS_UNAPPROVED\x10\x022\x9c#\n" +
 	"\x12StockAuditsService\x12M\n" +
 	"\x06Create\x12'.Scailo.StockAuditsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
 	"\x05Draft\x12'.Scailo.StockAuditsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -2684,7 +2684,8 @@ const file_stock_audits_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12\\\n" +
 	"\x11AddStockAuditItem\x12+.Scailo.StockAuditsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
@@ -2774,25 +2775,26 @@ var file_stock_audits_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 28: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 29: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 30: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 31: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                    // 32: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                         // 33: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 34: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 35: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                   // 36: Scailo.SimpleSearchReq
-	(*IdentifierWithSearchKey)(nil),                           // 37: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                             // 38: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 39: Scailo.IdentifierUUIDWithFile
-	(*IdentifiersList)(nil),                                   // 40: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 41: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 42: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 43: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 44: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 45: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 46: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 47: Scailo.StandardFile
-	(*FamiliesList)(nil),                                      // 48: Scailo.FamiliesList
-	(*CountResponse)(nil),                                     // 49: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 31: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 32: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                    // 33: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                         // 34: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 35: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 36: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                   // 37: Scailo.SimpleSearchReq
+	(*IdentifierWithSearchKey)(nil),                           // 38: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                             // 39: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 40: Scailo.IdentifierUUIDWithFile
+	(*IdentifiersList)(nil),                                   // 41: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 42: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 43: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 44: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 45: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 46: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 47: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 48: Scailo.StandardFile
+	(*FamiliesList)(nil),                                      // 49: Scailo.FamiliesList
+	(*CountResponse)(nil),                                     // 50: Scailo.CountResponse
 }
 var file_stock_audits_scailo_proto_depIdxs = []int32{
 	20, // 0: Scailo.StockAuditsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2845,100 +2847,102 @@ var file_stock_audits_scailo_proto_depIdxs = []int32{
 	29, // 47: Scailo.StockAuditsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 48: Scailo.StockAuditsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	30, // 49: Scailo.StockAuditsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	31, // 50: Scailo.StockAuditsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	32, // 51: Scailo.StockAuditsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	6,  // 52: Scailo.StockAuditsService.AddStockAuditItem:input_type -> Scailo.StockAuditsServiceItemCreateRequest
-	7,  // 53: Scailo.StockAuditsService.ModifyStockAuditItem:input_type -> Scailo.StockAuditsServiceItemUpdateRequest
-	33, // 54: Scailo.StockAuditsService.ApproveStockAuditItem:input_type -> Scailo.IdentifierWithUserComment
-	33, // 55: Scailo.StockAuditsService.DeleteStockAuditItem:input_type -> Scailo.IdentifierWithUserComment
-	34, // 56: Scailo.StockAuditsService.ReorderStockAuditItems:input_type -> Scailo.ReorderItemsRequest
-	35, // 57: Scailo.StockAuditsService.ViewStockAuditItemByID:input_type -> Scailo.Identifier
-	36, // 58: Scailo.StockAuditsService.ViewStockAuditItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
-	37, // 59: Scailo.StockAuditsService.ViewApprovedStockAuditItems:input_type -> Scailo.IdentifierWithSearchKey
-	37, // 60: Scailo.StockAuditsService.ViewUnapprovedStockAuditItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 61: Scailo.StockAuditsService.ViewStockAuditItemHistory:input_type -> Scailo.StockAuditItemHistoryRequest
-	18, // 62: Scailo.StockAuditsService.ViewPaginatedApprovedStockAuditItems:input_type -> Scailo.StockAuditItemsSearchRequest
-	18, // 63: Scailo.StockAuditsService.ViewPaginatedUnapprovedStockAuditItems:input_type -> Scailo.StockAuditItemsSearchRequest
-	18, // 64: Scailo.StockAuditsService.SearchItemsWithPagination:input_type -> Scailo.StockAuditItemsSearchRequest
-	32, // 65: Scailo.StockAuditsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	38, // 66: Scailo.StockAuditsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	39, // 67: Scailo.StockAuditsService.UploadStockAuditItems:input_type -> Scailo.IdentifierUUIDWithFile
-	35, // 68: Scailo.StockAuditsService.ViewByID:input_type -> Scailo.Identifier
-	32, // 69: Scailo.StockAuditsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 70: Scailo.StockAuditsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	35, // 71: Scailo.StockAuditsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	32, // 72: Scailo.StockAuditsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	40, // 73: Scailo.StockAuditsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	41, // 74: Scailo.StockAuditsService.ViewAll:input_type -> Scailo.ActiveStatus
-	32, // 75: Scailo.StockAuditsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	13, // 76: Scailo.StockAuditsService.ViewWithPagination:input_type -> Scailo.StockAuditsServicePaginationReq
-	37, // 77: Scailo.StockAuditsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	42, // 78: Scailo.StockAuditsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	12, // 79: Scailo.StockAuditsService.ViewProspectiveStockAuditItem:input_type -> Scailo.StockAuditItemProspectiveInfoRequest
-	32, // 80: Scailo.StockAuditsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	32, // 81: Scailo.StockAuditsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	32, // 82: Scailo.StockAuditsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 83: Scailo.StockAuditsService.SearchAll:input_type -> Scailo.StockAuditsServiceSearchAllReq
-	15, // 84: Scailo.StockAuditsService.Filter:input_type -> Scailo.StockAuditsServiceFilterReq
-	43, // 85: Scailo.StockAuditsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	16, // 86: Scailo.StockAuditsService.Count:input_type -> Scailo.StockAuditsServiceCountReq
-	15, // 87: Scailo.StockAuditsService.DownloadAsCSV:input_type -> Scailo.StockAuditsServiceFilterReq
-	44, // 88: Scailo.StockAuditsService.Create:output_type -> Scailo.IdentifierResponse
-	44, // 89: Scailo.StockAuditsService.Draft:output_type -> Scailo.IdentifierResponse
-	44, // 90: Scailo.StockAuditsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	44, // 91: Scailo.StockAuditsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	44, // 92: Scailo.StockAuditsService.Verify:output_type -> Scailo.IdentifierResponse
-	44, // 93: Scailo.StockAuditsService.Approve:output_type -> Scailo.IdentifierResponse
-	44, // 94: Scailo.StockAuditsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	44, // 95: Scailo.StockAuditsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	44, // 96: Scailo.StockAuditsService.Halt:output_type -> Scailo.IdentifierResponse
-	44, // 97: Scailo.StockAuditsService.Discard:output_type -> Scailo.IdentifierResponse
-	44, // 98: Scailo.StockAuditsService.Restore:output_type -> Scailo.IdentifierResponse
-	44, // 99: Scailo.StockAuditsService.Complete:output_type -> Scailo.IdentifierResponse
-	44, // 100: Scailo.StockAuditsService.Repeat:output_type -> Scailo.IdentifierResponse
-	44, // 101: Scailo.StockAuditsService.Reopen:output_type -> Scailo.IdentifierResponse
-	44, // 102: Scailo.StockAuditsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	44, // 103: Scailo.StockAuditsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	45, // 104: Scailo.StockAuditsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	46, // 105: Scailo.StockAuditsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	44, // 106: Scailo.StockAuditsService.AddStockAuditItem:output_type -> Scailo.IdentifierResponse
-	44, // 107: Scailo.StockAuditsService.ModifyStockAuditItem:output_type -> Scailo.IdentifierResponse
-	44, // 108: Scailo.StockAuditsService.ApproveStockAuditItem:output_type -> Scailo.IdentifierResponse
-	44, // 109: Scailo.StockAuditsService.DeleteStockAuditItem:output_type -> Scailo.IdentifierResponse
-	44, // 110: Scailo.StockAuditsService.ReorderStockAuditItems:output_type -> Scailo.IdentifierResponse
-	8,  // 111: Scailo.StockAuditsService.ViewStockAuditItemByID:output_type -> Scailo.StockAuditItem
-	8,  // 112: Scailo.StockAuditsService.ViewStockAuditItemByInventoryHash:output_type -> Scailo.StockAuditItem
-	10, // 113: Scailo.StockAuditsService.ViewApprovedStockAuditItems:output_type -> Scailo.StockAuditsItemsList
-	10, // 114: Scailo.StockAuditsService.ViewUnapprovedStockAuditItems:output_type -> Scailo.StockAuditsItemsList
-	10, // 115: Scailo.StockAuditsService.ViewStockAuditItemHistory:output_type -> Scailo.StockAuditsItemsList
-	19, // 116: Scailo.StockAuditsService.ViewPaginatedApprovedStockAuditItems:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
-	19, // 117: Scailo.StockAuditsService.ViewPaginatedUnapprovedStockAuditItems:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
-	19, // 118: Scailo.StockAuditsService.SearchItemsWithPagination:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
-	47, // 119: Scailo.StockAuditsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	47, // 120: Scailo.StockAuditsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	40, // 121: Scailo.StockAuditsService.UploadStockAuditItems:output_type -> Scailo.IdentifiersList
-	5,  // 122: Scailo.StockAuditsService.ViewByID:output_type -> Scailo.StockAudit
-	5,  // 123: Scailo.StockAuditsService.ViewByUUID:output_type -> Scailo.StockAudit
-	5,  // 124: Scailo.StockAuditsService.ViewByReferenceID:output_type -> Scailo.StockAudit
-	5,  // 125: Scailo.StockAuditsService.ViewEssentialByID:output_type -> Scailo.StockAudit
-	5,  // 126: Scailo.StockAuditsService.ViewEssentialByUUID:output_type -> Scailo.StockAudit
-	9,  // 127: Scailo.StockAuditsService.ViewFromIDs:output_type -> Scailo.StockAuditsList
-	9,  // 128: Scailo.StockAuditsService.ViewAll:output_type -> Scailo.StockAuditsList
-	9,  // 129: Scailo.StockAuditsService.ViewAllForEntityUUID:output_type -> Scailo.StockAuditsList
-	14, // 130: Scailo.StockAuditsService.ViewWithPagination:output_type -> Scailo.StockAuditsServicePaginationResponse
-	48, // 131: Scailo.StockAuditsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	48, // 132: Scailo.StockAuditsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	6,  // 133: Scailo.StockAuditsService.ViewProspectiveStockAuditItem:output_type -> Scailo.StockAuditsServiceItemCreateRequest
-	47, // 134: Scailo.StockAuditsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	46, // 135: Scailo.StockAuditsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	47, // 136: Scailo.StockAuditsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	9,  // 137: Scailo.StockAuditsService.SearchAll:output_type -> Scailo.StockAuditsList
-	9,  // 138: Scailo.StockAuditsService.Filter:output_type -> Scailo.StockAuditsList
-	49, // 139: Scailo.StockAuditsService.CountInStatus:output_type -> Scailo.CountResponse
-	49, // 140: Scailo.StockAuditsService.Count:output_type -> Scailo.CountResponse
-	47, // 141: Scailo.StockAuditsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	88, // [88:142] is the sub-list for method output_type
-	34, // [34:88] is the sub-list for method input_type
+	31, // 50: Scailo.StockAuditsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	32, // 51: Scailo.StockAuditsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	33, // 52: Scailo.StockAuditsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	6,  // 53: Scailo.StockAuditsService.AddStockAuditItem:input_type -> Scailo.StockAuditsServiceItemCreateRequest
+	7,  // 54: Scailo.StockAuditsService.ModifyStockAuditItem:input_type -> Scailo.StockAuditsServiceItemUpdateRequest
+	34, // 55: Scailo.StockAuditsService.ApproveStockAuditItem:input_type -> Scailo.IdentifierWithUserComment
+	34, // 56: Scailo.StockAuditsService.DeleteStockAuditItem:input_type -> Scailo.IdentifierWithUserComment
+	35, // 57: Scailo.StockAuditsService.ReorderStockAuditItems:input_type -> Scailo.ReorderItemsRequest
+	36, // 58: Scailo.StockAuditsService.ViewStockAuditItemByID:input_type -> Scailo.Identifier
+	37, // 59: Scailo.StockAuditsService.ViewStockAuditItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
+	38, // 60: Scailo.StockAuditsService.ViewApprovedStockAuditItems:input_type -> Scailo.IdentifierWithSearchKey
+	38, // 61: Scailo.StockAuditsService.ViewUnapprovedStockAuditItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 62: Scailo.StockAuditsService.ViewStockAuditItemHistory:input_type -> Scailo.StockAuditItemHistoryRequest
+	18, // 63: Scailo.StockAuditsService.ViewPaginatedApprovedStockAuditItems:input_type -> Scailo.StockAuditItemsSearchRequest
+	18, // 64: Scailo.StockAuditsService.ViewPaginatedUnapprovedStockAuditItems:input_type -> Scailo.StockAuditItemsSearchRequest
+	18, // 65: Scailo.StockAuditsService.SearchItemsWithPagination:input_type -> Scailo.StockAuditItemsSearchRequest
+	33, // 66: Scailo.StockAuditsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	39, // 67: Scailo.StockAuditsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	40, // 68: Scailo.StockAuditsService.UploadStockAuditItems:input_type -> Scailo.IdentifierUUIDWithFile
+	36, // 69: Scailo.StockAuditsService.ViewByID:input_type -> Scailo.Identifier
+	33, // 70: Scailo.StockAuditsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 71: Scailo.StockAuditsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	36, // 72: Scailo.StockAuditsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	33, // 73: Scailo.StockAuditsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	41, // 74: Scailo.StockAuditsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	42, // 75: Scailo.StockAuditsService.ViewAll:input_type -> Scailo.ActiveStatus
+	33, // 76: Scailo.StockAuditsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	13, // 77: Scailo.StockAuditsService.ViewWithPagination:input_type -> Scailo.StockAuditsServicePaginationReq
+	38, // 78: Scailo.StockAuditsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	43, // 79: Scailo.StockAuditsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	12, // 80: Scailo.StockAuditsService.ViewProspectiveStockAuditItem:input_type -> Scailo.StockAuditItemProspectiveInfoRequest
+	33, // 81: Scailo.StockAuditsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	33, // 82: Scailo.StockAuditsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	33, // 83: Scailo.StockAuditsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	17, // 84: Scailo.StockAuditsService.SearchAll:input_type -> Scailo.StockAuditsServiceSearchAllReq
+	15, // 85: Scailo.StockAuditsService.Filter:input_type -> Scailo.StockAuditsServiceFilterReq
+	44, // 86: Scailo.StockAuditsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	16, // 87: Scailo.StockAuditsService.Count:input_type -> Scailo.StockAuditsServiceCountReq
+	15, // 88: Scailo.StockAuditsService.DownloadAsCSV:input_type -> Scailo.StockAuditsServiceFilterReq
+	45, // 89: Scailo.StockAuditsService.Create:output_type -> Scailo.IdentifierResponse
+	45, // 90: Scailo.StockAuditsService.Draft:output_type -> Scailo.IdentifierResponse
+	45, // 91: Scailo.StockAuditsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	45, // 92: Scailo.StockAuditsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	45, // 93: Scailo.StockAuditsService.Verify:output_type -> Scailo.IdentifierResponse
+	45, // 94: Scailo.StockAuditsService.Approve:output_type -> Scailo.IdentifierResponse
+	45, // 95: Scailo.StockAuditsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	45, // 96: Scailo.StockAuditsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	45, // 97: Scailo.StockAuditsService.Halt:output_type -> Scailo.IdentifierResponse
+	45, // 98: Scailo.StockAuditsService.Discard:output_type -> Scailo.IdentifierResponse
+	45, // 99: Scailo.StockAuditsService.Restore:output_type -> Scailo.IdentifierResponse
+	45, // 100: Scailo.StockAuditsService.Complete:output_type -> Scailo.IdentifierResponse
+	45, // 101: Scailo.StockAuditsService.Repeat:output_type -> Scailo.IdentifierResponse
+	45, // 102: Scailo.StockAuditsService.Reopen:output_type -> Scailo.IdentifierResponse
+	45, // 103: Scailo.StockAuditsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	45, // 104: Scailo.StockAuditsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	45, // 105: Scailo.StockAuditsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	46, // 106: Scailo.StockAuditsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	47, // 107: Scailo.StockAuditsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	45, // 108: Scailo.StockAuditsService.AddStockAuditItem:output_type -> Scailo.IdentifierResponse
+	45, // 109: Scailo.StockAuditsService.ModifyStockAuditItem:output_type -> Scailo.IdentifierResponse
+	45, // 110: Scailo.StockAuditsService.ApproveStockAuditItem:output_type -> Scailo.IdentifierResponse
+	45, // 111: Scailo.StockAuditsService.DeleteStockAuditItem:output_type -> Scailo.IdentifierResponse
+	45, // 112: Scailo.StockAuditsService.ReorderStockAuditItems:output_type -> Scailo.IdentifierResponse
+	8,  // 113: Scailo.StockAuditsService.ViewStockAuditItemByID:output_type -> Scailo.StockAuditItem
+	8,  // 114: Scailo.StockAuditsService.ViewStockAuditItemByInventoryHash:output_type -> Scailo.StockAuditItem
+	10, // 115: Scailo.StockAuditsService.ViewApprovedStockAuditItems:output_type -> Scailo.StockAuditsItemsList
+	10, // 116: Scailo.StockAuditsService.ViewUnapprovedStockAuditItems:output_type -> Scailo.StockAuditsItemsList
+	10, // 117: Scailo.StockAuditsService.ViewStockAuditItemHistory:output_type -> Scailo.StockAuditsItemsList
+	19, // 118: Scailo.StockAuditsService.ViewPaginatedApprovedStockAuditItems:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
+	19, // 119: Scailo.StockAuditsService.ViewPaginatedUnapprovedStockAuditItems:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
+	19, // 120: Scailo.StockAuditsService.SearchItemsWithPagination:output_type -> Scailo.StockAuditsServicePaginatedItemsResponse
+	48, // 121: Scailo.StockAuditsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	48, // 122: Scailo.StockAuditsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	41, // 123: Scailo.StockAuditsService.UploadStockAuditItems:output_type -> Scailo.IdentifiersList
+	5,  // 124: Scailo.StockAuditsService.ViewByID:output_type -> Scailo.StockAudit
+	5,  // 125: Scailo.StockAuditsService.ViewByUUID:output_type -> Scailo.StockAudit
+	5,  // 126: Scailo.StockAuditsService.ViewByReferenceID:output_type -> Scailo.StockAudit
+	5,  // 127: Scailo.StockAuditsService.ViewEssentialByID:output_type -> Scailo.StockAudit
+	5,  // 128: Scailo.StockAuditsService.ViewEssentialByUUID:output_type -> Scailo.StockAudit
+	9,  // 129: Scailo.StockAuditsService.ViewFromIDs:output_type -> Scailo.StockAuditsList
+	9,  // 130: Scailo.StockAuditsService.ViewAll:output_type -> Scailo.StockAuditsList
+	9,  // 131: Scailo.StockAuditsService.ViewAllForEntityUUID:output_type -> Scailo.StockAuditsList
+	14, // 132: Scailo.StockAuditsService.ViewWithPagination:output_type -> Scailo.StockAuditsServicePaginationResponse
+	49, // 133: Scailo.StockAuditsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	49, // 134: Scailo.StockAuditsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	6,  // 135: Scailo.StockAuditsService.ViewProspectiveStockAuditItem:output_type -> Scailo.StockAuditsServiceItemCreateRequest
+	48, // 136: Scailo.StockAuditsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	47, // 137: Scailo.StockAuditsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	48, // 138: Scailo.StockAuditsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	9,  // 139: Scailo.StockAuditsService.SearchAll:output_type -> Scailo.StockAuditsList
+	9,  // 140: Scailo.StockAuditsService.Filter:output_type -> Scailo.StockAuditsList
+	50, // 141: Scailo.StockAuditsService.CountInStatus:output_type -> Scailo.CountResponse
+	50, // 142: Scailo.StockAuditsService.Count:output_type -> Scailo.CountResponse
+	48, // 143: Scailo.StockAuditsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	89, // [89:144] is the sub-list for method output_type
+	34, // [34:89] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name
@@ -2953,6 +2957,7 @@ func file_stock_audits_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

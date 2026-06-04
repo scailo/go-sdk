@@ -33,6 +33,7 @@ const (
 	GoalsService_Repeat_FullMethodName                           = "/Scailo.GoalsService/Repeat"
 	GoalsService_Reopen_FullMethodName                           = "/Scailo.GoalsService/Reopen"
 	GoalsService_CommentAdd_FullMethodName                       = "/Scailo.GoalsService/CommentAdd"
+	GoalsService_AttachVaultFolder_FullMethodName                = "/Scailo.GoalsService/AttachVaultFolder"
 	GoalsService_Clone_FullMethodName                            = "/Scailo.GoalsService/Clone"
 	GoalsService_AddGoalItem_FullMethodName                      = "/Scailo.GoalsService/AddGoalItem"
 	GoalsService_ModifyGoalItem_FullMethodName                   = "/Scailo.GoalsService/ModifyGoalItem"
@@ -164,6 +165,17 @@ type GoalsServiceClient interface {
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Clone goal from an existing goal (denoted by the identifier)
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a goal
@@ -380,6 +392,16 @@ func (c *goalsServiceClient) CommentAdd(ctx context.Context, in *IdentifierUUIDW
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, GoalsService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *goalsServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, GoalsService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

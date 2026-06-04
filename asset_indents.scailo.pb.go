@@ -2614,7 +2614,7 @@ var File_asset_indents_scailo_proto protoreflect.FileDescriptor
 
 const file_asset_indents_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1aasset_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\x87\x03\n" +
+	"\x1aasset_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x87\x03\n" +
 	" AssetIndentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2832,7 +2832,7 @@ const file_asset_indents_scailo_proto_rawDesc = "" +
 	"\"ASSET_INDENT_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12*\n" +
 	"&ASSET_INDENT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12%\n" +
-	"!ASSET_INDENT_SORT_KEY_LOCATION_ID\x10\f2\xa1\"\n" +
+	"!ASSET_INDENT_SORT_KEY_LOCATION_ID\x10\f2\xf4\"\n" +
 	"\x13AssetIndentsService\x12N\n" +
 	"\x06Create\x12(.Scailo.AssetIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.AssetIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -2850,7 +2850,8 @@ const file_asset_indents_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12^\n" +
 	"\x12AddAssetIndentItem\x12,.Scailo.AssetIndentsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12a\n" +
@@ -2941,26 +2942,27 @@ var file_asset_indents_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                       // 30: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 31: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 32: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 33: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                    // 34: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                         // 35: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 36: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 37: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 38: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                             // 39: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 40: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 41: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 42: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 43: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 44: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 45: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 46: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 47: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 48: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 49: Scailo.StandardFile
-	(*FamiliesList)(nil),                                      // 50: Scailo.FamiliesList
-	(*QuantityResponse)(nil),                                  // 51: Scailo.QuantityResponse
-	(*CountResponse)(nil),                                     // 52: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 33: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 34: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                    // 35: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                         // 36: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 37: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 38: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 39: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                             // 40: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 41: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 42: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 43: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 44: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 45: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 46: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 47: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 48: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 49: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 50: Scailo.StandardFile
+	(*FamiliesList)(nil),                                      // 51: Scailo.FamiliesList
+	(*QuantityResponse)(nil),                                  // 52: Scailo.QuantityResponse
+	(*CountResponse)(nil),                                     // 53: Scailo.CountResponse
 }
 var file_asset_indents_scailo_proto_depIdxs = []int32{
 	22, // 0: Scailo.AssetIndentsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3014,98 +3016,100 @@ var file_asset_indents_scailo_proto_depIdxs = []int32{
 	31, // 48: Scailo.AssetIndentsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	31, // 49: Scailo.AssetIndentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 50: Scailo.AssetIndentsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	33, // 51: Scailo.AssetIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	34, // 52: Scailo.AssetIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	6,  // 53: Scailo.AssetIndentsService.AddAssetIndentItem:input_type -> Scailo.AssetIndentsServiceItemCreateRequest
-	7,  // 54: Scailo.AssetIndentsService.ModifyAssetIndentItem:input_type -> Scailo.AssetIndentsServiceItemUpdateRequest
-	35, // 55: Scailo.AssetIndentsService.ApproveAssetIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	35, // 56: Scailo.AssetIndentsService.DeleteAssetIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	36, // 57: Scailo.AssetIndentsService.ReorderAssetIndentItems:input_type -> Scailo.ReorderItemsRequest
-	37, // 58: Scailo.AssetIndentsService.ViewAssetIndentItemByID:input_type -> Scailo.Identifier
-	38, // 59: Scailo.AssetIndentsService.ViewApprovedAssetIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	38, // 60: Scailo.AssetIndentsService.ViewUnapprovedAssetIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 61: Scailo.AssetIndentsService.ViewAssetIndentItemHistory:input_type -> Scailo.AssetIndentItemHistoryRequest
-	12, // 62: Scailo.AssetIndentsService.ViewPaginatedApprovedAssetIndentItems:input_type -> Scailo.AssetIndentItemsSearchRequest
-	12, // 63: Scailo.AssetIndentsService.ViewPaginatedUnapprovedAssetIndentItems:input_type -> Scailo.AssetIndentItemsSearchRequest
-	12, // 64: Scailo.AssetIndentsService.SearchItemsWithPagination:input_type -> Scailo.AssetIndentItemsSearchRequest
-	34, // 65: Scailo.AssetIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	39, // 66: Scailo.AssetIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	40, // 67: Scailo.AssetIndentsService.UploadAssetIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
-	37, // 68: Scailo.AssetIndentsService.ViewByID:input_type -> Scailo.Identifier
-	34, // 69: Scailo.AssetIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	41, // 70: Scailo.AssetIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	37, // 71: Scailo.AssetIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	34, // 72: Scailo.AssetIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 73: Scailo.AssetIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	43, // 74: Scailo.AssetIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	34, // 75: Scailo.AssetIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 76: Scailo.AssetIndentsService.ViewWithPagination:input_type -> Scailo.AssetIndentsServicePaginationReq
-	38, // 77: Scailo.AssetIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	44, // 78: Scailo.AssetIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	34, // 79: Scailo.AssetIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	34, // 80: Scailo.AssetIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	34, // 81: Scailo.AssetIndentsService.ViewIssuedStatistics:input_type -> Scailo.IdentifierUUID
-	14, // 82: Scailo.AssetIndentsService.ViewAddedQuantityForFamily:input_type -> Scailo.AssetIndentItemProspectiveInfoRequest
-	19, // 83: Scailo.AssetIndentsService.SearchAll:input_type -> Scailo.AssetIndentsServiceSearchAllReq
-	17, // 84: Scailo.AssetIndentsService.Filter:input_type -> Scailo.AssetIndentsServiceFilterReq
-	45, // 85: Scailo.AssetIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 86: Scailo.AssetIndentsService.Count:input_type -> Scailo.AssetIndentsServiceCountReq
-	17, // 87: Scailo.AssetIndentsService.DownloadAsCSV:input_type -> Scailo.AssetIndentsServiceFilterReq
-	46, // 88: Scailo.AssetIndentsService.Create:output_type -> Scailo.IdentifierResponse
-	46, // 89: Scailo.AssetIndentsService.Draft:output_type -> Scailo.IdentifierResponse
-	46, // 90: Scailo.AssetIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	46, // 91: Scailo.AssetIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	46, // 92: Scailo.AssetIndentsService.Verify:output_type -> Scailo.IdentifierResponse
-	46, // 93: Scailo.AssetIndentsService.Approve:output_type -> Scailo.IdentifierResponse
-	46, // 94: Scailo.AssetIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	46, // 95: Scailo.AssetIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	46, // 96: Scailo.AssetIndentsService.Halt:output_type -> Scailo.IdentifierResponse
-	46, // 97: Scailo.AssetIndentsService.Discard:output_type -> Scailo.IdentifierResponse
-	46, // 98: Scailo.AssetIndentsService.Restore:output_type -> Scailo.IdentifierResponse
-	46, // 99: Scailo.AssetIndentsService.Complete:output_type -> Scailo.IdentifierResponse
-	46, // 100: Scailo.AssetIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	46, // 101: Scailo.AssetIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
-	46, // 102: Scailo.AssetIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	46, // 103: Scailo.AssetIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	47, // 104: Scailo.AssetIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	48, // 105: Scailo.AssetIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	46, // 106: Scailo.AssetIndentsService.AddAssetIndentItem:output_type -> Scailo.IdentifierResponse
-	46, // 107: Scailo.AssetIndentsService.ModifyAssetIndentItem:output_type -> Scailo.IdentifierResponse
-	46, // 108: Scailo.AssetIndentsService.ApproveAssetIndentItem:output_type -> Scailo.IdentifierResponse
-	46, // 109: Scailo.AssetIndentsService.DeleteAssetIndentItem:output_type -> Scailo.IdentifierResponse
-	46, // 110: Scailo.AssetIndentsService.ReorderAssetIndentItems:output_type -> Scailo.IdentifierResponse
-	8,  // 111: Scailo.AssetIndentsService.ViewAssetIndentItemByID:output_type -> Scailo.AssetIndentItem
-	10, // 112: Scailo.AssetIndentsService.ViewApprovedAssetIndentItems:output_type -> Scailo.AssetIndentsItemsList
-	10, // 113: Scailo.AssetIndentsService.ViewUnapprovedAssetIndentItems:output_type -> Scailo.AssetIndentsItemsList
-	10, // 114: Scailo.AssetIndentsService.ViewAssetIndentItemHistory:output_type -> Scailo.AssetIndentsItemsList
-	13, // 115: Scailo.AssetIndentsService.ViewPaginatedApprovedAssetIndentItems:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
-	13, // 116: Scailo.AssetIndentsService.ViewPaginatedUnapprovedAssetIndentItems:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
-	13, // 117: Scailo.AssetIndentsService.SearchItemsWithPagination:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
-	49, // 118: Scailo.AssetIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	49, // 119: Scailo.AssetIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	42, // 120: Scailo.AssetIndentsService.UploadAssetIndentItems:output_type -> Scailo.IdentifiersList
-	5,  // 121: Scailo.AssetIndentsService.ViewByID:output_type -> Scailo.AssetIndent
-	5,  // 122: Scailo.AssetIndentsService.ViewByUUID:output_type -> Scailo.AssetIndent
-	5,  // 123: Scailo.AssetIndentsService.ViewByReferenceID:output_type -> Scailo.AssetIndent
-	5,  // 124: Scailo.AssetIndentsService.ViewEssentialByID:output_type -> Scailo.AssetIndent
-	5,  // 125: Scailo.AssetIndentsService.ViewEssentialByUUID:output_type -> Scailo.AssetIndent
-	9,  // 126: Scailo.AssetIndentsService.ViewFromIDs:output_type -> Scailo.AssetIndentsList
-	9,  // 127: Scailo.AssetIndentsService.ViewAll:output_type -> Scailo.AssetIndentsList
-	9,  // 128: Scailo.AssetIndentsService.ViewAllForEntityUUID:output_type -> Scailo.AssetIndentsList
-	16, // 129: Scailo.AssetIndentsService.ViewWithPagination:output_type -> Scailo.AssetIndentsServicePaginationResponse
-	50, // 130: Scailo.AssetIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	50, // 131: Scailo.AssetIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	48, // 132: Scailo.AssetIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	49, // 133: Scailo.AssetIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	21, // 134: Scailo.AssetIndentsService.ViewIssuedStatistics:output_type -> Scailo.AssetIndentIssuedStatisticsList
-	51, // 135: Scailo.AssetIndentsService.ViewAddedQuantityForFamily:output_type -> Scailo.QuantityResponse
-	9,  // 136: Scailo.AssetIndentsService.SearchAll:output_type -> Scailo.AssetIndentsList
-	9,  // 137: Scailo.AssetIndentsService.Filter:output_type -> Scailo.AssetIndentsList
-	52, // 138: Scailo.AssetIndentsService.CountInStatus:output_type -> Scailo.CountResponse
-	52, // 139: Scailo.AssetIndentsService.Count:output_type -> Scailo.CountResponse
-	49, // 140: Scailo.AssetIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	88, // [88:141] is the sub-list for method output_type
-	35, // [35:88] is the sub-list for method input_type
+	33, // 51: Scailo.AssetIndentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	34, // 52: Scailo.AssetIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	35, // 53: Scailo.AssetIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	6,  // 54: Scailo.AssetIndentsService.AddAssetIndentItem:input_type -> Scailo.AssetIndentsServiceItemCreateRequest
+	7,  // 55: Scailo.AssetIndentsService.ModifyAssetIndentItem:input_type -> Scailo.AssetIndentsServiceItemUpdateRequest
+	36, // 56: Scailo.AssetIndentsService.ApproveAssetIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	36, // 57: Scailo.AssetIndentsService.DeleteAssetIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	37, // 58: Scailo.AssetIndentsService.ReorderAssetIndentItems:input_type -> Scailo.ReorderItemsRequest
+	38, // 59: Scailo.AssetIndentsService.ViewAssetIndentItemByID:input_type -> Scailo.Identifier
+	39, // 60: Scailo.AssetIndentsService.ViewApprovedAssetIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	39, // 61: Scailo.AssetIndentsService.ViewUnapprovedAssetIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 62: Scailo.AssetIndentsService.ViewAssetIndentItemHistory:input_type -> Scailo.AssetIndentItemHistoryRequest
+	12, // 63: Scailo.AssetIndentsService.ViewPaginatedApprovedAssetIndentItems:input_type -> Scailo.AssetIndentItemsSearchRequest
+	12, // 64: Scailo.AssetIndentsService.ViewPaginatedUnapprovedAssetIndentItems:input_type -> Scailo.AssetIndentItemsSearchRequest
+	12, // 65: Scailo.AssetIndentsService.SearchItemsWithPagination:input_type -> Scailo.AssetIndentItemsSearchRequest
+	35, // 66: Scailo.AssetIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	40, // 67: Scailo.AssetIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	41, // 68: Scailo.AssetIndentsService.UploadAssetIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
+	38, // 69: Scailo.AssetIndentsService.ViewByID:input_type -> Scailo.Identifier
+	35, // 70: Scailo.AssetIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	42, // 71: Scailo.AssetIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	38, // 72: Scailo.AssetIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	35, // 73: Scailo.AssetIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 74: Scailo.AssetIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	44, // 75: Scailo.AssetIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	35, // 76: Scailo.AssetIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 77: Scailo.AssetIndentsService.ViewWithPagination:input_type -> Scailo.AssetIndentsServicePaginationReq
+	39, // 78: Scailo.AssetIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	45, // 79: Scailo.AssetIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	35, // 80: Scailo.AssetIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	35, // 81: Scailo.AssetIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	35, // 82: Scailo.AssetIndentsService.ViewIssuedStatistics:input_type -> Scailo.IdentifierUUID
+	14, // 83: Scailo.AssetIndentsService.ViewAddedQuantityForFamily:input_type -> Scailo.AssetIndentItemProspectiveInfoRequest
+	19, // 84: Scailo.AssetIndentsService.SearchAll:input_type -> Scailo.AssetIndentsServiceSearchAllReq
+	17, // 85: Scailo.AssetIndentsService.Filter:input_type -> Scailo.AssetIndentsServiceFilterReq
+	46, // 86: Scailo.AssetIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 87: Scailo.AssetIndentsService.Count:input_type -> Scailo.AssetIndentsServiceCountReq
+	17, // 88: Scailo.AssetIndentsService.DownloadAsCSV:input_type -> Scailo.AssetIndentsServiceFilterReq
+	47, // 89: Scailo.AssetIndentsService.Create:output_type -> Scailo.IdentifierResponse
+	47, // 90: Scailo.AssetIndentsService.Draft:output_type -> Scailo.IdentifierResponse
+	47, // 91: Scailo.AssetIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	47, // 92: Scailo.AssetIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	47, // 93: Scailo.AssetIndentsService.Verify:output_type -> Scailo.IdentifierResponse
+	47, // 94: Scailo.AssetIndentsService.Approve:output_type -> Scailo.IdentifierResponse
+	47, // 95: Scailo.AssetIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	47, // 96: Scailo.AssetIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	47, // 97: Scailo.AssetIndentsService.Halt:output_type -> Scailo.IdentifierResponse
+	47, // 98: Scailo.AssetIndentsService.Discard:output_type -> Scailo.IdentifierResponse
+	47, // 99: Scailo.AssetIndentsService.Restore:output_type -> Scailo.IdentifierResponse
+	47, // 100: Scailo.AssetIndentsService.Complete:output_type -> Scailo.IdentifierResponse
+	47, // 101: Scailo.AssetIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	47, // 102: Scailo.AssetIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
+	47, // 103: Scailo.AssetIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	47, // 104: Scailo.AssetIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	47, // 105: Scailo.AssetIndentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	48, // 106: Scailo.AssetIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	49, // 107: Scailo.AssetIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	47, // 108: Scailo.AssetIndentsService.AddAssetIndentItem:output_type -> Scailo.IdentifierResponse
+	47, // 109: Scailo.AssetIndentsService.ModifyAssetIndentItem:output_type -> Scailo.IdentifierResponse
+	47, // 110: Scailo.AssetIndentsService.ApproveAssetIndentItem:output_type -> Scailo.IdentifierResponse
+	47, // 111: Scailo.AssetIndentsService.DeleteAssetIndentItem:output_type -> Scailo.IdentifierResponse
+	47, // 112: Scailo.AssetIndentsService.ReorderAssetIndentItems:output_type -> Scailo.IdentifierResponse
+	8,  // 113: Scailo.AssetIndentsService.ViewAssetIndentItemByID:output_type -> Scailo.AssetIndentItem
+	10, // 114: Scailo.AssetIndentsService.ViewApprovedAssetIndentItems:output_type -> Scailo.AssetIndentsItemsList
+	10, // 115: Scailo.AssetIndentsService.ViewUnapprovedAssetIndentItems:output_type -> Scailo.AssetIndentsItemsList
+	10, // 116: Scailo.AssetIndentsService.ViewAssetIndentItemHistory:output_type -> Scailo.AssetIndentsItemsList
+	13, // 117: Scailo.AssetIndentsService.ViewPaginatedApprovedAssetIndentItems:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
+	13, // 118: Scailo.AssetIndentsService.ViewPaginatedUnapprovedAssetIndentItems:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
+	13, // 119: Scailo.AssetIndentsService.SearchItemsWithPagination:output_type -> Scailo.AssetIndentsServicePaginatedItemsResponse
+	50, // 120: Scailo.AssetIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	50, // 121: Scailo.AssetIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	43, // 122: Scailo.AssetIndentsService.UploadAssetIndentItems:output_type -> Scailo.IdentifiersList
+	5,  // 123: Scailo.AssetIndentsService.ViewByID:output_type -> Scailo.AssetIndent
+	5,  // 124: Scailo.AssetIndentsService.ViewByUUID:output_type -> Scailo.AssetIndent
+	5,  // 125: Scailo.AssetIndentsService.ViewByReferenceID:output_type -> Scailo.AssetIndent
+	5,  // 126: Scailo.AssetIndentsService.ViewEssentialByID:output_type -> Scailo.AssetIndent
+	5,  // 127: Scailo.AssetIndentsService.ViewEssentialByUUID:output_type -> Scailo.AssetIndent
+	9,  // 128: Scailo.AssetIndentsService.ViewFromIDs:output_type -> Scailo.AssetIndentsList
+	9,  // 129: Scailo.AssetIndentsService.ViewAll:output_type -> Scailo.AssetIndentsList
+	9,  // 130: Scailo.AssetIndentsService.ViewAllForEntityUUID:output_type -> Scailo.AssetIndentsList
+	16, // 131: Scailo.AssetIndentsService.ViewWithPagination:output_type -> Scailo.AssetIndentsServicePaginationResponse
+	51, // 132: Scailo.AssetIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	51, // 133: Scailo.AssetIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	49, // 134: Scailo.AssetIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	50, // 135: Scailo.AssetIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	21, // 136: Scailo.AssetIndentsService.ViewIssuedStatistics:output_type -> Scailo.AssetIndentIssuedStatisticsList
+	52, // 137: Scailo.AssetIndentsService.ViewAddedQuantityForFamily:output_type -> Scailo.QuantityResponse
+	9,  // 138: Scailo.AssetIndentsService.SearchAll:output_type -> Scailo.AssetIndentsList
+	9,  // 139: Scailo.AssetIndentsService.Filter:output_type -> Scailo.AssetIndentsList
+	53, // 140: Scailo.AssetIndentsService.CountInStatus:output_type -> Scailo.CountResponse
+	53, // 141: Scailo.AssetIndentsService.Count:output_type -> Scailo.CountResponse
+	50, // 142: Scailo.AssetIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	89, // [89:143] is the sub-list for method output_type
+	35, // [35:89] is the sub-list for method input_type
 	35, // [35:35] is the sub-list for extension type_name
 	35, // [35:35] is the sub-list for extension extendee
 	0,  // [0:35] is the sub-list for field type_name
@@ -3120,6 +3124,7 @@ func file_asset_indents_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

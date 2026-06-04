@@ -2963,7 +2963,7 @@ var File_meetings_scailo_proto protoreflect.FileDescriptor
 
 const file_meetings_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15meetings.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xc1\x02\n" +
+	"\x15meetings.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc1\x02\n" +
 	"\x13LogbookLogMeetingLC\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\x12\x1c\n" +
@@ -3234,7 +3234,7 @@ const file_meetings_scailo_proto_rawDesc = "" +
 	"'MEETING_ACTIONABLE_SORT_KEY_MODIFIED_AT\x10\x02\x12%\n" +
 	"!MEETING_ACTIONABLE_SORT_KEY_TITLE\x10\n" +
 	"\x12/\n" +
-	"+MEETING_ACTIONABLE_SORT_KEY_ACTIVITY_TAG_ID\x10\v2\xd4\x1a\n" +
+	"+MEETING_ACTIONABLE_SORT_KEY_ACTIVITY_TAG_ID\x10\v2\xa7\x1b\n" +
 	"\x0fMeetingsService\x12J\n" +
 	"\x06Create\x12$.Scailo.MeetingsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x06Update\x12$.Scailo.MeetingsServiceUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
@@ -3243,7 +3243,8 @@ const file_meetings_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\vRequestRSVP\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\x0fSendActionables\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12[\n" +
 	"\rAddActionable\x12..Scailo.MeetingsServiceActionableCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12^\n" +
@@ -3337,17 +3338,18 @@ var file_meetings_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                 // 34: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),               // 35: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),               // 36: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierWithUserComment)(nil),                   // 37: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                         // 38: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                  // 39: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                     // 40: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                              // 41: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                             // 42: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                // 43: Scailo.ActiveStatus
-	(*StandardFile)(nil),                                // 44: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                          // 45: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                               // 46: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                         // 47: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                    // 37: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                   // 38: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                         // 39: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                  // 40: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                     // 41: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                              // 42: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                             // 43: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                // 44: Scailo.ActiveStatus
+	(*StandardFile)(nil),                                // 45: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                          // 46: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                               // 47: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                         // 48: Scailo.IdentifierUUIDsList
 }
 var file_meetings_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogMeetingLC.operation:type_name -> Scailo.MEETING_LIFECYCLE
@@ -3397,87 +3399,89 @@ var file_meetings_scailo_proto_depIdxs = []int32{
 	35, // 44: Scailo.MeetingsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	35, // 45: Scailo.MeetingsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	36, // 46: Scailo.MeetingsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	36, // 47: Scailo.MeetingsService.RequestRSVP:input_type -> Scailo.IdentifierWithEmailAttributes
-	36, // 48: Scailo.MeetingsService.SendActionables:input_type -> Scailo.IdentifierWithEmailAttributes
-	14, // 49: Scailo.MeetingsService.AddActionable:input_type -> Scailo.MeetingsServiceActionableCreateRequest
-	15, // 50: Scailo.MeetingsService.ModifyActionable:input_type -> Scailo.MeetingsServiceActionableUpdateRequest
-	37, // 51: Scailo.MeetingsService.DeleteActionable:input_type -> Scailo.IdentifierWithUserComment
-	38, // 52: Scailo.MeetingsService.ReorderActionables:input_type -> Scailo.ReorderItemsRequest
-	39, // 53: Scailo.MeetingsService.ViewActionableByID:input_type -> Scailo.Identifier
-	40, // 54: Scailo.MeetingsService.ViewActionables:input_type -> Scailo.IdentifierWithSearchKey
-	18, // 55: Scailo.MeetingsService.ViewActionableHistory:input_type -> Scailo.MeetingActionableHistoryRequest
-	19, // 56: Scailo.MeetingsService.ViewPaginatedActionables:input_type -> Scailo.MeetingActionablesSearchRequest
-	19, // 57: Scailo.MeetingsService.SearchActionablesWithPagination:input_type -> Scailo.MeetingActionablesSearchRequest
-	21, // 58: Scailo.MeetingsService.AddEmployee:input_type -> Scailo.MeetingsServiceEmployeeCreateRequest
-	37, // 59: Scailo.MeetingsService.DeleteEmployee:input_type -> Scailo.IdentifierWithUserComment
-	39, // 60: Scailo.MeetingsService.ViewEmployeeByID:input_type -> Scailo.Identifier
-	39, // 61: Scailo.MeetingsService.ViewEmployees:input_type -> Scailo.Identifier
-	28, // 62: Scailo.MeetingsService.SetEmployeeRSVP:input_type -> Scailo.MeetingsServiceSetRSVPRequest
-	27, // 63: Scailo.MeetingsService.ImportFromTeam:input_type -> Scailo.MeetingsServiceImportEmployeesRequest
-	27, // 64: Scailo.MeetingsService.ImportFromDepartment:input_type -> Scailo.MeetingsServiceImportEmployeesRequest
-	24, // 65: Scailo.MeetingsService.AddAssociate:input_type -> Scailo.MeetingsServiceAssociateCreateRequest
-	37, // 66: Scailo.MeetingsService.DeleteAssociate:input_type -> Scailo.IdentifierWithUserComment
-	39, // 67: Scailo.MeetingsService.ViewAssociateByID:input_type -> Scailo.Identifier
-	39, // 68: Scailo.MeetingsService.ViewAssociates:input_type -> Scailo.Identifier
-	28, // 69: Scailo.MeetingsService.SetAssociateRSVP:input_type -> Scailo.MeetingsServiceSetRSVPRequest
-	39, // 70: Scailo.MeetingsService.ViewByID:input_type -> Scailo.Identifier
-	41, // 71: Scailo.MeetingsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 72: Scailo.MeetingsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	41, // 73: Scailo.MeetingsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 74: Scailo.MeetingsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	43, // 75: Scailo.MeetingsService.ViewAll:input_type -> Scailo.ActiveStatus
-	41, // 76: Scailo.MeetingsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	9,  // 77: Scailo.MeetingsService.ViewWithPagination:input_type -> Scailo.MeetingsServicePaginationReq
-	13, // 78: Scailo.MeetingsService.SearchAll:input_type -> Scailo.MeetingsServiceSearchAllReq
-	11, // 79: Scailo.MeetingsService.Filter:input_type -> Scailo.MeetingsServiceFilterReq
-	12, // 80: Scailo.MeetingsService.Count:input_type -> Scailo.MeetingsServiceCountReq
-	11, // 81: Scailo.MeetingsService.DownloadAsCSV:input_type -> Scailo.MeetingsServiceFilterReq
-	44, // 82: Scailo.MeetingsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	45, // 83: Scailo.MeetingsService.Create:output_type -> Scailo.IdentifierResponse
-	45, // 84: Scailo.MeetingsService.Update:output_type -> Scailo.IdentifierResponse
-	45, // 85: Scailo.MeetingsService.Cancel:output_type -> Scailo.IdentifierResponse
-	45, // 86: Scailo.MeetingsService.Complete:output_type -> Scailo.IdentifierResponse
-	45, // 87: Scailo.MeetingsService.Repeat:output_type -> Scailo.IdentifierResponse
-	45, // 88: Scailo.MeetingsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	45, // 89: Scailo.MeetingsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	45, // 90: Scailo.MeetingsService.RequestRSVP:output_type -> Scailo.IdentifierResponse
-	45, // 91: Scailo.MeetingsService.SendActionables:output_type -> Scailo.IdentifierResponse
-	45, // 92: Scailo.MeetingsService.AddActionable:output_type -> Scailo.IdentifierResponse
-	45, // 93: Scailo.MeetingsService.ModifyActionable:output_type -> Scailo.IdentifierResponse
-	45, // 94: Scailo.MeetingsService.DeleteActionable:output_type -> Scailo.IdentifierResponse
-	45, // 95: Scailo.MeetingsService.ReorderActionables:output_type -> Scailo.IdentifierResponse
-	16, // 96: Scailo.MeetingsService.ViewActionableByID:output_type -> Scailo.MeetingActionable
-	17, // 97: Scailo.MeetingsService.ViewActionables:output_type -> Scailo.MeetingActionablesList
-	17, // 98: Scailo.MeetingsService.ViewActionableHistory:output_type -> Scailo.MeetingActionablesList
-	20, // 99: Scailo.MeetingsService.ViewPaginatedActionables:output_type -> Scailo.MeetingsServicePaginatedActionablesResponse
-	20, // 100: Scailo.MeetingsService.SearchActionablesWithPagination:output_type -> Scailo.MeetingsServicePaginatedActionablesResponse
-	45, // 101: Scailo.MeetingsService.AddEmployee:output_type -> Scailo.IdentifierResponse
-	45, // 102: Scailo.MeetingsService.DeleteEmployee:output_type -> Scailo.IdentifierResponse
-	22, // 103: Scailo.MeetingsService.ViewEmployeeByID:output_type -> Scailo.MeetingEmployee
-	23, // 104: Scailo.MeetingsService.ViewEmployees:output_type -> Scailo.MeetingEmployeesList
-	41, // 105: Scailo.MeetingsService.SetEmployeeRSVP:output_type -> Scailo.IdentifierUUID
-	45, // 106: Scailo.MeetingsService.ImportFromTeam:output_type -> Scailo.IdentifierResponse
-	45, // 107: Scailo.MeetingsService.ImportFromDepartment:output_type -> Scailo.IdentifierResponse
-	45, // 108: Scailo.MeetingsService.AddAssociate:output_type -> Scailo.IdentifierResponse
-	45, // 109: Scailo.MeetingsService.DeleteAssociate:output_type -> Scailo.IdentifierResponse
-	25, // 110: Scailo.MeetingsService.ViewAssociateByID:output_type -> Scailo.MeetingAssociate
-	26, // 111: Scailo.MeetingsService.ViewAssociates:output_type -> Scailo.MeetingAssociatesList
-	41, // 112: Scailo.MeetingsService.SetAssociateRSVP:output_type -> Scailo.IdentifierUUID
-	7,  // 113: Scailo.MeetingsService.ViewByID:output_type -> Scailo.Meeting
-	7,  // 114: Scailo.MeetingsService.ViewByUUID:output_type -> Scailo.Meeting
-	7,  // 115: Scailo.MeetingsService.ViewEssentialByID:output_type -> Scailo.Meeting
-	7,  // 116: Scailo.MeetingsService.ViewEssentialByUUID:output_type -> Scailo.Meeting
-	8,  // 117: Scailo.MeetingsService.ViewFromIDs:output_type -> Scailo.MeetingsList
-	8,  // 118: Scailo.MeetingsService.ViewAll:output_type -> Scailo.MeetingsList
-	8,  // 119: Scailo.MeetingsService.ViewAllForEntityUUID:output_type -> Scailo.MeetingsList
-	10, // 120: Scailo.MeetingsService.ViewWithPagination:output_type -> Scailo.MeetingsServicePaginationResponse
-	8,  // 121: Scailo.MeetingsService.SearchAll:output_type -> Scailo.MeetingsList
-	8,  // 122: Scailo.MeetingsService.Filter:output_type -> Scailo.MeetingsList
-	46, // 123: Scailo.MeetingsService.Count:output_type -> Scailo.CountResponse
-	44, // 124: Scailo.MeetingsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	47, // 125: Scailo.MeetingsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	83, // [83:126] is the sub-list for method output_type
-	40, // [40:83] is the sub-list for method input_type
+	37, // 47: Scailo.MeetingsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	36, // 48: Scailo.MeetingsService.RequestRSVP:input_type -> Scailo.IdentifierWithEmailAttributes
+	36, // 49: Scailo.MeetingsService.SendActionables:input_type -> Scailo.IdentifierWithEmailAttributes
+	14, // 50: Scailo.MeetingsService.AddActionable:input_type -> Scailo.MeetingsServiceActionableCreateRequest
+	15, // 51: Scailo.MeetingsService.ModifyActionable:input_type -> Scailo.MeetingsServiceActionableUpdateRequest
+	38, // 52: Scailo.MeetingsService.DeleteActionable:input_type -> Scailo.IdentifierWithUserComment
+	39, // 53: Scailo.MeetingsService.ReorderActionables:input_type -> Scailo.ReorderItemsRequest
+	40, // 54: Scailo.MeetingsService.ViewActionableByID:input_type -> Scailo.Identifier
+	41, // 55: Scailo.MeetingsService.ViewActionables:input_type -> Scailo.IdentifierWithSearchKey
+	18, // 56: Scailo.MeetingsService.ViewActionableHistory:input_type -> Scailo.MeetingActionableHistoryRequest
+	19, // 57: Scailo.MeetingsService.ViewPaginatedActionables:input_type -> Scailo.MeetingActionablesSearchRequest
+	19, // 58: Scailo.MeetingsService.SearchActionablesWithPagination:input_type -> Scailo.MeetingActionablesSearchRequest
+	21, // 59: Scailo.MeetingsService.AddEmployee:input_type -> Scailo.MeetingsServiceEmployeeCreateRequest
+	38, // 60: Scailo.MeetingsService.DeleteEmployee:input_type -> Scailo.IdentifierWithUserComment
+	40, // 61: Scailo.MeetingsService.ViewEmployeeByID:input_type -> Scailo.Identifier
+	40, // 62: Scailo.MeetingsService.ViewEmployees:input_type -> Scailo.Identifier
+	28, // 63: Scailo.MeetingsService.SetEmployeeRSVP:input_type -> Scailo.MeetingsServiceSetRSVPRequest
+	27, // 64: Scailo.MeetingsService.ImportFromTeam:input_type -> Scailo.MeetingsServiceImportEmployeesRequest
+	27, // 65: Scailo.MeetingsService.ImportFromDepartment:input_type -> Scailo.MeetingsServiceImportEmployeesRequest
+	24, // 66: Scailo.MeetingsService.AddAssociate:input_type -> Scailo.MeetingsServiceAssociateCreateRequest
+	38, // 67: Scailo.MeetingsService.DeleteAssociate:input_type -> Scailo.IdentifierWithUserComment
+	40, // 68: Scailo.MeetingsService.ViewAssociateByID:input_type -> Scailo.Identifier
+	40, // 69: Scailo.MeetingsService.ViewAssociates:input_type -> Scailo.Identifier
+	28, // 70: Scailo.MeetingsService.SetAssociateRSVP:input_type -> Scailo.MeetingsServiceSetRSVPRequest
+	40, // 71: Scailo.MeetingsService.ViewByID:input_type -> Scailo.Identifier
+	42, // 72: Scailo.MeetingsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 73: Scailo.MeetingsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	42, // 74: Scailo.MeetingsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 75: Scailo.MeetingsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	44, // 76: Scailo.MeetingsService.ViewAll:input_type -> Scailo.ActiveStatus
+	42, // 77: Scailo.MeetingsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	9,  // 78: Scailo.MeetingsService.ViewWithPagination:input_type -> Scailo.MeetingsServicePaginationReq
+	13, // 79: Scailo.MeetingsService.SearchAll:input_type -> Scailo.MeetingsServiceSearchAllReq
+	11, // 80: Scailo.MeetingsService.Filter:input_type -> Scailo.MeetingsServiceFilterReq
+	12, // 81: Scailo.MeetingsService.Count:input_type -> Scailo.MeetingsServiceCountReq
+	11, // 82: Scailo.MeetingsService.DownloadAsCSV:input_type -> Scailo.MeetingsServiceFilterReq
+	45, // 83: Scailo.MeetingsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	46, // 84: Scailo.MeetingsService.Create:output_type -> Scailo.IdentifierResponse
+	46, // 85: Scailo.MeetingsService.Update:output_type -> Scailo.IdentifierResponse
+	46, // 86: Scailo.MeetingsService.Cancel:output_type -> Scailo.IdentifierResponse
+	46, // 87: Scailo.MeetingsService.Complete:output_type -> Scailo.IdentifierResponse
+	46, // 88: Scailo.MeetingsService.Repeat:output_type -> Scailo.IdentifierResponse
+	46, // 89: Scailo.MeetingsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	46, // 90: Scailo.MeetingsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	46, // 91: Scailo.MeetingsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	46, // 92: Scailo.MeetingsService.RequestRSVP:output_type -> Scailo.IdentifierResponse
+	46, // 93: Scailo.MeetingsService.SendActionables:output_type -> Scailo.IdentifierResponse
+	46, // 94: Scailo.MeetingsService.AddActionable:output_type -> Scailo.IdentifierResponse
+	46, // 95: Scailo.MeetingsService.ModifyActionable:output_type -> Scailo.IdentifierResponse
+	46, // 96: Scailo.MeetingsService.DeleteActionable:output_type -> Scailo.IdentifierResponse
+	46, // 97: Scailo.MeetingsService.ReorderActionables:output_type -> Scailo.IdentifierResponse
+	16, // 98: Scailo.MeetingsService.ViewActionableByID:output_type -> Scailo.MeetingActionable
+	17, // 99: Scailo.MeetingsService.ViewActionables:output_type -> Scailo.MeetingActionablesList
+	17, // 100: Scailo.MeetingsService.ViewActionableHistory:output_type -> Scailo.MeetingActionablesList
+	20, // 101: Scailo.MeetingsService.ViewPaginatedActionables:output_type -> Scailo.MeetingsServicePaginatedActionablesResponse
+	20, // 102: Scailo.MeetingsService.SearchActionablesWithPagination:output_type -> Scailo.MeetingsServicePaginatedActionablesResponse
+	46, // 103: Scailo.MeetingsService.AddEmployee:output_type -> Scailo.IdentifierResponse
+	46, // 104: Scailo.MeetingsService.DeleteEmployee:output_type -> Scailo.IdentifierResponse
+	22, // 105: Scailo.MeetingsService.ViewEmployeeByID:output_type -> Scailo.MeetingEmployee
+	23, // 106: Scailo.MeetingsService.ViewEmployees:output_type -> Scailo.MeetingEmployeesList
+	42, // 107: Scailo.MeetingsService.SetEmployeeRSVP:output_type -> Scailo.IdentifierUUID
+	46, // 108: Scailo.MeetingsService.ImportFromTeam:output_type -> Scailo.IdentifierResponse
+	46, // 109: Scailo.MeetingsService.ImportFromDepartment:output_type -> Scailo.IdentifierResponse
+	46, // 110: Scailo.MeetingsService.AddAssociate:output_type -> Scailo.IdentifierResponse
+	46, // 111: Scailo.MeetingsService.DeleteAssociate:output_type -> Scailo.IdentifierResponse
+	25, // 112: Scailo.MeetingsService.ViewAssociateByID:output_type -> Scailo.MeetingAssociate
+	26, // 113: Scailo.MeetingsService.ViewAssociates:output_type -> Scailo.MeetingAssociatesList
+	42, // 114: Scailo.MeetingsService.SetAssociateRSVP:output_type -> Scailo.IdentifierUUID
+	7,  // 115: Scailo.MeetingsService.ViewByID:output_type -> Scailo.Meeting
+	7,  // 116: Scailo.MeetingsService.ViewByUUID:output_type -> Scailo.Meeting
+	7,  // 117: Scailo.MeetingsService.ViewEssentialByID:output_type -> Scailo.Meeting
+	7,  // 118: Scailo.MeetingsService.ViewEssentialByUUID:output_type -> Scailo.Meeting
+	8,  // 119: Scailo.MeetingsService.ViewFromIDs:output_type -> Scailo.MeetingsList
+	8,  // 120: Scailo.MeetingsService.ViewAll:output_type -> Scailo.MeetingsList
+	8,  // 121: Scailo.MeetingsService.ViewAllForEntityUUID:output_type -> Scailo.MeetingsList
+	10, // 122: Scailo.MeetingsService.ViewWithPagination:output_type -> Scailo.MeetingsServicePaginationResponse
+	8,  // 123: Scailo.MeetingsService.SearchAll:output_type -> Scailo.MeetingsList
+	8,  // 124: Scailo.MeetingsService.Filter:output_type -> Scailo.MeetingsList
+	47, // 125: Scailo.MeetingsService.Count:output_type -> Scailo.CountResponse
+	45, // 126: Scailo.MeetingsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	48, // 127: Scailo.MeetingsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	84, // [84:128] is the sub-list for method output_type
+	40, // [40:84] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
 	40, // [40:40] is the sub-list for extension extendee
 	0,  // [0:40] is the sub-list for field type_name
@@ -3490,6 +3494,7 @@ func file_meetings_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

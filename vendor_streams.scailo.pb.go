@@ -2865,7 +2865,7 @@ var File_vendor_streams_scailo_proto protoreflect.FileDescriptor
 
 const file_vendor_streams_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1bvendor_streams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xcc\x02\n" +
+	"\x1bvendor_streams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xcc\x02\n" +
 	"\x18LogbookLogVendorStreamLC\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1b\n" +
 	"\tis_active\x18\x02 \x01(\bR\bisActive\x12\x1c\n" +
@@ -3107,7 +3107,7 @@ const file_vendor_streams_scailo_proto_rawDesc = "" +
 	"\x1eVENDOR_STREAM_MESSAGE_SORT_KEY\x121\n" +
 	"-VENDOR_STREAM_MESSAGE_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12-\n" +
 	")VENDOR_STREAM_MESSAGE_SORT_KEY_CREATED_AT\x10\x01\x12.\n" +
-	"*VENDOR_STREAM_MESSAGE_SORT_KEY_MODIFIED_AT\x10\x022\xd5\x18\n" +
+	"*VENDOR_STREAM_MESSAGE_SORT_KEY_MODIFIED_AT\x10\x022\xa8\x19\n" +
 	"\x14VendorStreamsService\x12K\n" +
 	"\x06Create\x12).Scailo.VendorStreamsServiceCreateRequest\x1a\x16.Scailo.IdentifierUUID\x12K\n" +
 	"\x06Update\x12).Scailo.VendorStreamsServiceUpdateRequest\x1a\x16.Scailo.IdentifierUUID\x12G\n" +
@@ -3116,7 +3116,8 @@ const file_vendor_streams_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12G\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12K\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12V\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x16.Scailo.IdentifierUUID\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\n" +
 	"AddMessage\x120.Scailo.VendorStreamsServiceMessageCreateRequest\x1a\x16.Scailo.IdentifierUUID\x12E\n" +
 	"\x13SaveMessageForLater\x12\x16.Scailo.IdentifierUUID\x1a\x16.Scailo.IdentifierUUID\x12?\n" +
@@ -3201,14 +3202,15 @@ var file_vendor_streams_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                             // 30: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                              // 31: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                        // 32: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierUUID)(nil),                                       // 33: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                            // 34: Scailo.IdentifierWithUserComment
-	(*Identifier)(nil),                                           // 35: Scailo.Identifier
-	(*IdentifiersList)(nil),                                      // 36: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                         // 37: Scailo.ActiveStatus
-	(*IdentifierResponse)(nil),                                   // 38: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                        // 39: Scailo.CountResponse
-	(*StandardFile)(nil),                                         // 40: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                             // 33: Scailo.VaultFolderAttachRequest
+	(*IdentifierUUID)(nil),                                       // 34: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                            // 35: Scailo.IdentifierWithUserComment
+	(*Identifier)(nil),                                           // 36: Scailo.Identifier
+	(*IdentifiersList)(nil),                                      // 37: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                         // 38: Scailo.ActiveStatus
+	(*IdentifierResponse)(nil),                                   // 39: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                        // 40: Scailo.CountResponse
+	(*StandardFile)(nil),                                         // 41: Scailo.StandardFile
 }
 var file_vendor_streams_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.LogbookLogVendorStreamLC.operation:type_name -> Scailo.VENDOR_STREAM_LIFECYCLE
@@ -3257,75 +3259,77 @@ var file_vendor_streams_scailo_proto_depIdxs = []int32{
 	32, // 43: Scailo.VendorStreamsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 44: Scailo.VendorStreamsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 45: Scailo.VendorStreamsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	15, // 46: Scailo.VendorStreamsService.AddMessage:input_type -> Scailo.VendorStreamsServiceMessageCreateRequest
-	33, // 47: Scailo.VendorStreamsService.SaveMessageForLater:input_type -> Scailo.IdentifierUUID
-	33, // 48: Scailo.VendorStreamsService.DeleteMessage:input_type -> Scailo.IdentifierUUID
-	33, // 49: Scailo.VendorStreamsService.ViewMessageByUUID:input_type -> Scailo.IdentifierUUID
-	33, // 50: Scailo.VendorStreamsService.ViewMessages:input_type -> Scailo.IdentifierUUID
-	18, // 51: Scailo.VendorStreamsService.ViewPaginatedMessages:input_type -> Scailo.VendorStreamMessagesSearchRequest
-	18, // 52: Scailo.VendorStreamsService.SearchMessagesWithPagination:input_type -> Scailo.VendorStreamMessagesSearchRequest
-	33, // 53: Scailo.VendorStreamsService.ViewMessageReceipts:input_type -> Scailo.IdentifierUUID
-	22, // 54: Scailo.VendorStreamsService.AddInternalSubscriber:input_type -> Scailo.VendorStreamsServiceInternalSubscriberCreateRequest
-	34, // 55: Scailo.VendorStreamsService.DeleteInternalSubscriber:input_type -> Scailo.IdentifierWithUserComment
-	35, // 56: Scailo.VendorStreamsService.ViewInternalSubscriberByID:input_type -> Scailo.Identifier
-	33, // 57: Scailo.VendorStreamsService.ViewInternalSubscribers:input_type -> Scailo.IdentifierUUID
-	25, // 58: Scailo.VendorStreamsService.ImportInternalSubscribersFromTeam:input_type -> Scailo.VendorStreamsServiceImportInternalSubscribersRequest
-	25, // 59: Scailo.VendorStreamsService.ImportInternalSubscribersFromDepartment:input_type -> Scailo.VendorStreamsServiceImportInternalSubscribersRequest
-	26, // 60: Scailo.VendorStreamsService.AddVendorSubscriber:input_type -> Scailo.VendorStreamsServiceVendorSubscriberCreateRequest
-	34, // 61: Scailo.VendorStreamsService.DeleteVendorSubscriber:input_type -> Scailo.IdentifierWithUserComment
-	35, // 62: Scailo.VendorStreamsService.ViewVendorSubscriberByID:input_type -> Scailo.Identifier
-	33, // 63: Scailo.VendorStreamsService.ViewVendorSubscribers:input_type -> Scailo.IdentifierUUID
-	35, // 64: Scailo.VendorStreamsService.ViewByID:input_type -> Scailo.Identifier
-	33, // 65: Scailo.VendorStreamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 66: Scailo.VendorStreamsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	33, // 67: Scailo.VendorStreamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 68: Scailo.VendorStreamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	37, // 69: Scailo.VendorStreamsService.ViewAll:input_type -> Scailo.ActiveStatus
-	33, // 70: Scailo.VendorStreamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	10, // 71: Scailo.VendorStreamsService.ViewWithPagination:input_type -> Scailo.VendorStreamsServicePaginationReq
-	14, // 72: Scailo.VendorStreamsService.SearchAll:input_type -> Scailo.VendorStreamsServiceSearchAllReq
-	12, // 73: Scailo.VendorStreamsService.Filter:input_type -> Scailo.VendorStreamsServiceFilterReq
-	13, // 74: Scailo.VendorStreamsService.Count:input_type -> Scailo.VendorStreamsServiceCountReq
-	12, // 75: Scailo.VendorStreamsService.DownloadAsCSV:input_type -> Scailo.VendorStreamsServiceFilterReq
-	33, // 76: Scailo.VendorStreamsService.Create:output_type -> Scailo.IdentifierUUID
-	33, // 77: Scailo.VendorStreamsService.Update:output_type -> Scailo.IdentifierUUID
-	33, // 78: Scailo.VendorStreamsService.Cancel:output_type -> Scailo.IdentifierUUID
-	33, // 79: Scailo.VendorStreamsService.Complete:output_type -> Scailo.IdentifierUUID
-	33, // 80: Scailo.VendorStreamsService.Reopen:output_type -> Scailo.IdentifierUUID
-	33, // 81: Scailo.VendorStreamsService.Repeat:output_type -> Scailo.IdentifierUUID
-	33, // 82: Scailo.VendorStreamsService.CommentAdd:output_type -> Scailo.IdentifierUUID
-	33, // 83: Scailo.VendorStreamsService.AddMessage:output_type -> Scailo.IdentifierUUID
-	33, // 84: Scailo.VendorStreamsService.SaveMessageForLater:output_type -> Scailo.IdentifierUUID
-	33, // 85: Scailo.VendorStreamsService.DeleteMessage:output_type -> Scailo.IdentifierUUID
-	16, // 86: Scailo.VendorStreamsService.ViewMessageByUUID:output_type -> Scailo.VendorStreamMessage
-	17, // 87: Scailo.VendorStreamsService.ViewMessages:output_type -> Scailo.VendorStreamMessagesList
-	19, // 88: Scailo.VendorStreamsService.ViewPaginatedMessages:output_type -> Scailo.VendorStreamsServicePaginatedMessagesResponse
-	19, // 89: Scailo.VendorStreamsService.SearchMessagesWithPagination:output_type -> Scailo.VendorStreamsServicePaginatedMessagesResponse
-	21, // 90: Scailo.VendorStreamsService.ViewMessageReceipts:output_type -> Scailo.VendorStreamMessageReceiptsList
-	38, // 91: Scailo.VendorStreamsService.AddInternalSubscriber:output_type -> Scailo.IdentifierResponse
-	38, // 92: Scailo.VendorStreamsService.DeleteInternalSubscriber:output_type -> Scailo.IdentifierResponse
-	23, // 93: Scailo.VendorStreamsService.ViewInternalSubscriberByID:output_type -> Scailo.VendorStreamInternalSubscriber
-	24, // 94: Scailo.VendorStreamsService.ViewInternalSubscribers:output_type -> Scailo.VendorStreamInternalSubscribersList
-	38, // 95: Scailo.VendorStreamsService.ImportInternalSubscribersFromTeam:output_type -> Scailo.IdentifierResponse
-	38, // 96: Scailo.VendorStreamsService.ImportInternalSubscribersFromDepartment:output_type -> Scailo.IdentifierResponse
-	38, // 97: Scailo.VendorStreamsService.AddVendorSubscriber:output_type -> Scailo.IdentifierResponse
-	38, // 98: Scailo.VendorStreamsService.DeleteVendorSubscriber:output_type -> Scailo.IdentifierResponse
-	27, // 99: Scailo.VendorStreamsService.ViewVendorSubscriberByID:output_type -> Scailo.VendorStreamVendorSubscriber
-	28, // 100: Scailo.VendorStreamsService.ViewVendorSubscribers:output_type -> Scailo.VendorStreamVendorSubscribersList
-	8,  // 101: Scailo.VendorStreamsService.ViewByID:output_type -> Scailo.VendorStream
-	8,  // 102: Scailo.VendorStreamsService.ViewByUUID:output_type -> Scailo.VendorStream
-	8,  // 103: Scailo.VendorStreamsService.ViewEssentialByID:output_type -> Scailo.VendorStream
-	8,  // 104: Scailo.VendorStreamsService.ViewEssentialByUUID:output_type -> Scailo.VendorStream
-	9,  // 105: Scailo.VendorStreamsService.ViewFromIDs:output_type -> Scailo.VendorStreamsList
-	9,  // 106: Scailo.VendorStreamsService.ViewAll:output_type -> Scailo.VendorStreamsList
-	9,  // 107: Scailo.VendorStreamsService.ViewAllForEntityUUID:output_type -> Scailo.VendorStreamsList
-	11, // 108: Scailo.VendorStreamsService.ViewWithPagination:output_type -> Scailo.VendorStreamsServicePaginationResponse
-	9,  // 109: Scailo.VendorStreamsService.SearchAll:output_type -> Scailo.VendorStreamsList
-	9,  // 110: Scailo.VendorStreamsService.Filter:output_type -> Scailo.VendorStreamsList
-	39, // 111: Scailo.VendorStreamsService.Count:output_type -> Scailo.CountResponse
-	40, // 112: Scailo.VendorStreamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	76, // [76:113] is the sub-list for method output_type
-	39, // [39:76] is the sub-list for method input_type
+	33, // 46: Scailo.VendorStreamsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	15, // 47: Scailo.VendorStreamsService.AddMessage:input_type -> Scailo.VendorStreamsServiceMessageCreateRequest
+	34, // 48: Scailo.VendorStreamsService.SaveMessageForLater:input_type -> Scailo.IdentifierUUID
+	34, // 49: Scailo.VendorStreamsService.DeleteMessage:input_type -> Scailo.IdentifierUUID
+	34, // 50: Scailo.VendorStreamsService.ViewMessageByUUID:input_type -> Scailo.IdentifierUUID
+	34, // 51: Scailo.VendorStreamsService.ViewMessages:input_type -> Scailo.IdentifierUUID
+	18, // 52: Scailo.VendorStreamsService.ViewPaginatedMessages:input_type -> Scailo.VendorStreamMessagesSearchRequest
+	18, // 53: Scailo.VendorStreamsService.SearchMessagesWithPagination:input_type -> Scailo.VendorStreamMessagesSearchRequest
+	34, // 54: Scailo.VendorStreamsService.ViewMessageReceipts:input_type -> Scailo.IdentifierUUID
+	22, // 55: Scailo.VendorStreamsService.AddInternalSubscriber:input_type -> Scailo.VendorStreamsServiceInternalSubscriberCreateRequest
+	35, // 56: Scailo.VendorStreamsService.DeleteInternalSubscriber:input_type -> Scailo.IdentifierWithUserComment
+	36, // 57: Scailo.VendorStreamsService.ViewInternalSubscriberByID:input_type -> Scailo.Identifier
+	34, // 58: Scailo.VendorStreamsService.ViewInternalSubscribers:input_type -> Scailo.IdentifierUUID
+	25, // 59: Scailo.VendorStreamsService.ImportInternalSubscribersFromTeam:input_type -> Scailo.VendorStreamsServiceImportInternalSubscribersRequest
+	25, // 60: Scailo.VendorStreamsService.ImportInternalSubscribersFromDepartment:input_type -> Scailo.VendorStreamsServiceImportInternalSubscribersRequest
+	26, // 61: Scailo.VendorStreamsService.AddVendorSubscriber:input_type -> Scailo.VendorStreamsServiceVendorSubscriberCreateRequest
+	35, // 62: Scailo.VendorStreamsService.DeleteVendorSubscriber:input_type -> Scailo.IdentifierWithUserComment
+	36, // 63: Scailo.VendorStreamsService.ViewVendorSubscriberByID:input_type -> Scailo.Identifier
+	34, // 64: Scailo.VendorStreamsService.ViewVendorSubscribers:input_type -> Scailo.IdentifierUUID
+	36, // 65: Scailo.VendorStreamsService.ViewByID:input_type -> Scailo.Identifier
+	34, // 66: Scailo.VendorStreamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 67: Scailo.VendorStreamsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	34, // 68: Scailo.VendorStreamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 69: Scailo.VendorStreamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	38, // 70: Scailo.VendorStreamsService.ViewAll:input_type -> Scailo.ActiveStatus
+	34, // 71: Scailo.VendorStreamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	10, // 72: Scailo.VendorStreamsService.ViewWithPagination:input_type -> Scailo.VendorStreamsServicePaginationReq
+	14, // 73: Scailo.VendorStreamsService.SearchAll:input_type -> Scailo.VendorStreamsServiceSearchAllReq
+	12, // 74: Scailo.VendorStreamsService.Filter:input_type -> Scailo.VendorStreamsServiceFilterReq
+	13, // 75: Scailo.VendorStreamsService.Count:input_type -> Scailo.VendorStreamsServiceCountReq
+	12, // 76: Scailo.VendorStreamsService.DownloadAsCSV:input_type -> Scailo.VendorStreamsServiceFilterReq
+	34, // 77: Scailo.VendorStreamsService.Create:output_type -> Scailo.IdentifierUUID
+	34, // 78: Scailo.VendorStreamsService.Update:output_type -> Scailo.IdentifierUUID
+	34, // 79: Scailo.VendorStreamsService.Cancel:output_type -> Scailo.IdentifierUUID
+	34, // 80: Scailo.VendorStreamsService.Complete:output_type -> Scailo.IdentifierUUID
+	34, // 81: Scailo.VendorStreamsService.Reopen:output_type -> Scailo.IdentifierUUID
+	34, // 82: Scailo.VendorStreamsService.Repeat:output_type -> Scailo.IdentifierUUID
+	34, // 83: Scailo.VendorStreamsService.CommentAdd:output_type -> Scailo.IdentifierUUID
+	39, // 84: Scailo.VendorStreamsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	34, // 85: Scailo.VendorStreamsService.AddMessage:output_type -> Scailo.IdentifierUUID
+	34, // 86: Scailo.VendorStreamsService.SaveMessageForLater:output_type -> Scailo.IdentifierUUID
+	34, // 87: Scailo.VendorStreamsService.DeleteMessage:output_type -> Scailo.IdentifierUUID
+	16, // 88: Scailo.VendorStreamsService.ViewMessageByUUID:output_type -> Scailo.VendorStreamMessage
+	17, // 89: Scailo.VendorStreamsService.ViewMessages:output_type -> Scailo.VendorStreamMessagesList
+	19, // 90: Scailo.VendorStreamsService.ViewPaginatedMessages:output_type -> Scailo.VendorStreamsServicePaginatedMessagesResponse
+	19, // 91: Scailo.VendorStreamsService.SearchMessagesWithPagination:output_type -> Scailo.VendorStreamsServicePaginatedMessagesResponse
+	21, // 92: Scailo.VendorStreamsService.ViewMessageReceipts:output_type -> Scailo.VendorStreamMessageReceiptsList
+	39, // 93: Scailo.VendorStreamsService.AddInternalSubscriber:output_type -> Scailo.IdentifierResponse
+	39, // 94: Scailo.VendorStreamsService.DeleteInternalSubscriber:output_type -> Scailo.IdentifierResponse
+	23, // 95: Scailo.VendorStreamsService.ViewInternalSubscriberByID:output_type -> Scailo.VendorStreamInternalSubscriber
+	24, // 96: Scailo.VendorStreamsService.ViewInternalSubscribers:output_type -> Scailo.VendorStreamInternalSubscribersList
+	39, // 97: Scailo.VendorStreamsService.ImportInternalSubscribersFromTeam:output_type -> Scailo.IdentifierResponse
+	39, // 98: Scailo.VendorStreamsService.ImportInternalSubscribersFromDepartment:output_type -> Scailo.IdentifierResponse
+	39, // 99: Scailo.VendorStreamsService.AddVendorSubscriber:output_type -> Scailo.IdentifierResponse
+	39, // 100: Scailo.VendorStreamsService.DeleteVendorSubscriber:output_type -> Scailo.IdentifierResponse
+	27, // 101: Scailo.VendorStreamsService.ViewVendorSubscriberByID:output_type -> Scailo.VendorStreamVendorSubscriber
+	28, // 102: Scailo.VendorStreamsService.ViewVendorSubscribers:output_type -> Scailo.VendorStreamVendorSubscribersList
+	8,  // 103: Scailo.VendorStreamsService.ViewByID:output_type -> Scailo.VendorStream
+	8,  // 104: Scailo.VendorStreamsService.ViewByUUID:output_type -> Scailo.VendorStream
+	8,  // 105: Scailo.VendorStreamsService.ViewEssentialByID:output_type -> Scailo.VendorStream
+	8,  // 106: Scailo.VendorStreamsService.ViewEssentialByUUID:output_type -> Scailo.VendorStream
+	9,  // 107: Scailo.VendorStreamsService.ViewFromIDs:output_type -> Scailo.VendorStreamsList
+	9,  // 108: Scailo.VendorStreamsService.ViewAll:output_type -> Scailo.VendorStreamsList
+	9,  // 109: Scailo.VendorStreamsService.ViewAllForEntityUUID:output_type -> Scailo.VendorStreamsList
+	11, // 110: Scailo.VendorStreamsService.ViewWithPagination:output_type -> Scailo.VendorStreamsServicePaginationResponse
+	9,  // 111: Scailo.VendorStreamsService.SearchAll:output_type -> Scailo.VendorStreamsList
+	9,  // 112: Scailo.VendorStreamsService.Filter:output_type -> Scailo.VendorStreamsList
+	40, // 113: Scailo.VendorStreamsService.Count:output_type -> Scailo.CountResponse
+	41, // 114: Scailo.VendorStreamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	77, // [77:115] is the sub-list for method output_type
+	39, // [39:77] is the sub-list for method input_type
 	39, // [39:39] is the sub-list for extension type_name
 	39, // [39:39] is the sub-list for extension extendee
 	0,  // [0:39] is the sub-list for field type_name
@@ -3337,6 +3341,7 @@ func file_vendor_streams_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

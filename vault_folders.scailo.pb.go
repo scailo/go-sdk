@@ -596,6 +596,70 @@ func (x *VaultFolderDownload) GetError() string {
 	return ""
 }
 
+// Describes the message that allows a folder to be attached to a resource
+type VaultFolderAttachRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stores any comment that the user might add during this operation
+	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// The UUID of the folder that needs to be attached
+	FolderUuid string `protobuf:"bytes,10,opt,name=folder_uuid,json=folderUuid,proto3" json:"folder_uuid,omitempty"`
+	// The UUID of the resource to which the folder is attached
+	ResourceUuid  string `protobuf:"bytes,20,opt,name=resource_uuid,json=resourceUuid,proto3" json:"resource_uuid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VaultFolderAttachRequest) Reset() {
+	*x = VaultFolderAttachRequest{}
+	mi := &file_vault_folders_scailo_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VaultFolderAttachRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VaultFolderAttachRequest) ProtoMessage() {}
+
+func (x *VaultFolderAttachRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_folders_scailo_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VaultFolderAttachRequest.ProtoReflect.Descriptor instead.
+func (*VaultFolderAttachRequest) Descriptor() ([]byte, []int) {
+	return file_vault_folders_scailo_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *VaultFolderAttachRequest) GetUserComment() string {
+	if x != nil {
+		return x.UserComment
+	}
+	return ""
+}
+
+func (x *VaultFolderAttachRequest) GetFolderUuid() string {
+	if x != nil {
+		return x.FolderUuid
+	}
+	return ""
+}
+
+func (x *VaultFolderAttachRequest) GetResourceUuid() string {
+	if x != nil {
+		return x.ResourceUuid
+	}
+	return ""
+}
+
 var File_vault_folders_scailo_proto protoreflect.FileDescriptor
 
 const file_vault_folders_scailo_proto_rawDesc = "" +
@@ -650,7 +714,13 @@ const file_vault_folders_scailo_proto_rawDesc = "" +
 	"\x13download_started_at\x18\x0e \x01(\x04R\x11downloadStartedAt\x12*\n" +
 	"\x11download_ended_at\x18\x0f \x01(\x04R\x0fdownloadEndedAt\x12#\n" +
 	"\rdownloaded_by\x18\x10 \x01(\tR\fdownloadedBy\x12\x14\n" +
-	"\x05error\x18\x11 \x01(\tR\x05errorBq\n" +
+	"\x05error\x18\x11 \x01(\tR\x05error\"\x97\x01\n" +
+	"\x18VaultFolderAttachRequest\x12!\n" +
+	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12)\n" +
+	"\vfolder_uuid\x18\n" +
+	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
+	"folderUuid\x12-\n" +
+	"\rresource_uuid\x18\x14 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fresourceUuidBq\n" +
 	"\x0ecom.scailo.sdkB\x17VaultFoldersScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
 	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -667,7 +737,7 @@ func file_vault_folders_scailo_proto_rawDescGZIP() []byte {
 	return file_vault_folders_scailo_proto_rawDescData
 }
 
-var file_vault_folders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_vault_folders_scailo_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_vault_folders_scailo_proto_goTypes = []any{
 	(*VaultFolderAddRequest)(nil),          // 0: Scailo.VaultFolderAddRequest
 	(*VaultFolderMoveFolderRequest)(nil),   // 1: Scailo.VaultFolderMoveFolderRequest
@@ -676,17 +746,18 @@ var file_vault_folders_scailo_proto_goTypes = []any{
 	(*VaultFolder)(nil),                    // 4: Scailo.VaultFolder
 	(*VaultFoldersList)(nil),               // 5: Scailo.VaultFoldersList
 	(*VaultFolderDownload)(nil),            // 6: Scailo.VaultFolderDownload
-	(*EmployeeMetadata)(nil),               // 7: Scailo.EmployeeMetadata
-	(*VaultPermission)(nil),                // 8: Scailo.VaultPermission
+	(*VaultFolderAttachRequest)(nil),       // 7: Scailo.VaultFolderAttachRequest
+	(*EmployeeMetadata)(nil),               // 8: Scailo.EmployeeMetadata
+	(*VaultPermission)(nil),                // 9: Scailo.VaultPermission
 }
 var file_vault_folders_scailo_proto_depIdxs = []int32{
-	7, // 0: Scailo.VaultParentFolder.metadata:type_name -> Scailo.EmployeeMetadata
-	8, // 1: Scailo.VaultParentFolder.permissions:type_name -> Scailo.VaultPermission
-	7, // 2: Scailo.VaultFolder.metadata:type_name -> Scailo.EmployeeMetadata
-	8, // 3: Scailo.VaultFolder.permissions:type_name -> Scailo.VaultPermission
+	8, // 0: Scailo.VaultParentFolder.metadata:type_name -> Scailo.EmployeeMetadata
+	9, // 1: Scailo.VaultParentFolder.permissions:type_name -> Scailo.VaultPermission
+	8, // 2: Scailo.VaultFolder.metadata:type_name -> Scailo.EmployeeMetadata
+	9, // 3: Scailo.VaultFolder.permissions:type_name -> Scailo.VaultPermission
 	3, // 4: Scailo.VaultFolder.parent_folders:type_name -> Scailo.VaultParentFolder
 	4, // 5: Scailo.VaultFoldersList.list:type_name -> Scailo.VaultFolder
-	7, // 6: Scailo.VaultFolderDownload.metadata:type_name -> Scailo.EmployeeMetadata
+	8, // 6: Scailo.VaultFolderDownload.metadata:type_name -> Scailo.EmployeeMetadata
 	7, // [7:7] is the sub-list for method output_type
 	7, // [7:7] is the sub-list for method input_type
 	7, // [7:7] is the sub-list for extension type_name
@@ -707,7 +778,7 @@ func file_vault_folders_scailo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vault_folders_scailo_proto_rawDesc), len(file_vault_folders_scailo_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

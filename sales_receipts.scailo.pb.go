@@ -1985,7 +1985,7 @@ var File_sales_receipts_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1bsales_receipts.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x8e\x05\n" +
+	"\x1bsales_receipts.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x8e\x05\n" +
 	"!SalesReceiptsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2159,7 +2159,7 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"#SALES_RECEIPT_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12+\n" +
 	"'SALES_RECEIPT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12,\n" +
-	"(SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\xc7\x13\n" +
+	"(SALES_RECEIPT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\x9a\x14\n" +
 	"\x14SalesReceiptsService\x12O\n" +
 	"\x06Create\x12).Scailo.SalesReceiptsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
 	"\x05Draft\x12).Scailo.SalesReceiptsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
@@ -2176,7 +2176,8 @@ const file_sales_receipts_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x124\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x14.Scailo.SalesReceipt\x12:\n" +
 	"\n" +
@@ -2235,17 +2236,18 @@ var file_sales_receipts_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 18: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                     // 19: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 20: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 21: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 22: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 23: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 24: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 25: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 26: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 27: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 28: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 29: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
-	(*CountResponse)(nil),                                     // 31: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 21: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 23: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 26: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 27: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 28: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 29: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 30: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 31: Scailo.StandardFile
+	(*CountResponse)(nil),                                     // 32: Scailo.CountResponse
 }
 var file_sales_receipts_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.SalesReceiptsServiceCreateRequest.ref_from:type_name -> Scailo.SALES_RECEIPT_REF_FROM
@@ -2292,57 +2294,59 @@ var file_sales_receipts_scailo_proto_depIdxs = []int32{
 	19, // 41: Scailo.SalesReceiptsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 42: Scailo.SalesReceiptsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 43: Scailo.SalesReceiptsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	21, // 44: Scailo.SalesReceiptsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	22, // 45: Scailo.SalesReceiptsService.ViewByID:input_type -> Scailo.Identifier
-	23, // 46: Scailo.SalesReceiptsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 47: Scailo.SalesReceiptsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	23, // 48: Scailo.SalesReceiptsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 49: Scailo.SalesReceiptsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 50: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 51: Scailo.SalesReceiptsService.ViewAll:input_type -> Scailo.ActiveStatus
-	23, // 52: Scailo.SalesReceiptsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 53: Scailo.SalesReceiptsService.ViewWithPagination:input_type -> Scailo.SalesReceiptsServicePaginationReq
-	23, // 54: Scailo.SalesReceiptsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	23, // 55: Scailo.SalesReceiptsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	11, // 56: Scailo.SalesReceiptsService.SearchAll:input_type -> Scailo.SalesReceiptsServiceSearchAllReq
-	9,  // 57: Scailo.SalesReceiptsService.Filter:input_type -> Scailo.SalesReceiptsServiceFilterReq
-	26, // 58: Scailo.SalesReceiptsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 59: Scailo.SalesReceiptsService.Count:input_type -> Scailo.SalesReceiptsServiceCountReq
-	9,  // 60: Scailo.SalesReceiptsService.DownloadAsCSV:input_type -> Scailo.SalesReceiptsServiceFilterReq
-	27, // 61: Scailo.SalesReceiptsService.Create:output_type -> Scailo.IdentifierResponse
-	27, // 62: Scailo.SalesReceiptsService.Draft:output_type -> Scailo.IdentifierResponse
-	27, // 63: Scailo.SalesReceiptsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	27, // 64: Scailo.SalesReceiptsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	27, // 65: Scailo.SalesReceiptsService.Verify:output_type -> Scailo.IdentifierResponse
-	27, // 66: Scailo.SalesReceiptsService.Approve:output_type -> Scailo.IdentifierResponse
-	27, // 67: Scailo.SalesReceiptsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	27, // 68: Scailo.SalesReceiptsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	27, // 69: Scailo.SalesReceiptsService.Halt:output_type -> Scailo.IdentifierResponse
-	27, // 70: Scailo.SalesReceiptsService.Discard:output_type -> Scailo.IdentifierResponse
-	27, // 71: Scailo.SalesReceiptsService.Restore:output_type -> Scailo.IdentifierResponse
-	27, // 72: Scailo.SalesReceiptsService.Complete:output_type -> Scailo.IdentifierResponse
-	27, // 73: Scailo.SalesReceiptsService.Repeat:output_type -> Scailo.IdentifierResponse
-	27, // 74: Scailo.SalesReceiptsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	27, // 75: Scailo.SalesReceiptsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	28, // 76: Scailo.SalesReceiptsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	5,  // 77: Scailo.SalesReceiptsService.ViewByID:output_type -> Scailo.SalesReceipt
-	5,  // 78: Scailo.SalesReceiptsService.ViewByUUID:output_type -> Scailo.SalesReceipt
-	5,  // 79: Scailo.SalesReceiptsService.ViewEssentialByID:output_type -> Scailo.SalesReceipt
-	5,  // 80: Scailo.SalesReceiptsService.ViewEssentialByUUID:output_type -> Scailo.SalesReceipt
-	6,  // 81: Scailo.SalesReceiptsService.ViewFromIDs:output_type -> Scailo.SalesReceiptsList
-	4,  // 82: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesReceiptAncillaryParameters
-	6,  // 83: Scailo.SalesReceiptsService.ViewAll:output_type -> Scailo.SalesReceiptsList
-	6,  // 84: Scailo.SalesReceiptsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReceiptsList
-	8,  // 85: Scailo.SalesReceiptsService.ViewWithPagination:output_type -> Scailo.SalesReceiptsServicePaginationResponse
-	29, // 86: Scailo.SalesReceiptsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	30, // 87: Scailo.SalesReceiptsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	6,  // 88: Scailo.SalesReceiptsService.SearchAll:output_type -> Scailo.SalesReceiptsList
-	6,  // 89: Scailo.SalesReceiptsService.Filter:output_type -> Scailo.SalesReceiptsList
-	31, // 90: Scailo.SalesReceiptsService.CountInStatus:output_type -> Scailo.CountResponse
-	31, // 91: Scailo.SalesReceiptsService.Count:output_type -> Scailo.CountResponse
-	30, // 92: Scailo.SalesReceiptsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	61, // [61:93] is the sub-list for method output_type
-	29, // [29:61] is the sub-list for method input_type
+	21, // 44: Scailo.SalesReceiptsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	22, // 45: Scailo.SalesReceiptsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	23, // 46: Scailo.SalesReceiptsService.ViewByID:input_type -> Scailo.Identifier
+	24, // 47: Scailo.SalesReceiptsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 48: Scailo.SalesReceiptsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	24, // 49: Scailo.SalesReceiptsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 50: Scailo.SalesReceiptsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	24, // 51: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 52: Scailo.SalesReceiptsService.ViewAll:input_type -> Scailo.ActiveStatus
+	24, // 53: Scailo.SalesReceiptsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 54: Scailo.SalesReceiptsService.ViewWithPagination:input_type -> Scailo.SalesReceiptsServicePaginationReq
+	24, // 55: Scailo.SalesReceiptsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	24, // 56: Scailo.SalesReceiptsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	11, // 57: Scailo.SalesReceiptsService.SearchAll:input_type -> Scailo.SalesReceiptsServiceSearchAllReq
+	9,  // 58: Scailo.SalesReceiptsService.Filter:input_type -> Scailo.SalesReceiptsServiceFilterReq
+	27, // 59: Scailo.SalesReceiptsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 60: Scailo.SalesReceiptsService.Count:input_type -> Scailo.SalesReceiptsServiceCountReq
+	9,  // 61: Scailo.SalesReceiptsService.DownloadAsCSV:input_type -> Scailo.SalesReceiptsServiceFilterReq
+	28, // 62: Scailo.SalesReceiptsService.Create:output_type -> Scailo.IdentifierResponse
+	28, // 63: Scailo.SalesReceiptsService.Draft:output_type -> Scailo.IdentifierResponse
+	28, // 64: Scailo.SalesReceiptsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	28, // 65: Scailo.SalesReceiptsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	28, // 66: Scailo.SalesReceiptsService.Verify:output_type -> Scailo.IdentifierResponse
+	28, // 67: Scailo.SalesReceiptsService.Approve:output_type -> Scailo.IdentifierResponse
+	28, // 68: Scailo.SalesReceiptsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	28, // 69: Scailo.SalesReceiptsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	28, // 70: Scailo.SalesReceiptsService.Halt:output_type -> Scailo.IdentifierResponse
+	28, // 71: Scailo.SalesReceiptsService.Discard:output_type -> Scailo.IdentifierResponse
+	28, // 72: Scailo.SalesReceiptsService.Restore:output_type -> Scailo.IdentifierResponse
+	28, // 73: Scailo.SalesReceiptsService.Complete:output_type -> Scailo.IdentifierResponse
+	28, // 74: Scailo.SalesReceiptsService.Repeat:output_type -> Scailo.IdentifierResponse
+	28, // 75: Scailo.SalesReceiptsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	28, // 76: Scailo.SalesReceiptsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	28, // 77: Scailo.SalesReceiptsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	29, // 78: Scailo.SalesReceiptsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	5,  // 79: Scailo.SalesReceiptsService.ViewByID:output_type -> Scailo.SalesReceipt
+	5,  // 80: Scailo.SalesReceiptsService.ViewByUUID:output_type -> Scailo.SalesReceipt
+	5,  // 81: Scailo.SalesReceiptsService.ViewEssentialByID:output_type -> Scailo.SalesReceipt
+	5,  // 82: Scailo.SalesReceiptsService.ViewEssentialByUUID:output_type -> Scailo.SalesReceipt
+	6,  // 83: Scailo.SalesReceiptsService.ViewFromIDs:output_type -> Scailo.SalesReceiptsList
+	4,  // 84: Scailo.SalesReceiptsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesReceiptAncillaryParameters
+	6,  // 85: Scailo.SalesReceiptsService.ViewAll:output_type -> Scailo.SalesReceiptsList
+	6,  // 86: Scailo.SalesReceiptsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReceiptsList
+	8,  // 87: Scailo.SalesReceiptsService.ViewWithPagination:output_type -> Scailo.SalesReceiptsServicePaginationResponse
+	30, // 88: Scailo.SalesReceiptsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	31, // 89: Scailo.SalesReceiptsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	6,  // 90: Scailo.SalesReceiptsService.SearchAll:output_type -> Scailo.SalesReceiptsList
+	6,  // 91: Scailo.SalesReceiptsService.Filter:output_type -> Scailo.SalesReceiptsList
+	32, // 92: Scailo.SalesReceiptsService.CountInStatus:output_type -> Scailo.CountResponse
+	32, // 93: Scailo.SalesReceiptsService.Count:output_type -> Scailo.CountResponse
+	31, // 94: Scailo.SalesReceiptsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	62, // [62:95] is the sub-list for method output_type
+	29, // [29:62] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2355,6 +2359,7 @@ func file_sales_receipts_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

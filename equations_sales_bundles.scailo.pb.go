@@ -2283,7 +2283,7 @@ var File_equations_sales_bundles_scailo_proto protoreflect.FileDescriptor
 
 const file_equations_sales_bundles_scailo_proto_rawDesc = "" +
 	"\n" +
-	"$equations_sales_bundles.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x85\x02\n" +
+	"$equations_sales_bundles.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x85\x02\n" +
 	")EquationsSalesBundlesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2477,7 +2477,7 @@ const file_equations_sales_bundles_scailo_proto_rawDesc = "" +
 	"+EQUATION_SALES_BUNDLE_SORT_KEY_COMPLETED_ON\x10\x06\x12'\n" +
 	"#EQUATION_SALES_BUNDLE_SORT_KEY_NAME\x10\n" +
 	"\x12,\n" +
-	"(EQUATION_SALES_BUNDLE_SORT_KEY_FAMILY_ID\x10\v2\xaa#\n" +
+	"(EQUATION_SALES_BUNDLE_SORT_KEY_FAMILY_ID\x10\v2\xfd#\n" +
 	"\x1cEquationsSalesBundlesService\x12W\n" +
 	"\x06Create\x121.Scailo.EquationsSalesBundlesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x05Draft\x121.Scailo.EquationsSalesBundlesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\\\n" +
@@ -2494,7 +2494,8 @@ const file_equations_sales_bundles_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12o\n" +
 	"\x1aAddEquationSalesBundleItem\x125.Scailo.EquationsSalesBundlesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12r\n" +
@@ -2578,25 +2579,26 @@ var file_equations_sales_bundles_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                           // 23: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                            // 24: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                      // 25: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),  // 26: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*CloneRequest)(nil),                                       // 27: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),                          // 28: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                // 29: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                         // 30: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                            // 31: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                     // 32: Scailo.IdentifierUUID
-	(*Empty)(nil),                                              // 33: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                             // 34: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                    // 35: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                    // 36: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                       // 37: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                            // 38: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                                       // 39: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                 // 40: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                          // 41: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                    // 42: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                      // 43: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                                // 44: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                           // 26: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),  // 27: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*CloneRequest)(nil),                                       // 28: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),                          // 29: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                // 30: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                         // 31: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                            // 32: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                     // 33: Scailo.IdentifierUUID
+	(*Empty)(nil),                                              // 34: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                             // 35: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                    // 36: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                    // 37: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                       // 38: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                            // 39: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                                       // 40: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                 // 41: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                          // 42: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                    // 43: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                      // 44: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                                // 45: Scailo.IdentifierUUIDsList
 }
 var file_equations_sales_bundles_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.EquationSalesBundle.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2643,95 +2645,97 @@ var file_equations_sales_bundles_scailo_proto_depIdxs = []int32{
 	25, // 41: Scailo.EquationsSalesBundlesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.EquationsSalesBundlesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 43: Scailo.EquationsSalesBundlesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	26, // 44: Scailo.EquationsSalesBundlesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	27, // 45: Scailo.EquationsSalesBundlesService.Clone:input_type -> Scailo.CloneRequest
-	6,  // 46: Scailo.EquationsSalesBundlesService.AddEquationSalesBundleItem:input_type -> Scailo.EquationsSalesBundlesServiceItemCreateRequest
-	7,  // 47: Scailo.EquationsSalesBundlesService.ModifyEquationSalesBundleItem:input_type -> Scailo.EquationsSalesBundlesServiceItemUpdateRequest
-	28, // 48: Scailo.EquationsSalesBundlesService.ApproveEquationSalesBundleItem:input_type -> Scailo.IdentifierWithUserComment
-	28, // 49: Scailo.EquationsSalesBundlesService.DeleteEquationSalesBundleItem:input_type -> Scailo.IdentifierWithUserComment
-	29, // 50: Scailo.EquationsSalesBundlesService.ReorderEquationSalesBundleItems:input_type -> Scailo.ReorderItemsRequest
-	30, // 51: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemByID:input_type -> Scailo.Identifier
-	31, // 52: Scailo.EquationsSalesBundlesService.ViewApprovedEquationSalesBundleItems:input_type -> Scailo.IdentifierWithSearchKey
-	31, // 53: Scailo.EquationsSalesBundlesService.ViewUnapprovedEquationSalesBundleItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 54: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemHistory:input_type -> Scailo.EquationSalesBundleItemHistoryRequest
-	12, // 55: Scailo.EquationsSalesBundlesService.ViewPaginatedApprovedEquationSalesBundleItems:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
-	12, // 56: Scailo.EquationsSalesBundlesService.ViewPaginatedUnapprovedEquationSalesBundleItems:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
-	12, // 57: Scailo.EquationsSalesBundlesService.SearchItemsWithPagination:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
-	32, // 58: Scailo.EquationsSalesBundlesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	33, // 59: Scailo.EquationsSalesBundlesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	32, // 60: Scailo.EquationsSalesBundlesService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
-	34, // 61: Scailo.EquationsSalesBundlesService.UploadEquationSalesBundleItems:input_type -> Scailo.IdentifierUUIDWithFile
-	30, // 62: Scailo.EquationsSalesBundlesService.ViewByID:input_type -> Scailo.Identifier
-	32, // 63: Scailo.EquationsSalesBundlesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 64: Scailo.EquationsSalesBundlesService.ViewByName:input_type -> Scailo.SimpleSearchReq
-	30, // 65: Scailo.EquationsSalesBundlesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	32, // 66: Scailo.EquationsSalesBundlesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 67: Scailo.EquationsSalesBundlesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	37, // 68: Scailo.EquationsSalesBundlesService.ViewAll:input_type -> Scailo.ActiveStatus
-	32, // 69: Scailo.EquationsSalesBundlesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 70: Scailo.EquationsSalesBundlesService.ViewWithPagination:input_type -> Scailo.EquationsSalesBundlesServicePaginationReq
-	30, // 71: Scailo.EquationsSalesBundlesService.ViewForFamilyID:input_type -> Scailo.Identifier
-	32, // 72: Scailo.EquationsSalesBundlesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	32, // 73: Scailo.EquationsSalesBundlesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 74: Scailo.EquationsSalesBundlesService.SearchAll:input_type -> Scailo.EquationsSalesBundlesServiceSearchAllReq
-	16, // 75: Scailo.EquationsSalesBundlesService.Filter:input_type -> Scailo.EquationsSalesBundlesServiceFilterReq
-	38, // 76: Scailo.EquationsSalesBundlesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 77: Scailo.EquationsSalesBundlesService.Count:input_type -> Scailo.EquationsSalesBundlesServiceCountReq
-	16, // 78: Scailo.EquationsSalesBundlesService.DownloadAsCSV:input_type -> Scailo.EquationsSalesBundlesServiceFilterReq
-	39, // 79: Scailo.EquationsSalesBundlesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	40, // 80: Scailo.EquationsSalesBundlesService.Create:output_type -> Scailo.IdentifierResponse
-	40, // 81: Scailo.EquationsSalesBundlesService.Draft:output_type -> Scailo.IdentifierResponse
-	40, // 82: Scailo.EquationsSalesBundlesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 83: Scailo.EquationsSalesBundlesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	40, // 84: Scailo.EquationsSalesBundlesService.Verify:output_type -> Scailo.IdentifierResponse
-	40, // 85: Scailo.EquationsSalesBundlesService.Approve:output_type -> Scailo.IdentifierResponse
-	40, // 86: Scailo.EquationsSalesBundlesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	40, // 87: Scailo.EquationsSalesBundlesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 88: Scailo.EquationsSalesBundlesService.Halt:output_type -> Scailo.IdentifierResponse
-	40, // 89: Scailo.EquationsSalesBundlesService.Discard:output_type -> Scailo.IdentifierResponse
-	40, // 90: Scailo.EquationsSalesBundlesService.Restore:output_type -> Scailo.IdentifierResponse
-	40, // 91: Scailo.EquationsSalesBundlesService.Complete:output_type -> Scailo.IdentifierResponse
-	40, // 92: Scailo.EquationsSalesBundlesService.Repeat:output_type -> Scailo.IdentifierResponse
-	40, // 93: Scailo.EquationsSalesBundlesService.Reopen:output_type -> Scailo.IdentifierResponse
-	40, // 94: Scailo.EquationsSalesBundlesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	41, // 95: Scailo.EquationsSalesBundlesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	40, // 96: Scailo.EquationsSalesBundlesService.Clone:output_type -> Scailo.IdentifierResponse
-	40, // 97: Scailo.EquationsSalesBundlesService.AddEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
-	40, // 98: Scailo.EquationsSalesBundlesService.ModifyEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
-	40, // 99: Scailo.EquationsSalesBundlesService.ApproveEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
-	40, // 100: Scailo.EquationsSalesBundlesService.DeleteEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
-	40, // 101: Scailo.EquationsSalesBundlesService.ReorderEquationSalesBundleItems:output_type -> Scailo.IdentifierResponse
-	8,  // 102: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemByID:output_type -> Scailo.EquationSalesBundleItem
-	10, // 103: Scailo.EquationsSalesBundlesService.ViewApprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesItemsList
-	10, // 104: Scailo.EquationsSalesBundlesService.ViewUnapprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesItemsList
-	10, // 105: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemHistory:output_type -> Scailo.EquationsSalesBundlesItemsList
-	13, // 106: Scailo.EquationsSalesBundlesService.ViewPaginatedApprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
-	13, // 107: Scailo.EquationsSalesBundlesService.ViewPaginatedUnapprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
-	13, // 108: Scailo.EquationsSalesBundlesService.SearchItemsWithPagination:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
-	39, // 109: Scailo.EquationsSalesBundlesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	39, // 110: Scailo.EquationsSalesBundlesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	39, // 111: Scailo.EquationsSalesBundlesService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
-	36, // 112: Scailo.EquationsSalesBundlesService.UploadEquationSalesBundleItems:output_type -> Scailo.IdentifiersList
-	5,  // 113: Scailo.EquationsSalesBundlesService.ViewByID:output_type -> Scailo.EquationSalesBundle
-	5,  // 114: Scailo.EquationsSalesBundlesService.ViewByUUID:output_type -> Scailo.EquationSalesBundle
-	5,  // 115: Scailo.EquationsSalesBundlesService.ViewByName:output_type -> Scailo.EquationSalesBundle
-	5,  // 116: Scailo.EquationsSalesBundlesService.ViewEssentialByID:output_type -> Scailo.EquationSalesBundle
-	5,  // 117: Scailo.EquationsSalesBundlesService.ViewEssentialByUUID:output_type -> Scailo.EquationSalesBundle
-	9,  // 118: Scailo.EquationsSalesBundlesService.ViewFromIDs:output_type -> Scailo.EquationsSalesBundlesList
-	9,  // 119: Scailo.EquationsSalesBundlesService.ViewAll:output_type -> Scailo.EquationsSalesBundlesList
-	9,  // 120: Scailo.EquationsSalesBundlesService.ViewAllForEntityUUID:output_type -> Scailo.EquationsSalesBundlesList
-	15, // 121: Scailo.EquationsSalesBundlesService.ViewWithPagination:output_type -> Scailo.EquationsSalesBundlesServicePaginationResponse
-	5,  // 122: Scailo.EquationsSalesBundlesService.ViewForFamilyID:output_type -> Scailo.EquationSalesBundle
-	42, // 123: Scailo.EquationsSalesBundlesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	39, // 124: Scailo.EquationsSalesBundlesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	9,  // 125: Scailo.EquationsSalesBundlesService.SearchAll:output_type -> Scailo.EquationsSalesBundlesList
-	9,  // 126: Scailo.EquationsSalesBundlesService.Filter:output_type -> Scailo.EquationsSalesBundlesList
-	43, // 127: Scailo.EquationsSalesBundlesService.CountInStatus:output_type -> Scailo.CountResponse
-	43, // 128: Scailo.EquationsSalesBundlesService.Count:output_type -> Scailo.CountResponse
-	39, // 129: Scailo.EquationsSalesBundlesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	44, // 130: Scailo.EquationsSalesBundlesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	80, // [80:131] is the sub-list for method output_type
-	29, // [29:80] is the sub-list for method input_type
+	26, // 44: Scailo.EquationsSalesBundlesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	27, // 45: Scailo.EquationsSalesBundlesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	28, // 46: Scailo.EquationsSalesBundlesService.Clone:input_type -> Scailo.CloneRequest
+	6,  // 47: Scailo.EquationsSalesBundlesService.AddEquationSalesBundleItem:input_type -> Scailo.EquationsSalesBundlesServiceItemCreateRequest
+	7,  // 48: Scailo.EquationsSalesBundlesService.ModifyEquationSalesBundleItem:input_type -> Scailo.EquationsSalesBundlesServiceItemUpdateRequest
+	29, // 49: Scailo.EquationsSalesBundlesService.ApproveEquationSalesBundleItem:input_type -> Scailo.IdentifierWithUserComment
+	29, // 50: Scailo.EquationsSalesBundlesService.DeleteEquationSalesBundleItem:input_type -> Scailo.IdentifierWithUserComment
+	30, // 51: Scailo.EquationsSalesBundlesService.ReorderEquationSalesBundleItems:input_type -> Scailo.ReorderItemsRequest
+	31, // 52: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemByID:input_type -> Scailo.Identifier
+	32, // 53: Scailo.EquationsSalesBundlesService.ViewApprovedEquationSalesBundleItems:input_type -> Scailo.IdentifierWithSearchKey
+	32, // 54: Scailo.EquationsSalesBundlesService.ViewUnapprovedEquationSalesBundleItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 55: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemHistory:input_type -> Scailo.EquationSalesBundleItemHistoryRequest
+	12, // 56: Scailo.EquationsSalesBundlesService.ViewPaginatedApprovedEquationSalesBundleItems:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
+	12, // 57: Scailo.EquationsSalesBundlesService.ViewPaginatedUnapprovedEquationSalesBundleItems:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
+	12, // 58: Scailo.EquationsSalesBundlesService.SearchItemsWithPagination:input_type -> Scailo.EquationSalesBundleItemsSearchRequest
+	33, // 59: Scailo.EquationsSalesBundlesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	34, // 60: Scailo.EquationsSalesBundlesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	33, // 61: Scailo.EquationsSalesBundlesService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
+	35, // 62: Scailo.EquationsSalesBundlesService.UploadEquationSalesBundleItems:input_type -> Scailo.IdentifierUUIDWithFile
+	31, // 63: Scailo.EquationsSalesBundlesService.ViewByID:input_type -> Scailo.Identifier
+	33, // 64: Scailo.EquationsSalesBundlesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 65: Scailo.EquationsSalesBundlesService.ViewByName:input_type -> Scailo.SimpleSearchReq
+	31, // 66: Scailo.EquationsSalesBundlesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	33, // 67: Scailo.EquationsSalesBundlesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 68: Scailo.EquationsSalesBundlesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	38, // 69: Scailo.EquationsSalesBundlesService.ViewAll:input_type -> Scailo.ActiveStatus
+	33, // 70: Scailo.EquationsSalesBundlesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14, // 71: Scailo.EquationsSalesBundlesService.ViewWithPagination:input_type -> Scailo.EquationsSalesBundlesServicePaginationReq
+	31, // 72: Scailo.EquationsSalesBundlesService.ViewForFamilyID:input_type -> Scailo.Identifier
+	33, // 73: Scailo.EquationsSalesBundlesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	33, // 74: Scailo.EquationsSalesBundlesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 75: Scailo.EquationsSalesBundlesService.SearchAll:input_type -> Scailo.EquationsSalesBundlesServiceSearchAllReq
+	16, // 76: Scailo.EquationsSalesBundlesService.Filter:input_type -> Scailo.EquationsSalesBundlesServiceFilterReq
+	39, // 77: Scailo.EquationsSalesBundlesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17, // 78: Scailo.EquationsSalesBundlesService.Count:input_type -> Scailo.EquationsSalesBundlesServiceCountReq
+	16, // 79: Scailo.EquationsSalesBundlesService.DownloadAsCSV:input_type -> Scailo.EquationsSalesBundlesServiceFilterReq
+	40, // 80: Scailo.EquationsSalesBundlesService.ImportFromCSV:input_type -> Scailo.StandardFile
+	41, // 81: Scailo.EquationsSalesBundlesService.Create:output_type -> Scailo.IdentifierResponse
+	41, // 82: Scailo.EquationsSalesBundlesService.Draft:output_type -> Scailo.IdentifierResponse
+	41, // 83: Scailo.EquationsSalesBundlesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 84: Scailo.EquationsSalesBundlesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	41, // 85: Scailo.EquationsSalesBundlesService.Verify:output_type -> Scailo.IdentifierResponse
+	41, // 86: Scailo.EquationsSalesBundlesService.Approve:output_type -> Scailo.IdentifierResponse
+	41, // 87: Scailo.EquationsSalesBundlesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	41, // 88: Scailo.EquationsSalesBundlesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 89: Scailo.EquationsSalesBundlesService.Halt:output_type -> Scailo.IdentifierResponse
+	41, // 90: Scailo.EquationsSalesBundlesService.Discard:output_type -> Scailo.IdentifierResponse
+	41, // 91: Scailo.EquationsSalesBundlesService.Restore:output_type -> Scailo.IdentifierResponse
+	41, // 92: Scailo.EquationsSalesBundlesService.Complete:output_type -> Scailo.IdentifierResponse
+	41, // 93: Scailo.EquationsSalesBundlesService.Repeat:output_type -> Scailo.IdentifierResponse
+	41, // 94: Scailo.EquationsSalesBundlesService.Reopen:output_type -> Scailo.IdentifierResponse
+	41, // 95: Scailo.EquationsSalesBundlesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	41, // 96: Scailo.EquationsSalesBundlesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	42, // 97: Scailo.EquationsSalesBundlesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	41, // 98: Scailo.EquationsSalesBundlesService.Clone:output_type -> Scailo.IdentifierResponse
+	41, // 99: Scailo.EquationsSalesBundlesService.AddEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
+	41, // 100: Scailo.EquationsSalesBundlesService.ModifyEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
+	41, // 101: Scailo.EquationsSalesBundlesService.ApproveEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
+	41, // 102: Scailo.EquationsSalesBundlesService.DeleteEquationSalesBundleItem:output_type -> Scailo.IdentifierResponse
+	41, // 103: Scailo.EquationsSalesBundlesService.ReorderEquationSalesBundleItems:output_type -> Scailo.IdentifierResponse
+	8,  // 104: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemByID:output_type -> Scailo.EquationSalesBundleItem
+	10, // 105: Scailo.EquationsSalesBundlesService.ViewApprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesItemsList
+	10, // 106: Scailo.EquationsSalesBundlesService.ViewUnapprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesItemsList
+	10, // 107: Scailo.EquationsSalesBundlesService.ViewEquationSalesBundleItemHistory:output_type -> Scailo.EquationsSalesBundlesItemsList
+	13, // 108: Scailo.EquationsSalesBundlesService.ViewPaginatedApprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
+	13, // 109: Scailo.EquationsSalesBundlesService.ViewPaginatedUnapprovedEquationSalesBundleItems:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
+	13, // 110: Scailo.EquationsSalesBundlesService.SearchItemsWithPagination:output_type -> Scailo.EquationsSalesBundlesServicePaginatedItemsResponse
+	40, // 111: Scailo.EquationsSalesBundlesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	40, // 112: Scailo.EquationsSalesBundlesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	40, // 113: Scailo.EquationsSalesBundlesService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
+	37, // 114: Scailo.EquationsSalesBundlesService.UploadEquationSalesBundleItems:output_type -> Scailo.IdentifiersList
+	5,  // 115: Scailo.EquationsSalesBundlesService.ViewByID:output_type -> Scailo.EquationSalesBundle
+	5,  // 116: Scailo.EquationsSalesBundlesService.ViewByUUID:output_type -> Scailo.EquationSalesBundle
+	5,  // 117: Scailo.EquationsSalesBundlesService.ViewByName:output_type -> Scailo.EquationSalesBundle
+	5,  // 118: Scailo.EquationsSalesBundlesService.ViewEssentialByID:output_type -> Scailo.EquationSalesBundle
+	5,  // 119: Scailo.EquationsSalesBundlesService.ViewEssentialByUUID:output_type -> Scailo.EquationSalesBundle
+	9,  // 120: Scailo.EquationsSalesBundlesService.ViewFromIDs:output_type -> Scailo.EquationsSalesBundlesList
+	9,  // 121: Scailo.EquationsSalesBundlesService.ViewAll:output_type -> Scailo.EquationsSalesBundlesList
+	9,  // 122: Scailo.EquationsSalesBundlesService.ViewAllForEntityUUID:output_type -> Scailo.EquationsSalesBundlesList
+	15, // 123: Scailo.EquationsSalesBundlesService.ViewWithPagination:output_type -> Scailo.EquationsSalesBundlesServicePaginationResponse
+	5,  // 124: Scailo.EquationsSalesBundlesService.ViewForFamilyID:output_type -> Scailo.EquationSalesBundle
+	43, // 125: Scailo.EquationsSalesBundlesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	40, // 126: Scailo.EquationsSalesBundlesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	9,  // 127: Scailo.EquationsSalesBundlesService.SearchAll:output_type -> Scailo.EquationsSalesBundlesList
+	9,  // 128: Scailo.EquationsSalesBundlesService.Filter:output_type -> Scailo.EquationsSalesBundlesList
+	44, // 129: Scailo.EquationsSalesBundlesService.CountInStatus:output_type -> Scailo.CountResponse
+	44, // 130: Scailo.EquationsSalesBundlesService.Count:output_type -> Scailo.CountResponse
+	40, // 131: Scailo.EquationsSalesBundlesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	45, // 132: Scailo.EquationsSalesBundlesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	81, // [81:133] is the sub-list for method output_type
+	29, // [29:81] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2744,6 +2748,7 @@ func file_equations_sales_bundles_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

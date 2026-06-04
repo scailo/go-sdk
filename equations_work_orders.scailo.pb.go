@@ -2296,7 +2296,7 @@ var File_equations_work_orders_scailo_proto protoreflect.FileDescriptor
 
 const file_equations_work_orders_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\"equations_work_orders.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x8a\x02\n" +
+	"\"equations_work_orders.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x8a\x02\n" +
 	"'EquationsWorkOrdersServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2492,7 +2492,7 @@ const file_equations_work_orders_scailo_proto_rawDesc = "" +
 	"!EQUATION_WORK_ORDER_SORT_KEY_NAME\x10\n" +
 	"\x12.\n" +
 	"*EQUATION_WORK_ORDER_SORT_KEY_WORK_ORDER_ID\x10\v\x120\n" +
-	",EQUATION_WORK_ORDER_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xdc#\n" +
+	",EQUATION_WORK_ORDER_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xaf$\n" +
 	"\x1aEquationsWorkOrdersService\x12U\n" +
 	"\x06Create\x12/.Scailo.EquationsWorkOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\x05Draft\x12/.Scailo.EquationsWorkOrdersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Z\n" +
@@ -2509,7 +2509,8 @@ const file_equations_work_orders_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
@@ -2595,26 +2596,27 @@ var file_equations_work_orders_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                          // 23: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                           // 24: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                     // 25: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 26: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*CloneRequest)(nil),                                      // 27: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),                         // 28: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 29: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 30: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 31: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 32: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 33: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 34: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 35: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 36: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 37: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 38: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                                      // 39: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                                // 40: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 41: Scailo.MagicLink
-	(*AmendmentLogsList)(nil),                                 // 42: Scailo.AmendmentLogsList
-	(*BooleanResponse)(nil),                                   // 43: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 44: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                               // 45: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),                          // 26: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 27: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*CloneRequest)(nil),                                      // 28: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),                         // 29: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 30: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 31: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 32: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 33: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 34: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 35: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 36: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 37: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 38: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 39: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                                      // 40: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                                // 41: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 42: Scailo.MagicLink
+	(*AmendmentLogsList)(nil),                                 // 43: Scailo.AmendmentLogsList
+	(*BooleanResponse)(nil),                                   // 44: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 45: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                               // 46: Scailo.IdentifierUUIDsList
 }
 var file_equations_work_orders_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.EquationWorkOrder.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2661,99 +2663,101 @@ var file_equations_work_orders_scailo_proto_depIdxs = []int32{
 	25, // 41: Scailo.EquationsWorkOrdersService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.EquationsWorkOrdersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 43: Scailo.EquationsWorkOrdersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	26, // 44: Scailo.EquationsWorkOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	25, // 45: Scailo.EquationsWorkOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	27, // 46: Scailo.EquationsWorkOrdersService.Clone:input_type -> Scailo.CloneRequest
-	6,  // 47: Scailo.EquationsWorkOrdersService.AddEquationWorkOrderItem:input_type -> Scailo.EquationsWorkOrdersServiceItemCreateRequest
-	7,  // 48: Scailo.EquationsWorkOrdersService.ModifyEquationWorkOrderItem:input_type -> Scailo.EquationsWorkOrdersServiceItemUpdateRequest
-	28, // 49: Scailo.EquationsWorkOrdersService.ApproveEquationWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	28, // 50: Scailo.EquationsWorkOrdersService.DeleteEquationWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
-	29, // 51: Scailo.EquationsWorkOrdersService.ReorderEquationWorkOrderItems:input_type -> Scailo.ReorderItemsRequest
-	30, // 52: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemByID:input_type -> Scailo.Identifier
-	31, // 53: Scailo.EquationsWorkOrdersService.ViewApprovedEquationWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	31, // 54: Scailo.EquationsWorkOrdersService.ViewUnapprovedEquationWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 55: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemHistory:input_type -> Scailo.EquationWorkOrderItemHistoryRequest
-	12, // 56: Scailo.EquationsWorkOrdersService.ViewPaginatedApprovedEquationWorkOrderItems:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
-	12, // 57: Scailo.EquationsWorkOrdersService.ViewPaginatedUnapprovedEquationWorkOrderItems:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
-	12, // 58: Scailo.EquationsWorkOrdersService.SearchItemsWithPagination:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
-	32, // 59: Scailo.EquationsWorkOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	33, // 60: Scailo.EquationsWorkOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	32, // 61: Scailo.EquationsWorkOrdersService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
-	34, // 62: Scailo.EquationsWorkOrdersService.UploadEquationWorkOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
-	30, // 63: Scailo.EquationsWorkOrdersService.ViewByID:input_type -> Scailo.Identifier
-	32, // 64: Scailo.EquationsWorkOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 65: Scailo.EquationsWorkOrdersService.ViewByName:input_type -> Scailo.SimpleSearchReq
-	30, // 66: Scailo.EquationsWorkOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	32, // 67: Scailo.EquationsWorkOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	36, // 68: Scailo.EquationsWorkOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	37, // 69: Scailo.EquationsWorkOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
-	32, // 70: Scailo.EquationsWorkOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	14, // 71: Scailo.EquationsWorkOrdersService.ViewWithPagination:input_type -> Scailo.EquationsWorkOrdersServicePaginationReq
-	30, // 72: Scailo.EquationsWorkOrdersService.ViewForWorkOrderID:input_type -> Scailo.Identifier
-	30, // 73: Scailo.EquationsWorkOrdersService.ViewAmendments:input_type -> Scailo.Identifier
-	32, // 74: Scailo.EquationsWorkOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	32, // 75: Scailo.EquationsWorkOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	18, // 76: Scailo.EquationsWorkOrdersService.SearchAll:input_type -> Scailo.EquationsWorkOrdersServiceSearchAllReq
-	16, // 77: Scailo.EquationsWorkOrdersService.Filter:input_type -> Scailo.EquationsWorkOrdersServiceFilterReq
-	38, // 78: Scailo.EquationsWorkOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	17, // 79: Scailo.EquationsWorkOrdersService.Count:input_type -> Scailo.EquationsWorkOrdersServiceCountReq
-	16, // 80: Scailo.EquationsWorkOrdersService.DownloadAsCSV:input_type -> Scailo.EquationsWorkOrdersServiceFilterReq
-	39, // 81: Scailo.EquationsWorkOrdersService.ImportFromCSV:input_type -> Scailo.StandardFile
-	40, // 82: Scailo.EquationsWorkOrdersService.Create:output_type -> Scailo.IdentifierResponse
-	40, // 83: Scailo.EquationsWorkOrdersService.Draft:output_type -> Scailo.IdentifierResponse
-	40, // 84: Scailo.EquationsWorkOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 85: Scailo.EquationsWorkOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	40, // 86: Scailo.EquationsWorkOrdersService.Verify:output_type -> Scailo.IdentifierResponse
-	40, // 87: Scailo.EquationsWorkOrdersService.Approve:output_type -> Scailo.IdentifierResponse
-	40, // 88: Scailo.EquationsWorkOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	40, // 89: Scailo.EquationsWorkOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	40, // 90: Scailo.EquationsWorkOrdersService.Halt:output_type -> Scailo.IdentifierResponse
-	40, // 91: Scailo.EquationsWorkOrdersService.Discard:output_type -> Scailo.IdentifierResponse
-	40, // 92: Scailo.EquationsWorkOrdersService.Restore:output_type -> Scailo.IdentifierResponse
-	40, // 93: Scailo.EquationsWorkOrdersService.Complete:output_type -> Scailo.IdentifierResponse
-	40, // 94: Scailo.EquationsWorkOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
-	40, // 95: Scailo.EquationsWorkOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
-	40, // 96: Scailo.EquationsWorkOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	41, // 97: Scailo.EquationsWorkOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
-	40, // 98: Scailo.EquationsWorkOrdersService.Amend:output_type -> Scailo.IdentifierResponse
-	40, // 99: Scailo.EquationsWorkOrdersService.Clone:output_type -> Scailo.IdentifierResponse
-	40, // 100: Scailo.EquationsWorkOrdersService.AddEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	40, // 101: Scailo.EquationsWorkOrdersService.ModifyEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	40, // 102: Scailo.EquationsWorkOrdersService.ApproveEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	40, // 103: Scailo.EquationsWorkOrdersService.DeleteEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
-	40, // 104: Scailo.EquationsWorkOrdersService.ReorderEquationWorkOrderItems:output_type -> Scailo.IdentifierResponse
-	8,  // 105: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemByID:output_type -> Scailo.EquationWorkOrderItem
-	10, // 106: Scailo.EquationsWorkOrdersService.ViewApprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersItemsList
-	10, // 107: Scailo.EquationsWorkOrdersService.ViewUnapprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersItemsList
-	10, // 108: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemHistory:output_type -> Scailo.EquationsWorkOrdersItemsList
-	13, // 109: Scailo.EquationsWorkOrdersService.ViewPaginatedApprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
-	13, // 110: Scailo.EquationsWorkOrdersService.ViewPaginatedUnapprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
-	13, // 111: Scailo.EquationsWorkOrdersService.SearchItemsWithPagination:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
-	39, // 112: Scailo.EquationsWorkOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	39, // 113: Scailo.EquationsWorkOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	39, // 114: Scailo.EquationsWorkOrdersService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
-	36, // 115: Scailo.EquationsWorkOrdersService.UploadEquationWorkOrderItems:output_type -> Scailo.IdentifiersList
-	5,  // 116: Scailo.EquationsWorkOrdersService.ViewByID:output_type -> Scailo.EquationWorkOrder
-	5,  // 117: Scailo.EquationsWorkOrdersService.ViewByUUID:output_type -> Scailo.EquationWorkOrder
-	5,  // 118: Scailo.EquationsWorkOrdersService.ViewByName:output_type -> Scailo.EquationWorkOrder
-	5,  // 119: Scailo.EquationsWorkOrdersService.ViewEssentialByID:output_type -> Scailo.EquationWorkOrder
-	5,  // 120: Scailo.EquationsWorkOrdersService.ViewEssentialByUUID:output_type -> Scailo.EquationWorkOrder
-	9,  // 121: Scailo.EquationsWorkOrdersService.ViewFromIDs:output_type -> Scailo.EquationsWorkOrdersList
-	9,  // 122: Scailo.EquationsWorkOrdersService.ViewAll:output_type -> Scailo.EquationsWorkOrdersList
-	9,  // 123: Scailo.EquationsWorkOrdersService.ViewAllForEntityUUID:output_type -> Scailo.EquationsWorkOrdersList
-	15, // 124: Scailo.EquationsWorkOrdersService.ViewWithPagination:output_type -> Scailo.EquationsWorkOrdersServicePaginationResponse
-	5,  // 125: Scailo.EquationsWorkOrdersService.ViewForWorkOrderID:output_type -> Scailo.EquationWorkOrder
-	42, // 126: Scailo.EquationsWorkOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	43, // 127: Scailo.EquationsWorkOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	39, // 128: Scailo.EquationsWorkOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
-	9,  // 129: Scailo.EquationsWorkOrdersService.SearchAll:output_type -> Scailo.EquationsWorkOrdersList
-	9,  // 130: Scailo.EquationsWorkOrdersService.Filter:output_type -> Scailo.EquationsWorkOrdersList
-	44, // 131: Scailo.EquationsWorkOrdersService.CountInStatus:output_type -> Scailo.CountResponse
-	44, // 132: Scailo.EquationsWorkOrdersService.Count:output_type -> Scailo.CountResponse
-	39, // 133: Scailo.EquationsWorkOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	45, // 134: Scailo.EquationsWorkOrdersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	82, // [82:135] is the sub-list for method output_type
-	29, // [29:82] is the sub-list for method input_type
+	26, // 44: Scailo.EquationsWorkOrdersService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	27, // 45: Scailo.EquationsWorkOrdersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	25, // 46: Scailo.EquationsWorkOrdersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	28, // 47: Scailo.EquationsWorkOrdersService.Clone:input_type -> Scailo.CloneRequest
+	6,  // 48: Scailo.EquationsWorkOrdersService.AddEquationWorkOrderItem:input_type -> Scailo.EquationsWorkOrdersServiceItemCreateRequest
+	7,  // 49: Scailo.EquationsWorkOrdersService.ModifyEquationWorkOrderItem:input_type -> Scailo.EquationsWorkOrdersServiceItemUpdateRequest
+	29, // 50: Scailo.EquationsWorkOrdersService.ApproveEquationWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	29, // 51: Scailo.EquationsWorkOrdersService.DeleteEquationWorkOrderItem:input_type -> Scailo.IdentifierWithUserComment
+	30, // 52: Scailo.EquationsWorkOrdersService.ReorderEquationWorkOrderItems:input_type -> Scailo.ReorderItemsRequest
+	31, // 53: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemByID:input_type -> Scailo.Identifier
+	32, // 54: Scailo.EquationsWorkOrdersService.ViewApprovedEquationWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	32, // 55: Scailo.EquationsWorkOrdersService.ViewUnapprovedEquationWorkOrderItems:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 56: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemHistory:input_type -> Scailo.EquationWorkOrderItemHistoryRequest
+	12, // 57: Scailo.EquationsWorkOrdersService.ViewPaginatedApprovedEquationWorkOrderItems:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
+	12, // 58: Scailo.EquationsWorkOrdersService.ViewPaginatedUnapprovedEquationWorkOrderItems:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
+	12, // 59: Scailo.EquationsWorkOrdersService.SearchItemsWithPagination:input_type -> Scailo.EquationWorkOrderItemsSearchRequest
+	33, // 60: Scailo.EquationsWorkOrdersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	34, // 61: Scailo.EquationsWorkOrdersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	33, // 62: Scailo.EquationsWorkOrdersService.DownloadTreeAsCSV:input_type -> Scailo.IdentifierUUID
+	35, // 63: Scailo.EquationsWorkOrdersService.UploadEquationWorkOrderItems:input_type -> Scailo.IdentifierUUIDWithFile
+	31, // 64: Scailo.EquationsWorkOrdersService.ViewByID:input_type -> Scailo.Identifier
+	33, // 65: Scailo.EquationsWorkOrdersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 66: Scailo.EquationsWorkOrdersService.ViewByName:input_type -> Scailo.SimpleSearchReq
+	31, // 67: Scailo.EquationsWorkOrdersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	33, // 68: Scailo.EquationsWorkOrdersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	37, // 69: Scailo.EquationsWorkOrdersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	38, // 70: Scailo.EquationsWorkOrdersService.ViewAll:input_type -> Scailo.ActiveStatus
+	33, // 71: Scailo.EquationsWorkOrdersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	14, // 72: Scailo.EquationsWorkOrdersService.ViewWithPagination:input_type -> Scailo.EquationsWorkOrdersServicePaginationReq
+	31, // 73: Scailo.EquationsWorkOrdersService.ViewForWorkOrderID:input_type -> Scailo.Identifier
+	31, // 74: Scailo.EquationsWorkOrdersService.ViewAmendments:input_type -> Scailo.Identifier
+	33, // 75: Scailo.EquationsWorkOrdersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	33, // 76: Scailo.EquationsWorkOrdersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	18, // 77: Scailo.EquationsWorkOrdersService.SearchAll:input_type -> Scailo.EquationsWorkOrdersServiceSearchAllReq
+	16, // 78: Scailo.EquationsWorkOrdersService.Filter:input_type -> Scailo.EquationsWorkOrdersServiceFilterReq
+	39, // 79: Scailo.EquationsWorkOrdersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	17, // 80: Scailo.EquationsWorkOrdersService.Count:input_type -> Scailo.EquationsWorkOrdersServiceCountReq
+	16, // 81: Scailo.EquationsWorkOrdersService.DownloadAsCSV:input_type -> Scailo.EquationsWorkOrdersServiceFilterReq
+	40, // 82: Scailo.EquationsWorkOrdersService.ImportFromCSV:input_type -> Scailo.StandardFile
+	41, // 83: Scailo.EquationsWorkOrdersService.Create:output_type -> Scailo.IdentifierResponse
+	41, // 84: Scailo.EquationsWorkOrdersService.Draft:output_type -> Scailo.IdentifierResponse
+	41, // 85: Scailo.EquationsWorkOrdersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 86: Scailo.EquationsWorkOrdersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	41, // 87: Scailo.EquationsWorkOrdersService.Verify:output_type -> Scailo.IdentifierResponse
+	41, // 88: Scailo.EquationsWorkOrdersService.Approve:output_type -> Scailo.IdentifierResponse
+	41, // 89: Scailo.EquationsWorkOrdersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	41, // 90: Scailo.EquationsWorkOrdersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	41, // 91: Scailo.EquationsWorkOrdersService.Halt:output_type -> Scailo.IdentifierResponse
+	41, // 92: Scailo.EquationsWorkOrdersService.Discard:output_type -> Scailo.IdentifierResponse
+	41, // 93: Scailo.EquationsWorkOrdersService.Restore:output_type -> Scailo.IdentifierResponse
+	41, // 94: Scailo.EquationsWorkOrdersService.Complete:output_type -> Scailo.IdentifierResponse
+	41, // 95: Scailo.EquationsWorkOrdersService.Repeat:output_type -> Scailo.IdentifierResponse
+	41, // 96: Scailo.EquationsWorkOrdersService.Reopen:output_type -> Scailo.IdentifierResponse
+	41, // 97: Scailo.EquationsWorkOrdersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	41, // 98: Scailo.EquationsWorkOrdersService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	42, // 99: Scailo.EquationsWorkOrdersService.CreateMagicLink:output_type -> Scailo.MagicLink
+	41, // 100: Scailo.EquationsWorkOrdersService.Amend:output_type -> Scailo.IdentifierResponse
+	41, // 101: Scailo.EquationsWorkOrdersService.Clone:output_type -> Scailo.IdentifierResponse
+	41, // 102: Scailo.EquationsWorkOrdersService.AddEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	41, // 103: Scailo.EquationsWorkOrdersService.ModifyEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	41, // 104: Scailo.EquationsWorkOrdersService.ApproveEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	41, // 105: Scailo.EquationsWorkOrdersService.DeleteEquationWorkOrderItem:output_type -> Scailo.IdentifierResponse
+	41, // 106: Scailo.EquationsWorkOrdersService.ReorderEquationWorkOrderItems:output_type -> Scailo.IdentifierResponse
+	8,  // 107: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemByID:output_type -> Scailo.EquationWorkOrderItem
+	10, // 108: Scailo.EquationsWorkOrdersService.ViewApprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersItemsList
+	10, // 109: Scailo.EquationsWorkOrdersService.ViewUnapprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersItemsList
+	10, // 110: Scailo.EquationsWorkOrdersService.ViewEquationWorkOrderItemHistory:output_type -> Scailo.EquationsWorkOrdersItemsList
+	13, // 111: Scailo.EquationsWorkOrdersService.ViewPaginatedApprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
+	13, // 112: Scailo.EquationsWorkOrdersService.ViewPaginatedUnapprovedEquationWorkOrderItems:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
+	13, // 113: Scailo.EquationsWorkOrdersService.SearchItemsWithPagination:output_type -> Scailo.EquationsWorkOrdersServicePaginatedItemsResponse
+	40, // 114: Scailo.EquationsWorkOrdersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	40, // 115: Scailo.EquationsWorkOrdersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	40, // 116: Scailo.EquationsWorkOrdersService.DownloadTreeAsCSV:output_type -> Scailo.StandardFile
+	37, // 117: Scailo.EquationsWorkOrdersService.UploadEquationWorkOrderItems:output_type -> Scailo.IdentifiersList
+	5,  // 118: Scailo.EquationsWorkOrdersService.ViewByID:output_type -> Scailo.EquationWorkOrder
+	5,  // 119: Scailo.EquationsWorkOrdersService.ViewByUUID:output_type -> Scailo.EquationWorkOrder
+	5,  // 120: Scailo.EquationsWorkOrdersService.ViewByName:output_type -> Scailo.EquationWorkOrder
+	5,  // 121: Scailo.EquationsWorkOrdersService.ViewEssentialByID:output_type -> Scailo.EquationWorkOrder
+	5,  // 122: Scailo.EquationsWorkOrdersService.ViewEssentialByUUID:output_type -> Scailo.EquationWorkOrder
+	9,  // 123: Scailo.EquationsWorkOrdersService.ViewFromIDs:output_type -> Scailo.EquationsWorkOrdersList
+	9,  // 124: Scailo.EquationsWorkOrdersService.ViewAll:output_type -> Scailo.EquationsWorkOrdersList
+	9,  // 125: Scailo.EquationsWorkOrdersService.ViewAllForEntityUUID:output_type -> Scailo.EquationsWorkOrdersList
+	15, // 126: Scailo.EquationsWorkOrdersService.ViewWithPagination:output_type -> Scailo.EquationsWorkOrdersServicePaginationResponse
+	5,  // 127: Scailo.EquationsWorkOrdersService.ViewForWorkOrderID:output_type -> Scailo.EquationWorkOrder
+	43, // 128: Scailo.EquationsWorkOrdersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	44, // 129: Scailo.EquationsWorkOrdersService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	40, // 130: Scailo.EquationsWorkOrdersService.DownloadByUUID:output_type -> Scailo.StandardFile
+	9,  // 131: Scailo.EquationsWorkOrdersService.SearchAll:output_type -> Scailo.EquationsWorkOrdersList
+	9,  // 132: Scailo.EquationsWorkOrdersService.Filter:output_type -> Scailo.EquationsWorkOrdersList
+	45, // 133: Scailo.EquationsWorkOrdersService.CountInStatus:output_type -> Scailo.CountResponse
+	45, // 134: Scailo.EquationsWorkOrdersService.Count:output_type -> Scailo.CountResponse
+	40, // 135: Scailo.EquationsWorkOrdersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	46, // 136: Scailo.EquationsWorkOrdersService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	83, // [83:137] is the sub-list for method output_type
+	29, // [29:83] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2766,6 +2770,7 @@ func file_equations_work_orders_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -3318,7 +3318,7 @@ var File_supply_offers_scailo_proto protoreflect.FileDescriptor
 
 const file_supply_offers_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1asupply_offers.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xf4\x05\n" +
+	"\x1asupply_offers.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xf4\x05\n" +
 	" SupplyOffersServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3630,7 +3630,7 @@ const file_supply_offers_scailo_proto_rawDesc = "" +
 	"\x18SUPPLY_OFFER_ITEM_STATUS\x12,\n" +
 	"(SUPPLY_OFFER_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12%\n" +
 	"!SUPPLY_OFFER_ITEM_STATUS_APPROVED\x10\x01\x12'\n" +
-	"#SUPPLY_OFFER_ITEM_STATUS_UNAPPROVED\x10\x022\x82%\n" +
+	"#SUPPLY_OFFER_ITEM_STATUS_UNAPPROVED\x10\x022\xd5%\n" +
 	"\x13SupplyOffersService\x12N\n" +
 	"\x06Create\x12(.Scailo.SupplyOffersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.SupplyOffersServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -3648,7 +3648,8 @@ const file_supply_offers_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12R\n" +
 	"\bAutofill\x12*.Scailo.SupplyOffersServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12^\n" +
@@ -3744,28 +3745,29 @@ var file_supply_offers_scailo_proto_goTypes = []any{
 	(*IdentifierUUIDWithUserComment)(nil),                     // 31: Scailo.IdentifierUUIDWithUserComment
 	(*RepeatWithDeliveryDate)(nil),                            // 32: Scailo.RepeatWithDeliveryDate
 	(*IdentifierWithEmailAttributes)(nil),                     // 33: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 34: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 35: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 36: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 37: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 38: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 39: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 40: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 41: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 42: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 43: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 44: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                    // 45: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                           // 46: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 47: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 48: Scailo.MagicLink
-	(*PriceResponse)(nil),                                     // 49: Scailo.PriceResponse
-	(*StandardFile)(nil),                                      // 50: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 51: Scailo.AmendmentLogsList
-	(*FamiliesList)(nil),                                      // 52: Scailo.FamiliesList
-	(*BooleanResponse)(nil),                                   // 53: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 54: Scailo.CountResponse
-	(*SumResponse)(nil),                                       // 55: Scailo.SumResponse
+	(*VaultFolderAttachRequest)(nil),                          // 34: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 35: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 36: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 37: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 38: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 39: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 40: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 41: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 42: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 43: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 44: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 45: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                    // 46: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                           // 47: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 48: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 49: Scailo.MagicLink
+	(*PriceResponse)(nil),                                     // 50: Scailo.PriceResponse
+	(*StandardFile)(nil),                                      // 51: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 52: Scailo.AmendmentLogsList
+	(*FamiliesList)(nil),                                      // 53: Scailo.FamiliesList
+	(*BooleanResponse)(nil),                                   // 54: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 55: Scailo.CountResponse
+	(*SumResponse)(nil),                                       // 56: Scailo.SumResponse
 }
 var file_supply_offers_scailo_proto_depIdxs = []int32{
 	22, // 0: Scailo.SupplyOffersServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3818,106 +3820,108 @@ var file_supply_offers_scailo_proto_depIdxs = []int32{
 	31, // 47: Scailo.SupplyOffersService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	31, // 48: Scailo.SupplyOffersService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	33, // 49: Scailo.SupplyOffersService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	34, // 50: Scailo.SupplyOffersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	5,  // 51: Scailo.SupplyOffersService.Autofill:input_type -> Scailo.SupplyOffersServiceAutofillRequest
-	31, // 52: Scailo.SupplyOffersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	8,  // 53: Scailo.SupplyOffersService.AddSupplyOfferItem:input_type -> Scailo.SupplyOffersServiceItemCreateRequest
-	9,  // 54: Scailo.SupplyOffersService.ModifySupplyOfferItem:input_type -> Scailo.SupplyOffersServiceItemUpdateRequest
-	35, // 55: Scailo.SupplyOffersService.ApproveSupplyOfferItem:input_type -> Scailo.IdentifierWithUserComment
-	35, // 56: Scailo.SupplyOffersService.DeleteSupplyOfferItem:input_type -> Scailo.IdentifierWithUserComment
-	36, // 57: Scailo.SupplyOffersService.ReorderSupplyOfferItems:input_type -> Scailo.ReorderItemsRequest
-	37, // 58: Scailo.SupplyOffersService.ViewSupplyOfferItemByID:input_type -> Scailo.Identifier
-	14, // 59: Scailo.SupplyOffersService.ViewSupplyOfferItemPrice:input_type -> Scailo.SupplyOfferItemProspectiveInfoRequest
-	38, // 60: Scailo.SupplyOffersService.ViewApprovedSupplyOfferItems:input_type -> Scailo.IdentifierWithSearchKey
-	38, // 61: Scailo.SupplyOffersService.ViewUnapprovedSupplyOfferItems:input_type -> Scailo.IdentifierWithSearchKey
-	13, // 62: Scailo.SupplyOffersService.ViewSupplyOfferItemHistory:input_type -> Scailo.SupplyOfferItemHistoryRequest
-	20, // 63: Scailo.SupplyOffersService.ViewPaginatedApprovedSupplyOfferItems:input_type -> Scailo.SupplyOfferItemsSearchRequest
-	20, // 64: Scailo.SupplyOffersService.ViewPaginatedUnapprovedSupplyOfferItems:input_type -> Scailo.SupplyOfferItemsSearchRequest
-	20, // 65: Scailo.SupplyOffersService.SearchItemsWithPagination:input_type -> Scailo.SupplyOfferItemsSearchRequest
-	39, // 66: Scailo.SupplyOffersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	40, // 67: Scailo.SupplyOffersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	41, // 68: Scailo.SupplyOffersService.UploadSupplyOfferItems:input_type -> Scailo.IdentifierUUIDWithFile
-	37, // 69: Scailo.SupplyOffersService.ViewByID:input_type -> Scailo.Identifier
-	39, // 70: Scailo.SupplyOffersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 71: Scailo.SupplyOffersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	37, // 72: Scailo.SupplyOffersService.ViewEssentialByID:input_type -> Scailo.Identifier
-	39, // 73: Scailo.SupplyOffersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	43, // 74: Scailo.SupplyOffersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	39, // 75: Scailo.SupplyOffersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	44, // 76: Scailo.SupplyOffersService.ViewAll:input_type -> Scailo.ActiveStatus
-	39, // 77: Scailo.SupplyOffersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 78: Scailo.SupplyOffersService.ViewWithPagination:input_type -> Scailo.SupplyOffersServicePaginationReq
-	37, // 79: Scailo.SupplyOffersService.ViewAmendments:input_type -> Scailo.Identifier
-	38, // 80: Scailo.SupplyOffersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	45, // 81: Scailo.SupplyOffersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	14, // 82: Scailo.SupplyOffersService.ViewProspectiveSupplyOfferItem:input_type -> Scailo.SupplyOfferItemProspectiveInfoRequest
-	39, // 83: Scailo.SupplyOffersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	39, // 84: Scailo.SupplyOffersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 85: Scailo.SupplyOffersService.SearchAll:input_type -> Scailo.SupplyOffersServiceSearchAllReq
-	17, // 86: Scailo.SupplyOffersService.Filter:input_type -> Scailo.SupplyOffersServiceFilterReq
-	46, // 87: Scailo.SupplyOffersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 88: Scailo.SupplyOffersService.Count:input_type -> Scailo.SupplyOffersServiceCountReq
-	18, // 89: Scailo.SupplyOffersService.AccruedValue:input_type -> Scailo.SupplyOffersServiceCountReq
-	17, // 90: Scailo.SupplyOffersService.DownloadAsCSV:input_type -> Scailo.SupplyOffersServiceFilterReq
-	47, // 91: Scailo.SupplyOffersService.Create:output_type -> Scailo.IdentifierResponse
-	47, // 92: Scailo.SupplyOffersService.Draft:output_type -> Scailo.IdentifierResponse
-	47, // 93: Scailo.SupplyOffersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 94: Scailo.SupplyOffersService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	47, // 95: Scailo.SupplyOffersService.Verify:output_type -> Scailo.IdentifierResponse
-	47, // 96: Scailo.SupplyOffersService.Approve:output_type -> Scailo.IdentifierResponse
-	47, // 97: Scailo.SupplyOffersService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	47, // 98: Scailo.SupplyOffersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 99: Scailo.SupplyOffersService.Halt:output_type -> Scailo.IdentifierResponse
-	47, // 100: Scailo.SupplyOffersService.Discard:output_type -> Scailo.IdentifierResponse
-	47, // 101: Scailo.SupplyOffersService.Restore:output_type -> Scailo.IdentifierResponse
-	47, // 102: Scailo.SupplyOffersService.Complete:output_type -> Scailo.IdentifierResponse
-	47, // 103: Scailo.SupplyOffersService.Repeat:output_type -> Scailo.IdentifierResponse
-	47, // 104: Scailo.SupplyOffersService.Reopen:output_type -> Scailo.IdentifierResponse
-	47, // 105: Scailo.SupplyOffersService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	47, // 106: Scailo.SupplyOffersService.SendEmail:output_type -> Scailo.IdentifierResponse
-	48, // 107: Scailo.SupplyOffersService.CreateMagicLink:output_type -> Scailo.MagicLink
-	47, // 108: Scailo.SupplyOffersService.Autofill:output_type -> Scailo.IdentifierResponse
-	47, // 109: Scailo.SupplyOffersService.Amend:output_type -> Scailo.IdentifierResponse
-	47, // 110: Scailo.SupplyOffersService.AddSupplyOfferItem:output_type -> Scailo.IdentifierResponse
-	47, // 111: Scailo.SupplyOffersService.ModifySupplyOfferItem:output_type -> Scailo.IdentifierResponse
-	47, // 112: Scailo.SupplyOffersService.ApproveSupplyOfferItem:output_type -> Scailo.IdentifierResponse
-	47, // 113: Scailo.SupplyOffersService.DeleteSupplyOfferItem:output_type -> Scailo.IdentifierResponse
-	47, // 114: Scailo.SupplyOffersService.ReorderSupplyOfferItems:output_type -> Scailo.IdentifierResponse
-	10, // 115: Scailo.SupplyOffersService.ViewSupplyOfferItemByID:output_type -> Scailo.SupplyOfferItem
-	49, // 116: Scailo.SupplyOffersService.ViewSupplyOfferItemPrice:output_type -> Scailo.PriceResponse
-	12, // 117: Scailo.SupplyOffersService.ViewApprovedSupplyOfferItems:output_type -> Scailo.SupplyOfferItemsList
-	12, // 118: Scailo.SupplyOffersService.ViewUnapprovedSupplyOfferItems:output_type -> Scailo.SupplyOfferItemsList
-	12, // 119: Scailo.SupplyOffersService.ViewSupplyOfferItemHistory:output_type -> Scailo.SupplyOfferItemsList
-	21, // 120: Scailo.SupplyOffersService.ViewPaginatedApprovedSupplyOfferItems:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
-	21, // 121: Scailo.SupplyOffersService.ViewPaginatedUnapprovedSupplyOfferItems:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
-	21, // 122: Scailo.SupplyOffersService.SearchItemsWithPagination:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
-	50, // 123: Scailo.SupplyOffersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	50, // 124: Scailo.SupplyOffersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	43, // 125: Scailo.SupplyOffersService.UploadSupplyOfferItems:output_type -> Scailo.IdentifiersList
-	7,  // 126: Scailo.SupplyOffersService.ViewByID:output_type -> Scailo.SupplyOffer
-	7,  // 127: Scailo.SupplyOffersService.ViewByUUID:output_type -> Scailo.SupplyOffer
-	7,  // 128: Scailo.SupplyOffersService.ViewByReferenceID:output_type -> Scailo.SupplyOffer
-	7,  // 129: Scailo.SupplyOffersService.ViewEssentialByID:output_type -> Scailo.SupplyOffer
-	7,  // 130: Scailo.SupplyOffersService.ViewEssentialByUUID:output_type -> Scailo.SupplyOffer
-	11, // 131: Scailo.SupplyOffersService.ViewFromIDs:output_type -> Scailo.SupplyOffersList
-	6,  // 132: Scailo.SupplyOffersService.ViewAncillaryParametersByUUID:output_type -> Scailo.SupplyOfferAncillaryParameters
-	11, // 133: Scailo.SupplyOffersService.ViewAll:output_type -> Scailo.SupplyOffersList
-	11, // 134: Scailo.SupplyOffersService.ViewAllForEntityUUID:output_type -> Scailo.SupplyOffersList
-	16, // 135: Scailo.SupplyOffersService.ViewWithPagination:output_type -> Scailo.SupplyOffersServicePaginationResponse
-	51, // 136: Scailo.SupplyOffersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	52, // 137: Scailo.SupplyOffersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	52, // 138: Scailo.SupplyOffersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	8,  // 139: Scailo.SupplyOffersService.ViewProspectiveSupplyOfferItem:output_type -> Scailo.SupplyOffersServiceItemCreateRequest
-	53, // 140: Scailo.SupplyOffersService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	50, // 141: Scailo.SupplyOffersService.DownloadByUUID:output_type -> Scailo.StandardFile
-	11, // 142: Scailo.SupplyOffersService.SearchAll:output_type -> Scailo.SupplyOffersList
-	11, // 143: Scailo.SupplyOffersService.Filter:output_type -> Scailo.SupplyOffersList
-	54, // 144: Scailo.SupplyOffersService.CountInStatus:output_type -> Scailo.CountResponse
-	54, // 145: Scailo.SupplyOffersService.Count:output_type -> Scailo.CountResponse
-	55, // 146: Scailo.SupplyOffersService.AccruedValue:output_type -> Scailo.SumResponse
-	50, // 147: Scailo.SupplyOffersService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	91, // [91:148] is the sub-list for method output_type
-	34, // [34:91] is the sub-list for method input_type
+	34, // 50: Scailo.SupplyOffersService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	35, // 51: Scailo.SupplyOffersService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	5,  // 52: Scailo.SupplyOffersService.Autofill:input_type -> Scailo.SupplyOffersServiceAutofillRequest
+	31, // 53: Scailo.SupplyOffersService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	8,  // 54: Scailo.SupplyOffersService.AddSupplyOfferItem:input_type -> Scailo.SupplyOffersServiceItemCreateRequest
+	9,  // 55: Scailo.SupplyOffersService.ModifySupplyOfferItem:input_type -> Scailo.SupplyOffersServiceItemUpdateRequest
+	36, // 56: Scailo.SupplyOffersService.ApproveSupplyOfferItem:input_type -> Scailo.IdentifierWithUserComment
+	36, // 57: Scailo.SupplyOffersService.DeleteSupplyOfferItem:input_type -> Scailo.IdentifierWithUserComment
+	37, // 58: Scailo.SupplyOffersService.ReorderSupplyOfferItems:input_type -> Scailo.ReorderItemsRequest
+	38, // 59: Scailo.SupplyOffersService.ViewSupplyOfferItemByID:input_type -> Scailo.Identifier
+	14, // 60: Scailo.SupplyOffersService.ViewSupplyOfferItemPrice:input_type -> Scailo.SupplyOfferItemProspectiveInfoRequest
+	39, // 61: Scailo.SupplyOffersService.ViewApprovedSupplyOfferItems:input_type -> Scailo.IdentifierWithSearchKey
+	39, // 62: Scailo.SupplyOffersService.ViewUnapprovedSupplyOfferItems:input_type -> Scailo.IdentifierWithSearchKey
+	13, // 63: Scailo.SupplyOffersService.ViewSupplyOfferItemHistory:input_type -> Scailo.SupplyOfferItemHistoryRequest
+	20, // 64: Scailo.SupplyOffersService.ViewPaginatedApprovedSupplyOfferItems:input_type -> Scailo.SupplyOfferItemsSearchRequest
+	20, // 65: Scailo.SupplyOffersService.ViewPaginatedUnapprovedSupplyOfferItems:input_type -> Scailo.SupplyOfferItemsSearchRequest
+	20, // 66: Scailo.SupplyOffersService.SearchItemsWithPagination:input_type -> Scailo.SupplyOfferItemsSearchRequest
+	40, // 67: Scailo.SupplyOffersService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	41, // 68: Scailo.SupplyOffersService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	42, // 69: Scailo.SupplyOffersService.UploadSupplyOfferItems:input_type -> Scailo.IdentifierUUIDWithFile
+	38, // 70: Scailo.SupplyOffersService.ViewByID:input_type -> Scailo.Identifier
+	40, // 71: Scailo.SupplyOffersService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 72: Scailo.SupplyOffersService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	38, // 73: Scailo.SupplyOffersService.ViewEssentialByID:input_type -> Scailo.Identifier
+	40, // 74: Scailo.SupplyOffersService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	44, // 75: Scailo.SupplyOffersService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	40, // 76: Scailo.SupplyOffersService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	45, // 77: Scailo.SupplyOffersService.ViewAll:input_type -> Scailo.ActiveStatus
+	40, // 78: Scailo.SupplyOffersService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 79: Scailo.SupplyOffersService.ViewWithPagination:input_type -> Scailo.SupplyOffersServicePaginationReq
+	38, // 80: Scailo.SupplyOffersService.ViewAmendments:input_type -> Scailo.Identifier
+	39, // 81: Scailo.SupplyOffersService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	46, // 82: Scailo.SupplyOffersService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	14, // 83: Scailo.SupplyOffersService.ViewProspectiveSupplyOfferItem:input_type -> Scailo.SupplyOfferItemProspectiveInfoRequest
+	40, // 84: Scailo.SupplyOffersService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	40, // 85: Scailo.SupplyOffersService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	19, // 86: Scailo.SupplyOffersService.SearchAll:input_type -> Scailo.SupplyOffersServiceSearchAllReq
+	17, // 87: Scailo.SupplyOffersService.Filter:input_type -> Scailo.SupplyOffersServiceFilterReq
+	47, // 88: Scailo.SupplyOffersService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 89: Scailo.SupplyOffersService.Count:input_type -> Scailo.SupplyOffersServiceCountReq
+	18, // 90: Scailo.SupplyOffersService.AccruedValue:input_type -> Scailo.SupplyOffersServiceCountReq
+	17, // 91: Scailo.SupplyOffersService.DownloadAsCSV:input_type -> Scailo.SupplyOffersServiceFilterReq
+	48, // 92: Scailo.SupplyOffersService.Create:output_type -> Scailo.IdentifierResponse
+	48, // 93: Scailo.SupplyOffersService.Draft:output_type -> Scailo.IdentifierResponse
+	48, // 94: Scailo.SupplyOffersService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 95: Scailo.SupplyOffersService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	48, // 96: Scailo.SupplyOffersService.Verify:output_type -> Scailo.IdentifierResponse
+	48, // 97: Scailo.SupplyOffersService.Approve:output_type -> Scailo.IdentifierResponse
+	48, // 98: Scailo.SupplyOffersService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	48, // 99: Scailo.SupplyOffersService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 100: Scailo.SupplyOffersService.Halt:output_type -> Scailo.IdentifierResponse
+	48, // 101: Scailo.SupplyOffersService.Discard:output_type -> Scailo.IdentifierResponse
+	48, // 102: Scailo.SupplyOffersService.Restore:output_type -> Scailo.IdentifierResponse
+	48, // 103: Scailo.SupplyOffersService.Complete:output_type -> Scailo.IdentifierResponse
+	48, // 104: Scailo.SupplyOffersService.Repeat:output_type -> Scailo.IdentifierResponse
+	48, // 105: Scailo.SupplyOffersService.Reopen:output_type -> Scailo.IdentifierResponse
+	48, // 106: Scailo.SupplyOffersService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	48, // 107: Scailo.SupplyOffersService.SendEmail:output_type -> Scailo.IdentifierResponse
+	48, // 108: Scailo.SupplyOffersService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	49, // 109: Scailo.SupplyOffersService.CreateMagicLink:output_type -> Scailo.MagicLink
+	48, // 110: Scailo.SupplyOffersService.Autofill:output_type -> Scailo.IdentifierResponse
+	48, // 111: Scailo.SupplyOffersService.Amend:output_type -> Scailo.IdentifierResponse
+	48, // 112: Scailo.SupplyOffersService.AddSupplyOfferItem:output_type -> Scailo.IdentifierResponse
+	48, // 113: Scailo.SupplyOffersService.ModifySupplyOfferItem:output_type -> Scailo.IdentifierResponse
+	48, // 114: Scailo.SupplyOffersService.ApproveSupplyOfferItem:output_type -> Scailo.IdentifierResponse
+	48, // 115: Scailo.SupplyOffersService.DeleteSupplyOfferItem:output_type -> Scailo.IdentifierResponse
+	48, // 116: Scailo.SupplyOffersService.ReorderSupplyOfferItems:output_type -> Scailo.IdentifierResponse
+	10, // 117: Scailo.SupplyOffersService.ViewSupplyOfferItemByID:output_type -> Scailo.SupplyOfferItem
+	50, // 118: Scailo.SupplyOffersService.ViewSupplyOfferItemPrice:output_type -> Scailo.PriceResponse
+	12, // 119: Scailo.SupplyOffersService.ViewApprovedSupplyOfferItems:output_type -> Scailo.SupplyOfferItemsList
+	12, // 120: Scailo.SupplyOffersService.ViewUnapprovedSupplyOfferItems:output_type -> Scailo.SupplyOfferItemsList
+	12, // 121: Scailo.SupplyOffersService.ViewSupplyOfferItemHistory:output_type -> Scailo.SupplyOfferItemsList
+	21, // 122: Scailo.SupplyOffersService.ViewPaginatedApprovedSupplyOfferItems:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
+	21, // 123: Scailo.SupplyOffersService.ViewPaginatedUnapprovedSupplyOfferItems:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
+	21, // 124: Scailo.SupplyOffersService.SearchItemsWithPagination:output_type -> Scailo.SupplyOffersServicePaginatedItemsResponse
+	51, // 125: Scailo.SupplyOffersService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	51, // 126: Scailo.SupplyOffersService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	44, // 127: Scailo.SupplyOffersService.UploadSupplyOfferItems:output_type -> Scailo.IdentifiersList
+	7,  // 128: Scailo.SupplyOffersService.ViewByID:output_type -> Scailo.SupplyOffer
+	7,  // 129: Scailo.SupplyOffersService.ViewByUUID:output_type -> Scailo.SupplyOffer
+	7,  // 130: Scailo.SupplyOffersService.ViewByReferenceID:output_type -> Scailo.SupplyOffer
+	7,  // 131: Scailo.SupplyOffersService.ViewEssentialByID:output_type -> Scailo.SupplyOffer
+	7,  // 132: Scailo.SupplyOffersService.ViewEssentialByUUID:output_type -> Scailo.SupplyOffer
+	11, // 133: Scailo.SupplyOffersService.ViewFromIDs:output_type -> Scailo.SupplyOffersList
+	6,  // 134: Scailo.SupplyOffersService.ViewAncillaryParametersByUUID:output_type -> Scailo.SupplyOfferAncillaryParameters
+	11, // 135: Scailo.SupplyOffersService.ViewAll:output_type -> Scailo.SupplyOffersList
+	11, // 136: Scailo.SupplyOffersService.ViewAllForEntityUUID:output_type -> Scailo.SupplyOffersList
+	16, // 137: Scailo.SupplyOffersService.ViewWithPagination:output_type -> Scailo.SupplyOffersServicePaginationResponse
+	52, // 138: Scailo.SupplyOffersService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	53, // 139: Scailo.SupplyOffersService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	53, // 140: Scailo.SupplyOffersService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	8,  // 141: Scailo.SupplyOffersService.ViewProspectiveSupplyOfferItem:output_type -> Scailo.SupplyOffersServiceItemCreateRequest
+	54, // 142: Scailo.SupplyOffersService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	51, // 143: Scailo.SupplyOffersService.DownloadByUUID:output_type -> Scailo.StandardFile
+	11, // 144: Scailo.SupplyOffersService.SearchAll:output_type -> Scailo.SupplyOffersList
+	11, // 145: Scailo.SupplyOffersService.Filter:output_type -> Scailo.SupplyOffersList
+	55, // 146: Scailo.SupplyOffersService.CountInStatus:output_type -> Scailo.CountResponse
+	55, // 147: Scailo.SupplyOffersService.Count:output_type -> Scailo.CountResponse
+	56, // 148: Scailo.SupplyOffersService.AccruedValue:output_type -> Scailo.SumResponse
+	51, // 149: Scailo.SupplyOffersService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	92, // [92:150] is the sub-list for method output_type
+	34, // [34:92] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name
@@ -3932,6 +3936,7 @@ func file_supply_offers_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

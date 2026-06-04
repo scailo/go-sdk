@@ -2901,7 +2901,7 @@ var File_purchases_indents_scailo_proto protoreflect.FileDescriptor
 
 const file_purchases_indents_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1epurchases_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xd4\x02\n" +
+	"\x1epurchases_indents.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xd4\x02\n" +
 	"$PurchasesIndentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3130,7 +3130,7 @@ const file_purchases_indents_scailo_proto_rawDesc = "" +
 	"\x1bPURCHASE_INDENT_ITEM_STATUS\x12/\n" +
 	"+PURCHASE_INDENT_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12(\n" +
 	"$PURCHASE_INDENT_ITEM_STATUS_APPROVED\x10\x01\x12*\n" +
-	"&PURCHASE_INDENT_ITEM_STATUS_UNAPPROVED\x10\x022\x8b'\n" +
+	"&PURCHASE_INDENT_ITEM_STATUS_UNAPPROVED\x10\x022\xde'\n" +
 	"\x17PurchasesIndentsService\x12R\n" +
 	"\x06Create\x12,.Scailo.PurchasesIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
 	"\x05Draft\x12,.Scailo.PurchasesIndentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12W\n" +
@@ -3148,7 +3148,8 @@ const file_purchases_indents_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12V\n" +
 	"\bAutofill\x12..Scailo.PurchasesIndentsServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12w\n" +
@@ -3248,25 +3249,26 @@ var file_purchases_indents_scailo_proto_goTypes = []any{
 	(*IdentifierUUIDWithUserComment)(nil),                          // 35: Scailo.IdentifierUUIDWithUserComment
 	(*RepeatWithDeliveryDate)(nil),                                 // 36: Scailo.RepeatWithDeliveryDate
 	(*IdentifierWithEmailAttributes)(nil),                          // 37: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),      // 38: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                         // 39: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                              // 40: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                    // 41: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                             // 42: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                // 43: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                  // 44: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                 // 45: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                        // 46: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                        // 47: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                           // 48: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                         // 49: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                // 50: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                     // 51: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                              // 52: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                        // 53: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                           // 54: Scailo.StandardFile
-	(*FamiliesList)(nil),                                           // 55: Scailo.FamiliesList
-	(*CountResponse)(nil),                                          // 56: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                               // 38: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),      // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                         // 40: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                              // 41: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                    // 42: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                             // 43: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                // 44: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                  // 45: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                 // 46: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                        // 47: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                        // 48: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                           // 49: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                         // 50: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                // 51: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                     // 52: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                              // 53: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                        // 54: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                           // 55: Scailo.StandardFile
+	(*FamiliesList)(nil),                                           // 56: Scailo.FamiliesList
+	(*CountResponse)(nil),                                          // 57: Scailo.CountResponse
 }
 var file_purchases_indents_scailo_proto_depIdxs = []int32{
 	26, // 0: Scailo.PurchasesIndentsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3321,106 +3323,108 @@ var file_purchases_indents_scailo_proto_depIdxs = []int32{
 	35, // 49: Scailo.PurchasesIndentsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	35, // 50: Scailo.PurchasesIndentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	37, // 51: Scailo.PurchasesIndentsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	38, // 52: Scailo.PurchasesIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	5,  // 53: Scailo.PurchasesIndentsService.Autofill:input_type -> Scailo.PurchasesIndentsServiceAutofillRequest
-	39, // 54: Scailo.PurchasesIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	9,  // 55: Scailo.PurchasesIndentsService.AddMultiplePurchaseIndentItems:input_type -> Scailo.PurchasesIndentsServiceMultipleItemsCreateRequest
-	7,  // 56: Scailo.PurchasesIndentsService.AddPurchaseIndentItem:input_type -> Scailo.PurchasesIndentsServiceItemCreateRequest
-	10, // 57: Scailo.PurchasesIndentsService.ModifyPurchaseIndentItem:input_type -> Scailo.PurchasesIndentsServiceItemUpdateRequest
-	11, // 58: Scailo.PurchasesIndentsService.UpdatePurchaseIndentItemSpecifications:input_type -> Scailo.PurchasesIndentsServiceItemSpecificationsUpdateRequest
-	40, // 59: Scailo.PurchasesIndentsService.ApprovePurchaseIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	40, // 60: Scailo.PurchasesIndentsService.DeletePurchaseIndentItem:input_type -> Scailo.IdentifierWithUserComment
-	41, // 61: Scailo.PurchasesIndentsService.ReorderPurchaseIndentItems:input_type -> Scailo.ReorderItemsRequest
-	42, // 62: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemByID:input_type -> Scailo.Identifier
-	43, // 63: Scailo.PurchasesIndentsService.ViewApprovedPurchaseIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	43, // 64: Scailo.PurchasesIndentsService.ViewUnapprovedPurchaseIndentItems:input_type -> Scailo.IdentifierWithSearchKey
-	15, // 65: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemHistory:input_type -> Scailo.PurchaseIndentItemHistoryRequest
-	22, // 66: Scailo.PurchasesIndentsService.ViewPaginatedApprovedPurchaseIndentItems:input_type -> Scailo.PurchaseIndentItemsSearchRequest
-	22, // 67: Scailo.PurchasesIndentsService.ViewPaginatedUnapprovedPurchaseIndentItems:input_type -> Scailo.PurchaseIndentItemsSearchRequest
-	22, // 68: Scailo.PurchasesIndentsService.SearchItemsWithPagination:input_type -> Scailo.PurchaseIndentItemsSearchRequest
-	39, // 69: Scailo.PurchasesIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	44, // 70: Scailo.PurchasesIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	45, // 71: Scailo.PurchasesIndentsService.UploadPurchaseIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
-	42, // 72: Scailo.PurchasesIndentsService.ViewByID:input_type -> Scailo.Identifier
-	39, // 73: Scailo.PurchasesIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	46, // 74: Scailo.PurchasesIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	42, // 75: Scailo.PurchasesIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	39, // 76: Scailo.PurchasesIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	47, // 77: Scailo.PurchasesIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	48, // 78: Scailo.PurchasesIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	39, // 79: Scailo.PurchasesIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	17, // 80: Scailo.PurchasesIndentsService.ViewWithPagination:input_type -> Scailo.PurchasesIndentsServicePaginationReq
-	42, // 81: Scailo.PurchasesIndentsService.ViewAssociatedPurchaseOrderIDs:input_type -> Scailo.Identifier
-	43, // 82: Scailo.PurchasesIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	49, // 83: Scailo.PurchasesIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	16, // 84: Scailo.PurchasesIndentsService.ViewProspectivePurchaseIndentItem:input_type -> Scailo.PurchaseIndentItemProspectiveInfoRequest
-	39, // 85: Scailo.PurchasesIndentsService.ViewOrderedStatistics:input_type -> Scailo.IdentifierUUID
-	39, // 86: Scailo.PurchasesIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	39, // 87: Scailo.PurchasesIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	21, // 88: Scailo.PurchasesIndentsService.SearchAll:input_type -> Scailo.PurchasesIndentsServiceSearchAllReq
-	19, // 89: Scailo.PurchasesIndentsService.Filter:input_type -> Scailo.PurchasesIndentsServiceFilterReq
-	50, // 90: Scailo.PurchasesIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	20, // 91: Scailo.PurchasesIndentsService.Count:input_type -> Scailo.PurchasesIndentsServiceCountReq
-	19, // 92: Scailo.PurchasesIndentsService.DownloadAsCSV:input_type -> Scailo.PurchasesIndentsServiceFilterReq
-	51, // 93: Scailo.PurchasesIndentsService.Create:output_type -> Scailo.IdentifierResponse
-	51, // 94: Scailo.PurchasesIndentsService.Draft:output_type -> Scailo.IdentifierResponse
-	51, // 95: Scailo.PurchasesIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	51, // 96: Scailo.PurchasesIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	51, // 97: Scailo.PurchasesIndentsService.Verify:output_type -> Scailo.IdentifierResponse
-	51, // 98: Scailo.PurchasesIndentsService.Approve:output_type -> Scailo.IdentifierResponse
-	51, // 99: Scailo.PurchasesIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	51, // 100: Scailo.PurchasesIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	51, // 101: Scailo.PurchasesIndentsService.Halt:output_type -> Scailo.IdentifierResponse
-	51, // 102: Scailo.PurchasesIndentsService.Discard:output_type -> Scailo.IdentifierResponse
-	51, // 103: Scailo.PurchasesIndentsService.Restore:output_type -> Scailo.IdentifierResponse
-	51, // 104: Scailo.PurchasesIndentsService.Complete:output_type -> Scailo.IdentifierResponse
-	51, // 105: Scailo.PurchasesIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	51, // 106: Scailo.PurchasesIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
-	51, // 107: Scailo.PurchasesIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	51, // 108: Scailo.PurchasesIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	52, // 109: Scailo.PurchasesIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	51, // 110: Scailo.PurchasesIndentsService.Autofill:output_type -> Scailo.IdentifierResponse
-	53, // 111: Scailo.PurchasesIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	51, // 112: Scailo.PurchasesIndentsService.AddMultiplePurchaseIndentItems:output_type -> Scailo.IdentifierResponse
-	51, // 113: Scailo.PurchasesIndentsService.AddPurchaseIndentItem:output_type -> Scailo.IdentifierResponse
-	51, // 114: Scailo.PurchasesIndentsService.ModifyPurchaseIndentItem:output_type -> Scailo.IdentifierResponse
-	51, // 115: Scailo.PurchasesIndentsService.UpdatePurchaseIndentItemSpecifications:output_type -> Scailo.IdentifierResponse
-	51, // 116: Scailo.PurchasesIndentsService.ApprovePurchaseIndentItem:output_type -> Scailo.IdentifierResponse
-	51, // 117: Scailo.PurchasesIndentsService.DeletePurchaseIndentItem:output_type -> Scailo.IdentifierResponse
-	51, // 118: Scailo.PurchasesIndentsService.ReorderPurchaseIndentItems:output_type -> Scailo.IdentifierResponse
-	12, // 119: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemByID:output_type -> Scailo.PurchaseIndentItem
-	14, // 120: Scailo.PurchasesIndentsService.ViewApprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsItemsList
-	14, // 121: Scailo.PurchasesIndentsService.ViewUnapprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsItemsList
-	14, // 122: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemHistory:output_type -> Scailo.PurchasesIndentsItemsList
-	23, // 123: Scailo.PurchasesIndentsService.ViewPaginatedApprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
-	23, // 124: Scailo.PurchasesIndentsService.ViewPaginatedUnapprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
-	23, // 125: Scailo.PurchasesIndentsService.SearchItemsWithPagination:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
-	54, // 126: Scailo.PurchasesIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	54, // 127: Scailo.PurchasesIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	47, // 128: Scailo.PurchasesIndentsService.UploadPurchaseIndentItems:output_type -> Scailo.IdentifiersList
-	6,  // 129: Scailo.PurchasesIndentsService.ViewByID:output_type -> Scailo.PurchaseIndent
-	6,  // 130: Scailo.PurchasesIndentsService.ViewByUUID:output_type -> Scailo.PurchaseIndent
-	6,  // 131: Scailo.PurchasesIndentsService.ViewByReferenceID:output_type -> Scailo.PurchaseIndent
-	6,  // 132: Scailo.PurchasesIndentsService.ViewEssentialByID:output_type -> Scailo.PurchaseIndent
-	6,  // 133: Scailo.PurchasesIndentsService.ViewEssentialByUUID:output_type -> Scailo.PurchaseIndent
-	13, // 134: Scailo.PurchasesIndentsService.ViewFromIDs:output_type -> Scailo.PurchasesIndentsList
-	13, // 135: Scailo.PurchasesIndentsService.ViewAll:output_type -> Scailo.PurchasesIndentsList
-	13, // 136: Scailo.PurchasesIndentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesIndentsList
-	18, // 137: Scailo.PurchasesIndentsService.ViewWithPagination:output_type -> Scailo.PurchasesIndentsServicePaginationResponse
-	47, // 138: Scailo.PurchasesIndentsService.ViewAssociatedPurchaseOrderIDs:output_type -> Scailo.IdentifiersList
-	55, // 139: Scailo.PurchasesIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	55, // 140: Scailo.PurchasesIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	7,  // 141: Scailo.PurchasesIndentsService.ViewProspectivePurchaseIndentItem:output_type -> Scailo.PurchasesIndentsServiceItemCreateRequest
-	25, // 142: Scailo.PurchasesIndentsService.ViewOrderedStatistics:output_type -> Scailo.PurchaseIndentOrderedStatisticsList
-	53, // 143: Scailo.PurchasesIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	54, // 144: Scailo.PurchasesIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	13, // 145: Scailo.PurchasesIndentsService.SearchAll:output_type -> Scailo.PurchasesIndentsList
-	13, // 146: Scailo.PurchasesIndentsService.Filter:output_type -> Scailo.PurchasesIndentsList
-	56, // 147: Scailo.PurchasesIndentsService.CountInStatus:output_type -> Scailo.CountResponse
-	56, // 148: Scailo.PurchasesIndentsService.Count:output_type -> Scailo.CountResponse
-	54, // 149: Scailo.PurchasesIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	93, // [93:150] is the sub-list for method output_type
-	36, // [36:93] is the sub-list for method input_type
+	38, // 52: Scailo.PurchasesIndentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	39, // 53: Scailo.PurchasesIndentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	5,  // 54: Scailo.PurchasesIndentsService.Autofill:input_type -> Scailo.PurchasesIndentsServiceAutofillRequest
+	40, // 55: Scailo.PurchasesIndentsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	9,  // 56: Scailo.PurchasesIndentsService.AddMultiplePurchaseIndentItems:input_type -> Scailo.PurchasesIndentsServiceMultipleItemsCreateRequest
+	7,  // 57: Scailo.PurchasesIndentsService.AddPurchaseIndentItem:input_type -> Scailo.PurchasesIndentsServiceItemCreateRequest
+	10, // 58: Scailo.PurchasesIndentsService.ModifyPurchaseIndentItem:input_type -> Scailo.PurchasesIndentsServiceItemUpdateRequest
+	11, // 59: Scailo.PurchasesIndentsService.UpdatePurchaseIndentItemSpecifications:input_type -> Scailo.PurchasesIndentsServiceItemSpecificationsUpdateRequest
+	41, // 60: Scailo.PurchasesIndentsService.ApprovePurchaseIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	41, // 61: Scailo.PurchasesIndentsService.DeletePurchaseIndentItem:input_type -> Scailo.IdentifierWithUserComment
+	42, // 62: Scailo.PurchasesIndentsService.ReorderPurchaseIndentItems:input_type -> Scailo.ReorderItemsRequest
+	43, // 63: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemByID:input_type -> Scailo.Identifier
+	44, // 64: Scailo.PurchasesIndentsService.ViewApprovedPurchaseIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	44, // 65: Scailo.PurchasesIndentsService.ViewUnapprovedPurchaseIndentItems:input_type -> Scailo.IdentifierWithSearchKey
+	15, // 66: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemHistory:input_type -> Scailo.PurchaseIndentItemHistoryRequest
+	22, // 67: Scailo.PurchasesIndentsService.ViewPaginatedApprovedPurchaseIndentItems:input_type -> Scailo.PurchaseIndentItemsSearchRequest
+	22, // 68: Scailo.PurchasesIndentsService.ViewPaginatedUnapprovedPurchaseIndentItems:input_type -> Scailo.PurchaseIndentItemsSearchRequest
+	22, // 69: Scailo.PurchasesIndentsService.SearchItemsWithPagination:input_type -> Scailo.PurchaseIndentItemsSearchRequest
+	40, // 70: Scailo.PurchasesIndentsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	45, // 71: Scailo.PurchasesIndentsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	46, // 72: Scailo.PurchasesIndentsService.UploadPurchaseIndentItems:input_type -> Scailo.IdentifierUUIDWithFile
+	43, // 73: Scailo.PurchasesIndentsService.ViewByID:input_type -> Scailo.Identifier
+	40, // 74: Scailo.PurchasesIndentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	47, // 75: Scailo.PurchasesIndentsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	43, // 76: Scailo.PurchasesIndentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	40, // 77: Scailo.PurchasesIndentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	48, // 78: Scailo.PurchasesIndentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	49, // 79: Scailo.PurchasesIndentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	40, // 80: Scailo.PurchasesIndentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	17, // 81: Scailo.PurchasesIndentsService.ViewWithPagination:input_type -> Scailo.PurchasesIndentsServicePaginationReq
+	43, // 82: Scailo.PurchasesIndentsService.ViewAssociatedPurchaseOrderIDs:input_type -> Scailo.Identifier
+	44, // 83: Scailo.PurchasesIndentsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	50, // 84: Scailo.PurchasesIndentsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	16, // 85: Scailo.PurchasesIndentsService.ViewProspectivePurchaseIndentItem:input_type -> Scailo.PurchaseIndentItemProspectiveInfoRequest
+	40, // 86: Scailo.PurchasesIndentsService.ViewOrderedStatistics:input_type -> Scailo.IdentifierUUID
+	40, // 87: Scailo.PurchasesIndentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	40, // 88: Scailo.PurchasesIndentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	21, // 89: Scailo.PurchasesIndentsService.SearchAll:input_type -> Scailo.PurchasesIndentsServiceSearchAllReq
+	19, // 90: Scailo.PurchasesIndentsService.Filter:input_type -> Scailo.PurchasesIndentsServiceFilterReq
+	51, // 91: Scailo.PurchasesIndentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	20, // 92: Scailo.PurchasesIndentsService.Count:input_type -> Scailo.PurchasesIndentsServiceCountReq
+	19, // 93: Scailo.PurchasesIndentsService.DownloadAsCSV:input_type -> Scailo.PurchasesIndentsServiceFilterReq
+	52, // 94: Scailo.PurchasesIndentsService.Create:output_type -> Scailo.IdentifierResponse
+	52, // 95: Scailo.PurchasesIndentsService.Draft:output_type -> Scailo.IdentifierResponse
+	52, // 96: Scailo.PurchasesIndentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	52, // 97: Scailo.PurchasesIndentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	52, // 98: Scailo.PurchasesIndentsService.Verify:output_type -> Scailo.IdentifierResponse
+	52, // 99: Scailo.PurchasesIndentsService.Approve:output_type -> Scailo.IdentifierResponse
+	52, // 100: Scailo.PurchasesIndentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	52, // 101: Scailo.PurchasesIndentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	52, // 102: Scailo.PurchasesIndentsService.Halt:output_type -> Scailo.IdentifierResponse
+	52, // 103: Scailo.PurchasesIndentsService.Discard:output_type -> Scailo.IdentifierResponse
+	52, // 104: Scailo.PurchasesIndentsService.Restore:output_type -> Scailo.IdentifierResponse
+	52, // 105: Scailo.PurchasesIndentsService.Complete:output_type -> Scailo.IdentifierResponse
+	52, // 106: Scailo.PurchasesIndentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	52, // 107: Scailo.PurchasesIndentsService.Reopen:output_type -> Scailo.IdentifierResponse
+	52, // 108: Scailo.PurchasesIndentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	52, // 109: Scailo.PurchasesIndentsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	52, // 110: Scailo.PurchasesIndentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	53, // 111: Scailo.PurchasesIndentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	52, // 112: Scailo.PurchasesIndentsService.Autofill:output_type -> Scailo.IdentifierResponse
+	54, // 113: Scailo.PurchasesIndentsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	52, // 114: Scailo.PurchasesIndentsService.AddMultiplePurchaseIndentItems:output_type -> Scailo.IdentifierResponse
+	52, // 115: Scailo.PurchasesIndentsService.AddPurchaseIndentItem:output_type -> Scailo.IdentifierResponse
+	52, // 116: Scailo.PurchasesIndentsService.ModifyPurchaseIndentItem:output_type -> Scailo.IdentifierResponse
+	52, // 117: Scailo.PurchasesIndentsService.UpdatePurchaseIndentItemSpecifications:output_type -> Scailo.IdentifierResponse
+	52, // 118: Scailo.PurchasesIndentsService.ApprovePurchaseIndentItem:output_type -> Scailo.IdentifierResponse
+	52, // 119: Scailo.PurchasesIndentsService.DeletePurchaseIndentItem:output_type -> Scailo.IdentifierResponse
+	52, // 120: Scailo.PurchasesIndentsService.ReorderPurchaseIndentItems:output_type -> Scailo.IdentifierResponse
+	12, // 121: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemByID:output_type -> Scailo.PurchaseIndentItem
+	14, // 122: Scailo.PurchasesIndentsService.ViewApprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsItemsList
+	14, // 123: Scailo.PurchasesIndentsService.ViewUnapprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsItemsList
+	14, // 124: Scailo.PurchasesIndentsService.ViewPurchaseIndentItemHistory:output_type -> Scailo.PurchasesIndentsItemsList
+	23, // 125: Scailo.PurchasesIndentsService.ViewPaginatedApprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
+	23, // 126: Scailo.PurchasesIndentsService.ViewPaginatedUnapprovedPurchaseIndentItems:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
+	23, // 127: Scailo.PurchasesIndentsService.SearchItemsWithPagination:output_type -> Scailo.PurchasesIndentsServicePaginatedItemsResponse
+	55, // 128: Scailo.PurchasesIndentsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	55, // 129: Scailo.PurchasesIndentsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	48, // 130: Scailo.PurchasesIndentsService.UploadPurchaseIndentItems:output_type -> Scailo.IdentifiersList
+	6,  // 131: Scailo.PurchasesIndentsService.ViewByID:output_type -> Scailo.PurchaseIndent
+	6,  // 132: Scailo.PurchasesIndentsService.ViewByUUID:output_type -> Scailo.PurchaseIndent
+	6,  // 133: Scailo.PurchasesIndentsService.ViewByReferenceID:output_type -> Scailo.PurchaseIndent
+	6,  // 134: Scailo.PurchasesIndentsService.ViewEssentialByID:output_type -> Scailo.PurchaseIndent
+	6,  // 135: Scailo.PurchasesIndentsService.ViewEssentialByUUID:output_type -> Scailo.PurchaseIndent
+	13, // 136: Scailo.PurchasesIndentsService.ViewFromIDs:output_type -> Scailo.PurchasesIndentsList
+	13, // 137: Scailo.PurchasesIndentsService.ViewAll:output_type -> Scailo.PurchasesIndentsList
+	13, // 138: Scailo.PurchasesIndentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesIndentsList
+	18, // 139: Scailo.PurchasesIndentsService.ViewWithPagination:output_type -> Scailo.PurchasesIndentsServicePaginationResponse
+	48, // 140: Scailo.PurchasesIndentsService.ViewAssociatedPurchaseOrderIDs:output_type -> Scailo.IdentifiersList
+	56, // 141: Scailo.PurchasesIndentsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	56, // 142: Scailo.PurchasesIndentsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	7,  // 143: Scailo.PurchasesIndentsService.ViewProspectivePurchaseIndentItem:output_type -> Scailo.PurchasesIndentsServiceItemCreateRequest
+	25, // 144: Scailo.PurchasesIndentsService.ViewOrderedStatistics:output_type -> Scailo.PurchaseIndentOrderedStatisticsList
+	54, // 145: Scailo.PurchasesIndentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	55, // 146: Scailo.PurchasesIndentsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	13, // 147: Scailo.PurchasesIndentsService.SearchAll:output_type -> Scailo.PurchasesIndentsList
+	13, // 148: Scailo.PurchasesIndentsService.Filter:output_type -> Scailo.PurchasesIndentsList
+	57, // 149: Scailo.PurchasesIndentsService.CountInStatus:output_type -> Scailo.CountResponse
+	57, // 150: Scailo.PurchasesIndentsService.Count:output_type -> Scailo.CountResponse
+	55, // 151: Scailo.PurchasesIndentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	94, // [94:152] is the sub-list for method output_type
+	36, // [36:94] is the sub-list for method input_type
 	36, // [36:36] is the sub-list for extension type_name
 	36, // [36:36] is the sub-list for extension extendee
 	0,  // [0:36] is the sub-list for field type_name
@@ -3435,6 +3439,7 @@ func file_purchases_indents_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -34,6 +34,7 @@ const (
 	SalariesService_Reopen_FullMethodName                                 = "/Scailo.SalariesService/Reopen"
 	SalariesService_CommentAdd_FullMethodName                             = "/Scailo.SalariesService/CommentAdd"
 	SalariesService_SendEmail_FullMethodName                              = "/Scailo.SalariesService/SendEmail"
+	SalariesService_AttachVaultFolder_FullMethodName                      = "/Scailo.SalariesService/AttachVaultFolder"
 	SalariesService_Autofill_FullMethodName                               = "/Scailo.SalariesService/Autofill"
 	SalariesService_AddSalaryAdditionItem_FullMethodName                  = "/Scailo.SalariesService/AddSalaryAdditionItem"
 	SalariesService_ModifySalaryAdditionItem_FullMethodName               = "/Scailo.SalariesService/ModifySalaryAdditionItem"
@@ -181,6 +182,17 @@ type SalariesServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Autofill the salary
 	Autofill(ctx context.Context, in *SalariesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an addition item to a salary
@@ -434,6 +446,16 @@ func (c *salariesServiceClient) SendEmail(ctx context.Context, in *IdentifierWit
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, SalariesService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *salariesServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, SalariesService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

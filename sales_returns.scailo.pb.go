@@ -2904,7 +2904,7 @@ var File_sales_returns_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_returns_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1asales_returns.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\"\x97\x03\n" +
+	"\x1asales_returns.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x97\x03\n" +
 	" SalesReturnsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3147,7 +3147,7 @@ const file_sales_returns_scailo_proto_rawDesc = "" +
 	"\x1bSALES_RETURN_BILLING_STATUS\x12/\n" +
 	"+SALES_RETURN_BILLING_STATUS_ANY_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"SALES_RETURN_BILLING_STATUS_BILLED\x10\x01\x12(\n" +
-	"$SALES_RETURN_BILLING_STATUS_UNBILLED\x10\x022\x80'\n" +
+	"$SALES_RETURN_BILLING_STATUS_UNBILLED\x10\x022\xd3'\n" +
 	"\x13SalesReturnsService\x12N\n" +
 	"\x06Create\x12(.Scailo.SalesReturnsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
 	"\x05Draft\x12(.Scailo.SalesReturnsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -3165,7 +3165,8 @@ const file_sales_returns_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12^\n" +
 	"\x12AddSalesReturnItem\x12,.Scailo.SalesReturnsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12a\n" +
@@ -3264,28 +3265,29 @@ var file_sales_returns_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                             // 32: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                           // 33: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                           // 34: Scailo.IdentifierWithEmailAttributes
-	(*IdentifierUUID)(nil),                                          // 35: Scailo.IdentifierUUID
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),       // 36: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                               // 37: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                     // 38: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                              // 39: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                         // 40: Scailo.SimpleSearchReq
-	(*IdentifierWithSearchKey)(nil),                                 // 41: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                   // 42: Scailo.Empty
-	(*IdentifiersList)(nil),                                         // 43: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                            // 44: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                          // 45: Scailo.FilterFamiliesReqForIdentifier
-	(*SearchReturnableInventoryForIdentifierUUID)(nil),              // 46: Scailo.SearchReturnableInventoryForIdentifierUUID
-	(*FilterReturnableInventoryForIdentifierUUID)(nil),              // 47: Scailo.FilterReturnableInventoryForIdentifierUUID
-	(*CountInSLCStatusRequest)(nil),                                 // 48: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                      // 49: Scailo.IdentifierResponse
-	(*BooleanResponse)(nil),                                         // 50: Scailo.BooleanResponse
-	(*MagicLink)(nil),                                               // 51: Scailo.MagicLink
-	(*StandardFile)(nil),                                            // 52: Scailo.StandardFile
-	(*FamiliesList)(nil),                                            // 53: Scailo.FamiliesList
-	(*GenericInventoryList)(nil),                                    // 54: Scailo.GenericInventoryList
-	(*DualQuantitiesResponse)(nil),                                  // 55: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                           // 56: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                                // 35: Scailo.VaultFolderAttachRequest
+	(*IdentifierUUID)(nil),                                          // 36: Scailo.IdentifierUUID
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),       // 37: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                               // 38: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                     // 39: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                              // 40: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                         // 41: Scailo.SimpleSearchReq
+	(*IdentifierWithSearchKey)(nil),                                 // 42: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                   // 43: Scailo.Empty
+	(*IdentifiersList)(nil),                                         // 44: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                            // 45: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                          // 46: Scailo.FilterFamiliesReqForIdentifier
+	(*SearchReturnableInventoryForIdentifierUUID)(nil),              // 47: Scailo.SearchReturnableInventoryForIdentifierUUID
+	(*FilterReturnableInventoryForIdentifierUUID)(nil),              // 48: Scailo.FilterReturnableInventoryForIdentifierUUID
+	(*CountInSLCStatusRequest)(nil),                                 // 49: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                      // 50: Scailo.IdentifierResponse
+	(*BooleanResponse)(nil),                                         // 51: Scailo.BooleanResponse
+	(*MagicLink)(nil),                                               // 52: Scailo.MagicLink
+	(*StandardFile)(nil),                                            // 53: Scailo.StandardFile
+	(*FamiliesList)(nil),                                            // 54: Scailo.FamiliesList
+	(*GenericInventoryList)(nil),                                    // 55: Scailo.GenericInventoryList
+	(*DualQuantitiesResponse)(nil),                                  // 56: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                           // 57: Scailo.CountResponse
 }
 var file_sales_returns_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.SalesReturnsServiceCreateRequest.ref_from:type_name -> Scailo.SALES_RETURN_REF_FROM
@@ -3347,110 +3349,112 @@ var file_sales_returns_scailo_proto_depIdxs = []int32{
 	33,  // 56: Scailo.SalesReturnsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	33,  // 57: Scailo.SalesReturnsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	34,  // 58: Scailo.SalesReturnsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	35,  // 59: Scailo.SalesReturnsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	36,  // 60: Scailo.SalesReturnsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	9,   // 61: Scailo.SalesReturnsService.AddSalesReturnItem:input_type -> Scailo.SalesReturnsServiceItemCreateRequest
-	10,  // 62: Scailo.SalesReturnsService.ModifySalesReturnItem:input_type -> Scailo.SalesReturnsServiceItemUpdateRequest
-	37,  // 63: Scailo.SalesReturnsService.ApproveSalesReturnItem:input_type -> Scailo.IdentifierWithUserComment
-	37,  // 64: Scailo.SalesReturnsService.DeleteSalesReturnItem:input_type -> Scailo.IdentifierWithUserComment
-	38,  // 65: Scailo.SalesReturnsService.ReorderSalesReturnItems:input_type -> Scailo.ReorderItemsRequest
-	39,  // 66: Scailo.SalesReturnsService.ViewSalesReturnItemByID:input_type -> Scailo.Identifier
-	40,  // 67: Scailo.SalesReturnsService.ViewSalesReturnItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
-	41,  // 68: Scailo.SalesReturnsService.ViewApprovedSalesReturnItems:input_type -> Scailo.IdentifierWithSearchKey
-	41,  // 69: Scailo.SalesReturnsService.ViewUnapprovedSalesReturnItems:input_type -> Scailo.IdentifierWithSearchKey
-	14,  // 70: Scailo.SalesReturnsService.ViewSalesReturnItemHistory:input_type -> Scailo.SalesReturnItemHistoryRequest
-	16,  // 71: Scailo.SalesReturnsService.ViewPaginatedApprovedSalesReturnItems:input_type -> Scailo.SalesReturnItemsSearchRequest
-	16,  // 72: Scailo.SalesReturnsService.ViewPaginatedUnapprovedSalesReturnItems:input_type -> Scailo.SalesReturnItemsSearchRequest
-	16,  // 73: Scailo.SalesReturnsService.SearchItemsWithPagination:input_type -> Scailo.SalesReturnItemsSearchRequest
-	35,  // 74: Scailo.SalesReturnsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	42,  // 75: Scailo.SalesReturnsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	39,  // 76: Scailo.SalesReturnsService.ViewByID:input_type -> Scailo.Identifier
-	35,  // 77: Scailo.SalesReturnsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	40,  // 78: Scailo.SalesReturnsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	39,  // 79: Scailo.SalesReturnsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35,  // 80: Scailo.SalesReturnsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	43,  // 81: Scailo.SalesReturnsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	35,  // 82: Scailo.SalesReturnsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	44,  // 83: Scailo.SalesReturnsService.ViewAll:input_type -> Scailo.ActiveStatus
-	35,  // 84: Scailo.SalesReturnsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 85: Scailo.SalesReturnsService.ViewWithPagination:input_type -> Scailo.SalesReturnsServicePaginationReq
-	41,  // 86: Scailo.SalesReturnsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	45,  // 87: Scailo.SalesReturnsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15,  // 88: Scailo.SalesReturnsService.ViewProspectiveSalesReturnItem:input_type -> Scailo.SalesReturnItemProspectiveInfoRequest
-	46,  // 89: Scailo.SalesReturnsService.SearchReturnableInventory:input_type -> Scailo.SearchReturnableInventoryForIdentifierUUID
-	47,  // 90: Scailo.SalesReturnsService.FilterReturnableInventory:input_type -> Scailo.FilterReturnableInventoryForIdentifierUUID
-	35,  // 91: Scailo.SalesReturnsService.ViewAssociatedCreditNoteInfo:input_type -> Scailo.IdentifierUUID
-	35,  // 92: Scailo.SalesReturnsService.IsBilled:input_type -> Scailo.IdentifierUUID
-	18,  // 93: Scailo.SalesReturnsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.SalesReturnsServiceAlreadyAddedQuantityForSourceRequest
-	35,  // 94: Scailo.SalesReturnsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	35,  // 95: Scailo.SalesReturnsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	35,  // 96: Scailo.SalesReturnsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	23,  // 97: Scailo.SalesReturnsService.SearchAll:input_type -> Scailo.SalesReturnsServiceSearchAllReq
-	21,  // 98: Scailo.SalesReturnsService.Filter:input_type -> Scailo.SalesReturnsServiceFilterReq
-	48,  // 99: Scailo.SalesReturnsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 100: Scailo.SalesReturnsService.Count:input_type -> Scailo.SalesReturnsServiceCountReq
-	21,  // 101: Scailo.SalesReturnsService.DownloadAsCSV:input_type -> Scailo.SalesReturnsServiceFilterReq
-	49,  // 102: Scailo.SalesReturnsService.Create:output_type -> Scailo.IdentifierResponse
-	49,  // 103: Scailo.SalesReturnsService.Draft:output_type -> Scailo.IdentifierResponse
-	49,  // 104: Scailo.SalesReturnsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	49,  // 105: Scailo.SalesReturnsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	49,  // 106: Scailo.SalesReturnsService.Verify:output_type -> Scailo.IdentifierResponse
-	49,  // 107: Scailo.SalesReturnsService.Approve:output_type -> Scailo.IdentifierResponse
-	49,  // 108: Scailo.SalesReturnsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	49,  // 109: Scailo.SalesReturnsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	49,  // 110: Scailo.SalesReturnsService.Halt:output_type -> Scailo.IdentifierResponse
-	49,  // 111: Scailo.SalesReturnsService.Discard:output_type -> Scailo.IdentifierResponse
-	49,  // 112: Scailo.SalesReturnsService.Restore:output_type -> Scailo.IdentifierResponse
-	49,  // 113: Scailo.SalesReturnsService.Complete:output_type -> Scailo.IdentifierResponse
-	49,  // 114: Scailo.SalesReturnsService.Repeat:output_type -> Scailo.IdentifierResponse
-	49,  // 115: Scailo.SalesReturnsService.Reopen:output_type -> Scailo.IdentifierResponse
-	49,  // 116: Scailo.SalesReturnsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	49,  // 117: Scailo.SalesReturnsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	50,  // 118: Scailo.SalesReturnsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	51,  // 119: Scailo.SalesReturnsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	49,  // 120: Scailo.SalesReturnsService.AddSalesReturnItem:output_type -> Scailo.IdentifierResponse
-	49,  // 121: Scailo.SalesReturnsService.ModifySalesReturnItem:output_type -> Scailo.IdentifierResponse
-	49,  // 122: Scailo.SalesReturnsService.ApproveSalesReturnItem:output_type -> Scailo.IdentifierResponse
-	49,  // 123: Scailo.SalesReturnsService.DeleteSalesReturnItem:output_type -> Scailo.IdentifierResponse
-	49,  // 124: Scailo.SalesReturnsService.ReorderSalesReturnItems:output_type -> Scailo.IdentifierResponse
-	11,  // 125: Scailo.SalesReturnsService.ViewSalesReturnItemByID:output_type -> Scailo.SalesReturnItem
-	11,  // 126: Scailo.SalesReturnsService.ViewSalesReturnItemByInventoryHash:output_type -> Scailo.SalesReturnItem
-	13,  // 127: Scailo.SalesReturnsService.ViewApprovedSalesReturnItems:output_type -> Scailo.SalesReturnsItemsList
-	13,  // 128: Scailo.SalesReturnsService.ViewUnapprovedSalesReturnItems:output_type -> Scailo.SalesReturnsItemsList
-	13,  // 129: Scailo.SalesReturnsService.ViewSalesReturnItemHistory:output_type -> Scailo.SalesReturnsItemsList
-	17,  // 130: Scailo.SalesReturnsService.ViewPaginatedApprovedSalesReturnItems:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
-	17,  // 131: Scailo.SalesReturnsService.ViewPaginatedUnapprovedSalesReturnItems:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
-	17,  // 132: Scailo.SalesReturnsService.SearchItemsWithPagination:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
-	52,  // 133: Scailo.SalesReturnsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	52,  // 134: Scailo.SalesReturnsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	8,   // 135: Scailo.SalesReturnsService.ViewByID:output_type -> Scailo.SalesReturn
-	8,   // 136: Scailo.SalesReturnsService.ViewByUUID:output_type -> Scailo.SalesReturn
-	8,   // 137: Scailo.SalesReturnsService.ViewByReferenceID:output_type -> Scailo.SalesReturn
-	8,   // 138: Scailo.SalesReturnsService.ViewEssentialByID:output_type -> Scailo.SalesReturn
-	8,   // 139: Scailo.SalesReturnsService.ViewEssentialByUUID:output_type -> Scailo.SalesReturn
-	12,  // 140: Scailo.SalesReturnsService.ViewFromIDs:output_type -> Scailo.SalesReturnsList
-	7,   // 141: Scailo.SalesReturnsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesReturnAncillaryParameters
-	12,  // 142: Scailo.SalesReturnsService.ViewAll:output_type -> Scailo.SalesReturnsList
-	12,  // 143: Scailo.SalesReturnsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReturnsList
-	20,  // 144: Scailo.SalesReturnsService.ViewWithPagination:output_type -> Scailo.SalesReturnsServicePaginationResponse
-	53,  // 145: Scailo.SalesReturnsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	53,  // 146: Scailo.SalesReturnsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 147: Scailo.SalesReturnsService.ViewProspectiveSalesReturnItem:output_type -> Scailo.SalesReturnsServiceItemCreateRequest
-	54,  // 148: Scailo.SalesReturnsService.SearchReturnableInventory:output_type -> Scailo.GenericInventoryList
-	54,  // 149: Scailo.SalesReturnsService.FilterReturnableInventory:output_type -> Scailo.GenericInventoryList
-	49,  // 150: Scailo.SalesReturnsService.ViewAssociatedCreditNoteInfo:output_type -> Scailo.IdentifierResponse
-	50,  // 151: Scailo.SalesReturnsService.IsBilled:output_type -> Scailo.BooleanResponse
-	55,  // 152: Scailo.SalesReturnsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	50,  // 153: Scailo.SalesReturnsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	52,  // 154: Scailo.SalesReturnsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	52,  // 155: Scailo.SalesReturnsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	12,  // 156: Scailo.SalesReturnsService.SearchAll:output_type -> Scailo.SalesReturnsList
-	12,  // 157: Scailo.SalesReturnsService.Filter:output_type -> Scailo.SalesReturnsList
-	56,  // 158: Scailo.SalesReturnsService.CountInStatus:output_type -> Scailo.CountResponse
-	56,  // 159: Scailo.SalesReturnsService.Count:output_type -> Scailo.CountResponse
-	52,  // 160: Scailo.SalesReturnsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	102, // [102:161] is the sub-list for method output_type
-	43,  // [43:102] is the sub-list for method input_type
+	35,  // 59: Scailo.SalesReturnsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	36,  // 60: Scailo.SalesReturnsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	37,  // 61: Scailo.SalesReturnsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	9,   // 62: Scailo.SalesReturnsService.AddSalesReturnItem:input_type -> Scailo.SalesReturnsServiceItemCreateRequest
+	10,  // 63: Scailo.SalesReturnsService.ModifySalesReturnItem:input_type -> Scailo.SalesReturnsServiceItemUpdateRequest
+	38,  // 64: Scailo.SalesReturnsService.ApproveSalesReturnItem:input_type -> Scailo.IdentifierWithUserComment
+	38,  // 65: Scailo.SalesReturnsService.DeleteSalesReturnItem:input_type -> Scailo.IdentifierWithUserComment
+	39,  // 66: Scailo.SalesReturnsService.ReorderSalesReturnItems:input_type -> Scailo.ReorderItemsRequest
+	40,  // 67: Scailo.SalesReturnsService.ViewSalesReturnItemByID:input_type -> Scailo.Identifier
+	41,  // 68: Scailo.SalesReturnsService.ViewSalesReturnItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
+	42,  // 69: Scailo.SalesReturnsService.ViewApprovedSalesReturnItems:input_type -> Scailo.IdentifierWithSearchKey
+	42,  // 70: Scailo.SalesReturnsService.ViewUnapprovedSalesReturnItems:input_type -> Scailo.IdentifierWithSearchKey
+	14,  // 71: Scailo.SalesReturnsService.ViewSalesReturnItemHistory:input_type -> Scailo.SalesReturnItemHistoryRequest
+	16,  // 72: Scailo.SalesReturnsService.ViewPaginatedApprovedSalesReturnItems:input_type -> Scailo.SalesReturnItemsSearchRequest
+	16,  // 73: Scailo.SalesReturnsService.ViewPaginatedUnapprovedSalesReturnItems:input_type -> Scailo.SalesReturnItemsSearchRequest
+	16,  // 74: Scailo.SalesReturnsService.SearchItemsWithPagination:input_type -> Scailo.SalesReturnItemsSearchRequest
+	36,  // 75: Scailo.SalesReturnsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	43,  // 76: Scailo.SalesReturnsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	40,  // 77: Scailo.SalesReturnsService.ViewByID:input_type -> Scailo.Identifier
+	36,  // 78: Scailo.SalesReturnsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	41,  // 79: Scailo.SalesReturnsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	40,  // 80: Scailo.SalesReturnsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36,  // 81: Scailo.SalesReturnsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	44,  // 82: Scailo.SalesReturnsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	36,  // 83: Scailo.SalesReturnsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	45,  // 84: Scailo.SalesReturnsService.ViewAll:input_type -> Scailo.ActiveStatus
+	36,  // 85: Scailo.SalesReturnsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	19,  // 86: Scailo.SalesReturnsService.ViewWithPagination:input_type -> Scailo.SalesReturnsServicePaginationReq
+	42,  // 87: Scailo.SalesReturnsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	46,  // 88: Scailo.SalesReturnsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	15,  // 89: Scailo.SalesReturnsService.ViewProspectiveSalesReturnItem:input_type -> Scailo.SalesReturnItemProspectiveInfoRequest
+	47,  // 90: Scailo.SalesReturnsService.SearchReturnableInventory:input_type -> Scailo.SearchReturnableInventoryForIdentifierUUID
+	48,  // 91: Scailo.SalesReturnsService.FilterReturnableInventory:input_type -> Scailo.FilterReturnableInventoryForIdentifierUUID
+	36,  // 92: Scailo.SalesReturnsService.ViewAssociatedCreditNoteInfo:input_type -> Scailo.IdentifierUUID
+	36,  // 93: Scailo.SalesReturnsService.IsBilled:input_type -> Scailo.IdentifierUUID
+	18,  // 94: Scailo.SalesReturnsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.SalesReturnsServiceAlreadyAddedQuantityForSourceRequest
+	36,  // 95: Scailo.SalesReturnsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	36,  // 96: Scailo.SalesReturnsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	36,  // 97: Scailo.SalesReturnsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	23,  // 98: Scailo.SalesReturnsService.SearchAll:input_type -> Scailo.SalesReturnsServiceSearchAllReq
+	21,  // 99: Scailo.SalesReturnsService.Filter:input_type -> Scailo.SalesReturnsServiceFilterReq
+	49,  // 100: Scailo.SalesReturnsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	22,  // 101: Scailo.SalesReturnsService.Count:input_type -> Scailo.SalesReturnsServiceCountReq
+	21,  // 102: Scailo.SalesReturnsService.DownloadAsCSV:input_type -> Scailo.SalesReturnsServiceFilterReq
+	50,  // 103: Scailo.SalesReturnsService.Create:output_type -> Scailo.IdentifierResponse
+	50,  // 104: Scailo.SalesReturnsService.Draft:output_type -> Scailo.IdentifierResponse
+	50,  // 105: Scailo.SalesReturnsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	50,  // 106: Scailo.SalesReturnsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	50,  // 107: Scailo.SalesReturnsService.Verify:output_type -> Scailo.IdentifierResponse
+	50,  // 108: Scailo.SalesReturnsService.Approve:output_type -> Scailo.IdentifierResponse
+	50,  // 109: Scailo.SalesReturnsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	50,  // 110: Scailo.SalesReturnsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	50,  // 111: Scailo.SalesReturnsService.Halt:output_type -> Scailo.IdentifierResponse
+	50,  // 112: Scailo.SalesReturnsService.Discard:output_type -> Scailo.IdentifierResponse
+	50,  // 113: Scailo.SalesReturnsService.Restore:output_type -> Scailo.IdentifierResponse
+	50,  // 114: Scailo.SalesReturnsService.Complete:output_type -> Scailo.IdentifierResponse
+	50,  // 115: Scailo.SalesReturnsService.Repeat:output_type -> Scailo.IdentifierResponse
+	50,  // 116: Scailo.SalesReturnsService.Reopen:output_type -> Scailo.IdentifierResponse
+	50,  // 117: Scailo.SalesReturnsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	50,  // 118: Scailo.SalesReturnsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	50,  // 119: Scailo.SalesReturnsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	51,  // 120: Scailo.SalesReturnsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	52,  // 121: Scailo.SalesReturnsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	50,  // 122: Scailo.SalesReturnsService.AddSalesReturnItem:output_type -> Scailo.IdentifierResponse
+	50,  // 123: Scailo.SalesReturnsService.ModifySalesReturnItem:output_type -> Scailo.IdentifierResponse
+	50,  // 124: Scailo.SalesReturnsService.ApproveSalesReturnItem:output_type -> Scailo.IdentifierResponse
+	50,  // 125: Scailo.SalesReturnsService.DeleteSalesReturnItem:output_type -> Scailo.IdentifierResponse
+	50,  // 126: Scailo.SalesReturnsService.ReorderSalesReturnItems:output_type -> Scailo.IdentifierResponse
+	11,  // 127: Scailo.SalesReturnsService.ViewSalesReturnItemByID:output_type -> Scailo.SalesReturnItem
+	11,  // 128: Scailo.SalesReturnsService.ViewSalesReturnItemByInventoryHash:output_type -> Scailo.SalesReturnItem
+	13,  // 129: Scailo.SalesReturnsService.ViewApprovedSalesReturnItems:output_type -> Scailo.SalesReturnsItemsList
+	13,  // 130: Scailo.SalesReturnsService.ViewUnapprovedSalesReturnItems:output_type -> Scailo.SalesReturnsItemsList
+	13,  // 131: Scailo.SalesReturnsService.ViewSalesReturnItemHistory:output_type -> Scailo.SalesReturnsItemsList
+	17,  // 132: Scailo.SalesReturnsService.ViewPaginatedApprovedSalesReturnItems:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
+	17,  // 133: Scailo.SalesReturnsService.ViewPaginatedUnapprovedSalesReturnItems:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
+	17,  // 134: Scailo.SalesReturnsService.SearchItemsWithPagination:output_type -> Scailo.SalesReturnsServicePaginatedItemsResponse
+	53,  // 135: Scailo.SalesReturnsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	53,  // 136: Scailo.SalesReturnsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	8,   // 137: Scailo.SalesReturnsService.ViewByID:output_type -> Scailo.SalesReturn
+	8,   // 138: Scailo.SalesReturnsService.ViewByUUID:output_type -> Scailo.SalesReturn
+	8,   // 139: Scailo.SalesReturnsService.ViewByReferenceID:output_type -> Scailo.SalesReturn
+	8,   // 140: Scailo.SalesReturnsService.ViewEssentialByID:output_type -> Scailo.SalesReturn
+	8,   // 141: Scailo.SalesReturnsService.ViewEssentialByUUID:output_type -> Scailo.SalesReturn
+	12,  // 142: Scailo.SalesReturnsService.ViewFromIDs:output_type -> Scailo.SalesReturnsList
+	7,   // 143: Scailo.SalesReturnsService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesReturnAncillaryParameters
+	12,  // 144: Scailo.SalesReturnsService.ViewAll:output_type -> Scailo.SalesReturnsList
+	12,  // 145: Scailo.SalesReturnsService.ViewAllForEntityUUID:output_type -> Scailo.SalesReturnsList
+	20,  // 146: Scailo.SalesReturnsService.ViewWithPagination:output_type -> Scailo.SalesReturnsServicePaginationResponse
+	54,  // 147: Scailo.SalesReturnsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	54,  // 148: Scailo.SalesReturnsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 149: Scailo.SalesReturnsService.ViewProspectiveSalesReturnItem:output_type -> Scailo.SalesReturnsServiceItemCreateRequest
+	55,  // 150: Scailo.SalesReturnsService.SearchReturnableInventory:output_type -> Scailo.GenericInventoryList
+	55,  // 151: Scailo.SalesReturnsService.FilterReturnableInventory:output_type -> Scailo.GenericInventoryList
+	50,  // 152: Scailo.SalesReturnsService.ViewAssociatedCreditNoteInfo:output_type -> Scailo.IdentifierResponse
+	51,  // 153: Scailo.SalesReturnsService.IsBilled:output_type -> Scailo.BooleanResponse
+	56,  // 154: Scailo.SalesReturnsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	51,  // 155: Scailo.SalesReturnsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	53,  // 156: Scailo.SalesReturnsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	53,  // 157: Scailo.SalesReturnsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	12,  // 158: Scailo.SalesReturnsService.SearchAll:output_type -> Scailo.SalesReturnsList
+	12,  // 159: Scailo.SalesReturnsService.Filter:output_type -> Scailo.SalesReturnsList
+	57,  // 160: Scailo.SalesReturnsService.CountInStatus:output_type -> Scailo.CountResponse
+	57,  // 161: Scailo.SalesReturnsService.Count:output_type -> Scailo.CountResponse
+	53,  // 162: Scailo.SalesReturnsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	103, // [103:163] is the sub-list for method output_type
+	43,  // [43:103] is the sub-list for method input_type
 	43,  // [43:43] is the sub-list for extension type_name
 	43,  // [43:43] is the sub-list for extension extendee
 	0,   // [0:43] is the sub-list for field type_name
@@ -3466,6 +3470,7 @@ func file_sales_returns_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_inventory_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

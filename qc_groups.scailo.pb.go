@@ -2617,7 +2617,7 @@ var File_qc_groups_scailo_proto protoreflect.FileDescriptor
 
 const file_qc_groups_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x16qc_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xb1\x02\n" +
+	"\x16qc_groups.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xb1\x02\n" +
 	"\x1cQCGroupsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2842,7 +2842,7 @@ const file_qc_groups_scailo_proto_rawDesc = "" +
 	"\"QC_GROUP_SORT_KEY_APPROVER_ROLE_ID\x10\x05\x12\"\n" +
 	"\x1eQC_GROUP_SORT_KEY_COMPLETED_ON\x10\x06\x12\x1a\n" +
 	"\x16QC_GROUP_SORT_KEY_NAME\x10\n" +
-	"2\xfc\x1b\n" +
+	"2\xcf\x1c\n" +
 	"\x0fQCGroupsService\x12J\n" +
 	"\x06Create\x12$.Scailo.QCGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.QCGroupsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2859,7 +2859,8 @@ const file_qc_groups_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x0eAddQCGroupItem\x12(.Scailo.QCGroupsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Y\n" +
 	"\x11ModifyQCGroupItem\x12(.Scailo.QCGroupsServiceItemUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12S\n" +
@@ -2942,22 +2943,23 @@ var file_qc_groups_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                               // 27: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),           // 28: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),         // 29: Scailo.IdentifierUUIDWithUserComment
-	(*CloneRequest)(nil),                          // 30: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),             // 31: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                   // 32: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                            // 33: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),               // 34: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                        // 35: Scailo.IdentifierUUID
-	(*Empty)(nil),                                 // 36: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                // 37: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                       // 38: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                       // 39: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                          // 40: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),               // 41: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                          // 42: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                    // 43: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                         // 44: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                   // 45: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),              // 30: Scailo.VaultFolderAttachRequest
+	(*CloneRequest)(nil),                          // 31: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),             // 32: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                   // 33: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                            // 34: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),               // 35: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                        // 36: Scailo.IdentifierUUID
+	(*Empty)(nil),                                 // 37: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                // 38: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                       // 39: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                       // 40: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                          // 41: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),               // 42: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                          // 43: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                    // 44: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                         // 45: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                   // 46: Scailo.IdentifierUUIDsList
 }
 var file_qc_groups_scailo_proto_depIdxs = []int32{
 	20, // 0: Scailo.QCGroupsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3014,85 +3016,87 @@ var file_qc_groups_scailo_proto_depIdxs = []int32{
 	29, // 51: Scailo.QCGroupsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 52: Scailo.QCGroupsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	29, // 53: Scailo.QCGroupsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	30, // 54: Scailo.QCGroupsService.Clone:input_type -> Scailo.CloneRequest
-	7,  // 55: Scailo.QCGroupsService.AddQCGroupItem:input_type -> Scailo.QCGroupsServiceItemCreateRequest
-	8,  // 56: Scailo.QCGroupsService.ModifyQCGroupItem:input_type -> Scailo.QCGroupsServiceItemUpdateRequest
-	31, // 57: Scailo.QCGroupsService.ApproveQCGroupItem:input_type -> Scailo.IdentifierWithUserComment
-	31, // 58: Scailo.QCGroupsService.DeleteQCGroupItem:input_type -> Scailo.IdentifierWithUserComment
-	32, // 59: Scailo.QCGroupsService.ReorderQCGroupItems:input_type -> Scailo.ReorderItemsRequest
-	33, // 60: Scailo.QCGroupsService.ViewQCGroupItemByID:input_type -> Scailo.Identifier
-	34, // 61: Scailo.QCGroupsService.ViewApprovedQCGroupItems:input_type -> Scailo.IdentifierWithSearchKey
-	34, // 62: Scailo.QCGroupsService.ViewUnapprovedQCGroupItems:input_type -> Scailo.IdentifierWithSearchKey
-	12, // 63: Scailo.QCGroupsService.ViewQCGroupItemHistory:input_type -> Scailo.QCGroupItemHistoryRequest
-	13, // 64: Scailo.QCGroupsService.ViewPaginatedApprovedQCGroupItems:input_type -> Scailo.QCGroupItemsSearchRequest
-	13, // 65: Scailo.QCGroupsService.ViewPaginatedUnapprovedQCGroupItems:input_type -> Scailo.QCGroupItemsSearchRequest
-	13, // 66: Scailo.QCGroupsService.SearchItemsWithPagination:input_type -> Scailo.QCGroupItemsSearchRequest
-	35, // 67: Scailo.QCGroupsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	36, // 68: Scailo.QCGroupsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	37, // 69: Scailo.QCGroupsService.UploadQCGroupItems:input_type -> Scailo.IdentifierUUIDWithFile
-	33, // 70: Scailo.QCGroupsService.ViewByID:input_type -> Scailo.Identifier
-	35, // 71: Scailo.QCGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	38, // 72: Scailo.QCGroupsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
-	33, // 73: Scailo.QCGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35, // 74: Scailo.QCGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 75: Scailo.QCGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	40, // 76: Scailo.QCGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
-	35, // 77: Scailo.QCGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 78: Scailo.QCGroupsService.ViewWithPagination:input_type -> Scailo.QCGroupsServicePaginationReq
-	19, // 79: Scailo.QCGroupsService.SearchAll:input_type -> Scailo.QCGroupsServiceSearchAllReq
-	17, // 80: Scailo.QCGroupsService.Filter:input_type -> Scailo.QCGroupsServiceFilterReq
-	41, // 81: Scailo.QCGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 82: Scailo.QCGroupsService.Count:input_type -> Scailo.QCGroupsServiceCountReq
-	17, // 83: Scailo.QCGroupsService.DownloadAsCSV:input_type -> Scailo.QCGroupsServiceFilterReq
-	42, // 84: Scailo.QCGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	43, // 85: Scailo.QCGroupsService.Create:output_type -> Scailo.IdentifierResponse
-	43, // 86: Scailo.QCGroupsService.Draft:output_type -> Scailo.IdentifierResponse
-	43, // 87: Scailo.QCGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	43, // 88: Scailo.QCGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	43, // 89: Scailo.QCGroupsService.Verify:output_type -> Scailo.IdentifierResponse
-	43, // 90: Scailo.QCGroupsService.Approve:output_type -> Scailo.IdentifierResponse
-	43, // 91: Scailo.QCGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	43, // 92: Scailo.QCGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	43, // 93: Scailo.QCGroupsService.Halt:output_type -> Scailo.IdentifierResponse
-	43, // 94: Scailo.QCGroupsService.Discard:output_type -> Scailo.IdentifierResponse
-	43, // 95: Scailo.QCGroupsService.Restore:output_type -> Scailo.IdentifierResponse
-	43, // 96: Scailo.QCGroupsService.Complete:output_type -> Scailo.IdentifierResponse
-	43, // 97: Scailo.QCGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
-	43, // 98: Scailo.QCGroupsService.Reopen:output_type -> Scailo.IdentifierResponse
-	43, // 99: Scailo.QCGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	43, // 100: Scailo.QCGroupsService.Clone:output_type -> Scailo.IdentifierResponse
-	43, // 101: Scailo.QCGroupsService.AddQCGroupItem:output_type -> Scailo.IdentifierResponse
-	43, // 102: Scailo.QCGroupsService.ModifyQCGroupItem:output_type -> Scailo.IdentifierResponse
-	43, // 103: Scailo.QCGroupsService.ApproveQCGroupItem:output_type -> Scailo.IdentifierResponse
-	43, // 104: Scailo.QCGroupsService.DeleteQCGroupItem:output_type -> Scailo.IdentifierResponse
-	43, // 105: Scailo.QCGroupsService.ReorderQCGroupItems:output_type -> Scailo.IdentifierResponse
-	9,  // 106: Scailo.QCGroupsService.ViewQCGroupItemByID:output_type -> Scailo.QCGroupItem
-	11, // 107: Scailo.QCGroupsService.ViewApprovedQCGroupItems:output_type -> Scailo.QCGroupsItemsList
-	11, // 108: Scailo.QCGroupsService.ViewUnapprovedQCGroupItems:output_type -> Scailo.QCGroupsItemsList
-	11, // 109: Scailo.QCGroupsService.ViewQCGroupItemHistory:output_type -> Scailo.QCGroupsItemsList
-	14, // 110: Scailo.QCGroupsService.ViewPaginatedApprovedQCGroupItems:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
-	14, // 111: Scailo.QCGroupsService.ViewPaginatedUnapprovedQCGroupItems:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
-	14, // 112: Scailo.QCGroupsService.SearchItemsWithPagination:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
-	42, // 113: Scailo.QCGroupsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	42, // 114: Scailo.QCGroupsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	39, // 115: Scailo.QCGroupsService.UploadQCGroupItems:output_type -> Scailo.IdentifiersList
-	6,  // 116: Scailo.QCGroupsService.ViewByID:output_type -> Scailo.QCGroup
-	6,  // 117: Scailo.QCGroupsService.ViewByUUID:output_type -> Scailo.QCGroup
-	6,  // 118: Scailo.QCGroupsService.ViewByCode:output_type -> Scailo.QCGroup
-	6,  // 119: Scailo.QCGroupsService.ViewEssentialByID:output_type -> Scailo.QCGroup
-	6,  // 120: Scailo.QCGroupsService.ViewEssentialByUUID:output_type -> Scailo.QCGroup
-	10, // 121: Scailo.QCGroupsService.ViewFromIDs:output_type -> Scailo.QCGroupsList
-	10, // 122: Scailo.QCGroupsService.ViewAll:output_type -> Scailo.QCGroupsList
-	10, // 123: Scailo.QCGroupsService.ViewAllForEntityUUID:output_type -> Scailo.QCGroupsList
-	16, // 124: Scailo.QCGroupsService.ViewWithPagination:output_type -> Scailo.QCGroupsServicePaginationResponse
-	10, // 125: Scailo.QCGroupsService.SearchAll:output_type -> Scailo.QCGroupsList
-	10, // 126: Scailo.QCGroupsService.Filter:output_type -> Scailo.QCGroupsList
-	44, // 127: Scailo.QCGroupsService.CountInStatus:output_type -> Scailo.CountResponse
-	44, // 128: Scailo.QCGroupsService.Count:output_type -> Scailo.CountResponse
-	42, // 129: Scailo.QCGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	45, // 130: Scailo.QCGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	85, // [85:131] is the sub-list for method output_type
-	39, // [39:85] is the sub-list for method input_type
+	30, // 54: Scailo.QCGroupsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	31, // 55: Scailo.QCGroupsService.Clone:input_type -> Scailo.CloneRequest
+	7,  // 56: Scailo.QCGroupsService.AddQCGroupItem:input_type -> Scailo.QCGroupsServiceItemCreateRequest
+	8,  // 57: Scailo.QCGroupsService.ModifyQCGroupItem:input_type -> Scailo.QCGroupsServiceItemUpdateRequest
+	32, // 58: Scailo.QCGroupsService.ApproveQCGroupItem:input_type -> Scailo.IdentifierWithUserComment
+	32, // 59: Scailo.QCGroupsService.DeleteQCGroupItem:input_type -> Scailo.IdentifierWithUserComment
+	33, // 60: Scailo.QCGroupsService.ReorderQCGroupItems:input_type -> Scailo.ReorderItemsRequest
+	34, // 61: Scailo.QCGroupsService.ViewQCGroupItemByID:input_type -> Scailo.Identifier
+	35, // 62: Scailo.QCGroupsService.ViewApprovedQCGroupItems:input_type -> Scailo.IdentifierWithSearchKey
+	35, // 63: Scailo.QCGroupsService.ViewUnapprovedQCGroupItems:input_type -> Scailo.IdentifierWithSearchKey
+	12, // 64: Scailo.QCGroupsService.ViewQCGroupItemHistory:input_type -> Scailo.QCGroupItemHistoryRequest
+	13, // 65: Scailo.QCGroupsService.ViewPaginatedApprovedQCGroupItems:input_type -> Scailo.QCGroupItemsSearchRequest
+	13, // 66: Scailo.QCGroupsService.ViewPaginatedUnapprovedQCGroupItems:input_type -> Scailo.QCGroupItemsSearchRequest
+	13, // 67: Scailo.QCGroupsService.SearchItemsWithPagination:input_type -> Scailo.QCGroupItemsSearchRequest
+	36, // 68: Scailo.QCGroupsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	37, // 69: Scailo.QCGroupsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	38, // 70: Scailo.QCGroupsService.UploadQCGroupItems:input_type -> Scailo.IdentifierUUIDWithFile
+	34, // 71: Scailo.QCGroupsService.ViewByID:input_type -> Scailo.Identifier
+	36, // 72: Scailo.QCGroupsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	39, // 73: Scailo.QCGroupsService.ViewByCode:input_type -> Scailo.SimpleSearchReq
+	34, // 74: Scailo.QCGroupsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36, // 75: Scailo.QCGroupsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 76: Scailo.QCGroupsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	41, // 77: Scailo.QCGroupsService.ViewAll:input_type -> Scailo.ActiveStatus
+	36, // 78: Scailo.QCGroupsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 79: Scailo.QCGroupsService.ViewWithPagination:input_type -> Scailo.QCGroupsServicePaginationReq
+	19, // 80: Scailo.QCGroupsService.SearchAll:input_type -> Scailo.QCGroupsServiceSearchAllReq
+	17, // 81: Scailo.QCGroupsService.Filter:input_type -> Scailo.QCGroupsServiceFilterReq
+	42, // 82: Scailo.QCGroupsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 83: Scailo.QCGroupsService.Count:input_type -> Scailo.QCGroupsServiceCountReq
+	17, // 84: Scailo.QCGroupsService.DownloadAsCSV:input_type -> Scailo.QCGroupsServiceFilterReq
+	43, // 85: Scailo.QCGroupsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	44, // 86: Scailo.QCGroupsService.Create:output_type -> Scailo.IdentifierResponse
+	44, // 87: Scailo.QCGroupsService.Draft:output_type -> Scailo.IdentifierResponse
+	44, // 88: Scailo.QCGroupsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	44, // 89: Scailo.QCGroupsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	44, // 90: Scailo.QCGroupsService.Verify:output_type -> Scailo.IdentifierResponse
+	44, // 91: Scailo.QCGroupsService.Approve:output_type -> Scailo.IdentifierResponse
+	44, // 92: Scailo.QCGroupsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	44, // 93: Scailo.QCGroupsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	44, // 94: Scailo.QCGroupsService.Halt:output_type -> Scailo.IdentifierResponse
+	44, // 95: Scailo.QCGroupsService.Discard:output_type -> Scailo.IdentifierResponse
+	44, // 96: Scailo.QCGroupsService.Restore:output_type -> Scailo.IdentifierResponse
+	44, // 97: Scailo.QCGroupsService.Complete:output_type -> Scailo.IdentifierResponse
+	44, // 98: Scailo.QCGroupsService.Repeat:output_type -> Scailo.IdentifierResponse
+	44, // 99: Scailo.QCGroupsService.Reopen:output_type -> Scailo.IdentifierResponse
+	44, // 100: Scailo.QCGroupsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	44, // 101: Scailo.QCGroupsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	44, // 102: Scailo.QCGroupsService.Clone:output_type -> Scailo.IdentifierResponse
+	44, // 103: Scailo.QCGroupsService.AddQCGroupItem:output_type -> Scailo.IdentifierResponse
+	44, // 104: Scailo.QCGroupsService.ModifyQCGroupItem:output_type -> Scailo.IdentifierResponse
+	44, // 105: Scailo.QCGroupsService.ApproveQCGroupItem:output_type -> Scailo.IdentifierResponse
+	44, // 106: Scailo.QCGroupsService.DeleteQCGroupItem:output_type -> Scailo.IdentifierResponse
+	44, // 107: Scailo.QCGroupsService.ReorderQCGroupItems:output_type -> Scailo.IdentifierResponse
+	9,  // 108: Scailo.QCGroupsService.ViewQCGroupItemByID:output_type -> Scailo.QCGroupItem
+	11, // 109: Scailo.QCGroupsService.ViewApprovedQCGroupItems:output_type -> Scailo.QCGroupsItemsList
+	11, // 110: Scailo.QCGroupsService.ViewUnapprovedQCGroupItems:output_type -> Scailo.QCGroupsItemsList
+	11, // 111: Scailo.QCGroupsService.ViewQCGroupItemHistory:output_type -> Scailo.QCGroupsItemsList
+	14, // 112: Scailo.QCGroupsService.ViewPaginatedApprovedQCGroupItems:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
+	14, // 113: Scailo.QCGroupsService.ViewPaginatedUnapprovedQCGroupItems:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
+	14, // 114: Scailo.QCGroupsService.SearchItemsWithPagination:output_type -> Scailo.QCGroupsServicePaginatedItemsResponse
+	43, // 115: Scailo.QCGroupsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	43, // 116: Scailo.QCGroupsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	40, // 117: Scailo.QCGroupsService.UploadQCGroupItems:output_type -> Scailo.IdentifiersList
+	6,  // 118: Scailo.QCGroupsService.ViewByID:output_type -> Scailo.QCGroup
+	6,  // 119: Scailo.QCGroupsService.ViewByUUID:output_type -> Scailo.QCGroup
+	6,  // 120: Scailo.QCGroupsService.ViewByCode:output_type -> Scailo.QCGroup
+	6,  // 121: Scailo.QCGroupsService.ViewEssentialByID:output_type -> Scailo.QCGroup
+	6,  // 122: Scailo.QCGroupsService.ViewEssentialByUUID:output_type -> Scailo.QCGroup
+	10, // 123: Scailo.QCGroupsService.ViewFromIDs:output_type -> Scailo.QCGroupsList
+	10, // 124: Scailo.QCGroupsService.ViewAll:output_type -> Scailo.QCGroupsList
+	10, // 125: Scailo.QCGroupsService.ViewAllForEntityUUID:output_type -> Scailo.QCGroupsList
+	16, // 126: Scailo.QCGroupsService.ViewWithPagination:output_type -> Scailo.QCGroupsServicePaginationResponse
+	10, // 127: Scailo.QCGroupsService.SearchAll:output_type -> Scailo.QCGroupsList
+	10, // 128: Scailo.QCGroupsService.Filter:output_type -> Scailo.QCGroupsList
+	45, // 129: Scailo.QCGroupsService.CountInStatus:output_type -> Scailo.CountResponse
+	45, // 130: Scailo.QCGroupsService.Count:output_type -> Scailo.CountResponse
+	43, // 131: Scailo.QCGroupsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	46, // 132: Scailo.QCGroupsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	86, // [86:133] is the sub-list for method output_type
+	39, // [39:86] is the sub-list for method input_type
 	39, // [39:39] is the sub-list for extension type_name
 	39, // [39:39] is the sub-list for extension extendee
 	0,  // [0:39] is the sub-list for field type_name
@@ -3105,6 +3109,7 @@ func file_qc_groups_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

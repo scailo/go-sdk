@@ -3209,7 +3209,7 @@ var File_sales_enquiries_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1csales_enquiries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xa3\x05\n" +
+	"\x1csales_enquiries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xa3\x05\n" +
 	"\"SalesEnquiriesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3499,7 +3499,7 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"*SALES_ENQUIRY_SORT_KEY_CONSIGNEE_CLIENT_ID\x10\f\x12*\n" +
 	"&SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID\x10\r\x12#\n" +
 	"\x1fSALES_ENQUIRY_SORT_KEY_PRIORITY\x10\x0e\x12*\n" +
-	"&SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\xb5%\n" +
+	"&SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\x88&\n" +
 	"\x15SalesEnquiriesService\x12P\n" +
 	"\x06Create\x12*.Scailo.SalesEnquiriesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\x05Draft\x12*.Scailo.SalesEnquiriesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12U\n" +
@@ -3517,7 +3517,8 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12J\n" +
 	"\x05Amend\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12a\n" +
 	"\x13AddSalesEnquiryItem\x12..Scailo.SalesEnquiriesServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12d\n" +
@@ -3614,24 +3615,25 @@ var file_sales_enquiries_scailo_proto_goTypes = []any{
 	(*IdentifierUUIDWithUserComment)(nil),                     // 32: Scailo.IdentifierUUIDWithUserComment
 	(*RepeatWithDeliveryDate)(nil),                            // 33: Scailo.RepeatWithDeliveryDate
 	(*IdentifierWithEmailAttributes)(nil),                     // 34: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 35: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierWithUserComment)(nil),                         // 36: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                               // 37: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                        // 38: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                           // 39: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                    // 40: Scailo.IdentifierUUID
-	(*Empty)(nil),                                             // 41: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                            // 42: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                   // 43: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                   // 44: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 45: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 46: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 47: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 48: Scailo.MagicLink
-	(*StandardFile)(nil),                                      // 49: Scailo.StandardFile
-	(*AmendmentLogsList)(nil),                                 // 50: Scailo.AmendmentLogsList
-	(*BooleanResponse)(nil),                                   // 51: Scailo.BooleanResponse
-	(*CountResponse)(nil),                                     // 52: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 35: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 36: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierWithUserComment)(nil),                         // 37: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                               // 38: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                        // 39: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                           // 40: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                    // 41: Scailo.IdentifierUUID
+	(*Empty)(nil),                                             // 42: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                            // 43: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                   // 44: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                   // 45: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 46: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 47: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 48: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 49: Scailo.MagicLink
+	(*StandardFile)(nil),                                      // 50: Scailo.StandardFile
+	(*AmendmentLogsList)(nil),                                 // 51: Scailo.AmendmentLogsList
+	(*BooleanResponse)(nil),                                   // 52: Scailo.BooleanResponse
+	(*CountResponse)(nil),                                     // 53: Scailo.CountResponse
 }
 var file_sales_enquiries_scailo_proto_depIdxs = []int32{
 	23, // 0: Scailo.SalesEnquiriesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -3687,106 +3689,108 @@ var file_sales_enquiries_scailo_proto_depIdxs = []int32{
 	32, // 50: Scailo.SalesEnquiriesService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 51: Scailo.SalesEnquiriesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	34, // 52: Scailo.SalesEnquiriesService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	32, // 53: Scailo.SalesEnquiriesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
-	35, // 54: Scailo.SalesEnquiriesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	7,  // 55: Scailo.SalesEnquiriesService.AddSalesEnquiryItem:input_type -> Scailo.SalesEnquiriesServiceItemCreateRequest
-	8,  // 56: Scailo.SalesEnquiriesService.ModifySalesEnquiryItem:input_type -> Scailo.SalesEnquiriesServiceItemUpdateRequest
-	36, // 57: Scailo.SalesEnquiriesService.ApproveSalesEnquiryItem:input_type -> Scailo.IdentifierWithUserComment
-	36, // 58: Scailo.SalesEnquiriesService.DeleteSalesEnquiryItem:input_type -> Scailo.IdentifierWithUserComment
-	37, // 59: Scailo.SalesEnquiriesService.ReorderSalesEnquiryItems:input_type -> Scailo.ReorderItemsRequest
-	38, // 60: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemByID:input_type -> Scailo.Identifier
-	39, // 61: Scailo.SalesEnquiriesService.ViewApprovedSalesEnquiryItems:input_type -> Scailo.IdentifierWithSearchKey
-	39, // 62: Scailo.SalesEnquiriesService.ViewUnapprovedSalesEnquiryItems:input_type -> Scailo.IdentifierWithSearchKey
-	12, // 63: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemHistory:input_type -> Scailo.SalesEnquiryItemHistoryRequest
-	13, // 64: Scailo.SalesEnquiriesService.ViewPaginatedApprovedSalesEnquiryItems:input_type -> Scailo.SalesEnquiryItemsSearchRequest
-	13, // 65: Scailo.SalesEnquiriesService.ViewPaginatedUnapprovedSalesEnquiryItems:input_type -> Scailo.SalesEnquiryItemsSearchRequest
-	13, // 66: Scailo.SalesEnquiriesService.SearchItemsWithPagination:input_type -> Scailo.SalesEnquiryItemsSearchRequest
-	40, // 67: Scailo.SalesEnquiriesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	41, // 68: Scailo.SalesEnquiriesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	42, // 69: Scailo.SalesEnquiriesService.UploadSalesEnquiryItems:input_type -> Scailo.IdentifierUUIDWithFile
-	20, // 70: Scailo.SalesEnquiriesService.AddSalesEnquiryContact:input_type -> Scailo.SalesEnquiriesServiceContactCreateRequest
-	36, // 71: Scailo.SalesEnquiriesService.ApproveSalesEnquiryContact:input_type -> Scailo.IdentifierWithUserComment
-	36, // 72: Scailo.SalesEnquiriesService.DeleteSalesEnquiryContact:input_type -> Scailo.IdentifierWithUserComment
-	38, // 73: Scailo.SalesEnquiriesService.ViewSalesEnquiryContactByID:input_type -> Scailo.Identifier
-	40, // 74: Scailo.SalesEnquiriesService.ViewSalesEnquiryContacts:input_type -> Scailo.IdentifierUUID
-	38, // 75: Scailo.SalesEnquiriesService.ViewByID:input_type -> Scailo.Identifier
-	40, // 76: Scailo.SalesEnquiriesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	43, // 77: Scailo.SalesEnquiriesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	38, // 78: Scailo.SalesEnquiriesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	40, // 79: Scailo.SalesEnquiriesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	44, // 80: Scailo.SalesEnquiriesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	40, // 81: Scailo.SalesEnquiriesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	45, // 82: Scailo.SalesEnquiriesService.ViewAll:input_type -> Scailo.ActiveStatus
-	40, // 83: Scailo.SalesEnquiriesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	15, // 84: Scailo.SalesEnquiriesService.ViewWithPagination:input_type -> Scailo.SalesEnquiriesServicePaginationReq
-	38, // 85: Scailo.SalesEnquiriesService.ViewAmendments:input_type -> Scailo.Identifier
-	38, // 86: Scailo.SalesEnquiriesService.ViewAssociatedSalesOrdersIDs:input_type -> Scailo.Identifier
-	40, // 87: Scailo.SalesEnquiriesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	40, // 88: Scailo.SalesEnquiriesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	19, // 89: Scailo.SalesEnquiriesService.SearchAll:input_type -> Scailo.SalesEnquiriesServiceSearchAllReq
-	17, // 90: Scailo.SalesEnquiriesService.Filter:input_type -> Scailo.SalesEnquiriesServiceFilterReq
-	46, // 91: Scailo.SalesEnquiriesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	18, // 92: Scailo.SalesEnquiriesService.Count:input_type -> Scailo.SalesEnquiriesServiceCountReq
-	17, // 93: Scailo.SalesEnquiriesService.DownloadAsCSV:input_type -> Scailo.SalesEnquiriesServiceFilterReq
-	47, // 94: Scailo.SalesEnquiriesService.Create:output_type -> Scailo.IdentifierResponse
-	47, // 95: Scailo.SalesEnquiriesService.Draft:output_type -> Scailo.IdentifierResponse
-	47, // 96: Scailo.SalesEnquiriesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 97: Scailo.SalesEnquiriesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	47, // 98: Scailo.SalesEnquiriesService.Verify:output_type -> Scailo.IdentifierResponse
-	47, // 99: Scailo.SalesEnquiriesService.Approve:output_type -> Scailo.IdentifierResponse
-	47, // 100: Scailo.SalesEnquiriesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	47, // 101: Scailo.SalesEnquiriesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	47, // 102: Scailo.SalesEnquiriesService.Halt:output_type -> Scailo.IdentifierResponse
-	47, // 103: Scailo.SalesEnquiriesService.Discard:output_type -> Scailo.IdentifierResponse
-	47, // 104: Scailo.SalesEnquiriesService.Restore:output_type -> Scailo.IdentifierResponse
-	47, // 105: Scailo.SalesEnquiriesService.Complete:output_type -> Scailo.IdentifierResponse
-	47, // 106: Scailo.SalesEnquiriesService.Repeat:output_type -> Scailo.IdentifierResponse
-	47, // 107: Scailo.SalesEnquiriesService.Reopen:output_type -> Scailo.IdentifierResponse
-	47, // 108: Scailo.SalesEnquiriesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	47, // 109: Scailo.SalesEnquiriesService.SendEmail:output_type -> Scailo.IdentifierResponse
-	47, // 110: Scailo.SalesEnquiriesService.Amend:output_type -> Scailo.IdentifierResponse
-	48, // 111: Scailo.SalesEnquiriesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	47, // 112: Scailo.SalesEnquiriesService.AddSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
-	47, // 113: Scailo.SalesEnquiriesService.ModifySalesEnquiryItem:output_type -> Scailo.IdentifierResponse
-	47, // 114: Scailo.SalesEnquiriesService.ApproveSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
-	47, // 115: Scailo.SalesEnquiriesService.DeleteSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
-	47, // 116: Scailo.SalesEnquiriesService.ReorderSalesEnquiryItems:output_type -> Scailo.IdentifierResponse
-	9,  // 117: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemByID:output_type -> Scailo.SalesEnquiryItem
-	11, // 118: Scailo.SalesEnquiriesService.ViewApprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesItemsList
-	11, // 119: Scailo.SalesEnquiriesService.ViewUnapprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesItemsList
-	11, // 120: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemHistory:output_type -> Scailo.SalesEnquiriesItemsList
-	14, // 121: Scailo.SalesEnquiriesService.ViewPaginatedApprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
-	14, // 122: Scailo.SalesEnquiriesService.ViewPaginatedUnapprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
-	14, // 123: Scailo.SalesEnquiriesService.SearchItemsWithPagination:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
-	49, // 124: Scailo.SalesEnquiriesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	49, // 125: Scailo.SalesEnquiriesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	44, // 126: Scailo.SalesEnquiriesService.UploadSalesEnquiryItems:output_type -> Scailo.IdentifiersList
-	47, // 127: Scailo.SalesEnquiriesService.AddSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
-	47, // 128: Scailo.SalesEnquiriesService.ApproveSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
-	47, // 129: Scailo.SalesEnquiriesService.DeleteSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
-	21, // 130: Scailo.SalesEnquiriesService.ViewSalesEnquiryContactByID:output_type -> Scailo.SalesEnquiryContact
-	22, // 131: Scailo.SalesEnquiriesService.ViewSalesEnquiryContacts:output_type -> Scailo.SalesEnquiryContactsList
-	6,  // 132: Scailo.SalesEnquiriesService.ViewByID:output_type -> Scailo.SalesEnquiry
-	6,  // 133: Scailo.SalesEnquiriesService.ViewByUUID:output_type -> Scailo.SalesEnquiry
-	6,  // 134: Scailo.SalesEnquiriesService.ViewByReferenceID:output_type -> Scailo.SalesEnquiry
-	6,  // 135: Scailo.SalesEnquiriesService.ViewEssentialByID:output_type -> Scailo.SalesEnquiry
-	6,  // 136: Scailo.SalesEnquiriesService.ViewEssentialByUUID:output_type -> Scailo.SalesEnquiry
-	10, // 137: Scailo.SalesEnquiriesService.ViewFromIDs:output_type -> Scailo.SalesEnquiriesList
-	5,  // 138: Scailo.SalesEnquiriesService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesEnquiryAncillaryParameters
-	10, // 139: Scailo.SalesEnquiriesService.ViewAll:output_type -> Scailo.SalesEnquiriesList
-	10, // 140: Scailo.SalesEnquiriesService.ViewAllForEntityUUID:output_type -> Scailo.SalesEnquiriesList
-	16, // 141: Scailo.SalesEnquiriesService.ViewWithPagination:output_type -> Scailo.SalesEnquiriesServicePaginationResponse
-	50, // 142: Scailo.SalesEnquiriesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	44, // 143: Scailo.SalesEnquiriesService.ViewAssociatedSalesOrdersIDs:output_type -> Scailo.IdentifiersList
-	51, // 144: Scailo.SalesEnquiriesService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	49, // 145: Scailo.SalesEnquiriesService.DownloadByUUID:output_type -> Scailo.StandardFile
-	10, // 146: Scailo.SalesEnquiriesService.SearchAll:output_type -> Scailo.SalesEnquiriesList
-	10, // 147: Scailo.SalesEnquiriesService.Filter:output_type -> Scailo.SalesEnquiriesList
-	52, // 148: Scailo.SalesEnquiriesService.CountInStatus:output_type -> Scailo.CountResponse
-	52, // 149: Scailo.SalesEnquiriesService.Count:output_type -> Scailo.CountResponse
-	49, // 150: Scailo.SalesEnquiriesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	94, // [94:151] is the sub-list for method output_type
-	37, // [37:94] is the sub-list for method input_type
+	35, // 53: Scailo.SalesEnquiriesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	32, // 54: Scailo.SalesEnquiriesService.Amend:input_type -> Scailo.IdentifierUUIDWithUserComment
+	36, // 55: Scailo.SalesEnquiriesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	7,  // 56: Scailo.SalesEnquiriesService.AddSalesEnquiryItem:input_type -> Scailo.SalesEnquiriesServiceItemCreateRequest
+	8,  // 57: Scailo.SalesEnquiriesService.ModifySalesEnquiryItem:input_type -> Scailo.SalesEnquiriesServiceItemUpdateRequest
+	37, // 58: Scailo.SalesEnquiriesService.ApproveSalesEnquiryItem:input_type -> Scailo.IdentifierWithUserComment
+	37, // 59: Scailo.SalesEnquiriesService.DeleteSalesEnquiryItem:input_type -> Scailo.IdentifierWithUserComment
+	38, // 60: Scailo.SalesEnquiriesService.ReorderSalesEnquiryItems:input_type -> Scailo.ReorderItemsRequest
+	39, // 61: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemByID:input_type -> Scailo.Identifier
+	40, // 62: Scailo.SalesEnquiriesService.ViewApprovedSalesEnquiryItems:input_type -> Scailo.IdentifierWithSearchKey
+	40, // 63: Scailo.SalesEnquiriesService.ViewUnapprovedSalesEnquiryItems:input_type -> Scailo.IdentifierWithSearchKey
+	12, // 64: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemHistory:input_type -> Scailo.SalesEnquiryItemHistoryRequest
+	13, // 65: Scailo.SalesEnquiriesService.ViewPaginatedApprovedSalesEnquiryItems:input_type -> Scailo.SalesEnquiryItemsSearchRequest
+	13, // 66: Scailo.SalesEnquiriesService.ViewPaginatedUnapprovedSalesEnquiryItems:input_type -> Scailo.SalesEnquiryItemsSearchRequest
+	13, // 67: Scailo.SalesEnquiriesService.SearchItemsWithPagination:input_type -> Scailo.SalesEnquiryItemsSearchRequest
+	41, // 68: Scailo.SalesEnquiriesService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	42, // 69: Scailo.SalesEnquiriesService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	43, // 70: Scailo.SalesEnquiriesService.UploadSalesEnquiryItems:input_type -> Scailo.IdentifierUUIDWithFile
+	20, // 71: Scailo.SalesEnquiriesService.AddSalesEnquiryContact:input_type -> Scailo.SalesEnquiriesServiceContactCreateRequest
+	37, // 72: Scailo.SalesEnquiriesService.ApproveSalesEnquiryContact:input_type -> Scailo.IdentifierWithUserComment
+	37, // 73: Scailo.SalesEnquiriesService.DeleteSalesEnquiryContact:input_type -> Scailo.IdentifierWithUserComment
+	39, // 74: Scailo.SalesEnquiriesService.ViewSalesEnquiryContactByID:input_type -> Scailo.Identifier
+	41, // 75: Scailo.SalesEnquiriesService.ViewSalesEnquiryContacts:input_type -> Scailo.IdentifierUUID
+	39, // 76: Scailo.SalesEnquiriesService.ViewByID:input_type -> Scailo.Identifier
+	41, // 77: Scailo.SalesEnquiriesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	44, // 78: Scailo.SalesEnquiriesService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	39, // 79: Scailo.SalesEnquiriesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	41, // 80: Scailo.SalesEnquiriesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	45, // 81: Scailo.SalesEnquiriesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	41, // 82: Scailo.SalesEnquiriesService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	46, // 83: Scailo.SalesEnquiriesService.ViewAll:input_type -> Scailo.ActiveStatus
+	41, // 84: Scailo.SalesEnquiriesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	15, // 85: Scailo.SalesEnquiriesService.ViewWithPagination:input_type -> Scailo.SalesEnquiriesServicePaginationReq
+	39, // 86: Scailo.SalesEnquiriesService.ViewAmendments:input_type -> Scailo.Identifier
+	39, // 87: Scailo.SalesEnquiriesService.ViewAssociatedSalesOrdersIDs:input_type -> Scailo.Identifier
+	41, // 88: Scailo.SalesEnquiriesService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	41, // 89: Scailo.SalesEnquiriesService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	19, // 90: Scailo.SalesEnquiriesService.SearchAll:input_type -> Scailo.SalesEnquiriesServiceSearchAllReq
+	17, // 91: Scailo.SalesEnquiriesService.Filter:input_type -> Scailo.SalesEnquiriesServiceFilterReq
+	47, // 92: Scailo.SalesEnquiriesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	18, // 93: Scailo.SalesEnquiriesService.Count:input_type -> Scailo.SalesEnquiriesServiceCountReq
+	17, // 94: Scailo.SalesEnquiriesService.DownloadAsCSV:input_type -> Scailo.SalesEnquiriesServiceFilterReq
+	48, // 95: Scailo.SalesEnquiriesService.Create:output_type -> Scailo.IdentifierResponse
+	48, // 96: Scailo.SalesEnquiriesService.Draft:output_type -> Scailo.IdentifierResponse
+	48, // 97: Scailo.SalesEnquiriesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 98: Scailo.SalesEnquiriesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	48, // 99: Scailo.SalesEnquiriesService.Verify:output_type -> Scailo.IdentifierResponse
+	48, // 100: Scailo.SalesEnquiriesService.Approve:output_type -> Scailo.IdentifierResponse
+	48, // 101: Scailo.SalesEnquiriesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	48, // 102: Scailo.SalesEnquiriesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	48, // 103: Scailo.SalesEnquiriesService.Halt:output_type -> Scailo.IdentifierResponse
+	48, // 104: Scailo.SalesEnquiriesService.Discard:output_type -> Scailo.IdentifierResponse
+	48, // 105: Scailo.SalesEnquiriesService.Restore:output_type -> Scailo.IdentifierResponse
+	48, // 106: Scailo.SalesEnquiriesService.Complete:output_type -> Scailo.IdentifierResponse
+	48, // 107: Scailo.SalesEnquiriesService.Repeat:output_type -> Scailo.IdentifierResponse
+	48, // 108: Scailo.SalesEnquiriesService.Reopen:output_type -> Scailo.IdentifierResponse
+	48, // 109: Scailo.SalesEnquiriesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	48, // 110: Scailo.SalesEnquiriesService.SendEmail:output_type -> Scailo.IdentifierResponse
+	48, // 111: Scailo.SalesEnquiriesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	48, // 112: Scailo.SalesEnquiriesService.Amend:output_type -> Scailo.IdentifierResponse
+	49, // 113: Scailo.SalesEnquiriesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	48, // 114: Scailo.SalesEnquiriesService.AddSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
+	48, // 115: Scailo.SalesEnquiriesService.ModifySalesEnquiryItem:output_type -> Scailo.IdentifierResponse
+	48, // 116: Scailo.SalesEnquiriesService.ApproveSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
+	48, // 117: Scailo.SalesEnquiriesService.DeleteSalesEnquiryItem:output_type -> Scailo.IdentifierResponse
+	48, // 118: Scailo.SalesEnquiriesService.ReorderSalesEnquiryItems:output_type -> Scailo.IdentifierResponse
+	9,  // 119: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemByID:output_type -> Scailo.SalesEnquiryItem
+	11, // 120: Scailo.SalesEnquiriesService.ViewApprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesItemsList
+	11, // 121: Scailo.SalesEnquiriesService.ViewUnapprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesItemsList
+	11, // 122: Scailo.SalesEnquiriesService.ViewSalesEnquiryItemHistory:output_type -> Scailo.SalesEnquiriesItemsList
+	14, // 123: Scailo.SalesEnquiriesService.ViewPaginatedApprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
+	14, // 124: Scailo.SalesEnquiriesService.ViewPaginatedUnapprovedSalesEnquiryItems:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
+	14, // 125: Scailo.SalesEnquiriesService.SearchItemsWithPagination:output_type -> Scailo.SalesEnquiriesServicePaginatedItemsResponse
+	50, // 126: Scailo.SalesEnquiriesService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	50, // 127: Scailo.SalesEnquiriesService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	45, // 128: Scailo.SalesEnquiriesService.UploadSalesEnquiryItems:output_type -> Scailo.IdentifiersList
+	48, // 129: Scailo.SalesEnquiriesService.AddSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
+	48, // 130: Scailo.SalesEnquiriesService.ApproveSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
+	48, // 131: Scailo.SalesEnquiriesService.DeleteSalesEnquiryContact:output_type -> Scailo.IdentifierResponse
+	21, // 132: Scailo.SalesEnquiriesService.ViewSalesEnquiryContactByID:output_type -> Scailo.SalesEnquiryContact
+	22, // 133: Scailo.SalesEnquiriesService.ViewSalesEnquiryContacts:output_type -> Scailo.SalesEnquiryContactsList
+	6,  // 134: Scailo.SalesEnquiriesService.ViewByID:output_type -> Scailo.SalesEnquiry
+	6,  // 135: Scailo.SalesEnquiriesService.ViewByUUID:output_type -> Scailo.SalesEnquiry
+	6,  // 136: Scailo.SalesEnquiriesService.ViewByReferenceID:output_type -> Scailo.SalesEnquiry
+	6,  // 137: Scailo.SalesEnquiriesService.ViewEssentialByID:output_type -> Scailo.SalesEnquiry
+	6,  // 138: Scailo.SalesEnquiriesService.ViewEssentialByUUID:output_type -> Scailo.SalesEnquiry
+	10, // 139: Scailo.SalesEnquiriesService.ViewFromIDs:output_type -> Scailo.SalesEnquiriesList
+	5,  // 140: Scailo.SalesEnquiriesService.ViewAncillaryParametersByUUID:output_type -> Scailo.SalesEnquiryAncillaryParameters
+	10, // 141: Scailo.SalesEnquiriesService.ViewAll:output_type -> Scailo.SalesEnquiriesList
+	10, // 142: Scailo.SalesEnquiriesService.ViewAllForEntityUUID:output_type -> Scailo.SalesEnquiriesList
+	16, // 143: Scailo.SalesEnquiriesService.ViewWithPagination:output_type -> Scailo.SalesEnquiriesServicePaginationResponse
+	51, // 144: Scailo.SalesEnquiriesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	45, // 145: Scailo.SalesEnquiriesService.ViewAssociatedSalesOrdersIDs:output_type -> Scailo.IdentifiersList
+	52, // 146: Scailo.SalesEnquiriesService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	50, // 147: Scailo.SalesEnquiriesService.DownloadByUUID:output_type -> Scailo.StandardFile
+	10, // 148: Scailo.SalesEnquiriesService.SearchAll:output_type -> Scailo.SalesEnquiriesList
+	10, // 149: Scailo.SalesEnquiriesService.Filter:output_type -> Scailo.SalesEnquiriesList
+	53, // 150: Scailo.SalesEnquiriesService.CountInStatus:output_type -> Scailo.CountResponse
+	53, // 151: Scailo.SalesEnquiriesService.Count:output_type -> Scailo.CountResponse
+	50, // 152: Scailo.SalesEnquiriesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	95, // [95:153] is the sub-list for method output_type
+	37, // [37:95] is the sub-list for method input_type
 	37, // [37:37] is the sub-list for extension type_name
 	37, // [37:37] is the sub-list for extension extendee
 	0,  // [0:37] is the sub-list for field type_name
@@ -3800,6 +3804,7 @@ func file_sales_enquiries_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

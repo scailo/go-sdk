@@ -3090,7 +3090,7 @@ var File_production_plans_scailo_proto protoreflect.FileDescriptor
 
 const file_production_plans_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproduction_plans.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xb6\x04\n" +
+	"\x1dproduction_plans.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xb6\x04\n" +
 	"#ProductionPlansServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3363,7 +3363,7 @@ const file_production_plans_scailo_proto_rawDesc = "" +
 	"\x1bPRODUCTION_PLAN_ITEM_STATUS\x12/\n" +
 	"+PRODUCTION_PLAN_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12(\n" +
 	"$PRODUCTION_PLAN_ITEM_STATUS_APPROVED\x10\x01\x12*\n" +
-	"&PRODUCTION_PLAN_ITEM_STATUS_UNAPPROVED\x10\x022\xbc(\n" +
+	"&PRODUCTION_PLAN_ITEM_STATUS_UNAPPROVED\x10\x022\x8f)\n" +
 	"\x16ProductionPlansService\x12Q\n" +
 	"\x06Create\x12+.Scailo.ProductionPlansServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\x05Draft\x12+.Scailo.ProductionPlansServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
@@ -3381,7 +3381,8 @@ const file_production_plans_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12U\n" +
 	"\bAutofill\x12-.Scailo.ProductionPlansServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12d\n" +
@@ -3483,26 +3484,27 @@ var file_production_plans_scailo_proto_goTypes = []any{
 	(FAMILY_TYPE)(0),                                                   // 35: Scailo.FAMILY_TYPE
 	(*IdentifierUUIDWithUserComment)(nil),                              // 36: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                              // 37: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 38: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                             // 39: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                                  // 40: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                        // 41: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                 // 42: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                                    // 43: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                      // 44: Scailo.Empty
-	(*IdentifierUUIDWithFile)(nil),                                     // 45: Scailo.IdentifierUUIDWithFile
-	(*SimpleSearchReq)(nil),                                            // 46: Scailo.SimpleSearchReq
-	(*IdentifiersList)(nil),                                            // 47: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                               // 48: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                             // 49: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                                    // 50: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                         // 51: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                                  // 52: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                            // 53: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                               // 54: Scailo.StandardFile
-	(*FamiliesList)(nil),                                               // 55: Scailo.FamiliesList
-	(*QuantityResponse)(nil),                                           // 56: Scailo.QuantityResponse
-	(*CountResponse)(nil),                                              // 57: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                                   // 38: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),          // 39: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                             // 40: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                                  // 41: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                        // 42: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                 // 43: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                                    // 44: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                      // 45: Scailo.Empty
+	(*IdentifierUUIDWithFile)(nil),                                     // 46: Scailo.IdentifierUUIDWithFile
+	(*SimpleSearchReq)(nil),                                            // 47: Scailo.SimpleSearchReq
+	(*IdentifiersList)(nil),                                            // 48: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                               // 49: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                             // 50: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                                    // 51: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                         // 52: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                                  // 53: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                            // 54: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                               // 55: Scailo.StandardFile
+	(*FamiliesList)(nil),                                               // 56: Scailo.FamiliesList
+	(*QuantityResponse)(nil),                                           // 57: Scailo.QuantityResponse
+	(*CountResponse)(nil),                                              // 58: Scailo.CountResponse
 }
 var file_production_plans_scailo_proto_depIdxs = []int32{
 	0,   // 0: Scailo.ProductionPlansServiceCreateRequest.ref_from:type_name -> Scailo.PRODUCTION_PLAN_REF_FROM
@@ -3563,110 +3565,112 @@ var file_production_plans_scailo_proto_depIdxs = []int32{
 	36,  // 55: Scailo.ProductionPlansService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	36,  // 56: Scailo.ProductionPlansService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	37,  // 57: Scailo.ProductionPlansService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	38,  // 58: Scailo.ProductionPlansService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	6,   // 59: Scailo.ProductionPlansService.Autofill:input_type -> Scailo.ProductionPlansServiceAutofillRequest
-	39,  // 60: Scailo.ProductionPlansService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	9,   // 61: Scailo.ProductionPlansService.AddProductionPlanItem:input_type -> Scailo.ProductionPlansServiceItemCreateRequest
-	10,  // 62: Scailo.ProductionPlansService.ModifyProductionPlanItem:input_type -> Scailo.ProductionPlansServiceItemUpdateRequest
-	40,  // 63: Scailo.ProductionPlansService.ApproveProductionPlanItem:input_type -> Scailo.IdentifierWithUserComment
-	40,  // 64: Scailo.ProductionPlansService.DeleteProductionPlanItem:input_type -> Scailo.IdentifierWithUserComment
-	41,  // 65: Scailo.ProductionPlansService.ReorderProductionPlanItems:input_type -> Scailo.ReorderItemsRequest
-	42,  // 66: Scailo.ProductionPlansService.ViewProductionPlanItemByID:input_type -> Scailo.Identifier
-	43,  // 67: Scailo.ProductionPlansService.ViewApprovedProductionPlanItems:input_type -> Scailo.IdentifierWithSearchKey
-	43,  // 68: Scailo.ProductionPlansService.ViewUnapprovedProductionPlanItems:input_type -> Scailo.IdentifierWithSearchKey
-	14,  // 69: Scailo.ProductionPlansService.ViewProductionPlanItemHistory:input_type -> Scailo.ProductionPlanItemHistoryRequest
-	22,  // 70: Scailo.ProductionPlansService.ViewPaginatedApprovedProductionPlanItems:input_type -> Scailo.ProductionPlanItemsSearchRequest
-	22,  // 71: Scailo.ProductionPlansService.ViewPaginatedUnapprovedProductionPlanItems:input_type -> Scailo.ProductionPlanItemsSearchRequest
-	22,  // 72: Scailo.ProductionPlansService.SearchItemsWithPagination:input_type -> Scailo.ProductionPlanItemsSearchRequest
-	39,  // 73: Scailo.ProductionPlansService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	44,  // 74: Scailo.ProductionPlansService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	45,  // 75: Scailo.ProductionPlansService.UploadProductionPlanItems:input_type -> Scailo.IdentifierUUIDWithFile
-	42,  // 76: Scailo.ProductionPlansService.ViewByID:input_type -> Scailo.Identifier
-	39,  // 77: Scailo.ProductionPlansService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	46,  // 78: Scailo.ProductionPlansService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	42,  // 79: Scailo.ProductionPlansService.ViewEssentialByID:input_type -> Scailo.Identifier
-	39,  // 80: Scailo.ProductionPlansService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	47,  // 81: Scailo.ProductionPlansService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	39,  // 82: Scailo.ProductionPlansService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	48,  // 83: Scailo.ProductionPlansService.ViewAll:input_type -> Scailo.ActiveStatus
-	39,  // 84: Scailo.ProductionPlansService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	17,  // 85: Scailo.ProductionPlansService.ViewWithPagination:input_type -> Scailo.ProductionPlansServicePaginationReq
-	43,  // 86: Scailo.ProductionPlansService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	49,  // 87: Scailo.ProductionPlansService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	15,  // 88: Scailo.ProductionPlansService.ViewProspectiveProductionPlanItem:input_type -> Scailo.ProductionPlanItemProspectiveInfoRequest
-	15,  // 89: Scailo.ProductionPlansService.ViewRemainingProductionQuantity:input_type -> Scailo.ProductionPlanItemProspectiveInfoRequest
-	39,  // 90: Scailo.ProductionPlansService.ViewProductionStatistics:input_type -> Scailo.IdentifierUUID
-	43,  // 91: Scailo.ProductionPlansService.ViewFamiliesInProductionPlan:input_type -> Scailo.IdentifierWithSearchKey
-	49,  // 92: Scailo.ProductionPlansService.FilterFamiliesInProductionPlan:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	16,  // 93: Scailo.ProductionPlansService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.ProductionPlansServiceAlreadyAddedQuantityForSourceRequest
-	39,  // 94: Scailo.ProductionPlansService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	39,  // 95: Scailo.ProductionPlansService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	21,  // 96: Scailo.ProductionPlansService.SearchAll:input_type -> Scailo.ProductionPlansServiceSearchAllReq
-	19,  // 97: Scailo.ProductionPlansService.Filter:input_type -> Scailo.ProductionPlansServiceFilterReq
-	50,  // 98: Scailo.ProductionPlansService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	20,  // 99: Scailo.ProductionPlansService.Count:input_type -> Scailo.ProductionPlansServiceCountReq
-	19,  // 100: Scailo.ProductionPlansService.DownloadAsCSV:input_type -> Scailo.ProductionPlansServiceFilterReq
-	51,  // 101: Scailo.ProductionPlansService.Create:output_type -> Scailo.IdentifierResponse
-	51,  // 102: Scailo.ProductionPlansService.Draft:output_type -> Scailo.IdentifierResponse
-	51,  // 103: Scailo.ProductionPlansService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 104: Scailo.ProductionPlansService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	51,  // 105: Scailo.ProductionPlansService.Verify:output_type -> Scailo.IdentifierResponse
-	51,  // 106: Scailo.ProductionPlansService.Approve:output_type -> Scailo.IdentifierResponse
-	51,  // 107: Scailo.ProductionPlansService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	51,  // 108: Scailo.ProductionPlansService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	51,  // 109: Scailo.ProductionPlansService.Halt:output_type -> Scailo.IdentifierResponse
-	51,  // 110: Scailo.ProductionPlansService.Discard:output_type -> Scailo.IdentifierResponse
-	51,  // 111: Scailo.ProductionPlansService.Restore:output_type -> Scailo.IdentifierResponse
-	51,  // 112: Scailo.ProductionPlansService.Complete:output_type -> Scailo.IdentifierResponse
-	51,  // 113: Scailo.ProductionPlansService.Repeat:output_type -> Scailo.IdentifierResponse
-	51,  // 114: Scailo.ProductionPlansService.Reopen:output_type -> Scailo.IdentifierResponse
-	51,  // 115: Scailo.ProductionPlansService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	51,  // 116: Scailo.ProductionPlansService.SendEmail:output_type -> Scailo.IdentifierResponse
-	52,  // 117: Scailo.ProductionPlansService.CreateMagicLink:output_type -> Scailo.MagicLink
-	51,  // 118: Scailo.ProductionPlansService.Autofill:output_type -> Scailo.IdentifierResponse
-	53,  // 119: Scailo.ProductionPlansService.IsCompletable:output_type -> Scailo.BooleanResponse
-	51,  // 120: Scailo.ProductionPlansService.AddProductionPlanItem:output_type -> Scailo.IdentifierResponse
-	51,  // 121: Scailo.ProductionPlansService.ModifyProductionPlanItem:output_type -> Scailo.IdentifierResponse
-	51,  // 122: Scailo.ProductionPlansService.ApproveProductionPlanItem:output_type -> Scailo.IdentifierResponse
-	51,  // 123: Scailo.ProductionPlansService.DeleteProductionPlanItem:output_type -> Scailo.IdentifierResponse
-	51,  // 124: Scailo.ProductionPlansService.ReorderProductionPlanItems:output_type -> Scailo.IdentifierResponse
-	11,  // 125: Scailo.ProductionPlansService.ViewProductionPlanItemByID:output_type -> Scailo.ProductionPlanItem
-	13,  // 126: Scailo.ProductionPlansService.ViewApprovedProductionPlanItems:output_type -> Scailo.ProductionPlansItemsList
-	13,  // 127: Scailo.ProductionPlansService.ViewUnapprovedProductionPlanItems:output_type -> Scailo.ProductionPlansItemsList
-	13,  // 128: Scailo.ProductionPlansService.ViewProductionPlanItemHistory:output_type -> Scailo.ProductionPlansItemsList
-	23,  // 129: Scailo.ProductionPlansService.ViewPaginatedApprovedProductionPlanItems:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
-	23,  // 130: Scailo.ProductionPlansService.ViewPaginatedUnapprovedProductionPlanItems:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
-	23,  // 131: Scailo.ProductionPlansService.SearchItemsWithPagination:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
-	54,  // 132: Scailo.ProductionPlansService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	54,  // 133: Scailo.ProductionPlansService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	47,  // 134: Scailo.ProductionPlansService.UploadProductionPlanItems:output_type -> Scailo.IdentifiersList
-	8,   // 135: Scailo.ProductionPlansService.ViewByID:output_type -> Scailo.ProductionPlan
-	8,   // 136: Scailo.ProductionPlansService.ViewByUUID:output_type -> Scailo.ProductionPlan
-	8,   // 137: Scailo.ProductionPlansService.ViewByReferenceID:output_type -> Scailo.ProductionPlan
-	8,   // 138: Scailo.ProductionPlansService.ViewEssentialByID:output_type -> Scailo.ProductionPlan
-	8,   // 139: Scailo.ProductionPlansService.ViewEssentialByUUID:output_type -> Scailo.ProductionPlan
-	12,  // 140: Scailo.ProductionPlansService.ViewFromIDs:output_type -> Scailo.ProductionPlansList
-	7,   // 141: Scailo.ProductionPlansService.ViewAncillaryParametersByUUID:output_type -> Scailo.ProductionPlanAncillaryParameters
-	12,  // 142: Scailo.ProductionPlansService.ViewAll:output_type -> Scailo.ProductionPlansList
-	12,  // 143: Scailo.ProductionPlansService.ViewAllForEntityUUID:output_type -> Scailo.ProductionPlansList
-	18,  // 144: Scailo.ProductionPlansService.ViewWithPagination:output_type -> Scailo.ProductionPlansServicePaginationResponse
-	55,  // 145: Scailo.ProductionPlansService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	55,  // 146: Scailo.ProductionPlansService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	9,   // 147: Scailo.ProductionPlansService.ViewProspectiveProductionPlanItem:output_type -> Scailo.ProductionPlansServiceItemCreateRequest
-	56,  // 148: Scailo.ProductionPlansService.ViewRemainingProductionQuantity:output_type -> Scailo.QuantityResponse
-	25,  // 149: Scailo.ProductionPlansService.ViewProductionStatistics:output_type -> Scailo.ProductionPlanProductionStatisticsList
-	55,  // 150: Scailo.ProductionPlansService.ViewFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
-	55,  // 151: Scailo.ProductionPlansService.FilterFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
-	56,  // 152: Scailo.ProductionPlansService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.QuantityResponse
-	53,  // 153: Scailo.ProductionPlansService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	54,  // 154: Scailo.ProductionPlansService.DownloadByUUID:output_type -> Scailo.StandardFile
-	12,  // 155: Scailo.ProductionPlansService.SearchAll:output_type -> Scailo.ProductionPlansList
-	12,  // 156: Scailo.ProductionPlansService.Filter:output_type -> Scailo.ProductionPlansList
-	57,  // 157: Scailo.ProductionPlansService.CountInStatus:output_type -> Scailo.CountResponse
-	57,  // 158: Scailo.ProductionPlansService.Count:output_type -> Scailo.CountResponse
-	54,  // 159: Scailo.ProductionPlansService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	101, // [101:160] is the sub-list for method output_type
-	42,  // [42:101] is the sub-list for method input_type
+	38,  // 58: Scailo.ProductionPlansService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	39,  // 59: Scailo.ProductionPlansService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	6,   // 60: Scailo.ProductionPlansService.Autofill:input_type -> Scailo.ProductionPlansServiceAutofillRequest
+	40,  // 61: Scailo.ProductionPlansService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	9,   // 62: Scailo.ProductionPlansService.AddProductionPlanItem:input_type -> Scailo.ProductionPlansServiceItemCreateRequest
+	10,  // 63: Scailo.ProductionPlansService.ModifyProductionPlanItem:input_type -> Scailo.ProductionPlansServiceItemUpdateRequest
+	41,  // 64: Scailo.ProductionPlansService.ApproveProductionPlanItem:input_type -> Scailo.IdentifierWithUserComment
+	41,  // 65: Scailo.ProductionPlansService.DeleteProductionPlanItem:input_type -> Scailo.IdentifierWithUserComment
+	42,  // 66: Scailo.ProductionPlansService.ReorderProductionPlanItems:input_type -> Scailo.ReorderItemsRequest
+	43,  // 67: Scailo.ProductionPlansService.ViewProductionPlanItemByID:input_type -> Scailo.Identifier
+	44,  // 68: Scailo.ProductionPlansService.ViewApprovedProductionPlanItems:input_type -> Scailo.IdentifierWithSearchKey
+	44,  // 69: Scailo.ProductionPlansService.ViewUnapprovedProductionPlanItems:input_type -> Scailo.IdentifierWithSearchKey
+	14,  // 70: Scailo.ProductionPlansService.ViewProductionPlanItemHistory:input_type -> Scailo.ProductionPlanItemHistoryRequest
+	22,  // 71: Scailo.ProductionPlansService.ViewPaginatedApprovedProductionPlanItems:input_type -> Scailo.ProductionPlanItemsSearchRequest
+	22,  // 72: Scailo.ProductionPlansService.ViewPaginatedUnapprovedProductionPlanItems:input_type -> Scailo.ProductionPlanItemsSearchRequest
+	22,  // 73: Scailo.ProductionPlansService.SearchItemsWithPagination:input_type -> Scailo.ProductionPlanItemsSearchRequest
+	40,  // 74: Scailo.ProductionPlansService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	45,  // 75: Scailo.ProductionPlansService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	46,  // 76: Scailo.ProductionPlansService.UploadProductionPlanItems:input_type -> Scailo.IdentifierUUIDWithFile
+	43,  // 77: Scailo.ProductionPlansService.ViewByID:input_type -> Scailo.Identifier
+	40,  // 78: Scailo.ProductionPlansService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 79: Scailo.ProductionPlansService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	43,  // 80: Scailo.ProductionPlansService.ViewEssentialByID:input_type -> Scailo.Identifier
+	40,  // 81: Scailo.ProductionPlansService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	48,  // 82: Scailo.ProductionPlansService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	40,  // 83: Scailo.ProductionPlansService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	49,  // 84: Scailo.ProductionPlansService.ViewAll:input_type -> Scailo.ActiveStatus
+	40,  // 85: Scailo.ProductionPlansService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	17,  // 86: Scailo.ProductionPlansService.ViewWithPagination:input_type -> Scailo.ProductionPlansServicePaginationReq
+	44,  // 87: Scailo.ProductionPlansService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	50,  // 88: Scailo.ProductionPlansService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	15,  // 89: Scailo.ProductionPlansService.ViewProspectiveProductionPlanItem:input_type -> Scailo.ProductionPlanItemProspectiveInfoRequest
+	15,  // 90: Scailo.ProductionPlansService.ViewRemainingProductionQuantity:input_type -> Scailo.ProductionPlanItemProspectiveInfoRequest
+	40,  // 91: Scailo.ProductionPlansService.ViewProductionStatistics:input_type -> Scailo.IdentifierUUID
+	44,  // 92: Scailo.ProductionPlansService.ViewFamiliesInProductionPlan:input_type -> Scailo.IdentifierWithSearchKey
+	50,  // 93: Scailo.ProductionPlansService.FilterFamiliesInProductionPlan:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	16,  // 94: Scailo.ProductionPlansService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.ProductionPlansServiceAlreadyAddedQuantityForSourceRequest
+	40,  // 95: Scailo.ProductionPlansService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	40,  // 96: Scailo.ProductionPlansService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	21,  // 97: Scailo.ProductionPlansService.SearchAll:input_type -> Scailo.ProductionPlansServiceSearchAllReq
+	19,  // 98: Scailo.ProductionPlansService.Filter:input_type -> Scailo.ProductionPlansServiceFilterReq
+	51,  // 99: Scailo.ProductionPlansService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	20,  // 100: Scailo.ProductionPlansService.Count:input_type -> Scailo.ProductionPlansServiceCountReq
+	19,  // 101: Scailo.ProductionPlansService.DownloadAsCSV:input_type -> Scailo.ProductionPlansServiceFilterReq
+	52,  // 102: Scailo.ProductionPlansService.Create:output_type -> Scailo.IdentifierResponse
+	52,  // 103: Scailo.ProductionPlansService.Draft:output_type -> Scailo.IdentifierResponse
+	52,  // 104: Scailo.ProductionPlansService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 105: Scailo.ProductionPlansService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	52,  // 106: Scailo.ProductionPlansService.Verify:output_type -> Scailo.IdentifierResponse
+	52,  // 107: Scailo.ProductionPlansService.Approve:output_type -> Scailo.IdentifierResponse
+	52,  // 108: Scailo.ProductionPlansService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	52,  // 109: Scailo.ProductionPlansService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	52,  // 110: Scailo.ProductionPlansService.Halt:output_type -> Scailo.IdentifierResponse
+	52,  // 111: Scailo.ProductionPlansService.Discard:output_type -> Scailo.IdentifierResponse
+	52,  // 112: Scailo.ProductionPlansService.Restore:output_type -> Scailo.IdentifierResponse
+	52,  // 113: Scailo.ProductionPlansService.Complete:output_type -> Scailo.IdentifierResponse
+	52,  // 114: Scailo.ProductionPlansService.Repeat:output_type -> Scailo.IdentifierResponse
+	52,  // 115: Scailo.ProductionPlansService.Reopen:output_type -> Scailo.IdentifierResponse
+	52,  // 116: Scailo.ProductionPlansService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	52,  // 117: Scailo.ProductionPlansService.SendEmail:output_type -> Scailo.IdentifierResponse
+	52,  // 118: Scailo.ProductionPlansService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	53,  // 119: Scailo.ProductionPlansService.CreateMagicLink:output_type -> Scailo.MagicLink
+	52,  // 120: Scailo.ProductionPlansService.Autofill:output_type -> Scailo.IdentifierResponse
+	54,  // 121: Scailo.ProductionPlansService.IsCompletable:output_type -> Scailo.BooleanResponse
+	52,  // 122: Scailo.ProductionPlansService.AddProductionPlanItem:output_type -> Scailo.IdentifierResponse
+	52,  // 123: Scailo.ProductionPlansService.ModifyProductionPlanItem:output_type -> Scailo.IdentifierResponse
+	52,  // 124: Scailo.ProductionPlansService.ApproveProductionPlanItem:output_type -> Scailo.IdentifierResponse
+	52,  // 125: Scailo.ProductionPlansService.DeleteProductionPlanItem:output_type -> Scailo.IdentifierResponse
+	52,  // 126: Scailo.ProductionPlansService.ReorderProductionPlanItems:output_type -> Scailo.IdentifierResponse
+	11,  // 127: Scailo.ProductionPlansService.ViewProductionPlanItemByID:output_type -> Scailo.ProductionPlanItem
+	13,  // 128: Scailo.ProductionPlansService.ViewApprovedProductionPlanItems:output_type -> Scailo.ProductionPlansItemsList
+	13,  // 129: Scailo.ProductionPlansService.ViewUnapprovedProductionPlanItems:output_type -> Scailo.ProductionPlansItemsList
+	13,  // 130: Scailo.ProductionPlansService.ViewProductionPlanItemHistory:output_type -> Scailo.ProductionPlansItemsList
+	23,  // 131: Scailo.ProductionPlansService.ViewPaginatedApprovedProductionPlanItems:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
+	23,  // 132: Scailo.ProductionPlansService.ViewPaginatedUnapprovedProductionPlanItems:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
+	23,  // 133: Scailo.ProductionPlansService.SearchItemsWithPagination:output_type -> Scailo.ProductionPlansServicePaginatedItemsResponse
+	55,  // 134: Scailo.ProductionPlansService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	55,  // 135: Scailo.ProductionPlansService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	48,  // 136: Scailo.ProductionPlansService.UploadProductionPlanItems:output_type -> Scailo.IdentifiersList
+	8,   // 137: Scailo.ProductionPlansService.ViewByID:output_type -> Scailo.ProductionPlan
+	8,   // 138: Scailo.ProductionPlansService.ViewByUUID:output_type -> Scailo.ProductionPlan
+	8,   // 139: Scailo.ProductionPlansService.ViewByReferenceID:output_type -> Scailo.ProductionPlan
+	8,   // 140: Scailo.ProductionPlansService.ViewEssentialByID:output_type -> Scailo.ProductionPlan
+	8,   // 141: Scailo.ProductionPlansService.ViewEssentialByUUID:output_type -> Scailo.ProductionPlan
+	12,  // 142: Scailo.ProductionPlansService.ViewFromIDs:output_type -> Scailo.ProductionPlansList
+	7,   // 143: Scailo.ProductionPlansService.ViewAncillaryParametersByUUID:output_type -> Scailo.ProductionPlanAncillaryParameters
+	12,  // 144: Scailo.ProductionPlansService.ViewAll:output_type -> Scailo.ProductionPlansList
+	12,  // 145: Scailo.ProductionPlansService.ViewAllForEntityUUID:output_type -> Scailo.ProductionPlansList
+	18,  // 146: Scailo.ProductionPlansService.ViewWithPagination:output_type -> Scailo.ProductionPlansServicePaginationResponse
+	56,  // 147: Scailo.ProductionPlansService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	56,  // 148: Scailo.ProductionPlansService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	9,   // 149: Scailo.ProductionPlansService.ViewProspectiveProductionPlanItem:output_type -> Scailo.ProductionPlansServiceItemCreateRequest
+	57,  // 150: Scailo.ProductionPlansService.ViewRemainingProductionQuantity:output_type -> Scailo.QuantityResponse
+	25,  // 151: Scailo.ProductionPlansService.ViewProductionStatistics:output_type -> Scailo.ProductionPlanProductionStatisticsList
+	56,  // 152: Scailo.ProductionPlansService.ViewFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
+	56,  // 153: Scailo.ProductionPlansService.FilterFamiliesInProductionPlan:output_type -> Scailo.FamiliesList
+	57,  // 154: Scailo.ProductionPlansService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.QuantityResponse
+	54,  // 155: Scailo.ProductionPlansService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	55,  // 156: Scailo.ProductionPlansService.DownloadByUUID:output_type -> Scailo.StandardFile
+	12,  // 157: Scailo.ProductionPlansService.SearchAll:output_type -> Scailo.ProductionPlansList
+	12,  // 158: Scailo.ProductionPlansService.Filter:output_type -> Scailo.ProductionPlansList
+	58,  // 159: Scailo.ProductionPlansService.CountInStatus:output_type -> Scailo.CountResponse
+	58,  // 160: Scailo.ProductionPlansService.Count:output_type -> Scailo.CountResponse
+	55,  // 161: Scailo.ProductionPlansService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	102, // [102:162] is the sub-list for method output_type
+	42,  // [42:102] is the sub-list for method input_type
 	42,  // [42:42] is the sub-list for extension type_name
 	42,  // [42:42] is the sub-list for extension extendee
 	0,   // [0:42] is the sub-list for field type_name
@@ -3681,6 +3685,7 @@ func file_production_plans_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

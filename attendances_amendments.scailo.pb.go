@@ -1859,7 +1859,7 @@ var File_attendances_amendments_scailo_proto protoreflect.FileDescriptor
 
 const file_attendances_amendments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"#attendances_amendments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xad\x04\n" +
+	"#attendances_amendments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xad\x04\n" +
 	")AttendancesAmendmentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2012,7 +2012,7 @@ const file_attendances_amendments_scailo_proto_rawDesc = "" +
 	"8ATTENDANCE_AMENDMENT_SORT_KEY_ATTENDANCE_ENTRY_TIMESTAMP\x10\r\x12;\n" +
 	"7ATTENDANCE_AMENDMENT_SORT_KEY_ATTENDANCE_EXIT_TIMESTAMP\x10\x0e\x12;\n" +
 	"7ATTENDANCE_AMENDMENT_SORT_KEY_AMENDMENT_ENTRY_TIMESTAMP\x10\x0f\x12:\n" +
-	"6ATTENDANCE_AMENDMENT_SORT_KEY_AMENDMENT_EXIT_TIMESTAMP\x10\x102\x8c\x12\n" +
+	"6ATTENDANCE_AMENDMENT_SORT_KEY_AMENDMENT_EXIT_TIMESTAMP\x10\x102\xdf\x12\n" +
 	"\x1cAttendancesAmendmentsService\x12W\n" +
 	"\x06Create\x121.Scailo.AttendancesAmendmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12V\n" +
 	"\x05Draft\x121.Scailo.AttendancesAmendmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\\\n" +
@@ -2028,7 +2028,8 @@ const file_attendances_amendments_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12;\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12;\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x1b.Scailo.AttendanceAmendment\x12A\n" +
 	"\n" +
 	"ViewByUUID\x12\x16.Scailo.IdentifierUUID\x1a\x1b.Scailo.AttendanceAmendment\x12D\n" +
@@ -2083,15 +2084,16 @@ var file_attendances_amendments_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                        // 17: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                    // 18: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                  // 19: Scailo.IdentifierUUIDWithUserComment
-	(*Identifier)(nil),                                     // 20: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                 // 21: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                // 22: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                   // 23: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                        // 24: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                             // 25: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                  // 26: Scailo.CountResponse
-	(*BooleanResponse)(nil),                                // 27: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                   // 28: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                       // 20: Scailo.VaultFolderAttachRequest
+	(*Identifier)(nil),                                     // 21: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                 // 22: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                // 23: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                   // 24: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                        // 25: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                             // 26: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                  // 27: Scailo.CountResponse
+	(*BooleanResponse)(nil),                                // 28: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                   // 29: Scailo.StandardFile
 }
 var file_attendances_amendments_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.AttendancesAmendmentsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2133,50 +2135,52 @@ var file_attendances_amendments_scailo_proto_depIdxs = []int32{
 	19, // 36: Scailo.AttendancesAmendmentsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 37: Scailo.AttendancesAmendmentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 38: Scailo.AttendancesAmendmentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	20, // 39: Scailo.AttendancesAmendmentsService.ViewByID:input_type -> Scailo.Identifier
-	21, // 40: Scailo.AttendancesAmendmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	20, // 41: Scailo.AttendancesAmendmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	21, // 42: Scailo.AttendancesAmendmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 43: Scailo.AttendancesAmendmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 44: Scailo.AttendancesAmendmentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	21, // 45: Scailo.AttendancesAmendmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 46: Scailo.AttendancesAmendmentsService.ViewWithPagination:input_type -> Scailo.AttendancesAmendmentsServicePaginationReq
-	9,  // 47: Scailo.AttendancesAmendmentsService.SearchAll:input_type -> Scailo.AttendancesAmendmentsServiceSearchAllReq
-	7,  // 48: Scailo.AttendancesAmendmentsService.Filter:input_type -> Scailo.AttendancesAmendmentsServiceFilterReq
-	24, // 49: Scailo.AttendancesAmendmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 50: Scailo.AttendancesAmendmentsService.Count:input_type -> Scailo.AttendancesAmendmentsServiceCountReq
-	20, // 51: Scailo.AttendancesAmendmentsService.CheckConflicts:input_type -> Scailo.Identifier
-	7,  // 52: Scailo.AttendancesAmendmentsService.DownloadAsCSV:input_type -> Scailo.AttendancesAmendmentsServiceFilterReq
-	25, // 53: Scailo.AttendancesAmendmentsService.Create:output_type -> Scailo.IdentifierResponse
-	25, // 54: Scailo.AttendancesAmendmentsService.Draft:output_type -> Scailo.IdentifierResponse
-	25, // 55: Scailo.AttendancesAmendmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 56: Scailo.AttendancesAmendmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	25, // 57: Scailo.AttendancesAmendmentsService.Verify:output_type -> Scailo.IdentifierResponse
-	25, // 58: Scailo.AttendancesAmendmentsService.Approve:output_type -> Scailo.IdentifierResponse
-	25, // 59: Scailo.AttendancesAmendmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	25, // 60: Scailo.AttendancesAmendmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	25, // 61: Scailo.AttendancesAmendmentsService.Halt:output_type -> Scailo.IdentifierResponse
-	25, // 62: Scailo.AttendancesAmendmentsService.Discard:output_type -> Scailo.IdentifierResponse
-	25, // 63: Scailo.AttendancesAmendmentsService.Restore:output_type -> Scailo.IdentifierResponse
-	25, // 64: Scailo.AttendancesAmendmentsService.Complete:output_type -> Scailo.IdentifierResponse
-	25, // 65: Scailo.AttendancesAmendmentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	25, // 66: Scailo.AttendancesAmendmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	3,  // 67: Scailo.AttendancesAmendmentsService.ViewByID:output_type -> Scailo.AttendanceAmendment
-	3,  // 68: Scailo.AttendancesAmendmentsService.ViewByUUID:output_type -> Scailo.AttendanceAmendment
-	3,  // 69: Scailo.AttendancesAmendmentsService.ViewEssentialByID:output_type -> Scailo.AttendanceAmendment
-	3,  // 70: Scailo.AttendancesAmendmentsService.ViewEssentialByUUID:output_type -> Scailo.AttendanceAmendment
-	4,  // 71: Scailo.AttendancesAmendmentsService.ViewFromIDs:output_type -> Scailo.AttendancesAmendmentsList
-	4,  // 72: Scailo.AttendancesAmendmentsService.ViewAll:output_type -> Scailo.AttendancesAmendmentsList
-	4,  // 73: Scailo.AttendancesAmendmentsService.ViewAllForEntityUUID:output_type -> Scailo.AttendancesAmendmentsList
-	6,  // 74: Scailo.AttendancesAmendmentsService.ViewWithPagination:output_type -> Scailo.AttendancesAmendmentsServicePaginationResponse
-	4,  // 75: Scailo.AttendancesAmendmentsService.SearchAll:output_type -> Scailo.AttendancesAmendmentsList
-	4,  // 76: Scailo.AttendancesAmendmentsService.Filter:output_type -> Scailo.AttendancesAmendmentsList
-	26, // 77: Scailo.AttendancesAmendmentsService.CountInStatus:output_type -> Scailo.CountResponse
-	26, // 78: Scailo.AttendancesAmendmentsService.Count:output_type -> Scailo.CountResponse
-	27, // 79: Scailo.AttendancesAmendmentsService.CheckConflicts:output_type -> Scailo.BooleanResponse
-	28, // 80: Scailo.AttendancesAmendmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	53, // [53:81] is the sub-list for method output_type
-	25, // [25:53] is the sub-list for method input_type
+	20, // 39: Scailo.AttendancesAmendmentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	21, // 40: Scailo.AttendancesAmendmentsService.ViewByID:input_type -> Scailo.Identifier
+	22, // 41: Scailo.AttendancesAmendmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	21, // 42: Scailo.AttendancesAmendmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	22, // 43: Scailo.AttendancesAmendmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 44: Scailo.AttendancesAmendmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	24, // 45: Scailo.AttendancesAmendmentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	22, // 46: Scailo.AttendancesAmendmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 47: Scailo.AttendancesAmendmentsService.ViewWithPagination:input_type -> Scailo.AttendancesAmendmentsServicePaginationReq
+	9,  // 48: Scailo.AttendancesAmendmentsService.SearchAll:input_type -> Scailo.AttendancesAmendmentsServiceSearchAllReq
+	7,  // 49: Scailo.AttendancesAmendmentsService.Filter:input_type -> Scailo.AttendancesAmendmentsServiceFilterReq
+	25, // 50: Scailo.AttendancesAmendmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 51: Scailo.AttendancesAmendmentsService.Count:input_type -> Scailo.AttendancesAmendmentsServiceCountReq
+	21, // 52: Scailo.AttendancesAmendmentsService.CheckConflicts:input_type -> Scailo.Identifier
+	7,  // 53: Scailo.AttendancesAmendmentsService.DownloadAsCSV:input_type -> Scailo.AttendancesAmendmentsServiceFilterReq
+	26, // 54: Scailo.AttendancesAmendmentsService.Create:output_type -> Scailo.IdentifierResponse
+	26, // 55: Scailo.AttendancesAmendmentsService.Draft:output_type -> Scailo.IdentifierResponse
+	26, // 56: Scailo.AttendancesAmendmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 57: Scailo.AttendancesAmendmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	26, // 58: Scailo.AttendancesAmendmentsService.Verify:output_type -> Scailo.IdentifierResponse
+	26, // 59: Scailo.AttendancesAmendmentsService.Approve:output_type -> Scailo.IdentifierResponse
+	26, // 60: Scailo.AttendancesAmendmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	26, // 61: Scailo.AttendancesAmendmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	26, // 62: Scailo.AttendancesAmendmentsService.Halt:output_type -> Scailo.IdentifierResponse
+	26, // 63: Scailo.AttendancesAmendmentsService.Discard:output_type -> Scailo.IdentifierResponse
+	26, // 64: Scailo.AttendancesAmendmentsService.Restore:output_type -> Scailo.IdentifierResponse
+	26, // 65: Scailo.AttendancesAmendmentsService.Complete:output_type -> Scailo.IdentifierResponse
+	26, // 66: Scailo.AttendancesAmendmentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	26, // 67: Scailo.AttendancesAmendmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	26, // 68: Scailo.AttendancesAmendmentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	3,  // 69: Scailo.AttendancesAmendmentsService.ViewByID:output_type -> Scailo.AttendanceAmendment
+	3,  // 70: Scailo.AttendancesAmendmentsService.ViewByUUID:output_type -> Scailo.AttendanceAmendment
+	3,  // 71: Scailo.AttendancesAmendmentsService.ViewEssentialByID:output_type -> Scailo.AttendanceAmendment
+	3,  // 72: Scailo.AttendancesAmendmentsService.ViewEssentialByUUID:output_type -> Scailo.AttendanceAmendment
+	4,  // 73: Scailo.AttendancesAmendmentsService.ViewFromIDs:output_type -> Scailo.AttendancesAmendmentsList
+	4,  // 74: Scailo.AttendancesAmendmentsService.ViewAll:output_type -> Scailo.AttendancesAmendmentsList
+	4,  // 75: Scailo.AttendancesAmendmentsService.ViewAllForEntityUUID:output_type -> Scailo.AttendancesAmendmentsList
+	6,  // 76: Scailo.AttendancesAmendmentsService.ViewWithPagination:output_type -> Scailo.AttendancesAmendmentsServicePaginationResponse
+	4,  // 77: Scailo.AttendancesAmendmentsService.SearchAll:output_type -> Scailo.AttendancesAmendmentsList
+	4,  // 78: Scailo.AttendancesAmendmentsService.Filter:output_type -> Scailo.AttendancesAmendmentsList
+	27, // 79: Scailo.AttendancesAmendmentsService.CountInStatus:output_type -> Scailo.CountResponse
+	27, // 80: Scailo.AttendancesAmendmentsService.Count:output_type -> Scailo.CountResponse
+	28, // 81: Scailo.AttendancesAmendmentsService.CheckConflicts:output_type -> Scailo.BooleanResponse
+	29, // 82: Scailo.AttendancesAmendmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	54, // [54:83] is the sub-list for method output_type
+	25, // [25:54] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2189,6 +2193,7 @@ func file_attendances_amendments_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

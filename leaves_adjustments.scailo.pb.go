@@ -2345,7 +2345,7 @@ var File_leaves_adjustments_scailo_proto protoreflect.FileDescriptor
 
 const file_leaves_adjustments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1fleaves_adjustments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xb1\x02\n" +
+	"\x1fleaves_adjustments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xb1\x02\n" +
 	"%LeavesAdjustmentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2533,7 +2533,7 @@ const file_leaves_adjustments_scailo_proto_rawDesc = "" +
 	"\x1eLEAVE_ADJUSTMENT_RECORD_STATUS\x122\n" +
 	".LEAVE_ADJUSTMENT_RECORD_STATUS_ANY_UNSPECIFIED\x10\x00\x12+\n" +
 	"'LEAVE_ADJUSTMENT_RECORD_STATUS_APPROVED\x10\x01\x12-\n" +
-	")LEAVE_ADJUSTMENT_RECORD_STATUS_UNAPPROVED\x10\x022\xd2\x1b\n" +
+	")LEAVE_ADJUSTMENT_RECORD_STATUS_UNAPPROVED\x10\x022\xa5\x1c\n" +
 	"\x18LeavesAdjustmentsService\x12S\n" +
 	"\x06Create\x12-.Scailo.LeavesAdjustmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
 	"\x05Draft\x12-.Scailo.LeavesAdjustmentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -2549,7 +2549,8 @@ const file_leaves_adjustments_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
 	"\x18AddLeaveAdjustmentRecord\x123.Scailo.LeavesAdjustmentsServiceRecordCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12n\n" +
 	"\x1bModifyLeaveAdjustmentRecord\x123.Scailo.LeavesAdjustmentsServiceRecordUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12]\n" +
 	"\x1cApproveLeaveAdjustmentRecord\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12\\\n" +
@@ -2621,17 +2622,18 @@ var file_leaves_adjustments_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                                         // 23: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                                          // 24: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                    // 25: Scailo.IdentifierUUIDWithUserComment
-	(*IdentifierWithUserComment)(nil),                        // 26: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                              // 27: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                       // 28: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                          // 29: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                                   // 30: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                  // 31: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                     // 32: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                          // 33: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                               // 34: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                                    // 35: Scailo.CountResponse
-	(*StandardFile)(nil),                                     // 36: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                         // 26: Scailo.VaultFolderAttachRequest
+	(*IdentifierWithUserComment)(nil),                        // 27: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                              // 28: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                       // 29: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                          // 30: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                                   // 31: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                  // 32: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                     // 33: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                          // 34: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                               // 35: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                                    // 36: Scailo.CountResponse
+	(*StandardFile)(nil),                                     // 37: Scailo.StandardFile
 }
 var file_leaves_adjustments_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.LeaveAdjustment.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2677,72 +2679,74 @@ var file_leaves_adjustments_scailo_proto_depIdxs = []int32{
 	25, // 40: Scailo.LeavesAdjustmentsService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 41: Scailo.LeavesAdjustmentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.LeavesAdjustmentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	6,  // 43: Scailo.LeavesAdjustmentsService.AddLeaveAdjustmentRecord:input_type -> Scailo.LeavesAdjustmentsServiceRecordCreateRequest
-	7,  // 44: Scailo.LeavesAdjustmentsService.ModifyLeaveAdjustmentRecord:input_type -> Scailo.LeavesAdjustmentsServiceRecordUpdateRequest
-	26, // 45: Scailo.LeavesAdjustmentsService.ApproveLeaveAdjustmentRecord:input_type -> Scailo.IdentifierWithUserComment
-	26, // 46: Scailo.LeavesAdjustmentsService.DeleteLeaveAdjustmentRecord:input_type -> Scailo.IdentifierWithUserComment
-	27, // 47: Scailo.LeavesAdjustmentsService.ReorderLeaveAdjustmentRecords:input_type -> Scailo.ReorderItemsRequest
-	28, // 48: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordByID:input_type -> Scailo.Identifier
-	29, // 49: Scailo.LeavesAdjustmentsService.ViewApprovedLeaveAdjustmentRecords:input_type -> Scailo.IdentifierWithSearchKey
-	29, // 50: Scailo.LeavesAdjustmentsService.ViewUnapprovedLeaveAdjustmentRecords:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 51: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordHistory:input_type -> Scailo.LeavesAdjustmentsRecordsHistoryRequest
-	17, // 52: Scailo.LeavesAdjustmentsService.ViewPaginatedApprovedLeaveAdjustmentRecords:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
-	17, // 53: Scailo.LeavesAdjustmentsService.ViewPaginatedUnapprovedLeaveAdjustmentRecords:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
-	17, // 54: Scailo.LeavesAdjustmentsService.SearchRecordsWithPagination:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
-	28, // 55: Scailo.LeavesAdjustmentsService.ViewByID:input_type -> Scailo.Identifier
-	30, // 56: Scailo.LeavesAdjustmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	28, // 57: Scailo.LeavesAdjustmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	30, // 58: Scailo.LeavesAdjustmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	31, // 59: Scailo.LeavesAdjustmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	32, // 60: Scailo.LeavesAdjustmentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	30, // 61: Scailo.LeavesAdjustmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	12, // 62: Scailo.LeavesAdjustmentsService.ViewWithPagination:input_type -> Scailo.LeavesAdjustmentsServicePaginationReq
-	16, // 63: Scailo.LeavesAdjustmentsService.SearchAll:input_type -> Scailo.LeavesAdjustmentsServiceSearchAllReq
-	14, // 64: Scailo.LeavesAdjustmentsService.Filter:input_type -> Scailo.LeavesAdjustmentsServiceFilterReq
-	33, // 65: Scailo.LeavesAdjustmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	15, // 66: Scailo.LeavesAdjustmentsService.Count:input_type -> Scailo.LeavesAdjustmentsServiceCountReq
-	14, // 67: Scailo.LeavesAdjustmentsService.DownloadAsCSV:input_type -> Scailo.LeavesAdjustmentsServiceFilterReq
-	34, // 68: Scailo.LeavesAdjustmentsService.Create:output_type -> Scailo.IdentifierResponse
-	34, // 69: Scailo.LeavesAdjustmentsService.Draft:output_type -> Scailo.IdentifierResponse
-	34, // 70: Scailo.LeavesAdjustmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	34, // 71: Scailo.LeavesAdjustmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	34, // 72: Scailo.LeavesAdjustmentsService.Verify:output_type -> Scailo.IdentifierResponse
-	34, // 73: Scailo.LeavesAdjustmentsService.Approve:output_type -> Scailo.IdentifierResponse
-	34, // 74: Scailo.LeavesAdjustmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	34, // 75: Scailo.LeavesAdjustmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	34, // 76: Scailo.LeavesAdjustmentsService.Halt:output_type -> Scailo.IdentifierResponse
-	34, // 77: Scailo.LeavesAdjustmentsService.Discard:output_type -> Scailo.IdentifierResponse
-	34, // 78: Scailo.LeavesAdjustmentsService.Restore:output_type -> Scailo.IdentifierResponse
-	34, // 79: Scailo.LeavesAdjustmentsService.Complete:output_type -> Scailo.IdentifierResponse
-	34, // 80: Scailo.LeavesAdjustmentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	34, // 81: Scailo.LeavesAdjustmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	34, // 82: Scailo.LeavesAdjustmentsService.AddLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
-	34, // 83: Scailo.LeavesAdjustmentsService.ModifyLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
-	34, // 84: Scailo.LeavesAdjustmentsService.ApproveLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
-	34, // 85: Scailo.LeavesAdjustmentsService.DeleteLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
-	34, // 86: Scailo.LeavesAdjustmentsService.ReorderLeaveAdjustmentRecords:output_type -> Scailo.IdentifierResponse
-	8,  // 87: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordByID:output_type -> Scailo.LeaveAdjustmentRecord
-	10, // 88: Scailo.LeavesAdjustmentsService.ViewApprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsRecordsList
-	10, // 89: Scailo.LeavesAdjustmentsService.ViewUnapprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsRecordsList
-	10, // 90: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordHistory:output_type -> Scailo.LeavesAdjustmentsRecordsList
-	18, // 91: Scailo.LeavesAdjustmentsService.ViewPaginatedApprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
-	18, // 92: Scailo.LeavesAdjustmentsService.ViewPaginatedUnapprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
-	18, // 93: Scailo.LeavesAdjustmentsService.SearchRecordsWithPagination:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
-	5,  // 94: Scailo.LeavesAdjustmentsService.ViewByID:output_type -> Scailo.LeaveAdjustment
-	5,  // 95: Scailo.LeavesAdjustmentsService.ViewByUUID:output_type -> Scailo.LeaveAdjustment
-	5,  // 96: Scailo.LeavesAdjustmentsService.ViewEssentialByID:output_type -> Scailo.LeaveAdjustment
-	5,  // 97: Scailo.LeavesAdjustmentsService.ViewEssentialByUUID:output_type -> Scailo.LeaveAdjustment
-	9,  // 98: Scailo.LeavesAdjustmentsService.ViewFromIDs:output_type -> Scailo.LeavesAdjustmentsList
-	9,  // 99: Scailo.LeavesAdjustmentsService.ViewAll:output_type -> Scailo.LeavesAdjustmentsList
-	9,  // 100: Scailo.LeavesAdjustmentsService.ViewAllForEntityUUID:output_type -> Scailo.LeavesAdjustmentsList
-	13, // 101: Scailo.LeavesAdjustmentsService.ViewWithPagination:output_type -> Scailo.LeavesAdjustmentsServicePaginationResponse
-	9,  // 102: Scailo.LeavesAdjustmentsService.SearchAll:output_type -> Scailo.LeavesAdjustmentsList
-	9,  // 103: Scailo.LeavesAdjustmentsService.Filter:output_type -> Scailo.LeavesAdjustmentsList
-	35, // 104: Scailo.LeavesAdjustmentsService.CountInStatus:output_type -> Scailo.CountResponse
-	35, // 105: Scailo.LeavesAdjustmentsService.Count:output_type -> Scailo.CountResponse
-	36, // 106: Scailo.LeavesAdjustmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	68, // [68:107] is the sub-list for method output_type
-	29, // [29:68] is the sub-list for method input_type
+	26, // 43: Scailo.LeavesAdjustmentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	6,  // 44: Scailo.LeavesAdjustmentsService.AddLeaveAdjustmentRecord:input_type -> Scailo.LeavesAdjustmentsServiceRecordCreateRequest
+	7,  // 45: Scailo.LeavesAdjustmentsService.ModifyLeaveAdjustmentRecord:input_type -> Scailo.LeavesAdjustmentsServiceRecordUpdateRequest
+	27, // 46: Scailo.LeavesAdjustmentsService.ApproveLeaveAdjustmentRecord:input_type -> Scailo.IdentifierWithUserComment
+	27, // 47: Scailo.LeavesAdjustmentsService.DeleteLeaveAdjustmentRecord:input_type -> Scailo.IdentifierWithUserComment
+	28, // 48: Scailo.LeavesAdjustmentsService.ReorderLeaveAdjustmentRecords:input_type -> Scailo.ReorderItemsRequest
+	29, // 49: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordByID:input_type -> Scailo.Identifier
+	30, // 50: Scailo.LeavesAdjustmentsService.ViewApprovedLeaveAdjustmentRecords:input_type -> Scailo.IdentifierWithSearchKey
+	30, // 51: Scailo.LeavesAdjustmentsService.ViewUnapprovedLeaveAdjustmentRecords:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 52: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordHistory:input_type -> Scailo.LeavesAdjustmentsRecordsHistoryRequest
+	17, // 53: Scailo.LeavesAdjustmentsService.ViewPaginatedApprovedLeaveAdjustmentRecords:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
+	17, // 54: Scailo.LeavesAdjustmentsService.ViewPaginatedUnapprovedLeaveAdjustmentRecords:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
+	17, // 55: Scailo.LeavesAdjustmentsService.SearchRecordsWithPagination:input_type -> Scailo.LeaveAdjustmentRecordsSearchRequest
+	29, // 56: Scailo.LeavesAdjustmentsService.ViewByID:input_type -> Scailo.Identifier
+	31, // 57: Scailo.LeavesAdjustmentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	29, // 58: Scailo.LeavesAdjustmentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	31, // 59: Scailo.LeavesAdjustmentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	32, // 60: Scailo.LeavesAdjustmentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	33, // 61: Scailo.LeavesAdjustmentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	31, // 62: Scailo.LeavesAdjustmentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	12, // 63: Scailo.LeavesAdjustmentsService.ViewWithPagination:input_type -> Scailo.LeavesAdjustmentsServicePaginationReq
+	16, // 64: Scailo.LeavesAdjustmentsService.SearchAll:input_type -> Scailo.LeavesAdjustmentsServiceSearchAllReq
+	14, // 65: Scailo.LeavesAdjustmentsService.Filter:input_type -> Scailo.LeavesAdjustmentsServiceFilterReq
+	34, // 66: Scailo.LeavesAdjustmentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	15, // 67: Scailo.LeavesAdjustmentsService.Count:input_type -> Scailo.LeavesAdjustmentsServiceCountReq
+	14, // 68: Scailo.LeavesAdjustmentsService.DownloadAsCSV:input_type -> Scailo.LeavesAdjustmentsServiceFilterReq
+	35, // 69: Scailo.LeavesAdjustmentsService.Create:output_type -> Scailo.IdentifierResponse
+	35, // 70: Scailo.LeavesAdjustmentsService.Draft:output_type -> Scailo.IdentifierResponse
+	35, // 71: Scailo.LeavesAdjustmentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	35, // 72: Scailo.LeavesAdjustmentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	35, // 73: Scailo.LeavesAdjustmentsService.Verify:output_type -> Scailo.IdentifierResponse
+	35, // 74: Scailo.LeavesAdjustmentsService.Approve:output_type -> Scailo.IdentifierResponse
+	35, // 75: Scailo.LeavesAdjustmentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	35, // 76: Scailo.LeavesAdjustmentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	35, // 77: Scailo.LeavesAdjustmentsService.Halt:output_type -> Scailo.IdentifierResponse
+	35, // 78: Scailo.LeavesAdjustmentsService.Discard:output_type -> Scailo.IdentifierResponse
+	35, // 79: Scailo.LeavesAdjustmentsService.Restore:output_type -> Scailo.IdentifierResponse
+	35, // 80: Scailo.LeavesAdjustmentsService.Complete:output_type -> Scailo.IdentifierResponse
+	35, // 81: Scailo.LeavesAdjustmentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	35, // 82: Scailo.LeavesAdjustmentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	35, // 83: Scailo.LeavesAdjustmentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	35, // 84: Scailo.LeavesAdjustmentsService.AddLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
+	35, // 85: Scailo.LeavesAdjustmentsService.ModifyLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
+	35, // 86: Scailo.LeavesAdjustmentsService.ApproveLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
+	35, // 87: Scailo.LeavesAdjustmentsService.DeleteLeaveAdjustmentRecord:output_type -> Scailo.IdentifierResponse
+	35, // 88: Scailo.LeavesAdjustmentsService.ReorderLeaveAdjustmentRecords:output_type -> Scailo.IdentifierResponse
+	8,  // 89: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordByID:output_type -> Scailo.LeaveAdjustmentRecord
+	10, // 90: Scailo.LeavesAdjustmentsService.ViewApprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsRecordsList
+	10, // 91: Scailo.LeavesAdjustmentsService.ViewUnapprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsRecordsList
+	10, // 92: Scailo.LeavesAdjustmentsService.ViewLeaveAdjustmentRecordHistory:output_type -> Scailo.LeavesAdjustmentsRecordsList
+	18, // 93: Scailo.LeavesAdjustmentsService.ViewPaginatedApprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
+	18, // 94: Scailo.LeavesAdjustmentsService.ViewPaginatedUnapprovedLeaveAdjustmentRecords:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
+	18, // 95: Scailo.LeavesAdjustmentsService.SearchRecordsWithPagination:output_type -> Scailo.LeavesAdjustmentsServicePaginatedRecordsResponse
+	5,  // 96: Scailo.LeavesAdjustmentsService.ViewByID:output_type -> Scailo.LeaveAdjustment
+	5,  // 97: Scailo.LeavesAdjustmentsService.ViewByUUID:output_type -> Scailo.LeaveAdjustment
+	5,  // 98: Scailo.LeavesAdjustmentsService.ViewEssentialByID:output_type -> Scailo.LeaveAdjustment
+	5,  // 99: Scailo.LeavesAdjustmentsService.ViewEssentialByUUID:output_type -> Scailo.LeaveAdjustment
+	9,  // 100: Scailo.LeavesAdjustmentsService.ViewFromIDs:output_type -> Scailo.LeavesAdjustmentsList
+	9,  // 101: Scailo.LeavesAdjustmentsService.ViewAll:output_type -> Scailo.LeavesAdjustmentsList
+	9,  // 102: Scailo.LeavesAdjustmentsService.ViewAllForEntityUUID:output_type -> Scailo.LeavesAdjustmentsList
+	13, // 103: Scailo.LeavesAdjustmentsService.ViewWithPagination:output_type -> Scailo.LeavesAdjustmentsServicePaginationResponse
+	9,  // 104: Scailo.LeavesAdjustmentsService.SearchAll:output_type -> Scailo.LeavesAdjustmentsList
+	9,  // 105: Scailo.LeavesAdjustmentsService.Filter:output_type -> Scailo.LeavesAdjustmentsList
+	36, // 106: Scailo.LeavesAdjustmentsService.CountInStatus:output_type -> Scailo.CountResponse
+	36, // 107: Scailo.LeavesAdjustmentsService.Count:output_type -> Scailo.CountResponse
+	37, // 108: Scailo.LeavesAdjustmentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	69, // [69:109] is the sub-list for method output_type
+	29, // [29:69] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2754,6 +2758,7 @@ func file_leaves_adjustments_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -2806,7 +2806,7 @@ var File_outward_jobs_free_issue_materials_returns_scailo_proto protoreflect.Fil
 
 const file_outward_jobs_free_issue_materials_returns_scailo_proto_rawDesc = "" +
 	"\n" +
-	"6outward_jobs_free_issue_materials_returns.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\"\xc9\x03\n" +
+	"6outward_jobs_free_issue_materials_returns.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x16inventory.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc9\x03\n" +
 	"8OutwardJobsFreeIssueMaterialsReturnsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -3040,7 +3040,7 @@ const file_outward_jobs_free_issue_materials_returns_scailo_proto_rawDesc = "" +
 	"<OUTWARD_JOB_FREE_ISSUE_MATERIAL_RETURN_SORT_KEY_COMPLETED_ON\x10\x06\x12@\n" +
 	"<OUTWARD_JOB_FREE_ISSUE_MATERIAL_RETURN_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12D\n" +
-	"@OUTWARD_JOB_FREE_ISSUE_MATERIAL_RETURN_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xa4/\n" +
+	"@OUTWARD_JOB_FREE_ISSUE_MATERIAL_RETURN_SORT_KEY_FINAL_REF_NUMBER\x10\v2\xf7/\n" +
 	"+OutwardJobsFreeIssueMaterialsReturnsService\x12f\n" +
 	"\x06Create\x12@.Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12e\n" +
 	"\x05Draft\x12@.Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12k\n" +
@@ -3058,7 +3058,8 @@ const file_outward_jobs_free_issue_materials_returns_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12\x8c\x01\n" +
 	"(AddOutwardJobFreeIssueMaterialReturnItem\x12D.Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12\x8f\x01\n" +
@@ -3154,28 +3155,29 @@ var file_outward_jobs_free_issue_materials_returns_scailo_proto_goTypes = []any{
 	(*FormFieldDatumFilterRequest)(nil),                                                     // 31: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                                                   // 32: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                                                   // 33: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),                               // 34: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                                                  // 35: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                                                       // 36: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                                             // 37: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                                                      // 38: Scailo.Identifier
-	(*SimpleSearchReq)(nil),                                                                 // 39: Scailo.SimpleSearchReq
-	(*IdentifierWithSearchKey)(nil),                                                         // 40: Scailo.IdentifierWithSearchKey
-	(*Empty)(nil),                                                                           // 41: Scailo.Empty
-	(*IdentifiersList)(nil),                                                                 // 42: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                                                    // 43: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                                                  // 44: Scailo.FilterFamiliesReqForIdentifier
-	(*SearchReturnableInventoryForIdentifierUUID)(nil),                                      // 45: Scailo.SearchReturnableInventoryForIdentifierUUID
-	(*FilterReturnableInventoryForIdentifierUUID)(nil),                                      // 46: Scailo.FilterReturnableInventoryForIdentifierUUID
-	(*CountInSLCStatusRequest)(nil),                                                         // 47: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                                              // 48: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                                                       // 49: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                                                 // 50: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                                                    // 51: Scailo.StandardFile
-	(*FamiliesList)(nil),                                                                    // 52: Scailo.FamiliesList
-	(*GenericInventoryList)(nil),                                                            // 53: Scailo.GenericInventoryList
-	(*DualQuantitiesResponse)(nil),                                                          // 54: Scailo.DualQuantitiesResponse
-	(*CountResponse)(nil),                                                                   // 55: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                                                        // 34: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),                               // 35: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                                                  // 36: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                                                       // 37: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                                             // 38: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                                                      // 39: Scailo.Identifier
+	(*SimpleSearchReq)(nil),                                                                 // 40: Scailo.SimpleSearchReq
+	(*IdentifierWithSearchKey)(nil),                                                         // 41: Scailo.IdentifierWithSearchKey
+	(*Empty)(nil),                                                                           // 42: Scailo.Empty
+	(*IdentifiersList)(nil),                                                                 // 43: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                                                    // 44: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                                                  // 45: Scailo.FilterFamiliesReqForIdentifier
+	(*SearchReturnableInventoryForIdentifierUUID)(nil),                                      // 46: Scailo.SearchReturnableInventoryForIdentifierUUID
+	(*FilterReturnableInventoryForIdentifierUUID)(nil),                                      // 47: Scailo.FilterReturnableInventoryForIdentifierUUID
+	(*CountInSLCStatusRequest)(nil),                                                         // 48: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                                              // 49: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                                                       // 50: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                                                 // 51: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                                                    // 52: Scailo.StandardFile
+	(*FamiliesList)(nil),                                                                    // 53: Scailo.FamiliesList
+	(*GenericInventoryList)(nil),                                                            // 54: Scailo.GenericInventoryList
+	(*DualQuantitiesResponse)(nil),                                                          // 55: Scailo.DualQuantitiesResponse
+	(*CountResponse)(nil),                                                                   // 56: Scailo.CountResponse
 }
 var file_outward_jobs_free_issue_materials_returns_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceCreateRequest.ref_from:type_name -> Scailo.OUTWARD_JOB_FREE_ISSUE_MATERIAL_RETURN_REF_FROM
@@ -3234,106 +3236,108 @@ var file_outward_jobs_free_issue_materials_returns_scailo_proto_depIdxs = []int3
 	32, // 53: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	32, // 54: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	33, // 55: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	34, // 56: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	35, // 57: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	8,  // 58: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AddOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemCreateRequest
-	9,  // 59: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ModifyOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemUpdateRequest
-	36, // 60: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ApproveOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.IdentifierWithUserComment
-	36, // 61: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DeleteOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.IdentifierWithUserComment
-	37, // 62: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ReorderOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.ReorderItemsRequest
-	38, // 63: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByID:input_type -> Scailo.Identifier
-	39, // 64: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
-	40, // 65: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewApprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.IdentifierWithSearchKey
-	40, // 66: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewUnapprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.IdentifierWithSearchKey
-	13, // 67: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemHistory:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemHistoryRequest
-	15, // 68: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedApprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
-	15, // 69: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedUnapprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
-	15, // 70: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchItemsWithPagination:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
-	35, // 71: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
-	41, // 72: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
-	38, // 73: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByID:input_type -> Scailo.Identifier
-	35, // 74: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	39, // 75: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
-	38, // 76: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	35, // 77: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	42, // 78: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	35, // 79: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	43, // 80: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAll:input_type -> Scailo.ActiveStatus
-	35, // 81: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	18, // 82: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewWithPagination:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginationReq
-	40, // 83: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	44, // 84: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	14, // 85: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemProspectiveInfoRequest
-	45, // 86: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchReturnableInventory:input_type -> Scailo.SearchReturnableInventoryForIdentifierUUID
-	46, // 87: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterReturnableInventory:input_type -> Scailo.FilterReturnableInventoryForIdentifierUUID
-	35, // 88: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	35, // 89: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	35, // 90: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
-	17, // 91: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceAlreadyAddedQuantityForSourceRequest
-	22, // 92: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchAll:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceSearchAllReq
-	20, // 93: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Filter:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceFilterReq
-	47, // 94: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	21, // 95: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Count:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceCountReq
-	20, // 96: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadAsCSV:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceFilterReq
-	48, // 97: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Create:output_type -> Scailo.IdentifierResponse
-	48, // 98: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Draft:output_type -> Scailo.IdentifierResponse
-	48, // 99: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	48, // 100: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	48, // 101: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Verify:output_type -> Scailo.IdentifierResponse
-	48, // 102: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Approve:output_type -> Scailo.IdentifierResponse
-	48, // 103: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	48, // 104: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	48, // 105: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Halt:output_type -> Scailo.IdentifierResponse
-	48, // 106: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Discard:output_type -> Scailo.IdentifierResponse
-	48, // 107: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Restore:output_type -> Scailo.IdentifierResponse
-	48, // 108: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Complete:output_type -> Scailo.IdentifierResponse
-	48, // 109: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Repeat:output_type -> Scailo.IdentifierResponse
-	48, // 110: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Reopen:output_type -> Scailo.IdentifierResponse
-	48, // 111: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	48, // 112: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	49, // 113: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	50, // 114: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	48, // 115: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AddOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
-	48, // 116: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ModifyOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
-	48, // 117: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ApproveOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
-	48, // 118: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DeleteOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
-	48, // 119: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ReorderOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.IdentifierResponse
-	10, // 120: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnItem
-	10, // 121: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByInventoryHash:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnItem
-	12, // 122: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewApprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
-	12, // 123: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewUnapprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
-	12, // 124: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemHistory:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
-	16, // 125: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedApprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
-	16, // 126: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedUnapprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
-	16, // 127: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchItemsWithPagination:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
-	51, // 128: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
-	51, // 129: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
-	7,  // 130: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
-	7,  // 131: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
-	7,  // 132: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByReferenceID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
-	7,  // 133: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
-	7,  // 134: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
-	11, // 135: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewFromIDs:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
-	6,  // 136: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAncillaryParametersByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnAncillaryParameters
-	11, // 137: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAll:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
-	11, // 138: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAllForEntityUUID:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
-	19, // 139: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewWithPagination:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginationResponse
-	52, // 140: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
-	52, // 141: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
-	8,  // 142: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemCreateRequest
-	53, // 143: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchReturnableInventory:output_type -> Scailo.GenericInventoryList
-	53, // 144: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterReturnableInventory:output_type -> Scailo.GenericInventoryList
-	50, // 145: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	51, // 146: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	51, // 147: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
-	54, // 148: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
-	11, // 149: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchAll:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
-	11, // 150: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Filter:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
-	55, // 151: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CountInStatus:output_type -> Scailo.CountResponse
-	55, // 152: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Count:output_type -> Scailo.CountResponse
-	51, // 153: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	97, // [97:154] is the sub-list for method output_type
-	40, // [40:97] is the sub-list for method input_type
+	34, // 56: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	35, // 57: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	36, // 58: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	8,  // 59: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AddOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemCreateRequest
+	9,  // 60: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ModifyOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemUpdateRequest
+	37, // 61: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ApproveOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.IdentifierWithUserComment
+	37, // 62: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DeleteOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.IdentifierWithUserComment
+	38, // 63: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ReorderOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.ReorderItemsRequest
+	39, // 64: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByID:input_type -> Scailo.Identifier
+	40, // 65: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByInventoryHash:input_type -> Scailo.SimpleSearchReq
+	41, // 66: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewApprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.IdentifierWithSearchKey
+	41, // 67: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewUnapprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.IdentifierWithSearchKey
+	13, // 68: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemHistory:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemHistoryRequest
+	15, // 69: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedApprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
+	15, // 70: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedUnapprovedOutwardJobFreeIssueMaterialReturnItems:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
+	15, // 71: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchItemsWithPagination:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemsSearchRequest
+	36, // 72: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsAsCSV:input_type -> Scailo.IdentifierUUID
+	42, // 73: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsTemplateAsCSV:input_type -> Scailo.Empty
+	39, // 74: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByID:input_type -> Scailo.Identifier
+	36, // 75: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	40, // 76: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByReferenceID:input_type -> Scailo.SimpleSearchReq
+	39, // 77: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	36, // 78: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	43, // 79: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	36, // 80: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	44, // 81: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAll:input_type -> Scailo.ActiveStatus
+	36, // 82: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	18, // 83: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewWithPagination:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginationReq
+	41, // 84: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	45, // 85: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterProspectiveFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	14, // 86: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveOutwardJobFreeIssueMaterialReturnItem:input_type -> Scailo.OutwardJobFreeIssueMaterialReturnItemProspectiveInfoRequest
+	46, // 87: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchReturnableInventory:input_type -> Scailo.SearchReturnableInventoryForIdentifierUUID
+	47, // 88: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterReturnableInventory:input_type -> Scailo.FilterReturnableInventoryForIdentifierUUID
+	36, // 89: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	36, // 90: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	36, // 91: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadLabelByUUID:input_type -> Scailo.IdentifierUUID
+	17, // 92: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAddedFamilyQuantityForSource:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceAlreadyAddedQuantityForSourceRequest
+	22, // 93: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchAll:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceSearchAllReq
+	20, // 94: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Filter:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceFilterReq
+	48, // 95: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	21, // 96: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Count:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceCountReq
+	20, // 97: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadAsCSV:input_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceFilterReq
+	49, // 98: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Create:output_type -> Scailo.IdentifierResponse
+	49, // 99: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Draft:output_type -> Scailo.IdentifierResponse
+	49, // 100: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	49, // 101: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	49, // 102: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Verify:output_type -> Scailo.IdentifierResponse
+	49, // 103: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Approve:output_type -> Scailo.IdentifierResponse
+	49, // 104: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	49, // 105: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	49, // 106: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Halt:output_type -> Scailo.IdentifierResponse
+	49, // 107: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Discard:output_type -> Scailo.IdentifierResponse
+	49, // 108: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Restore:output_type -> Scailo.IdentifierResponse
+	49, // 109: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Complete:output_type -> Scailo.IdentifierResponse
+	49, // 110: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Repeat:output_type -> Scailo.IdentifierResponse
+	49, // 111: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Reopen:output_type -> Scailo.IdentifierResponse
+	49, // 112: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	49, // 113: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	49, // 114: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	50, // 115: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	51, // 116: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	49, // 117: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.AddOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
+	49, // 118: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ModifyOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
+	49, // 119: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ApproveOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
+	49, // 120: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DeleteOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.IdentifierResponse
+	49, // 121: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ReorderOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.IdentifierResponse
+	10, // 122: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnItem
+	10, // 123: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemByInventoryHash:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnItem
+	12, // 124: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewApprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
+	12, // 125: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewUnapprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
+	12, // 126: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewOutwardJobFreeIssueMaterialReturnItemHistory:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsItemsList
+	16, // 127: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedApprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
+	16, // 128: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewPaginatedUnapprovedOutwardJobFreeIssueMaterialReturnItems:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
+	16, // 129: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchItemsWithPagination:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginatedItemsResponse
+	52, // 130: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsAsCSV:output_type -> Scailo.StandardFile
+	52, // 131: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadItemsTemplateAsCSV:output_type -> Scailo.StandardFile
+	7,  // 132: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
+	7,  // 133: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
+	7,  // 134: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewByReferenceID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
+	7,  // 135: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
+	7,  // 136: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewEssentialByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturn
+	11, // 137: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewFromIDs:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
+	6,  // 138: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAncillaryParametersByUUID:output_type -> Scailo.OutwardJobFreeIssueMaterialReturnAncillaryParameters
+	11, // 139: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAll:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
+	11, // 140: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAllForEntityUUID:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
+	19, // 141: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewWithPagination:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServicePaginationResponse
+	53, // 142: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveFamilies:output_type -> Scailo.FamiliesList
+	53, // 143: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterProspectiveFamilies:output_type -> Scailo.FamiliesList
+	8,  // 144: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewProspectiveOutwardJobFreeIssueMaterialReturnItem:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsServiceItemCreateRequest
+	54, // 145: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchReturnableInventory:output_type -> Scailo.GenericInventoryList
+	54, // 146: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.FilterReturnableInventory:output_type -> Scailo.GenericInventoryList
+	51, // 147: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	52, // 148: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	52, // 149: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadLabelByUUID:output_type -> Scailo.StandardFile
+	55, // 150: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.ViewAddedFamilyQuantityForSource:output_type -> Scailo.DualQuantitiesResponse
+	11, // 151: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.SearchAll:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
+	11, // 152: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Filter:output_type -> Scailo.OutwardJobsFreeIssueMaterialsReturnsList
+	56, // 153: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.CountInStatus:output_type -> Scailo.CountResponse
+	56, // 154: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.Count:output_type -> Scailo.CountResponse
+	52, // 155: Scailo.OutwardJobsFreeIssueMaterialsReturnsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	98, // [98:156] is the sub-list for method output_type
+	40, // [40:98] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
 	40, // [40:40] is the sub-list for extension extendee
 	0,  // [0:40] is the sub-list for field type_name
@@ -3349,6 +3353,7 @@ func file_outward_jobs_free_issue_materials_returns_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_inventory_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

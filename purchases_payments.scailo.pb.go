@@ -1975,7 +1975,7 @@ var File_purchases_payments_scailo_proto protoreflect.FileDescriptor
 
 const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1fpurchases_payments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\"\x95\x05\n" +
+	"\x1fpurchases_payments.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x95\x05\n" +
 	"%PurchasesPaymentsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2148,7 +2148,7 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"&PURCHASE_PAYMENT_SORT_KEY_REFERENCE_ID\x10\n" +
 	"\x12.\n" +
 	"*PURCHASE_PAYMENT_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12/\n" +
-	"+PURCHASE_PAYMENT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\x96\x14\n" +
+	"+PURCHASE_PAYMENT_SORT_KEY_PAYMENT_TIMESTAMP\x10\f2\xe9\x14\n" +
 	"\x18PurchasesPaymentsService\x12S\n" +
 	"\x06Create\x12-.Scailo.PurchasesPaymentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
 	"\x05Draft\x12-.Scailo.PurchasesPaymentsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12X\n" +
@@ -2165,7 +2165,8 @@ const file_purchases_payments_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x127\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x17.Scailo.PurchasePayment\x12=\n" +
 	"\n" +
@@ -2224,17 +2225,18 @@ var file_purchases_payments_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 18: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),                     // 19: Scailo.IdentifierUUIDWithUserComment
 	(*IdentifierWithEmailAttributes)(nil),                     // 20: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 21: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 22: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 23: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 24: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 25: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 26: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 27: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 28: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                   // 29: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
-	(*CountResponse)(nil),                                     // 31: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                          // 21: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 22: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 23: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 24: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 25: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 26: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 27: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 28: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 29: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                   // 30: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                      // 31: Scailo.StandardFile
+	(*CountResponse)(nil),                                     // 32: Scailo.CountResponse
 }
 var file_purchases_payments_scailo_proto_depIdxs = []int32{
 	0,  // 0: Scailo.PurchasesPaymentsServiceCreateRequest.ref_from:type_name -> Scailo.PURCHASE_PAYMENT_REF_FROM
@@ -2281,57 +2283,59 @@ var file_purchases_payments_scailo_proto_depIdxs = []int32{
 	19, // 41: Scailo.PurchasesPaymentsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 42: Scailo.PurchasesPaymentsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	20, // 43: Scailo.PurchasesPaymentsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	21, // 44: Scailo.PurchasesPaymentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	22, // 45: Scailo.PurchasesPaymentsService.ViewByID:input_type -> Scailo.Identifier
-	23, // 46: Scailo.PurchasesPaymentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	22, // 47: Scailo.PurchasesPaymentsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	23, // 48: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	24, // 49: Scailo.PurchasesPaymentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	23, // 50: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	25, // 51: Scailo.PurchasesPaymentsService.ViewAll:input_type -> Scailo.ActiveStatus
-	23, // 52: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	7,  // 53: Scailo.PurchasesPaymentsService.ViewWithPagination:input_type -> Scailo.PurchasesPaymentsServicePaginationReq
-	23, // 54: Scailo.PurchasesPaymentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	23, // 55: Scailo.PurchasesPaymentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	11, // 56: Scailo.PurchasesPaymentsService.SearchAll:input_type -> Scailo.PurchasesPaymentsServiceSearchAllReq
-	9,  // 57: Scailo.PurchasesPaymentsService.Filter:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
-	26, // 58: Scailo.PurchasesPaymentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	10, // 59: Scailo.PurchasesPaymentsService.Count:input_type -> Scailo.PurchasesPaymentsServiceCountReq
-	9,  // 60: Scailo.PurchasesPaymentsService.DownloadAsCSV:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
-	27, // 61: Scailo.PurchasesPaymentsService.Create:output_type -> Scailo.IdentifierResponse
-	27, // 62: Scailo.PurchasesPaymentsService.Draft:output_type -> Scailo.IdentifierResponse
-	27, // 63: Scailo.PurchasesPaymentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	27, // 64: Scailo.PurchasesPaymentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	27, // 65: Scailo.PurchasesPaymentsService.Verify:output_type -> Scailo.IdentifierResponse
-	27, // 66: Scailo.PurchasesPaymentsService.Approve:output_type -> Scailo.IdentifierResponse
-	27, // 67: Scailo.PurchasesPaymentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	27, // 68: Scailo.PurchasesPaymentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	27, // 69: Scailo.PurchasesPaymentsService.Halt:output_type -> Scailo.IdentifierResponse
-	27, // 70: Scailo.PurchasesPaymentsService.Discard:output_type -> Scailo.IdentifierResponse
-	27, // 71: Scailo.PurchasesPaymentsService.Restore:output_type -> Scailo.IdentifierResponse
-	27, // 72: Scailo.PurchasesPaymentsService.Complete:output_type -> Scailo.IdentifierResponse
-	27, // 73: Scailo.PurchasesPaymentsService.Repeat:output_type -> Scailo.IdentifierResponse
-	27, // 74: Scailo.PurchasesPaymentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	27, // 75: Scailo.PurchasesPaymentsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	28, // 76: Scailo.PurchasesPaymentsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	5,  // 77: Scailo.PurchasesPaymentsService.ViewByID:output_type -> Scailo.PurchasePayment
-	5,  // 78: Scailo.PurchasesPaymentsService.ViewByUUID:output_type -> Scailo.PurchasePayment
-	5,  // 79: Scailo.PurchasesPaymentsService.ViewEssentialByID:output_type -> Scailo.PurchasePayment
-	5,  // 80: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:output_type -> Scailo.PurchasePayment
-	6,  // 81: Scailo.PurchasesPaymentsService.ViewFromIDs:output_type -> Scailo.PurchasesPaymentsList
-	4,  // 82: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchasePaymentAncillaryParameters
-	6,  // 83: Scailo.PurchasesPaymentsService.ViewAll:output_type -> Scailo.PurchasesPaymentsList
-	6,  // 84: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesPaymentsList
-	8,  // 85: Scailo.PurchasesPaymentsService.ViewWithPagination:output_type -> Scailo.PurchasesPaymentsServicePaginationResponse
-	29, // 86: Scailo.PurchasesPaymentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	30, // 87: Scailo.PurchasesPaymentsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	6,  // 88: Scailo.PurchasesPaymentsService.SearchAll:output_type -> Scailo.PurchasesPaymentsList
-	6,  // 89: Scailo.PurchasesPaymentsService.Filter:output_type -> Scailo.PurchasesPaymentsList
-	31, // 90: Scailo.PurchasesPaymentsService.CountInStatus:output_type -> Scailo.CountResponse
-	31, // 91: Scailo.PurchasesPaymentsService.Count:output_type -> Scailo.CountResponse
-	30, // 92: Scailo.PurchasesPaymentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	61, // [61:93] is the sub-list for method output_type
-	29, // [29:61] is the sub-list for method input_type
+	21, // 44: Scailo.PurchasesPaymentsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	22, // 45: Scailo.PurchasesPaymentsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	23, // 46: Scailo.PurchasesPaymentsService.ViewByID:input_type -> Scailo.Identifier
+	24, // 47: Scailo.PurchasesPaymentsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	23, // 48: Scailo.PurchasesPaymentsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	24, // 49: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	25, // 50: Scailo.PurchasesPaymentsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	24, // 51: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	26, // 52: Scailo.PurchasesPaymentsService.ViewAll:input_type -> Scailo.ActiveStatus
+	24, // 53: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	7,  // 54: Scailo.PurchasesPaymentsService.ViewWithPagination:input_type -> Scailo.PurchasesPaymentsServicePaginationReq
+	24, // 55: Scailo.PurchasesPaymentsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	24, // 56: Scailo.PurchasesPaymentsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	11, // 57: Scailo.PurchasesPaymentsService.SearchAll:input_type -> Scailo.PurchasesPaymentsServiceSearchAllReq
+	9,  // 58: Scailo.PurchasesPaymentsService.Filter:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
+	27, // 59: Scailo.PurchasesPaymentsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	10, // 60: Scailo.PurchasesPaymentsService.Count:input_type -> Scailo.PurchasesPaymentsServiceCountReq
+	9,  // 61: Scailo.PurchasesPaymentsService.DownloadAsCSV:input_type -> Scailo.PurchasesPaymentsServiceFilterReq
+	28, // 62: Scailo.PurchasesPaymentsService.Create:output_type -> Scailo.IdentifierResponse
+	28, // 63: Scailo.PurchasesPaymentsService.Draft:output_type -> Scailo.IdentifierResponse
+	28, // 64: Scailo.PurchasesPaymentsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	28, // 65: Scailo.PurchasesPaymentsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	28, // 66: Scailo.PurchasesPaymentsService.Verify:output_type -> Scailo.IdentifierResponse
+	28, // 67: Scailo.PurchasesPaymentsService.Approve:output_type -> Scailo.IdentifierResponse
+	28, // 68: Scailo.PurchasesPaymentsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	28, // 69: Scailo.PurchasesPaymentsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	28, // 70: Scailo.PurchasesPaymentsService.Halt:output_type -> Scailo.IdentifierResponse
+	28, // 71: Scailo.PurchasesPaymentsService.Discard:output_type -> Scailo.IdentifierResponse
+	28, // 72: Scailo.PurchasesPaymentsService.Restore:output_type -> Scailo.IdentifierResponse
+	28, // 73: Scailo.PurchasesPaymentsService.Complete:output_type -> Scailo.IdentifierResponse
+	28, // 74: Scailo.PurchasesPaymentsService.Repeat:output_type -> Scailo.IdentifierResponse
+	28, // 75: Scailo.PurchasesPaymentsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	28, // 76: Scailo.PurchasesPaymentsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	28, // 77: Scailo.PurchasesPaymentsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	29, // 78: Scailo.PurchasesPaymentsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	5,  // 79: Scailo.PurchasesPaymentsService.ViewByID:output_type -> Scailo.PurchasePayment
+	5,  // 80: Scailo.PurchasesPaymentsService.ViewByUUID:output_type -> Scailo.PurchasePayment
+	5,  // 81: Scailo.PurchasesPaymentsService.ViewEssentialByID:output_type -> Scailo.PurchasePayment
+	5,  // 82: Scailo.PurchasesPaymentsService.ViewEssentialByUUID:output_type -> Scailo.PurchasePayment
+	6,  // 83: Scailo.PurchasesPaymentsService.ViewFromIDs:output_type -> Scailo.PurchasesPaymentsList
+	4,  // 84: Scailo.PurchasesPaymentsService.ViewAncillaryParametersByUUID:output_type -> Scailo.PurchasePaymentAncillaryParameters
+	6,  // 85: Scailo.PurchasesPaymentsService.ViewAll:output_type -> Scailo.PurchasesPaymentsList
+	6,  // 86: Scailo.PurchasesPaymentsService.ViewAllForEntityUUID:output_type -> Scailo.PurchasesPaymentsList
+	8,  // 87: Scailo.PurchasesPaymentsService.ViewWithPagination:output_type -> Scailo.PurchasesPaymentsServicePaginationResponse
+	30, // 88: Scailo.PurchasesPaymentsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	31, // 89: Scailo.PurchasesPaymentsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	6,  // 90: Scailo.PurchasesPaymentsService.SearchAll:output_type -> Scailo.PurchasesPaymentsList
+	6,  // 91: Scailo.PurchasesPaymentsService.Filter:output_type -> Scailo.PurchasesPaymentsList
+	32, // 92: Scailo.PurchasesPaymentsService.CountInStatus:output_type -> Scailo.CountResponse
+	32, // 93: Scailo.PurchasesPaymentsService.Count:output_type -> Scailo.CountResponse
+	31, // 94: Scailo.PurchasesPaymentsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	62, // [62:95] is the sub-list for method output_type
+	29, // [29:62] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2344,6 +2348,7 @@ func file_purchases_payments_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

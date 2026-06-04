@@ -34,6 +34,7 @@ const (
 	PurchasesOrdersService_Reopen_FullMethodName                                    = "/Scailo.PurchasesOrdersService/Reopen"
 	PurchasesOrdersService_CommentAdd_FullMethodName                                = "/Scailo.PurchasesOrdersService/CommentAdd"
 	PurchasesOrdersService_SendEmail_FullMethodName                                 = "/Scailo.PurchasesOrdersService/SendEmail"
+	PurchasesOrdersService_AttachVaultFolder_FullMethodName                         = "/Scailo.PurchasesOrdersService/AttachVaultFolder"
 	PurchasesOrdersService_Autofill_FullMethodName                                  = "/Scailo.PurchasesOrdersService/Autofill"
 	PurchasesOrdersService_Amend_FullMethodName                                     = "/Scailo.PurchasesOrdersService/Amend"
 	PurchasesOrdersService_CreateMagicLink_FullMethodName                           = "/Scailo.PurchasesOrdersService/CreateMagicLink"
@@ -192,6 +193,17 @@ type PurchasesOrdersServiceClient interface {
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Send Email
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Autofill the purchase order
 	Autofill(ctx context.Context, in *PurchasesOrdersServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Amend the purchase order and send for revision
@@ -474,6 +486,16 @@ func (c *purchasesOrdersServiceClient) SendEmail(ctx context.Context, in *Identi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, PurchasesOrdersService_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *purchasesOrdersServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, PurchasesOrdersService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

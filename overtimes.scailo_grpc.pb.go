@@ -32,6 +32,7 @@ const (
 	OvertimesService_Complete_FullMethodName             = "/Scailo.OvertimesService/Complete"
 	OvertimesService_Repeat_FullMethodName               = "/Scailo.OvertimesService/Repeat"
 	OvertimesService_CommentAdd_FullMethodName           = "/Scailo.OvertimesService/CommentAdd"
+	OvertimesService_AttachVaultFolder_FullMethodName    = "/Scailo.OvertimesService/AttachVaultFolder"
 	OvertimesService_ViewByID_FullMethodName             = "/Scailo.OvertimesService/ViewByID"
 	OvertimesService_ViewByUUID_FullMethodName           = "/Scailo.OvertimesService/ViewByUUID"
 	OvertimesService_ViewEssentialByID_FullMethodName    = "/Scailo.OvertimesService/ViewEssentialByID"
@@ -144,6 +145,17 @@ type OvertimesServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Attaches a specified folder directly to a record without requiring a full revision workflow.
+	//
+	// This is a convenience API designed to bypass the traditional multi-step modification lifecycle
+	// (e.g., creating a revision, updating data, submitting for verification, and awaiting approval).
+	// It allows for the immediate, single-step association of a vault folder.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The overall status of the record remains unchanged.
+	// * The record's modification timestamp is automatically updated to the current time.
+	// * An entry is appended to the record's audit log tracking this attachment.
+	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Overtime, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
@@ -315,6 +327,16 @@ func (c *overtimesServiceClient) CommentAdd(ctx context.Context, in *IdentifierU
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierResponse)
 	err := c.cc.Invoke(ctx, OvertimesService_CommentAdd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *overtimesServiceClient) AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierResponse)
+	err := c.cc.Invoke(ctx, OvertimesService_AttachVaultFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -4702,7 +4702,7 @@ var File_inward_jobs_scailo_proto protoreflect.FileDescriptor
 
 const file_inward_jobs_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x18inward_jobs.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xcd\x03\n" +
+	"\x18inward_jobs.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcd\x03\n" +
 	"\x1eInwardJobsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -5111,7 +5111,7 @@ const file_inward_jobs_scailo_proto_rawDesc = "" +
 	"\x1eINWARD_JOB_OUTWARD_ITEM_STATUS\x122\n" +
 	".INWARD_JOB_OUTWARD_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12+\n" +
 	"'INWARD_JOB_OUTWARD_ITEM_STATUS_APPROVED\x10\x01\x12-\n" +
-	")INWARD_JOB_OUTWARD_ITEM_STATUS_UNAPPROVED\x10\x022\xc89\n" +
+	")INWARD_JOB_OUTWARD_ITEM_STATUS_UNAPPROVED\x10\x022\x9b:\n" +
 	"\x11InwardJobsService\x12L\n" +
 	"\x06Create\x12&.Scailo.InwardJobsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x05Draft\x12&.Scailo.InwardJobsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
@@ -5129,7 +5129,8 @@ const file_inward_jobs_scailo_proto_rawDesc = "" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
 	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
-	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
+	"\tSendEmail\x12%.Scailo.IdentifierWithEmailAttributes\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12P\n" +
 	"\bAutofill\x12(.Scailo.InwardJobsServiceAutofillRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12@\n" +
 	"\rIsCompletable\x12\x16.Scailo.IdentifierUUID\x1a\x17.Scailo.BooleanResponse\x12<\n" +
@@ -5271,23 +5272,24 @@ var file_inward_jobs_scailo_proto_goTypes = []any{
 	(*IdentifierUUIDWithUserComment)(nil),                      // 52: Scailo.IdentifierUUIDWithUserComment
 	(*RepeatWithDeliveryDate)(nil),                             // 53: Scailo.RepeatWithDeliveryDate
 	(*IdentifierWithEmailAttributes)(nil),                      // 54: Scailo.IdentifierWithEmailAttributes
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),  // 55: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*IdentifierUUID)(nil),                                     // 56: Scailo.IdentifierUUID
-	(*IdentifierWithUserComment)(nil),                          // 57: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                                // 58: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                                         // 59: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),                            // 60: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUIDWithFile)(nil),                             // 61: Scailo.IdentifierUUIDWithFile
-	(*IdentifiersList)(nil),                                    // 62: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                       // 63: Scailo.ActiveStatus
-	(*FilterFamiliesReqForIdentifier)(nil),                     // 64: Scailo.FilterFamiliesReqForIdentifier
-	(*CountInSLCStatusRequest)(nil),                            // 65: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                 // 66: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                          // 67: Scailo.MagicLink
-	(*BooleanResponse)(nil),                                    // 68: Scailo.BooleanResponse
-	(*StandardFile)(nil),                                       // 69: Scailo.StandardFile
-	(*FamiliesList)(nil),                                       // 70: Scailo.FamiliesList
-	(*CountResponse)(nil),                                      // 71: Scailo.CountResponse
+	(*VaultFolderAttachRequest)(nil),                           // 55: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil),  // 56: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*IdentifierUUID)(nil),                                     // 57: Scailo.IdentifierUUID
+	(*IdentifierWithUserComment)(nil),                          // 58: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                                // 59: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                                         // 60: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),                            // 61: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUIDWithFile)(nil),                             // 62: Scailo.IdentifierUUIDWithFile
+	(*IdentifiersList)(nil),                                    // 63: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                       // 64: Scailo.ActiveStatus
+	(*FilterFamiliesReqForIdentifier)(nil),                     // 65: Scailo.FilterFamiliesReqForIdentifier
+	(*CountInSLCStatusRequest)(nil),                            // 66: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                 // 67: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                          // 68: Scailo.MagicLink
+	(*BooleanResponse)(nil),                                    // 69: Scailo.BooleanResponse
+	(*StandardFile)(nil),                                       // 70: Scailo.StandardFile
+	(*FamiliesList)(nil),                                       // 71: Scailo.FamiliesList
+	(*CountResponse)(nil),                                      // 72: Scailo.CountResponse
 }
 var file_inward_jobs_scailo_proto_depIdxs = []int32{
 	43,  // 0: Scailo.InwardJobsServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -5356,154 +5358,156 @@ var file_inward_jobs_scailo_proto_depIdxs = []int32{
 	52,  // 63: Scailo.InwardJobsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	52,  // 64: Scailo.InwardJobsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
 	54,  // 65: Scailo.InwardJobsService.SendEmail:input_type -> Scailo.IdentifierWithEmailAttributes
-	7,   // 66: Scailo.InwardJobsService.Autofill:input_type -> Scailo.InwardJobsServiceAutofillRequest
-	55,  // 67: Scailo.InwardJobsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	56,  // 68: Scailo.InwardJobsService.IsCompletable:input_type -> Scailo.IdentifierUUID
-	56,  // 69: Scailo.InwardJobsService.IsOrdered:input_type -> Scailo.IdentifierUUID
-	56,  // 70: Scailo.InwardJobsService.IsReceived:input_type -> Scailo.IdentifierUUID
-	12,  // 71: Scailo.InwardJobsService.AddMultipleInwardJobInwardItems:input_type -> Scailo.InwardJobsServiceMultipleInwardItemsCreateRequest
-	10,  // 72: Scailo.InwardJobsService.AddInwardJobInwardItem:input_type -> Scailo.InwardJobsServiceInwardItemCreateRequest
-	13,  // 73: Scailo.InwardJobsService.ModifyInwardJobInwardItem:input_type -> Scailo.InwardJobsServiceInwardItemUpdateRequest
-	57,  // 74: Scailo.InwardJobsService.ApproveInwardJobInwardItem:input_type -> Scailo.IdentifierWithUserComment
-	57,  // 75: Scailo.InwardJobsService.DeleteInwardJobInwardItem:input_type -> Scailo.IdentifierWithUserComment
-	58,  // 76: Scailo.InwardJobsService.ReorderInwardJobInwardItems:input_type -> Scailo.ReorderItemsRequest
-	59,  // 77: Scailo.InwardJobsService.ViewInwardJobInwardItemByID:input_type -> Scailo.Identifier
-	60,  // 78: Scailo.InwardJobsService.ViewApprovedInwardJobInwardItems:input_type -> Scailo.IdentifierWithSearchKey
-	60,  // 79: Scailo.InwardJobsService.ViewUnapprovedInwardJobInwardItems:input_type -> Scailo.IdentifierWithSearchKey
-	17,  // 80: Scailo.InwardJobsService.ViewInwardJobInwardItemHistory:input_type -> Scailo.InwardJobInwardItemHistoryRequest
-	24,  // 81: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobInwardItems:input_type -> Scailo.InwardJobInwardItemsSearchRequest
-	24,  // 82: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobInwardItems:input_type -> Scailo.InwardJobInwardItemsSearchRequest
-	24,  // 83: Scailo.InwardJobsService.SearchInwardItemsWithPagination:input_type -> Scailo.InwardJobInwardItemsSearchRequest
-	56,  // 84: Scailo.InwardJobsService.DownloadInwardItemsCSVTemplate:input_type -> Scailo.IdentifierUUID
-	61,  // 85: Scailo.InwardJobsService.UploadInwardJobInwardItems:input_type -> Scailo.IdentifierUUIDWithFile
-	28,  // 86: Scailo.InwardJobsService.AddMultipleInwardJobOutwardItems:input_type -> Scailo.InwardJobsServiceMultipleOutwardItemsCreateRequest
-	26,  // 87: Scailo.InwardJobsService.AddInwardJobOutwardItem:input_type -> Scailo.InwardJobsServiceOutwardItemCreateRequest
-	29,  // 88: Scailo.InwardJobsService.ModifyInwardJobOutwardItem:input_type -> Scailo.InwardJobsServiceOutwardItemUpdateRequest
-	57,  // 89: Scailo.InwardJobsService.ApproveInwardJobOutwardItem:input_type -> Scailo.IdentifierWithUserComment
-	57,  // 90: Scailo.InwardJobsService.DeleteInwardJobOutwardItem:input_type -> Scailo.IdentifierWithUserComment
-	58,  // 91: Scailo.InwardJobsService.ReorderInwardJobOutwardItems:input_type -> Scailo.ReorderItemsRequest
-	59,  // 92: Scailo.InwardJobsService.ViewInwardJobOutwardItemByID:input_type -> Scailo.Identifier
-	60,  // 93: Scailo.InwardJobsService.ViewApprovedInwardJobOutwardItems:input_type -> Scailo.IdentifierWithSearchKey
-	60,  // 94: Scailo.InwardJobsService.ViewUnapprovedInwardJobOutwardItems:input_type -> Scailo.IdentifierWithSearchKey
-	32,  // 95: Scailo.InwardJobsService.ViewInwardJobOutwardItemHistory:input_type -> Scailo.InwardJobOutwardItemHistoryRequest
-	34,  // 96: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobOutwardItems:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
-	34,  // 97: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobOutwardItems:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
-	34,  // 98: Scailo.InwardJobsService.SearchOutwardItemsWithPagination:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
-	56,  // 99: Scailo.InwardJobsService.DownloadOutwardItemsCSVTemplate:input_type -> Scailo.IdentifierUUID
-	61,  // 100: Scailo.InwardJobsService.UploadInwardJobOutwardItems:input_type -> Scailo.IdentifierUUIDWithFile
-	36,  // 101: Scailo.InwardJobsService.AddInwardJobContact:input_type -> Scailo.InwardJobsServiceContactCreateRequest
-	57,  // 102: Scailo.InwardJobsService.ApproveInwardJobContact:input_type -> Scailo.IdentifierWithUserComment
-	57,  // 103: Scailo.InwardJobsService.DeleteInwardJobContact:input_type -> Scailo.IdentifierWithUserComment
-	59,  // 104: Scailo.InwardJobsService.ViewInwardJobContactByID:input_type -> Scailo.Identifier
-	56,  // 105: Scailo.InwardJobsService.ViewInwardJobContacts:input_type -> Scailo.IdentifierUUID
-	59,  // 106: Scailo.InwardJobsService.ViewByID:input_type -> Scailo.Identifier
-	56,  // 107: Scailo.InwardJobsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	59,  // 108: Scailo.InwardJobsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	56,  // 109: Scailo.InwardJobsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	62,  // 110: Scailo.InwardJobsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	56,  // 111: Scailo.InwardJobsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
-	63,  // 112: Scailo.InwardJobsService.ViewAll:input_type -> Scailo.ActiveStatus
-	56,  // 113: Scailo.InwardJobsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	19,  // 114: Scailo.InwardJobsService.ViewWithPagination:input_type -> Scailo.InwardJobsServicePaginationReq
-	56,  // 115: Scailo.InwardJobsService.ViewAssociatedSalesOrderIDs:input_type -> Scailo.IdentifierUUID
-	56,  // 116: Scailo.InwardJobsService.ViewInwardInventoryMatch:input_type -> Scailo.IdentifierUUID
-	60,  // 117: Scailo.InwardJobsService.ViewProspectiveInwardFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	64,  // 118: Scailo.InwardJobsService.FilterProspectiveInwardFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	18,  // 119: Scailo.InwardJobsService.ViewProspectiveInwardJobInwardItem:input_type -> Scailo.InwardJobInwardItemProspectiveInfoRequest
-	56,  // 120: Scailo.InwardJobsService.ViewOutwardInventoryMatch:input_type -> Scailo.IdentifierUUID
-	60,  // 121: Scailo.InwardJobsService.ViewProspectiveOutwardFamilies:input_type -> Scailo.IdentifierWithSearchKey
-	64,  // 122: Scailo.InwardJobsService.FilterProspectiveOutwardFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
-	33,  // 123: Scailo.InwardJobsService.ViewProspectiveInwardJobOutwardItem:input_type -> Scailo.InwardJobOutwardItemProspectiveInfoRequest
-	56,  // 124: Scailo.InwardJobsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
-	56,  // 125: Scailo.InwardJobsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
-	23,  // 126: Scailo.InwardJobsService.SearchAll:input_type -> Scailo.InwardJobsServiceSearchAllReq
-	21,  // 127: Scailo.InwardJobsService.Filter:input_type -> Scailo.InwardJobsServiceFilterReq
-	65,  // 128: Scailo.InwardJobsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	22,  // 129: Scailo.InwardJobsService.Count:input_type -> Scailo.InwardJobsServiceCountReq
-	21,  // 130: Scailo.InwardJobsService.DownloadAsCSV:input_type -> Scailo.InwardJobsServiceFilterReq
-	66,  // 131: Scailo.InwardJobsService.Create:output_type -> Scailo.IdentifierResponse
-	66,  // 132: Scailo.InwardJobsService.Draft:output_type -> Scailo.IdentifierResponse
-	66,  // 133: Scailo.InwardJobsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	66,  // 134: Scailo.InwardJobsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	66,  // 135: Scailo.InwardJobsService.Verify:output_type -> Scailo.IdentifierResponse
-	66,  // 136: Scailo.InwardJobsService.Approve:output_type -> Scailo.IdentifierResponse
-	66,  // 137: Scailo.InwardJobsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	66,  // 138: Scailo.InwardJobsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	66,  // 139: Scailo.InwardJobsService.Halt:output_type -> Scailo.IdentifierResponse
-	66,  // 140: Scailo.InwardJobsService.Discard:output_type -> Scailo.IdentifierResponse
-	66,  // 141: Scailo.InwardJobsService.Restore:output_type -> Scailo.IdentifierResponse
-	66,  // 142: Scailo.InwardJobsService.Complete:output_type -> Scailo.IdentifierResponse
-	66,  // 143: Scailo.InwardJobsService.Repeat:output_type -> Scailo.IdentifierResponse
-	66,  // 144: Scailo.InwardJobsService.Reopen:output_type -> Scailo.IdentifierResponse
-	66,  // 145: Scailo.InwardJobsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	66,  // 146: Scailo.InwardJobsService.SendEmail:output_type -> Scailo.IdentifierResponse
-	66,  // 147: Scailo.InwardJobsService.Autofill:output_type -> Scailo.IdentifierResponse
-	67,  // 148: Scailo.InwardJobsService.CreateMagicLink:output_type -> Scailo.MagicLink
-	68,  // 149: Scailo.InwardJobsService.IsCompletable:output_type -> Scailo.BooleanResponse
-	68,  // 150: Scailo.InwardJobsService.IsOrdered:output_type -> Scailo.BooleanResponse
-	68,  // 151: Scailo.InwardJobsService.IsReceived:output_type -> Scailo.BooleanResponse
-	66,  // 152: Scailo.InwardJobsService.AddMultipleInwardJobInwardItems:output_type -> Scailo.IdentifierResponse
-	66,  // 153: Scailo.InwardJobsService.AddInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 154: Scailo.InwardJobsService.ModifyInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 155: Scailo.InwardJobsService.ApproveInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 156: Scailo.InwardJobsService.DeleteInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 157: Scailo.InwardJobsService.ReorderInwardJobInwardItems:output_type -> Scailo.IdentifierResponse
-	14,  // 158: Scailo.InwardJobsService.ViewInwardJobInwardItemByID:output_type -> Scailo.InwardJobInwardItem
-	16,  // 159: Scailo.InwardJobsService.ViewApprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsInwardItemsList
-	16,  // 160: Scailo.InwardJobsService.ViewUnapprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsInwardItemsList
-	16,  // 161: Scailo.InwardJobsService.ViewInwardJobInwardItemHistory:output_type -> Scailo.InwardJobsInwardItemsList
-	25,  // 162: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
-	25,  // 163: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
-	25,  // 164: Scailo.InwardJobsService.SearchInwardItemsWithPagination:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
-	69,  // 165: Scailo.InwardJobsService.DownloadInwardItemsCSVTemplate:output_type -> Scailo.StandardFile
-	62,  // 166: Scailo.InwardJobsService.UploadInwardJobInwardItems:output_type -> Scailo.IdentifiersList
-	66,  // 167: Scailo.InwardJobsService.AddMultipleInwardJobOutwardItems:output_type -> Scailo.IdentifierResponse
-	66,  // 168: Scailo.InwardJobsService.AddInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 169: Scailo.InwardJobsService.ModifyInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 170: Scailo.InwardJobsService.ApproveInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 171: Scailo.InwardJobsService.DeleteInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
-	66,  // 172: Scailo.InwardJobsService.ReorderInwardJobOutwardItems:output_type -> Scailo.IdentifierResponse
-	30,  // 173: Scailo.InwardJobsService.ViewInwardJobOutwardItemByID:output_type -> Scailo.InwardJobOutwardItem
-	31,  // 174: Scailo.InwardJobsService.ViewApprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsOutwardItemsList
-	31,  // 175: Scailo.InwardJobsService.ViewUnapprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsOutwardItemsList
-	31,  // 176: Scailo.InwardJobsService.ViewInwardJobOutwardItemHistory:output_type -> Scailo.InwardJobsOutwardItemsList
-	35,  // 177: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
-	35,  // 178: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
-	35,  // 179: Scailo.InwardJobsService.SearchOutwardItemsWithPagination:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
-	69,  // 180: Scailo.InwardJobsService.DownloadOutwardItemsCSVTemplate:output_type -> Scailo.StandardFile
-	62,  // 181: Scailo.InwardJobsService.UploadInwardJobOutwardItems:output_type -> Scailo.IdentifiersList
-	66,  // 182: Scailo.InwardJobsService.AddInwardJobContact:output_type -> Scailo.IdentifierResponse
-	66,  // 183: Scailo.InwardJobsService.ApproveInwardJobContact:output_type -> Scailo.IdentifierResponse
-	66,  // 184: Scailo.InwardJobsService.DeleteInwardJobContact:output_type -> Scailo.IdentifierResponse
-	37,  // 185: Scailo.InwardJobsService.ViewInwardJobContactByID:output_type -> Scailo.InwardJobContact
-	38,  // 186: Scailo.InwardJobsService.ViewInwardJobContacts:output_type -> Scailo.InwardJobContactsList
-	9,   // 187: Scailo.InwardJobsService.ViewByID:output_type -> Scailo.InwardJob
-	9,   // 188: Scailo.InwardJobsService.ViewByUUID:output_type -> Scailo.InwardJob
-	9,   // 189: Scailo.InwardJobsService.ViewEssentialByID:output_type -> Scailo.InwardJob
-	9,   // 190: Scailo.InwardJobsService.ViewEssentialByUUID:output_type -> Scailo.InwardJob
-	15,  // 191: Scailo.InwardJobsService.ViewFromIDs:output_type -> Scailo.InwardJobsList
-	8,   // 192: Scailo.InwardJobsService.ViewAncillaryParametersByUUID:output_type -> Scailo.InwardJobAncillaryParameters
-	15,  // 193: Scailo.InwardJobsService.ViewAll:output_type -> Scailo.InwardJobsList
-	15,  // 194: Scailo.InwardJobsService.ViewAllForEntityUUID:output_type -> Scailo.InwardJobsList
-	20,  // 195: Scailo.InwardJobsService.ViewWithPagination:output_type -> Scailo.InwardJobsServicePaginationResponse
-	62,  // 196: Scailo.InwardJobsService.ViewAssociatedSalesOrderIDs:output_type -> Scailo.IdentifiersList
-	40,  // 197: Scailo.InwardJobsService.ViewInwardInventoryMatch:output_type -> Scailo.InwardJobInwardInventoryMatchList
-	70,  // 198: Scailo.InwardJobsService.ViewProspectiveInwardFamilies:output_type -> Scailo.FamiliesList
-	70,  // 199: Scailo.InwardJobsService.FilterProspectiveInwardFamilies:output_type -> Scailo.FamiliesList
-	10,  // 200: Scailo.InwardJobsService.ViewProspectiveInwardJobInwardItem:output_type -> Scailo.InwardJobsServiceInwardItemCreateRequest
-	42,  // 201: Scailo.InwardJobsService.ViewOutwardInventoryMatch:output_type -> Scailo.InwardJobOutwardInventoryMatchList
-	70,  // 202: Scailo.InwardJobsService.ViewProspectiveOutwardFamilies:output_type -> Scailo.FamiliesList
-	70,  // 203: Scailo.InwardJobsService.FilterProspectiveOutwardFamilies:output_type -> Scailo.FamiliesList
-	26,  // 204: Scailo.InwardJobsService.ViewProspectiveInwardJobOutwardItem:output_type -> Scailo.InwardJobsServiceOutwardItemCreateRequest
-	68,  // 205: Scailo.InwardJobsService.IsDownloadable:output_type -> Scailo.BooleanResponse
-	69,  // 206: Scailo.InwardJobsService.DownloadByUUID:output_type -> Scailo.StandardFile
-	15,  // 207: Scailo.InwardJobsService.SearchAll:output_type -> Scailo.InwardJobsList
-	15,  // 208: Scailo.InwardJobsService.Filter:output_type -> Scailo.InwardJobsList
-	71,  // 209: Scailo.InwardJobsService.CountInStatus:output_type -> Scailo.CountResponse
-	71,  // 210: Scailo.InwardJobsService.Count:output_type -> Scailo.CountResponse
-	69,  // 211: Scailo.InwardJobsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	131, // [131:212] is the sub-list for method output_type
-	50,  // [50:131] is the sub-list for method input_type
+	55,  // 66: Scailo.InwardJobsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	7,   // 67: Scailo.InwardJobsService.Autofill:input_type -> Scailo.InwardJobsServiceAutofillRequest
+	56,  // 68: Scailo.InwardJobsService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	57,  // 69: Scailo.InwardJobsService.IsCompletable:input_type -> Scailo.IdentifierUUID
+	57,  // 70: Scailo.InwardJobsService.IsOrdered:input_type -> Scailo.IdentifierUUID
+	57,  // 71: Scailo.InwardJobsService.IsReceived:input_type -> Scailo.IdentifierUUID
+	12,  // 72: Scailo.InwardJobsService.AddMultipleInwardJobInwardItems:input_type -> Scailo.InwardJobsServiceMultipleInwardItemsCreateRequest
+	10,  // 73: Scailo.InwardJobsService.AddInwardJobInwardItem:input_type -> Scailo.InwardJobsServiceInwardItemCreateRequest
+	13,  // 74: Scailo.InwardJobsService.ModifyInwardJobInwardItem:input_type -> Scailo.InwardJobsServiceInwardItemUpdateRequest
+	58,  // 75: Scailo.InwardJobsService.ApproveInwardJobInwardItem:input_type -> Scailo.IdentifierWithUserComment
+	58,  // 76: Scailo.InwardJobsService.DeleteInwardJobInwardItem:input_type -> Scailo.IdentifierWithUserComment
+	59,  // 77: Scailo.InwardJobsService.ReorderInwardJobInwardItems:input_type -> Scailo.ReorderItemsRequest
+	60,  // 78: Scailo.InwardJobsService.ViewInwardJobInwardItemByID:input_type -> Scailo.Identifier
+	61,  // 79: Scailo.InwardJobsService.ViewApprovedInwardJobInwardItems:input_type -> Scailo.IdentifierWithSearchKey
+	61,  // 80: Scailo.InwardJobsService.ViewUnapprovedInwardJobInwardItems:input_type -> Scailo.IdentifierWithSearchKey
+	17,  // 81: Scailo.InwardJobsService.ViewInwardJobInwardItemHistory:input_type -> Scailo.InwardJobInwardItemHistoryRequest
+	24,  // 82: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobInwardItems:input_type -> Scailo.InwardJobInwardItemsSearchRequest
+	24,  // 83: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobInwardItems:input_type -> Scailo.InwardJobInwardItemsSearchRequest
+	24,  // 84: Scailo.InwardJobsService.SearchInwardItemsWithPagination:input_type -> Scailo.InwardJobInwardItemsSearchRequest
+	57,  // 85: Scailo.InwardJobsService.DownloadInwardItemsCSVTemplate:input_type -> Scailo.IdentifierUUID
+	62,  // 86: Scailo.InwardJobsService.UploadInwardJobInwardItems:input_type -> Scailo.IdentifierUUIDWithFile
+	28,  // 87: Scailo.InwardJobsService.AddMultipleInwardJobOutwardItems:input_type -> Scailo.InwardJobsServiceMultipleOutwardItemsCreateRequest
+	26,  // 88: Scailo.InwardJobsService.AddInwardJobOutwardItem:input_type -> Scailo.InwardJobsServiceOutwardItemCreateRequest
+	29,  // 89: Scailo.InwardJobsService.ModifyInwardJobOutwardItem:input_type -> Scailo.InwardJobsServiceOutwardItemUpdateRequest
+	58,  // 90: Scailo.InwardJobsService.ApproveInwardJobOutwardItem:input_type -> Scailo.IdentifierWithUserComment
+	58,  // 91: Scailo.InwardJobsService.DeleteInwardJobOutwardItem:input_type -> Scailo.IdentifierWithUserComment
+	59,  // 92: Scailo.InwardJobsService.ReorderInwardJobOutwardItems:input_type -> Scailo.ReorderItemsRequest
+	60,  // 93: Scailo.InwardJobsService.ViewInwardJobOutwardItemByID:input_type -> Scailo.Identifier
+	61,  // 94: Scailo.InwardJobsService.ViewApprovedInwardJobOutwardItems:input_type -> Scailo.IdentifierWithSearchKey
+	61,  // 95: Scailo.InwardJobsService.ViewUnapprovedInwardJobOutwardItems:input_type -> Scailo.IdentifierWithSearchKey
+	32,  // 96: Scailo.InwardJobsService.ViewInwardJobOutwardItemHistory:input_type -> Scailo.InwardJobOutwardItemHistoryRequest
+	34,  // 97: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobOutwardItems:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
+	34,  // 98: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobOutwardItems:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
+	34,  // 99: Scailo.InwardJobsService.SearchOutwardItemsWithPagination:input_type -> Scailo.InwardJobOutwardItemsSearchRequest
+	57,  // 100: Scailo.InwardJobsService.DownloadOutwardItemsCSVTemplate:input_type -> Scailo.IdentifierUUID
+	62,  // 101: Scailo.InwardJobsService.UploadInwardJobOutwardItems:input_type -> Scailo.IdentifierUUIDWithFile
+	36,  // 102: Scailo.InwardJobsService.AddInwardJobContact:input_type -> Scailo.InwardJobsServiceContactCreateRequest
+	58,  // 103: Scailo.InwardJobsService.ApproveInwardJobContact:input_type -> Scailo.IdentifierWithUserComment
+	58,  // 104: Scailo.InwardJobsService.DeleteInwardJobContact:input_type -> Scailo.IdentifierWithUserComment
+	60,  // 105: Scailo.InwardJobsService.ViewInwardJobContactByID:input_type -> Scailo.Identifier
+	57,  // 106: Scailo.InwardJobsService.ViewInwardJobContacts:input_type -> Scailo.IdentifierUUID
+	60,  // 107: Scailo.InwardJobsService.ViewByID:input_type -> Scailo.Identifier
+	57,  // 108: Scailo.InwardJobsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	60,  // 109: Scailo.InwardJobsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	57,  // 110: Scailo.InwardJobsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	63,  // 111: Scailo.InwardJobsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	57,  // 112: Scailo.InwardJobsService.ViewAncillaryParametersByUUID:input_type -> Scailo.IdentifierUUID
+	64,  // 113: Scailo.InwardJobsService.ViewAll:input_type -> Scailo.ActiveStatus
+	57,  // 114: Scailo.InwardJobsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	19,  // 115: Scailo.InwardJobsService.ViewWithPagination:input_type -> Scailo.InwardJobsServicePaginationReq
+	57,  // 116: Scailo.InwardJobsService.ViewAssociatedSalesOrderIDs:input_type -> Scailo.IdentifierUUID
+	57,  // 117: Scailo.InwardJobsService.ViewInwardInventoryMatch:input_type -> Scailo.IdentifierUUID
+	61,  // 118: Scailo.InwardJobsService.ViewProspectiveInwardFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	65,  // 119: Scailo.InwardJobsService.FilterProspectiveInwardFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	18,  // 120: Scailo.InwardJobsService.ViewProspectiveInwardJobInwardItem:input_type -> Scailo.InwardJobInwardItemProspectiveInfoRequest
+	57,  // 121: Scailo.InwardJobsService.ViewOutwardInventoryMatch:input_type -> Scailo.IdentifierUUID
+	61,  // 122: Scailo.InwardJobsService.ViewProspectiveOutwardFamilies:input_type -> Scailo.IdentifierWithSearchKey
+	65,  // 123: Scailo.InwardJobsService.FilterProspectiveOutwardFamilies:input_type -> Scailo.FilterFamiliesReqForIdentifier
+	33,  // 124: Scailo.InwardJobsService.ViewProspectiveInwardJobOutwardItem:input_type -> Scailo.InwardJobOutwardItemProspectiveInfoRequest
+	57,  // 125: Scailo.InwardJobsService.IsDownloadable:input_type -> Scailo.IdentifierUUID
+	57,  // 126: Scailo.InwardJobsService.DownloadByUUID:input_type -> Scailo.IdentifierUUID
+	23,  // 127: Scailo.InwardJobsService.SearchAll:input_type -> Scailo.InwardJobsServiceSearchAllReq
+	21,  // 128: Scailo.InwardJobsService.Filter:input_type -> Scailo.InwardJobsServiceFilterReq
+	66,  // 129: Scailo.InwardJobsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	22,  // 130: Scailo.InwardJobsService.Count:input_type -> Scailo.InwardJobsServiceCountReq
+	21,  // 131: Scailo.InwardJobsService.DownloadAsCSV:input_type -> Scailo.InwardJobsServiceFilterReq
+	67,  // 132: Scailo.InwardJobsService.Create:output_type -> Scailo.IdentifierResponse
+	67,  // 133: Scailo.InwardJobsService.Draft:output_type -> Scailo.IdentifierResponse
+	67,  // 134: Scailo.InwardJobsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	67,  // 135: Scailo.InwardJobsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	67,  // 136: Scailo.InwardJobsService.Verify:output_type -> Scailo.IdentifierResponse
+	67,  // 137: Scailo.InwardJobsService.Approve:output_type -> Scailo.IdentifierResponse
+	67,  // 138: Scailo.InwardJobsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	67,  // 139: Scailo.InwardJobsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	67,  // 140: Scailo.InwardJobsService.Halt:output_type -> Scailo.IdentifierResponse
+	67,  // 141: Scailo.InwardJobsService.Discard:output_type -> Scailo.IdentifierResponse
+	67,  // 142: Scailo.InwardJobsService.Restore:output_type -> Scailo.IdentifierResponse
+	67,  // 143: Scailo.InwardJobsService.Complete:output_type -> Scailo.IdentifierResponse
+	67,  // 144: Scailo.InwardJobsService.Repeat:output_type -> Scailo.IdentifierResponse
+	67,  // 145: Scailo.InwardJobsService.Reopen:output_type -> Scailo.IdentifierResponse
+	67,  // 146: Scailo.InwardJobsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	67,  // 147: Scailo.InwardJobsService.SendEmail:output_type -> Scailo.IdentifierResponse
+	67,  // 148: Scailo.InwardJobsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	67,  // 149: Scailo.InwardJobsService.Autofill:output_type -> Scailo.IdentifierResponse
+	68,  // 150: Scailo.InwardJobsService.CreateMagicLink:output_type -> Scailo.MagicLink
+	69,  // 151: Scailo.InwardJobsService.IsCompletable:output_type -> Scailo.BooleanResponse
+	69,  // 152: Scailo.InwardJobsService.IsOrdered:output_type -> Scailo.BooleanResponse
+	69,  // 153: Scailo.InwardJobsService.IsReceived:output_type -> Scailo.BooleanResponse
+	67,  // 154: Scailo.InwardJobsService.AddMultipleInwardJobInwardItems:output_type -> Scailo.IdentifierResponse
+	67,  // 155: Scailo.InwardJobsService.AddInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 156: Scailo.InwardJobsService.ModifyInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 157: Scailo.InwardJobsService.ApproveInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 158: Scailo.InwardJobsService.DeleteInwardJobInwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 159: Scailo.InwardJobsService.ReorderInwardJobInwardItems:output_type -> Scailo.IdentifierResponse
+	14,  // 160: Scailo.InwardJobsService.ViewInwardJobInwardItemByID:output_type -> Scailo.InwardJobInwardItem
+	16,  // 161: Scailo.InwardJobsService.ViewApprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsInwardItemsList
+	16,  // 162: Scailo.InwardJobsService.ViewUnapprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsInwardItemsList
+	16,  // 163: Scailo.InwardJobsService.ViewInwardJobInwardItemHistory:output_type -> Scailo.InwardJobsInwardItemsList
+	25,  // 164: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
+	25,  // 165: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobInwardItems:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
+	25,  // 166: Scailo.InwardJobsService.SearchInwardItemsWithPagination:output_type -> Scailo.InwardJobsServicePaginatedInwardItemsResponse
+	70,  // 167: Scailo.InwardJobsService.DownloadInwardItemsCSVTemplate:output_type -> Scailo.StandardFile
+	63,  // 168: Scailo.InwardJobsService.UploadInwardJobInwardItems:output_type -> Scailo.IdentifiersList
+	67,  // 169: Scailo.InwardJobsService.AddMultipleInwardJobOutwardItems:output_type -> Scailo.IdentifierResponse
+	67,  // 170: Scailo.InwardJobsService.AddInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 171: Scailo.InwardJobsService.ModifyInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 172: Scailo.InwardJobsService.ApproveInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 173: Scailo.InwardJobsService.DeleteInwardJobOutwardItem:output_type -> Scailo.IdentifierResponse
+	67,  // 174: Scailo.InwardJobsService.ReorderInwardJobOutwardItems:output_type -> Scailo.IdentifierResponse
+	30,  // 175: Scailo.InwardJobsService.ViewInwardJobOutwardItemByID:output_type -> Scailo.InwardJobOutwardItem
+	31,  // 176: Scailo.InwardJobsService.ViewApprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsOutwardItemsList
+	31,  // 177: Scailo.InwardJobsService.ViewUnapprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsOutwardItemsList
+	31,  // 178: Scailo.InwardJobsService.ViewInwardJobOutwardItemHistory:output_type -> Scailo.InwardJobsOutwardItemsList
+	35,  // 179: Scailo.InwardJobsService.ViewPaginatedApprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
+	35,  // 180: Scailo.InwardJobsService.ViewPaginatedUnapprovedInwardJobOutwardItems:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
+	35,  // 181: Scailo.InwardJobsService.SearchOutwardItemsWithPagination:output_type -> Scailo.InwardJobsServicePaginatedOutwardItemsResponse
+	70,  // 182: Scailo.InwardJobsService.DownloadOutwardItemsCSVTemplate:output_type -> Scailo.StandardFile
+	63,  // 183: Scailo.InwardJobsService.UploadInwardJobOutwardItems:output_type -> Scailo.IdentifiersList
+	67,  // 184: Scailo.InwardJobsService.AddInwardJobContact:output_type -> Scailo.IdentifierResponse
+	67,  // 185: Scailo.InwardJobsService.ApproveInwardJobContact:output_type -> Scailo.IdentifierResponse
+	67,  // 186: Scailo.InwardJobsService.DeleteInwardJobContact:output_type -> Scailo.IdentifierResponse
+	37,  // 187: Scailo.InwardJobsService.ViewInwardJobContactByID:output_type -> Scailo.InwardJobContact
+	38,  // 188: Scailo.InwardJobsService.ViewInwardJobContacts:output_type -> Scailo.InwardJobContactsList
+	9,   // 189: Scailo.InwardJobsService.ViewByID:output_type -> Scailo.InwardJob
+	9,   // 190: Scailo.InwardJobsService.ViewByUUID:output_type -> Scailo.InwardJob
+	9,   // 191: Scailo.InwardJobsService.ViewEssentialByID:output_type -> Scailo.InwardJob
+	9,   // 192: Scailo.InwardJobsService.ViewEssentialByUUID:output_type -> Scailo.InwardJob
+	15,  // 193: Scailo.InwardJobsService.ViewFromIDs:output_type -> Scailo.InwardJobsList
+	8,   // 194: Scailo.InwardJobsService.ViewAncillaryParametersByUUID:output_type -> Scailo.InwardJobAncillaryParameters
+	15,  // 195: Scailo.InwardJobsService.ViewAll:output_type -> Scailo.InwardJobsList
+	15,  // 196: Scailo.InwardJobsService.ViewAllForEntityUUID:output_type -> Scailo.InwardJobsList
+	20,  // 197: Scailo.InwardJobsService.ViewWithPagination:output_type -> Scailo.InwardJobsServicePaginationResponse
+	63,  // 198: Scailo.InwardJobsService.ViewAssociatedSalesOrderIDs:output_type -> Scailo.IdentifiersList
+	40,  // 199: Scailo.InwardJobsService.ViewInwardInventoryMatch:output_type -> Scailo.InwardJobInwardInventoryMatchList
+	71,  // 200: Scailo.InwardJobsService.ViewProspectiveInwardFamilies:output_type -> Scailo.FamiliesList
+	71,  // 201: Scailo.InwardJobsService.FilterProspectiveInwardFamilies:output_type -> Scailo.FamiliesList
+	10,  // 202: Scailo.InwardJobsService.ViewProspectiveInwardJobInwardItem:output_type -> Scailo.InwardJobsServiceInwardItemCreateRequest
+	42,  // 203: Scailo.InwardJobsService.ViewOutwardInventoryMatch:output_type -> Scailo.InwardJobOutwardInventoryMatchList
+	71,  // 204: Scailo.InwardJobsService.ViewProspectiveOutwardFamilies:output_type -> Scailo.FamiliesList
+	71,  // 205: Scailo.InwardJobsService.FilterProspectiveOutwardFamilies:output_type -> Scailo.FamiliesList
+	26,  // 206: Scailo.InwardJobsService.ViewProspectiveInwardJobOutwardItem:output_type -> Scailo.InwardJobsServiceOutwardItemCreateRequest
+	69,  // 207: Scailo.InwardJobsService.IsDownloadable:output_type -> Scailo.BooleanResponse
+	70,  // 208: Scailo.InwardJobsService.DownloadByUUID:output_type -> Scailo.StandardFile
+	15,  // 209: Scailo.InwardJobsService.SearchAll:output_type -> Scailo.InwardJobsList
+	15,  // 210: Scailo.InwardJobsService.Filter:output_type -> Scailo.InwardJobsList
+	72,  // 211: Scailo.InwardJobsService.CountInStatus:output_type -> Scailo.CountResponse
+	72,  // 212: Scailo.InwardJobsService.Count:output_type -> Scailo.CountResponse
+	70,  // 213: Scailo.InwardJobsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	132, // [132:214] is the sub-list for method output_type
+	50,  // [50:132] is the sub-list for method input_type
 	50,  // [50:50] is the sub-list for extension type_name
 	50,  // [50:50] is the sub-list for extension extendee
 	0,   // [0:50] is the sub-list for field type_name
@@ -5518,6 +5522,7 @@ func file_inward_jobs_scailo_proto_init() {
 	file_families_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

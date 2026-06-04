@@ -2247,7 +2247,7 @@ var File_teams_scailo_proto protoreflect.FileDescriptor
 
 const file_teams_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12teams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xa0\x02\n" +
+	"\x12teams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xa0\x02\n" +
 	"\x19TeamsServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2435,7 +2435,7 @@ const file_teams_scailo_proto_rawDesc = "" +
 	"\x12TEAM_MEMBER_STATUS\x12&\n" +
 	"\"TEAM_MEMBER_STATUS_ANY_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bTEAM_MEMBER_STATUS_APPROVED\x10\x01\x12!\n" +
-	"\x1dTEAM_MEMBER_STATUS_UNAPPROVED\x10\x022\xd9\x19\n" +
+	"\x1dTEAM_MEMBER_STATUS_UNAPPROVED\x10\x022\xac\x1a\n" +
 	"\fTeamsService\x12G\n" +
 	"\x06Create\x12!.Scailo.TeamsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12F\n" +
 	"\x05Draft\x12!.Scailo.TeamsServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12L\n" +
@@ -2452,7 +2452,8 @@ const file_teams_scailo_proto_rawDesc = "" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Reopen\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x129\n" +
 	"\x05Clone\x12\x14.Scailo.CloneRequest\x1a\x1a.Scailo.IdentifierResponse\x12T\n" +
 	"\rAddTeamMember\x12'.Scailo.TeamsServiceMemberCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12W\n" +
 	"\x10ModifyTeamMember\x12'.Scailo.TeamsServiceMemberUpdateRequest\x1a\x1a.Scailo.IdentifierResponse\x12R\n" +
@@ -2527,19 +2528,20 @@ var file_teams_scailo_proto_goTypes = []any{
 	(BOOL_FILTER)(0),                             // 23: Scailo.BOOL_FILTER
 	(SORT_ORDER)(0),                              // 24: Scailo.SORT_ORDER
 	(*IdentifierUUIDWithUserComment)(nil),        // 25: Scailo.IdentifierUUIDWithUserComment
-	(*CloneRequest)(nil),                         // 26: Scailo.CloneRequest
-	(*IdentifierWithUserComment)(nil),            // 27: Scailo.IdentifierWithUserComment
-	(*ReorderItemsRequest)(nil),                  // 28: Scailo.ReorderItemsRequest
-	(*Identifier)(nil),                           // 29: Scailo.Identifier
-	(*IdentifierWithSearchKey)(nil),              // 30: Scailo.IdentifierWithSearchKey
-	(*IdentifierUUID)(nil),                       // 31: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                      // 32: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                         // 33: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),              // 34: Scailo.CountInSLCStatusRequest
-	(*StandardFile)(nil),                         // 35: Scailo.StandardFile
-	(*IdentifierResponse)(nil),                   // 36: Scailo.IdentifierResponse
-	(*CountResponse)(nil),                        // 37: Scailo.CountResponse
-	(*IdentifierUUIDsList)(nil),                  // 38: Scailo.IdentifierUUIDsList
+	(*VaultFolderAttachRequest)(nil),             // 26: Scailo.VaultFolderAttachRequest
+	(*CloneRequest)(nil),                         // 27: Scailo.CloneRequest
+	(*IdentifierWithUserComment)(nil),            // 28: Scailo.IdentifierWithUserComment
+	(*ReorderItemsRequest)(nil),                  // 29: Scailo.ReorderItemsRequest
+	(*Identifier)(nil),                           // 30: Scailo.Identifier
+	(*IdentifierWithSearchKey)(nil),              // 31: Scailo.IdentifierWithSearchKey
+	(*IdentifierUUID)(nil),                       // 32: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                      // 33: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                         // 34: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),              // 35: Scailo.CountInSLCStatusRequest
+	(*StandardFile)(nil),                         // 36: Scailo.StandardFile
+	(*IdentifierResponse)(nil),                   // 37: Scailo.IdentifierResponse
+	(*CountResponse)(nil),                        // 38: Scailo.CountResponse
+	(*IdentifierUUIDsList)(nil),                  // 39: Scailo.IdentifierUUIDsList
 }
 var file_teams_scailo_proto_depIdxs = []int32{
 	19, // 0: Scailo.Team.metadata:type_name -> Scailo.EmployeeMetadata
@@ -2586,79 +2588,81 @@ var file_teams_scailo_proto_depIdxs = []int32{
 	25, // 41: Scailo.TeamsService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 42: Scailo.TeamsService.Reopen:input_type -> Scailo.IdentifierUUIDWithUserComment
 	25, // 43: Scailo.TeamsService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	26, // 44: Scailo.TeamsService.Clone:input_type -> Scailo.CloneRequest
-	6,  // 45: Scailo.TeamsService.AddTeamMember:input_type -> Scailo.TeamsServiceMemberCreateRequest
-	7,  // 46: Scailo.TeamsService.ModifyTeamMember:input_type -> Scailo.TeamsServiceMemberUpdateRequest
-	27, // 47: Scailo.TeamsService.ApproveTeamMember:input_type -> Scailo.IdentifierWithUserComment
-	27, // 48: Scailo.TeamsService.DeleteTeamMember:input_type -> Scailo.IdentifierWithUserComment
-	28, // 49: Scailo.TeamsService.ReorderTeamMembers:input_type -> Scailo.ReorderItemsRequest
-	29, // 50: Scailo.TeamsService.ViewTeamMemberByID:input_type -> Scailo.Identifier
-	30, // 51: Scailo.TeamsService.ViewApprovedTeamMembers:input_type -> Scailo.IdentifierWithSearchKey
-	30, // 52: Scailo.TeamsService.ViewUnapprovedTeamMembers:input_type -> Scailo.IdentifierWithSearchKey
-	11, // 53: Scailo.TeamsService.ViewTeamMemberHistory:input_type -> Scailo.TeamMemberHistoryRequest
-	17, // 54: Scailo.TeamsService.ViewPaginatedApprovedTeamMembers:input_type -> Scailo.TeamMembersSearchRequest
-	17, // 55: Scailo.TeamsService.ViewPaginatedUnapprovedTeamMembers:input_type -> Scailo.TeamMembersSearchRequest
-	17, // 56: Scailo.TeamsService.SearchMembersWithPagination:input_type -> Scailo.TeamMembersSearchRequest
-	29, // 57: Scailo.TeamsService.ViewTeamsForMember:input_type -> Scailo.Identifier
-	29, // 58: Scailo.TeamsService.ViewByID:input_type -> Scailo.Identifier
-	31, // 59: Scailo.TeamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	29, // 60: Scailo.TeamsService.ViewEssentialByID:input_type -> Scailo.Identifier
-	31, // 61: Scailo.TeamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	32, // 62: Scailo.TeamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	33, // 63: Scailo.TeamsService.ViewAll:input_type -> Scailo.ActiveStatus
-	31, // 64: Scailo.TeamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	12, // 65: Scailo.TeamsService.ViewWithPagination:input_type -> Scailo.TeamsServicePaginationReq
-	16, // 66: Scailo.TeamsService.SearchAll:input_type -> Scailo.TeamsServiceSearchAllReq
-	14, // 67: Scailo.TeamsService.Filter:input_type -> Scailo.TeamsServiceFilterReq
-	34, // 68: Scailo.TeamsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	15, // 69: Scailo.TeamsService.Count:input_type -> Scailo.TeamsServiceCountReq
-	14, // 70: Scailo.TeamsService.DownloadAsCSV:input_type -> Scailo.TeamsServiceFilterReq
-	35, // 71: Scailo.TeamsService.ImportFromCSV:input_type -> Scailo.StandardFile
-	36, // 72: Scailo.TeamsService.Create:output_type -> Scailo.IdentifierResponse
-	36, // 73: Scailo.TeamsService.Draft:output_type -> Scailo.IdentifierResponse
-	36, // 74: Scailo.TeamsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	36, // 75: Scailo.TeamsService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	36, // 76: Scailo.TeamsService.Verify:output_type -> Scailo.IdentifierResponse
-	36, // 77: Scailo.TeamsService.Approve:output_type -> Scailo.IdentifierResponse
-	36, // 78: Scailo.TeamsService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	36, // 79: Scailo.TeamsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	36, // 80: Scailo.TeamsService.Halt:output_type -> Scailo.IdentifierResponse
-	36, // 81: Scailo.TeamsService.Discard:output_type -> Scailo.IdentifierResponse
-	36, // 82: Scailo.TeamsService.Restore:output_type -> Scailo.IdentifierResponse
-	36, // 83: Scailo.TeamsService.Complete:output_type -> Scailo.IdentifierResponse
-	36, // 84: Scailo.TeamsService.Repeat:output_type -> Scailo.IdentifierResponse
-	36, // 85: Scailo.TeamsService.Reopen:output_type -> Scailo.IdentifierResponse
-	36, // 86: Scailo.TeamsService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	36, // 87: Scailo.TeamsService.Clone:output_type -> Scailo.IdentifierResponse
-	36, // 88: Scailo.TeamsService.AddTeamMember:output_type -> Scailo.IdentifierResponse
-	36, // 89: Scailo.TeamsService.ModifyTeamMember:output_type -> Scailo.IdentifierResponse
-	36, // 90: Scailo.TeamsService.ApproveTeamMember:output_type -> Scailo.IdentifierResponse
-	36, // 91: Scailo.TeamsService.DeleteTeamMember:output_type -> Scailo.IdentifierResponse
-	36, // 92: Scailo.TeamsService.ReorderTeamMembers:output_type -> Scailo.IdentifierResponse
-	8,  // 93: Scailo.TeamsService.ViewTeamMemberByID:output_type -> Scailo.TeamMember
-	10, // 94: Scailo.TeamsService.ViewApprovedTeamMembers:output_type -> Scailo.TeamsMembersList
-	10, // 95: Scailo.TeamsService.ViewUnapprovedTeamMembers:output_type -> Scailo.TeamsMembersList
-	10, // 96: Scailo.TeamsService.ViewTeamMemberHistory:output_type -> Scailo.TeamsMembersList
-	18, // 97: Scailo.TeamsService.ViewPaginatedApprovedTeamMembers:output_type -> Scailo.TeamsServicePaginatedMembersResponse
-	18, // 98: Scailo.TeamsService.ViewPaginatedUnapprovedTeamMembers:output_type -> Scailo.TeamsServicePaginatedMembersResponse
-	18, // 99: Scailo.TeamsService.SearchMembersWithPagination:output_type -> Scailo.TeamsServicePaginatedMembersResponse
-	9,  // 100: Scailo.TeamsService.ViewTeamsForMember:output_type -> Scailo.TeamsList
-	5,  // 101: Scailo.TeamsService.ViewByID:output_type -> Scailo.Team
-	5,  // 102: Scailo.TeamsService.ViewByUUID:output_type -> Scailo.Team
-	5,  // 103: Scailo.TeamsService.ViewEssentialByID:output_type -> Scailo.Team
-	5,  // 104: Scailo.TeamsService.ViewEssentialByUUID:output_type -> Scailo.Team
-	9,  // 105: Scailo.TeamsService.ViewFromIDs:output_type -> Scailo.TeamsList
-	9,  // 106: Scailo.TeamsService.ViewAll:output_type -> Scailo.TeamsList
-	9,  // 107: Scailo.TeamsService.ViewAllForEntityUUID:output_type -> Scailo.TeamsList
-	13, // 108: Scailo.TeamsService.ViewWithPagination:output_type -> Scailo.TeamsServicePaginationResponse
-	9,  // 109: Scailo.TeamsService.SearchAll:output_type -> Scailo.TeamsList
-	9,  // 110: Scailo.TeamsService.Filter:output_type -> Scailo.TeamsList
-	37, // 111: Scailo.TeamsService.CountInStatus:output_type -> Scailo.CountResponse
-	37, // 112: Scailo.TeamsService.Count:output_type -> Scailo.CountResponse
-	35, // 113: Scailo.TeamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	38, // 114: Scailo.TeamsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	72, // [72:115] is the sub-list for method output_type
-	29, // [29:72] is the sub-list for method input_type
+	26, // 44: Scailo.TeamsService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	27, // 45: Scailo.TeamsService.Clone:input_type -> Scailo.CloneRequest
+	6,  // 46: Scailo.TeamsService.AddTeamMember:input_type -> Scailo.TeamsServiceMemberCreateRequest
+	7,  // 47: Scailo.TeamsService.ModifyTeamMember:input_type -> Scailo.TeamsServiceMemberUpdateRequest
+	28, // 48: Scailo.TeamsService.ApproveTeamMember:input_type -> Scailo.IdentifierWithUserComment
+	28, // 49: Scailo.TeamsService.DeleteTeamMember:input_type -> Scailo.IdentifierWithUserComment
+	29, // 50: Scailo.TeamsService.ReorderTeamMembers:input_type -> Scailo.ReorderItemsRequest
+	30, // 51: Scailo.TeamsService.ViewTeamMemberByID:input_type -> Scailo.Identifier
+	31, // 52: Scailo.TeamsService.ViewApprovedTeamMembers:input_type -> Scailo.IdentifierWithSearchKey
+	31, // 53: Scailo.TeamsService.ViewUnapprovedTeamMembers:input_type -> Scailo.IdentifierWithSearchKey
+	11, // 54: Scailo.TeamsService.ViewTeamMemberHistory:input_type -> Scailo.TeamMemberHistoryRequest
+	17, // 55: Scailo.TeamsService.ViewPaginatedApprovedTeamMembers:input_type -> Scailo.TeamMembersSearchRequest
+	17, // 56: Scailo.TeamsService.ViewPaginatedUnapprovedTeamMembers:input_type -> Scailo.TeamMembersSearchRequest
+	17, // 57: Scailo.TeamsService.SearchMembersWithPagination:input_type -> Scailo.TeamMembersSearchRequest
+	30, // 58: Scailo.TeamsService.ViewTeamsForMember:input_type -> Scailo.Identifier
+	30, // 59: Scailo.TeamsService.ViewByID:input_type -> Scailo.Identifier
+	32, // 60: Scailo.TeamsService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	30, // 61: Scailo.TeamsService.ViewEssentialByID:input_type -> Scailo.Identifier
+	32, // 62: Scailo.TeamsService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	33, // 63: Scailo.TeamsService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	34, // 64: Scailo.TeamsService.ViewAll:input_type -> Scailo.ActiveStatus
+	32, // 65: Scailo.TeamsService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	12, // 66: Scailo.TeamsService.ViewWithPagination:input_type -> Scailo.TeamsServicePaginationReq
+	16, // 67: Scailo.TeamsService.SearchAll:input_type -> Scailo.TeamsServiceSearchAllReq
+	14, // 68: Scailo.TeamsService.Filter:input_type -> Scailo.TeamsServiceFilterReq
+	35, // 69: Scailo.TeamsService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	15, // 70: Scailo.TeamsService.Count:input_type -> Scailo.TeamsServiceCountReq
+	14, // 71: Scailo.TeamsService.DownloadAsCSV:input_type -> Scailo.TeamsServiceFilterReq
+	36, // 72: Scailo.TeamsService.ImportFromCSV:input_type -> Scailo.StandardFile
+	37, // 73: Scailo.TeamsService.Create:output_type -> Scailo.IdentifierResponse
+	37, // 74: Scailo.TeamsService.Draft:output_type -> Scailo.IdentifierResponse
+	37, // 75: Scailo.TeamsService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	37, // 76: Scailo.TeamsService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	37, // 77: Scailo.TeamsService.Verify:output_type -> Scailo.IdentifierResponse
+	37, // 78: Scailo.TeamsService.Approve:output_type -> Scailo.IdentifierResponse
+	37, // 79: Scailo.TeamsService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	37, // 80: Scailo.TeamsService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	37, // 81: Scailo.TeamsService.Halt:output_type -> Scailo.IdentifierResponse
+	37, // 82: Scailo.TeamsService.Discard:output_type -> Scailo.IdentifierResponse
+	37, // 83: Scailo.TeamsService.Restore:output_type -> Scailo.IdentifierResponse
+	37, // 84: Scailo.TeamsService.Complete:output_type -> Scailo.IdentifierResponse
+	37, // 85: Scailo.TeamsService.Repeat:output_type -> Scailo.IdentifierResponse
+	37, // 86: Scailo.TeamsService.Reopen:output_type -> Scailo.IdentifierResponse
+	37, // 87: Scailo.TeamsService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	37, // 88: Scailo.TeamsService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	37, // 89: Scailo.TeamsService.Clone:output_type -> Scailo.IdentifierResponse
+	37, // 90: Scailo.TeamsService.AddTeamMember:output_type -> Scailo.IdentifierResponse
+	37, // 91: Scailo.TeamsService.ModifyTeamMember:output_type -> Scailo.IdentifierResponse
+	37, // 92: Scailo.TeamsService.ApproveTeamMember:output_type -> Scailo.IdentifierResponse
+	37, // 93: Scailo.TeamsService.DeleteTeamMember:output_type -> Scailo.IdentifierResponse
+	37, // 94: Scailo.TeamsService.ReorderTeamMembers:output_type -> Scailo.IdentifierResponse
+	8,  // 95: Scailo.TeamsService.ViewTeamMemberByID:output_type -> Scailo.TeamMember
+	10, // 96: Scailo.TeamsService.ViewApprovedTeamMembers:output_type -> Scailo.TeamsMembersList
+	10, // 97: Scailo.TeamsService.ViewUnapprovedTeamMembers:output_type -> Scailo.TeamsMembersList
+	10, // 98: Scailo.TeamsService.ViewTeamMemberHistory:output_type -> Scailo.TeamsMembersList
+	18, // 99: Scailo.TeamsService.ViewPaginatedApprovedTeamMembers:output_type -> Scailo.TeamsServicePaginatedMembersResponse
+	18, // 100: Scailo.TeamsService.ViewPaginatedUnapprovedTeamMembers:output_type -> Scailo.TeamsServicePaginatedMembersResponse
+	18, // 101: Scailo.TeamsService.SearchMembersWithPagination:output_type -> Scailo.TeamsServicePaginatedMembersResponse
+	9,  // 102: Scailo.TeamsService.ViewTeamsForMember:output_type -> Scailo.TeamsList
+	5,  // 103: Scailo.TeamsService.ViewByID:output_type -> Scailo.Team
+	5,  // 104: Scailo.TeamsService.ViewByUUID:output_type -> Scailo.Team
+	5,  // 105: Scailo.TeamsService.ViewEssentialByID:output_type -> Scailo.Team
+	5,  // 106: Scailo.TeamsService.ViewEssentialByUUID:output_type -> Scailo.Team
+	9,  // 107: Scailo.TeamsService.ViewFromIDs:output_type -> Scailo.TeamsList
+	9,  // 108: Scailo.TeamsService.ViewAll:output_type -> Scailo.TeamsList
+	9,  // 109: Scailo.TeamsService.ViewAllForEntityUUID:output_type -> Scailo.TeamsList
+	13, // 110: Scailo.TeamsService.ViewWithPagination:output_type -> Scailo.TeamsServicePaginationResponse
+	9,  // 111: Scailo.TeamsService.SearchAll:output_type -> Scailo.TeamsList
+	9,  // 112: Scailo.TeamsService.Filter:output_type -> Scailo.TeamsList
+	38, // 113: Scailo.TeamsService.CountInStatus:output_type -> Scailo.CountResponse
+	38, // 114: Scailo.TeamsService.Count:output_type -> Scailo.CountResponse
+	36, // 115: Scailo.TeamsService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	39, // 116: Scailo.TeamsService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
+	73, // [73:117] is the sub-list for method output_type
+	29, // [29:73] is the sub-list for method input_type
 	29, // [29:29] is the sub-list for extension type_name
 	29, // [29:29] is the sub-list for extension extendee
 	0,  // [0:29] is the sub-list for field type_name
@@ -2670,6 +2674,7 @@ func file_teams_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

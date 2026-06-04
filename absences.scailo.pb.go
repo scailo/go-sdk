@@ -2180,7 +2180,7 @@ var File_absences_scailo_proto protoreflect.FileDescriptor
 
 const file_absences_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15absences.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\"\xbe\x04\n" +
+	"\x15absences.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xbe\x04\n" +
 	"\x1cAbsencesServiceCreateRequest\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12!\n" +
@@ -2335,7 +2335,7 @@ const file_absences_scailo_proto_rawDesc = "" +
 	"\x18ABSENCE_SORT_KEY_USER_ID\x10\f\x12%\n" +
 	"!ABSENCE_SORT_KEY_LEAVE_REQUEST_ID\x10\r\x12#\n" +
 	"\x1fABSENCE_SORT_KEY_FROM_TIMESTAMP\x10\x0e\x12!\n" +
-	"\x1dABSENCE_SORT_KEY_TO_TIMESTAMP\x10\x0f2\xae\x10\n" +
+	"\x1dABSENCE_SORT_KEY_TO_TIMESTAMP\x10\x0f2\x81\x11\n" +
 	"\x0fAbsencesService\x12J\n" +
 	"\x06Create\x12$.Scailo.AbsencesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12I\n" +
 	"\x05Draft\x12$.Scailo.AbsencesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -2351,7 +2351,8 @@ const file_absences_scailo_proto_rawDesc = "" +
 	"\bComplete\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12K\n" +
 	"\x06Repeat\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\n" +
-	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
+	"CommentAdd\x12%.Scailo.IdentifierUUIDWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12Q\n" +
+	"\x11AttachVaultFolder\x12 .Scailo.VaultFolderAttachRequest\x1a\x1a.Scailo.IdentifierResponse\x12_\n" +
 	"\x0fCreateMagicLink\x129.Scailo.MagicLinksServiceCreateRequestForSpecificResource\x1a\x11.Scailo.MagicLink\x12/\n" +
 	"\bViewByID\x12\x12.Scailo.Identifier\x1a\x0f.Scailo.Absence\x125\n" +
 	"\n" +
@@ -2406,16 +2407,17 @@ var file_absences_scailo_proto_goTypes = []any{
 	(SORT_ORDER)(0),                                           // 17: Scailo.SORT_ORDER
 	(*FormFieldDatumFilterRequest)(nil),                       // 18: Scailo.FormFieldDatumFilterRequest
 	(*IdentifierUUIDWithUserComment)(nil),                     // 19: Scailo.IdentifierUUIDWithUserComment
-	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 20: Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	(*Identifier)(nil),                                        // 21: Scailo.Identifier
-	(*IdentifierUUID)(nil),                                    // 22: Scailo.IdentifierUUID
-	(*IdentifiersList)(nil),                                   // 23: Scailo.IdentifiersList
-	(*ActiveStatus)(nil),                                      // 24: Scailo.ActiveStatus
-	(*CountInSLCStatusRequest)(nil),                           // 25: Scailo.CountInSLCStatusRequest
-	(*IdentifierResponse)(nil),                                // 26: Scailo.IdentifierResponse
-	(*MagicLink)(nil),                                         // 27: Scailo.MagicLink
-	(*CountResponse)(nil),                                     // 28: Scailo.CountResponse
-	(*StandardFile)(nil),                                      // 29: Scailo.StandardFile
+	(*VaultFolderAttachRequest)(nil),                          // 20: Scailo.VaultFolderAttachRequest
+	(*MagicLinksServiceCreateRequestForSpecificResource)(nil), // 21: Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	(*Identifier)(nil),                                        // 22: Scailo.Identifier
+	(*IdentifierUUID)(nil),                                    // 23: Scailo.IdentifierUUID
+	(*IdentifiersList)(nil),                                   // 24: Scailo.IdentifiersList
+	(*ActiveStatus)(nil),                                      // 25: Scailo.ActiveStatus
+	(*CountInSLCStatusRequest)(nil),                           // 26: Scailo.CountInSLCStatusRequest
+	(*IdentifierResponse)(nil),                                // 27: Scailo.IdentifierResponse
+	(*MagicLink)(nil),                                         // 28: Scailo.MagicLink
+	(*CountResponse)(nil),                                     // 29: Scailo.CountResponse
+	(*StandardFile)(nil),                                      // 30: Scailo.StandardFile
 }
 var file_absences_scailo_proto_depIdxs = []int32{
 	10, // 0: Scailo.AbsencesServiceCreateRequest.form_data:type_name -> Scailo.FormFieldDatumCreateRequest
@@ -2457,50 +2459,52 @@ var file_absences_scailo_proto_depIdxs = []int32{
 	19, // 36: Scailo.AbsencesService.Complete:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 37: Scailo.AbsencesService.Repeat:input_type -> Scailo.IdentifierUUIDWithUserComment
 	19, // 38: Scailo.AbsencesService.CommentAdd:input_type -> Scailo.IdentifierUUIDWithUserComment
-	20, // 39: Scailo.AbsencesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
-	21, // 40: Scailo.AbsencesService.ViewByID:input_type -> Scailo.Identifier
-	22, // 41: Scailo.AbsencesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	21, // 42: Scailo.AbsencesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	22, // 43: Scailo.AbsencesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	23, // 44: Scailo.AbsencesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	24, // 45: Scailo.AbsencesService.ViewAll:input_type -> Scailo.ActiveStatus
-	22, // 46: Scailo.AbsencesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	5,  // 47: Scailo.AbsencesService.ViewWithPagination:input_type -> Scailo.AbsencesServicePaginationReq
-	9,  // 48: Scailo.AbsencesService.SearchAll:input_type -> Scailo.AbsencesServiceSearchAllReq
-	7,  // 49: Scailo.AbsencesService.Filter:input_type -> Scailo.AbsencesServiceFilterReq
-	25, // 50: Scailo.AbsencesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	8,  // 51: Scailo.AbsencesService.Count:input_type -> Scailo.AbsencesServiceCountReq
-	7,  // 52: Scailo.AbsencesService.DownloadAsCSV:input_type -> Scailo.AbsencesServiceFilterReq
-	26, // 53: Scailo.AbsencesService.Create:output_type -> Scailo.IdentifierResponse
-	26, // 54: Scailo.AbsencesService.Draft:output_type -> Scailo.IdentifierResponse
-	26, // 55: Scailo.AbsencesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 56: Scailo.AbsencesService.SendForVerification:output_type -> Scailo.IdentifierResponse
-	26, // 57: Scailo.AbsencesService.Verify:output_type -> Scailo.IdentifierResponse
-	26, // 58: Scailo.AbsencesService.Approve:output_type -> Scailo.IdentifierResponse
-	26, // 59: Scailo.AbsencesService.SendForRevision:output_type -> Scailo.IdentifierResponse
-	26, // 60: Scailo.AbsencesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
-	26, // 61: Scailo.AbsencesService.Halt:output_type -> Scailo.IdentifierResponse
-	26, // 62: Scailo.AbsencesService.Discard:output_type -> Scailo.IdentifierResponse
-	26, // 63: Scailo.AbsencesService.Restore:output_type -> Scailo.IdentifierResponse
-	26, // 64: Scailo.AbsencesService.Complete:output_type -> Scailo.IdentifierResponse
-	26, // 65: Scailo.AbsencesService.Repeat:output_type -> Scailo.IdentifierResponse
-	26, // 66: Scailo.AbsencesService.CommentAdd:output_type -> Scailo.IdentifierResponse
-	27, // 67: Scailo.AbsencesService.CreateMagicLink:output_type -> Scailo.MagicLink
-	3,  // 68: Scailo.AbsencesService.ViewByID:output_type -> Scailo.Absence
-	3,  // 69: Scailo.AbsencesService.ViewByUUID:output_type -> Scailo.Absence
-	3,  // 70: Scailo.AbsencesService.ViewEssentialByID:output_type -> Scailo.Absence
-	3,  // 71: Scailo.AbsencesService.ViewEssentialByUUID:output_type -> Scailo.Absence
-	4,  // 72: Scailo.AbsencesService.ViewFromIDs:output_type -> Scailo.AbsencesList
-	4,  // 73: Scailo.AbsencesService.ViewAll:output_type -> Scailo.AbsencesList
-	4,  // 74: Scailo.AbsencesService.ViewAllForEntityUUID:output_type -> Scailo.AbsencesList
-	6,  // 75: Scailo.AbsencesService.ViewWithPagination:output_type -> Scailo.AbsencesServicePaginationResponse
-	4,  // 76: Scailo.AbsencesService.SearchAll:output_type -> Scailo.AbsencesList
-	4,  // 77: Scailo.AbsencesService.Filter:output_type -> Scailo.AbsencesList
-	28, // 78: Scailo.AbsencesService.CountInStatus:output_type -> Scailo.CountResponse
-	28, // 79: Scailo.AbsencesService.Count:output_type -> Scailo.CountResponse
-	29, // 80: Scailo.AbsencesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	53, // [53:81] is the sub-list for method output_type
-	25, // [25:53] is the sub-list for method input_type
+	20, // 39: Scailo.AbsencesService.AttachVaultFolder:input_type -> Scailo.VaultFolderAttachRequest
+	21, // 40: Scailo.AbsencesService.CreateMagicLink:input_type -> Scailo.MagicLinksServiceCreateRequestForSpecificResource
+	22, // 41: Scailo.AbsencesService.ViewByID:input_type -> Scailo.Identifier
+	23, // 42: Scailo.AbsencesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	22, // 43: Scailo.AbsencesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	23, // 44: Scailo.AbsencesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	24, // 45: Scailo.AbsencesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	25, // 46: Scailo.AbsencesService.ViewAll:input_type -> Scailo.ActiveStatus
+	23, // 47: Scailo.AbsencesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	5,  // 48: Scailo.AbsencesService.ViewWithPagination:input_type -> Scailo.AbsencesServicePaginationReq
+	9,  // 49: Scailo.AbsencesService.SearchAll:input_type -> Scailo.AbsencesServiceSearchAllReq
+	7,  // 50: Scailo.AbsencesService.Filter:input_type -> Scailo.AbsencesServiceFilterReq
+	26, // 51: Scailo.AbsencesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	8,  // 52: Scailo.AbsencesService.Count:input_type -> Scailo.AbsencesServiceCountReq
+	7,  // 53: Scailo.AbsencesService.DownloadAsCSV:input_type -> Scailo.AbsencesServiceFilterReq
+	27, // 54: Scailo.AbsencesService.Create:output_type -> Scailo.IdentifierResponse
+	27, // 55: Scailo.AbsencesService.Draft:output_type -> Scailo.IdentifierResponse
+	27, // 56: Scailo.AbsencesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 57: Scailo.AbsencesService.SendForVerification:output_type -> Scailo.IdentifierResponse
+	27, // 58: Scailo.AbsencesService.Verify:output_type -> Scailo.IdentifierResponse
+	27, // 59: Scailo.AbsencesService.Approve:output_type -> Scailo.IdentifierResponse
+	27, // 60: Scailo.AbsencesService.SendForRevision:output_type -> Scailo.IdentifierResponse
+	27, // 61: Scailo.AbsencesService.RevisionUpdate:output_type -> Scailo.IdentifierResponse
+	27, // 62: Scailo.AbsencesService.Halt:output_type -> Scailo.IdentifierResponse
+	27, // 63: Scailo.AbsencesService.Discard:output_type -> Scailo.IdentifierResponse
+	27, // 64: Scailo.AbsencesService.Restore:output_type -> Scailo.IdentifierResponse
+	27, // 65: Scailo.AbsencesService.Complete:output_type -> Scailo.IdentifierResponse
+	27, // 66: Scailo.AbsencesService.Repeat:output_type -> Scailo.IdentifierResponse
+	27, // 67: Scailo.AbsencesService.CommentAdd:output_type -> Scailo.IdentifierResponse
+	27, // 68: Scailo.AbsencesService.AttachVaultFolder:output_type -> Scailo.IdentifierResponse
+	28, // 69: Scailo.AbsencesService.CreateMagicLink:output_type -> Scailo.MagicLink
+	3,  // 70: Scailo.AbsencesService.ViewByID:output_type -> Scailo.Absence
+	3,  // 71: Scailo.AbsencesService.ViewByUUID:output_type -> Scailo.Absence
+	3,  // 72: Scailo.AbsencesService.ViewEssentialByID:output_type -> Scailo.Absence
+	3,  // 73: Scailo.AbsencesService.ViewEssentialByUUID:output_type -> Scailo.Absence
+	4,  // 74: Scailo.AbsencesService.ViewFromIDs:output_type -> Scailo.AbsencesList
+	4,  // 75: Scailo.AbsencesService.ViewAll:output_type -> Scailo.AbsencesList
+	4,  // 76: Scailo.AbsencesService.ViewAllForEntityUUID:output_type -> Scailo.AbsencesList
+	6,  // 77: Scailo.AbsencesService.ViewWithPagination:output_type -> Scailo.AbsencesServicePaginationResponse
+	4,  // 78: Scailo.AbsencesService.SearchAll:output_type -> Scailo.AbsencesList
+	4,  // 79: Scailo.AbsencesService.Filter:output_type -> Scailo.AbsencesList
+	29, // 80: Scailo.AbsencesService.CountInStatus:output_type -> Scailo.CountResponse
+	29, // 81: Scailo.AbsencesService.Count:output_type -> Scailo.CountResponse
+	30, // 82: Scailo.AbsencesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	54, // [54:83] is the sub-list for method output_type
+	25, // [25:54] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -2514,6 +2518,7 @@ func file_absences_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
+	file_vault_folders_scailo_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
