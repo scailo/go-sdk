@@ -46,17 +46,56 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the methods applicable on each associate
+// The AssociatesService manages the full operational lifecycle of associates.
+// It provides standard CRUD infrastructure, enterprise data ingestion, audit-logged state
+// transitions, compliance-driven file attachments, and granular permission checking.
 type AssociatesServiceClient interface {
-	// Import associates
+	// Bulk imports associate records from a structured request payload.
+	//
+	// **Side Effects:**
+	// - Validates, parses, and persists multiple associate profiles simultaneously.
+	// - Automatically generates unique system UUIDs for new entries.
+	// - Dispatches asynchronous background synchronization jobs to downstream systems.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If the payload contains structurally malformed entries.
 	ImportFromReq(ctx context.Context, in *AssociatesServiceImportRequest, opts ...grpc.CallOption) (*AssociatesList, error)
-	// Create a associate
+	// Creates a new associate record and establishes their initial profile context.
+	//
+	// **Side Effects:**
+	// - Reserves an incremental internal ID and provisions a globally unique UUID.
+	// - Records a creation entry in the system compliance log.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If structural or business validation rules fail.
 	Create(ctx context.Context, in *AssociatesServiceCreateRequest, opts ...grpc.CallOption) (*Associate, error)
-	// Update a associate
+	// Updates an existing associate record with modified profile attributes.
+	//
+	// This method modifies primary operational data field-by-field based on the provided request.
+	//
+	// **Side Effects:**
+	// - Overwrites mutable associate properties.
+	// - Refreshes the record's primary modification timestamp.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the targeted associate record does not exist.
+	// - `FAILED_PRECONDITION`: If the associate is in a state that locks modification.
 	Update(ctx context.Context, in *AssociatesServiceUpdateRequest, opts ...grpc.CallOption) (*Associate, error)
-	// Discard the associate
+	// Permanently cancels or deactivates the associate record within the system.
+	//
+	// **Status Transition:** -> `DISCARDED`
+	//
+	// **Side Effects:**
+	// - Immediately revokes the associate's active visibility flags across primary lookups.
+	// - Logs the required user justification comment into the system compliance trail.
 	Discard(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Restore the associate
+	// Restores a previously `DISCARDED` associate record back to an active state.
+	//
+	// **Status Transition:** -> `ACTIVE`
+	//
+	// **Side Effects:**
+	// - Re-instates the associate record to standard search indices and data views.
+	// - Records the restoration action and associated user notes in the audit trail.
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -79,19 +118,28 @@ type AssociatesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Associate, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*AssociatesList, error)
-	// Download Associate by ID as a vCard
+	// Generates and downloads the contact details of a specified associate formatted as an electronic business card (vCard).
+	//
+	// The resulting binary stream can be parsed directly by standard external email and contact clients.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the associate target ID is missing.
 	DownloadVCard(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*BytesResponse, error)
-	// View all associates
+	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*AssociatesList, error)
-	// View all associates with the given entity UUID
+	// Returns all records belonging to a specific organization/entity UUID.
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*AssociatesList, error)
-	// View associates with pagination
+	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *AssociatesServicePaginationReq, opts ...grpc.CallOption) (*AssociatePaginationResp, error)
-	// Check if the user has permission to modify an associate
+	// Evaluates if the currently authenticated caller has sufficient permissions to modify an associate record.
+	//
+	// **Note:** This acts as a pre-flight authorization check for client applications to dynamically adjust UI capabilities.
 	CheckModifyPermission(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Check if the user has permission to add an associate
+	// Evaluates if the currently authenticated caller has sufficient permissions to add a new associate to the platform.
+	//
+	// **Note:** This acts as a pre-flight authorization check for client applications to dynamically adjust UI capabilities.
 	CheckAddPermission(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// View all associates that match the given search key
+	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *AssociatesServiceSearchAllReq, opts ...grpc.CallOption) (*AssociatesList, error)
 	// Performs a high-granularity search based on multiple specific field filters.
 	Filter(ctx context.Context, in *AssociatesServiceFilterReq, opts ...grpc.CallOption) (*AssociatesList, error)

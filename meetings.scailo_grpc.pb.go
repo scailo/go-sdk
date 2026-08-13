@@ -89,7 +89,11 @@ type MeetingsServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//

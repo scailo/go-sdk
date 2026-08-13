@@ -409,7 +409,15 @@ type InwardJobsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -439,7 +447,13 @@ type InwardJobsServiceCreateRequest struct {
 	LocationId uint64 `protobuf:"varint,14,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 	// The optional associated ID of the project
 	ProjectId uint64 `protobuf:"varint,15,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -541,9 +555,25 @@ func (x *InwardJobsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRe
 // Describes the parameters necessary to update a record
 type InwardJobsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -577,7 +607,13 @@ type InwardJobsServiceUpdateRequest struct {
 	BuyerClientId uint64 `protobuf:"varint,13,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
 	// The optional associated ID of the project
 	ProjectId uint64 `protobuf:"varint,15,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -679,7 +715,15 @@ func (x *InwardJobsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRe
 // Describes the parameters necessary to perform an autofill request
 type InwardJobsServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record that needs to be updated
 	Uuid          string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -838,7 +882,7 @@ type InwardJob struct {
 	InwardItemsList []*InwardJobInwardItem `protobuf:"bytes,20,rep,name=inward_items_list,json=inwardItemsList,proto3" json:"inward_items_list,omitempty"`
 	// The list of associated inward job outward items
 	OutwardItemsList []*InwardJobOutwardItem `protobuf:"bytes,21,rep,name=outward_items_list,json=outwardItemsList,proto3" json:"outward_items_list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -989,7 +1033,15 @@ func (x *InwardJob) GetFormData() []*FormFieldDatum {
 // Describes the parameters required to add an inward item to a inward job
 type InwardJobsServiceInwardItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the inward job ID
 	InwardJobId uint64 `protobuf:"varint,10,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
@@ -1189,7 +1241,15 @@ func (x *InwardJobsServiceMultipleInwardItemsSingleton) GetSpecifications() stri
 // Describes the parameters required to add multiple items to a inward job
 type InwardJobsServiceMultipleInwardItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the inward job ID
 	InwardJobId uint64 `protobuf:"varint,10,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
@@ -1253,7 +1313,15 @@ func (x *InwardJobsServiceMultipleInwardItemsCreateRequest) GetList() []*InwardJ
 // Describes the parameters required to update an inward item in a inward job
 type InwardJobsServiceInwardItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1361,7 +1429,11 @@ type InwardJobInwardItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -2495,7 +2567,9 @@ type InwardJobsServiceCountReq struct {
 	ProjectId uint64 `protobuf:"varint,25,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// The ID of the outward family
 	OutwardFamilyId uint64 `protobuf:"varint,30,opt,name=outward_family_id,json=outwardFamilyId,proto3" json:"outward_family_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3198,7 +3272,15 @@ func (x *InwardJobsServicePaginatedInwardItemsResponse) GetPayload() []*InwardJo
 // Describes the parameters required to add an outward item to a inward job
 type InwardJobsServiceOutwardItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the inward job ID
 	InwardJobId uint64 `protobuf:"varint,10,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
@@ -3416,7 +3498,15 @@ func (x *InwardJobsServiceMultipleOutwardItemsSingleton) GetSpecifications() str
 // Describes the parameters required to add multiple items to a inward job
 type InwardJobsServiceMultipleOutwardItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the inward job ID
 	InwardJobId uint64 `protobuf:"varint,10,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
@@ -3480,7 +3570,15 @@ func (x *InwardJobsServiceMultipleOutwardItemsCreateRequest) GetList() []*Inward
 // Describes the parameters required to update an outward item in a inward job
 type InwardJobsServiceOutwardItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -3597,7 +3695,11 @@ type InwardJobOutwardItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -4233,7 +4335,15 @@ func (x *InwardJobsServicePaginatedOutwardItemsResponse) GetPayload() []*InwardJ
 // Describes the parameters necessary to create a inward job contact
 type InwardJobsServiceContactCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the inward job ID
 	InwardJobId uint64 `protobuf:"varint,10,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
@@ -4305,7 +4415,11 @@ type InwardJobContact struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`

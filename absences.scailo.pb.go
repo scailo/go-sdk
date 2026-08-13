@@ -133,7 +133,7 @@ type AbsencesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
@@ -143,7 +143,7 @@ type AbsencesServiceCreateRequest struct {
 	// @regex .*
 	//
 	// @format May contain any UTF-8 characters or be left empty.
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -153,7 +153,7 @@ type AbsencesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -183,7 +183,7 @@ type AbsencesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	LeaveRequestId uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
+	LeaveRequestId *uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3,oneof" json:"leave_request_id,omitempty"`
 	// @mandatory
 	//
 	// @description Start of the absence period in UNIX Epoch Seconds.
@@ -233,10 +233,14 @@ type AbsencesServiceCreateRequest struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
+	Description *string `protobuf:"bytes,17,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	// @optional
 	//
 	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -273,22 +277,22 @@ func (*AbsencesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AbsencesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *AbsencesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -308,8 +312,8 @@ func (x *AbsencesServiceCreateRequest) GetUserId() uint64 {
 }
 
 func (x *AbsencesServiceCreateRequest) GetLeaveRequestId() uint64 {
-	if x != nil {
-		return x.LeaveRequestId
+	if x != nil && x.LeaveRequestId != nil {
+		return *x.LeaveRequestId
 	}
 	return 0
 }
@@ -343,8 +347,8 @@ func (x *AbsencesServiceCreateRequest) GetQuantity() uint64 {
 }
 
 func (x *AbsencesServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -359,7 +363,7 @@ func (x *AbsencesServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 // Request message for updating an existing Absence record.
 // Only applicable for records in `DRAFT` or `REVISION` states.
 // This message allows for modifying the naming, leave request, start and end timestamps and quantity
-// of an established Action Code.
+// of an established Absence.
 //
 // **Note:** Only fields provided in the request will typically be updated.
 // The unique system ID is required to locate the target record.
@@ -374,7 +378,7 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex .*
 	//
 	// @format May contain any UTF-8 characters or be left empty.
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @mandatory
 	//
 	// @description The unique system identifier of the Absence to be modified. Must be a value greater than `0`.
@@ -390,7 +394,7 @@ type AbsencesServiceUpdateRequest struct {
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -400,8 +404,8 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// @mandatory
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
 	//
 	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
 	//
@@ -410,7 +414,7 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Updated link to a Leave Request.
@@ -420,8 +424,8 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	LeaveRequestId uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
-	// @mandatory
+	LeaveRequestId *uint64 `protobuf:"varint,12,opt,name=leave_request_id,json=leaveRequestId,proto3,oneof" json:"leave_request_id,omitempty"`
+	// @optional
 	//
 	// @description Updated start timestamp in UNIX Epoch Seconds.
 	//
@@ -430,8 +434,8 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex ^[1-9][0-9]*$
 	//
 	// @format Must be a strictly positive integer (1 or greater).
-	FromTimestamp uint64 `protobuf:"varint,13,opt,name=from_timestamp,json=fromTimestamp,proto3" json:"from_timestamp,omitempty"`
-	// @mandatory
+	FromTimestamp *uint64 `protobuf:"varint,13,opt,name=from_timestamp,json=fromTimestamp,proto3,oneof" json:"from_timestamp,omitempty"`
+	// @optional
 	//
 	// @description Updated end timestamp in UNIX Epoch Seconds.
 	//
@@ -440,8 +444,8 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex ^[1-9][0-9]*$
 	//
 	// @format Must be a strictly positive integer (1 or greater).
-	ToTimestamp uint64 `protobuf:"varint,14,opt,name=to_timestamp,json=toTimestamp,proto3" json:"to_timestamp,omitempty"`
-	// @mandatory
+	ToTimestamp *uint64 `protobuf:"varint,14,opt,name=to_timestamp,json=toTimestamp,proto3,oneof" json:"to_timestamp,omitempty"`
+	// @optional
 	//
 	// @description Updated quantity in cents (x100).
 	//
@@ -450,7 +454,7 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex ^[1-9][0-9]*$
 	//
 	// @format Must be a strictly positive integer (1 or greater).
-	Quantity uint64 `protobuf:"varint,16,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity *uint64 `protobuf:"varint,16,opt,name=quantity,proto3,oneof" json:"quantity,omitempty"`
 	// @optional
 	//
 	// @description Updated textual description.
@@ -460,10 +464,14 @@ type AbsencesServiceUpdateRequest struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
+	Description *string `protobuf:"bytes,17,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	// @optional
 	//
-	// @description Updated custom dynamic form data.
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -500,8 +508,8 @@ func (*AbsencesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -514,57 +522,57 @@ func (x *AbsencesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *AbsencesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *AbsencesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *AbsencesServiceUpdateRequest) GetLeaveRequestId() uint64 {
-	if x != nil {
-		return x.LeaveRequestId
+	if x != nil && x.LeaveRequestId != nil {
+		return *x.LeaveRequestId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceUpdateRequest) GetFromTimestamp() uint64 {
-	if x != nil {
-		return x.FromTimestamp
+	if x != nil && x.FromTimestamp != nil {
+		return *x.FromTimestamp
 	}
 	return 0
 }
 
 func (x *AbsencesServiceUpdateRequest) GetToTimestamp() uint64 {
-	if x != nil {
-		return x.ToTimestamp
+	if x != nil && x.ToTimestamp != nil {
+		return *x.ToTimestamp
 	}
 	return 0
 }
 
 func (x *AbsencesServiceUpdateRequest) GetQuantity() uint64 {
-	if x != nil {
-		return x.Quantity
+	if x != nil && x.Quantity != nil {
+		return *x.Quantity
 	}
 	return 0
 }
 
 func (x *AbsencesServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -844,7 +852,7 @@ type AbsencesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -864,23 +872,23 @@ type AbsencesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter results by a specific lifecycle status.
 	//
 	// @example STANDING
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -916,8 +924,8 @@ func (*AbsencesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -930,29 +938,29 @@ func (x *AbsencesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *AbsencesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AbsencesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AbsencesServicePaginationReq) GetSortKey() ABSENCE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *AbsencesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
@@ -1036,7 +1044,12 @@ func (x *AbsencesServicePaginationResponse) GetPayload() []*Absence {
 	return nil
 }
 
-// Advanced filter request for searching absences using multiple logical criteria.
+// Advanced filter request for searching and paginating absences using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type AbsencesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1044,7 +1057,7 @@ type AbsencesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1064,17 +1077,17 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1084,7 +1097,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1094,7 +1107,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1104,7 +1117,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1114,7 +1127,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1124,13 +1137,13 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1140,7 +1153,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1150,7 +1163,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1160,7 +1173,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1170,7 +1183,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1180,7 +1193,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1190,7 +1203,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -1200,7 +1213,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -1210,7 +1223,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
 	// @optional
 	//
 	// @description Filter by specific employee ID.
@@ -1220,7 +1233,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	UserId uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId *uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by linked leave request ID.
@@ -1230,7 +1243,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	LeaveRequestId uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
+	LeaveRequestId *uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3,oneof" json:"leave_request_id,omitempty"`
 	// @optional
 	//
 	// @description Filter absences starting ON or AFTER this timestamp.
@@ -1240,7 +1253,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	FromTimestampStart uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3" json:"from_timestamp_start,omitempty"`
+	FromTimestampStart *uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3,oneof" json:"from_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter absences starting ON or BEFORE this timestamp.
@@ -1250,7 +1263,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	FromTimestampEnd uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3" json:"from_timestamp_end,omitempty"`
+	FromTimestampEnd *uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3,oneof" json:"from_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter absences ending ON or AFTER this timestamp.
@@ -1260,7 +1273,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ToTimestampStart uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3" json:"to_timestamp_start,omitempty"`
+	ToTimestampStart *uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3,oneof" json:"to_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter absences ending ON or BEFORE this timestamp.
@@ -1270,7 +1283,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ToTimestampEnd uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3" json:"to_timestamp_end,omitempty"`
+	ToTimestampEnd *uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3,oneof" json:"to_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by Unit of Measure (e.g., Days, Hours).
@@ -1280,7 +1293,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	UomId uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
+	UomId *uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
 	// @optional
 	//
 	// @description Minimum quantity filter (expressed in cents).
@@ -1290,7 +1303,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	QuantityMin uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3" json:"quantity_min,omitempty"`
+	QuantityMin *uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3,oneof" json:"quantity_min,omitempty"`
 	// @optional
 	//
 	// @description Maximum quantity filter (expressed in cents).
@@ -1300,7 +1313,7 @@ type AbsencesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	QuantityMax uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3" json:"quantity_max,omitempty"`
+	QuantityMax *uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3,oneof" json:"quantity_max,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1311,7 +1324,7 @@ type AbsencesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1347,8 +1360,8 @@ func (*AbsencesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1361,183 +1374,183 @@ func (x *AbsencesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *AbsencesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AbsencesServiceFilterReq) GetSortKey() ABSENCE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *AbsencesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AbsencesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *AbsencesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *AbsencesServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *AbsencesServiceFilterReq) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetLeaveRequestId() uint64 {
-	if x != nil {
-		return x.LeaveRequestId
+	if x != nil && x.LeaveRequestId != nil {
+		return *x.LeaveRequestId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetFromTimestampStart() uint64 {
-	if x != nil {
-		return x.FromTimestampStart
+	if x != nil && x.FromTimestampStart != nil {
+		return *x.FromTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetFromTimestampEnd() uint64 {
-	if x != nil {
-		return x.FromTimestampEnd
+	if x != nil && x.FromTimestampEnd != nil {
+		return *x.FromTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetToTimestampStart() uint64 {
-	if x != nil {
-		return x.ToTimestampStart
+	if x != nil && x.ToTimestampStart != nil {
+		return *x.ToTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetToTimestampEnd() uint64 {
-	if x != nil {
-		return x.ToTimestampEnd
+	if x != nil && x.ToTimestampEnd != nil {
+		return *x.ToTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetQuantityMin() uint64 {
-	if x != nil {
-		return x.QuantityMin
+	if x != nil && x.QuantityMin != nil {
+		return *x.QuantityMin
 	}
 	return 0
 }
 
 func (x *AbsencesServiceFilterReq) GetQuantityMax() uint64 {
-	if x != nil {
-		return x.QuantityMax
+	if x != nil && x.QuantityMax != nil {
+		return *x.QuantityMax
 	}
 	return 0
 }
@@ -1550,13 +1563,19 @@ func (x *AbsencesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest 
 }
 
 func (x *AbsencesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Request message to count records matching specific criteria.
+// Target filter request for counting absence records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type AbsencesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1564,7 +1583,7 @@ type AbsencesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1574,7 +1593,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1584,7 +1603,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1594,7 +1613,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1604,7 +1623,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1614,13 +1633,13 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status.
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1630,7 +1649,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1640,7 +1659,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by specific user who approved the records.
@@ -1650,7 +1669,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role used during approval.
@@ -1660,7 +1679,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1670,7 +1689,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1680,7 +1699,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -1690,7 +1709,7 @@ type AbsencesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -1700,7 +1719,7 @@ type AbsencesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
 	// @optional
 	//
 	// @description Filter by specific employee ID.
@@ -1710,7 +1729,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	UserId uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId *uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by linked leave request ID.
@@ -1720,7 +1739,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	LeaveRequestId uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3" json:"leave_request_id,omitempty"`
+	LeaveRequestId *uint64 `protobuf:"varint,23,opt,name=leave_request_id,json=leaveRequestId,proto3,oneof" json:"leave_request_id,omitempty"`
 	// @optional
 	//
 	// @description Filter absences starting ON or AFTER this timestamp.
@@ -1730,7 +1749,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	FromTimestampStart uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3" json:"from_timestamp_start,omitempty"`
+	FromTimestampStart *uint64 `protobuf:"varint,24,opt,name=from_timestamp_start,json=fromTimestampStart,proto3,oneof" json:"from_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter absences starting ON or BEFORE this timestamp.
@@ -1740,7 +1759,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	FromTimestampEnd uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3" json:"from_timestamp_end,omitempty"`
+	FromTimestampEnd *uint64 `protobuf:"varint,25,opt,name=from_timestamp_end,json=fromTimestampEnd,proto3,oneof" json:"from_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter absences ending ON or AFTER this timestamp.
@@ -1750,7 +1769,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ToTimestampStart uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3" json:"to_timestamp_start,omitempty"`
+	ToTimestampStart *uint64 `protobuf:"varint,26,opt,name=to_timestamp_start,json=toTimestampStart,proto3,oneof" json:"to_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter absences ending ON or BEFORE this timestamp.
@@ -1760,7 +1779,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ToTimestampEnd uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3" json:"to_timestamp_end,omitempty"`
+	ToTimestampEnd *uint64 `protobuf:"varint,27,opt,name=to_timestamp_end,json=toTimestampEnd,proto3,oneof" json:"to_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by specific Unit of Measure.
@@ -1770,7 +1789,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	UomId uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
+	UomId *uint64 `protobuf:"varint,28,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
 	// @optional
 	//
 	// @description Minimum quantity filter (in cents).
@@ -1780,7 +1799,7 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	QuantityMin uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3" json:"quantity_min,omitempty"`
+	QuantityMin *uint64 `protobuf:"varint,29,opt,name=quantity_min,json=quantityMin,proto3,oneof" json:"quantity_min,omitempty"`
 	// @optional
 	//
 	// @description Maximum quantity filter (in cents).
@@ -1790,10 +1809,10 @@ type AbsencesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	QuantityMax uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3" json:"quantity_max,omitempty"`
+	QuantityMax *uint64 `protobuf:"varint,30,opt,name=quantity_max,json=quantityMax,proto3,oneof" json:"quantity_max,omitempty"`
 	// @optional
 	//
-	// @description Custom field filters.
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1830,169 +1849,169 @@ func (*AbsencesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *AbsencesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AbsencesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *AbsencesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *AbsencesServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *AbsencesServiceCountReq) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetLeaveRequestId() uint64 {
-	if x != nil {
-		return x.LeaveRequestId
+	if x != nil && x.LeaveRequestId != nil {
+		return *x.LeaveRequestId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetFromTimestampStart() uint64 {
-	if x != nil {
-		return x.FromTimestampStart
+	if x != nil && x.FromTimestampStart != nil {
+		return *x.FromTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetFromTimestampEnd() uint64 {
-	if x != nil {
-		return x.FromTimestampEnd
+	if x != nil && x.FromTimestampEnd != nil {
+		return *x.FromTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetToTimestampStart() uint64 {
-	if x != nil {
-		return x.ToTimestampStart
+	if x != nil && x.ToTimestampStart != nil {
+		return *x.ToTimestampStart
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetToTimestampEnd() uint64 {
-	if x != nil {
-		return x.ToTimestampEnd
+	if x != nil && x.ToTimestampEnd != nil {
+		return *x.ToTimestampEnd
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetQuantityMin() uint64 {
-	if x != nil {
-		return x.QuantityMin
+	if x != nil && x.QuantityMin != nil {
+		return *x.QuantityMin
 	}
 	return 0
 }
 
 func (x *AbsencesServiceCountReq) GetQuantityMax() uint64 {
-	if x != nil {
-		return x.QuantityMax
+	if x != nil && x.QuantityMax != nil {
+		return *x.QuantityMax
 	}
 	return 0
 }
@@ -2004,7 +2023,13 @@ func (x *AbsencesServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Generic search request for finding absences using a free-text search key.
+// Broad-spectrum search and lookup request for locating and paginating absences via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type AbsencesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2012,7 +2037,7 @@ type AbsencesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2032,17 +2057,17 @@ type AbsencesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ABSENCE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ABSENCE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2052,14 +2077,14 @@ type AbsencesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// @mandatory
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -2068,7 +2093,7 @@ type AbsencesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	// @optional
 	//
 	// @description Limit search results to a specific employee ID.
@@ -2078,7 +2103,7 @@ type AbsencesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	UserId        uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        *uint64 `protobuf:"varint,22,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2114,8 +2139,8 @@ func (*AbsencesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AbsencesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2128,50 +2153,50 @@ func (x *AbsencesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *AbsencesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AbsencesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AbsencesServiceSearchAllReq) GetSortKey() ABSENCE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ABSENCE_SORT_KEY_ABSENCE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *AbsencesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AbsencesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *AbsencesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *AbsencesServiceSearchAllReq) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
@@ -2180,35 +2205,49 @@ var File_absences_scailo_proto protoreflect.FileDescriptor
 
 const file_absences_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15absences.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xbe\x04\n" +
-	"\x1cAbsencesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x15absences.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xb1\x05\n" +
+	"\x1cAbsencesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12 \n" +
-	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x121\n" +
-	"\x10leave_request_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\x0eleaveRequestId\x12.\n" +
+	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x126\n" +
+	"\x10leave_request_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\x0eleaveRequestId\x88\x01\x01\x12.\n" +
 	"\x0efrom_timestamp\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\rfromTimestamp\x12*\n" +
 	"\fto_timestamp\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vtoTimestamp\x12\x1e\n" +
 	"\x06uom_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12#\n" +
-	"\bquantity\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\bquantity\x127\n" +
-	"\vdescription\x18\x11 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$R\vdescription\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x97\x04\n" +
-	"\x1cAbsencesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\bquantity\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\bquantity\x12<\n" +
+	"\vdescription\x18\x11 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$H\x04R\vdescription\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x13\n" +
+	"\x11_leave_request_idB\x0e\n" +
+	"\f_description\"\xe1\x05\n" +
+	"\x1cAbsencesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x121\n" +
-	"\x10leave_request_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\x0eleaveRequestId\x12.\n" +
-	"\x0efrom_timestamp\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\rfromTimestamp\x12*\n" +
-	"\fto_timestamp\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vtoTimestamp\x12#\n" +
-	"\bquantity\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\bquantity\x127\n" +
-	"\vdescription\x18\x11 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$R\vdescription\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xc3\x05\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x126\n" +
+	"\x10leave_request_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x0eleaveRequestId\x88\x01\x01\x123\n" +
+	"\x0efrom_timestamp\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\rfromTimestamp\x88\x01\x01\x12/\n" +
+	"\fto_timestamp\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00H\x06R\vtoTimestamp\x88\x01\x01\x12(\n" +
+	"\bquantity\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00H\aR\bquantity\x88\x01\x01\x12<\n" +
+	"\vdescription\x18\x11 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$H\bR\vdescription\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_leave_request_idB\x11\n" +
+	"\x0f_from_timestampB\x0f\n" +
+	"\r_to_timestampB\v\n" +
+	"\t_quantityB\x0e\n" +
+	"\f_description\"\xc3\x05\n" +
 	"\aAbsence\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2230,97 +2269,170 @@ const file_absences_scailo_proto_rawDesc = "" +
 	"\vdescription\x18\x12 \x01(\tR\vdescription\x123\n" +
 	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"3\n" +
 	"\fAbsencesList\x12#\n" +
-	"\x04list\x18\x01 \x03(\v2\x0f.Scailo.AbsenceR\x04list\"\xb3\x02\n" +
-	"\x1cAbsencesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x0f.Scailo.AbsenceR\x04list\"\x8c\x03\n" +
+	"\x1cAbsencesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x92\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x92\x01\n" +
 	"!AbsencesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12)\n" +
-	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.AbsenceR\apayload\"\xe3\n" +
+	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.AbsenceR\apayload\"\xa0\x10\n" +
+	"\x18AbsencesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"\x18AbsencesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
-	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x17\n" +
-	"\auser_id\x18\x16 \x01(\x04R\x06userId\x12(\n" +
-	"\x10leave_request_id\x18\x17 \x01(\x04R\x0eleaveRequestId\x120\n" +
-	"\x14from_timestamp_start\x18\x18 \x01(\x04R\x12fromTimestampStart\x12,\n" +
-	"\x12from_timestamp_end\x18\x19 \x01(\x04R\x10fromTimestampEnd\x12,\n" +
-	"\x12to_timestamp_start\x18\x1a \x01(\x04R\x10toTimestampStart\x12(\n" +
-	"\x10to_timestamp_end\x18\x1b \x01(\x04R\x0etoTimestampEnd\x12\x15\n" +
-	"\x06uom_id\x18\x1c \x01(\x04R\x05uomId\x12!\n" +
-	"\fquantity_min\x18\x1d \x01(\x04R\vquantityMin\x12!\n" +
-	"\fquantity_max\x18\x1e \x01(\x04R\vquantityMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x84\t\n" +
-	"\x17AbsencesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12\x17\n" +
-	"\auser_id\x18\x16 \x01(\x04R\x06userId\x12(\n" +
-	"\x10leave_request_id\x18\x17 \x01(\x04R\x0eleaveRequestId\x120\n" +
-	"\x14from_timestamp_start\x18\x18 \x01(\x04R\x12fromTimestampStart\x12,\n" +
-	"\x12from_timestamp_end\x18\x19 \x01(\x04R\x10fromTimestampEnd\x12,\n" +
-	"\x12to_timestamp_start\x18\x1a \x01(\x04R\x10toTimestampStart\x12(\n" +
-	"\x10to_timestamp_end\x18\x1b \x01(\x04R\x0etoTimestampEnd\x12\x15\n" +
-	"\x06uom_id\x18\x1c \x01(\x04R\x05uomId\x12!\n" +
-	"\fquantity_min\x18\x1d \x01(\x04R\vquantityMin\x12!\n" +
-	"\fquantity_max\x18\x1e \x01(\x04R\vquantityMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\x94\x03\n" +
-	"\x1bAbsencesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x16 \x01(\x04H\x12R\x06userId\x88\x01\x01\x12-\n" +
+	"\x10leave_request_id\x18\x17 \x01(\x04H\x13R\x0eleaveRequestId\x88\x01\x01\x125\n" +
+	"\x14from_timestamp_start\x18\x18 \x01(\x04H\x14R\x12fromTimestampStart\x88\x01\x01\x121\n" +
+	"\x12from_timestamp_end\x18\x19 \x01(\x04H\x15R\x10fromTimestampEnd\x88\x01\x01\x121\n" +
+	"\x12to_timestamp_start\x18\x1a \x01(\x04H\x16R\x10toTimestampStart\x88\x01\x01\x12-\n" +
+	"\x10to_timestamp_end\x18\x1b \x01(\x04H\x17R\x0etoTimestampEnd\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\x1c \x01(\x04H\x18R\x05uomId\x88\x01\x01\x12&\n" +
+	"\fquantity_min\x18\x1d \x01(\x04H\x19R\vquantityMin\x88\x01\x01\x12&\n" +
+	"\fquantity_max\x18\x1e \x01(\x04H\x1aR\vquantityMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1bR\x0fincludeFormData\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12\x17\n" +
-	"\auser_id\x18\x16 \x01(\x04R\x06userId*\xdf\x03\n" +
+	"\b_user_idB\x13\n" +
+	"\x11_leave_request_idB\x17\n" +
+	"\x15_from_timestamp_startB\x15\n" +
+	"\x13_from_timestamp_endB\x15\n" +
+	"\x13_to_timestamp_startB\x13\n" +
+	"\x11_to_timestamp_endB\t\n" +
+	"\a_uom_idB\x0f\n" +
+	"\r_quantity_minB\x0f\n" +
+	"\r_quantity_maxB\x14\n" +
+	"\x12_include_form_data\"\xf0\r\n" +
+	"\x17AbsencesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x16 \x01(\x04H\x0fR\x06userId\x88\x01\x01\x12-\n" +
+	"\x10leave_request_id\x18\x17 \x01(\x04H\x10R\x0eleaveRequestId\x88\x01\x01\x125\n" +
+	"\x14from_timestamp_start\x18\x18 \x01(\x04H\x11R\x12fromTimestampStart\x88\x01\x01\x121\n" +
+	"\x12from_timestamp_end\x18\x19 \x01(\x04H\x12R\x10fromTimestampEnd\x88\x01\x01\x121\n" +
+	"\x12to_timestamp_start\x18\x1a \x01(\x04H\x13R\x10toTimestampStart\x88\x01\x01\x12-\n" +
+	"\x10to_timestamp_end\x18\x1b \x01(\x04H\x14R\x0etoTimestampEnd\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\x1c \x01(\x04H\x15R\x05uomId\x88\x01\x01\x12&\n" +
+	"\fquantity_min\x18\x1d \x01(\x04H\x16R\vquantityMin\x88\x01\x01\x12&\n" +
+	"\fquantity_max\x18\x1e \x01(\x04H\x17R\vquantityMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
+	"\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\n" +
+	"\n" +
+	"\b_user_idB\x13\n" +
+	"\x11_leave_request_idB\x17\n" +
+	"\x15_from_timestamp_startB\x15\n" +
+	"\x13_from_timestamp_endB\x15\n" +
+	"\x13_to_timestamp_startB\x13\n" +
+	"\x11_to_timestamp_endB\t\n" +
+	"\a_uom_idB\x0f\n" +
+	"\r_quantity_minB\x0f\n" +
+	"\r_quantity_max\"\xa7\x04\n" +
+	"\x1bAbsencesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.ABSENCE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x16 \x01(\x04H\aR\x06userId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\n" +
+	"\n" +
+	"\b_user_id*\xdf\x03\n" +
 	"\x10ABSENCE_SORT_KEY\x12#\n" +
 	"\x1fABSENCE_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bABSENCE_SORT_KEY_CREATED_AT\x10\x01\x12 \n" +
@@ -2519,6 +2631,12 @@ func file_absences_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_absences_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_absences_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_absences_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_absences_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_absences_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_absences_scailo_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

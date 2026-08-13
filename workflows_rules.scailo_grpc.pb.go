@@ -140,7 +140,13 @@ type WorkflowsRulesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)

@@ -247,7 +247,15 @@ type PurchasesIndentsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -271,7 +279,13 @@ type PurchasesIndentsServiceCreateRequest struct {
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	// The ID of the location
 	ConsigneeLocationId uint64 `protobuf:"varint,12,opt,name=consignee_location_id,json=consigneeLocationId,proto3" json:"consignee_location_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -352,9 +366,25 @@ func (x *PurchasesIndentsServiceCreateRequest) GetFormData() []*FormFieldDatumCr
 // Describes the parameters necessary to update a record
 type PurchasesIndentsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -382,7 +412,13 @@ type PurchasesIndentsServiceUpdateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -463,7 +499,15 @@ func (x *PurchasesIndentsServiceUpdateRequest) GetFormData() []*FormFieldDatumCr
 // Describes the parameters necessary to perform an autofill request
 type PurchasesIndentsServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record that needs to be updated
 	Uuid          string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -550,7 +594,7 @@ type PurchaseIndent struct {
 	ConsigneeLocationId uint64 `protobuf:"varint,12,opt,name=consignee_location_id,json=consigneeLocationId,proto3" json:"consignee_location_id,omitempty"`
 	// The list of associated purchase indent items
 	List []*PurchaseIndentItem `protobuf:"bytes,20,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -673,7 +717,15 @@ func (x *PurchaseIndent) GetFormData() []*FormFieldDatum {
 // Describes the parameters required to add an item to a purchase indent
 type PurchasesIndentsServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the purchase indent ID
 	PurchaseIndentId uint64 `protobuf:"varint,10,opt,name=purchase_indent_id,json=purchaseIndentId,proto3" json:"purchase_indent_id,omitempty"`
@@ -837,7 +889,15 @@ func (x *PurchasesIndentsServiceMultipleItemsSingleton) GetSpecifications() stri
 // Describes the parameters required to add multiple items to a purchase indent
 type PurchasesIndentsServiceMultipleItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the purchase indent ID
 	PurchaseIndentId uint64 `protobuf:"varint,10,opt,name=purchase_indent_id,json=purchaseIndentId,proto3" json:"purchase_indent_id,omitempty"`
@@ -901,7 +961,15 @@ func (x *PurchasesIndentsServiceMultipleItemsCreateRequest) GetList() []*Purchas
 // Describes the parameters required to update an item in a purchase indent
 type PurchasesIndentsServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -983,7 +1051,15 @@ func (x *PurchasesIndentsServiceItemUpdateRequest) GetSpecifications() string {
 // Describes the parameters required to update the specifications of an item in a purchase indent
 type PurchasesIndentsServiceItemSpecificationsUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -1055,7 +1131,11 @@ type PurchaseIndentItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -2138,7 +2218,9 @@ type PurchasesIndentsServiceCountReq struct {
 	ConsigneeLocationId uint64 `protobuf:"varint,22,opt,name=consignee_location_id,json=consigneeLocationId,proto3" json:"consignee_location_id,omitempty"`
 	// The ID of the family
 	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -23,27 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting role search results.
 type ROLE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	ROLE_SORT_KEY_ROLE_SORT_KEY_ID_UNSPECIFIED ROLE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_CREATED_AT ROLE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_MODIFIED_AT ROLE_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_APPROVED_ON ROLE_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_APPROVED_BY ROLE_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_APPROVER_ROLE_ID ROLE_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_COMPLETED_ON ROLE_SORT_KEY = 6
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_NAME ROLE_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	ROLE_SORT_KEY_ROLE_SORT_KEY_CODE ROLE_SORT_KEY = 11
 )
 
@@ -100,7 +100,12 @@ func (ROLE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_roles_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating and defining a new security Role.
+// This record maps RBAC structures, descriptive identifiers, specialized system access flags
+// (Vault storage restrictions and network gateway protocols), and granular menu privilege definitions.
+//
+// **Note:** This is the primary entry point for Information Security, HR, and Admins to
+// construct permission tiers, enforce least-privilege principles, and provision access profiles.
 type RolesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -112,24 +117,86 @@ type RolesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The name of the role
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The official, displayable name of the security role.
+	//
+	// @example "Senior Document Auditor"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the role
+	// @mandatory
+	//
+	// @description The unique code or system-level alphanumeric token used to evaluate permissions programmatically within backend middleware.
+	//
+	// @example "ROLE_SR_DOC_AUDITOR"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The description of the role
-	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	// Stores if this role has access to Vault
-	VaultAccess bool `protobuf:"varint,13,opt,name=vault_access,json=vaultAccess,proto3" json:"vault_access,omitempty"`
-	// Stores if the role has access to perform operations on the root folder in Vault
-	VaultRootFolderInteractions bool `protobuf:"varint,14,opt,name=vault_root_folder_interactions,json=vaultRootFolderInteractions,proto3" json:"vault_root_folder_interactions,omitempty"`
-	// Stores if the role has access via HTTP (or within local network)
-	HttpAccess bool `protobuf:"varint,15,opt,name=http_access,json=httpAccess,proto3" json:"http_access,omitempty"`
-	// Stores if the role has access via HTTPS (or through a public FQDN)
-	HttpsAccess bool `protobuf:"varint,16,opt,name=https_access,json=httpsAccess,proto3" json:"https_access,omitempty"`
-	// The list of accessible menu UIDs
+	// @optional
+	//
+	// @description Clarifying scope of responsibilities, clearance level, or business context associated with this security profile.
+	//
+	// @example "Grants full read access to client contracts and verification documents while enforcing strict root storage write blocks."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Description *string `protobuf:"bytes,12,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether accounts possessing this role are permitted to access the secure Vault file system.
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	VaultAccess *bool `protobuf:"varint,13,opt,name=vault_access,json=vaultAccess,proto3,oneof" json:"vault_access,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether this role is authorized to perform structural operations (such as writes, modifications, or deletions) within the primary root folder of the Vault file system.
+	//
+	// @example false
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	VaultRootFolderInteractions *bool `protobuf:"varint,14,opt,name=vault_root_folder_interactions,json=vaultRootFolderInteractions,proto3,oneof" json:"vault_root_folder_interactions,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether the role can execute incoming operations over unencrypted HTTP endpoints or within a designated local perimeter network.
+	//
+	// @example false
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	HttpAccess *bool `protobuf:"varint,15,opt,name=http_access,json=httpAccess,proto3,oneof" json:"http_access,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether the role can execute operations over encrypted HTTPS gateways or through public-facing fully qualified domain names (FQDNs).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	HttpsAccess *bool `protobuf:"varint,16,opt,name=https_access,json=httpsAccess,proto3,oneof" json:"https_access,omitempty"`
+	// @optional
+	//
+	// @description A collection mapping explicit menu, routing, or function view identifiers to the role's structural access tree.
+	//
+	// @example []
+	//
+	// @format An array/list of RolesServiceAccessCreateAndUpdateRequest structural entries. Can be empty if no initial menu maps are assigned.
 	AccessList    []*RolesServiceAccessCreateAndUpdateRequest `protobuf:"bytes,20,rep,name=access_list,json=accessList,proto3" json:"access_list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -166,15 +233,15 @@ func (*RolesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *RolesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -194,36 +261,36 @@ func (x *RolesServiceCreateRequest) GetCode() string {
 }
 
 func (x *RolesServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
 func (x *RolesServiceCreateRequest) GetVaultAccess() bool {
-	if x != nil {
-		return x.VaultAccess
+	if x != nil && x.VaultAccess != nil {
+		return *x.VaultAccess
 	}
 	return false
 }
 
 func (x *RolesServiceCreateRequest) GetVaultRootFolderInteractions() bool {
-	if x != nil {
-		return x.VaultRootFolderInteractions
+	if x != nil && x.VaultRootFolderInteractions != nil {
+		return *x.VaultRootFolderInteractions
 	}
 	return false
 }
 
 func (x *RolesServiceCreateRequest) GetHttpAccess() bool {
-	if x != nil {
-		return x.HttpAccess
+	if x != nil && x.HttpAccess != nil {
+		return *x.HttpAccess
 	}
 	return false
 }
 
 func (x *RolesServiceCreateRequest) GetHttpsAccess() bool {
-	if x != nil {
-		return x.HttpsAccess
+	if x != nil && x.HttpsAccess != nil {
+		return *x.HttpsAccess
 	}
 	return false
 }
@@ -235,34 +302,110 @@ func (x *RolesServiceCreateRequest) GetAccessList() []*RolesServiceAccessCreateA
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Role record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, code, description, vault access, vault root folder interactions, http access, and https access
+// of an established Role.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type RolesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The name of the role
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the role
-	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The description of the role
-	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	// Stores if this role has access to Vault
-	VaultAccess bool `protobuf:"varint,13,opt,name=vault_access,json=vaultAccess,proto3" json:"vault_access,omitempty"`
-	// Stores if the role has access to perform operations on the root folder in Vault
-	VaultRootFolderInteractions bool `protobuf:"varint,14,opt,name=vault_root_folder_interactions,json=vaultRootFolderInteractions,proto3" json:"vault_root_folder_interactions,omitempty"`
-	// Stores if the role has access via HTTP (or within local network)
-	HttpAccess bool `protobuf:"varint,15,opt,name=http_access,json=httpAccess,proto3" json:"http_access,omitempty"`
-	// Stores if the role has access via HTTPS (or through a public FQDN)
-	HttpsAccess bool `protobuf:"varint,16,opt,name=https_access,json=httpsAccess,proto3" json:"https_access,omitempty"`
-	// The list of accessible menu UIDs
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
+	// @optional
+	//
+	// @description The official, displayable name of the security role.
+	//
+	// @example "Senior Document Auditor"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or system-level alphanumeric token used to evaluate permissions programmatically within backend middleware.
+	//
+	// @example "ROLE_SR_DOC_AUDITOR"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,11,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description Clarifying scope of responsibilities, clearance level, or business context associated with this security profile.
+	//
+	// @example "Grants full read access to client contracts and verification documents while enforcing strict root storage write blocks."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Description *string `protobuf:"bytes,12,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether accounts possessing this role are permitted to access the secure Vault file system.
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	VaultAccess *bool `protobuf:"varint,13,opt,name=vault_access,json=vaultAccess,proto3,oneof" json:"vault_access,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether this role is authorized to perform structural operations (such as writes, modifications, or deletions) within the primary root folder of the Vault file system.
+	//
+	// @example false
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	VaultRootFolderInteractions *bool `protobuf:"varint,14,opt,name=vault_root_folder_interactions,json=vaultRootFolderInteractions,proto3,oneof" json:"vault_root_folder_interactions,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether the role can execute incoming operations over unencrypted HTTP endpoints or within a designated local perimeter network.
+	//
+	// @example false
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	HttpAccess *bool `protobuf:"varint,15,opt,name=http_access,json=httpAccess,proto3,oneof" json:"http_access,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether the role can execute operations over encrypted HTTPS gateways or through public-facing fully qualified domain names (FQDNs).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`). Defaults to false if unassigned.
+	HttpsAccess *bool `protobuf:"varint,16,opt,name=https_access,json=httpsAccess,proto3,oneof" json:"https_access,omitempty"`
+	// @optional
+	//
+	// @description A collection mapping explicit menu, routing, or function view identifiers to the role's structural access tree.
+	//
+	// @example []
+	//
+	// @format An array/list of RolesServiceAccessCreateAndUpdateRequest structural entries. Can be empty if no initial menu maps are assigned.
 	AccessList    []*RolesServiceAccessCreateAndUpdateRequest `protobuf:"bytes,20,rep,name=access_list,json=accessList,proto3" json:"access_list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -299,8 +442,8 @@ func (*RolesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -313,57 +456,57 @@ func (x *RolesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *RolesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *RolesServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *RolesServiceUpdateRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *RolesServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
 func (x *RolesServiceUpdateRequest) GetVaultAccess() bool {
-	if x != nil {
-		return x.VaultAccess
+	if x != nil && x.VaultAccess != nil {
+		return *x.VaultAccess
 	}
 	return false
 }
 
 func (x *RolesServiceUpdateRequest) GetVaultRootFolderInteractions() bool {
-	if x != nil {
-		return x.VaultRootFolderInteractions
+	if x != nil && x.VaultRootFolderInteractions != nil {
+		return *x.VaultRootFolderInteractions
 	}
 	return false
 }
 
 func (x *RolesServiceUpdateRequest) GetHttpAccess() bool {
-	if x != nil {
-		return x.HttpAccess
+	if x != nil && x.HttpAccess != nil {
+		return *x.HttpAccess
 	}
 	return false
 }
 
 func (x *RolesServiceUpdateRequest) GetHttpsAccess() bool {
-	if x != nil {
-		return x.HttpsAccess
+	if x != nil && x.HttpsAccess != nil {
+		return *x.HttpsAccess
 	}
 	return false
 }
@@ -375,7 +518,7 @@ func (x *RolesServiceUpdateRequest) GetAccessList() []*RolesServiceAccessCreateA
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Role within the system.
 type Role struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -394,21 +537,37 @@ type Role struct {
 	//
 	// @example 1698400000
 	CompletedOn uint64 `protobuf:"varint,6,opt,name=completed_on,json=completedOn,proto3" json:"completed_on,omitempty"`
-	// The name of the role
+	// @description The official, displayable name of the security role.
+	//
+	// @example "Senior Document Auditor"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the role
+	// @description The unique code or system-level alphanumeric token used to evaluate permissions programmatically within backend middleware.
+	//
+	// @example "ROLE_SR_DOC_AUDITOR"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The description of the role
+	// @description Clarifying scope of responsibilities, clearance level, or business context associated with this security profile.
+	//
+	// @example "Grants full read access to client contracts and verification documents while enforcing strict root storage write blocks."
 	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	// Stores if this role has access to Vault
+	// @description Flag determining whether accounts possessing this role are permitted to access the secure Vault file system.
+	//
+	// @example true
 	VaultAccess bool `protobuf:"varint,13,opt,name=vault_access,json=vaultAccess,proto3" json:"vault_access,omitempty"`
-	// Stores if the role has access to perform operations on the root folder in Vault
+	// @description Flag determining whether this role is authorized to perform structural operations (such as writes, modifications, or deletions) within the primary root folder of the Vault file system.
+	//
+	// @example false
 	VaultRootFolderInteractions bool `protobuf:"varint,14,opt,name=vault_root_folder_interactions,json=vaultRootFolderInteractions,proto3" json:"vault_root_folder_interactions,omitempty"`
-	// Stores if the role has access via HTTP (or within local network)
+	// @description Flag determining whether the role can execute incoming operations over unencrypted HTTP endpoints or within a designated local perimeter network.
+	//
+	// @example false
 	HttpAccess bool `protobuf:"varint,15,opt,name=http_access,json=httpAccess,proto3" json:"http_access,omitempty"`
-	// Stores if the role has access via HTTPS (or through a public FQDN)
+	// @description Flag determining whether the role can execute operations over encrypted HTTPS gateways or through public-facing fully qualified domain names (FQDNs).
+	//
+	// @example true
 	HttpsAccess bool `protobuf:"varint,16,opt,name=https_access,json=httpsAccess,proto3" json:"https_access,omitempty"`
-	// The list of associated role accesses
+	// @description A collection mapping explicit menu, routing, or function view identifiers to the role's structural access tree.
+	//
+	// @example []
 	AccessList    []*RoleAccess `protobuf:"bytes,20,rep,name=access_list,json=accessList,proto3" json:"access_list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -542,12 +701,27 @@ func (x *Role) GetAccessList() []*RoleAccess {
 	return nil
 }
 
-// Describes the necessary data structure during creation/updation of a role access
+// Input structure used during the creation or modification of individual role access privileges.
+// This maps explicit system modules or UI components directly to a lease-privilege accessibility state.
 type RolesServiceAccessCreateAndUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The menu UID (or internal code)
+	// @mandatory
+	//
+	// @description The globally unique alphanumeric identifier or standard internal code assigned to a system menu or routing module.
+	//
+	// @example "MENU_COMPLIANCE_AUDIT"
+	//
+	// @regex ^[0-9A-Za-z_-]+$
+	//
+	// @format Alphanumeric characters, hyphens, and underscores only. Spaces are strictly prohibited.
 	MenuUid string `protobuf:"bytes,11,opt,name=menu_uid,json=menuUid,proto3" json:"menu_uid,omitempty"`
-	// Denotes if the menu is accessible
+	// @mandatory
+	//
+	// @description Flag determining whether accounts assigned to the parent role are granted access to interact with this menu module.
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
 	IsAccessible  bool `protobuf:"varint,12,opt,name=is_accessible,json=isAccessible,proto3" json:"is_accessible,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -597,14 +771,21 @@ func (x *RolesServiceAccessCreateAndUpdateRequest) GetIsAccessible() bool {
 	return false
 }
 
-// Describes the parameters for a role definition
+// Explanatory metadata container describing a system access point or application view component.
+// This structure aggregates human-readable attributes to render authorization trees inside administrative dashboards.
 type RolesServiceAccessDefinition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The menu UID (or internal code)
+	// @description The unique system-level alphanumeric token or internal code representing the application component.
+	//
+	// @example "MENU_FINANCE_LEDGER"
 	MenuUid string `protobuf:"bytes,11,opt,name=menu_uid,json=menuUid,proto3" json:"menu_uid,omitempty"`
-	// The name of the menu
+	// @description The human-readable or display-friendly name of the module or layout segment as seen on UI components.
+	//
+	// @example "General Ledger Settings"
 	MenuName string `protobuf:"bytes,12,opt,name=menu_name,json=menuName,proto3" json:"menu_name,omitempty"`
-	// The description of the menu
+	// @description Functional description summarizing the feature set, workflows, and operations tied to this interface component.
+	//
+	// @example "Provides controls to add, verify, and hierarchy-map internal corporate ledger accounts."
 	MenuDescription string `protobuf:"bytes,13,opt,name=menu_description,json=menuDescription,proto3" json:"menu_description,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -661,7 +842,9 @@ func (x *RolesServiceAccessDefinition) GetMenuDescription() string {
 	return ""
 }
 
-// Describes the data structure of each role access on the platform
+// Represents the comprehensive operational state of a single Role Access entry within the platform.
+// This message encapsulates organization tenancy mapping, complete system audit trails, approval state flags,
+// and the specific security permissions associated with a targeted system feature.
 type RoleAccess struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -672,13 +855,21 @@ type RoleAccess struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// The associated Role ID
+	// @description The unique internal sequence identifier of the parent security Role to which this access block is bound.
+	//
+	// @example 1024
 	RoleId uint64 `protobuf:"varint,10,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The menu UID (or internal code)
+	// @description The unique alphanumeric identifier or code corresponding to the targeted system menu module.
+	//
+	// @example "MENU_COMPLIANCE_AUDIT"
 	MenuUid string `protobuf:"bytes,11,opt,name=menu_uid,json=menuUid,proto3" json:"menu_uid,omitempty"`
-	// Denotes if the menu is accessible
+	// @description Active authorization flag indicating if the related role profile can access this system view.
 	IsAccessible  bool `protobuf:"varint,12,opt,name=is_accessible,json=isAccessible,proto3" json:"is_accessible,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -763,10 +954,10 @@ func (x *RoleAccess) GetIsAccessible() bool {
 	return false
 }
 
-// Describes the message consisting of the list of roles
+// Container message for a collection of Role records.
 type RolesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Role records.
 	List          []*Role `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -809,7 +1000,7 @@ func (x *RolesList) GetList() []*Role {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Role records.
 type RolesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -817,7 +1008,7 @@ type RolesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -837,19 +1028,23 @@ type RolesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this role
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -885,8 +1080,8 @@ func (*RolesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -899,34 +1094,34 @@ func (x *RolesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *RolesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *RolesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *RolesServicePaginationReq) GetSortKey() ROLE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ROLE_SORT_KEY_ROLE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *RolesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type RolesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1005,7 +1200,12 @@ func (x *RolesServicePaginationResponse) GetPayload() []*Role {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating roles using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type RolesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1013,7 +1213,7 @@ type RolesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1033,17 +1233,17 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1053,7 +1253,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1063,7 +1263,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1073,7 +1273,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1083,7 +1283,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1093,13 +1293,13 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1109,7 +1309,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1119,7 +1319,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1129,7 +1329,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1139,7 +1339,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1149,7 +1349,7 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1159,11 +1359,27 @@ type RolesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The name of the role
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the code
-	Code          string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
+	// @optional
+	//
+	// @description The official, displayable name of the security role.
+	//
+	// @example "Senior Document Auditor"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or system-level alphanumeric token used to evaluate permissions programmatically within backend middleware.
+	//
+	// @example "ROLE_SR_DOC_AUDITOR"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code          *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1199,8 +1415,8 @@ func (*RolesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1213,125 +1429,131 @@ func (x *RolesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *RolesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *RolesServiceFilterReq) GetSortKey() ROLE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ROLE_SORT_KEY_ROLE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *RolesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *RolesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *RolesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *RolesServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting role records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type RolesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1339,7 +1561,7 @@ type RolesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1349,7 +1571,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1359,7 +1581,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1369,7 +1591,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1379,7 +1601,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1389,13 +1611,13 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1405,7 +1627,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1415,7 +1637,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1425,7 +1647,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1435,7 +1657,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1445,7 +1667,7 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1455,11 +1677,27 @@ type RolesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The name of the role
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the code
-	Code          string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
+	// @optional
+	//
+	// @description The official, displayable name of the security role.
+	//
+	// @example "Senior Document Auditor"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or system-level alphanumeric token used to evaluate permissions programmatically within backend middleware.
+	//
+	// @example "ROLE_SR_DOC_AUDITOR"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code          *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1495,111 +1733,117 @@ func (*RolesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *RolesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *RolesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *RolesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *RolesServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *RolesServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating roles via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type RolesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1607,7 +1851,7 @@ type RolesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1627,17 +1871,17 @@ type RolesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ROLE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ROLE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1647,13 +1891,13 @@ type RolesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -1663,7 +1907,7 @@ type RolesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	SearchKey     *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1699,8 +1943,8 @@ func (*RolesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *RolesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1713,43 +1957,43 @@ func (x *RolesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *RolesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *RolesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *RolesServiceSearchAllReq) GetSortKey() ROLE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ROLE_SORT_KEY_ROLE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *RolesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *RolesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *RolesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
@@ -1758,37 +2002,53 @@ var File_roles_scailo_proto protoreflect.FileDescriptor
 
 const file_roles_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12roles.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xba\x03\n" +
-	"\x19RolesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12\x1b\n" +
+	"\x12roles.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xe3\x04\n" +
+	"\x19RolesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
-	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12 \n" +
-	"\vdescription\x18\f \x01(\tR\vdescription\x12!\n" +
-	"\fvault_access\x18\r \x01(\bR\vvaultAccess\x12C\n" +
-	"\x1evault_root_folder_interactions\x18\x0e \x01(\bR\x1bvaultRootFolderInteractions\x12\x1f\n" +
-	"\vhttp_access\x18\x0f \x01(\bR\n" +
-	"httpAccess\x12!\n" +
-	"\fhttps_access\x18\x10 \x01(\bR\vhttpsAccess\x12Q\n" +
+	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12%\n" +
+	"\vdescription\x18\f \x01(\tH\x02R\vdescription\x88\x01\x01\x12&\n" +
+	"\fvault_access\x18\r \x01(\bH\x03R\vvaultAccess\x88\x01\x01\x12H\n" +
+	"\x1evault_root_folder_interactions\x18\x0e \x01(\bH\x04R\x1bvaultRootFolderInteractions\x88\x01\x01\x12$\n" +
+	"\vhttp_access\x18\x0f \x01(\bH\x05R\n" +
+	"httpAccess\x88\x01\x01\x12&\n" +
+	"\fhttps_access\x18\x10 \x01(\bH\x06R\vhttpsAccess\x88\x01\x01\x12Q\n" +
 	"\vaccess_list\x18\x14 \x03(\v20.Scailo.RolesServiceAccessCreateAndUpdateRequestR\n" +
-	"accessList\"\xd5\x03\n" +
-	"\x19RolesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12\x1b\n" +
+	"accessListB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x0e\n" +
+	"\f_descriptionB\x0f\n" +
+	"\r_vault_accessB!\n" +
+	"\x1f_vault_root_folder_interactionsB\x0e\n" +
+	"\f_http_accessB\x0f\n" +
+	"\r_https_access\"\x9b\x05\n" +
+	"\x19RolesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x12 \n" +
 	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
-	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12 \n" +
-	"\vdescription\x18\f \x01(\tR\vdescription\x12!\n" +
-	"\fvault_access\x18\r \x01(\bR\vvaultAccess\x12C\n" +
-	"\x1evault_root_folder_interactions\x18\x0e \x01(\bR\x1bvaultRootFolderInteractions\x12\x1f\n" +
-	"\vhttp_access\x18\x0f \x01(\bR\n" +
-	"httpAccess\x12!\n" +
-	"\fhttps_access\x18\x10 \x01(\bR\vhttpsAccess\x12Q\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04name\x88\x01\x01\x12 \n" +
+	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x04code\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\f \x01(\tH\x04R\vdescription\x88\x01\x01\x12&\n" +
+	"\fvault_access\x18\r \x01(\bH\x05R\vvaultAccess\x88\x01\x01\x12H\n" +
+	"\x1evault_root_folder_interactions\x18\x0e \x01(\bH\x06R\x1bvaultRootFolderInteractions\x88\x01\x01\x12$\n" +
+	"\vhttp_access\x18\x0f \x01(\bH\aR\n" +
+	"httpAccess\x88\x01\x01\x12&\n" +
+	"\fhttps_access\x18\x10 \x01(\bH\bR\vhttpsAccess\x88\x01\x01\x12Q\n" +
 	"\vaccess_list\x18\x14 \x03(\v20.Scailo.RolesServiceAccessCreateAndUpdateRequestR\n" +
-	"accessList\"\xdf\x04\n" +
+	"accessListB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0e\n" +
+	"\f_descriptionB\x0f\n" +
+	"\r_vault_accessB!\n" +
+	"\x1f_vault_root_folder_interactionsB\x0e\n" +
+	"\f_http_accessB\x0f\n" +
+	"\r_https_access\"\xdf\x04\n" +
 	"\x04Role\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1827,74 +2087,126 @@ const file_roles_scailo_proto_rawDesc = "" +
 	"\bmenu_uid\x18\v \x01(\tR\amenuUid\x12#\n" +
 	"\ris_accessible\x18\f \x01(\bR\fisAccessible\"-\n" +
 	"\tRolesList\x12 \n" +
-	"\x04list\x18\x01 \x03(\v2\f.Scailo.RoleR\x04list\"\xad\x02\n" +
-	"\x19RolesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\f.Scailo.RoleR\x04list\"\x86\x03\n" +
+	"\x19RolesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x8c\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x8c\x01\n" +
 	"\x1eRolesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12&\n" +
-	"\apayload\x18\x04 \x03(\v2\f.Scailo.RoleR\apayload\"\xf0\x06\n" +
-	"\x15RolesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\f.Scailo.RoleR\apayload\"\xa7\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\"\xc1\x05\n" +
-	"\x14RolesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\"\xf5\x02\n" +
-	"\x18RolesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x15RolesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x10R\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x11R\x04code\x88\x01\x01B\f\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey*\xa0\x02\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_code\"\xc2\b\n" +
+	"\x14RolesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\rR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x0eR\x04code\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_code\"\xf7\x03\n" +
+	"\x18RolesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.ROLE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_key*\xa0\x02\n" +
 	"\rROLE_SORT_KEY\x12 \n" +
 	"\x1cROLE_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18ROLE_SORT_KEY_CREATED_AT\x10\x01\x12\x1d\n" +
@@ -2092,6 +2404,12 @@ func file_roles_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_roles_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_roles_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_roles_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_roles_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_roles_scailo_proto_msgTypes[10].OneofWrappers = []any{}
+	file_roles_scailo_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

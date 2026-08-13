@@ -55,9 +55,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each role
+// The RolesService manages the full lifecycle of roles.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type RolesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *RolesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -146,11 +159,24 @@ type RolesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Clone role from an existing role (denoted by the identifier)
+	// Clones an existing security role and its associated permission sets to establish a new role profile.
+	//
+	// This operation is optimized for administrative templating, allowing rapid provisioning of similar
+	// role matrices without manual reconfiguration of individual menu rules.
+	//
+	// **Side Effects:**
+	// - Deep-copies all associated `RoleAccess` states, menu UIDs, and interaction privileges from the source record.
+	// - Places the newly cloned role into an initial configuration state (e.g., `DRAFT` or `PREVERIFY` depending on system defaults).
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Role, error)
@@ -168,7 +194,10 @@ type RolesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*RolesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *RolesServicePaginationReq, opts ...grpc.CallOption) (*RolesServicePaginationResponse, error)
-	// View self role (the role of the logged in user). Returns the role on the basis of the logged in environment as well.
+	// Retrieves the security role configuration of the currently authenticated actor.
+	//
+	// This is a specialized read-only lookup that dynamically evaluates the user's active session
+	// context, current environment settings, and tenant isolation parameters to determine their exact operational clearance.
 	ViewSelf(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Role, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *RolesServiceSearchAllReq, opts ...grpc.CallOption) (*RolesList, error)

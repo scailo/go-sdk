@@ -306,7 +306,15 @@ type LabelsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The name of the label
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
@@ -386,7 +394,15 @@ func (x *LabelsServiceCreateRequest) GetDescription() string {
 // Describes the data structure to perform the update (draft/revision) operation on a label
 type LabelsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the label that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`

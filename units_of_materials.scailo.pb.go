@@ -23,25 +23,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting unit of material search results.
 type UNIT_OF_MATERIAL_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_ID_UNSPECIFIED UNIT_OF_MATERIAL_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_CREATED_AT UNIT_OF_MATERIAL_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_MODIFIED_AT UNIT_OF_MATERIAL_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_APPROVED_ON UNIT_OF_MATERIAL_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_APPROVED_BY UNIT_OF_MATERIAL_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_APPROVER_ROLE_ID UNIT_OF_MATERIAL_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_NAME UNIT_OF_MATERIAL_SORT_KEY = 10
-	// Fetch ordered results by the symbol
+	// @description Sort alphabetically by the user-provided symbol.
 	UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_SYMBOL UNIT_OF_MATERIAL_SORT_KEY = 11
 )
 
@@ -96,7 +96,12 @@ func (UNIT_OF_MATERIAL_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_units_of_materials_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating and registering a new Unit of Material (UOM) definition.
+// This record tracks standardized measurement units, classification symbols, descriptive metadata,
+// and tenant isolation parameters for physical or logistical item quantities.
+//
+// **Note:** This is the primary entry point for Procurement, Supply Chain, and Admins to
+// initialize systemic units of measure (e.g., kilograms, liters, packs) used for inventory ledgering.
 type UnitsOfMaterialsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -108,15 +113,47 @@ type UnitsOfMaterialsServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The name of the unit of material
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The official or canonical name of the unit of material.
+	//
+	// @example "Kilogram"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique symbol by which the unit of material is classified
+	// @mandatory
+	//
+	// @description The unique shorthand symbol, abbreviation, or metric token by which the unit of material is structurally classified.
+	//
+	// @example "kg"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Symbol string `protobuf:"bytes,11,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	// The description of the unit of material
-	Description   string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Contextual description or clarifying details outlining the operational bounds, conversions, or standard applications of this unit.
+	//
+	// @example "Standard SI unit for mass, utilized across all raw bulk compound inventory tables."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Description   *string `protobuf:"bytes,12,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -152,15 +189,15 @@ func (*UnitsOfMaterialsServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -180,27 +217,77 @@ func (x *UnitsOfMaterialsServiceCreateRequest) GetSymbol() string {
 }
 
 func (x *UnitsOfMaterialsServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing UnitOfMaterial record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, symbol, mantissa name, exponent name, and description
+// of an established UnitOfMaterial.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type UnitsOfMaterialsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that denotes if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The name of the unit of material
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique symbol by which the unit of material is classified
-	Symbol string `protobuf:"bytes,11,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	// The description of the unit of material
-	Description   string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
+	// @optional
+	//
+	// @description The official or canonical name of the unit of material.
+	//
+	// @example "Kilogram"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique shorthand symbol, abbreviation, or metric token by which the unit of material is structurally classified.
+	//
+	// @example "kg"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Symbol *string `protobuf:"bytes,11,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
+	// @optional
+	//
+	// @description Contextual description or clarifying details outlining the operational bounds, conversions, or standard applications of this unit.
+	//
+	// @example "Standard SI unit for mass, utilized across all raw bulk compound inventory tables."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Description   *string `protobuf:"bytes,12,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -236,8 +323,8 @@ func (*UnitsOfMaterialsServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -250,34 +337,34 @@ func (x *UnitsOfMaterialsServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *UnitsOfMaterialsServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *UnitsOfMaterialsServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceUpdateRequest) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
+	if x != nil && x.Symbol != nil {
+		return *x.Symbol
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full UnitOfMaterial within the system.
 type UnitOfMaterial struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -292,11 +379,17 @@ type UnitOfMaterial struct {
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The name of the unit of material
+	// @description The official or canonical name of the unit of material.
+	//
+	// @example "Kilogram"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique symbol by which the unit of material is classified
+	// @description The unique shorthand symbol, abbreviation, or metric token by which the unit of material is structurally classified.
+	//
+	// @example "kg"
 	Symbol string `protobuf:"bytes,11,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	// The description of the unit of material
+	// @description Contextual description or clarifying details outlining the operational bounds, conversions, or standard applications of this unit.
+	//
+	// @example "Standard SI unit for mass, utilized across all raw bulk compound inventory tables."
 	Description   string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -388,10 +481,10 @@ func (x *UnitOfMaterial) GetDescription() string {
 	return ""
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of UnitOfMaterial records.
 type UnitsOfMaterialsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of UnitOfMaterial records.
 	List          []*UnitOfMaterial `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -434,7 +527,7 @@ func (x *UnitsOfMaterialsList) GetList() []*UnitOfMaterial {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of UnitOfMaterial records.
 type UnitsOfMaterialsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -442,7 +535,7 @@ type UnitsOfMaterialsServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -462,19 +555,23 @@ type UnitsOfMaterialsServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this unit of material
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -510,8 +607,8 @@ func (*UnitsOfMaterialsServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -524,34 +621,34 @@ func (x *UnitsOfMaterialsServicePaginationReq) GetCount() int64 {
 }
 
 func (x *UnitsOfMaterialsServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServicePaginationReq) GetSortKey() UNIT_OF_MATERIAL_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type UnitsOfMaterialsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -630,7 +727,12 @@ func (x *UnitsOfMaterialsServicePaginationResponse) GetPayload() []*UnitOfMateri
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating unit of materials using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type UnitsOfMaterialsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -638,7 +740,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -658,17 +760,17 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -678,7 +780,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -688,7 +790,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -698,7 +800,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -708,7 +810,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -718,13 +820,13 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -734,7 +836,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -744,7 +846,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -754,7 +856,7 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -764,11 +866,27 @@ type UnitsOfMaterialsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the unit of material
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique symbol by which the unit of material is classified
-	Symbol        string `protobuf:"bytes,21,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or canonical name of the unit of material.
+	//
+	// @example "Kilogram"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique shorthand symbol, abbreviation, or metric token by which the unit of material is structurally classified.
+	//
+	// @example "kg"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Symbol        *string `protobuf:"bytes,21,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -804,8 +922,8 @@ func (*UnitsOfMaterialsServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -818,111 +936,117 @@ func (x *UnitsOfMaterialsServiceFilterReq) GetCount() int64 {
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetSortKey() UNIT_OF_MATERIAL_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceFilterReq) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
+	if x != nil && x.Symbol != nil {
+		return *x.Symbol
 	}
 	return ""
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting unit of material records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type UnitsOfMaterialsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -930,7 +1054,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -940,7 +1064,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -950,7 +1074,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -960,7 +1084,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -970,7 +1094,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -980,13 +1104,13 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -996,7 +1120,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1006,7 +1130,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1016,7 +1140,7 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1026,11 +1150,27 @@ type UnitsOfMaterialsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the unit of material
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique symbol by which the unit of material is classified
-	Symbol        string `protobuf:"bytes,21,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or canonical name of the unit of material.
+	//
+	// @example "Kilogram"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique shorthand symbol, abbreviation, or metric token by which the unit of material is structurally classified.
+	//
+	// @example "kg"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Symbol        *string `protobuf:"bytes,21,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1066,97 +1206,103 @@ func (*UnitsOfMaterialsServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceCountReq) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
+	if x != nil && x.Symbol != nil {
+		return *x.Symbol
 	}
 	return ""
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating unit of materials via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type UnitsOfMaterialsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1164,7 +1310,7 @@ type UnitsOfMaterialsServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1184,17 +1330,17 @@ type UnitsOfMaterialsServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *UNIT_OF_MATERIAL_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.UNIT_OF_MATERIAL_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1204,13 +1350,13 @@ type UnitsOfMaterialsServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -1220,7 +1366,7 @@ type UnitsOfMaterialsServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	SearchKey     *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1256,8 +1402,8 @@ func (*UnitsOfMaterialsServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1270,43 +1416,43 @@ func (x *UnitsOfMaterialsServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetSortKey() UNIT_OF_MATERIAL_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return UNIT_OF_MATERIAL_SORT_KEY_UNIT_OF_MATERIAL_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UnitsOfMaterialsServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
@@ -1315,23 +1461,31 @@ var File_units_of_materials_scailo_proto protoreflect.FileDescriptor
 
 const file_units_of_materials_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1funits_of_materials.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\xca\x01\n" +
-	"$UnitsOfMaterialsServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12\x1b\n" +
+	"\x1funits_of_materials.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\"\x8a\x02\n" +
+	"$UnitsOfMaterialsServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1f\n" +
-	"\x06symbol\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06symbol\x12 \n" +
-	"\vdescription\x18\f \x01(\tR\vdescription\"\xe5\x01\n" +
-	"$UnitsOfMaterialsServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12\x1b\n" +
+	"\x06symbol\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06symbol\x12%\n" +
+	"\vdescription\x18\f \x01(\tH\x02R\vdescription\x88\x01\x01B\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x0e\n" +
+	"\f_description\"\xc4\x02\n" +
+	"$UnitsOfMaterialsServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x12 \n" +
 	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1f\n" +
-	"\x06symbol\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06symbol\x12 \n" +
-	"\vdescription\x18\f \x01(\tR\vdescription\"\xe9\x02\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04name\x88\x01\x01\x12$\n" +
+	"\x06symbol\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x06symbol\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\f \x01(\tH\x04R\vdescription\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\a\n" +
+	"\x05_nameB\t\n" +
+	"\a_symbolB\x0e\n" +
+	"\f_description\"\xe9\x02\n" +
 	"\x0eUnitOfMaterial\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1344,70 +1498,117 @@ const file_units_of_materials_scailo_proto_rawDesc = "" +
 	"\x06symbol\x18\v \x01(\tR\x06symbol\x12 \n" +
 	"\vdescription\x18\f \x01(\tR\vdescription\"B\n" +
 	"\x14UnitsOfMaterialsList\x12*\n" +
-	"\x04list\x18\x01 \x03(\v2\x16.Scailo.UnitOfMaterialR\x04list\"\xc4\x02\n" +
-	"$UnitsOfMaterialsServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x16.Scailo.UnitOfMaterialR\x04list\"\x9d\x03\n" +
+	"$UnitsOfMaterialsServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\xa1\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\xa1\x01\n" +
 	")UnitsOfMaterialsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x120\n" +
-	"\apayload\x18\x04 \x03(\v2\x16.Scailo.UnitOfMaterialR\apayload\"\xb3\x06\n" +
-	" UnitsOfMaterialsServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x16.Scailo.UnitOfMaterialR\apayload\"\xb6\t\n" +
+	" UnitsOfMaterialsServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x16\n" +
-	"\x06symbol\x18\x15 \x01(\tR\x06symbol\"\xf8\x04\n" +
-	"\x1fUnitsOfMaterialsServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x16\n" +
-	"\x06symbol\x18\x15 \x01(\tR\x06symbol\"\x8c\x03\n" +
-	"#UnitsOfMaterialsServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x0eR\x04name\x88\x01\x01\x12\x1b\n" +
+	"\x06symbol\x18\x15 \x01(\tH\x0fR\x06symbol\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\t\n" +
+	"\a_symbol\"\xc5\a\n" +
+	"\x1fUnitsOfMaterialsServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\vR\x04name\x88\x01\x01\x12\x1b\n" +
+	"\x06symbol\x18\x15 \x01(\tH\fR\x06symbol\x88\x01\x01B\f\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey*\xee\x02\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\t\n" +
+	"\a_symbol\"\x8e\x04\n" +
+	"#UnitsOfMaterialsServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.UNIT_OF_MATERIAL_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_key*\xee\x02\n" +
 	"\x19UNIT_OF_MATERIAL_SORT_KEY\x12,\n" +
 	"(UNIT_OF_MATERIAL_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12(\n" +
 	"$UNIT_OF_MATERIAL_SORT_KEY_CREATED_AT\x10\x01\x12)\n" +
@@ -1582,6 +1783,12 @@ func file_units_of_materials_scailo_proto_init() {
 		return
 	}
 	file_base_scailo_proto_init()
+	file_units_of_materials_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_units_of_materials_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_units_of_materials_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_units_of_materials_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_units_of_materials_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_units_of_materials_scailo_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

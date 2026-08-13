@@ -170,11 +170,21 @@ type StockAuditsServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -191,7 +201,10 @@ type StockAuditsServiceClient interface {
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Checks if the Stock Audit can be marked as completed
+	// Evaluates whether the specified record has satisfied all prerequisite business rules required to transition into a completed lifecycle state.
+	//
+	// This is a non-mutating, read-only query that performs comprehensive server-side validation against the record's current operational constraints. Depending on the specific domain context, the underlying checks may verify that all dependent workflows are resolved, associated child records (such as line items or sub-tasks) have reached their terminal states, and no mandatory actions remain pending.
+	// Client applications typically utilize this endpoint to dynamically determine whether the "Complete" action should be enabled or exposed in the user interface.
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Add an item to a stock audit
 	AddStockAuditItem(ctx context.Context, in *StockAuditsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -230,7 +243,12 @@ type StockAuditsServiceClient interface {
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StockAudit, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StockAudit, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*StockAudit, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*StockAudit, error)
@@ -252,9 +270,22 @@ type StockAuditsServiceClient interface {
 	ViewProspectiveStockAuditItem(ctx context.Context, in *StockAuditItemProspectiveInfoRequest, opts ...grpc.CallOption) (*StockAuditsServiceItemCreateRequest, error)
 	// Download the label for the stock audit with the given IdentifierUUID
 	DownloadLabelByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download stock audit with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *StockAuditsServiceSearchAllReq, opts ...grpc.CallOption) (*StockAuditsList, error)

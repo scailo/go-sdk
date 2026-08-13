@@ -160,7 +160,13 @@ type SkillsGroupsServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -175,7 +181,12 @@ type SkillsGroupsServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Clone skill group from an existing skill group (denoted by the identifier)
+	// Initiates the creation of a new record by duplicating the structural properties of an existing record.
+	//
+	// **Side Effects:**
+	// - Provisions a new record populated with the metadata and configurations of the source record.
+	// - Does not clone operational transactions or historical logs of the source.
+	// - Appends an audit trail entry tracking the cloning operation and justification.
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add a param to a skill group
 	AddSkillGroupItem(ctx context.Context, in *SkillsGroupsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -206,7 +217,12 @@ type SkillsGroupsServiceClient interface {
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SkillGroup, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SkillGroup, error)
-	// View by Code (returns the latest record in case of duplicates)
+	// Retrieves a single record via the assigned internal code. In case duplicates are found, this method retrieves the latest record.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided internal code does not exist.
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*SkillGroup, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SkillGroup, error)

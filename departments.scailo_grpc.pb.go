@@ -54,9 +54,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each department
+// The DepartmentsService manages the full lifecycle of departments.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type DepartmentsServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *DepartmentsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -145,7 +158,13 @@ type DepartmentsServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)

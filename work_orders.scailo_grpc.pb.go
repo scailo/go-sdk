@@ -170,13 +170,29 @@ type WorkOrdersServiceClient interface {
 	// **Side Effects:**
 	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Duplicates an existing operational record (e.g., an order, schedule, or requisition) to create a new, distinct entity with a specified delivery date.
+	//
+	// **Side Effects:**
+	// - Provisions a completely new record that inherits the core attributes, line items, and configurations of the source record identified by the UUID.
+	// - Overrides the original delivery schedule with the newly provided `delivery_date` and assigns the newly provided external `reference_id`.
+	// - Appends an audit trail entry linking the new record to its original source, tracking the duplication event and justification comment.
+	// - Returns the internal identifier and UUID of the newly generated record.
 	Repeat(ctx context.Context, in *RepeatWithDeliveryDate, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -193,11 +209,28 @@ type WorkOrdersServiceClient interface {
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Autofill the work order
+	// Automatically populates a record with line items and configurations derived from its linked references.
+	//
+	// **Side Effects:**
+	// - Queries the target record (identified by its UUID) for any attached operational constraints or references.
+	// - Dynamically generates and attaches the corresponding line items to the record based on the sourced data, minimizing manual data entry.
+	// - Appends an audit trail entry tracking the execution of the autofill operation and the provided justification comment.
 	Autofill(ctx context.Context, in *WorkOrdersServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Amend the work order and send for revision
+	// Initiates a formal amendment process for a specific record, transitioning it into a structured revision workflow.
+	//
+	// This API is utilized when substantive modifications are required for an already finalized or approved record.
+	// Rather than mutating the active data directly, it explicitly triggers a compliance-driven revision cycle,
+	// ensuring that all proposed changes are tracked and undergo standard review and authorization procedures.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The record's internal amendment count property is strictly incremented by 1.
+	// * The record is placed into a pending revision state, typically preserving the availability of the currently approved version until the amendment is finalized.
+	// * The optional user comment is permanently appended to the record's audit log as the formal justification for initiating the change.
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Checks if the Work Order can be marked as completed
+	// Evaluates whether the specified record has satisfied all prerequisite business rules required to transition into a completed lifecycle state.
+	//
+	// This is a non-mutating, read-only query that performs comprehensive server-side validation against the record's current operational constraints. Depending on the specific domain context, the underlying checks may verify that all dependent workflows are resolved, associated child records (such as line items or sub-tasks) have reached their terminal states, and no mandatory actions remain pending.
+	// Client applications typically utilize this endpoint to dynamically determine whether the "Complete" action should be enabled or exposed in the user interface.
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Add an item to a work order
 	AddWorkOrderItem(ctx context.Context, in *WorkOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -234,7 +267,12 @@ type WorkOrdersServiceClient interface {
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*WorkOrder, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*WorkOrder, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*WorkOrder, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*WorkOrder, error)
@@ -250,7 +288,15 @@ type WorkOrdersServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*WorkOrdersList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *WorkOrdersServicePaginationReq, opts ...grpc.CallOption) (*WorkOrdersServicePaginationResponse, error)
-	// View all the amendments made
+	// Retrieves the comprehensive, chronological history of formal amendments applied to a specific record.
+	//
+	// This read-only query exposes the complete audit trail of revision workflows that the entity has undergone.
+	// It is explicitly designed to support compliance checks, historical tracking, and administrative reviews by
+	// detailing exactly how and when a record evolved over its lifecycle.
+	//
+	// **Side Effects & Lifecycle:**
+	// * This is a strictly read-only operation; the underlying record and its current lifecycle state remain entirely unchanged.
+	// * Aggregates and returns a sequential log of amendment events, which typically include revision counts, initiation timestamps, and the justification comments provided when the amendments were triggered.
 	ViewAmendments(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AmendmentLogsList, error)
 	// View prospective families for the given work order
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
@@ -262,9 +308,22 @@ type WorkOrdersServiceClient interface {
 	ViewRequirementStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*WorkOrderRequirementStatisticsList, error)
 	// View production statistics (match with all the associated production plans) of the work order
 	ViewProductionStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*WorkOrderProductionStatisticsList, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download work order with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *WorkOrdersServiceSearchAllReq, opts ...grpc.CallOption) (*WorkOrdersList, error)

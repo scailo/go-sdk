@@ -23,13 +23,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Stores all the possible references from which a goods dispatch can be added
+// Enumeration of the supported source record types from which a Goods Dispatch can be generated.
+// This determines the operational linkage between the physical logistics/fulfillment process
+// and the original commercial contract.
 type GOODS_DISPATCH_REF_FROM int32
 
 const (
-	// Used only in filters
+	// @description Default behavior, ignoring the source record type. Utilized primarily within search and filtering APIs to return dispatches regardless of their origin.
 	GOODS_DISPATCH_REF_FROM_GOODS_DISPATCH_REF_FROM_ANY_UNSPECIFIED GOODS_DISPATCH_REF_FROM = 0
-	// Denotes that the goods dispatch originated from a sales order
+	// @description Denotes that the goods dispatch was generated directly against an approved, legally binding Sales Order.
 	GOODS_DISPATCH_REF_FROM_GOODS_DISPATCH_REF_FROM_SALES_ORDER GOODS_DISPATCH_REF_FROM = 1
 )
 
@@ -72,31 +74,31 @@ func (GOODS_DISPATCH_REF_FROM) EnumDescriptor() ([]byte, []int) {
 	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting goods dispatch item search results.
 type GOODS_DISPATCH_ITEM_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal item sequence ID).
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_ID_UNSPECIFIED GOODS_DISPATCH_ITEM_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the item record was initially created.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_CREATED_AT GOODS_DISPATCH_ITEM_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the item record was last modified.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_MODIFIED_AT GOODS_DISPATCH_ITEM_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp of the item.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_APPROVED_ON GOODS_DISPATCH_ITEM_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_APPROVED_BY GOODS_DISPATCH_ITEM_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_APPROVER_ROLE_ID GOODS_DISPATCH_ITEM_SORT_KEY = 5
-	// Fetch ordered results by the family ID
+	// @description Sort by the internal ID of the family.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_FAMILY_ID GOODS_DISPATCH_ITEM_SORT_KEY = 10
-	// Fetch ordered results by the internal quantity
+	// @description Sort by the dispatched quantity evaluated in the internal unit of measure.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_INTERNAL_QUANTITY GOODS_DISPATCH_ITEM_SORT_KEY = 11
-	// Fetch ordered results by the client unit of material ID
+	// @description Sort by the internal ID of the client's requested unit of measure.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_CLIENT_UOM_ID GOODS_DISPATCH_ITEM_SORT_KEY = 12
-	// Fetch ordered results by the client quantity
+	// @description Sort by the dispatched quantity evaluated in the client's unit of measure.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_CLIENT_QUANTITY GOODS_DISPATCH_ITEM_SORT_KEY = 13
-	// Fetch ordered results by the client family code
+	// @description Sort alphabetically by the client's specific family code or SKU.
 	GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_CLIENT_FAMILY_CODE GOODS_DISPATCH_ITEM_SORT_KEY = 14
 )
 
@@ -157,15 +159,15 @@ func (GOODS_DISPATCH_ITEM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the applicable statuses of goods dispatch items
+// Enum defining the applicable lifecycle and verification statuses for goods dispatch items.
 type GOODS_DISPATCH_ITEM_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	GOODS_DISPATCH_ITEM_STATUS_GOODS_DISPATCH_ITEM_STATUS_ANY_UNSPECIFIED GOODS_DISPATCH_ITEM_STATUS = 0
-	// Denotes that the goods dispatch items must have been approved
+	// @description Denotes that the goods dispatch item association has passed verification and is actively approved.
 	GOODS_DISPATCH_ITEM_STATUS_GOODS_DISPATCH_ITEM_STATUS_APPROVED GOODS_DISPATCH_ITEM_STATUS = 1
-	// Denotes that the goods dispatch items must be waiting for approval
+	// @description Denotes that the goods dispatch item association is pending review and waiting for administrative approval.
 	GOODS_DISPATCH_ITEM_STATUS_GOODS_DISPATCH_ITEM_STATUS_UNAPPROVED GOODS_DISPATCH_ITEM_STATUS = 2
 )
 
@@ -210,27 +212,27 @@ func (GOODS_DISPATCH_ITEM_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting goods dispatch search results.
 type GOODS_DISPATCH_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_ID_UNSPECIFIED GOODS_DISPATCH_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_CREATED_AT GOODS_DISPATCH_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_MODIFIED_AT GOODS_DISPATCH_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_APPROVED_ON GOODS_DISPATCH_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_APPROVED_BY GOODS_DISPATCH_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_APPROVER_ROLE_ID GOODS_DISPATCH_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_COMPLETED_ON GOODS_DISPATCH_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_REFERENCE_ID GOODS_DISPATCH_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_FINAL_REF_NUMBER GOODS_DISPATCH_SORT_KEY = 11
 )
 
@@ -287,15 +289,18 @@ func (GOODS_DISPATCH_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{3}
 }
 
-// Describes the available billing statuses
+// Enumeration of the supported financial conversion statuses for a Goods Dispatch.
+// This tracks the cross-departmental lifecycle progression of a physical fulfillment operation,
+// identifying whether the specific quantities that left the warehouse have been formally
+// realized and converted into a final, legally binding Sales Invoice by the finance team.
 type GOODS_DISPATCH_BILLING_STATUS int32
 
 const (
-	// Any billing status
+	// @description Default behavior, ignoring the billing status criteria. Utilized primarily within search and filtering payloads to return all logistical records regardless of their financial conversion state.
 	GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED GOODS_DISPATCH_BILLING_STATUS = 0
-	// Goods dispatch is billed
+	// @description Indicates that the goods dispatch has been formally billed. A finalized, legally binding Sales Invoice has been successfully generated to request payment for these exact physically shipped quantities.
 	GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_BILLED GOODS_DISPATCH_BILLING_STATUS = 1
-	// Goods dispatch is unbilled
+	// @description Indicates that the goods dispatch remains unbilled. The physical fulfillment has been recorded, but a formal Sales Invoice has not yet been generated, meaning the revenue for this shipment is pending.
 	GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_UNBILLED GOODS_DISPATCH_BILLING_STATUS = 2
 )
 
@@ -340,7 +345,11 @@ func (GOODS_DISPATCH_BILLING_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_goods_dispatches_scailo_proto_rawDescGZIP(), []int{4}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and initiating a new Goods Dispatch record within the system.
+// This record represents the physical fulfillment, packing, and outbound shipping of products
+// to a buyer. It is heavily constrained by its parent source document (e.g., a Sales Order),
+// ensuring that the warehouse or fulfillment center only dispatches quantities that have been formally
+// negotiated and approved.
 type GoodsDispatchesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -352,9 +361,17 @@ type GoodsDispatchesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -364,7 +381,7 @@ type GoodsDispatchesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -375,13 +392,43 @@ type GoodsDispatchesServiceCreateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which this physical fulfillment operation originates (e.g., Sales Order).
+	//
+	// @example "GOODS_DISPATCH_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_REF_FROM enum value. Cannot be unspecified (0).
 	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order dictating this fulfillment).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The location ID of where the record is created
+	// @mandatory
+	//
+	// @description The unique internal identifier of the physical location, warehouse, or fulfillment center from which these goods are being picked, packed, and dispatched.
+	//
+	// @example 42
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	LocationId uint64 `protobuf:"varint,15,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -418,22 +465,22 @@ func (*GoodsDispatchesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -473,19 +520,41 @@ func (x *GoodsDispatchesServiceCreateRequest) GetFormData() []*FormFieldDatumCre
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for modifying the core metadata and logistical parameters of an existing Goods Dispatch record.
+// This payload supports updating external reference IDs (e.g., carrier tracking numbers), document storage locations
+// (e.g., for packing slips or bills of lading), and dynamic organizational attributes.
+//
+// **Note:** These modifications are typically restricted to the preliminary or drafting phases of the fulfillment
+// lifecycle. Once the dispatch is verified and physically shipped (reaching a finalized state), core logistical
+// details become immutable to ensure an accurate audit trail for downstream billing (Sales Invoices) and inventory deduction.
 type GoodsDispatchesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -495,7 +564,7 @@ type GoodsDispatchesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
@@ -505,8 +574,14 @@ type GoodsDispatchesServiceUpdateRequest struct {
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The list of dynamic forms
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -543,8 +618,8 @@ func (*GoodsDispatchesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -557,22 +632,22 @@ func (x *GoodsDispatchesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *GoodsDispatchesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *GoodsDispatchesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
@@ -584,15 +659,43 @@ func (x *GoodsDispatchesServiceUpdateRequest) GetFormData() []*FormFieldDatumCre
 	return nil
 }
 
-// Describes the parameters necessary to perform an autofill request
+// Request message to automatically populate a Goods Dispatch with pending line items from its source document.
+// This operational "autofill" mechanism accelerates the warehouse fulfillment process by querying the linked
+// parent record (e.g., an approved Sales Order) and automatically generating preliminary dispatch items for all
+// remaining unfulfilled quantities. This drastically reduces manual data entry errors and ensures strict
+// logistical alignment with the original commercial contract.
 type GoodsDispatchesServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target Goods Dispatch document that needs to be autofilled.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores if the inventory needs to be split into unit quantities
-	SplitIntoUnitQuantity bool `protobuf:"varint,10,opt,name=split_into_unit_quantity,json=splitIntoUnitQuantity,proto3" json:"split_into_unit_quantity,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether the auto-populated inventory should be split into individual line items of unit quantity (quantity = 1). This is highly valuable for serialized inventory operations where warehouse staff must scan, track, or assign serial numbers to individual items (e.g., electronics, high-value goods) during packing.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	SplitIntoUnitQuantity *bool `protobuf:"varint,10,opt,name=split_into_unit_quantity,json=splitIntoUnitQuantity,proto3,oneof" json:"split_into_unit_quantity,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -628,8 +731,8 @@ func (*GoodsDispatchesServiceAutofillRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceAutofillRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -642,18 +745,36 @@ func (x *GoodsDispatchesServiceAutofillRequest) GetUuid() string {
 }
 
 func (x *GoodsDispatchesServiceAutofillRequest) GetSplitIntoUnitQuantity() bool {
-	if x != nil {
-		return x.SplitIntoUnitQuantity
+	if x != nil && x.SplitIntoUnitQuantity != nil {
+		return *x.SplitIntoUnitQuantity
 	}
 	return false
 }
 
-// Stores the UUID references of the record
+// Represents a read-only container for universally unique identifiers (UUIDs) of related external entities.
+// This message securely exposes the downstream linkages (like the source order or location) to external
+// clients or frontend interfaces without revealing internal sequential IDs.
 type GoodsDispatchAncillaryParameters struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The UUID of the ref_id (the UUID of the associated ref_id)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the associated source document (e.g., the parent Sales Order).
+	//
+	// @example "661f9511-f39c-42d5-b827-557766551111"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	RefUuid string `protobuf:"bytes,213,opt,name=ref_uuid,json=refUuid,proto3" json:"ref_uuid,omitempty"`
-	// The UUID of the location (the UUID of the associated location_id)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the physical physical fulfillment center, warehouse, or location from which the goods are being dispatched.
+	//
+	// @example "88b1b220-e29b-41d4-a716-446655440999"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	LocationUuid  string `protobuf:"bytes,215,opt,name=location_uuid,json=locationUuid,proto3" json:"location_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -703,7 +824,15 @@ func (x *GoodsDispatchAncillaryParameters) GetLocationUuid() string {
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a complete, formalized Goods Dispatch entity within the system.
+// This message encapsulates the comprehensive state of a physical fulfillment operation.
+// It acts as the definitive logistical record that tracks the picking, packing, and outbound shipping
+// of products to a buyer.
+//
+// **Note:** This payload is typically utilized in read operations (e.g., View, Search)
+// and provides frontend clients, warehouse management systems (WMS), and downstream billing APIs
+// with the entire context needed to generate packing slips, deduct physical inventory,
+// and subsequently generate a finalized Sales Invoice for the dispatched quantities.
 type GoodsDispatch struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -734,15 +863,25 @@ type GoodsDispatch struct {
 	//
 	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
+	// @description The specific module or record type from which this physical fulfillment operation originates (e.g., Sales Order).
+	//
+	// @example "GOODS_DISPATCH_REF_FROM_SALES_ORDER"
 	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order dictating this fulfillment).
+	//
+	// @example 1024
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The location ID of where the record is created
+	// @description The unique internal identifier of the physical location, warehouse, or fulfillment center from which these goods are being picked, packed, and dispatched.
+	//
+	// @example 42
 	LocationId uint64 `protobuf:"varint,15,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
-	// The list of associated goods dispatch items
+	// @description The complete, aggregated list of individual line items that constitute this goods dispatch.
+	//
+	// @example []
+	//
+	// @format Repeated array of GoodsDispatchItem message blocks.
 	List []*GoodsDispatchItem `protobuf:"bytes,20,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -876,25 +1015,92 @@ func (x *GoodsDispatch) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the parameters required to add an item to a goods dispatch
+// Request message for appending a physical line item to an existing Goods Dispatch document.
+// This payload defines the exact product, the specific inventory instance being picked (via its hash),
+// and the actual quantities being packed and shipped. It acts as the bridge between internal warehouse
+// metrics and the client's expected units of measure, ensuring strict traceability of goods leaving the facility.
 type GoodsDispatchesServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the goods dispatch ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent goods dispatch document to which this logistical line item will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being physically picked and dispatched.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the item hash to be dispatched
+	// @mandatory
+	//
+	// @description The cryptographic hash representing the exact inventory instance, batch, or serial pool being dispatched. This guarantees strict traceability of physical goods leaving the facility.
+	//
+	// @example "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2"
+	//
+	// @regex ^.{128}$
+	//
+	// @format Exact 128-character string.
 	ItemHash string `protobuf:"bytes,12,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
-	// The quantity (in cents) being dispatched in internal unit of material
+	// @mandatory
+	//
+	// @description The physical quantity being dispatched, represented in the system's internal base unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this dispatched item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being dispatched in client's unit of material
+	// @mandatory
+	//
+	// @description The physical quantity being dispatched, represented in the client's specific unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// Stores the family code as defined by the client
-	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal receiving and logistics referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -930,8 +1136,8 @@ func (*GoodsDispatchesServiceItemCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceItemCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -979,27 +1185,77 @@ func (x *GoodsDispatchesServiceItemCreateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *GoodsDispatchesServiceItemCreateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
-// Describes the parameters required to add an individual item as part of multiple item addition to a goods dispatch
+// Represents a single line item payload within a bulk creation request.
+// Contains the exact same transactional parameters as a standard item creation request,
+// omitting the parent goods dispatch ID which is declared once at the batch level.
 type GoodsDispatchesServiceMultipleItemsSingleton struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being physically picked and dispatched.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the item hash to be dispatched
+	// @mandatory
+	//
+	// @description The cryptographic hash representing the exact inventory instance, batch, or serial pool being dispatched. This guarantees strict traceability of physical goods leaving the facility.
+	//
+	// @example "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2"
+	//
+	// @regex ^.{128}$
+	//
+	// @format Exact 128-character string.
 	ItemHash string `protobuf:"bytes,12,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
-	// The quantity (in cents) being dispatched in internal unit of material
+	// @mandatory
+	//
+	// @description The physical quantity being dispatched, represented in the system's internal base unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this dispatched item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being dispatched in client's unit of material
+	// @mandatory
+	//
+	// @description The physical quantity being dispatched, represented in the client's specific unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// Stores the family code as defined by the client
-	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal receiving and logistics referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1070,20 +1326,44 @@ func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetClientQuantity() uint6
 }
 
 func (x *GoodsDispatchesServiceMultipleItemsSingleton) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
-// Describes the parameters required to add multiple items to a goods dispatch
+// Request message for appending multiple line items to a Goods Dispatch in a single batch transaction.
+// Optimized for scenarios like imports or autofill operations where dozens of items
+// are attached simultaneously to a parent record.
 type GoodsDispatchesServiceMultipleItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the goods dispatch ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent goods dispatch to which this batch of items will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// List of items
+	// @mandatory
+	//
+	// @description An array containing the individual line item payloads to be appended to the invoice.
+	//
+	// @example []
+	//
+	// @format Repeated array of GoodsDispatchesServiceMultipleItemsSingleton message blocks.
 	List          []*GoodsDispatchesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1120,8 +1400,8 @@ func (*GoodsDispatchesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, [
 }
 
 func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1140,23 +1420,82 @@ func (x *GoodsDispatchesServiceMultipleItemsCreateRequest) GetList() []*GoodsDis
 	return nil
 }
 
-// Describes the parameters required to update an item in a goods dispatch
+// Request message for modifying the logistical parameters of an existing line item within a Goods Dispatch.
+// This payload is utilized during the warehouse packing or drafting phase to correct picked quantities,
+// swap the specific inventory instance being shipped (via the item hash), or adjust the client-specific
+// unit mappings before the physical shipment is locked and finalized.
 type GoodsDispatchesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Stores the item hash to be dispatched
+	// @mandatory
+	//
+	// @description The updated cryptographic hash representing the exact inventory instance, batch, or serial pool being dispatched. This guarantees strict traceability of physical goods leaving the facility.
+	//
+	// @example "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2"
+	//
+	// @regex ^.{128}$
+	//
+	// @format Exact 128-character string.
 	ItemHash string `protobuf:"bytes,12,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
-	// The quantity (in cents) being dispatched in internal unit of material
+	// @mandatory
+	//
+	// @description The updated physical quantity being dispatched, represented in the system's internal base unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The updated unique internal identifier of the Unit of Measure (UOM) requested by the client for this dispatched item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being dispatched in client's unit of material
+	// @mandatory
+	//
+	// @description The updated physical quantity being dispatched, represented in the client's specific unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// Stores the family code as defined by the client
-	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal receiving and logistics referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1192,8 +1531,8 @@ func (*GoodsDispatchesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceItemUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1234,13 +1573,20 @@ func (x *GoodsDispatchesServiceItemUpdateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *GoodsDispatchesServiceItemUpdateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
-// Describes the parameters that constitute an item associated to a goods dispatch
+// Represents a complete Goods Dispatch Item entity within the system.
+// This message encapsulates the comprehensive state of a single physical family line being fulfilled
+// and shipped to a buyer. It includes the exact inventory traceability (via the item hash), mapped
+// logistical quantities across both internal and client units of measure, and associated approval metadata.
+//
+// **Note:** This payload is utilized in read operations to provide downstream systems (like billing or Warehouse Management System)
+// with the exact logistical state of an individual dispatched item for physical inventory deduction and
+// accurate invoice generation.
 type GoodsDispatchItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1251,23 +1597,43 @@ type GoodsDispatchItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the goods dispatch ID
+	// @description The unique internal identifier of the parent goods dispatch document to which this logistical line item will be attached.
+	//
+	// @example 1024
 	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the family or catalog item being physically picked and dispatched.
+	//
+	// @example 505
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the item hash to be dispatched
+	// @description The cryptographic hash representing the exact inventory instance, batch, or serial pool being dispatched. This guarantees strict traceability of physical goods leaving the facility.
+	//
+	// @example "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2"
 	ItemHash string `protobuf:"bytes,12,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
-	// The quantity (in cents) being dispatched in internal unit of material
+	// @description The physical quantity being dispatched, represented in the system's internal base unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 10000
 	InternalQuantity uint64 `protobuf:"varint,13,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this dispatched item.
+	//
+	// @example 12
 	ClientUomId uint64 `protobuf:"varint,14,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being dispatched in client's unit of material
+	// @description The physical quantity being dispatched, represented in the client's specific unit of measure. Stored in subunits to maintain fractional precision.
+	//
+	// @example 5000
 	ClientQuantity uint64 `protobuf:"varint,15,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// Stores the family code as defined by the client
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal receiving and logistics referencing.
+	//
+	// @example "CLI-SKU-992"
 	ClientFamilyCode string `protobuf:"bytes,16,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -1387,10 +1753,10 @@ func (x *GoodsDispatchItem) GetClientFamilyCode() string {
 	return ""
 }
 
-// Describes the message consisting of the list of goods dispatches
+// Container message for a collection of Goods Dispatch records.
 type GoodsDispatchesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Goods Dispatch records.
 	List          []*GoodsDispatch `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1433,10 +1799,10 @@ func (x *GoodsDispatchesList) GetList() []*GoodsDispatch {
 	return nil
 }
 
-// Describes the message consisting of the list of goods dispatch items
+// Container message for a collection of Goods Dispatch Item records.
 type GoodsDispatchesItemsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Goods Dispatch Item records.
 	List          []*GoodsDispatchItem `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1479,12 +1845,29 @@ func (x *GoodsDispatchesItemsList) GetList() []*GoodsDispatchItem {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Represents the request payload containing the parameter constraints required to
+// retrieve the historical audit trail and lifecycle changes of a specific goods dispatch item record.
 type GoodsDispatchItemHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the goods dispatch ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target goods dispatch associated with the historical record.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family associated with the historical record.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1534,12 +1917,35 @@ func (x *GoodsDispatchItemHistoryRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the parameters that are required to retrieve the info of a prospective goods dispatch item
+// Represents the request payload utilized to fetch the default, auto-populated configuration for a potential
+// physical line item before it is formally added to a Goods Dispatch document.
+//
+// **Note:** This is a critical templating operation utilized by frontend interfaces and warehouse management
+// systems (WMS) during the packing phase. By evaluating the provided dispatch ID and family, the system
+// cross-references the originating source document (e.g., an approved Sales Order) to automatically determine
+// the remaining unfulfilled quantities and client-specific logistical mappings. This drastically minimizes manual
+// data entry errors on the warehouse floor and strictly prevents over-shipping.
 type GoodsDispatchItemProspectiveInfoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the goods dispatch ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent goods dispatch that is currently being evaluated or constructed.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	GoodsDispatchId uint64 `protobuf:"varint,10,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being evaluated for addition to the goods dispatch.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1589,7 +1995,8 @@ func (x *GoodsDispatchItemProspectiveInfoRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the request payload to retrieve approved or unapproved items.
+// Request payload structure used to search and filter Goods Dispatch Item records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type GoodsDispatchItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1597,7 +2004,7 @@ type GoodsDispatchItemsSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1617,17 +2024,17 @@ type GoodsDispatchItemsSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey GOODS_DISPATCH_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_ITEM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *GOODS_DISPATCH_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_ITEM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1637,29 +2044,111 @@ type GoodsDispatchItemsSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the items
-	Status GOODS_DISPATCH_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.GOODS_DISPATCH_ITEM_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
-	ApprovedOnStart uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
-	ApprovedOnEnd uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
-	ApprovedByUserId uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
-	ApproverRoleId uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The ID of the goods dispatch
-	GoodsDispatchId uint64 `protobuf:"varint,20,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,22,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the item hash to be dispatched
-	ItemHash string `protobuf:"bytes,23,opt,name=item_hash,json=itemHash,proto3" json:"item_hash,omitempty"`
-	// The ID of the client's unit of material
-	ClientUomId uint64 `protobuf:"varint,24,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the family code as given by the client
-	ClientFamilyCode string `protobuf:"bytes,26,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The field used for sorting.
+	Status *GOODS_DISPATCH_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.GOODS_DISPATCH_ITEM_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnStart *uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnEnd *uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedByUserId *uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApproverRoleId *uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific parent goods dispatch.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	GoodsDispatchId *uint64 `protobuf:"varint,20,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3,oneof" json:"goods_dispatch_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific family.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,22,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items by the cryptographic hash representing the exact inventory instance, batch, or serial pool being dispatched.
+	//
+	// @example "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2"
+	//
+	// @regex ^.{128}$
+	//
+	// @format Exact 128-character string.
+	ItemHash *string `protobuf:"bytes,23,opt,name=item_hash,json=itemHash,proto3,oneof" json:"item_hash,omitempty"`
+	// @optional
+	//
+	// @description Filter line items requesting a specific client Unit of Measure (UOM).
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ClientUomId *uint64 `protobuf:"varint,24,opt,name=client_uom_id,json=clientUomId,proto3,oneof" json:"client_uom_id,omitempty"`
+	// @optional
+	//
+	// @description Fuzzy match for the client's specific alphanumeric part number, SKU, or family code.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,26,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey     *string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1695,8 +2184,8 @@ func (*GoodsDispatchItemsSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1709,111 +2198,112 @@ func (x *GoodsDispatchItemsSearchRequest) GetCount() int64 {
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetSortKey() GOODS_DISPATCH_ITEM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return GOODS_DISPATCH_ITEM_SORT_KEY_GOODS_DISPATCH_ITEM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetStatus() GOODS_DISPATCH_ITEM_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return GOODS_DISPATCH_ITEM_STATUS_GOODS_DISPATCH_ITEM_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetGoodsDispatchId() uint64 {
-	if x != nil {
-		return x.GoodsDispatchId
+	if x != nil && x.GoodsDispatchId != nil {
+		return *x.GoodsDispatchId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetItemHash() string {
-	if x != nil {
-		return x.ItemHash
+	if x != nil && x.ItemHash != nil {
+		return *x.ItemHash
 	}
 	return ""
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetClientUomId() uint64 {
-	if x != nil {
-		return x.ClientUomId
+	if x != nil && x.ClientUomId != nil {
+		return *x.ClientUomId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
 func (x *GoodsDispatchItemsSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Goods Dispatch Item records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type GoodsDispatchesServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1892,14 +2382,44 @@ func (x *GoodsDispatchesServicePaginatedItemsResponse) GetPayload() []*GoodsDisp
 	return nil
 }
 
-// Describes the request payload to retrieve the quantity that has already been added for the specific ref_from, ref_id and family_id
+// Represents the request payload utilized to retrieve the cumulative physical quantity of a specific family
+// that has already been dispatched against a given source document.
+//
+// **Note:** This query acts as a critical logistical safeguard during the warehouse packing phase. By evaluating
+// historical fulfillment records, it prevents frontend clients, Warehouse Management Systems (WMS), and automated
+// scanners from accidentally packing or shipping more items than were originally constrained and approved in the
+// parent document (e.g., a Sales Order).
 type GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which the logistical fulfillment originates and against which the shipped quantity is being checked (e.g., Sales Order).
+	//
+	// @example "GOODS_DISPATCH_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_REF_FROM enum value. Cannot be unspecified (0).
 	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,1,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,2,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being queried to determine its cumulative dispatched quantity.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,3,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1956,7 +2476,7 @@ func (x *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest) GetFamilyId
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Goods Dispatch records.
 type GoodsDispatchesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1964,7 +2484,7 @@ type GoodsDispatchesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1984,19 +2504,23 @@ type GoodsDispatchesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this goods dispatch
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2032,8 +2556,8 @@ func (*GoodsDispatchesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2046,34 +2570,34 @@ func (x *GoodsDispatchesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetSortKey() GOODS_DISPATCH_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type GoodsDispatchesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2152,7 +2676,12 @@ func (x *GoodsDispatchesServicePaginationResponse) GetPayload() []*GoodsDispatch
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating goods dispatches using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type GoodsDispatchesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2160,7 +2689,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2180,17 +2709,17 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2200,7 +2729,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2210,7 +2739,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2220,7 +2749,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2230,7 +2759,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2240,13 +2769,13 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2256,7 +2785,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2266,7 +2795,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2276,7 +2805,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2286,7 +2815,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2296,7 +2825,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2306,7 +2835,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2316,7 +2845,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2326,24 +2855,87 @@ type GoodsDispatchesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The location ID of where the record is created
-	LocationId uint64 `protobuf:"varint,25,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,30,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The status of the goods dispatch bill
-	BillingStatus GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on the specific module or record type from which the logistical fulfillment originated (e.g., Sales Order).
+	//
+	// @example GOODS_DISPATCH_REF_FROM_SALES_ORDER
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_REF_FROM enum value.
+	RefFrom *GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the physical location, warehouse, or fulfillment center from which these goods are being picked, packed, and dispatched.
+	//
+	// @example 42
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	LocationId *uint64 `protobuf:"varint,25,opt,name=location_id,json=locationId,proto3,oneof" json:"location_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,30,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on their financial conversion lifecycle state—specifically, whether the physical shipment remains unbilled or has been successfully converted into a finalized Sales Invoice.
+	//
+	// @example GOODS_DISPATCH_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_BILLING_STATUS enum value.
+	BillingStatus *GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -2354,7 +2946,7 @@ type GoodsDispatchesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2390,8 +2982,8 @@ func (*GoodsDispatchesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2404,176 +2996,176 @@ func (x *GoodsDispatchesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetSortKey() GOODS_DISPATCH_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetRefFrom() GOODS_DISPATCH_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return GOODS_DISPATCH_REF_FROM_GOODS_DISPATCH_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetLocationId() uint64 {
-	if x != nil {
-		return x.LocationId
+	if x != nil && x.LocationId != nil {
+		return *x.LocationId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetBillingStatus() GOODS_DISPATCH_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
@@ -2586,13 +3178,19 @@ func (x *GoodsDispatchesServiceFilterReq) GetFormData() []*FormFieldDatumFilterR
 }
 
 func (x *GoodsDispatchesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting goods dispatch records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type GoodsDispatchesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2600,7 +3198,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2610,7 +3208,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2620,7 +3218,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2630,7 +3228,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2640,7 +3238,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2650,13 +3248,13 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2666,7 +3264,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2676,7 +3274,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2686,7 +3284,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2696,7 +3294,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2706,7 +3304,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2716,7 +3314,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2726,7 +3324,7 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2736,25 +3334,90 @@ type GoodsDispatchesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The location ID of where the record is created
-	LocationId uint64 `protobuf:"varint,25,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,30,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The status of the goods dispatch bill
-	BillingStatus GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// The list of form data filters
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on the specific module or record type from which the logistical fulfillment originated (e.g., Sales Order).
+	//
+	// @example GOODS_DISPATCH_REF_FROM_SALES_ORDER
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_REF_FROM enum value.
+	RefFrom *GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the physical location, warehouse, or fulfillment center from which these goods are being picked, packed, and dispatched.
+	//
+	// @example 42
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	LocationId *uint64 `protobuf:"varint,25,opt,name=location_id,json=locationId,proto3,oneof" json:"location_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,30,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on their financial conversion lifecycle state—specifically, whether the physical shipment remains unbilled or has been successfully converted into a finalized Sales Invoice.
+	//
+	// @example GOODS_DISPATCH_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_BILLING_STATUS enum value.
+	BillingStatus *GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2791,162 +3454,162 @@ func (*GoodsDispatchesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetRefFrom() GOODS_DISPATCH_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return GOODS_DISPATCH_REF_FROM_GOODS_DISPATCH_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetLocationId() uint64 {
-	if x != nil {
-		return x.LocationId
+	if x != nil && x.LocationId != nil {
+		return *x.LocationId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetBillingStatus() GOODS_DISPATCH_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceCountReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
@@ -2958,7 +3621,13 @@ func (x *GoodsDispatchesServiceCountReq) GetFormData() []*FormFieldDatumFilterRe
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating goods dispatches via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type GoodsDispatchesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2966,7 +3635,7 @@ type GoodsDispatchesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2986,17 +3655,17 @@ type GoodsDispatchesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *GOODS_DISPATCH_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.GOODS_DISPATCH_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3006,13 +3675,13 @@ type GoodsDispatchesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -3022,18 +3691,57 @@ type GoodsDispatchesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The associated reference
-	RefFrom GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The status of the goods dispatch bill
-	BillingStatus GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on the specific module or record type from which the logistical fulfillment originated (e.g., Sales Order).
+	//
+	// @example GOODS_DISPATCH_REF_FROM_SALES_ORDER
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_REF_FROM enum value.
+	RefFrom *GOODS_DISPATCH_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.GOODS_DISPATCH_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches based on their financial conversion lifecycle state—specifically, whether the physical shipment remains unbilled or has been successfully converted into a finalized Sales Invoice.
+	//
+	// @example GOODS_DISPATCH_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid GOODS_DISPATCH_BILLING_STATUS enum value.
+	BillingStatus *GOODS_DISPATCH_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.GOODS_DISPATCH_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter goods dispatches by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3069,8 +3777,8 @@ func (*GoodsDispatchesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3083,78 +3791,78 @@ func (x *GoodsDispatchesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetSortKey() GOODS_DISPATCH_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return GOODS_DISPATCH_SORT_KEY_GOODS_DISPATCH_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetRefFrom() GOODS_DISPATCH_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return GOODS_DISPATCH_REF_FROM_GOODS_DISPATCH_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetBillingStatus() GOODS_DISPATCH_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return GOODS_DISPATCH_BILLING_STATUS_GOODS_DISPATCH_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *GoodsDispatchesServiceSearchAllReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
@@ -3163,32 +3871,42 @@ var File_goods_dispatches_scailo_proto protoreflect.FileDescriptor
 
 const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1dgoods_dispatches.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x9c\x03\n" +
-	"#GoodsDispatchesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x1dgoods_dispatches.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xec\x03\n" +
+	"#GoodsDispatchesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12:\n" +
-	"\bref_from\x18\f \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMR\arefFrom\x12\x1e\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12F\n" +
+	"\bref_from\x18\f \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12(\n" +
 	"\vlocation_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"locationId\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xb1\x02\n" +
-	"#GoodsDispatchesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_id\"\x8c\x03\n" +
+	"#GoodsDispatchesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xa1\x01\n" +
-	"%GoodsDispatchesServiceAutofillRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
-	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x127\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_id\"\xd9\x01\n" +
+	"%GoodsDispatchesServiceAutofillRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12<\n" +
 	"\x18split_into_unit_quantity\x18\n" +
-	" \x01(\bR\x15splitIntoUnitQuantity\"d\n" +
+	" \x01(\bH\x01R\x15splitIntoUnitQuantity\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x1b\n" +
+	"\x19_split_into_unit_quantity\"d\n" +
 	" GoodsDispatchAncillaryParameters\x12\x1a\n" +
 	"\bref_uuid\x18\xd5\x01 \x01(\tR\arefUuid\x12$\n" +
 	"\rlocation_uuid\x18\xd7\x01 \x01(\tR\flocationUuid\"\x8a\x05\n" +
@@ -3209,37 +3927,43 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"\vlocation_id\x18\x0f \x01(\x04R\n" +
 	"locationId\x12-\n" +
 	"\x04list\x18\x14 \x03(\v2\x19.Scailo.GoodsDispatchItemR\x04list\x123\n" +
-	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\x94\x03\n" +
-	"'GoodsDispatchesServiceItemCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x123\n" +
+	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xc6\x03\n" +
+	"'GoodsDispatchesServiceItemCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x123\n" +
 	"\x11goods_dispatch_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchId\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12(\n" +
 	"\titem_hash\x18\f \x01(\tB\v\xbaH\br\x06\x10\x80\x01\x18\x80\x01R\bitemHash\x124\n" +
 	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\xc1\x02\n" +
+	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x10 \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_code\"\xdd\x02\n" +
 	",GoodsDispatchesServiceMultipleItemsSingleton\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12(\n" +
 	"\titem_hash\x18\f \x01(\tB\v\xbaH\br\x06\x10\x80\x01\x18\x80\x01R\bitemHash\x124\n" +
 	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\xd4\x01\n" +
-	"0GoodsDispatchesServiceMultipleItemsCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x123\n" +
+	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x10 \x01(\tH\x00R\x10clientFamilyCode\x88\x01\x01B\x15\n" +
+	"\x13_client_family_code\"\xea\x01\n" +
+	"0GoodsDispatchesServiceMultipleItemsCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x123\n" +
 	"\x11goods_dispatch_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchId\x12H\n" +
-	"\x04list\x18\v \x03(\v24.Scailo.GoodsDispatchesServiceMultipleItemsSingletonR\x04list\"\xd2\x02\n" +
-	"'GoodsDispatchesServiceItemUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"\x04list\x18\v \x03(\v24.Scailo.GoodsDispatchesServiceMultipleItemsSingletonR\x04listB\x0f\n" +
+	"\r_user_comment\"\x84\x03\n" +
+	"'GoodsDispatchesServiceItemUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12(\n" +
 	"\titem_hash\x18\f \x01(\tB\v\xbaH\br\x06\x10\x80\x01\x18\x80\x01R\bitemHash\x124\n" +
 	"\x11internal_quantity\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x10 \x01(\tR\x10clientFamilyCode\"\x87\x04\n" +
+	"\x0fclient_quantity\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x10 \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_code\"\x87\x04\n" +
 	"\x11GoodsDispatchItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3266,134 +3990,230 @@ const file_goods_dispatches_scailo_proto_rawDesc = "" +
 	"'GoodsDispatchItemProspectiveInfoRequest\x123\n" +
 	"\x11goods_dispatch_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchId\x12$\n" +
-	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xf1\x05\n" +
-	"\x1fGoodsDispatchItemsSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xd2\b\n" +
+	"\x1fGoodsDispatchItemsSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12?\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2$.Scailo.GOODS_DISPATCH_ITEM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x12:\n" +
-	"\x06status\x18\a \x01(\x0e2\".Scailo.GOODS_DISPATCH_ITEM_STATUSR\x06status\x12*\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12D\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2$.Scailo.GOODS_DISPATCH_ITEM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12?\n" +
+	"\x06status\x18\a \x01(\x0e2\".Scailo.GOODS_DISPATCH_ITEM_STATUSH\x05R\x06status\x88\x01\x01\x12/\n" +
 	"\x11approved_on_start\x18\n" +
-	" \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\v \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\f \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\r \x01(\x04R\x0eapproverRoleId\x12*\n" +
-	"\x11goods_dispatch_id\x18\x14 \x01(\x04R\x0fgoodsDispatchId\x12\x1b\n" +
-	"\tfamily_id\x18\x16 \x01(\x04R\bfamilyId\x12\x1b\n" +
-	"\titem_hash\x18\x17 \x01(\tR\bitemHash\x12\"\n" +
-	"\rclient_uom_id\x18\x18 \x01(\x04R\vclientUomId\x12,\n" +
-	"\x12client_family_code\x18\x1a \x01(\tR\x10clientFamilyCode\x12\x1d\n" +
+	" \x01(\x04H\x06R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\v \x01(\x04H\aR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\f \x01(\x04H\bR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\r \x01(\x04H\tR\x0eapproverRoleId\x88\x01\x01\x12/\n" +
+	"\x11goods_dispatch_id\x18\x14 \x01(\x04H\n" +
+	"R\x0fgoodsDispatchId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\x16 \x01(\x04H\vR\bfamilyId\x88\x01\x01\x12 \n" +
+	"\titem_hash\x18\x17 \x01(\tH\fR\bitemHash\x88\x01\x01\x12'\n" +
+	"\rclient_uom_id\x18\x18 \x01(\x04H\rR\vclientUomId\x88\x01\x01\x121\n" +
+	"\x12client_family_code\x18\x1a \x01(\tH\x0eR\x10clientFamilyCode\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18( \x01(\tR\tsearchKey\"\xa7\x01\n" +
+	"search_key\x18( \x01(\tH\x0fR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x14\n" +
+	"\x12_goods_dispatch_idB\f\n" +
+	"\n" +
+	"_family_idB\f\n" +
+	"\n" +
+	"_item_hashB\x10\n" +
+	"\x0e_client_uom_idB\x15\n" +
+	"\x13_client_family_codeB\r\n" +
+	"\v_search_key\"\xa7\x01\n" +
 	",GoodsDispatchesServicePaginatedItemsResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x123\n" +
-	"\apayload\x18\x04 \x03(\v2\x19.Scailo.GoodsDispatchItemR\apayload\"\xbe\x01\n" +
-	":GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest\x12:\n" +
-	"\bref_from\x18\x01 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMR\arefFrom\x12\x1e\n" +
+	"\apayload\x18\x04 \x03(\v2\x19.Scailo.GoodsDispatchItemR\apayload\"\xca\x01\n" +
+	":GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest\x12F\n" +
+	"\bref_from\x18\x01 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12$\n" +
-	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xc1\x02\n" +
-	"#GoodsDispatchesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\x9a\x03\n" +
+	"#GoodsDispatchesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12:\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x9f\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12?\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x9f\x01\n" +
 	"(GoodsDispatchesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12/\n" +
-	"\apayload\x18\x04 \x03(\v2\x15.Scailo.GoodsDispatchR\apayload\"\xef\n" +
+	"\apayload\x18\x04 \x03(\v2\x15.Scailo.GoodsDispatchR\apayload\"\x81\x10\n" +
+	"\x1fGoodsDispatchesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"\x1fGoodsDispatchesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
-	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12:\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12?\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12:\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vlocation_id\x18\x19 \x01(\x04R\n" +
-	"locationId\x12\x1b\n" +
-	"\tfamily_id\x18\x1e \x01(\x04R\bfamilyId\x12L\n" +
-	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x12?\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMH\x12R\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x13R\x05refId\x88\x01\x01\x12$\n" +
+	"\vlocation_id\x18\x19 \x01(\x04H\x14R\n" +
+	"locationId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\x1e \x01(\x04H\x15R\bfamilyId\x88\x01\x01\x12Q\n" +
+	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSH\x16R\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\x17R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\x18R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x184 \x01(\x04R\tprojectId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x89\t\n" +
-	"\x1eGoodsDispatchesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"project_id\x184 \x01(\x04H\x19R\tprojectId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1aR\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_location_idB\f\n" +
+	"\n" +
+	"_family_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_idB\x14\n" +
+	"\x12_include_form_data\"\xca\r\n" +
+	"\x1eGoodsDispatchesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12:\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vlocation_id\x18\x19 \x01(\x04R\n" +
-	"locationId\x12\x1b\n" +
-	"\tfamily_id\x18\x1e \x01(\x04R\bfamilyId\x12L\n" +
-	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x12?\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMH\x0fR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x10R\x05refId\x88\x01\x01\x12$\n" +
+	"\vlocation_id\x18\x19 \x01(\x04H\x11R\n" +
+	"locationId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\x1e \x01(\x04H\x12R\bfamilyId\x88\x01\x01\x12Q\n" +
+	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSH\x13R\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\x14R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\x15R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x184 \x01(\x04R\tprojectId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\x82\x05\n" +
-	"\"GoodsDispatchesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"project_id\x184 \x01(\x04H\x16R\tprojectId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12:\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_location_idB\f\n" +
+	"\n" +
+	"_family_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_id\"\xf4\x06\n" +
+	"\"GoodsDispatchesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12?\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12:\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12L\n" +
-	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId*o\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x12?\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1f.Scailo.GOODS_DISPATCH_REF_FROMH\aR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\bR\x05refId\x88\x01\x01\x12Q\n" +
+	"\x0ebilling_status\x18( \x01(\x0e2%.Scailo.GOODS_DISPATCH_BILLING_STATUSH\tR\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\n" +
+	"R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\vR\rbuyerClientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_id*o\n" +
 	"\x17GOODS_DISPATCH_REF_FROM\x12+\n" +
 	"'GOODS_DISPATCH_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12'\n" +
 	"#GOODS_DISPATCH_REF_FROM_SALES_ORDER\x10\x01*\xb0\x04\n" +
@@ -3752,6 +4572,18 @@ func file_goods_dispatches_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_goods_dispatches_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[2].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[14].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[17].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[19].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[20].OneofWrappers = []any{}
+	file_goods_dispatches_scailo_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

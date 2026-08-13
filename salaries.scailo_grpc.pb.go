@@ -176,11 +176,21 @@ type SalariesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -193,7 +203,12 @@ type SalariesServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Autofill the salary
+	// Automatically populates a record with line items and configurations derived from its linked references.
+	//
+	// **Side Effects:**
+	// - Queries the target record (identified by its UUID) for any attached operational constraints or references.
+	// - Dynamically generates and attaches the corresponding line items to the record based on the sourced data, minimizing manual data entry.
+	// - Appends an audit trail entry tracking the execution of the autofill operation and the provided justification comment.
 	Autofill(ctx context.Context, in *SalariesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an addition item to a salary
 	AddSalaryAdditionItem(ctx context.Context, in *SalariesServiceAdditionItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)

@@ -23,13 +23,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Stores all the possible references from which a proforma invoice can be added
+// Enumeration of the supported source record types from which a Proforma Invoice can be generated.
+// This determines the operational linkage and financial inheritance of the preliminary billing document.
 type PROFORMA_INVOICE_REF_FROM int32
 
 const (
-	// Used only in filters
+	// @description Default behavior, ignoring the source record type. Utilized primarily within search and listing APIs.
 	PROFORMA_INVOICE_REF_FROM_PROFORMA_INVOICE_REF_FROM_ANY_UNSPECIFIED PROFORMA_INVOICE_REF_FROM = 0
-	// Denotes that the proforma invoice originated from a sales order
+	// @description Denotes that the proforma invoice was generated directly from a fulfilled or approved Sales Order.
 	PROFORMA_INVOICE_REF_FROM_PROFORMA_INVOICE_REF_FROM_SALES_ORDER PROFORMA_INVOICE_REF_FROM = 1
 )
 
@@ -72,31 +73,31 @@ func (PROFORMA_INVOICE_REF_FROM) EnumDescriptor() ([]byte, []int) {
 	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting proforma invoice search results.
 type PROFORMA_INVOICE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_ID_UNSPECIFIED PROFORMA_INVOICE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_CREATED_AT PROFORMA_INVOICE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_MODIFIED_AT PROFORMA_INVOICE_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_APPROVED_ON PROFORMA_INVOICE_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_APPROVED_BY PROFORMA_INVOICE_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_APPROVER_ROLE_ID PROFORMA_INVOICE_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_COMPLETED_ON PROFORMA_INVOICE_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_REFERENCE_ID PROFORMA_INVOICE_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_FINAL_REF_NUMBER PROFORMA_INVOICE_SORT_KEY = 11
-	// Fetch ordered results by the amendment count
+	// @description Sort by the total number of times the sales invoice has been amended.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_AMENDMENT_COUNT PROFORMA_INVOICE_SORT_KEY = 18
-	// Fetch ordered results by the total value
+	// @description Sort by the calculated grand total value of the sales invoice.
 	PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_TOTAL_VALUE PROFORMA_INVOICE_SORT_KEY = 30
 )
 
@@ -157,15 +158,17 @@ func (PROFORMA_INVOICE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the available billing statuses
+// Enumeration of the supported financial conversion statuses for a Proforma Invoice.
+// This tracks the lifecycle progression of a preliminary billing document, identifying
+// whether its estimated charges have been formally realized and converted into a final, legally binding Sales Invoice.
 type PROFORMA_INVOICE_BILLING_STATUS int32
 
 const (
-	// Any billing status
+	// @description Default behavior, ignoring the billing status criteria. Utilized primarily within search and filtering payloads to return all records regardless of their conversion state.
 	PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_ANY_UNSPECIFIED PROFORMA_INVOICE_BILLING_STATUS = 0
-	// Goods dispatch is billed
+	// @description Indicates that the proforma invoice has been formally converted into a finalized, legally binding Sales Invoice (typically after physical fulfillment is complete).
 	PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_BILLED PROFORMA_INVOICE_BILLING_STATUS = 1
-	// Goods dispatch is unbilled
+	// @description Indicates that the proforma invoice remains in a preliminary state (e.g., acting as an estimate or awaiting advance payment) and has not yet been converted into a formal Sales Invoice.
 	PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_UNBILLED PROFORMA_INVOICE_BILLING_STATUS = 2
 )
 
@@ -210,35 +213,35 @@ func (PROFORMA_INVOICE_BILLING_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting proforma invoice item search results.
 type PROFORMA_INVOICE_ITEM_SORT_KEY int32
 
 const (
-	// Fetch invoiced results by id
+	// @description Default sort behavior (by internal item sequence ID).
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_ID_UNSPECIFIED PROFORMA_INVOICE_ITEM_SORT_KEY = 0
-	// Fetch invoiced results by the creation timestamp
+	// @description Sort by the timestamp the item record was initially created.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_CREATED_AT PROFORMA_INVOICE_ITEM_SORT_KEY = 1
-	// Fetch invoiced results by the modified timestamp
+	// @description Sort by the timestamp the item record was last modified.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_MODIFIED_AT PROFORMA_INVOICE_ITEM_SORT_KEY = 2
-	// Fetch invoiced results by the approved on timestamp
+	// @description Sort by the official approval timestamp of the item.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_APPROVED_ON PROFORMA_INVOICE_ITEM_SORT_KEY = 3
-	// Fetch invoiced results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_APPROVED_BY PROFORMA_INVOICE_ITEM_SORT_KEY = 4
-	// Fetch invoiced results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_APPROVER_ROLE_ID PROFORMA_INVOICE_ITEM_SORT_KEY = 5
-	// Fetch invoiced results by the family ID
+	// @description Sort by the internal ID of the family.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_FAMILY_ID PROFORMA_INVOICE_ITEM_SORT_KEY = 10
-	// Fetch invoiced results by the internal quantity
+	// @description Sort by the invoiced quantity evaluated in the internal unit of measure.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_INTERNAL_QUANTITY PROFORMA_INVOICE_ITEM_SORT_KEY = 11
-	// Fetch invoiced results by the client unit of material ID
+	// @description Sort by the internal ID of the client's requested unit of measure.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_CLIENT_UOM_ID PROFORMA_INVOICE_ITEM_SORT_KEY = 12
-	// Fetch invoiced results by the client quantity
+	// @description Sort by the invoiced quantity evaluated in the client's unit of measure.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_CLIENT_QUANTITY PROFORMA_INVOICE_ITEM_SORT_KEY = 13
-	// Fetch invoiced results by the client family code
+	// @description Sort alphabetically by the client's specific family code or SKU.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_CLIENT_FAMILY_CODE PROFORMA_INVOICE_ITEM_SORT_KEY = 14
-	// Fetch invoiced results by the unit price
+	// @description Sort by the invoiced base unit price.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_UNIT_PRICE PROFORMA_INVOICE_ITEM_SORT_KEY = 15
-	// Fetch invoiced results by the tax group ID
+	// @description Sort by the internal ID of the assigned tax group.
 	PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_TAX_GROUP_ID PROFORMA_INVOICE_ITEM_SORT_KEY = 16
 )
 
@@ -303,15 +306,15 @@ func (PROFORMA_INVOICE_ITEM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{3}
 }
 
-// Describes the applicable statuses of proforma invoice items
+// Enum defining the applicable lifecycle and verification statuses for proforma invoice items.
 type PROFORMA_INVOICE_ITEM_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	PROFORMA_INVOICE_ITEM_STATUS_PROFORMA_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED PROFORMA_INVOICE_ITEM_STATUS = 0
-	// Denotes that the proforma invoice items must have been approved
+	// @description Denotes that the proforma invoice item association has passed verification and is actively approved.
 	PROFORMA_INVOICE_ITEM_STATUS_PROFORMA_INVOICE_ITEM_STATUS_APPROVED PROFORMA_INVOICE_ITEM_STATUS = 1
-	// Denotes that the proforma invoice items must be waiting for approval
+	// @description Denotes that the proforma invoice item association is pending review and waiting for administrative approval.
 	PROFORMA_INVOICE_ITEM_STATUS_PROFORMA_INVOICE_ITEM_STATUS_UNAPPROVED PROFORMA_INVOICE_ITEM_STATUS = 2
 )
 
@@ -356,7 +359,11 @@ func (PROFORMA_INVOICE_ITEM_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_proforma_invoices_scailo_proto_rawDescGZIP(), []int{4}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and creating a new Proforma Invoice within the system.
+// This record serves as a preliminary bill of sale or estimated invoice sent to a buyer in advance
+// of a shipment or final delivery. It encapsulates the anticipated financial demands for goods or services
+// (based on a source document like a Sales Order) and is frequently used to secure advance payments,
+// facilitate customs declarations, or secure internal purchasing approvals on the buyer's end.
 type ProformaInvoicesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -368,9 +375,17 @@ type ProformaInvoicesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -380,7 +395,7 @@ type ProformaInvoicesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -391,25 +406,103 @@ type ProformaInvoicesServiceCreateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which this preliminary invoice originates (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_REF_FROM enum value.
 	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being estimated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated ID of the currency
+	// @mandatory
+	//
+	// @description The unique internal identifier of the currency used for all financial estimations within this proforma invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
+	// @mandatory
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive advance payments based on this proforma invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
-	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
-	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
-	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
-	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description Any estimated additional miscellaneous costs (e.g., anticipated freight charges) applied to the proforma invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	MiscellaneousCost *uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat estimated discount amount applied across the entire proforma invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	OverallDiscount *uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The estimated rounding adjustment amount to align the anticipated final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer. Defaults to 0.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of an excess tax group anticipated at the cumulative/invoice level (e.g., for specialized regional surcharges).
+	//
+	// @example 6
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	CumulativeExcessTaxGroupId *uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3,oneof" json:"cumulative_excess_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The anticipated monetary amount of the cumulative excess tax applied to the proforma invoice, represented in the base currency subunit.
+	//
+	// @example 1250
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	CumulativeExcessTaxAmount *uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3,oneof" json:"cumulative_excess_tax_amount,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -446,22 +539,22 @@ func (*ProformaInvoicesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -502,36 +595,36 @@ func (x *ProformaInvoicesServiceCreateRequest) GetBankAccountId() uint64 {
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetCumulativeExcessTaxGroupId() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxGroupId
+	if x != nil && x.CumulativeExcessTaxGroupId != nil {
+		return *x.CumulativeExcessTaxGroupId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCreateRequest) GetCumulativeExcessTaxAmount() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxAmount
+	if x != nil && x.CumulativeExcessTaxAmount != nil {
+		return *x.CumulativeExcessTaxAmount
 	}
 	return 0
 }
@@ -543,19 +636,41 @@ func (x *ProformaInvoicesServiceCreateRequest) GetFormData() []*FormFieldDatumCr
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Proforma Invoice record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the references, consignee & buyer, currency, project linkage, costs & discounts, payment terms, and other custom form fields
+// of an established Proforma Invoice.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type ProformaInvoicesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -565,8 +680,8 @@ type ProformaInvoicesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// @mandatory
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
 	//
 	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
 	//
@@ -575,22 +690,84 @@ type ProformaInvoicesServiceUpdateRequest struct {
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The associated ID of the currency
-	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
-	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
-	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
-	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
-	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// The list of dynamic forms
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial estimations within this proforma invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive advance payments based on this proforma invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Any estimated additional miscellaneous costs (e.g., anticipated freight charges) applied to the proforma invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	MiscellaneousCost *uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat estimated discount amount applied across the entire proforma invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	OverallDiscount *uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The estimated rounding adjustment amount to align the anticipated final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer. Defaults to 0.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of an excess tax group anticipated at the cumulative/invoice level (e.g., for specialized regional surcharges).
+	//
+	// @example 6
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	CumulativeExcessTaxGroupId *uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3,oneof" json:"cumulative_excess_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The anticipated monetary amount of the cumulative excess tax applied to the proforma invoice, represented in the base currency subunit.
+	//
+	// @example 1250
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0.
+	CumulativeExcessTaxAmount *uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3,oneof" json:"cumulative_excess_tax_amount,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -627,8 +804,8 @@ func (*ProformaInvoicesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -641,71 +818,71 @@ func (x *ProformaInvoicesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetCumulativeExcessTaxGroupId() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxGroupId
+	if x != nil && x.CumulativeExcessTaxGroupId != nil {
+		return *x.CumulativeExcessTaxGroupId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceUpdateRequest) GetCumulativeExcessTaxAmount() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxAmount
+	if x != nil && x.CumulativeExcessTaxAmount != nil {
+		return *x.CumulativeExcessTaxAmount
 	}
 	return 0
 }
@@ -717,15 +894,44 @@ func (x *ProformaInvoicesServiceUpdateRequest) GetFormData() []*FormFieldDatumCr
 	return nil
 }
 
-// Describes the parameters necessary to perform an autofill request
+// Request message for triggering an autofill operation on an existing Proforma Invoice.
+// This operation automatically populates the invoice with relevant line items (and optionally services)
+// by pulling them directly from the associated source document (e.g., the parent Sales Order).
+//
+// **Note:** The invoice must already be created and explicitly linked to a source reference
+// before this operation can be invoked.
 type ProformaInvoicesServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target proforma invoice that needs to be autofilled.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores if services should also be autofilled
-	IncludeServices bool `protobuf:"varint,10,opt,name=include_services,json=includeServices,proto3" json:"include_services,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether service-type line items should also be pulled from the source document during the autofill operation (in addition to standard physical inventory goods).
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IncludeServices *bool `protobuf:"varint,10,opt,name=include_services,json=includeServices,proto3,oneof" json:"include_services,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -761,8 +967,8 @@ func (*ProformaInvoicesServiceAutofillRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceAutofillRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -775,18 +981,36 @@ func (x *ProformaInvoicesServiceAutofillRequest) GetUuid() string {
 }
 
 func (x *ProformaInvoicesServiceAutofillRequest) GetIncludeServices() bool {
-	if x != nil {
-		return x.IncludeServices
+	if x != nil && x.IncludeServices != nil {
+		return *x.IncludeServices
 	}
 	return false
 }
 
-// Stores the UUID references of the record
+// Represents a read-only container for universally unique identifiers (UUIDs) of related external entities.
+// This message securely exposes the downstream linkages (like the source order or currency) to external
+// clients or frontend interfaces without revealing internal sequential IDs.
 type ProformaInvoiceAncillaryParameters struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The UUID of the ref_id (the UUID of the associated ref_id)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the associated source document (e.g., the parent Sales Order).
+	//
+	// @example "661f9511-f39c-42d5-b827-557766551111"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	RefUuid string `protobuf:"bytes,213,opt,name=ref_uuid,json=refUuid,proto3" json:"ref_uuid,omitempty"`
-	// The UUID of the currency (the UUID of the associated currency)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the currency used for financial calculations within this invoice.
+	//
+	// @example "772a8422-e18b-42d4-a815-446655442222"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	CurrencyUuid  string `protobuf:"bytes,214,opt,name=currency_uuid,json=currencyUuid,proto3" json:"currency_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -836,7 +1060,17 @@ func (x *ProformaInvoiceAncillaryParameters) GetCurrencyUuid() string {
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a complete, finalized Proforma Invoice entity within the system.
+// This message encapsulates the comprehensive state of a preliminary billing document
+// issued to a buyer prior to physical fulfillment or final delivery. It includes the
+// document's identity metadata, operational linkages to a source record (e.g., Sales Order),
+// designated bank accounts for advance payments, financial estimations (taxes, discounts, and round-offs),
+// approval lifecycle, audit history, and the complete collection of estimated line items.
+//
+// **Note:** This payload is typically utilized in read operations (e.g., View, Search)
+// and provides frontend clients, financial dashboards, and external systems with the
+// entire context needed to render the proforma document for customs declarations,
+// secure advance payments, or facilitate internal purchasing approvals on the buyer's end.
 type ProformaInvoice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -867,31 +1101,59 @@ type ProformaInvoice struct {
 	//
 	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
+	// @description The specific module or record type from which this preliminary invoice originates (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
 	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being estimated).
+	//
+	// @example 1024
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated ID of the currency
+	// @description The unique internal identifier of the currency used for all financial estimations within this proforma invoice.
+	//
+	// @example 3
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
+	// @description The unique internal identifier of the organization's bank account designated to receive advance payments based on this proforma invoice.
+	//
+	// @example 15
 	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
+	// @description Any estimated additional miscellaneous costs (e.g., anticipated freight charges) applied to the proforma invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
 	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
+	// @description A flat estimated discount amount applied across the entire proforma invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
 	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
+	// @description The estimated rounding adjustment amount to align the anticipated final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
+	// @description The unique internal identifier of an excess tax group anticipated at the cumulative/invoice level (e.g., for specialized regional surcharges).
+	//
+	// @example 6
 	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
+	// @description The anticipated monetary amount of the cumulative excess tax applied to the proforma invoice, represented in the base currency subunit.
+	//
+	// @example 1250
 	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// Stores the total value of the proforma invoice (as a double, which requires no adjustments)
+	// @description The calculated grand total value of the proforma invoice, including all items, discounts, costs, and round-offs. Represented as a standard decimal value.
+	//
+	// @example 15250.75
+	//
+	// @format Double-precision floating-point number.
 	TotalValue float64 `protobuf:"fixed64,21,opt,name=total_value,json=totalValue,proto3" json:"total_value,omitempty"`
-	// The number of times that the proforma invoice has been amended
+	// @description The number of times that this record has been amended after approval.
+	//
+	// @example 5
 	AmendmentCount uint64 `protobuf:"varint,22,opt,name=amendment_count,json=amendmentCount,proto3" json:"amendment_count,omitempty"`
-	// The list of associated proforma invoice items
+	// @description The complete, aggregated list of individual line items, products, or services that constitute this proforma invoice.
+	//
+	// @example []
+	//
+	// @format Repeated array of ProformaInvoiceItem message blocks.
 	List []*ProformaInvoiceItem `protobuf:"bytes,30,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,40,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1081,31 +1343,122 @@ func (x *ProformaInvoice) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the parameters required to add an item to a proforma invoice
+// Request message for appending a preliminary line item to an existing Proforma Invoice.
+// This payload defines the specific family, estimated quantities mapped between internal
+// and client-specific units of measure, and the anticipated commercial terms (price, tax, round-offs)
+// presented to the buyer in advance of actual fulfillment or final billing.
 type ProformaInvoicesServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the proforma invoice ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent proforma invoice to which this preliminary item will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ProformaInvoiceId uint64 `protobuf:"varint,10,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being estimated in this proforma invoice.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The estimated quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this estimated item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The estimated quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing of this item.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The estimated price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket anticipated for this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's estimated financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications associated with this preliminary item.
+	//
+	// @example "Estimated based on current freight rates."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1141,8 +1494,8 @@ func (*ProformaInvoicesServiceItemCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceItemCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1183,8 +1536,8 @@ func (x *ProformaInvoicesServiceItemCreateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *ProformaInvoicesServiceItemCreateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1204,40 +1557,114 @@ func (x *ProformaInvoicesServiceItemCreateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *ProformaInvoicesServiceItemCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceItemCreateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to add an individual item as part of multiple item addition to a proforma invoice
+// Represents a single line item payload within a bulk creation request.
+// Contains the exact same transactional parameters as a standard item creation request,
+// omitting the parent invoice ID which is declared once at the batch level.
 type ProformaInvoicesServiceMultipleItemsSingleton struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being estimated in this proforma invoice.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The estimated quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this estimated item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The estimated quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing of this item.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The estimated price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket anticipated for this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's estimated financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications associated with this preliminary item.
+	//
+	// @example "Estimated based on current freight rates."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1301,8 +1728,8 @@ func (x *ProformaInvoicesServiceMultipleItemsSingleton) GetClientQuantity() uint
 }
 
 func (x *ProformaInvoicesServiceMultipleItemsSingleton) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1322,27 +1749,51 @@ func (x *ProformaInvoicesServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
 }
 
 func (x *ProformaInvoicesServiceMultipleItemsSingleton) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceMultipleItemsSingleton) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to add multiple items to a proforma invoice
+// Request message for appending multiple line items to a Proforma Invoice in a single batch transaction.
+// Optimized for scenarios like invoice imports or autofill operations where dozens of items
+// are attached simultaneously to a parent record.
 type ProformaInvoicesServiceMultipleItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the proforma invoice ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent proforma invoice to which this batch of items will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ProformaInvoiceId uint64 `protobuf:"varint,10,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// List of items
+	// @mandatory
+	//
+	// @description An array containing the individual line item payloads to be appended to the invoice.
+	//
+	// @example []
+	//
+	// @format Repeated array of ProformaInvoicesServiceMultipleItemsSingleton message blocks.
 	List          []*ProformaInvoicesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1379,8 +1830,8 @@ func (*ProformaInvoicesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, 
 }
 
 func (x *ProformaInvoicesServiceMultipleItemsCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1399,29 +1850,115 @@ func (x *ProformaInvoicesServiceMultipleItemsCreateRequest) GetList() []*Proform
 	return nil
 }
 
-// Describes the parameters required to update an item in a proforma invoice
+// Request message for modifying the core transactional parameters of an existing preliminary line item within a Proforma Invoice.
+// This payload supports updating estimated quantities (across both internal and client-specific units of measure),
+// anticipated commercial terms (unit price, tax group, round-offs), and custom specifications.
+//
+// **Note:** These modifications are typically utilized during the negotiation or internal approval phases
+// of the pre-billing lifecycle, ensuring the proforma document accurately reflects the expected financial
+// obligations before advance payments are requested or final shipments occur.
 type ProformaInvoicesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The updated estimated quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The updated unique internal identifier of the Unit of Measure (UOM) requested by the client for this estimated item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The updated estimated quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The updated client's specific alphanumeric part number, SKU, or family code used for their internal referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The updated anticipated price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The updated unique internal identifier of the tax group or tax bracket anticipated for this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The updated applicable rounding adjustment amount for this specific item's anticipated financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Updated additional custom textual requirements, notes, or specifications associated with this preliminary item.
+	//
+	// @example "Estimated based on current freight rates."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1457,8 +1994,8 @@ func (*ProformaInvoicesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceItemUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1492,8 +2029,8 @@ func (x *ProformaInvoicesServiceItemUpdateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *ProformaInvoicesServiceItemUpdateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1513,27 +2050,54 @@ func (x *ProformaInvoicesServiceItemUpdateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *ProformaInvoicesServiceItemUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceItemUpdateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to update the specifications of an item in a proforma invoice
+// Request message for isolating updates strictly to the textual specifications or notes
+// of a Proforma Invoice line item.
+// Designed for scenarios where operational instructions change without impacting any
+// commercial terms, pricing, or quantities.
 type ProformaInvoicesServiceItemSpecificationsUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target record that needs to be updated.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// The specifications that should be updated
+	// @mandatory
+	//
+	// @description Additional custom textual requirements, notes, or specifications associated with this preliminary item.
+	//
+	// @example "Estimated based on current freight rates."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1570,8 +2134,8 @@ func (*ProformaInvoicesServiceItemSpecificationsUpdateRequest) Descriptor() ([]b
 }
 
 func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1590,7 +2154,14 @@ func (x *ProformaInvoicesServiceItemSpecificationsUpdateRequest) GetSpecificatio
 	return ""
 }
 
-// Describes the parameters that constitute an item associated to a proforma invoice
+// Represents a complete Proforma Invoice Item entity within the system.
+// This message encapsulates the comprehensive state of a single product or service being preliminarily estimated
+// for a buyer. It includes its relationship to the parent proforma invoice, mapped estimated quantities across
+// internal and client units, anticipated commercial terms (pricing, taxes, round-offs), and custom specifications.
+//
+// **Note:** This payload is utilized in read operations to provide frontend clients, downstream financial systems,
+// and approval workflows with the exact state of an individual estimated line item during the pre-billing,
+// customs declaration, negotiation, or advance payment phases.
 type ProformaInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1601,29 +2172,55 @@ type ProformaInvoiceItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the proforma invoice ID
+	// @description The unique internal identifier of the parent proforma invoice to which this preliminary item will be attached.
+	//
+	// @example 1024
 	ProformaInvoiceId uint64 `protobuf:"varint,10,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the family or catalog item being estimated in this proforma invoice.
+	//
+	// @example 505
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @description The estimated quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this estimated item.
+	//
+	// @example 12
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @description The estimated quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing of this item.
+	//
+	// @example "CLI-SKU-992"
 	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @description The estimated price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @description The unique internal identifier of the tax group or tax bracket anticipated for this specific line item.
+	//
+	// @example 4
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
+	// @description The applicable rounding adjustment amount for this specific item's estimated financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
+	// @description Additional custom textual requirements, notes, or specifications associated with this preliminary item.
+	//
+	// @example "Estimated based on current freight rates."
 	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1764,10 +2361,10 @@ func (x *ProformaInvoiceItem) GetSpecifications() string {
 	return ""
 }
 
-// Describes the message consisting of the list of proforma invoices
+// Container message for a collection of Proforma Invoice records.
 type ProformaInvoicesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Proforma Invoice records.
 	List          []*ProformaInvoice `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1810,10 +2407,10 @@ func (x *ProformaInvoicesList) GetList() []*ProformaInvoice {
 	return nil
 }
 
-// Describes the message consisting of the list of proforma invoice items
+// Container message for a collection of Proforma Invoice Item records.
 type ProformaInvoiceItemsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Proforma Invoice Item records.
 	List          []*ProformaInvoiceItem `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1856,12 +2453,29 @@ func (x *ProformaInvoiceItemsList) GetList() []*ProformaInvoiceItem {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Represents the request payload containing the parameter constraints required to
+// retrieve the historical audit trail and lifecycle changes of a specific proforma invoice item record.
 type ProformaInvoiceItemHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the proforma invoice ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target proforma invoice associated with the historical record.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	ProformaInvoiceId uint64 `protobuf:"varint,10,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family associated with the historical record.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1911,12 +2525,34 @@ func (x *ProformaInvoiceItemHistoryRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the parameters that are required to retrieve the info of a prospective proforma invoice item
+// Represents the request payload utilized to fetch the default, auto-populated configuration for a potential line item
+// before it is formally added to a Proforma Invoice.
+//
+// **Note:** This is a critical templating operation utilized by frontend interfaces during the drafting phase.
+// By evaluating the provided invoice ID and family, the system cross-references the originating source
+// document (e.g., a Sales Order) to automatically determine the negotiated unit price, remaining unbilled quantities,
+// and applicable tax brackets, thereby minimizing manual data entry and ensuring financial consistency.
 type ProformaInvoiceItemProspectiveInfoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the proforma invoice ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent proforma invoice that is currently being evaluated or constructed.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ProformaInvoiceId uint64 `protobuf:"varint,10,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being evaluated for addition to the invoice.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1966,14 +2602,43 @@ func (x *ProformaInvoiceItemProspectiveInfoRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the request payload to retrieve the quantity that has already been added for the specific ref_from, ref_id and family_id
+// Represents the request payload utilized to retrieve the cumulative quantity of a specific family
+// that has already been included in preliminary or proforma invoices against a given source document.
+//
+// **Note:** This query acts as a critical safeguard during the pre-billing phase. It evaluates
+// historical estimations to prevent frontend clients and downstream APIs from estimating or
+// requesting advance payment for more items than were originally constrained in the parent document (e.g., a Sales Order).
 type ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which the preliminary invoice originates and against which the estimated quantity is being checked (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
 	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,1,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,2,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being queried to determine its cumulative billed quantity.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,3,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2030,7 +2695,7 @@ func (x *ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest) GetFamilyI
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Proforma Invoice records.
 type ProformaInvoicesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2038,7 +2703,7 @@ type ProformaInvoicesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -2058,19 +2723,23 @@ type ProformaInvoicesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this proforma invoice
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2106,8 +2775,8 @@ func (*ProformaInvoicesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2120,34 +2789,34 @@ func (x *ProformaInvoicesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetSortKey() PROFORMA_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type ProformaInvoicesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2226,7 +2895,12 @@ func (x *ProformaInvoicesServicePaginationResponse) GetPayload() []*ProformaInvo
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating proforma invoices using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type ProformaInvoicesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2234,7 +2908,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2254,17 +2928,17 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2274,7 +2948,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2284,7 +2958,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2294,7 +2968,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2304,7 +2978,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2314,13 +2988,13 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2330,7 +3004,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2340,7 +3014,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2350,7 +3024,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2360,7 +3034,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2370,7 +3044,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2380,7 +3054,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2390,7 +3064,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2400,30 +3074,117 @@ type ProformaInvoicesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The ID of the associated currency
-	CurrencyId uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The status of the proforma invoice bill
-	BillingStatus PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,50,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,60,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,61,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,62,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the minimum value of the proforma invoice (ignored if 0)
-	TotalValueMin uint64 `protobuf:"varint,80,opt,name=total_value_min,json=totalValueMin,proto3" json:"total_value_min,omitempty"`
-	// Stores the maximum value of the proforma invoice (ignored if 0)
-	TotalValueMax uint64 `protobuf:"varint,81,opt,name=total_value_max,json=totalValueMax,proto3" json:"total_value_max,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which the preliminary invoice originates and against which the estimated quantity is being checked (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial estimations within this proforma invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive advance payments based on this proforma invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices based on their financial conversion lifecycle state—specifically, whether they remain as preliminary estimates (unbilled) or have been formally converted into finalized Sales Invoices (billed).
+	//
+	// @example PROFORMA_INVOICE_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_BILLING_STATUS enum value.
+	BillingStatus *PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,50,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,60,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,61,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,62,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices where the grand total value is greater than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMin *uint64 `protobuf:"varint,80,opt,name=total_value_min,json=totalValueMin,proto3,oneof" json:"total_value_min,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices where the grand total value is less than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 1500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMax *uint64 `protobuf:"varint,81,opt,name=total_value_max,json=totalValueMax,proto3,oneof" json:"total_value_max,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -2434,7 +3195,7 @@ type ProformaInvoicesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2470,8 +3231,8 @@ func (*ProformaInvoicesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2484,197 +3245,197 @@ func (x *ProformaInvoicesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetSortKey() PROFORMA_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetRefFrom() PROFORMA_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return PROFORMA_INVOICE_REF_FROM_PROFORMA_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetBillingStatus() PROFORMA_INVOICE_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetTotalValueMin() uint64 {
-	if x != nil {
-		return x.TotalValueMin
+	if x != nil && x.TotalValueMin != nil {
+		return *x.TotalValueMin
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetTotalValueMax() uint64 {
-	if x != nil {
-		return x.TotalValueMax
+	if x != nil && x.TotalValueMax != nil {
+		return *x.TotalValueMax
 	}
 	return 0
 }
@@ -2687,13 +3448,19 @@ func (x *ProformaInvoicesServiceFilterReq) GetFormData() []*FormFieldDatumFilter
 }
 
 func (x *ProformaInvoicesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting proforma invoice records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type ProformaInvoicesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2701,7 +3468,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2711,7 +3478,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2721,7 +3488,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2731,7 +3498,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2741,7 +3508,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2751,13 +3518,13 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2767,7 +3534,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2777,7 +3544,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2787,7 +3554,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2797,7 +3564,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2807,7 +3574,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2817,7 +3584,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2827,7 +3594,7 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2837,31 +3604,120 @@ type ProformaInvoicesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The ID of the associated currency
-	CurrencyId uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The status of the proforma invoice bill
-	BillingStatus PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,50,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,60,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,61,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,62,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the minimum value of the proforma invoice (ignored if 0)
-	TotalValueMin uint64 `protobuf:"varint,80,opt,name=total_value_min,json=totalValueMin,proto3" json:"total_value_min,omitempty"`
-	// Stores the maximum value of the proforma invoice (ignored if 0)
-	TotalValueMax uint64 `protobuf:"varint,81,opt,name=total_value_max,json=totalValueMax,proto3" json:"total_value_max,omitempty"`
-	// The list of form data filters
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which the preliminary invoice originates and against which the estimated quantity is being checked (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial estimations within this proforma invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive advance payments based on this proforma invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices based on their financial conversion lifecycle state—specifically, whether they remain as preliminary estimates (unbilled) or have been formally converted into finalized Sales Invoices (billed).
+	//
+	// @example PROFORMA_INVOICE_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_BILLING_STATUS enum value.
+	BillingStatus *PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,50,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,60,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,61,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,62,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices where the grand total value is greater than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMin *uint64 `protobuf:"varint,80,opt,name=total_value_min,json=totalValueMin,proto3,oneof" json:"total_value_min,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices where the grand total value is less than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 1500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMax *uint64 `protobuf:"varint,81,opt,name=total_value_max,json=totalValueMax,proto3,oneof" json:"total_value_max,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2898,183 +3754,183 @@ func (*ProformaInvoicesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetRefFrom() PROFORMA_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return PROFORMA_INVOICE_REF_FROM_PROFORMA_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetBillingStatus() PROFORMA_INVOICE_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetTotalValueMin() uint64 {
-	if x != nil {
-		return x.TotalValueMin
+	if x != nil && x.TotalValueMin != nil {
+		return *x.TotalValueMin
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceCountReq) GetTotalValueMax() uint64 {
-	if x != nil {
-		return x.TotalValueMax
+	if x != nil && x.TotalValueMax != nil {
+		return *x.TotalValueMax
 	}
 	return 0
 }
@@ -3086,7 +3942,13 @@ func (x *ProformaInvoicesServiceCountReq) GetFormData() []*FormFieldDatumFilterR
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating proforma invoices via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type ProformaInvoicesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -3094,7 +3956,7 @@ type ProformaInvoicesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -3114,17 +3976,17 @@ type ProformaInvoicesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *PROFORMA_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3134,14 +3996,14 @@ type ProformaInvoicesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// @mandatory
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -3150,18 +4012,57 @@ type ProformaInvoicesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The associated reference
-	RefFrom PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The status of the proforma invoice bill
-	BillingStatus PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS" json:"billing_status,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which the preliminary invoice originates and against which the estimated quantity is being checked (e.g., Sales Order).
+	//
+	// @example "PROFORMA_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *PROFORMA_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.PROFORMA_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices based on their financial conversion lifecycle state—specifically, whether they remain as preliminary estimates (unbilled) or have been formally converted into finalized Sales Invoices (billed).
+	//
+	// @example PROFORMA_INVOICE_BILLING_STATUS_UNBILLED
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid PROFORMA_INVOICE_BILLING_STATUS enum value.
+	BillingStatus *PROFORMA_INVOICE_BILLING_STATUS `protobuf:"varint,40,opt,name=billing_status,json=billingStatus,proto3,enum=Scailo.PROFORMA_INVOICE_BILLING_STATUS,oneof" json:"billing_status,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter proforma invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3197,8 +4098,8 @@ func (*ProformaInvoicesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3211,83 +4112,84 @@ func (x *ProformaInvoicesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetSortKey() PROFORMA_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROFORMA_INVOICE_SORT_KEY_PROFORMA_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetRefFrom() PROFORMA_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return PROFORMA_INVOICE_REF_FROM_PROFORMA_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetBillingStatus() PROFORMA_INVOICE_BILLING_STATUS {
-	if x != nil {
-		return x.BillingStatus
+	if x != nil && x.BillingStatus != nil {
+		return *x.BillingStatus
 	}
 	return PROFORMA_INVOICE_BILLING_STATUS_PROFORMA_INVOICE_BILLING_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *ProformaInvoicesServiceSearchAllReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-// Describes the request payload to retrieve approved or unapproved items.
+// Request payload structure used to search and filter Proforma Invoice Item records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type ProformaInvoiceItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -3295,7 +4197,7 @@ type ProformaInvoiceItemsSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -3315,17 +4217,17 @@ type ProformaInvoiceItemsSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey PROFORMA_INVOICE_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_ITEM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *PROFORMA_INVOICE_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROFORMA_INVOICE_ITEM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3335,29 +4237,111 @@ type ProformaInvoiceItemsSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the items
-	Status PROFORMA_INVOICE_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.PROFORMA_INVOICE_ITEM_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
-	ApprovedOnStart uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
-	ApprovedOnEnd uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
-	ApprovedByUserId uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
-	ApproverRoleId uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The ID of the proforma invoice
-	ProformaInvoiceId uint64 `protobuf:"varint,20,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3" json:"proforma_invoice_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,21,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The ID of the client's unit of material
-	ClientUomId uint64 `protobuf:"varint,23,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the family code as given by the client
-	ClientFamilyCode string `protobuf:"bytes,25,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,27,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The field used for sorting.
+	Status *PROFORMA_INVOICE_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.PROFORMA_INVOICE_ITEM_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnStart *uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnEnd *uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedByUserId *uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApproverRoleId *uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific parent proforma invoice.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProformaInvoiceId *uint64 `protobuf:"varint,20,opt,name=proforma_invoice_id,json=proformaInvoiceId,proto3,oneof" json:"proforma_invoice_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific family.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,21,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items requesting a specific client Unit of Measure (UOM).
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ClientUomId *uint64 `protobuf:"varint,23,opt,name=client_uom_id,json=clientUomId,proto3,oneof" json:"client_uom_id,omitempty"`
+	// @optional
+	//
+	// @description Fuzzy match for the client's specific alphanumeric part number, SKU, or family code.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,25,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description Filter line items mapped to a specific tax group.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TaxGroupId *uint64 `protobuf:"varint,27,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey     *string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3393,8 +4377,8 @@ func (*ProformaInvoiceItemsSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3407,111 +4391,112 @@ func (x *ProformaInvoiceItemsSearchRequest) GetCount() int64 {
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetSortKey() PROFORMA_INVOICE_ITEM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROFORMA_INVOICE_ITEM_SORT_KEY_PROFORMA_INVOICE_ITEM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetStatus() PROFORMA_INVOICE_ITEM_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return PROFORMA_INVOICE_ITEM_STATUS_PROFORMA_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetProformaInvoiceId() uint64 {
-	if x != nil {
-		return x.ProformaInvoiceId
+	if x != nil && x.ProformaInvoiceId != nil {
+		return *x.ProformaInvoiceId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetClientUomId() uint64 {
-	if x != nil {
-		return x.ClientUomId
+	if x != nil && x.ClientUomId != nil {
+		return *x.ClientUomId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *ProformaInvoiceItemsSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Proforma Invoice Item records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type ProformaInvoicesServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -3594,46 +4579,71 @@ var File_proforma_invoices_scailo_proto protoreflect.FileDescriptor
 
 const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1eproforma_invoices.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xf0\x05\n" +
-	"$ProformaInvoicesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x1eproforma_invoices.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xd7\a\n" +
+	"$ProformaInvoicesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12<\n" +
-	"\bref_from\x18\f \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMR\arefFrom\x12\x1e\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12H\n" +
+	"\bref_from\x18\f \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12(\n" +
 	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"currencyId\x12/\n" +
-	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x126\n" +
-	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12K\n" +
-	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\x1acumulativeExcessTaxGroupId\x12H\n" +
-	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00R\x19cumulativeExcessTaxAmount\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xad\x05\n" +
-	"$ProformaInvoicesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12;\n" +
+	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x05R\broundOff\x88\x01\x01\x12P\n" +
+	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\x1acumulativeExcessTaxGroupId\x88\x01\x01\x12M\n" +
+	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00H\aR\x19cumulativeExcessTaxAmount\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_offB!\n" +
+	"\x1f_cumulative_excess_tax_group_idB\x1f\n" +
+	"\x1d_cumulative_excess_tax_amount\"\xcd\a\n" +
+	"$ProformaInvoicesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12(\n" +
-	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12/\n" +
-	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x126\n" +
-	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12K\n" +
-	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\x1acumulativeExcessTaxGroupId\x12H\n" +
-	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00R\x19cumulativeExcessTaxAmount\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x94\x01\n" +
-	"&ProformaInvoicesServiceAutofillRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
-	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12)\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00H\x04R\n" +
+	"currencyId\x88\x01\x01\x124\n" +
+	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\rbankAccountId\x88\x01\x01\x12;\n" +
+	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\aR\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\bR\broundOff\x88\x01\x01\x12P\n" +
+	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\tR\x1acumulativeExcessTaxGroupId\x88\x01\x01\x12M\n" +
+	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00H\n" +
+	"R\x19cumulativeExcessTaxAmount\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_offB!\n" +
+	"\x1f_cumulative_excess_tax_group_idB\x1f\n" +
+	"\x1d_cumulative_excess_tax_amount\"\xc4\x01\n" +
+	"&ProformaInvoicesServiceAutofillRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12.\n" +
 	"\x10include_services\x18\n" +
-	" \x01(\bR\x0fincludeServices\"f\n" +
+	" \x01(\bH\x01R\x0fincludeServices\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x13\n" +
+	"\x11_include_services\"f\n" +
 	"\"ProformaInvoiceAncillaryParameters\x12\x1a\n" +
 	"\bref_uuid\x18\xd5\x01 \x01(\tR\arefUuid\x12$\n" +
 	"\rcurrency_uuid\x18\xd6\x01 \x01(\tR\fcurrencyUuid\"\xfe\a\n" +
@@ -3663,56 +4673,72 @@ const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	"totalValue\x12'\n" +
 	"\x0famendment_count\x18\x16 \x01(\x04R\x0eamendmentCount\x12/\n" +
 	"\x04list\x18\x1e \x03(\v2\x1b.Scailo.ProformaInvoiceItemR\x04list\x123\n" +
-	"\tform_data\x18( \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\x87\x04\n" +
-	"(ProformaInvoicesServiceItemCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x127\n" +
+	"\tform_data\x18( \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xe4\x04\n" +
+	"(ProformaInvoicesServiceItemCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x127\n" +
 	"\x13proforma_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x11proformaInvoiceId\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xb0\x03\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x02R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x03R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xf7\x03\n" +
 	"-ProformaInvoicesServiceMultipleItemsSingleton\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x00R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xda\x01\n" +
-	"1ProformaInvoicesServiceMultipleItemsCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x127\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x01R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x02R\x0especifications\x88\x01\x01B\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xf0\x01\n" +
+	"1ProformaInvoicesServiceMultipleItemsCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x127\n" +
 	"\x13proforma_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x11proformaInvoiceId\x12I\n" +
-	"\x04list\x18\v \x03(\v25.Scailo.ProformaInvoicesServiceMultipleItemsSingletonR\x04list\"\xc1\x03\n" +
-	"(ProformaInvoicesServiceItemUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"\x04list\x18\v \x03(\v25.Scailo.ProformaInvoicesServiceMultipleItemsSingletonR\x04listB\x0f\n" +
+	"\r_user_comment\"\x9e\x04\n" +
+	"(ProformaInvoicesServiceItemUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xa1\x01\n" +
-	"6ProformaInvoicesServiceItemSpecificationsUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x02R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x03R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xb7\x01\n" +
+	"6ProformaInvoicesServiceItemSpecificationsUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
 	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12&\n" +
-	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xf6\x04\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especificationsB\x0f\n" +
+	"\r_user_comment\"\xf6\x04\n" +
 	"\x13ProformaInvoiceItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3744,136 +4770,237 @@ const file_proforma_invoices_scailo_proto_rawDesc = "" +
 	")ProformaInvoiceItemProspectiveInfoRequest\x127\n" +
 	"\x13proforma_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x11proformaInvoiceId\x12$\n" +
-	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xc1\x01\n" +
-	";ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest\x12<\n" +
-	"\bref_from\x18\x01 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMR\arefFrom\x12\x1e\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xcd\x01\n" +
+	";ProformaInvoicesServiceAlreadyAddedQuantityForSourceRequest\x12H\n" +
+	"\bref_from\x18\x01 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12$\n" +
-	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xc4\x02\n" +
-	"$ProformaInvoicesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\x9d\x03\n" +
+	"$ProformaInvoicesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\xa2\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\xa2\x01\n" +
 	")ProformaInvoicesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x121\n" +
-	"\apayload\x18\x04 \x03(\v2\x17.Scailo.ProformaInvoiceR\apayload\"\xee\v\n" +
-	" ProformaInvoicesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x17.Scailo.ProformaInvoiceR\apayload\"\xcb\x11\n" +
+	" ProformaInvoicesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12<\n" +
-	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vcurrency_id\x18\x18 \x01(\x04R\n" +
-	"currencyId\x12&\n" +
-	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12N\n" +
-	"\x0ebilling_status\x182 \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x18< \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18= \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x12A\n" +
+	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMH\x12R\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x13R\x05refId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x18 \x01(\x04H\x14R\n" +
+	"currencyId\x88\x01\x01\x12+\n" +
+	"\x0fbank_account_id\x18\x19 \x01(\x04H\x15R\rbankAccountId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x16R\bfamilyId\x88\x01\x01\x12S\n" +
+	"\x0ebilling_status\x182 \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSH\x17R\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x18< \x01(\x04H\x18R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x18= \x01(\x04H\x19R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x18> \x01(\x04R\tprojectId\x12&\n" +
-	"\x0ftotal_value_min\x18P \x01(\x04R\rtotalValueMin\x12&\n" +
-	"\x0ftotal_value_max\x18Q \x01(\x04R\rtotalValueMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x86\n" +
+	"project_id\x18> \x01(\x04H\x1aR\tprojectId\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_min\x18P \x01(\x04H\x1bR\rtotalValueMin\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_max\x18Q \x01(\x04H\x1cR\rtotalValueMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1dR\x0fincludeFormData\x88\x01\x01B\f\n" +
 	"\n" +
-	"\x1fProformaInvoicesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\f\n" +
+	"\n" +
+	"_family_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_idB\x12\n" +
+	"\x10_total_value_minB\x12\n" +
+	"\x10_total_value_maxB\x14\n" +
+	"\x12_include_form_data\"\x92\x0f\n" +
+	"\x1fProformaInvoicesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12<\n" +
-	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vcurrency_id\x18\x18 \x01(\x04R\n" +
-	"currencyId\x12&\n" +
-	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12N\n" +
-	"\x0ebilling_status\x182 \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x18< \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18= \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x12A\n" +
+	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMH\x0fR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x10R\x05refId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x18 \x01(\x04H\x11R\n" +
+	"currencyId\x88\x01\x01\x12+\n" +
+	"\x0fbank_account_id\x18\x19 \x01(\x04H\x12R\rbankAccountId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x13R\bfamilyId\x88\x01\x01\x12S\n" +
+	"\x0ebilling_status\x182 \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSH\x14R\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x18< \x01(\x04H\x15R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x18= \x01(\x04H\x16R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x18> \x01(\x04R\tprojectId\x12&\n" +
-	"\x0ftotal_value_min\x18P \x01(\x04R\rtotalValueMin\x12&\n" +
-	"\x0ftotal_value_max\x18Q \x01(\x04R\rtotalValueMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\x89\x05\n" +
-	"#ProformaInvoicesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"project_id\x18> \x01(\x04H\x17R\tprojectId\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_min\x18P \x01(\x04H\x18R\rtotalValueMin\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_max\x18Q \x01(\x04H\x19R\rtotalValueMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12<\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\f\n" +
+	"\n" +
+	"_family_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_idB\x12\n" +
+	"\x10_total_value_minB\x12\n" +
+	"\x10_total_value_max\"\xfb\x06\n" +
+	"#ProformaInvoicesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12A\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12<\n" +
-	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12N\n" +
-	"\x0ebilling_status\x18( \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSR\rbillingStatus\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\"\x80\x06\n" +
-	"!ProformaInvoiceItemsSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x12A\n" +
+	"\bref_from\x18\x16 \x01(\x0e2!.Scailo.PROFORMA_INVOICE_REF_FROMH\aR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\bR\x05refId\x88\x01\x01\x12S\n" +
+	"\x0ebilling_status\x18( \x01(\x0e2'.Scailo.PROFORMA_INVOICE_BILLING_STATUSH\tR\rbillingStatus\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\n" +
+	"R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\vR\rbuyerClientId\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12A\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2&.Scailo.PROFORMA_INVOICE_ITEM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x12<\n" +
-	"\x06status\x18\a \x01(\x0e2$.Scailo.PROFORMA_INVOICE_ITEM_STATUSR\x06status\x12*\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x11\n" +
+	"\x0f_billing_statusB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_id\"\xe6\b\n" +
+	"!ProformaInvoiceItemsSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12F\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2&.Scailo.PROFORMA_INVOICE_ITEM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12A\n" +
+	"\x06status\x18\a \x01(\x0e2$.Scailo.PROFORMA_INVOICE_ITEM_STATUSH\x05R\x06status\x88\x01\x01\x12/\n" +
 	"\x11approved_on_start\x18\n" +
-	" \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\v \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\f \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\r \x01(\x04R\x0eapproverRoleId\x12.\n" +
-	"\x13proforma_invoice_id\x18\x14 \x01(\x04R\x11proformaInvoiceId\x12\x1b\n" +
-	"\tfamily_id\x18\x15 \x01(\x04R\bfamilyId\x12\"\n" +
-	"\rclient_uom_id\x18\x17 \x01(\x04R\vclientUomId\x12,\n" +
-	"\x12client_family_code\x18\x19 \x01(\tR\x10clientFamilyCode\x12 \n" +
-	"\ftax_group_id\x18\x1b \x01(\x04R\n" +
-	"taxGroupId\x12\x1d\n" +
+	" \x01(\x04H\x06R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\v \x01(\x04H\aR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\f \x01(\x04H\bR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\r \x01(\x04H\tR\x0eapproverRoleId\x88\x01\x01\x123\n" +
+	"\x13proforma_invoice_id\x18\x14 \x01(\x04H\n" +
+	"R\x11proformaInvoiceId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\x15 \x01(\x04H\vR\bfamilyId\x88\x01\x01\x12'\n" +
+	"\rclient_uom_id\x18\x17 \x01(\x04H\fR\vclientUomId\x88\x01\x01\x121\n" +
+	"\x12client_family_code\x18\x19 \x01(\tH\rR\x10clientFamilyCode\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18\x1b \x01(\x04H\x0eR\n" +
+	"taxGroupId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18( \x01(\tR\tsearchKey\"\xaa\x01\n" +
+	"search_key\x18( \x01(\tH\x0fR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x16\n" +
+	"\x14_proforma_invoice_idB\f\n" +
+	"\n" +
+	"_family_idB\x10\n" +
+	"\x0e_client_uom_idB\x15\n" +
+	"\x13_client_family_codeB\x0f\n" +
+	"\r_tax_group_idB\r\n" +
+	"\v_search_key\"\xaa\x01\n" +
 	"-ProformaInvoicesServicePaginatedItemsResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
@@ -4251,6 +5378,19 @@ func file_proforma_invoices_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_proforma_invoices_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[2].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[16].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[18].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[19].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[20].OneofWrappers = []any{}
+	file_proforma_invoices_scailo_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

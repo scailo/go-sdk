@@ -90,9 +90,37 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each sales invoice
+// Core service for managing the complete operational and approval lifecycle of Sales Invoices.
+//
+// A Sales Invoice is the finalized, legally binding financial document issued to a buyer,
+// representing a formal request for payment for goods or services rendered. It acts as the
+// culmination of the sales and fulfillment pipeline, accurately converting negotiated commercial
+// terms (from the source Sales Order) and physical fulfillment metrics (from Goods Dispatches)
+// into a definitive financial obligation.
+//
+// **Lifecycle & Workflow:**
+// This service strictly enforces the state machine of a Sales Invoice:
+// - **Drafting:** Creating initial drafts with relaxed validation to allow iterative aggregation of billable items and manual adjustments.
+// - **Verification:** Submitting the invoice through internal financial review to ensure commercial compliance, accurate tax application, and quantity reconciliation.
+// - **Approval:** Finalizing the invoice into a `STANDING` state, locking the financial record, generating the immutable invoice number, and officially recognizing the accounts receivable.
+//
+// **Operational Impact:**
+// Reaching the approved (`STANDING`) state ensures that the invoice is ready for distribution to the buyer
+// and integration with downstream accounting or ERP systems for payment tracking and ledger reconciliation.
 type SalesInvoicesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
+	// - `ALREADY_EXISTS`: If the `reference_id` is already taken.
 	Create(ctx context.Context, in *SalesInvoicesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -181,11 +209,21 @@ type SalesInvoicesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -198,64 +236,155 @@ type SalesInvoicesServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Autofill the sales invoice
+	// Automatically populates a record with line items and configurations derived from its linked references.
+	//
+	// **Side Effects:**
+	// - Queries the target record (identified by its UUID) for any attached operational constraints or references.
+	// - Dynamically generates and attaches the corresponding line items to the record based on the sourced data, minimizing manual data entry.
+	// - Appends an audit trail entry tracking the execution of the autofill operation and the provided justification comment.
 	Autofill(ctx context.Context, in *SalesInvoicesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Amend the sales invoice and send for revision
+	// Initiates a formal amendment process for a specific record, transitioning it into a structured revision workflow.
+	//
+	// This API is utilized when substantive modifications are required for an already finalized or approved record.
+	// Rather than mutating the active data directly, it explicitly triggers a compliance-driven revision cycle,
+	// ensuring that all proposed changes are tracked and undergo standard review and authorization procedures.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The record's internal amendment count property is strictly incremented by 1.
+	// * The record is placed into a pending revision state, typically preserving the availability of the currently approved version until the amendment is finalized.
+	// * The optional user comment is permanently appended to the record's audit log as the formal justification for initiating the change.
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Add multiple items to a sales invoice
+	// Appends a batch of billable line items to an existing Sales Invoice in a single transactional operation.
+	//
+	// **Side Effects:**
+	// - Maps multiple catalog families, quantities, and pricing structures to the invoice simultaneously.
+	// - Triggers a bulk recalculation of the invoice's financial grand total.
+	// - Appends creation audit logs for all attached items.
 	AddMultipleSalesInvoiceItems(ctx context.Context, in *SalesInvoicesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add an item to a sales invoice
+	// Appends a single billable line item to an existing Sales Invoice.
+	//
+	// **Side Effects:**
+	// - Defines the specific family, mapped unit quantities, pricing, and tax brackets for which the buyer is being formally billed.
+	// - Recomputes the parent invoice's prospective grand total.
+	// - Appends an audit trail entry tracking the creation and user justification.
 	AddSalesInvoiceItem(ctx context.Context, in *SalesInvoicesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an item in a sales invoice
+	// Modifies the core transactional parameters of an existing billable line item.
+	//
+	// **Side Effects:**
+	// - Overwrites billed quantities, proposed commercial terms (unit price, tax), and custom specifications to ensure financial accuracy.
+	// - Triggers a recalculation of the parent sales invoice's financial grand total.
+	// - May reset the item's approval status, requiring re-authorization.
+	// - Appends an audit trail entry tracking the modifications.
 	ModifySalesInvoiceItem(ctx context.Context, in *SalesInvoicesServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update specifications of an item in a sales invoice
+	// Updates strictly the custom textual specifications or notes associated with a billed item.
+	//
+	// **Side Effects:**
+	// - Modifies descriptive text without impacting or triggering recalculations of the item's financial values.
+	// - Typically avoids resetting the approval workflow state, allowing for minor typographical corrections.
+	// - Appends an audit trail entry tracking the text update.
 	UpdateSalesInvoiceItemSpecifications(ctx context.Context, in *SalesInvoicesServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve an item in a sales invoice
+	// Approves a pending billable line item, finalizing its active status within the sales invoice.
+	//
+	// **Side Effects:**
+	// - Activates the billed item, validating its inclusion in the formal financial obligation presented to the buyer.
+	// - Appends the required approval metadata, timestamp, and audit comment to the record's history.
 	ApproveSalesInvoiceItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete an item in a sales invoice
+	// Permanently removes or deactivates a billable line item from the sales invoice.
+	//
+	// **Side Effects:**
+	// - Revokes the item from the invoice, subtracting its financial value from the grand total.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteSalesInvoiceItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder items in a sales invoice
+	// Reorders the numerical sequence of billable line items within the sales invoice.
+	//
+	// **Side Effects:**
+	// - Mutates the display sequence (`sort_order`) of the specified items in bulk.
+	// - Directly dictates how the items are visually arranged on the final generated PDF invoice document sent to the buyer.
 	ReorderSalesInvoiceItems(ctx context.Context, in *ReorderItemsRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View Sales Invoice Item by ID
+	// Retrieves the complete, finalized details of a specific billed line item by its internal sequence ID.
+	//
+	// This read-only operation fetches full metadata, approval histories, and calculated financial values.
 	ViewSalesInvoiceItemByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesInvoiceItem, error)
-	// View approved sales invoice items for given sales invoice ID
+	// Lists all active, fully approved billable line items mapped to a specific sales invoice ID.
+	//
+	// This read-only query is optimized for rendering the finalized billing summary on frontend interfaces and generating the formal PDF document.
 	ViewApprovedSalesInvoiceItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesInvoiceItemsList, error)
-	// View unapproved sales invoice items for given sales invoice ID
+	// Lists pending or unapproved billable line items mapped to a specific sales invoice ID.
+	//
+	// This read-only query is utilized primarily by administrative dashboards to quickly identify invoice components awaiting financial review.
 	ViewUnapprovedSalesInvoiceItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesInvoiceItemsList, error)
-	// View the history of the sales invoice item
+	// Retrieves the historical audit trail and lifecycle changes of a specific billed line item.
+	//
+	// This read-only operation aggregates the chronological evolution of the item, tracking quantity/price adjustments and state changes throughout the drafting phase.
 	ViewSalesInvoiceItemHistory(ctx context.Context, in *SalesInvoiceItemHistoryRequest, opts ...grpc.CallOption) (*SalesInvoiceItemsList, error)
-	// View approved sales invoice items for given sales invoice ID with pagination
+	// Lists active, approved billable line items using robust pagination controls.
+	//
+	// This read-only query is optimized for rendering massive invoices in frontend data tables, supporting explicit windowing parameters.
 	ViewPaginatedApprovedSalesInvoiceItems(ctx context.Context, in *SalesInvoiceItemsSearchRequest, opts ...grpc.CallOption) (*SalesInvoicesServicePaginatedItemsResponse, error)
-	// View unapproved sales invoice items for given sales invoice ID with pagination
+	// Lists pending or unapproved billable line items using robust pagination controls.
+	//
+	// This read-only query is optimized for administrative review dashboards handling high volumes of unapproved billing components.
 	ViewPaginatedUnapprovedSalesInvoiceItems(ctx context.Context, in *SalesInvoiceItemsSearchRequest, opts ...grpc.CallOption) (*SalesInvoicesServicePaginatedItemsResponse, error)
-	// Search through sales invoice items with pagination
+	// Searches through all billable line items using advanced filters, status flags, fuzzy text matching, and pagination.
+	//
+	// This read-only query is the primary entry point for complex lookups across massive lists of invoiced items.
 	SearchItemsWithPagination(ctx context.Context, in *SalesInvoiceItemsSearchRequest, opts ...grpc.CallOption) (*SalesInvoicesServicePaginatedItemsResponse, error)
-	// CSV operations
-	// Download the CSV file with the associated line items. The same file could then be used to upload line items.
+	// Exports the current list of billable line items for a specific sales invoice into a downloadable CSV file.
+	//
+	// This read-only operation is used by finance teams to review large invoices offline in spreadsheet software, or as a baseline to modify items locally before executing a bulk upload.
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the CSV template that could be used to upload items
+	// Generates and downloads a blank, structurally compliant CSV template.
+	//
+	// This read-only operation provides clients with the exact column headers required to successfully perform a bulk line-item upload for an invoice.
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Upload items using a CSV file. This is an idempotent operation. All the existing items are deleted before adding the items from the file.
+	// Processes a bulk ingestion of billable line items for a specific sales invoice via a CSV file upload.
+	//
+	// **Side Effects:**
+	// - **CRITICAL:** This is an idempotent, destructive operation. It automatically deletes all existing line items currently mapped to the sales invoice before applying the new items from the CSV.
+	// - Wipes the current active list and replaces it entirely with the parsed file contents.
+	// - Triggers a complete recalculation of the invoice's financial totals and appends creation audit logs for all newly imported items.
 	UploadSalesInvoiceItems(ctx context.Context, in *IdentifierUUIDWithFile, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Add a reference
+	// Creates a formal linkage between a Sales Invoice and a Goods Dispatch document.
+	//
+	// **Side Effects:**
+	// - Establishes strict traceability by attaching proof of physical inventory fulfillment to the financial billing document.
+	// - Enables reconciliation workflows to compare billed quantities against actual shipped quantities.
+	// - Appends an audit trail entry tracking the creation of the reference.
 	AddSalesInvoiceReference(ctx context.Context, in *SalesInvoicesServiceReferenceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a reference
+	// Approves a pending Goods Dispatch reference mapping, finalizing its active status on the Sales Invoice.
+	//
+	// **Side Effects:**
+	// - Activates the linkage, formally acknowledging the attached dispatch as valid proof of delivery/fulfillment for the billed items.
+	// - Appends the required approval metadata, timestamp, and audit comment to the record's history.
 	ApproveSalesInvoiceReference(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a reference
+	// Permanently removes or severs the linkage between a Goods Dispatch and the Sales Invoice.
+	//
+	// **Side Effects:**
+	// - Detaches the physical fulfillment proof from the billing document.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteSalesInvoiceReference(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a reference for the given ID
+	// Retrieves the complete details of a specific invoice-to-dispatch reference mapping by its internal ID.
+	//
+	// This read-only query fetches the mapping details and its approval workflow state.
 	ViewSalesInvoiceReferenceByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesInvoiceReference, error)
-	// View all references for given sales invoice ID
+	// Lists all active Goods Dispatch references mapped to a specific Sales Invoice ID.
+	//
+	// This read-only query is utilized to populate the "Linked Deliveries" or "Fulfillment Proofs" section in frontend invoice management views, allowing finance teams to verify that all billed items have actually left the warehouse.
 	ViewSalesInvoiceReferences(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesInvoiceReferencesList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesInvoice, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesInvoice, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*SalesInvoice, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesInvoice, error)
@@ -263,7 +392,11 @@ type SalesInvoicesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesInvoice, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*SalesInvoicesList, error)
-	// View the ancillary parameters (UUIDs of the internal references) by UUID
+	// Retrieves the ancillary configuration parameters and universally unique identifiers (UUIDs) of related entities for a specific Sales Invoice.
+	//
+	// This read-only query securely exposes downstream linkages—such as the UUID of the originating source document (e.g., the parent Sales Order)
+	// and the applied currency—to frontend interfaces and external API clients. It allows external systems to resolve and navigate these relationships
+	// without exposing internal, sequential database IDs.
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesInvoiceAncillaryParameters, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*SalesInvoicesList, error)
@@ -271,21 +404,52 @@ type SalesInvoicesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesInvoicesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *SalesInvoicesServicePaginationReq, opts ...grpc.CallOption) (*SalesInvoicesServicePaginationResponse, error)
-	// View all the amendments made
+	// Retrieves the comprehensive, chronological history of formal amendments applied to a specific record.
+	//
+	// This read-only query exposes the complete audit trail of revision workflows that the entity has undergone.
+	// It is explicitly designed to support compliance checks, historical tracking, and administrative reviews by
+	// detailing exactly how and when a record evolved over its lifecycle.
+	//
+	// **Side Effects & Lifecycle:**
+	// * This is a strictly read-only operation; the underlying record and its current lifecycle state remain entirely unchanged.
+	// * Aggregates and returns a sequential log of amendment events, which typically include revision counts, initiation timestamps, and the justification comments provided when the amendments were triggered.
 	ViewAmendments(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AmendmentLogsList, error)
-	// View prospective families for the given sales invoice
+	// Retrieves a list of eligible families that can be added as billable line items to a specific sales invoice.
+	//
+	// This read-only query evaluates the originating source document (e.g., the parent Sales Order) and returns only those items that still have pending, unbilled quantities. It is typically utilized to populate frontend dropdowns during the invoice drafting phase, ensuring users can only bill for valid, negotiated families.
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
-	// Filter prospective families for the record represented by the given UUID identifier
+	// Searches and filters the list of eligible, unbilled families for a specific sales invoice using advanced criteria.
+	//
+	// This read-only query provides the same business value as `ViewProspectiveFamilies` but includes robust pagination and filtering. It is optimized for scenarios where the source document contains hundreds of line items, allowing finance users to quickly locate specific unbilled families to add to the current invoice.
 	FilterProspectiveFamilies(ctx context.Context, in *FilterFamiliesReqForIdentifier, opts ...grpc.CallOption) (*FamiliesList, error)
-	// View prospective sales invoice item info for the given family ID and sales invoice ID
+	// Generates a pre-populated item creation payload for a specific eligible family.
+	//
+	// This read-only operation acts as a templating engine. When a user selects a family to bill, this endpoint fetches the negotiated unit prices, default tax brackets, and remaining unbilled quantities directly from the source document. It returns a ready-to-submit payload that minimizes manual frontend data entry and enforces financial consistency.
 	ViewProspectiveSalesInvoiceItem(ctx context.Context, in *SalesInvoiceItemProspectiveInfoRequest, opts ...grpc.CallOption) (*SalesInvoicesServiceItemCreateRequest, error)
-	// View dispatched (goods dispatch) statistics of the sales invoice
+	// Retrieves the reconciliation metrics comparing the financial billed quantities against the physically dispatched quantities for a specific sales invoice.
+	//
+	// This read-only query aggregates data across all linked Goods Dispatches. It empowers finance teams to audit fulfillment side-by-side with billing, making it easy to identify partial shipments, backorders, or physical fulfillment discrepancies before the invoice is finalized and sent to the buyer.
 	ViewDispatchedStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesInvoiceDispatchedStatisticsList, error)
-	// View already added quantities
+	// Calculates the cumulative quantity of a specific family that has already been billed across all historical invoices linked to a given source document.
+	//
+	// This read-only query acts as a critical financial safeguard during the billing lifecycle. By revealing exactly how much of a family has already been invoiced, it prevents frontend clients and downstream APIs from accidentally over-billing the buyer beyond the original constraints of the parent Sales Order.
 	ViewAddedFamilyQuantityForSource(ctx context.Context, in *SalesInvoicesServiceAlreadyAddedQuantityForSourceRequest, opts ...grpc.CallOption) (*DualQuantitiesResponse, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download sales invoice with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *SalesInvoicesServiceSearchAllReq, opts ...grpc.CallOption) (*SalesInvoicesList, error)
@@ -295,7 +459,9 @@ type SalesInvoicesServiceClient interface {
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
 	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *SalesInvoicesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
-	// Returns the sum of the total value of all the records that match the given criteria
+	// Calculates and returns the aggregated financial grand total (accrued value) across all Sales Invoices that match the specified filter criteria.
+	//
+	// This read-only analytical query is optimized for high-level financial reporting and dashboard metrics. It empowers client applications to dynamically compute total generated revenue, evaluate client-specific billing aggregates, or summarize invoice values over designated time periods without the overhead of fetching and parsing massive lists of individual records.
 	AccruedValue(ctx context.Context, in *SalesInvoicesServiceCountReq, opts ...grpc.CallOption) (*SumResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

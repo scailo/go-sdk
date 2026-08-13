@@ -101,7 +101,15 @@ type ComponentsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The associated vault folder ID
 	VaultFolderId uint64 `protobuf:"varint,18,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
@@ -127,7 +135,13 @@ type ComponentsServiceCreateRequest struct {
 	LocationId uint64 `protobuf:"varint,54,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 	// The description of the component
 	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -271,9 +285,25 @@ func (x *ComponentsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRe
 // Describes the parameters necessary to update a record
 type ComponentsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -301,7 +331,13 @@ type ComponentsServiceUpdateRequest struct {
 	RemainingDimensions string `protobuf:"bytes,55,opt,name=remaining_dimensions,json=remainingDimensions,proto3" json:"remaining_dimensions,omitempty"`
 	// The description of the component
 	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -438,9 +474,25 @@ func (x *ComponentsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRe
 // Describes the parameters necessary to send a component to store
 type ComponentsServiceSendToStoreRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Stores an optional shelf life as a timestamp
 	ShelfLifeTimestamp uint64 `protobuf:"varint,40,opt,name=shelf_life_timestamp,json=shelfLifeTimestamp,proto3" json:"shelf_life_timestamp,omitempty"`
@@ -620,7 +672,7 @@ type Component struct {
 	Description string `protobuf:"bytes,60,opt,name=description,proto3" json:"description,omitempty"`
 	// The short URL of the item
 	ShortUrl string `protobuf:"bytes,70,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,80,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1674,7 +1726,9 @@ type ComponentsServiceCountReq struct {
 	VendorId uint64 `protobuf:"varint,81,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
 	// Filter by the ID of the client for whom the item has been issued
 	ClientId uint64 `protobuf:"varint,82,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // --------------------------------------------------
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

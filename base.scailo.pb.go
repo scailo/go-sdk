@@ -279,6 +279,16 @@ const (
 	FORM_TYPE_FORM_TYPE_INFRASTRUCTURE_FORM FORM_TYPE = 750
 	// The form type is "general-settings-form"
 	FORM_TYPE_FORM_TYPE_GENERAL_SETTINGS_FORM FORM_TYPE = 800
+	// The form type is "questionnaire-template-form"
+	FORM_TYPE_FORM_TYPE_QUESTIONNAIRE_TEMPLATE_FORM FORM_TYPE = 900
+	// The form type is "questionnaire-option-group-form"
+	FORM_TYPE_FORM_TYPE_QUESTIONNAIRE_OPTION_GROUP_FORM FORM_TYPE = 910
+	// The form type is "questionnaire-section-form"
+	FORM_TYPE_FORM_TYPE_QUESTIONNAIRE_SECTION_FORM FORM_TYPE = 920
+	// The form type is "questionnaire-question-form"
+	FORM_TYPE_FORM_TYPE_QUESTIONNAIRE_QUESTION_FORM FORM_TYPE = 930
+	// The form type is "questionnaire-submission-form"
+	FORM_TYPE_FORM_TYPE_QUESTIONNAIRE_SUBMISSION_FORM FORM_TYPE = 940
 )
 
 // Enum value maps for FORM_TYPE.
@@ -345,6 +355,11 @@ var (
 		740: "FORM_TYPE_EQUIPMENT_FORM",
 		750: "FORM_TYPE_INFRASTRUCTURE_FORM",
 		800: "FORM_TYPE_GENERAL_SETTINGS_FORM",
+		900: "FORM_TYPE_QUESTIONNAIRE_TEMPLATE_FORM",
+		910: "FORM_TYPE_QUESTIONNAIRE_OPTION_GROUP_FORM",
+		920: "FORM_TYPE_QUESTIONNAIRE_SECTION_FORM",
+		930: "FORM_TYPE_QUESTIONNAIRE_QUESTION_FORM",
+		940: "FORM_TYPE_QUESTIONNAIRE_SUBMISSION_FORM",
 	}
 	FORM_TYPE_value = map[string]int32{
 		"FORM_TYPE_ANY_UNSPECIFIED":                             0,
@@ -408,6 +423,11 @@ var (
 		"FORM_TYPE_EQUIPMENT_FORM":                              740,
 		"FORM_TYPE_INFRASTRUCTURE_FORM":                         750,
 		"FORM_TYPE_GENERAL_SETTINGS_FORM":                       800,
+		"FORM_TYPE_QUESTIONNAIRE_TEMPLATE_FORM":                 900,
+		"FORM_TYPE_QUESTIONNAIRE_OPTION_GROUP_FORM":             910,
+		"FORM_TYPE_QUESTIONNAIRE_SECTION_FORM":                  920,
+		"FORM_TYPE_QUESTIONNAIRE_QUESTION_FORM":                 930,
+		"FORM_TYPE_QUESTIONNAIRE_SUBMISSION_FORM":               940,
 	}
 )
 
@@ -2001,7 +2021,15 @@ func (x *ActiveStatus) GetIsActive() BOOL_FILTER {
 // Describes the payload that is required to update the password of a user (by an administrator)
 type UpdatePasswordReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record that needs to be updated
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -2065,7 +2093,15 @@ func (x *UpdatePasswordReq) GetPlainTextPassword() string {
 // Describes the payload that is requred to update the user's own password
 type UpdateOwnPasswordReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The old login password
 	OldPlainTextPassword string `protobuf:"bytes,3,opt,name=old_plain_text_password,json=oldPlainTextPassword,proto3" json:"old_plain_text_password,omitempty"`
@@ -2129,9 +2165,25 @@ func (x *UpdateOwnPasswordReq) GetPlainTextPassword() string {
 // Describes the payload that is required to upload a picture associated to a resource (such as profile picture or signature)
 type UploadPictureReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// The base64 encoded image that is to be set as the profile picture
 	Img string `protobuf:"bytes,10,opt,name=img,proto3" json:"img,omitempty"`
@@ -2244,12 +2296,33 @@ func (x *SimpleSearchReq) GetSearchKey() string {
 	return ""
 }
 
-// Describes the payload necessary for performing Repeat requests with a specific delivery date
+// Request message for duplicating an existing record while projecting it onto a new timeline.
+// This payload identifies the source record to be cloned and provides the mandatory overrides
+// (such as a new reference ID and delivery date) required to instantiate the new entity.
+//
+// **Note:** This is commonly used in procurement and sales workflows to rapidly recreate
+// frequent or recurring orders without manually re-entering line items and complex configurations.
 type RepeatWithDeliveryDate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// UUID of the resource
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the source record that serves as the blueprint for duplication.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @mandatory
 	//
@@ -2261,7 +2334,15 @@ type RepeatWithDeliveryDate struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The common delivery date
+	// @mandatory
+	//
+	// @description The target delivery date to be applied to the newly created record, overriding the schedule of the original source.
+	//
+	// @example "2023-12-31"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string. Expected to follow the standard date format designated by the client (e.g., YYYY-MM-DD).
 	DeliveryDate  string `protobuf:"bytes,13,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2575,7 +2656,15 @@ type IdentifierWithUserComment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment   string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3743,7 +3832,15 @@ type InventoryPartitionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The primary quantity of the new partition
 	PartitionQuantity uint64 `protobuf:"varint,10,opt,name=partition_quantity,json=partitionQuantity,proto3" json:"partition_quantity,omitempty"`
@@ -4335,7 +4432,7 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\n" +
 	"\x06HALTED\x10\x06\x12\r\n" +
 	"\tCOMPLETED\x10\a\x12\r\n" +
-	"\tDISCARDED\x10\b*\xc2\x10\n" +
+	"\tDISCARDED\x10\b*\xa3\x12\n" +
 	"\tFORM_TYPE\x12\x1d\n" +
 	"\x19FORM_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15FORM_TYPE_FAMILY_FORM\x10\x05\x12 \n" +
@@ -4398,7 +4495,12 @@ const file_base_scailo_proto_rawDesc = "" +
 	"\x1aFORM_TYPE_MERCHANDISE_FORM\x10\xda\x05\x12\x1d\n" +
 	"\x18FORM_TYPE_EQUIPMENT_FORM\x10\xe4\x05\x12\"\n" +
 	"\x1dFORM_TYPE_INFRASTRUCTURE_FORM\x10\xee\x05\x12$\n" +
-	"\x1fFORM_TYPE_GENERAL_SETTINGS_FORM\x10\xa0\x06*\xed\x02\n" +
+	"\x1fFORM_TYPE_GENERAL_SETTINGS_FORM\x10\xa0\x06\x12*\n" +
+	"%FORM_TYPE_QUESTIONNAIRE_TEMPLATE_FORM\x10\x84\a\x12.\n" +
+	")FORM_TYPE_QUESTIONNAIRE_OPTION_GROUP_FORM\x10\x8e\a\x12)\n" +
+	"$FORM_TYPE_QUESTIONNAIRE_SECTION_FORM\x10\x98\a\x12*\n" +
+	"%FORM_TYPE_QUESTIONNAIRE_QUESTION_FORM\x10\xa2\a\x12,\n" +
+	"'FORM_TYPE_QUESTIONNAIRE_SUBMISSION_FORM\x10\xac\a*\xed\x02\n" +
 	"\x12FORM_FIELD_ELEMENT\x12&\n" +
 	"\"FORM_FIELD_ELEMENT_ANY_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18FORM_FIELD_ELEMENT_INPUT\x10\n" +

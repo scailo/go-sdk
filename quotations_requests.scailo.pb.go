@@ -251,7 +251,15 @@ type QuotationsRequestsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -285,7 +293,13 @@ type QuotationsRequestsServiceCreateRequest struct {
 	Priority string `protobuf:"bytes,16,opt,name=priority,proto3" json:"priority,omitempty"`
 	// The description of the quotation request
 	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -401,9 +415,25 @@ func (x *QuotationsRequestsServiceCreateRequest) GetFormData() []*FormFieldDatum
 // Describes the parameters necessary to update a record
 type QuotationsRequestsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -441,7 +471,13 @@ type QuotationsRequestsServiceUpdateRequest struct {
 	Priority string `protobuf:"bytes,16,opt,name=priority,proto3" json:"priority,omitempty"`
 	// The description of the quotation request
 	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -557,7 +593,15 @@ func (x *QuotationsRequestsServiceUpdateRequest) GetFormData() []*FormFieldDatum
 // Describes the parameters necessary to perform an autofill request
 type QuotationsRequestsServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record that needs to be updated
 	Uuid          string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -709,7 +753,7 @@ type QuotationRequest struct {
 	Description string `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
 	// The list of associated quotation request items
 	List []*QuotationRequestItem `protobuf:"bytes,20,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	// Stores the total value of the quotation request (as a double, which requires no adjustments)
 	TotalValue    float64 `protobuf:"fixed64,50,opt,name=total_value,json=totalValue,proto3" json:"total_value,omitempty"`
@@ -876,7 +920,15 @@ func (x *QuotationRequest) GetTotalValue() float64 {
 // Describes the parameters required to add an item to a quotation request
 type QuotationsRequestsServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -1011,7 +1063,15 @@ func (x *QuotationsRequestsServiceItemCreateRequest) GetSpecifications() string 
 // Describes the parameters required to update an item in a quotation request
 type QuotationsRequestsServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1154,7 +1214,11 @@ type QuotationRequestItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -2490,7 +2554,9 @@ type QuotationsRequestsServiceCountReq struct {
 	PurchaseEnquiryId uint64 `protobuf:"varint,22,opt,name=purchase_enquiry_id,json=purchaseEnquiryId,proto3" json:"purchase_enquiry_id,omitempty"`
 	// The associated currency
 	CurrencyId uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

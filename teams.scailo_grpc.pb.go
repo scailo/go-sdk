@@ -68,9 +68,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each team
+// The TeamsService manages the full lifecycle of team records.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type TeamsServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
 	Create(ctx context.Context, in *TeamsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -159,7 +172,13 @@ type TeamsServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -174,33 +193,75 @@ type TeamsServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Clone team from an existing team (denoted by the identifier)
+	// Initiates the creation of a new record by duplicating the structural properties of an existing record.
+	//
+	// **Side Effects:**
+	// - Provisions a new record populated with the metadata and configurations of the source record.
+	// - Does not clone operational transactions or historical logs of the source.
+	// - Appends an audit trail entry tracking the cloning operation and justification.
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add a member to a team
+	// Associates a user with an existing team, formally adding them to the group's roster.
+	//
+	// **Side Effects:**
+	// - Validates the structural relationship and checks for duplicate associations.
+	// - Depending on system configurations, may place this new member association into a pending approval state before granting full access.
 	AddTeamMember(ctx context.Context, in *TeamsServiceMemberCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify a member in a team
+	// Updates the metadata or configuration of an existing team member association.
+	//
+	// **Side Effects:**
+	// - Modifies the member's association attributes (e.g., custom fields).
+	// - May trigger a re-approval workflow depending on the severity of the modifications.
+	// - Appends an audit trail entry tracking the change.
 	ModifyTeamMember(ctx context.Context, in *TeamsServiceMemberUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a member in a team
+	// Approves a pending team member association, finalizing their inclusion in the team.
+	//
+	// **Side Effects:**
+	// - Activates the user's mapping, formally granting them team-level access, context, or routing capabilities.
+	// - Appends the required approval metadata, timestamp, and audit comment to the record's history.
 	ApproveTeamMember(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a member in a team
+	// Permanently removes or deactivates a user association from a team profile.
+	//
+	// **Side Effects:**
+	// - Revokes any team-specific context, routing assignments, and data access previously linked to this user.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteTeamMember(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder members in a team
+	// Reorders the sequence or hierarchy of members within a team.
+	//
+	// **Side Effects:**
+	// - Mutates the display sequence or hierarchical priority of the specified team members in bulk.
+	// - Primarily affects how the team roster is presented in administrative and frontend views.
 	ReorderTeamMembers(ctx context.Context, in *ReorderItemsRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View Team Member by ID
+	// Retrieves the complete, granular details of a specific team member association by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, mapping context, and approval histories.
 	ViewTeamMemberByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*TeamMember, error)
-	// View approved team members for given team ID
+	// Lists all active, fully approved member associations mapped to a specific team ID.
+	//
+	// This read-only query is optimized for operational routing and directory lookups, returning only the personnel who are officially authorized as part of the team.
 	ViewApprovedTeamMembers(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*TeamsMembersList, error)
-	// View unapproved team members for given team ID
+	// Lists pending or unapproved member associations mapped to a specific team ID.
+	//
+	// This read-only query is utilized primarily by team leads and administrators to quickly identify and review personnel awaiting onboarding authorization.
 	ViewUnapprovedTeamMembers(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*TeamsMembersList, error)
-	// View the history of the team member
+	// Retrieves the historical audit trail and lifecycle changes of a specific team member record.
+	//
+	// This read-only operation aggregates the chronological evolution of the user's association with the team, tracking role shifts and approval state changes.
 	ViewTeamMemberHistory(ctx context.Context, in *TeamMemberHistoryRequest, opts ...grpc.CallOption) (*TeamsMembersList, error)
-	// View approved team members for given team ID with pagination
+	// Lists active, approved team member associations using robust pagination controls.
+	//
+	// This read-only query is optimized for frontend data grids viewing large teams, supporting explicit windowing parameters (count and offset) while restricting results to fully authorized members.
 	ViewPaginatedApprovedTeamMembers(ctx context.Context, in *TeamMembersSearchRequest, opts ...grpc.CallOption) (*TeamsServicePaginatedMembersResponse, error)
-	// View unapproved team members for given team ID with pagination
+	// Lists pending or unapproved team member associations using robust pagination controls.
+	//
+	// This read-only query is optimized for administrative review dashboards handling high volumes of onboarding requests.
 	ViewPaginatedUnapprovedTeamMembers(ctx context.Context, in *TeamMembersSearchRequest, opts ...grpc.CallOption) (*TeamsServicePaginatedMembersResponse, error)
-	// Search through team members with pagination
+	// Searches through all team member records using advanced filters, status flags, and pagination tokens.
+	//
+	// This read-only query is the primary entry point for complex, multi-attribute personnel lookups within a team, commonly utilized by HR and administrative reporting views.
 	SearchMembersWithPagination(ctx context.Context, in *TeamMembersSearchRequest, opts ...grpc.CallOption) (*TeamsServicePaginatedMembersResponse, error)
-	// View all the teams that the member is part of (and not the team lead)
+	// Retrieves all team profiles that a specified user is associated with as a standard member.
+	//
+	// This read-only query executes a reverse lookup to determine a user's cross-functional footprint within the organization. It explicitly excludes teams where the user is designated strictly as the top-level Team Lead.
 	ViewTeamsForMember(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*TeamsList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Team, error)

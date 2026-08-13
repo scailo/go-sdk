@@ -63,9 +63,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each project
+// The ProjectsService manages the full lifecycle of projects.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type ProjectsServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *ProjectsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -154,11 +167,21 @@ type ProjectsServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -171,21 +194,42 @@ type ProjectsServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add a contact
+	// Associates a new personnel contact with an existing project.
+	//
+	// **Side Effects:**
+	// - Validates the relationship between the project and employee.
+	// - Depending on system configurations, may place the new contact association into a pending approval state.
 	AddProjectContact(ctx context.Context, in *ProjectsServiceContactCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a contact
+	// Approves a pending project contact record, finalizing its integration into the project roster.
+	//
+	// **Side Effects:**
+	// - Activates the contact mapping within the system.
+	// - Appends the required approval metadata and audit comment to the record history.
 	ApproveProjectContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a contact
+	// Permanently removes or deactivates a contact association from a project.
+	//
+	// **Side Effects:**
+	// - Revokes project-specific context and access linked to this contact association.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteProjectContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a contact for the given ID
+	// Retrieves the complete, granular details of a specific project contact by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, employee contexts, and approval histories.
 	ViewProjectContactByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*ProjectContact, error)
-	// View all contacts for given project UUID
+	// Lists all contact associations mapped to a given project unique identifier.
+	//
+	// This read-only query aggregates and returns the collection of personnel assigned to the project entity.
 	ViewProjectContacts(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ProjectContactsList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Project, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Project, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Project, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Project, error)
@@ -199,7 +243,10 @@ type ProjectsServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ProjectsList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *ProjectsServicePaginationReq, opts ...grpc.CallOption) (*ProjectsServicePaginationResponse, error)
-	// View Statistics of Project
+	// Retrieves granular metrics and operational performance data for a specific project.
+	//
+	// This is a read-only operation used to aggregate lifecycle data, timelines,
+	// and resource utilization without altering the underlying record state.
 	ViewStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ProjectStatistics, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *ProjectsServiceSearchAllReq, opts ...grpc.CallOption) (*ProjectsList, error)

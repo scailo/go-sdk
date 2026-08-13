@@ -59,9 +59,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each client
+// The ClientsService manages the full lifecycle of clients.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type ClientsServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *ClientsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -152,17 +165,36 @@ type ClientsServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add a user
+	// Associates a new personnel user with an existing client.
+	//
+	// **Side Effects:**
+	// - Validates the structural relationship between the client and user.
+	// - Depending on system configurations, may place the new client user association into a pending approval state.
 	AddClientUser(ctx context.Context, in *ClientsServiceUserCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a user
+	// Approves a pending client user record, finalizing their access and mapping to the client account.
+	//
+	// **Side Effects:**
+	// - Activates the user mapping within the client scope.
+	// - Appends the required approval metadata and audit comment to the record history.
 	ApproveClientUser(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a user
+	// Permanently removes or deactivates a user association from a client profile.
+	//
+	// **Side Effects:**
+	// - Revokes client-specific context, tenancy permissions, and data access linked to this user.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteClientUser(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a user for the given ID
+	// Retrieves the complete, granular details of a specific client user by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, user contexts, and approval histories.
 	ViewClientUserByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*ClientUser, error)
-	// View all users for given client ID
+	// Lists all user associations mapped to a given client unique internal identifier.
+	//
+	// This read-only query aggregates and returns the collection of personnel assigned to the client entity.
 	ViewClientUsers(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*ClientUsersList, error)
-	// Search through client users with pagination
+	// Searches through client user records using filters, status flags, and pagination tokens.
+	//
+	// This read-only query is optimized for administrative data grids, supporting complex lookups,
+	// multi-tenant isolation, and explicit windowing parameters (count and offset).
 	SearchClientUsersWithPagination(ctx context.Context, in *ClientUsersSearchRequest, opts ...grpc.CallOption) (*ClientsServicePaginatedUsersResponse, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Client, error)
@@ -172,9 +204,13 @@ type ClientsServiceClient interface {
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Client, error)
 	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Client, error)
-	// View only essential components (without logs) that matches the first given email address
+	// Retrieves a client record using their primary email address, omitting compliance logs and non-essential metadata.
+	//
+	// This operation is tailored for fast, low-overhead lookups where only core profile traits and basic identification keys are required.
 	ViewEssentialByEmail(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Client, error)
-	// View only essential components (without logs) that matches the first given phone number
+	// Retrieves a client record using their primary phone number, omitting compliance logs and non-essential metadata.
+	//
+	// This operation is tailored for fast, low-overhead lookups where only core profile traits and basic identification keys are required.
 	ViewEssentialByPhone(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Client, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*ClientsList, error)

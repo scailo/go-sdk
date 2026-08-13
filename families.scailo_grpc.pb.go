@@ -37,8 +37,6 @@ const (
 	FamiliesService_UploadPrices_FullMethodName                 = "/Scailo.FamiliesService/UploadPrices"
 	FamiliesService_UpdateMinStockToMaintain_FullMethodName     = "/Scailo.FamiliesService/UpdateMinStockToMaintain"
 	FamiliesService_UploadMinStockToMaintain_FullMethodName     = "/Scailo.FamiliesService/UploadMinStockToMaintain"
-	FamiliesService_DownloadAsCSV_FullMethodName                = "/Scailo.FamiliesService/DownloadAsCSV"
-	FamiliesService_ImportFromCSV_FullMethodName                = "/Scailo.FamiliesService/ImportFromCSV"
 	FamiliesService_AddStorage_FullMethodName                   = "/Scailo.FamiliesService/AddStorage"
 	FamiliesService_ApproveStorage_FullMethodName               = "/Scailo.FamiliesService/ApproveStorage"
 	FamiliesService_DeleteStorage_FullMethodName                = "/Scailo.FamiliesService/DeleteStorage"
@@ -90,15 +88,30 @@ const (
 	FamiliesService_SearchForEquationSalesBundle_FullMethodName = "/Scailo.FamiliesService/SearchForEquationSalesBundle"
 	FamiliesService_CountInStatus_FullMethodName                = "/Scailo.FamiliesService/CountInStatus"
 	FamiliesService_Count_FullMethodName                        = "/Scailo.FamiliesService/Count"
+	FamiliesService_DownloadAsCSV_FullMethodName                = "/Scailo.FamiliesService/DownloadAsCSV"
+	FamiliesService_ImportFromCSV_FullMethodName                = "/Scailo.FamiliesService/ImportFromCSV"
 )
 
 // FamiliesServiceClient is the client API for FamiliesService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each family
+// The FamiliesService manages the full lifecycle of family records.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type FamiliesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *FamiliesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -202,97 +215,202 @@ type FamiliesServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Amend the family and send for revision
-	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Updates the price of the family with the given UUID
-	UpdatePrice(ctx context.Context, in *FamiliesServiceUpdatePriceRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Updates the price of all the families mentioned in the file
-	UploadPrices(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
-	// Updates the minimim stock to maintain for the family with the given UUID
-	UpdateMinStockToMaintain(ctx context.Context, in *FamiliesServiceUpdateMinStockToMaintainRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Updates the minimum stock to maintain for all the families mentioned in the file
-	UploadMinStockToMaintain(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
-	// CSV operations
-	// Download the CSV file that consists of the list of families according to the given filter request. The same file could also be used as a template for uploading families
-	DownloadAsCSV(ctx context.Context, in *FamiliesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
-	// Bulk imports records from a provided CSV file.
-	// Behavior:
-	//   - Deduplication: Skips entries where the `code` already exists in the system.
-	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
-	//     import fails, no changes are committed.
-	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	// Initiates a formal amendment process for a specific record, transitioning it into a structured revision workflow.
 	//
-	// Returns a list of UUIDs for all successfully processed or existing records.
-	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
-	// Add a storage
+	// This API is utilized when substantive modifications are required for an already finalized or approved record.
+	// Rather than mutating the active data directly, it explicitly triggers a compliance-driven revision cycle,
+	// ensuring that all proposed changes are tracked and undergo standard review and authorization procedures.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The record's internal amendment count property is strictly incremented by 1.
+	// * The record is placed into a pending revision state, typically preserving the availability of the currently approved version until the amendment is finalized.
+	// * The optional user comment is permanently appended to the record's audit log as the formal justification for initiating the change.
+	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Updates the standard base unit price of an existing family identified by its UUID.
+	//
+	// **Side Effects:**
+	// - Mutates the active unit price configuration for the family.
+	// - Appends an audit trail entry tracking the price change and the justification comment.
+	UpdatePrice(ctx context.Context, in *FamiliesServiceUpdatePriceRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Processes a batch ingestion to update unit prices across multiple families via a CSV file.
+	//
+	// **Side Effects:**
+	// - Parses the uploaded document and applies the respective price updates in bulk.
+	// - Validates the payload structure and triggers audit trail logging for each successfully modified record.
+	UploadPrices(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
+	// Updates the minimum inventory threshold (safety stock) required for a family identified by its UUID.
+	//
+	// **Side Effects:**
+	// - Mutates the active minimum stock configuration.
+	// - May influence downstream automated restock alerts or procurement triggers based on the new threshold.
+	// - Appends an audit trail entry tracking the threshold change.
+	UpdateMinStockToMaintain(ctx context.Context, in *FamiliesServiceUpdateMinStockToMaintainRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
+	// Processes a batch ingestion to update safety stock thresholds across multiple families via a CSV file.
+	//
+	// **Side Effects:**
+	// - Parses the uploaded document and applies the respective threshold updates in bulk.
+	// - Validates the payload and triggers audit trail logging for each successfully modified record.
+	UploadMinStockToMaintain(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
+	// Associates a specific storage location with a family.
+	//
+	// **Side Effects:**
+	// - Creates a structural mapping dictating where items of this family are authorized to be stored.
+	// - Depending on system configurations, may place this mapping into a pending approval state.
 	AddStorage(ctx context.Context, in *FamiliesServiceStorageCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a storage
+	// Approves a pending storage location mapping, finalizing its availability for inventory placement.
+	//
+	// **Side Effects:**
+	// - Activates the storage mapping for downstream warehousing and put-away workflows.
+	// - Appends the required approval metadata and audit comment to the record history.
 	ApproveStorage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a storage
+	// Permanently removes or deactivates a storage location association from a family profile.
+	//
+	// **Side Effects:**
+	// - Revokes authorization to utilize this specific storage node for this family.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteStorage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a storage for the given ID
+	// Retrieves the granular details of a specific family storage association by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches the complete mapping metadata and approval history.
 	ViewStorageByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyStorage, error)
-	// View all storages for given family ID
+	// Lists all authorized and pending storage locations mapped to a specific family.
+	//
+	// This read-only query is optimized for warehousing operations to determine valid put-away or picking destinations.
 	ViewStorages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyStoragesList, error)
-	// Add a label
+	// Associates a categorization label or taxonomy tag with a family.
+	//
+	// **Side Effects:**
+	// - Creates a structural mapping used for reporting and filtering.
+	// - May place this mapping into a pending approval state based on configuration.
 	AddLabel(ctx context.Context, in *FamiliesServiceLabelCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a label
+	// Approves a pending label mapping, finalizing its application to the family.
+	//
+	// **Side Effects:**
+	// - Activates the label association for downstream search and filtering workflows.
+	// - Appends the required approval metadata and audit comment.
 	ApproveLabel(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a label
+	// Permanently removes a categorization label association from a family profile.
+	//
+	// **Side Effects:**
+	// - Revokes the taxonomy tag from the family.
+	// - Logs the deletion justification comment into the compliance log.
 	DeleteLabel(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a label for the given ID
+	// Retrieves the granular details of a specific family label association by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches the mapping metadata and approval history.
 	ViewLabelByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyLabel, error)
-	// View all labels for given family ID
+	// Lists all categorization labels mapped to a specific family.
+	//
+	// This read-only query aggregates the active tags utilized for reporting and display purposes for a single family.
 	ViewLabels(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyLabelsList, error)
-	// View all labels for given family IDs
+	// Lists all categorization labels mapped across an array of specified families.
+	//
+	// This read-only bulk query is optimized for data grids and broad catalog views, fetching taxonomy tags for multiple families simultaneously to reduce round-trips.
 	ViewLabelsForFamilyIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*FamilyLabelsList, error)
-	// Add a unit conversion
+	// Associates a mathematical unit conversion rule (base UOM to alternate UOM) with a family.
+	//
+	// **Side Effects:**
+	// - Validates the structural integrity of the multiplication/division factors.
+	// - May place the conversion rule into a pending approval state to ensure procurement accuracy.
 	AddUnitConversion(ctx context.Context, in *FamiliesServiceUnitConversionCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a unit conversion
+	// Approves a pending unit conversion rule, finalizing its availability for procurement and inventory math.
+	//
+	// **Side Effects:**
+	// - Activates the conversion rule for downstream ordering and multi-unit transactional workflows.
+	// - Appends the required approval metadata and audit comment.
 	ApproveUnitConversion(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a unit conversion
+	// Permanently removes a unit conversion rule from a family profile.
+	//
+	// **Side Effects:**
+	// - Revokes the ability to conduct transactions in the specified alternate unit.
+	// - Logs the deletion justification comment into the compliance log.
 	DeleteUnitConversion(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a unit conversion for the given ID
+	// Retrieves the granular details of a specific unit conversion rule by its internal sequence ID.
+	//
+	// This read-only operation fetches the complete mathematical factors and approval state of the rule.
 	ViewUnitConversionByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyUnitConversion, error)
-	// View all unit conversions for given family ID
+	// Lists all defined unit conversion rules mapped to a specific family.
+	//
+	// This read-only query aggregates all alternative units in which this family can be transacted.
 	ViewUnitConversions(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyUnitConversionsList, error)
-	// View the unit conversion for the given family ID and the given uom ID
+	// Retrieves a specific unit conversion rule mapping between a given family and a target alternate UOM.
+	//
+	// This read-only operation is designed for defensive checking by client applications prior to permitting an order in an alternative unit.
 	ViewUnitConversionFor(ctx context.Context, in *FamiliesServiceUnitConversionPresenceRequest, opts ...grpc.CallOption) (*FamilyUnitConversion, error)
-	// Add a qc group
+	// Associates a Quality Control (QC) compliance group with a family.
+	//
+	// **Side Effects:**
+	// - Dictates the specific inspection and compliance workflows required for items within this family.
+	// - May place this association into a pending approval state.
 	AddQCGroup(ctx context.Context, in *FamiliesServiceQCGroupCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a qc group
+	// Approves a pending QC group association, finalizing its enforcement on the family.
+	//
+	// **Side Effects:**
+	// - Activates the QC requirement for downstream intake, production, or fulfillment workflows.
+	// - Appends the required approval metadata and audit comment.
 	ApproveQCGroup(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a qc group
+	// Permanently removes a QC group association from a family profile.
+	//
+	// **Side Effects:**
+	// - Revokes the specified inspection workflow requirement from this family.
+	// - Logs the deletion justification comment into the compliance log.
 	DeleteQCGroup(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a qc group for the given ID
+	// Retrieves the granular details of a specific family QC group association by its internal sequence ID.
+	//
+	// This read-only operation fetches the complete mapping metadata and approval history.
 	ViewQCGroupByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyQCGroup, error)
-	// View all qc groups for given family ID
+	// Lists all Quality Control groups mapped to a specific family.
+	//
+	// This read-only query aggregates the suite of compliance inspections mandated for this family.
 	ViewQCGroups(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyQCGroupsList, error)
-	// Add a image
+	// Attaches an uploaded visual asset (vault file) to a family.
+	//
+	// **Side Effects:**
+	// - Binds a document vault file to the family.
+	// - Defines the image's display sequence and visibility scope (internal vs. public).
+	// - May place the image association into a pending approval state.
 	AddImage(ctx context.Context, in *FamiliesServiceImageCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an image
+	// Updates the display sequence or public visibility flag of an existing family image attachment.
+	//
+	// **Side Effects:**
+	// - Modifies the presentation metadata without replacing the underlying vault file.
+	// - Appends an audit trail entry tracking the metadata shift.
 	UpdateImage(ctx context.Context, in *FamiliesServiceImageUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a image
+	// Approves a pending image attachment, finalizing its visibility.
+	//
+	// **Side Effects:**
+	// - Activates the visual asset for display in catalogs and technical reference views.
+	// - Appends the required approval metadata and audit comment.
 	ApproveImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a image
+	// Permanently removes a visual asset attachment from a family profile.
+	//
+	// **Side Effects:**
+	// - Revokes catalog visibility for the image and breaks the linkage to the vault file.
+	// - Logs the deletion justification comment into the compliance log.
 	DeleteImage(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a image for the given ID
+	// Retrieves the granular details and metadata of a specific image attachment by its internal sequence ID.
+	//
+	// This read-only operation fetches the vault file reference, visibility flags, and approval state.
 	ViewImageByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImage, error)
-	// View all images for given family ID
+	// Lists all images (both internal and public) attached to a specific family.
+	//
+	// This read-only query is optimized for internal administrative dashboards and catalog management workflows.
 	ViewImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error)
-	// View public images for given family ID
+	// Lists only the publicly flagged images attached to a specific family.
+	//
+	// This read-only query is optimized for external, customer-facing storefronts and public catalogs, guaranteeing internal assets remain hidden.
 	ViewPublicImages(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FamilyImagesList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Family, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Family, error)
-	// View only essential components of the family (without logs)
+	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Family, error)
-	// View only essential components of the family (without logs) that matches the given code
+	// Retrieves a record by its unique code excluding high-volume fields like logs.
 	ViewEssentialByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Family, error)
-	// View only essential components of the family (without logs) that matches the given UUID
+	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Family, error)
-	// View all families with the given IDs
+	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*FamiliesList, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*FamiliesList, error)
@@ -300,9 +418,19 @@ type FamiliesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*FamiliesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *FamiliesServicePaginationReq, opts ...grpc.CallOption) (*FamiliesServicePaginationResponse, error)
-	// View all families with required quantity greater than 0 from the given family types
+	// Retrieves all family records across specified family types that currently have an operational deficit (required quantity > 0).
+	//
+	// This read-only query is utilized heavily by procurement and manufacturing dashboards to identify and track pending demand, material shortages, and active requisitions.
 	ViewAllRequirable(ctx context.Context, in *FamilyTypesList, opts ...grpc.CallOption) (*FamiliesList, error)
-	// View all the amendments made
+	// Retrieves the comprehensive, chronological history of formal amendments applied to a specific record.
+	//
+	// This read-only query exposes the complete audit trail of revision workflows that the entity has undergone.
+	// It is explicitly designed to support compliance checks, historical tracking, and administrative reviews by
+	// detailing exactly how and when a record evolved over its lifecycle.
+	//
+	// **Side Effects & Lifecycle:**
+	// * This is a strictly read-only operation; the underlying record and its current lifecycle state remain entirely unchanged.
+	// * Aggregates and returns a sequential log of amendment events, which typically include revision counts, initiation timestamps, and the justification comments provided when the amendments were triggered.
 	ViewAmendments(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AmendmentLogsList, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *FamiliesServiceSearchAllReq, opts ...grpc.CallOption) (*FamiliesList, error)
@@ -333,6 +461,18 @@ type FamiliesServiceClient interface {
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
 	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *FamiliesServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
+	// CSV operations
+	// Download the CSV file that consists of the list of families according to the given filter request. The same file could also be used as a template for uploading families
+	DownloadAsCSV(ctx context.Context, in *FamiliesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error)
+	// Bulk imports records from a provided CSV file.
+	// Behavior:
+	//   - Deduplication: Skips entries where the `code` already exists in the system.
+	//   - Atomicity: This is an "all-or-nothing" operation; if any part of the
+	//     import fails, no changes are committed.
+	//   - Idempotency: Multiple calls with the same CSV result in the same state.
+	//
+	// Returns a list of UUIDs for all successfully processed or existing records.
+	ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error)
 }
 
 type familiesServiceClient struct {
@@ -527,26 +667,6 @@ func (c *familiesServiceClient) UploadMinStockToMaintain(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentifierUUIDsList)
 	err := c.cc.Invoke(ctx, FamiliesService_UploadMinStockToMaintain_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *familiesServiceClient) DownloadAsCSV(ctx context.Context, in *FamiliesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StandardFile)
-	err := c.cc.Invoke(ctx, FamiliesService_DownloadAsCSV_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *familiesServiceClient) ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IdentifierUUIDsList)
-	err := c.cc.Invoke(ctx, FamiliesService_ImportFromCSV_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1064,6 +1184,26 @@ func (c *familiesServiceClient) Count(ctx context.Context, in *FamiliesServiceCo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CountResponse)
 	err := c.cc.Invoke(ctx, FamiliesService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) DownloadAsCSV(ctx context.Context, in *FamiliesServiceFilterReq, opts ...grpc.CallOption) (*StandardFile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StandardFile)
+	err := c.cc.Invoke(ctx, FamiliesService_DownloadAsCSV_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *familiesServiceClient) ImportFromCSV(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*IdentifierUUIDsList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentifierUUIDsList)
+	err := c.cc.Invoke(ctx, FamiliesService_ImportFromCSV_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

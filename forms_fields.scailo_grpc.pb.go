@@ -56,7 +56,12 @@ type FormsFieldsServiceClient interface {
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FormField, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*FormField, error)
-	// View by Code
+	// Retrieves a single record via the assigned internal code.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided internal code does not exist.
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*FormField, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*FormField, error)

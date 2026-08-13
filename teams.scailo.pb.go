@@ -23,29 +23,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting team search results.
 type TEAM_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	TEAM_SORT_KEY_TEAM_SORT_KEY_ID_UNSPECIFIED TEAM_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_CREATED_AT TEAM_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_MODIFIED_AT TEAM_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_APPROVED_ON TEAM_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_APPROVED_BY TEAM_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_APPROVER_ROLE_ID TEAM_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_COMPLETED_ON TEAM_SORT_KEY = 6
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_NAME TEAM_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_CODE TEAM_SORT_KEY = 11
-	// Fetch ordered results by the leader ID
+	// @description Sort alphabetically by the ID of the leader.
 	TEAM_SORT_KEY_TEAM_SORT_KEY_LEAD_USER_ID TEAM_SORT_KEY = 12
 )
 
@@ -104,25 +104,25 @@ func (TEAM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_teams_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting team member search results.
 type TEAM_MEMBER_SORT_KEY int32
 
 const (
-	// Fetch invoiced results by id
+	// @description Default sort behavior (by internal ID).
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_ID_UNSPECIFIED TEAM_MEMBER_SORT_KEY = 0
-	// Fetch invoiced results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_CREATED_AT TEAM_MEMBER_SORT_KEY = 1
-	// Fetch invoiced results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_MODIFIED_AT TEAM_MEMBER_SORT_KEY = 2
-	// Fetch invoiced results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_APPROVED_ON TEAM_MEMBER_SORT_KEY = 3
-	// Fetch invoiced results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_APPROVED_BY TEAM_MEMBER_SORT_KEY = 4
-	// Fetch invoiced results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_APPROVER_ROLE_ID TEAM_MEMBER_SORT_KEY = 5
-	// Fetch invoiced results by the team ID
+	// @description Sort by the system ID of the associated team.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_TEAM_ID TEAM_MEMBER_SORT_KEY = 10
-	// Fetch invoiced results by the member ID
+	// @description Sort by the system ID of the associated member.
 	TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_MEMBER_ID TEAM_MEMBER_SORT_KEY = 11
 )
 
@@ -177,15 +177,15 @@ func (TEAM_MEMBER_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_teams_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the applicable statuses of team members
+// Enum defining the applicable lifecycle and verification statuses for team members.
 type TEAM_MEMBER_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	TEAM_MEMBER_STATUS_TEAM_MEMBER_STATUS_ANY_UNSPECIFIED TEAM_MEMBER_STATUS = 0
-	// Denotes that the team members must have been approved
+	// @description Denotes that the team member association has passed verification and is actively approved.
 	TEAM_MEMBER_STATUS_TEAM_MEMBER_STATUS_APPROVED TEAM_MEMBER_STATUS = 1
-	// Denotes that the team members must be waiting for approval
+	// @description Denotes that the team member association is pending review and waiting for administrative approval.
 	TEAM_MEMBER_STATUS_TEAM_MEMBER_STATUS_UNAPPROVED TEAM_MEMBER_STATUS = 2
 )
 
@@ -230,7 +230,13 @@ func (TEAM_MEMBER_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_teams_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and creating a new Team profile within the organizational structure.
+// This record tracks critical group metadata, unique internal alphanumeric identifiers,
+// operational descriptions, and leadership assignments.
+//
+// **Note:** This is the primary entry point for HR or Organization Administrators
+// to register new functional groups, squads, or departments to facilitate access control,
+// task assignment, and workflow routing.
 type TeamsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -242,9 +248,17 @@ type TeamsServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -254,15 +268,47 @@ type TeamsServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the team
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @mandatory
+	//
+	// @description The primary, human-readable name of the team.
+	//
+	// @example "Core Backend Engineering"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the team
+	// @mandatory
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the team.
+	//
+	// @example "ENG-CORE-01"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The ID of the user who is the team lead of this team
+	// @mandatory
+	//
+	// @description The unique internal identifier of the user designated as the team lead or manager for this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	LeadUserId uint64 `protobuf:"varint,12,opt,name=lead_user_id,json=leadUserId,proto3" json:"lead_user_id,omitempty"`
-	// The description of the team
-	Description   string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
+	// @optional
+	//
+	// @description A detailed text description outlining the purpose, responsibilities, and scope of the team.
+	//
+	// @example "Responsible for maintaining backend microservices and core API infrastructure."
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Description   *string `protobuf:"bytes,13,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -298,22 +344,22 @@ func (*TeamsServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *TeamsServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *TeamsServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -340,25 +386,47 @@ func (x *TeamsServiceCreateRequest) GetLeadUserId() uint64 {
 }
 
 func (x *TeamsServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Team record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, code, lead user id, and description
+// of an established Team.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type TeamsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -368,15 +436,47 @@ type TeamsServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the team
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the team
-	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The ID of the user who is the team lead of this team
-	LeadUserId uint64 `protobuf:"varint,12,opt,name=lead_user_id,json=leadUserId,proto3" json:"lead_user_id,omitempty"`
-	// The description of the team
-	Description   string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the team.
+	//
+	// @example "Core Backend Engineering"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the team.
+	//
+	// @example "ENG-CORE-01"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,11,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user designated as the team lead or manager for this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	LeadUserId *uint64 `protobuf:"varint,12,opt,name=lead_user_id,json=leadUserId,proto3,oneof" json:"lead_user_id,omitempty"`
+	// @optional
+	//
+	// @description A detailed text description outlining the purpose, responsibilities, and scope of the team.
+	//
+	// @example "Responsible for maintaining backend microservices and core API infrastructure."
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Description   *string `protobuf:"bytes,13,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -412,8 +512,8 @@ func (*TeamsServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -426,48 +526,48 @@ func (x *TeamsServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *TeamsServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *TeamsServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *TeamsServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *TeamsServiceUpdateRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *TeamsServiceUpdateRequest) GetLeadUserId() uint64 {
-	if x != nil {
-		return x.LeadUserId
+	if x != nil && x.LeadUserId != nil {
+		return *x.LeadUserId
 	}
 	return 0
 }
 
 func (x *TeamsServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Team within the system.
 type Team struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -490,15 +590,23 @@ type Team struct {
 	//
 	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the team
+	// @description The primary, human-readable name of the team.
+	//
+	// @example "Core Backend Engineering"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the team
+	// @description The unique alphanumeric code used to internally classify and represent the team.
+	//
+	// @example "ENG-CORE-01"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The ID of the user who is the team lead of this team
+	// @description The unique internal identifier of the user designated as the team lead or manager for this group.
+	//
+	// @example 402
 	LeadUserId uint64 `protobuf:"varint,12,opt,name=lead_user_id,json=leadUserId,proto3" json:"lead_user_id,omitempty"`
-	// The description of the team
+	// @description A detailed text description outlining the purpose, responsibilities, and scope of the team.
+	//
+	// @example "Responsible for maintaining backend microservices and core API infrastructure."
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of associated team members
+	// @description The aggregated list of active member associations mapped to this team.
 	List          []*TeamMember `protobuf:"bytes,20,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -618,14 +726,40 @@ func (x *Team) GetList() []*TeamMember {
 	return nil
 }
 
-// Describes the parameters required to add a member to a team
+// Request message for assigning and associating a user to an existing team.
+// This instructs the system to formally bind a personnel record to a functional group,
+// granting them any relevant downstream access or routing capabilities.
 type TeamsServiceMemberCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the ID of the team
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target team to which the user will be added.
+	//
+	// @example 105
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TeamId uint64 `protobuf:"varint,10,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// The ID of the user that is part of the team
+	// @mandatory
+	//
+	// @description The unique internal identifier of the user being mapped to the team.
+	//
+	// @example 420
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UserId        uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -662,8 +796,8 @@ func (*TeamsServiceMemberCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceMemberCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -682,12 +816,28 @@ func (x *TeamsServiceMemberCreateRequest) GetUserId() uint64 {
 	return 0
 }
 
-// Describes the parameters required to update a member in a team
+// Request message for updating the metadata of an existing team member association.
 type TeamsServiceMemberUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id            uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -724,8 +874,8 @@ func (*TeamsServiceMemberUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceMemberUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -737,7 +887,8 @@ func (x *TeamsServiceMemberUpdateRequest) GetId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a member associated to a team
+// Represents the finalized association between a user and a team.
+// Encapsulates the core mapping along with standard lifecycle and compliance metadata.
 type TeamMember struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -748,13 +899,23 @@ type TeamMember struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the ID of the team
+	// @description The unique internal identifier of the target team.
+	//
+	// @example 105
 	TeamId uint64 `protobuf:"varint,10,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// The ID of the user that is part of the team
+	// @description The unique internal identifier of the user that is mapped to the team.
+	//
+	// @example 420
 	UserId        uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -839,10 +1000,10 @@ func (x *TeamMember) GetUserId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of teams
+// Container message for a collection of Team records.
 type TeamsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Team records.
 	List          []*Team `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -885,10 +1046,11 @@ func (x *TeamsList) GetList() []*Team {
 	return nil
 }
 
-// Describes the message consisting of the list of team members
+// Represents a collection payload encapsulating multiple Team Member associations.
+// Used primarily to return the active personnel roster of a specific team.
 type TeamsMembersList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Team Member records.
 	List          []*TeamMember `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -931,12 +1093,29 @@ func (x *TeamsMembersList) GetList() []*TeamMember {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Request payload containing the parameter constraints required to retrieve the historical
+// audit trail and lifecycle changes of a specific team member association.
 type TeamMemberHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the ID of the team
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target team associated with the historical record.
+	//
+	// @example 105
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TeamId uint64 `protobuf:"varint,10,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// The ID of the user that is part of the team
+	// @mandatory
+	//
+	// @description The unique internal identifier of the user associated with the historical record.
+	//
+	// @example 420
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UserId        uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -986,7 +1165,7 @@ func (x *TeamMemberHistoryRequest) GetUserId() uint64 {
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Team records.
 type TeamsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -994,7 +1173,7 @@ type TeamsServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1014,19 +1193,23 @@ type TeamsServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this team
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1062,8 +1245,8 @@ func (*TeamsServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1076,34 +1259,34 @@ func (x *TeamsServicePaginationReq) GetCount() int64 {
 }
 
 func (x *TeamsServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *TeamsServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *TeamsServicePaginationReq) GetSortKey() TEAM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return TEAM_SORT_KEY_TEAM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *TeamsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type TeamsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1182,7 +1365,12 @@ func (x *TeamsServicePaginationResponse) GetPayload() []*Team {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating teams using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type TeamsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1190,7 +1378,7 @@ type TeamsServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1210,17 +1398,17 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1230,7 +1418,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1240,7 +1428,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1250,7 +1438,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1260,7 +1448,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1270,13 +1458,13 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1286,7 +1474,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1296,7 +1484,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1306,7 +1494,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1316,7 +1504,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1326,7 +1514,7 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1336,15 +1524,47 @@ type TeamsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The name of the team
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the team
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The ID of the leader
-	LeadUserId uint64 `protobuf:"varint,22,opt,name=lead_user_id,json=leadUserId,proto3" json:"lead_user_id,omitempty"`
-	// The ID of the member
-	MemberUserId  uint64 `protobuf:"varint,23,opt,name=member_user_id,json=memberUserId,proto3" json:"member_user_id,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the team.
+	//
+	// @example "Core Backend Engineering"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the team.
+	//
+	// @example "ENG-CORE-01"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user designated as the team lead or manager for this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	LeadUserId *uint64 `protobuf:"varint,22,opt,name=lead_user_id,json=leadUserId,proto3,oneof" json:"lead_user_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user designated as the team member that is part of this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	MemberUserId  *uint64 `protobuf:"varint,23,opt,name=member_user_id,json=memberUserId,proto3,oneof" json:"member_user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1380,8 +1600,8 @@ func (*TeamsServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1394,139 +1614,145 @@ func (x *TeamsServiceFilterReq) GetCount() int64 {
 }
 
 func (x *TeamsServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *TeamsServiceFilterReq) GetSortKey() TEAM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return TEAM_SORT_KEY_TEAM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *TeamsServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *TeamsServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *TeamsServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *TeamsServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *TeamsServiceFilterReq) GetLeadUserId() uint64 {
-	if x != nil {
-		return x.LeadUserId
+	if x != nil && x.LeadUserId != nil {
+		return *x.LeadUserId
 	}
 	return 0
 }
 
 func (x *TeamsServiceFilterReq) GetMemberUserId() uint64 {
-	if x != nil {
-		return x.MemberUserId
+	if x != nil && x.MemberUserId != nil {
+		return *x.MemberUserId
 	}
 	return 0
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting team records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type TeamsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1534,7 +1760,7 @@ type TeamsServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1544,7 +1770,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1554,7 +1780,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1564,7 +1790,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1574,7 +1800,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1584,13 +1810,13 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1600,7 +1826,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1610,7 +1836,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1620,7 +1846,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1630,7 +1856,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1640,7 +1866,7 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1650,15 +1876,47 @@ type TeamsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
-	// The name of the team
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The code of the team
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The ID of the leader
-	LeadUserId uint64 `protobuf:"varint,22,opt,name=lead_user_id,json=leadUserId,proto3" json:"lead_user_id,omitempty"`
-	// The ID of the member
-	MemberUserId  uint64 `protobuf:"varint,23,opt,name=member_user_id,json=memberUserId,proto3" json:"member_user_id,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the team.
+	//
+	// @example "Core Backend Engineering"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the team.
+	//
+	// @example "ENG-CORE-01"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user designated as the team lead or manager for this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	LeadUserId *uint64 `protobuf:"varint,22,opt,name=lead_user_id,json=leadUserId,proto3,oneof" json:"lead_user_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user designated as the team member that is part of this group.
+	//
+	// @example 402
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	MemberUserId  *uint64 `protobuf:"varint,23,opt,name=member_user_id,json=memberUserId,proto3,oneof" json:"member_user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1694,125 +1952,131 @@ func (*TeamsServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *TeamsServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *TeamsServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *TeamsServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *TeamsServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *TeamsServiceCountReq) GetLeadUserId() uint64 {
-	if x != nil {
-		return x.LeadUserId
+	if x != nil && x.LeadUserId != nil {
+		return *x.LeadUserId
 	}
 	return 0
 }
 
 func (x *TeamsServiceCountReq) GetMemberUserId() uint64 {
-	if x != nil {
-		return x.MemberUserId
+	if x != nil && x.MemberUserId != nil {
+		return *x.MemberUserId
 	}
 	return 0
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating teams via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type TeamsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1820,7 +2084,7 @@ type TeamsServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1840,17 +2104,17 @@ type TeamsServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *TEAM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1860,14 +2124,14 @@ type TeamsServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// @mandatory
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -1876,7 +2140,7 @@ type TeamsServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	SearchKey     *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1912,8 +2176,8 @@ func (*TeamsServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1926,48 +2190,49 @@ func (x *TeamsServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *TeamsServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *TeamsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *TeamsServiceSearchAllReq) GetSortKey() TEAM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return TEAM_SORT_KEY_TEAM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *TeamsServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *TeamsServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *TeamsServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the request payload to retrieve approved or unapproved members.
+// Request payload structure used to search and filter Team Member records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type TeamMembersSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1975,7 +2240,7 @@ type TeamMembersSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1995,17 +2260,17 @@ type TeamMembersSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey TEAM_MEMBER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_MEMBER_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *TEAM_MEMBER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.TEAM_MEMBER_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2015,23 +2280,83 @@ type TeamMembersSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the members
-	Status TEAM_MEMBER_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.TEAM_MEMBER_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
-	ApprovedOnStart uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
-	ApprovedOnEnd uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
-	ApprovedByUserId uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
-	ApproverRoleId uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The ID of the team
-	TeamId uint64 `protobuf:"varint,20,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// The ID of the member
-	UserId uint64 `protobuf:"varint,21,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Filter records by their verification lifecycle state (e.g., Approved, Unapproved). Defaults to unspecified/any.
+	//
+	// @example TEAM_MEMBER_STATUS_APPROVED
+	Status *TEAM_MEMBER_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.TEAM_MEMBER_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnStart *uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnEnd *uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedByUserId *uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApproverRoleId *uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the target team to which the user will be added.
+	//
+	// @example 105
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	TeamId *uint64 `protobuf:"varint,20,opt,name=team_id,json=teamId,proto3,oneof" json:"team_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the user being mapped to the team.
+	//
+	// @example 420
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UserId *uint64 `protobuf:"varint,21,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	// @optional
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey     *string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2067,8 +2392,8 @@ func (*TeamMembersSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *TeamMembersSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2081,90 +2406,91 @@ func (x *TeamMembersSearchRequest) GetCount() int64 {
 }
 
 func (x *TeamMembersSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *TeamMembersSearchRequest) GetSortKey() TEAM_MEMBER_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return TEAM_MEMBER_SORT_KEY_TEAM_MEMBER_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *TeamMembersSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *TeamMembersSearchRequest) GetStatus() TEAM_MEMBER_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return TEAM_MEMBER_STATUS_TEAM_MEMBER_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *TeamMembersSearchRequest) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetTeamId() uint64 {
-	if x != nil {
-		return x.TeamId
+	if x != nil && x.TeamId != nil {
+		return *x.TeamId
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *TeamMembersSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination members request
+// Paginated response packet containing a subset of Team Member records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type TeamsServicePaginatedMembersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2247,29 +2573,40 @@ var File_teams_scailo_proto protoreflect.FileDescriptor
 
 const file_teams_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12teams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xa0\x02\n" +
-	"\x19TeamsServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
+	"\x12teams.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1avault_folders.scailo.proto\"\xf9\x02\n" +
+	"\x19TeamsServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12)\n" +
 	"\flead_user_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"leadUserId\x12)\n" +
-	"\vdescription\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\"\xbb\x02\n" +
-	"\x19TeamsServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
+	"leadUserId\x12.\n" +
+	"\vdescription\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\vdescription\x88\x01\x01B\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x0e\n" +
+	"\f_description\"\xc7\x03\n" +
+	"\x19TeamsServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12 \n" +
 	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
-	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12)\n" +
-	"\flead_user_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"leadUserId\x12)\n" +
-	"\vdescription\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\"\xf0\x03\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x04name\x88\x01\x01\x12 \n" +
+	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x04code\x88\x01\x01\x12.\n" +
+	"\flead_user_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\n" +
+	"leadUserId\x88\x01\x01\x12.\n" +
+	"\vdescription\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\vdescription\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0f\n" +
+	"\r_lead_user_idB\x0e\n" +
+	"\f_description\"\xf0\x03\n" +
 	"\x04Team\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2285,15 +2622,17 @@ const file_teams_scailo_proto_rawDesc = "" +
 	"\flead_user_id\x18\f \x01(\x04R\n" +
 	"leadUserId\x12 \n" +
 	"\vdescription\x18\r \x01(\tR\vdescription\x12&\n" +
-	"\x04list\x18\x14 \x03(\v2\x12.Scailo.TeamMemberR\x04list\"\x88\x01\n" +
-	"\x1fTeamsServiceMemberCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12 \n" +
+	"\x04list\x18\x14 \x03(\v2\x12.Scailo.TeamMemberR\x04list\"\x9e\x01\n" +
+	"\x1fTeamsServiceMemberCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12 \n" +
 	"\ateam_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
-	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\"]\n" +
-	"\x1fTeamsServiceMemberUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\"\xa4\x02\n" +
+	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userIdB\x0f\n" +
+	"\r_user_comment\"s\n" +
+	"\x1fTeamsServiceMemberUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02idB\x0f\n" +
+	"\r_user_comment\"\xa4\x02\n" +
 	"\n" +
 	"TeamMember\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
@@ -2312,99 +2651,171 @@ const file_teams_scailo_proto_rawDesc = "" +
 	"\x18TeamMemberHistoryRequest\x12 \n" +
 	"\ateam_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
-	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\"\xad\x02\n" +
-	"\x19TeamsServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\"\x86\x03\n" +
+	"\x19TeamsServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x8c\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x8c\x01\n" +
 	"\x1eTeamsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12&\n" +
-	"\apayload\x18\x04 \x03(\v2\f.Scailo.TeamR\apayload\"\xb8\a\n" +
-	"\x15TeamsServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\f.Scailo.TeamR\apayload\"\x9d\v\n" +
+	"\x15TeamsServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12 \n" +
-	"\flead_user_id\x18\x16 \x01(\x04R\n" +
-	"leadUserId\x12$\n" +
-	"\x0emember_user_id\x18\x17 \x01(\x04R\fmemberUserId\"\x89\x06\n" +
-	"\x14TeamsServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x10R\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x11R\x04code\x88\x01\x01\x12%\n" +
+	"\flead_user_id\x18\x16 \x01(\x04H\x12R\n" +
+	"leadUserId\x88\x01\x01\x12)\n" +
+	"\x0emember_user_id\x18\x17 \x01(\x04H\x13R\fmemberUserId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0f\n" +
+	"\r_lead_user_idB\x11\n" +
+	"\x0f_member_user_id\"\xb8\t\n" +
+	"\x14TeamsServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12 \n" +
-	"\flead_user_id\x18\x16 \x01(\x04R\n" +
-	"leadUserId\x12$\n" +
-	"\x0emember_user_id\x18\x17 \x01(\x04R\fmemberUserId\"\xf5\x02\n" +
-	"\x18TeamsServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\rR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x0eR\x04code\x88\x01\x01\x12%\n" +
+	"\flead_user_id\x18\x16 \x01(\x04H\x0fR\n" +
+	"leadUserId\x88\x01\x01\x12)\n" +
+	"\x0emember_user_id\x18\x17 \x01(\x04H\x10R\fmemberUserId\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0f\n" +
+	"\r_lead_user_idB\x11\n" +
+	"\x0f_member_user_id\"\xf7\x03\n" +
+	"\x18TeamsServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.TEAM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\"\xd4\x04\n" +
-	"\x18TeamMembersSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x127\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1c.Scailo.TEAM_MEMBER_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x122\n" +
-	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.TEAM_MEMBER_STATUSR\x06status\x12*\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_key\"\xe3\x06\n" +
+	"\x18TeamMembersSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12<\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1c.Scailo.TEAM_MEMBER_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x127\n" +
+	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.TEAM_MEMBER_STATUSH\x05R\x06status\x88\x01\x01\x12/\n" +
 	"\x11approved_on_start\x18\n" +
-	" \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\v \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\f \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\r \x01(\x04R\x0eapproverRoleId\x12\x17\n" +
-	"\ateam_id\x18\x14 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\auser_id\x18\x15 \x01(\x04R\x06userId\x12\x1d\n" +
+	" \x01(\x04H\x06R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\v \x01(\x04H\aR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\f \x01(\x04H\bR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\r \x01(\x04H\tR\x0eapproverRoleId\x88\x01\x01\x12\x1c\n" +
+	"\ateam_id\x18\x14 \x01(\x04H\n" +
+	"R\x06teamId\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x15 \x01(\x04H\vR\x06userId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18( \x01(\tR\tsearchKey\"\x98\x01\n" +
+	"search_key\x18( \x01(\tH\fR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\n" +
+	"\n" +
+	"\b_team_idB\n" +
+	"\n" +
+	"\b_user_idB\r\n" +
+	"\v_search_key\"\x98\x01\n" +
 	"$TeamsServicePaginatedMembersResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
@@ -2675,6 +3086,15 @@ func file_teams_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_teams_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[3].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[11].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[12].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[13].OneofWrappers = []any{}
+	file_teams_scailo_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

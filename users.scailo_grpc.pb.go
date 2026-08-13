@@ -74,9 +74,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each user
+// The UsersService manages the full lifecycle of users.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type UsersServiceClient interface {
-	// Register user's mobile device for push notifications. Returns the ID of the user device record
+	// Registers a user's mobile device to enable push notifications.
+	//
+	// **Side Effects:**
+	// - Binds the device token to the authenticated user's session profile.
+	// - Invalidates previous device tokens if maximum device limits per user are exceeded.
+	//
+	// Returns the unique identifier response of the newly registered user device record.
 	RegisterMobileDevice(ctx context.Context, in *UsersServiceRegisterMobileDeviceRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Creates a new user and initiates the verification workflow.
 	//
@@ -172,21 +180,73 @@ type UsersServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Create a magic link that allows user to upload their signature
+	// Generates a secure, short-lived magic link allowing the user to securely upload their signature.
+	//
+	// **Side Effects:**
+	// - Creates a time-bounded resource access token in the system database.
 	CreateMagicLinkForSignature(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Update user's password by another user (such as an administrator)
+	// Administrative override method to forcefully update a user's password.
+	//
+	// This is typically invoked by an administrator or helpdesk agent.
+	//
+	// **Side Effects:**
+	// - Overwrites the existing password hash.
+	// - Triggers a security notification email to the target user notifying them of the change.
+	// - Terminates all active sessions for the target user, forcing a re-login.
+	//
+	// **Errors:**
+	// - `PERMISSION_DENIED`: If the calling user lacks administrative password modification privileges.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update user's own password
+	// Allows the currently authenticated user to update their own account password.
+	//
+	// This method strictly enforces a check against the user's current password to prevent hijacking.
+	//
+	// **Side Effects:**
+	// - Updates the password hash in the secure identity vault.
+	// - Revokes all other active login tokens/sessions except for the current operational session.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If the new password fails system complexity guidelines.
 	UpdateOwnPassword(ctx context.Context, in *UpdateOwnPasswordReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Request the password reset email for the given username. An email is triggered if the username is found.
+	// Initiates the self-service password recovery workflow for a specific username.
+	//
+	// **Side Effects:**
+	// - If the username is matched, asynchronously dispatches a structured reset email containing a token.
+	// - Appends a tracking entry to the system security logs.
+	//
+	// **Note:** To prevent user enumeration attacks, this endpoint may return a successful status
+	// even if the provided username does not exist in the system.
 	RequestPasswordResetEmail(ctx context.Context, in *UsersServicePasswordResetReq, opts ...grpc.CallOption) (*MagicLink, error)
-	// Update the user's profile picture
+	// Updates the profile picture associated with the user account.
+	//
+	// **Side Effects:**
+	// - Uploads the binary payload to the secure object store.
+	// - Automatically triggers an asynchronous background job to generate standardized thumbnails.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If the file format is unsupported or file size limits are exceeded.
 	UpdateProfilePicture(ctx context.Context, in *UploadPictureReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update the user's signature
+	// Updates the user's official signature resource.
+	//
+	// **Side Effects:**
+	// - Overwrites the existing signature image artifact.
+	// - Logs a compliance entry in the audit trail indicating a credential/signature modification.
 	UpdateSignature(ctx context.Context, in *UploadPictureReq, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Enable MFA for user
+	// Enables Multi-Factor Authentication (MFA) for the specified user account.
+	//
+	// **Side Effects:**
+	// - Initializes a new cryptographic seed for the user.
+	// - Generates a setup QR code image payload required to configure authenticator applications.
 	MFAEnable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// Reset MFA for user
+	// Disables and resets the Multi-Factor Authentication configuration for a user.
+	//
+	// **Side Effects:**
+	// - Completely clears the assigned cryptographic seed from the user's profile.
+	// - Reverts the account authentication requirement back to single-factor (password only).
+	// - Records a high-severity entry in the system compliance log.
+	//
+	// **Errors:**
+	// - `PERMISSION_DENIED`: If the action is not performed by an authorized security administrator.
 	MFAReset(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// View by ID (returns the entire information about the user, including the logs)
 	ViewByID(ctx context.Context, in *IdentifierZeroable, opts ...grpc.CallOption) (*User, error)
@@ -196,9 +256,21 @@ type UsersServiceClient interface {
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*User, error)
 	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*User, error)
-	// View by username (logs aren't returned)
+	// Retrieves a single user record utilizing their unique username.
+	//
+	// This is a high-performance, read-only query designed for quick profile validation.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided username does not match an active user record.
 	ViewByUsername(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*User, error)
-	// View by user's code (logs aren't returned)
+	// Retrieves a single record via the assigned internal code.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided internal code does not exist.
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*User, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*UsersList, error)
@@ -210,27 +282,56 @@ type UsersServiceClient interface {
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*UsersList, error)
 	// View all users with the given UUIDs
 	ViewFromUUIDs(ctx context.Context, in *IdentifierUUIDsList, opts ...grpc.CallOption) (*UsersList, error)
-	// View all users with the given usernames
+	// Resolves and returns a collection of user records corresponding to an explicit list of usernames.
+	//
+	// This query handles multi-record fetching efficiently and will return empty entries or skip
+	// usernames that fail to map to a valid record.
 	ViewFromUsernames(ctx context.Context, in *StringsList, opts ...grpc.CallOption) (*UsersList, error)
-	// View self user (the profile of the logged in user)
+	// Retrieves the contextual profile details of the currently authenticated system caller.
+	//
+	// This serves as the primary endpoint for populating active user dashboards and checking current permissions.
+	//
+	// **Errors:**
+	// - `UNAUTHENTICATED`: If the calling context lacks valid session tokens.
 	ViewSelf(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*User, error)
-	// View all users with birthdays on the given date
+	// Filters and returns all user records whose birthday falls on the specified month and day.
+	//
+	// This read-only utility API is typically utilized for scheduling automated cultural or internal system greetings.
 	ViewBirthdaysOn(ctx context.Context, in *MonthAndDayFilter, opts ...grpc.CallOption) (*UsersList, error)
-	// View user's signature
+	// Fetches the user's official signature rendered as a Base64 encoded string format.
+	//
+	// This is optimized for inline document embedding and programmatic PDF signing processes.
 	ViewSignature(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Base64String, error)
-	// View user's profile picture
+	// Retrieves the primary full-resolution profile picture artifact mapped to the user UUID.
 	ViewProfilePicture(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// View user's thumbnail picture
+	// Retrieves the optimized, low-bandwidth thumbnail image variant of the user's profile picture.
+	//
+	// This operation is heavily optimized for rendering lists, directory grids, and navigation bars.
 	ViewThumbnailPicture(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// View user's VCard
+	// Generates and returns a standard electronic business card (VCard) structure formatted as an image asset.
 	ViewVCard(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// View user's QR Code as image
+	// Retrieves the user's unique identification QR Code rendered cleanly as an image asset.
+	//
+	// Useful for displaying physical scanning cards within mobile user interfaces.
 	ViewQRImage(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// View user's QR Code as string
+	// Retrieves the text payload or URL represented within the user's identification QR code.
 	ViewQRString(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StringResponse, error)
-	// View user info on the basis of the provided image. The image should consist of only the user's face. Will return an error if the image has not been recognized.
+	// Performs biometric identification against a tightly pre-cropped image focusing solely on a single human face.
+	//
+	// The backend processes the facial vector characteristics to identify the target system user.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the biometric scan cannot securely match the facial vector against the active registry.
+	// - `INVALID_ARGUMENT`: If multiple faces or no recognizable facial features are discovered in the image template.
 	IdentifyCroppedFace(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*User, error)
-	// View user info on the basis of the provided image. The image should consist of just the user (might be a full sized photo). The face will be cropped. Will return an error if the image has not been recognized.
+	// Performs biometric identification against a standard or full-scale multi-context photograph.
+	//
+	// **Side Effects:**
+	// - The backend automatically applies edge-detection algorithms to locate, isolate, and crop the face before running validation.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If no corresponding user identity maps to the isolated face vector.
+	// - `INVALID_ARGUMENT`: If the photo contains multiple conflicting subjects or formatting anomalies.
 	IdentifyFullFace(ctx context.Context, in *StandardFile, opts ...grpc.CallOption) (*User, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *UsersServiceSearchAllReq, opts ...grpc.CallOption) (*UsersList, error)

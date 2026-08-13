@@ -150,7 +150,11 @@ type SalesReceiptsServiceClient interface {
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -185,9 +189,22 @@ type SalesReceiptsServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesReceiptsList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *SalesReceiptsServicePaginationReq, opts ...grpc.CallOption) (*SalesReceiptsServicePaginationResponse, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download sales receipt with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *SalesReceiptsServiceSearchAllReq, opts ...grpc.CallOption) (*SalesReceiptsList, error)

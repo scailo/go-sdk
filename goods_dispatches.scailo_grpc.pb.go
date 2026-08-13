@@ -84,9 +84,37 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each goods dispatch
+// Core service for managing the complete operational and approval lifecycle of Goods Dispatches.
+//
+// A Goods Dispatch represents the physical fulfillment, packing, and outbound shipping of products
+// to a buyer. It serves as the critical logistical bridge between the negotiated commercial terms
+// (defined in a parent Sales Order) and actual warehouse operations, ensuring that only authorized,
+// constrained quantities physically leave the facility.
+//
+// **Lifecycle & Workflow:**
+// This service strictly enforces the state machine of a Goods Dispatch:
+// - **Drafting (Packing):** Creating preliminary dispatch records, allocating specific inventory instances (via item hashes), and attaching external logistics metadata (e.g., carrier tracking numbers).
+// - **Verification:** Submitting the drafted shipment through a warehouse or QA review to ensure physical counts match the allocated quantities and comply with shipping policies.
+// - **Approval (Shipping):** Finalizing the dispatch into a `STANDING` state, formally acknowledging that the physical goods have left the fulfillment center and generating the immutable reference number.
+//
+// **Operational Impact:**
+// Reaching the approved (`STANDING`) state triggers crucial downstream effects: it definitively
+// deducts the shipped inventory from warehouse stock levels and flags the physically fulfilled quantities
+// as eligible for financial conversion (billing) via a finalized Sales Invoice.
 type GoodsDispatchesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
+	// - `ALREADY_EXISTS`: If the `reference_id` is already taken.
 	Create(ctx context.Context, in *GoodsDispatchesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -175,11 +203,21 @@ type GoodsDispatchesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -192,52 +230,111 @@ type GoodsDispatchesServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Autofill the goods dispatch
+	// Automatically populates a record with line items and configurations derived from its linked references.
+	//
+	// **Side Effects:**
+	// - Queries the target record (identified by its UUID) for any attached operational constraints or references.
+	// - Dynamically generates and attaches the corresponding line items to the record based on the sourced data, minimizing manual data entry.
+	// - Appends an audit trail entry tracking the execution of the autofill operation and the provided justification comment.
 	Autofill(ctx context.Context, in *GoodsDispatchesServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Checks if the Goods Dispatch can be marked as completed
+	// Evaluates whether the specified record has satisfied all prerequisite business rules required to transition into a completed lifecycle state.
+	//
+	// This is a non-mutating, read-only query that performs comprehensive server-side validation against the record's current operational constraints. Depending on the specific domain context, the underlying checks may verify that all dependent workflows are resolved, associated child records (such as line items or sub-tasks) have reached their terminal states, and no mandatory actions remain pending.
+	// Client applications typically utilize this endpoint to dynamically determine whether the "Complete" action should be enabled or exposed in the user interface.
 	IsCompletable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Add multiple items to a goods dispatch
+	// Appends a batch of physical line items to an existing Goods Dispatch in a single transactional operation.
+	//
+	// **Side Effects:**
+	// - Allocates multiple specific inventory instances (via item hashes) to the outbound shipment simultaneously.
+	// - Validates that the requested logistical quantities do not exceed the unfulfilled totals on the parent source document.
+	// - Appends creation audit logs for all attached physical items.
 	AddMultipleGoodsDispatchItems(ctx context.Context, in *GoodsDispatchesServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add an item to a goods dispatch
+	// Appends a single physical line item to an existing Goods Dispatch.
+	//
+	// **Side Effects:**
+	// - Maps a specific physical product instance (tracked by its unique `item_hash` or serial/batch identifier) to the outbound shipment.
+	// - Records the exact internal and client-facing quantities being picked from warehouse shelves.
+	// - Appends an audit trail entry tracking the packing action.
 	AddGoodsDispatchItem(ctx context.Context, in *GoodsDispatchesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an item in a goods dispatch
+	// Modifies the logistical parameters of an existing line item within a pending Goods Dispatch.
+	//
+	// **Side Effects:**
+	// - Allows warehouse staff to correct picking errors (e.g., swapping a scanned barcode/hash, adjusting packed quantities) before the dispatch is locked.
+	// - May reset the item's approval status, requiring re-authorization by a warehouse supervisor.
+	// - Appends an audit trail entry tracking the modification.
 	ModifyGoodsDispatchItem(ctx context.Context, in *GoodsDispatchesServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve an item in a goods dispatch
+	// Approves a specific packed line item, formally authorizing its inclusion in the outbound shipment.
+	//
+	// **Side Effects:**
+	// - Acts as a Quality Assurance (QA) gate, confirming that the physical item matches the requested quantity and family.
+	// - Appends the required approval metadata, timestamp, and QA justification to the record's history.
 	ApproveGoodsDispatchItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete an item in a goods dispatch
+	// Permanently removes or deallocates a physical line item from the goods dispatch document.
+	//
+	// **Side Effects:**
+	// - Releases the previously allocated inventory hash back to the warehouse's available pool.
+	// - Logs the deletion justification (e.g., "Item damaged during packing", "Customer canceled line") into the system compliance log.
 	DeleteGoodsDispatchItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder items in a goods dispatch
+	// Reorders the numerical sequence of physical line items within the goods dispatch.
+	//
+	// **Side Effects:**
+	// - Mutates the display sequence (`sort_order`) of the specified items.
+	// - Directly dictates how the items are visually arranged on the generated packing slip or Bill of Lading provided to the logistics carrier.
 	ReorderGoodsDispatchItems(ctx context.Context, in *ReorderItemsRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View Goods Dispatch Item by ID
+	// Retrieves the complete logistical details of a specific packed line item by its internal sequence ID.
+	//
+	// This read-only operation fetches full metadata, approval histories, and tracked quantities.
 	ViewGoodsDispatchItemByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*GoodsDispatchItem, error)
-	// View Goods Dispatch Item by Inventory Hash
+	// Retrieves the complete logistical details of a specific packed line item by its exact inventory hash (e.g., scanned barcode, RFID, or serial number).
+	//
+	// This is a highly critical read-only query for Warehouse Management Systems (WMS). It allows staff on the floor to scan a physical label and instantly verify if and where an item is packed within a pending shipment.
 	ViewGoodsDispatchItemByInventoryHash(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*GoodsDispatchItem, error)
-	// View approved goods dispatch items for given goods dispatch ID
+	// Lists all active, fully QA-approved physical line items mapped to a specific Goods Dispatch ID.
+	//
+	// This read-only query is optimized for rendering the finalized packing slip or generating the outbound logistics manifest.
 	ViewApprovedGoodsDispatchItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*GoodsDispatchesItemsList, error)
-	// View unapproved goods dispatch items for given goods dispatch ID
+	// Lists pending or unapproved physical line items mapped to a specific Goods Dispatch ID.
+	//
+	// This read-only query is utilized primarily by warehouse supervisor dashboards to quickly identify packed items awaiting QA review before the truck departs.
 	ViewUnapprovedGoodsDispatchItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*GoodsDispatchesItemsList, error)
-	// View the history of the goods dispatch item
+	// Retrieves the historical audit trail and lifecycle changes of a specific packed line item.
+	//
+	// This read-only operation tracks the chronological evolution of the physical pick—such as who initially scanned it, who adjusted the quantity, and who provided final QA approval.
 	ViewGoodsDispatchItemHistory(ctx context.Context, in *GoodsDispatchItemHistoryRequest, opts ...grpc.CallOption) (*GoodsDispatchesItemsList, error)
-	// View approved goods dispatch items for given goods dispatch ID with pagination
+	// Lists active, approved physical line items using robust pagination controls.
+	//
+	// This read-only query is optimized for rendering massive fulfillment manifests in frontend data tables, supporting explicit windowing parameters.
 	ViewPaginatedApprovedGoodsDispatchItems(ctx context.Context, in *GoodsDispatchItemsSearchRequest, opts ...grpc.CallOption) (*GoodsDispatchesServicePaginatedItemsResponse, error)
-	// View unapproved goods dispatch items for given goods dispatch ID with pagination
+	// Lists pending or unapproved physical line items using robust pagination controls.
+	//
+	// This read-only query is optimized for warehouse supervisor dashboards managing extremely high volumes of pending QA checks.
 	ViewPaginatedUnapprovedGoodsDispatchItems(ctx context.Context, in *GoodsDispatchItemsSearchRequest, opts ...grpc.CallOption) (*GoodsDispatchesServicePaginatedItemsResponse, error)
-	// Search through goods dispatch items with pagination
+	// Searches through all physical line items using advanced filters, status flags, fuzzy text matching (e.g., partial SKU searches), and pagination.
+	//
+	// This read-only query is the primary entry point for complex logistics lookups across large dispatch lists.
 	SearchItemsWithPagination(ctx context.Context, in *GoodsDispatchItemsSearchRequest, opts ...grpc.CallOption) (*GoodsDispatchesServicePaginatedItemsResponse, error)
-	// CSV operations
-	// Download the CSV file with the associated line items. The same file could then be used to upload line items.
+	// Exports the current list of packed line items for a specific goods dispatch into a downloadable CSV file.
+	//
+	// This read-only operation is highly valuable for offline warehouse reviews, sharing packing lists with Third-Party Logistics (3PL) providers, or serving as a baseline file for bulk discrepancy corrections.
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the CSV template that could be used to upload items
+	// Generates and downloads a blank, structurally compliant CSV template.
+	//
+	// This read-only operation provides warehouse teams or WMS integrations with the exact column headers required to successfully perform a bulk line-item upload for outbound fulfillment.
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*GoodsDispatch, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*GoodsDispatch, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*GoodsDispatch, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*GoodsDispatch, error)
@@ -245,7 +342,11 @@ type GoodsDispatchesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*GoodsDispatch, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*GoodsDispatchesList, error)
-	// View the ancillary parameters (UUIDs of the internal references) by UUID
+	// Retrieves the supplementary, globally unique identifiers (UUIDs) of the foreign key entities associated with a specific Goods Dispatch.
+	//
+	// This read-only query acts as an architectural accelerator for frontend clients and external integrations. By instantly resolving internal
+	// integer IDs into their corresponding UUIDs (such as the parent Sales Order's UUID and the physical fulfillment location's UUID), it enables
+	// seamless cross-module deep-linking and eliminates the need for secondary API lookups to traverse the supply chain hierarchy.
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*GoodsDispatchAncillaryParameters, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*GoodsDispatchesList, error)
@@ -253,23 +354,50 @@ type GoodsDispatchesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*GoodsDispatchesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *GoodsDispatchesServicePaginationReq, opts ...grpc.CallOption) (*GoodsDispatchesServicePaginationResponse, error)
-	// View prospective families for the given goods dispatch
+	// Retrieves a list of eligible families that can be added as physical line items to a specific Goods Dispatch.
+	//
+	// This read-only query evaluates the originating source document (e.g., the parent Sales Order) and returns only those products that still have pending, unshipped quantities. It is utilized heavily by warehouse management interfaces during the packing phase, ensuring that fulfillment teams can only pick and allocate items that were formally negotiated and authorized.
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
-	// Filter prospective families for the record represented by the given UUID identifier
+	// Searches and filters the list of eligible, unfulfilled families for a specific Goods Dispatch using advanced criteria.
+	//
+	// This read-only query provides the same critical logistical safeguard as `ViewProspectiveFamilies` but includes robust pagination and filtering capabilities. It is optimized for scenarios where the parent commercial document contains hundreds of line items, allowing warehouse pickers or automated scanners to quickly locate specific unshipped products to add to the current outbound shipment.
 	FilterProspectiveFamilies(ctx context.Context, in *FilterFamiliesReqForIdentifier, opts ...grpc.CallOption) (*FamiliesList, error)
-	// View prospective goods dispatch item info for the given family ID and goods dispatch ID
+	// Generates a pre-populated, ready-to-submit item creation payload for a specific eligible family.
+	//
+	// This read-only operation acts as a logistical templating engine for the warehouse floor. When a user or system selects a product to pack, this endpoint automatically cross-references the source document to fetch the correct client-specific unit mappings and the remaining unfulfilled quantities. By defaulting to these exact limits, it drastically reduces manual data entry errors and strictly prevents the facility from over-shipping inventory.
 	ViewProspectiveGoodsDispatchItem(ctx context.Context, in *GoodsDispatchItemProspectiveInfoRequest, opts ...grpc.CallOption) (*GoodsDispatchesServiceItemCreateRequest, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download goods dispatch with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the label for the goods dispatch with the given IdentifierUUID
+	// Generates and downloads the physical shipping label or packing slip for a specific Goods Dispatch.
+	//
+	// This read-only operation is highly critical for outbound logistics. It provides warehouse staff, shipping clerks, and external carriers with the formatted document required to physically attach to the outbound boxes or pallets, ensuring correct routing, tracking, and delivery to the buyer.
 	DownloadLabelByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// View the associated sales invoice information that is denoted by the identifier in the response for the goods dispatch that is denoted by the identifier UUID in the request
+	// Retrieves the internal system identifier of the finalized Sales Invoice that was generated to bill for this specific Goods Dispatch.
+	//
+	// This read-only query establishes the vital traceability link between physical fulfillment (what left the warehouse) and financial realization (what the customer is paying for). It empowers client applications to provide seamless, one-click navigation from a completed logistical shipment directly to its corresponding formal financial bill.
 	ViewAssociatedSalesInvoiceInfo(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Checks if the Goods Dispatch has been billed
+	// Evaluates whether the physically shipped items in a Goods Dispatch have been formally converted into a finalized Sales Invoice.
+	//
+	// This read-only query returns a strict boolean flag (`true` if billed, `false` if unbilled). It is widely utilized by both warehouse and finance dashboards to dynamically update UI status badges, identify unbilled shipments (pending unbilled revenue), and automatically lock logistical editing capabilities once the financial realization has occurred.
 	IsBilled(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// View already added quantities
+	// Calculates the cumulative physical quantity of a specific family that has already been dispatched across all outbound shipments linked to a given source document.
+	//
+	// This read-only query acts as a strict logistical safeguard during the warehouse packing phase. By instantly computing exactly how much of a family has already left the facility against a specific contract (e.g., a Sales Order), it prevents frontend clients and Warehouse Management System (WMS) integrations from accidentally scanning, packing, or over-shipping more inventory than was originally authorized.
 	ViewAddedFamilyQuantityForSource(ctx context.Context, in *GoodsDispatchesServiceAlreadyAddedQuantityForSourceRequest, opts ...grpc.CallOption) (*DualQuantitiesResponse, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *GoodsDispatchesServiceSearchAllReq, opts ...grpc.CallOption) (*GoodsDispatchesList, error)

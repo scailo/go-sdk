@@ -431,7 +431,15 @@ type ActivitiesServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The associated vault folder ID
 	VaultFolderId uint64 `protobuf:"varint,7,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
@@ -565,9 +573,25 @@ func (x *ActivitiesServiceCreateRequest) GetAssignSelfAsSupervisor() bool {
 // Describes the parameters necessary to update a record
 type ActivitiesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -2018,7 +2042,15 @@ func (x *ActivitiesServiceSearchAllReq) GetActivityTagId() uint64 {
 // Describes the parameters required to add an action to an activity
 type ActivitiesServiceActionCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the optional employee ID
 	EmployeeId uint64 `protobuf:"varint,9,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
@@ -2118,7 +2150,15 @@ func (x *ActivitiesServiceActionCreateRequest) GetPoints() uint64 {
 // Describes the parameters required to update an action in an activity
 type ActivitiesServiceActionUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -2743,7 +2783,15 @@ func (x *ActivitiesServicePaginatedActionsResponse) GetPayload() []*ActivityActi
 // Describes the parameters required to add an action along with an activity timer
 type ActivitiesServiceActionWithTimerCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the activity ID
 	ActivityId uint64 `protobuf:"varint,10,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
@@ -2879,7 +2927,15 @@ func (x *ActivitiesServiceActionWithTimerCreateRequest) GetContent() string {
 // Describes the parameters necessary to create an activity tag association
 type ActivitiesServiceActivityTagAssociationCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the activity ID
 	ActivityId uint64 `protobuf:"varint,10,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
@@ -3073,7 +3129,15 @@ func (x *ActivityTagAssociationsList) GetList() []*ActivityTagAssociation {
 // Describes the parameters necessary to create an activity owner
 type ActivitiesServiceOwnerCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the activity ID
 	ActivityId uint64 `protobuf:"varint,10,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
@@ -3267,7 +3331,15 @@ func (x *ActivityOwnersList) GetList() []*ActivityOwner {
 // Describes the data model to handle importing of employees from the given identifier representing a team or a department
 type ActivitiesServiceImportOwnersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the activity
 	ActivityId uint64 `protobuf:"varint,2,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
@@ -3340,7 +3412,15 @@ func (x *ActivitiesServiceImportOwnersRequest) GetDeleteExisting() bool {
 // Describes the parameters necessary to create an activity supervisor
 type ActivitiesServiceSupervisorCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the activity ID
 	ActivityId uint64 `protobuf:"varint,10,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
@@ -3534,7 +3614,15 @@ func (x *ActivitySupervisorsList) GetList() []*ActivitySupervisor {
 // Describes the parameters necessary to create an activity timer
 type ActivitiesServiceTimerCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the activity action ID
 	ActivityActionId uint64 `protobuf:"varint,11,opt,name=activity_action_id,json=activityActionId,proto3" json:"activity_action_id,omitempty"`
@@ -3643,7 +3731,15 @@ func (x *ActivitiesServiceTimerCreateRequest) GetDescription() string {
 // Describes the parameters necessary to end an activity timer
 type ActivitiesServiceTimerEndRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`

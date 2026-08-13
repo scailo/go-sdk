@@ -255,7 +255,15 @@ type ExpensesServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The associated project ID
 	ProjectId uint64 `protobuf:"varint,8,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
@@ -287,7 +295,13 @@ type ExpensesServiceCreateRequest struct {
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The ID of the user who paid for this expense (if paid by organization, then this will be 0)
 	PaidByUserId uint64 `protobuf:"varint,15,opt,name=paid_by_user_id,json=paidByUserId,proto3" json:"paid_by_user_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -396,9 +410,25 @@ func (x *ExpensesServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 // Describes the parameters necessary to update a record
 type ExpensesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -436,7 +466,13 @@ type ExpensesServiceUpdateRequest struct {
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
 	// The ID of the user who paid for this expense (if paid by organization, then this will be 0)
 	PaidByUserId uint64 `protobuf:"varint,15,opt,name=paid_by_user_id,json=paidByUserId,proto3" json:"paid_by_user_id,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -592,7 +628,7 @@ type Expense struct {
 	PaidByUserId uint64 `protobuf:"varint,15,opt,name=paid_by_user_id,json=paidByUserId,proto3" json:"paid_by_user_id,omitempty"`
 	// The list of associated expense items
 	List []*ExpenseItem `protobuf:"bytes,20,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	// The total amount of the expense
 	TotalAmount   float64 `protobuf:"fixed64,40,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
@@ -752,7 +788,15 @@ func (x *Expense) GetTotalAmount() float64 {
 // Describes the parameters required to add an item to a expense
 type ExpensesServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the expense ID
 	ExpenseId uint64 `protobuf:"varint,10,opt,name=expense_id,json=expenseId,proto3" json:"expense_id,omitempty"`
@@ -870,7 +914,15 @@ func (x *ExpensesServiceItemCreateRequest) GetDateOfExpense() string {
 // Describes the parameters required to update an item in a expense
 type ExpensesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -996,7 +1048,11 @@ type ExpenseItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -2323,7 +2379,9 @@ type ExpensesServiceCountReq struct {
 	PaidByUserId uint64 `protobuf:"varint,23,opt,name=paid_by_user_id,json=paidByUserId,proto3" json:"paid_by_user_id,omitempty"`
 	// The associated project ID
 	ProjectId uint64 `protobuf:"varint,30,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

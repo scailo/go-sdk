@@ -295,7 +295,15 @@ type SupplyOffersServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -337,7 +345,13 @@ type SupplyOffersServiceCreateRequest struct {
 	PaymentAdvance uint64 `protobuf:"varint,20,opt,name=payment_advance,json=paymentAdvance,proto3" json:"payment_advance,omitempty"`
 	// The payment cycle in days
 	PaymentCycleInDays uint64 `protobuf:"varint,21,opt,name=payment_cycle_in_days,json=paymentCycleInDays,proto3" json:"payment_cycle_in_days,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -481,9 +495,25 @@ func (x *SupplyOffersServiceCreateRequest) GetFormData() []*FormFieldDatumCreate
 // Describes the parameters necessary to update a record
 type SupplyOffersServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -529,7 +559,13 @@ type SupplyOffersServiceUpdateRequest struct {
 	PaymentAdvance uint64 `protobuf:"varint,20,opt,name=payment_advance,json=paymentAdvance,proto3" json:"payment_advance,omitempty"`
 	// The payment cycle in days
 	PaymentCycleInDays uint64 `protobuf:"varint,21,opt,name=payment_cycle_in_days,json=paymentCycleInDays,proto3" json:"payment_cycle_in_days,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -673,7 +709,15 @@ func (x *SupplyOffersServiceUpdateRequest) GetFormData() []*FormFieldDatumCreate
 // Describes the parameters necessary to perform an autofill request
 type SupplyOffersServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the record that needs to be updated
 	Uuid          string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -849,13 +893,15 @@ type SupplyOffer struct {
 	PaymentAdvance uint64 `protobuf:"varint,20,opt,name=payment_advance,json=paymentAdvance,proto3" json:"payment_advance,omitempty"`
 	// The payment cycle in days
 	PaymentCycleInDays uint64 `protobuf:"varint,21,opt,name=payment_cycle_in_days,json=paymentCycleInDays,proto3" json:"payment_cycle_in_days,omitempty"`
-	// The number of times that the supply offer has been amended
+	// @description The number of times that this record has been amended after approval.
+	//
+	// @example 5
 	AmendmentCount uint64 `protobuf:"varint,22,opt,name=amendment_count,json=amendmentCount,proto3" json:"amendment_count,omitempty"`
 	// Stores the total value of the supply offer (as a double, which requires no adjustments)
 	TotalValue float64 `protobuf:"fixed64,30,opt,name=total_value,json=totalValue,proto3" json:"total_value,omitempty"`
 	// The list of associated supply offer items
 	List []*SupplyOfferItem `protobuf:"bytes,40,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,50,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1055,7 +1101,15 @@ func (x *SupplyOffer) GetFormData() []*FormFieldDatum {
 // Describes the parameters required to add an item to a supply offer
 type SupplyOffersServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the supply offer ID
 	SupplyOfferId uint64 `protobuf:"varint,10,opt,name=supply_offer_id,json=supplyOfferId,proto3" json:"supply_offer_id,omitempty"`
@@ -1191,7 +1245,15 @@ func (x *SupplyOffersServiceItemCreateRequest) GetSpecifications() string {
 // Describes the parameters required to update an item in a supply offer
 type SupplyOffersServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1326,7 +1388,11 @@ type SupplyOfferItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
 	// Stores any comment that the user might have added during an operation
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
@@ -2557,7 +2623,9 @@ type SupplyOffersServiceCountReq struct {
 	TotalValueMin uint64 `protobuf:"varint,50,opt,name=total_value_min,json=totalValueMin,proto3" json:"total_value_min,omitempty"`
 	// Stores the maximum value of the supply offer (ignored if 0)
 	TotalValueMax uint64 `protobuf:"varint,51,opt,name=total_value_max,json=totalValueMax,proto3" json:"total_value_max,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

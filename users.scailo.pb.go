@@ -23,17 +23,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available user types
+// Enum defining the primary account classifications and systemic access types for users on the platform.
 type USER_TYPE int32
 
 const (
-	// Useful for filter and count operation when this field needs to be ignored
+	// @description Denotes that the user type filter should be disregarded. Used exclusively within search APIs to bypass classification restrictions.
 	USER_TYPE_USER_TYPE_ANY_UNSPECIFIED USER_TYPE = 0
-	// Denotes that the user is an employee
+	// @description Denotes an internal employee lifecycle record bound to corporate attendance, shift scheduling, and payroll.
 	USER_TYPE_USER_TYPE_EMPLOYEE USER_TYPE = 1
-	// Denotes that the user is a client
+	// @description Denotes an external client user mapping linked directly to a client organization or billing profile.
 	USER_TYPE_USER_TYPE_CLIENT USER_TYPE = 2
-	// Denotes that the user is a vendor
+	// @description Denotes an external vendor contact profile linked to supply chain logistics or procurement tracking.
 	USER_TYPE_USER_TYPE_VENDOR USER_TYPE = 3
 )
 
@@ -80,31 +80,31 @@ func (USER_TYPE) EnumDescriptor() ([]byte, []int) {
 	return file_users_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting user search results.
 type USER_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	USER_SORT_KEY_USER_SORT_KEY_ID_UNSPECIFIED USER_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	USER_SORT_KEY_USER_SORT_KEY_CREATED_AT USER_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	USER_SORT_KEY_USER_SORT_KEY_MODIFIED_AT USER_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	USER_SORT_KEY_USER_SORT_KEY_APPROVED_ON USER_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	USER_SORT_KEY_USER_SORT_KEY_APPROVED_BY USER_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	USER_SORT_KEY_USER_SORT_KEY_APPROVER_ROLE_ID USER_SORT_KEY = 5
-	// Fetch ordered results by the username
+	// @description Sort alphabetically by the user-provided username.
 	USER_SORT_KEY_USER_SORT_KEY_USERNAME USER_SORT_KEY = 10
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	USER_SORT_KEY_USER_SORT_KEY_NAME USER_SORT_KEY = 11
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	USER_SORT_KEY_USER_SORT_KEY_CODE USER_SORT_KEY = 12
-	// Fetch ordered results by the email address
+	// @description Sort alphabetically by the user-provided email.
 	USER_SORT_KEY_USER_SORT_KEY_EMAIL USER_SORT_KEY = 13
-	// Fetch ordered results by the phone number
+	// @description Sort alphabetically by the user-provided phone number.
 	USER_SORT_KEY_USER_SORT_KEY_PHONE USER_SORT_KEY = 14
 )
 
@@ -183,11 +183,22 @@ type UsersServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// [Optional] Internal notes or audit comments for this creation event.
-	// Maximum 500 characters.
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// [Required] The classification of the user (e.g., CLIENT, EMPLOYEE, VENDOR).
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
 	// @optional
 	//
@@ -198,71 +209,264 @@ type UsersServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// [Required] The unique login identifier.
-	// Must be at least 1 character and unique across the entity.
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @mandatory
+	//
+	// @description The unique system-level login alias used by the actor to authenticate against the platform.
+	//
+	// @example "jane.doe"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string and completely unique across the given business entity space.
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
-	// [Required] The unique employee or payroll code.
-	// Used for cross-referencing with external HR or ERP systems.
+	// @mandatory
+	//
+	// @description The unique internal enterprise code assigned to the individual, utilized for cross-referencing external platforms.
+	//
+	// @example "EMP-2026-992"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// [Required] The full legal name of the user.
+	// @mandatory
+	//
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
-	// [Required] The plain text password for the account.
-	// This value is hashed before storage.
+	// @mandatory
+	//
+	// @description The raw plain text password string supplied for account registration. This token is cryptographically hashed before commitment to persistent storage.
+	//
+	// @example "S3cureP@ssword123!"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string meeting organizational length and entropy guidelines.
 	PlainTextPassword string `protobuf:"bytes,13,opt,name=plain_text_password,json=plainTextPassword,proto3" json:"plain_text_password,omitempty"`
-	// [Required] The primary security Role ID (System/Web access).
+	// @mandatory
+	//
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer greater than zero.
 	RoleId uint64 `protobuf:"varint,14,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// [Optional] The secondary Role ID for mobile application access.
-	MobileRoleId uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3" json:"mobile_role_id,omitempty"`
-	// [Required] The primary email address for system notifications.
-	// Example: "jane.doe@example.com"
+	// @optional
+	//
+	// @description The unique internal identifier of a secondary security role tailored exclusively for mobile application endpoints.
+	//
+	// @example 2048
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	MobileRoleId *uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3,oneof" json:"mobile_role_id,omitempty"`
+	// @mandatory
+	//
+	// @description The primary communication or routing email address where structural system notifications are dispatched.
+	//
+	// @example "jane.doe@example.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a structurally sound and valid email address string.
 	Email string `protobuf:"bytes,16,opt,name=email,proto3" json:"email,omitempty"`
-	// [Optional] The secondary/corporate work email address.
-	WorkEmail string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// [Required] The primary contact number (e.g., Mobile or Landline).
-	// Recommended format: E.164 (e.g., "+12125550123").
+	// @optional
+	//
+	// @description A secondary, fallback, or corporate work email address for overlapping communication loops.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @mandatory
+	//
+	// @description The primary telephone contact or mobile line number assigned to the account profile.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
 	Phone string `protobuf:"bytes,18,opt,name=phone,proto3" json:"phone,omitempty"`
-	// [Optional] The user's date of birth.
-	// **Format:** `Day Month Date Year`
-	// Example: "Mon Jan 02 2006"
-	Birthday string `protobuf:"bytes,30,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// [Optional] The official start date for the user.
-	// **Format:** `Day Month Date Year`
-	// Example: "Wed Oct 25 2023"
-	JoiningDate string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3" json:"joining_date,omitempty"`
-	// [Optional] Primary residential or mailing address.
-	Address string `protobuf:"bytes,32,opt,name=address,proto3" json:"address,omitempty"`
-	// [Optional] City of residence.
-	City string `protobuf:"bytes,33,opt,name=city,proto3" json:"city,omitempty"`
-	// [Optional] State, Province, or Region of residence.
-	State string `protobuf:"bytes,34,opt,name=state,proto3" json:"state,omitempty"`
-	// [Optional] Country of residence (ISO 3166-1 alpha-2 recommended).
-	// Example: "US", "GB", "IN"
-	Country string `protobuf:"bytes,35,opt,name=country,proto3" json:"country,omitempty"`
-	// [Optional] Postal or ZIP code.
-	PinCode string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
-	// [Optional] The user's blood group.
-	// Example: "O+", "A-", "B+"
-	BloodGroup string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3" json:"blood_group,omitempty"`
-	// [Optional] Assigned shift group for attendance scheduling.
-	ShiftGroupId uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// [Optional] Unit of Measure (UOM) for tracking attendance duration.
-	AttendanceUomId uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// [Optional] The department ID. Set to 0 for unassigned/general.
-	DepartmentId uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// [Optional] The payroll group used for salary batching.
-	PayrollGroupId uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// [Optional] The tax group used for statutory deductions.
-	PayrollTaxGroupId uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// [Optional] The ID of the currency for the user's base salary.
-	PayrollCurrencyId uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// [Optional] The base salary amount in the **smallest currency unit**.
-	// For USD, 500000 represents $5,000.00.
-	BasicPayAmount uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3" json:"basic_pay_amount,omitempty"`
-	// [Optional] The UOM ID for the basic pay (e.g., Per Month, Per Year).
-	BasicPayUomId uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// [Optional] A collection of custom field data.
-	// Use this for any organization-specific dynamic attributes.
+	// @optional
+	//
+	// @description The calendar date of birth of the user, primarily captured for verification workflows.
+	//
+	// @example "Mon Jan 02 2006"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Birthday *string `protobuf:"bytes,30,opt,name=birthday,proto3,oneof" json:"birthday,omitempty"`
+	// @optional
+	//
+	// @description The formal start or contract initialization date marking when the individual officially joins the team roster.
+	//
+	// @example "Wed Oct 25 2023"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	JoiningDate *string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3,oneof" json:"joining_date,omitempty"`
+	// @optional
+	//
+	// @description Primary street details, building number, or geographic line matching residential or official mailing location records.
+	//
+	// @example "123 Business Park Drive, Suite 400"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters.
+	Address *string `protobuf:"bytes,32,opt,name=address,proto3,oneof" json:"address,omitempty"`
+	// @optional
+	//
+	// @description The explicit city name corresponding to the user's primary residence or workplace assignment.
+	//
+	// @example "Austin"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	City *string `protobuf:"bytes,33,opt,name=city,proto3,oneof" json:"city,omitempty"`
+	// @optional
+	//
+	// @description The administrative territory, province, state, or regional zone of residence.
+	//
+	// @example "Texas"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	State *string `protobuf:"bytes,34,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	// @optional
+	//
+	// @description The country code corresponding to the user's operational location.
+	//
+	// @example "US"
+	//
+	// @regex ^[A-Z]{2}$
+	//
+	// @format Strict ISO 3166-1 alpha-2 standard country codes are highly recommended.
+	Country *string `protobuf:"bytes,35,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	// @optional
+	//
+	// @description The standardized postal index number or geographic ZIP routing code.
+	//
+	// @example "78701"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	PinCode *string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3,oneof" json:"pin_code,omitempty"`
+	// @optional
+	//
+	// @description Medical identifier indicating the user's legal ABO blood group for emergency or corporate wellness logs.
+	//
+	// @example "O+"
+	//
+	// @regex ^(A|B|AB|O)[+-]$
+	//
+	// @format Alphanumeric value containing classification type followed by rh factor sign.
+	BloodGroup *string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3,oneof" json:"blood_group,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the operational work shift group mapped to this account profile for scheduling and timecard verification.
+	//
+	// @example 45
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	ShiftGroupId *uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3,oneof" json:"shift_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID used to evaluate time structures, shifts, or active work hour configurations.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	AttendanceUomId *uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3,oneof" json:"attendance_uom_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal sequence identifier of the corporate Department or business unit to which the user is structurally assigned.
+	//
+	// @example 304
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 for general or unassigned staff vectors.
+	DepartmentId *uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the designated payroll distribution group used for localized batch processing and compensation disbursement.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollGroupId *uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3,oneof" json:"payroll_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the tax matrix or statutory configuration rule governing payroll deductions.
+	//
+	// @example 19
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if no deductions are assigned.
+	PayrollTaxGroupId *uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3,oneof" json:"payroll_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal identifier matching the currency context in which the user's base salary and line compensation amounts are denominated.
+	//
+	// @example 3
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollCurrencyId *uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3,oneof" json:"payroll_currency_id,omitempty"`
+	// @optional
+	//
+	// @description The raw volume integer representing basic salary compensation. **Critical:** Value must be defined in the minor unit of the currency.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. For example, a value of 500000 in USD represents $5,000.00.
+	BasicPayAmount *uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3,oneof" json:"basic_pay_amount,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID applied to contextualize basic pay duration distributions (e.g., Per Month, Per Annum).
+	//
+	// @example 701
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	BasicPayUomId *uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3,oneof" json:"basic_pay_uom_id,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,70,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -299,15 +503,15 @@ func (*UsersServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -320,8 +524,8 @@ func (x *UsersServiceCreateRequest) GetUserType() USER_TYPE {
 }
 
 func (x *UsersServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -362,8 +566,8 @@ func (x *UsersServiceCreateRequest) GetRoleId() uint64 {
 }
 
 func (x *UsersServiceCreateRequest) GetMobileRoleId() uint64 {
-	if x != nil {
-		return x.MobileRoleId
+	if x != nil && x.MobileRoleId != nil {
+		return *x.MobileRoleId
 	}
 	return 0
 }
@@ -376,8 +580,8 @@ func (x *UsersServiceCreateRequest) GetEmail() string {
 }
 
 func (x *UsersServiceCreateRequest) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
@@ -390,113 +594,113 @@ func (x *UsersServiceCreateRequest) GetPhone() string {
 }
 
 func (x *UsersServiceCreateRequest) GetBirthday() string {
-	if x != nil {
-		return x.Birthday
+	if x != nil && x.Birthday != nil {
+		return *x.Birthday
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetJoiningDate() string {
-	if x != nil {
-		return x.JoiningDate
+	if x != nil && x.JoiningDate != nil {
+		return *x.JoiningDate
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
+	if x != nil && x.Address != nil {
+		return *x.Address
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetCity() string {
-	if x != nil {
-		return x.City
+	if x != nil && x.City != nil {
+		return *x.City
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetState() string {
-	if x != nil {
-		return x.State
+	if x != nil && x.State != nil {
+		return *x.State
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetCountry() string {
-	if x != nil {
-		return x.Country
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetPinCode() string {
-	if x != nil {
-		return x.PinCode
+	if x != nil && x.PinCode != nil {
+		return *x.PinCode
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetBloodGroup() string {
-	if x != nil {
-		return x.BloodGroup
+	if x != nil && x.BloodGroup != nil {
+		return *x.BloodGroup
 	}
 	return ""
 }
 
 func (x *UsersServiceCreateRequest) GetShiftGroupId() uint64 {
-	if x != nil {
-		return x.ShiftGroupId
+	if x != nil && x.ShiftGroupId != nil {
+		return *x.ShiftGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetAttendanceUomId() uint64 {
-	if x != nil {
-		return x.AttendanceUomId
+	if x != nil && x.AttendanceUomId != nil {
+		return *x.AttendanceUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetDepartmentId() uint64 {
-	if x != nil {
-		return x.DepartmentId
+	if x != nil && x.DepartmentId != nil {
+		return *x.DepartmentId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetPayrollGroupId() uint64 {
-	if x != nil {
-		return x.PayrollGroupId
+	if x != nil && x.PayrollGroupId != nil {
+		return *x.PayrollGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetPayrollTaxGroupId() uint64 {
-	if x != nil {
-		return x.PayrollTaxGroupId
+	if x != nil && x.PayrollTaxGroupId != nil {
+		return *x.PayrollTaxGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetPayrollCurrencyId() uint64 {
-	if x != nil {
-		return x.PayrollCurrencyId
+	if x != nil && x.PayrollCurrencyId != nil {
+		return *x.PayrollCurrencyId
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetBasicPayAmount() uint64 {
-	if x != nil {
-		return x.BasicPayAmount
+	if x != nil && x.BasicPayAmount != nil {
+		return *x.BasicPayAmount
 	}
 	return 0
 }
 
 func (x *UsersServiceCreateRequest) GetBasicPayUomId() uint64 {
-	if x != nil {
-		return x.BasicPayUomId
+	if x != nil && x.BasicPayUomId != nil {
+		return *x.BasicPayUomId
 	}
 	return 0
 }
@@ -508,19 +712,41 @@ func (x *UsersServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequest
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing User record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the code, name, role ID, mobile role ID, email, work email, phone, birthday, joining date, address, city, state, country, pin code, blood group, shift group ID, attendance uom ID, department ID, payroll group ID, payroll tax group ID, payroll currency ID, basic pay amount, basic pay uom ID and other custom form fields
+// of an established User.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type UsersServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -530,54 +756,244 @@ type UsersServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The unique employee code by which the user is classified
-	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The name of the user
-	Name string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
-	// The associated role ID
-	RoleId uint64 `protobuf:"varint,14,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated mobile role ID
-	MobileRoleId uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3" json:"mobile_role_id,omitempty"`
-	// The primary email of the user
-	Email string `protobuf:"bytes,16,opt,name=email,proto3" json:"email,omitempty"`
-	// The optional work email of the user
-	WorkEmail string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The primary contact number of the user
-	Phone string `protobuf:"bytes,18,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The birthday of the user
-	Birthday string `protobuf:"bytes,30,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The joining date of the user
-	JoiningDate string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3" json:"joining_date,omitempty"`
-	// The address of the user
-	Address string `protobuf:"bytes,32,opt,name=address,proto3" json:"address,omitempty"`
-	// The city of residence
-	City string `protobuf:"bytes,33,opt,name=city,proto3" json:"city,omitempty"`
-	// The state of residence
-	State string `protobuf:"bytes,34,opt,name=state,proto3" json:"state,omitempty"`
-	// The country of residence
-	Country string `protobuf:"bytes,35,opt,name=country,proto3" json:"country,omitempty"`
-	// THe PIN Code of residence
-	PinCode string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
-	// THe Blood Group of the user
-	BloodGroup string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3" json:"blood_group,omitempty"`
-	// The associated shift group ID
-	ShiftGroupId uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// The associated unit of material of the user's attendance record
-	AttendanceUomId uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// The associated department (can be 0 to allow seamless transition)
-	DepartmentId uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// The associated payroll group ID of the user
-	PayrollGroupId uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// The associated tax group ID using which the user's payroll needs to be calculated
-	PayrollTaxGroupId uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// The associated currency ID of the user's payroll
-	PayrollCurrencyId uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// The basic pay amount of the user (in cents)
-	BasicPayAmount uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3" json:"basic_pay_amount,omitempty"`
-	// The associated unit of material for storing the basic pay amount
-	BasicPayUomId uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// The list of dynamic forms
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal enterprise code assigned to the individual, utilized for cross-referencing external platforms.
+	//
+	// @example "EMP-2026-992"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,11,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,12,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer greater than zero.
+	RoleId *uint64 `protobuf:"varint,14,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of a secondary security role tailored exclusively for mobile application endpoints.
+	//
+	// @example 2048
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	MobileRoleId *uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3,oneof" json:"mobile_role_id,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or routing email address where structural system notifications are dispatched.
+	//
+	// @example "jane.doe@example.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a structurally sound and valid email address string.
+	Email *string `protobuf:"bytes,16,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description A secondary, fallback, or corporate work email address for overlapping communication loops.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description The primary telephone contact or mobile line number assigned to the account profile.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .*
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	Phone *string `protobuf:"bytes,18,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description The calendar date of birth of the user, primarily captured for verification workflows.
+	//
+	// @example "Mon Jan 02 2006"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Birthday *string `protobuf:"bytes,30,opt,name=birthday,proto3,oneof" json:"birthday,omitempty"`
+	// @optional
+	//
+	// @description The formal start or contract initialization date marking when the individual officially joins the team roster.
+	//
+	// @example "Wed Oct 25 2023"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	JoiningDate *string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3,oneof" json:"joining_date,omitempty"`
+	// @optional
+	//
+	// @description Primary street details, building number, or geographic line matching residential or official mailing location records.
+	//
+	// @example "123 Business Park Drive, Suite 400"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters.
+	Address *string `protobuf:"bytes,32,opt,name=address,proto3,oneof" json:"address,omitempty"`
+	// @optional
+	//
+	// @description The explicit city name corresponding to the user's primary residence or workplace assignment.
+	//
+	// @example "Austin"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	City *string `protobuf:"bytes,33,opt,name=city,proto3,oneof" json:"city,omitempty"`
+	// @optional
+	//
+	// @description The administrative territory, province, state, or regional zone of residence.
+	//
+	// @example "Texas"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	State *string `protobuf:"bytes,34,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	// @optional
+	//
+	// @description The country code corresponding to the user's operational location.
+	//
+	// @example "US"
+	//
+	// @regex ^[A-Z]{2}$
+	//
+	// @format Strict ISO 3166-1 alpha-2 standard country codes are highly recommended.
+	Country *string `protobuf:"bytes,35,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	// @optional
+	//
+	// @description The standardized postal index number or geographic ZIP routing code.
+	//
+	// @example "78701"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	PinCode *string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3,oneof" json:"pin_code,omitempty"`
+	// @optional
+	//
+	// @description Medical identifier indicating the user's legal ABO blood group for emergency or corporate wellness logs.
+	//
+	// @example "O+"
+	//
+	// @regex ^(A|B|AB|O)[+-]$
+	//
+	// @format Alphanumeric value containing classification type followed by rh factor sign.
+	BloodGroup *string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3,oneof" json:"blood_group,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the operational work shift group mapped to this account profile for scheduling and timecard verification.
+	//
+	// @example 45
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	ShiftGroupId *uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3,oneof" json:"shift_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID used to evaluate time structures, shifts, or active work hour configurations.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	AttendanceUomId *uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3,oneof" json:"attendance_uom_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal sequence identifier of the corporate Department or business unit to which the user is structurally assigned.
+	//
+	// @example 304
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 for general or unassigned staff vectors.
+	DepartmentId *uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the designated payroll distribution group used for localized batch processing and compensation disbursement.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollGroupId *uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3,oneof" json:"payroll_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the tax matrix or statutory configuration rule governing payroll deductions.
+	//
+	// @example 19
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if no deductions are assigned.
+	PayrollTaxGroupId *uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3,oneof" json:"payroll_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal identifier matching the currency context in which the user's base salary and line compensation amounts are denominated.
+	//
+	// @example 3
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollCurrencyId *uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3,oneof" json:"payroll_currency_id,omitempty"`
+	// @optional
+	//
+	// @description The raw volume integer representing basic salary compensation. **Critical:** Value must be defined in the minor unit of the currency.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. For example, a value of 500000 in USD represents $5,000.00.
+	BasicPayAmount *uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3,oneof" json:"basic_pay_amount,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID applied to contextualize basic pay duration distributions (e.g., Per Month, Per Annum).
+	//
+	// @example 701
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	BasicPayUomId *uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3,oneof" json:"basic_pay_uom_id,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,70,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -614,8 +1030,8 @@ func (*UsersServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -628,176 +1044,176 @@ func (x *UsersServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *UsersServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *UsersServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetRoleId() uint64 {
-	if x != nil {
-		return x.RoleId
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetMobileRoleId() uint64 {
-	if x != nil {
-		return x.MobileRoleId
+	if x != nil && x.MobileRoleId != nil {
+		return *x.MobileRoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetBirthday() string {
-	if x != nil {
-		return x.Birthday
+	if x != nil && x.Birthday != nil {
+		return *x.Birthday
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetJoiningDate() string {
-	if x != nil {
-		return x.JoiningDate
+	if x != nil && x.JoiningDate != nil {
+		return *x.JoiningDate
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
+	if x != nil && x.Address != nil {
+		return *x.Address
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetCity() string {
-	if x != nil {
-		return x.City
+	if x != nil && x.City != nil {
+		return *x.City
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetState() string {
-	if x != nil {
-		return x.State
+	if x != nil && x.State != nil {
+		return *x.State
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetCountry() string {
-	if x != nil {
-		return x.Country
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetPinCode() string {
-	if x != nil {
-		return x.PinCode
+	if x != nil && x.PinCode != nil {
+		return *x.PinCode
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetBloodGroup() string {
-	if x != nil {
-		return x.BloodGroup
+	if x != nil && x.BloodGroup != nil {
+		return *x.BloodGroup
 	}
 	return ""
 }
 
 func (x *UsersServiceUpdateRequest) GetShiftGroupId() uint64 {
-	if x != nil {
-		return x.ShiftGroupId
+	if x != nil && x.ShiftGroupId != nil {
+		return *x.ShiftGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetAttendanceUomId() uint64 {
-	if x != nil {
-		return x.AttendanceUomId
+	if x != nil && x.AttendanceUomId != nil {
+		return *x.AttendanceUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetDepartmentId() uint64 {
-	if x != nil {
-		return x.DepartmentId
+	if x != nil && x.DepartmentId != nil {
+		return *x.DepartmentId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetPayrollGroupId() uint64 {
-	if x != nil {
-		return x.PayrollGroupId
+	if x != nil && x.PayrollGroupId != nil {
+		return *x.PayrollGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetPayrollTaxGroupId() uint64 {
-	if x != nil {
-		return x.PayrollTaxGroupId
+	if x != nil && x.PayrollTaxGroupId != nil {
+		return *x.PayrollTaxGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetPayrollCurrencyId() uint64 {
-	if x != nil {
-		return x.PayrollCurrencyId
+	if x != nil && x.PayrollCurrencyId != nil {
+		return *x.PayrollCurrencyId
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetBasicPayAmount() uint64 {
-	if x != nil {
-		return x.BasicPayAmount
+	if x != nil && x.BasicPayAmount != nil {
+		return *x.BasicPayAmount
 	}
 	return 0
 }
 
 func (x *UsersServiceUpdateRequest) GetBasicPayUomId() uint64 {
-	if x != nil {
-		return x.BasicPayUomId
+	if x != nil && x.BasicPayUomId != nil {
+		return *x.BasicPayUomId
 	}
 	return 0
 }
@@ -809,7 +1225,7 @@ func (x *UsersServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequest
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full User within the system.
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -824,63 +1240,115 @@ type User struct {
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// Stores the user type
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
 	// @description Link to the document storage folder.
 	//
 	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The username of the user
+	// @description The unique system-level login alias used by the actor to authenticate against the platform.
+	//
+	// @example "jane.doe"
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
-	// The unique employee code by which the user is classified
+	// @description The unique internal enterprise code assigned to the individual, utilized for cross-referencing external platforms.
+	//
+	// @example "EMP-2026-992"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The name of the user
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
 	Name string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
-	// The associated role ID
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
 	RoleId uint64 `protobuf:"varint,14,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated mobile role ID
+	// @description The unique internal identifier of a secondary security role tailored exclusively for mobile application endpoints.
+	//
+	// @example 2048
 	MobileRoleId uint64 `protobuf:"varint,15,opt,name=mobile_role_id,json=mobileRoleId,proto3" json:"mobile_role_id,omitempty"`
-	// The primary email of the user
+	// @description The primary communication or routing email address where structural system notifications are dispatched.
+	//
+	// @example "jane.doe@example.com"
 	Email string `protobuf:"bytes,16,opt,name=email,proto3" json:"email,omitempty"`
-	// The optional work email of the user
+	// @description A secondary, fallback, or corporate work email address for overlapping communication loops.
+	//
+	// @example "j.doe@corporate-hub.com"
 	WorkEmail string `protobuf:"bytes,17,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The primary contact number of the user
+	// @description The primary telephone contact or mobile line number assigned to the account profile.
+	//
+	// @example "+12125550123"
 	Phone string `protobuf:"bytes,18,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The birthday of the user
+	// @description The calendar date of birth of the user, primarily captured for verification workflows.
+	//
+	// @example "Mon Jan 02 2006"
 	Birthday string `protobuf:"bytes,30,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The joining date of the user
+	// @description The formal start or contract initialization date marking when the individual officially joins the team roster.
+	//
+	// @example "Wed Oct 25 2023"
 	JoiningDate string `protobuf:"bytes,31,opt,name=joining_date,json=joiningDate,proto3" json:"joining_date,omitempty"`
-	// The address of the user
+	// @description Primary street details, building number, or geographic line matching residential or official mailing location records.
+	//
+	// @example "123 Business Park Drive, Suite 400"
 	Address string `protobuf:"bytes,32,opt,name=address,proto3" json:"address,omitempty"`
-	// The city of residence
+	// @description The explicit city name corresponding to the user's primary residence or workplace assignment.
+	//
+	// @example "Austin"
 	City string `protobuf:"bytes,33,opt,name=city,proto3" json:"city,omitempty"`
-	// The state of residence
+	// @description The administrative territory, province, state, or regional zone of residence.
+	//
+	// @example "Texas"
 	State string `protobuf:"bytes,34,opt,name=state,proto3" json:"state,omitempty"`
-	// The country of residence
+	// @description The country code corresponding to the user's operational location.
+	//
+	// @example "US"
 	Country string `protobuf:"bytes,35,opt,name=country,proto3" json:"country,omitempty"`
-	// THe PIN Code of residence
+	// @description The standardized postal index number or geographic ZIP routing code.
+	//
+	// @example "78701"
 	PinCode string `protobuf:"bytes,36,opt,name=pin_code,json=pinCode,proto3" json:"pin_code,omitempty"`
-	// THe Blood Group of the user
+	// @description Medical identifier indicating the user's legal ABO blood group for emergency or corporate wellness logs.
+	//
+	// @example "O+"
 	BloodGroup string `protobuf:"bytes,37,opt,name=blood_group,json=bloodGroup,proto3" json:"blood_group,omitempty"`
-	// The associated shift group ID
+	// @description The unique internal identifier of the operational work shift group mapped to this account profile for scheduling and timecard verification.
+	//
+	// @example 45
 	ShiftGroupId uint64 `protobuf:"varint,50,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// The associated unit of material of the user's attendance record
+	// @description The internal Unit of Measure (UOM) tracking ID used to evaluate time structures, shifts, or active work hour configurations.
+	//
+	// @example 12
 	AttendanceUomId uint64 `protobuf:"varint,51,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// The associated department
+	// @description The unique internal sequence identifier of the corporate Department or business unit to which the user is structurally assigned.
+	//
+	// @example 304
 	DepartmentId uint64 `protobuf:"varint,52,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// The associated payroll group ID of the user
+	// @description The unique internal identifier of the designated payroll distribution group used for localized batch processing and compensation disbursement.
+	//
+	// @example 88
 	PayrollGroupId uint64 `protobuf:"varint,53,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// The associated tax group ID using which the user's payroll needs to be calculated
+	// @description The unique internal identifier of the tax matrix or statutory configuration rule governing payroll deductions.
+	//
+	// @example 19
 	PayrollTaxGroupId uint64 `protobuf:"varint,54,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// The associated currency ID of the user's payroll
+	// @description The internal identifier matching the currency context in which the user's base salary and line compensation amounts are denominated.
+	//
+	// @example 3
 	PayrollCurrencyId uint64 `protobuf:"varint,55,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// The basic pay amount of the user (in cents)
+	// @description The raw volume integer representing basic salary compensation. **Critical:** Value must be defined in the minor unit of the currency.
+	//
+	// @example 500000
 	BasicPayAmount uint64 `protobuf:"varint,56,opt,name=basic_pay_amount,json=basicPayAmount,proto3" json:"basic_pay_amount,omitempty"`
-	// The associated unit of material for storing the basic pay amount
+	// @description The internal Unit of Measure (UOM) tracking ID applied to contextualize basic pay duration distributions (e.g., Per Month, Per Annum).
+	//
+	// @example 701
 	BasicPayUomId uint64 `protobuf:"varint,57,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// Stores if MFA has been enabled by the user
+	// @description Security flag determining whether Multi-Factor Authentication (MFA) has been explicitly provisioned and enabled for this user account.
+	//
+	// @example true
 	MfaStatus bool `protobuf:"varint,60,opt,name=mfa_status,json=mfaStatus,proto3" json:"mfa_status,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,70,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1147,26 +1615,55 @@ func (x *User) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the message that is used internally to validate user
+// Micro-structure utilized strictly for internal authentication, identity verification, and cryptographic evaluation.
+// This message isolates sensitive credential states, role matrices, Multi-Factor Authentication (MFA) secrets,
+// and critical baseline attributes required to securely issue session tokens.
+//
+// **Security Warning:** This message handles raw cryptographic data and password hashes. It must never
+// be exposed directly to public-facing edge services or untrusted client layers.
 type UserPrimaryInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the user type
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
 	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
-	// The username of the user
+	// @description The unique system-level login alias used by the actor to authenticate against the platform.
+	//
+	// @example "jane.doe"
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
-	// The name of the user
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
-	// Stores the hashed password
+	// @description The securely salted and compiled binary representation of the user's password hash.
+	//
+	// @example "\x24\x32\x61\x24\x31\x32\x24\x4b\x53..."
+	//
+	// @format Byte array containing the evaluated cryptographic digest (e.g., bcrypt payload).
 	Password []byte `protobuf:"bytes,12,opt,name=password,proto3" json:"password,omitempty"`
-	// The associated role ID
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
 	RoleId uint64 `protobuf:"varint,13,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated mobile role ID
+	// @description The unique internal identifier of a secondary security role tailored exclusively for mobile application endpoints.
+	//
+	// @example 2048
 	MobileRoleId uint64 `protobuf:"varint,14,opt,name=mobile_role_id,json=mobileRoleId,proto3" json:"mobile_role_id,omitempty"`
-	// Stores if MFA has been enabled by the user
+	// @description Security flag determining whether Multi-Factor Authentication (MFA) has been explicitly provisioned and enabled for this user account.
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
 	MfaStatus bool `protobuf:"varint,15,opt,name=mfa_status,json=mfaStatus,proto3" json:"mfa_status,omitempty"`
-	// Stores the MFA secret
+	// @description The encrypted or raw binary cryptographic secret used to evaluate Time-Based One-Time Password (TOTP) seed structures during verification loops.
+	//
+	// @example "\x4e\x58\x57\x32\x4d\x34\x33\x55..."
+	//
+	// @format Sensitive byte array. Access must remain strictly isolated within internal authentication boundaries.
 	MfaSecret []byte `protobuf:"bytes,16,opt,name=mfa_secret,json=mfaSecret,proto3" json:"mfa_secret,omitempty"`
-	// THe Blood Group of the user
+	// @description Medical identifier indicating the user's legal ABO blood group for emergency or corporate wellness logs.
+	//
+	// @example "O+"
 	BloodGroup    string `protobuf:"bytes,20,opt,name=blood_group,json=bloodGroup,proto3" json:"blood_group,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1265,10 +1762,10 @@ func (x *UserPrimaryInfo) GetBloodGroup() string {
 	return ""
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of User records.
 type UsersList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of User records.
 	List          []*User `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1311,7 +1808,7 @@ func (x *UsersList) GetList() []*User {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of User records.
 type UsersServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1319,7 +1816,7 @@ type UsersServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1339,19 +1836,23 @@ type UsersServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this user
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1387,8 +1888,8 @@ func (*UsersServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1401,34 +1902,34 @@ func (x *UsersServicePaginationReq) GetCount() int64 {
 }
 
 func (x *UsersServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UsersServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UsersServicePaginationReq) GetSortKey() USER_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return USER_SORT_KEY_USER_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UsersServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type UsersServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1507,7 +2008,12 @@ func (x *UsersServicePaginationResponse) GetPayload() []*User {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating users using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type UsersServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1515,7 +2021,7 @@ type UsersServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1535,17 +2041,17 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1555,7 +2061,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1565,7 +2071,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1575,7 +2081,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1585,9 +2091,13 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// Stores the user type
-	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
+	// @optional
+	//
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
+	UserType *USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE,oneof" json:"user_type,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1597,13 +2107,13 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1613,7 +2123,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1623,7 +2133,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1633,7 +2143,7 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1643,40 +2153,167 @@ type UsersServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The username of the user
-	Username string `protobuf:"bytes,20,opt,name=username,proto3" json:"username,omitempty"`
-	// The name of the user
-	Name string `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the user is classified
-	Code string `protobuf:"bytes,22,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the user
-	Email string `protobuf:"bytes,23,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the user
-	Phone string `protobuf:"bytes,24,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The associated role ID
-	RoleId uint64 `protobuf:"varint,25,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated shift group ID
-	ShiftGroupId uint64 `protobuf:"varint,26,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// The associated unit of material of the user's attendance record
-	AttendanceUomId uint64 `protobuf:"varint,27,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// The associated department
-	DepartmentId uint64 `protobuf:"varint,28,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// The associated payroll group ID of the user
-	PayrollGroupId uint64 `protobuf:"varint,29,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// The associated tax group ID using which the user's payroll needs to be calculated
-	PayrollTaxGroupId uint64 `protobuf:"varint,30,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// The associated currency ID of the user's payroll
-	PayrollCurrencyId uint64 `protobuf:"varint,31,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// The associated unit of material for storing the basic pay amount
-	BasicPayUomId uint64 `protobuf:"varint,32,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// The optional work email of the user
-	WorkEmail string `protobuf:"bytes,33,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// --------------------------------------------------------------------------------
-	// Filter by the associated vendor ID (return all the users that belong to this vendor)
-	VendorId uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Filter by the associated client ID (return all the users that belong to this client)
-	ClientId uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // --------------------------------------------------------------------------------
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique system-level login alias used by the actor to authenticate against the platform.
+	//
+	// @example "jane.doe"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string and completely unique across the given business entity space.
+	Username *string `protobuf:"bytes,20,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @optional
+	//
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,21,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique internal enterprise code assigned to the individual, utilized for cross-referencing external platforms.
+	//
+	// @example "EMP-2026-992"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,22,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or routing email address where structural system notifications are dispatched.
+	//
+	// @example "jane.doe@example.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a structurally sound and valid email address string.
+	Email *string `protobuf:"bytes,23,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary telephone contact or mobile line number assigned to the account profile.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .*
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	Phone *string `protobuf:"bytes,24,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer greater than zero.
+	RoleId *uint64 `protobuf:"varint,25,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the operational work shift group mapped to this account profile for scheduling and timecard verification.
+	//
+	// @example 45
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	ShiftGroupId *uint64 `protobuf:"varint,26,opt,name=shift_group_id,json=shiftGroupId,proto3,oneof" json:"shift_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID used to evaluate time structures, shifts, or active work hour configurations.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	AttendanceUomId *uint64 `protobuf:"varint,27,opt,name=attendance_uom_id,json=attendanceUomId,proto3,oneof" json:"attendance_uom_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal sequence identifier of the corporate Department or business unit to which the user is structurally assigned.
+	//
+	// @example 304
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 for general or unassigned staff vectors.
+	DepartmentId *uint64 `protobuf:"varint,28,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the designated payroll distribution group used for localized batch processing and compensation disbursement.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollGroupId *uint64 `protobuf:"varint,29,opt,name=payroll_group_id,json=payrollGroupId,proto3,oneof" json:"payroll_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the tax matrix or statutory configuration rule governing payroll deductions.
+	//
+	// @example 19
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if no deductions are assigned.
+	PayrollTaxGroupId *uint64 `protobuf:"varint,30,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3,oneof" json:"payroll_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal identifier matching the currency context in which the user's base salary and line compensation amounts are denominated.
+	//
+	// @example 3
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollCurrencyId *uint64 `protobuf:"varint,31,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3,oneof" json:"payroll_currency_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID applied to contextualize basic pay duration distributions (e.g., Per Month, Per Annum).
+	//
+	// @example 701
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	BasicPayUomId *uint64 `protobuf:"varint,32,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3,oneof" json:"basic_pay_uom_id,omitempty"`
+	// @optional
+	//
+	// @description A secondary, fallback, or corporate work email address for overlapping communication loops.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,33,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Vendor profile.
+	//
+	// @example 5402
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	VendorId *uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Client profile.
+	//
+	// @example 9107
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId *uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"` // --------------------------------------------------------------------------------
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1687,7 +2324,7 @@ type UsersServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1723,8 +2360,8 @@ func (*UsersServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1737,211 +2374,211 @@ func (x *UsersServiceFilterReq) GetCount() int64 {
 }
 
 func (x *UsersServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UsersServiceFilterReq) GetSortKey() USER_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return USER_SORT_KEY_USER_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UsersServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetUserType() USER_TYPE {
-	if x != nil {
-		return x.UserType
+	if x != nil && x.UserType != nil {
+		return *x.UserType
 	}
 	return USER_TYPE_USER_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetUsername() string {
-	if x != nil {
-		return x.Username
+	if x != nil && x.Username != nil {
+		return *x.Username
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetRoleId() uint64 {
-	if x != nil {
-		return x.RoleId
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetShiftGroupId() uint64 {
-	if x != nil {
-		return x.ShiftGroupId
+	if x != nil && x.ShiftGroupId != nil {
+		return *x.ShiftGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetAttendanceUomId() uint64 {
-	if x != nil {
-		return x.AttendanceUomId
+	if x != nil && x.AttendanceUomId != nil {
+		return *x.AttendanceUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetDepartmentId() uint64 {
-	if x != nil {
-		return x.DepartmentId
+	if x != nil && x.DepartmentId != nil {
+		return *x.DepartmentId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetPayrollGroupId() uint64 {
-	if x != nil {
-		return x.PayrollGroupId
+	if x != nil && x.PayrollGroupId != nil {
+		return *x.PayrollGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetPayrollTaxGroupId() uint64 {
-	if x != nil {
-		return x.PayrollTaxGroupId
+	if x != nil && x.PayrollTaxGroupId != nil {
+		return *x.PayrollTaxGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetPayrollCurrencyId() uint64 {
-	if x != nil {
-		return x.PayrollCurrencyId
+	if x != nil && x.PayrollCurrencyId != nil {
+		return *x.PayrollCurrencyId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetBasicPayUomId() uint64 {
-	if x != nil {
-		return x.BasicPayUomId
+	if x != nil && x.BasicPayUomId != nil {
+		return *x.BasicPayUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *UsersServiceFilterReq) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *UsersServiceFilterReq) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
@@ -1954,13 +2591,19 @@ func (x *UsersServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest {
 }
 
 func (x *UsersServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting user records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type UsersServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1968,7 +2611,7 @@ type UsersServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1978,7 +2621,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1988,7 +2631,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1998,7 +2641,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2008,9 +2651,13 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
-	// Stores the user type
-	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
+	// @optional
+	//
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
+	UserType *USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE,oneof" json:"user_type,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2020,13 +2667,13 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2036,7 +2683,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2046,7 +2693,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2056,7 +2703,7 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2066,41 +2713,170 @@ type UsersServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The username of the user
-	Username string `protobuf:"bytes,20,opt,name=username,proto3" json:"username,omitempty"`
-	// The name of the user
-	Name string `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the user is classified
-	Code string `protobuf:"bytes,22,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the user
-	Email string `protobuf:"bytes,23,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the user
-	Phone string `protobuf:"bytes,24,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The associated role ID
-	RoleId uint64 `protobuf:"varint,25,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	// The associated shift group ID
-	ShiftGroupId uint64 `protobuf:"varint,26,opt,name=shift_group_id,json=shiftGroupId,proto3" json:"shift_group_id,omitempty"`
-	// The associated unit of material of the user's attendance record
-	AttendanceUomId uint64 `protobuf:"varint,27,opt,name=attendance_uom_id,json=attendanceUomId,proto3" json:"attendance_uom_id,omitempty"`
-	// The associated department
-	DepartmentId uint64 `protobuf:"varint,28,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	// The associated payroll group ID of the user
-	PayrollGroupId uint64 `protobuf:"varint,29,opt,name=payroll_group_id,json=payrollGroupId,proto3" json:"payroll_group_id,omitempty"`
-	// The associated tax group ID using which the user's payroll needs to be calculated
-	PayrollTaxGroupId uint64 `protobuf:"varint,30,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3" json:"payroll_tax_group_id,omitempty"`
-	// The associated currency ID of the user's payroll
-	PayrollCurrencyId uint64 `protobuf:"varint,31,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3" json:"payroll_currency_id,omitempty"`
-	// The associated unit of material for storing the basic pay amount
-	BasicPayUomId uint64 `protobuf:"varint,32,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3" json:"basic_pay_uom_id,omitempty"`
-	// The optional work email of the user
-	WorkEmail string `protobuf:"bytes,33,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// --------------------------------------------------------------------------------
-	// Filter by the associated vendor ID (return all the users that belong to this vendor)
-	VendorId uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Filter by the associated client ID (return all the users that belong to this client)
-	ClientId uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // --------------------------------------------------------------------------------
-	// The list of form data filters
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique system-level login alias used by the actor to authenticate against the platform.
+	//
+	// @example "jane.doe"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string and completely unique across the given business entity space.
+	Username *string `protobuf:"bytes,20,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @optional
+	//
+	// @description The official or full legal name of the user as recognized on statutory documentation.
+	//
+	// @example "Jane Doe"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,21,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique internal enterprise code assigned to the individual, utilized for cross-referencing external platforms.
+	//
+	// @example "EMP-2026-992"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,22,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or routing email address where structural system notifications are dispatched.
+	//
+	// @example "jane.doe@example.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a structurally sound and valid email address string.
+	Email *string `protobuf:"bytes,23,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary telephone contact or mobile line number assigned to the account profile.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .*
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	Phone *string `protobuf:"bytes,24,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the primary web application access or RBAC security role.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer greater than zero.
+	RoleId *uint64 `protobuf:"varint,25,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the operational work shift group mapped to this account profile for scheduling and timecard verification.
+	//
+	// @example 45
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	ShiftGroupId *uint64 `protobuf:"varint,26,opt,name=shift_group_id,json=shiftGroupId,proto3,oneof" json:"shift_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID used to evaluate time structures, shifts, or active work hour configurations.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unallocated.
+	AttendanceUomId *uint64 `protobuf:"varint,27,opt,name=attendance_uom_id,json=attendanceUomId,proto3,oneof" json:"attendance_uom_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal sequence identifier of the corporate Department or business unit to which the user is structurally assigned.
+	//
+	// @example 304
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 for general or unassigned staff vectors.
+	DepartmentId *uint64 `protobuf:"varint,28,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the designated payroll distribution group used for localized batch processing and compensation disbursement.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollGroupId *uint64 `protobuf:"varint,29,opt,name=payroll_group_id,json=payrollGroupId,proto3,oneof" json:"payroll_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the tax matrix or statutory configuration rule governing payroll deductions.
+	//
+	// @example 19
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if no deductions are assigned.
+	PayrollTaxGroupId *uint64 `protobuf:"varint,30,opt,name=payroll_tax_group_id,json=payrollTaxGroupId,proto3,oneof" json:"payroll_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The internal identifier matching the currency context in which the user's base salary and line compensation amounts are denominated.
+	//
+	// @example 3
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	PayrollCurrencyId *uint64 `protobuf:"varint,31,opt,name=payroll_currency_id,json=payrollCurrencyId,proto3,oneof" json:"payroll_currency_id,omitempty"`
+	// @optional
+	//
+	// @description The internal Unit of Measure (UOM) tracking ID applied to contextualize basic pay duration distributions (e.g., Per Month, Per Annum).
+	//
+	// @example 701
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer. Defaults to 0 if unassigned.
+	BasicPayUomId *uint64 `protobuf:"varint,32,opt,name=basic_pay_uom_id,json=basicPayUomId,proto3,oneof" json:"basic_pay_uom_id,omitempty"`
+	// @optional
+	//
+	// @description A secondary, fallback, or corporate work email address for overlapping communication loops.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,33,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Vendor profile.
+	//
+	// @example 5402
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	VendorId *uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Client profile.
+	//
+	// @example 9107
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId *uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"` // --------------------------------------------------------------------------------
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2137,197 +2913,197 @@ func (*UsersServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetUserType() USER_TYPE {
-	if x != nil {
-		return x.UserType
+	if x != nil && x.UserType != nil {
+		return *x.UserType
 	}
 	return USER_TYPE_USER_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetUsername() string {
-	if x != nil {
-		return x.Username
+	if x != nil && x.Username != nil {
+		return *x.Username
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetRoleId() uint64 {
-	if x != nil {
-		return x.RoleId
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetShiftGroupId() uint64 {
-	if x != nil {
-		return x.ShiftGroupId
+	if x != nil && x.ShiftGroupId != nil {
+		return *x.ShiftGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetAttendanceUomId() uint64 {
-	if x != nil {
-		return x.AttendanceUomId
+	if x != nil && x.AttendanceUomId != nil {
+		return *x.AttendanceUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetDepartmentId() uint64 {
-	if x != nil {
-		return x.DepartmentId
+	if x != nil && x.DepartmentId != nil {
+		return *x.DepartmentId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetPayrollGroupId() uint64 {
-	if x != nil {
-		return x.PayrollGroupId
+	if x != nil && x.PayrollGroupId != nil {
+		return *x.PayrollGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetPayrollTaxGroupId() uint64 {
-	if x != nil {
-		return x.PayrollTaxGroupId
+	if x != nil && x.PayrollTaxGroupId != nil {
+		return *x.PayrollTaxGroupId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetPayrollCurrencyId() uint64 {
-	if x != nil {
-		return x.PayrollCurrencyId
+	if x != nil && x.PayrollCurrencyId != nil {
+		return *x.PayrollCurrencyId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetBasicPayUomId() uint64 {
-	if x != nil {
-		return x.BasicPayUomId
+	if x != nil && x.BasicPayUomId != nil {
+		return *x.BasicPayUomId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *UsersServiceCountReq) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *UsersServiceCountReq) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
@@ -2339,7 +3115,13 @@ func (x *UsersServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating users via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type UsersServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2347,7 +3129,7 @@ type UsersServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2367,17 +3149,17 @@ type UsersServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *USER_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.USER_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2387,15 +3169,19 @@ type UsersServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the user type
-	UserType USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE" json:"user_type,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The categorical classification of the user entity determining their system scope and behavioral rules.
+	//
+	// @example USER_TYPE_EMPLOYEE
+	UserType *USER_TYPE `protobuf:"varint,7,opt,name=user_type,json=userType,proto3,enum=Scailo.USER_TYPE,oneof" json:"user_type,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -2405,12 +3191,27 @@ type UsersServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// --------------------------------------------------------------------------------
-	// Filter by the associated vendor ID (return all the users that belong to this vendor)
-	VendorId uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Filter by the associated client ID (return all the users that belong to this client)
-	ClientId      uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // --------------------------------------------------------------------------------
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Vendor profile.
+	//
+	// @example 5402
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	VendorId *uint64 `protobuf:"varint,70,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the users associated with or belonging to a specific external Client profile.
+	//
+	// @example 9107
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId      *uint64 `protobuf:"varint,71,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2446,8 +3247,8 @@ func (*UsersServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2460,80 +3261,116 @@ func (x *UsersServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *UsersServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *UsersServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *UsersServiceSearchAllReq) GetSortKey() USER_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return USER_SORT_KEY_USER_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *UsersServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *UsersServiceSearchAllReq) GetUserType() USER_TYPE {
-	if x != nil {
-		return x.UserType
+	if x != nil && x.UserType != nil {
+		return *x.UserType
 	}
 	return USER_TYPE_USER_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *UsersServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *UsersServiceSearchAllReq) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *UsersServiceSearchAllReq) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
-// Describes the message that is required to register a user's device
+// Request message for registering an authenticated user's mobile device endpoint.
+// This structure maps pushing target tokens, hardware operating systems, and user profiles
+// to handle automated system routing for high-volume push alerts.
+//
+// **Side Effects:**
+// - Registers or overwrites the active Firebase Cloud Messaging (FCM) token mapped to the user asset.
+// - Subscribes the device endpoint to relevant corporate notification topics.
 type UsersServiceRegisterMobileDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @description The organization's globally unique identifier.
+	// @optional
+	//
+	// @description The globally unique identifier for the Organization or Business Entity.
 	//
 	// @example "550e8400-e29b-41d4-a716-446655440000"
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The ID of the user who has possession of the device
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal sequence identifier of the user who owns or possesses the mobile device.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative 64-bit integer greater than zero.
 	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// The operating system of the device
+	// @mandatory
+	//
+	// @description The primary operating system classification of the physical mobile device.
+	//
+	// @example "Android"
+	//
+	// @regex ^[0-9A-Za-z]+$
+	//
+	// @format Alphanumeric characters only. Spaces and special characters are strictly prohibited.
 	DeviceOs string `protobuf:"bytes,12,opt,name=device_os,json=deviceOs,proto3" json:"device_os,omitempty"`
-	// The generated FCM Token
+	// @mandatory
+	//
+	// @description The unique hardware token generated by Firebase Cloud Messaging (FCM) or Apple Push Notification service (APNs).
+	//
+	// @example "bk3RNwAz3B0:CI2gDEstbXGYadIDZsTY2s4YckCustomTokenString..."
+	//
+	// @regex .*
+	//
+	// @format Non-empty string constraint with a strict boundary enforcement between 1 and 300 characters.
 	DeviceToken   string `protobuf:"bytes,13,opt,name=device_token,json=deviceToken,proto3" json:"device_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2570,8 +3407,8 @@ func (*UsersServiceRegisterMobileDeviceRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UsersServiceRegisterMobileDeviceRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
@@ -2597,13 +3434,33 @@ func (x *UsersServiceRegisterMobileDeviceRequest) GetDeviceToken() string {
 	return ""
 }
 
-// Describes the message that is required to reset a user's password through an email
+// Request message used to safely initiate an asynchronous user password recovery and reset sequence via email.
+//
+// **Side Effects:**
+// - Generates a secure, short-lived single-use cryptographic verification token.
+// - Dispatches a automated recovery email containing a deep-linked "magic link" to the user's primary registered address.
 type UsersServicePasswordResetReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The username of the user
+	// @mandatory
+	//
+	// @description The unique system-level login alias matching the account requiring a password recovery event.
+	//
+	// @example "jane.doe"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Username string `protobuf:"bytes,10,opt,name=username,proto3" json:"username,omitempty"`
-	// The optional domain prefix that is used to generate the magic link that will allow the user to update the password. If this is empty, then the default authless access domain is used. This is useful in case of password redirections need to happen at custom domains.
-	DomainPrefix  string `protobuf:"bytes,20,opt,name=domain_prefix,json=domainPrefix,proto3" json:"domain_prefix,omitempty"`
+	// @optional
+	//
+	// @description A custom domain prefix or external FQDN string used to override standard redirect endpoints when constructing the recovery link.
+	//
+	// @example "https://users.acme.com/auth/reset"
+	//
+	// @regex .*
+	//
+	// @format If omitted, the system defaults to the pre-configured authless gateway domain. Highly recommended when integrating white-labeled portals.
+	DomainPrefix  *string `protobuf:"bytes,20,opt,name=domain_prefix,json=domainPrefix,proto3,oneof" json:"domain_prefix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2646,8 +3503,8 @@ func (x *UsersServicePasswordResetReq) GetUsername() string {
 }
 
 func (x *UsersServicePasswordResetReq) GetDomainPrefix() string {
-	if x != nil {
-		return x.DomainPrefix
+	if x != nil && x.DomainPrefix != nil {
+		return *x.DomainPrefix
 	}
 	return ""
 }
@@ -2656,73 +3513,127 @@ var File_users_scailo_proto protoreflect.FileDescriptor
 
 const file_users_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xc8\t\n" +
-	"\x19UsersServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x128\n" +
-	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEB\b\xbaH\x05\x82\x01\x02\x10\x01R\buserType\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12#\n" +
+	"\x12users.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x99\r\n" +
+	"\x19UsersServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x128\n" +
+	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEB\b\xbaH\x05\x82\x01\x02\x10\x01R\buserType\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12#\n" +
 	"\busername\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\busername\x12\x1b\n" +
 	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12\x1b\n" +
 	"\x04name\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x127\n" +
 	"\x13plain_text_password\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11plainTextPassword\x12 \n" +
-	"\arole_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x06roleId\x12-\n" +
-	"\x0emobile_role_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\fmobileRoleId\x12\x1d\n" +
-	"\x05email\x18\x10 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
+	"\arole_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x06roleId\x122\n" +
+	"\x0emobile_role_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\fmobileRoleId\x88\x01\x01\x12\x1d\n" +
+	"\x05email\x18\x10 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\"\n" +
 	"\n" +
-	"work_email\x18\x11 \x01(\tR\tworkEmail\x12\x1d\n" +
-	"\x05phone\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12\x1a\n" +
-	"\bbirthday\x18\x1e \x01(\tR\bbirthday\x12!\n" +
-	"\fjoining_date\x18\x1f \x01(\tR\vjoiningDate\x12\x18\n" +
-	"\aaddress\x18  \x01(\tR\aaddress\x12\x12\n" +
-	"\x04city\x18! \x01(\tR\x04city\x12\x14\n" +
-	"\x05state\x18\" \x01(\tR\x05state\x12\x18\n" +
-	"\acountry\x18# \x01(\tR\acountry\x12\x19\n" +
-	"\bpin_code\x18$ \x01(\tR\apinCode\x12\x1f\n" +
-	"\vblood_group\x18% \x01(\tR\n" +
-	"bloodGroup\x12-\n" +
-	"\x0eshift_group_id\x182 \x01(\x04B\a\xbaH\x042\x02(\x00R\fshiftGroupId\x123\n" +
-	"\x11attendance_uom_id\x183 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fattendanceUomId\x12,\n" +
-	"\rdepartment_id\x184 \x01(\x04B\a\xbaH\x042\x02(\x00R\fdepartmentId\x121\n" +
-	"\x10payroll_group_id\x185 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0epayrollGroupId\x128\n" +
-	"\x14payroll_tax_group_id\x186 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11payrollTaxGroupId\x127\n" +
-	"\x13payroll_currency_id\x187 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11payrollCurrencyId\x121\n" +
-	"\x10basic_pay_amount\x188 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0ebasicPayAmount\x120\n" +
-	"\x10basic_pay_uom_id\x189 \x01(\x04B\a\xbaH\x042\x02(\x00R\rbasicPayUomId\x12@\n" +
-	"\tform_data\x18F \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xcb\b\n" +
-	"\x19UsersServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
-	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12\x1b\n" +
-	"\x04name\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12 \n" +
-	"\arole_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x06roleId\x12-\n" +
-	"\x0emobile_role_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\fmobileRoleId\x12\x1d\n" +
-	"\x05email\x18\x10 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
+	"work_email\x18\x11 \x01(\tH\x04R\tworkEmail\x88\x01\x01\x12\x1d\n" +
+	"\x05phone\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12\x1f\n" +
+	"\bbirthday\x18\x1e \x01(\tH\x05R\bbirthday\x88\x01\x01\x12&\n" +
+	"\fjoining_date\x18\x1f \x01(\tH\x06R\vjoiningDate\x88\x01\x01\x12\x1d\n" +
+	"\aaddress\x18  \x01(\tH\aR\aaddress\x88\x01\x01\x12\x17\n" +
+	"\x04city\x18! \x01(\tH\bR\x04city\x88\x01\x01\x12\x19\n" +
+	"\x05state\x18\" \x01(\tH\tR\x05state\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18# \x01(\tH\n" +
+	"R\acountry\x88\x01\x01\x12\x1e\n" +
+	"\bpin_code\x18$ \x01(\tH\vR\apinCode\x88\x01\x01\x12$\n" +
+	"\vblood_group\x18% \x01(\tH\fR\n" +
+	"bloodGroup\x88\x01\x01\x122\n" +
+	"\x0eshift_group_id\x182 \x01(\x04B\a\xbaH\x042\x02(\x00H\rR\fshiftGroupId\x88\x01\x01\x128\n" +
+	"\x11attendance_uom_id\x183 \x01(\x04B\a\xbaH\x042\x02(\x00H\x0eR\x0fattendanceUomId\x88\x01\x01\x121\n" +
+	"\rdepartment_id\x184 \x01(\x04B\a\xbaH\x042\x02(\x00H\x0fR\fdepartmentId\x88\x01\x01\x126\n" +
+	"\x10payroll_group_id\x185 \x01(\x04B\a\xbaH\x042\x02(\x00H\x10R\x0epayrollGroupId\x88\x01\x01\x12=\n" +
+	"\x14payroll_tax_group_id\x186 \x01(\x04B\a\xbaH\x042\x02(\x00H\x11R\x11payrollTaxGroupId\x88\x01\x01\x12<\n" +
+	"\x13payroll_currency_id\x187 \x01(\x04B\a\xbaH\x042\x02(\x00H\x12R\x11payrollCurrencyId\x88\x01\x01\x126\n" +
+	"\x10basic_pay_amount\x188 \x01(\x04B\a\xbaH\x042\x02(\x00H\x13R\x0ebasicPayAmount\x88\x01\x01\x125\n" +
+	"\x10basic_pay_uom_id\x189 \x01(\x04B\a\xbaH\x042\x02(\x00H\x14R\rbasicPayUomId\x88\x01\x01\x12@\n" +
+	"\tform_data\x18F \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x11\n" +
+	"\x0f_mobile_role_idB\r\n" +
+	"\v_work_emailB\v\n" +
+	"\t_birthdayB\x0f\n" +
+	"\r_joining_dateB\n" +
 	"\n" +
-	"work_email\x18\x11 \x01(\tR\tworkEmail\x12\x1d\n" +
-	"\x05phone\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12\x1a\n" +
-	"\bbirthday\x18\x1e \x01(\tR\bbirthday\x12!\n" +
-	"\fjoining_date\x18\x1f \x01(\tR\vjoiningDate\x12\x18\n" +
-	"\aaddress\x18  \x01(\tR\aaddress\x12\x12\n" +
-	"\x04city\x18! \x01(\tR\x04city\x12\x14\n" +
-	"\x05state\x18\" \x01(\tR\x05state\x12\x18\n" +
-	"\acountry\x18# \x01(\tR\acountry\x12\x19\n" +
-	"\bpin_code\x18$ \x01(\tR\apinCode\x12\x1f\n" +
-	"\vblood_group\x18% \x01(\tR\n" +
-	"bloodGroup\x12-\n" +
-	"\x0eshift_group_id\x182 \x01(\x04B\a\xbaH\x042\x02(\x00R\fshiftGroupId\x123\n" +
-	"\x11attendance_uom_id\x183 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fattendanceUomId\x12,\n" +
-	"\rdepartment_id\x184 \x01(\x04B\a\xbaH\x042\x02(\x00R\fdepartmentId\x121\n" +
-	"\x10payroll_group_id\x185 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0epayrollGroupId\x128\n" +
-	"\x14payroll_tax_group_id\x186 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11payrollTaxGroupId\x127\n" +
-	"\x13payroll_currency_id\x187 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11payrollCurrencyId\x121\n" +
-	"\x10basic_pay_amount\x188 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0ebasicPayAmount\x120\n" +
-	"\x10basic_pay_uom_id\x189 \x01(\x04B\a\xbaH\x042\x02(\x00R\rbasicPayUomId\x12@\n" +
-	"\tform_data\x18F \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xb9\t\n" +
+	"\b_addressB\a\n" +
+	"\x05_cityB\b\n" +
+	"\x06_stateB\n" +
+	"\n" +
+	"\b_countryB\v\n" +
+	"\t_pin_codeB\x0e\n" +
+	"\f_blood_groupB\x11\n" +
+	"\x0f_shift_group_idB\x14\n" +
+	"\x12_attendance_uom_idB\x10\n" +
+	"\x0e_department_idB\x13\n" +
+	"\x11_payroll_group_idB\x17\n" +
+	"\x15_payroll_tax_group_idB\x16\n" +
+	"\x14_payroll_currency_idB\x13\n" +
+	"\x11_basic_pay_amountB\x13\n" +
+	"\x11_basic_pay_uom_id\"\xe8\f\n" +
+	"\x19UsersServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12 \n" +
+	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x04code\x88\x01\x01\x12 \n" +
+	"\x04name\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x04name\x88\x01\x01\x12%\n" +
+	"\arole_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\x06roleId\x88\x01\x01\x122\n" +
+	"\x0emobile_role_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\fmobileRoleId\x88\x01\x01\x12\"\n" +
+	"\x05email\x18\x10 \x01(\tB\a\xbaH\x04r\x02`\x01H\aR\x05email\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"work_email\x18\x11 \x01(\tH\bR\tworkEmail\x88\x01\x01\x12\"\n" +
+	"\x05phone\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\tR\x05phone\x88\x01\x01\x12\x1f\n" +
+	"\bbirthday\x18\x1e \x01(\tH\n" +
+	"R\bbirthday\x88\x01\x01\x12&\n" +
+	"\fjoining_date\x18\x1f \x01(\tH\vR\vjoiningDate\x88\x01\x01\x12\x1d\n" +
+	"\aaddress\x18  \x01(\tH\fR\aaddress\x88\x01\x01\x12\x17\n" +
+	"\x04city\x18! \x01(\tH\rR\x04city\x88\x01\x01\x12\x19\n" +
+	"\x05state\x18\" \x01(\tH\x0eR\x05state\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18# \x01(\tH\x0fR\acountry\x88\x01\x01\x12\x1e\n" +
+	"\bpin_code\x18$ \x01(\tH\x10R\apinCode\x88\x01\x01\x12$\n" +
+	"\vblood_group\x18% \x01(\tH\x11R\n" +
+	"bloodGroup\x88\x01\x01\x122\n" +
+	"\x0eshift_group_id\x182 \x01(\x04B\a\xbaH\x042\x02(\x00H\x12R\fshiftGroupId\x88\x01\x01\x128\n" +
+	"\x11attendance_uom_id\x183 \x01(\x04B\a\xbaH\x042\x02(\x00H\x13R\x0fattendanceUomId\x88\x01\x01\x121\n" +
+	"\rdepartment_id\x184 \x01(\x04B\a\xbaH\x042\x02(\x00H\x14R\fdepartmentId\x88\x01\x01\x126\n" +
+	"\x10payroll_group_id\x185 \x01(\x04B\a\xbaH\x042\x02(\x00H\x15R\x0epayrollGroupId\x88\x01\x01\x12=\n" +
+	"\x14payroll_tax_group_id\x186 \x01(\x04B\a\xbaH\x042\x02(\x00H\x16R\x11payrollTaxGroupId\x88\x01\x01\x12<\n" +
+	"\x13payroll_currency_id\x187 \x01(\x04B\a\xbaH\x042\x02(\x00H\x17R\x11payrollCurrencyId\x88\x01\x01\x126\n" +
+	"\x10basic_pay_amount\x188 \x01(\x04B\a\xbaH\x042\x02(\x00H\x18R\x0ebasicPayAmount\x88\x01\x01\x125\n" +
+	"\x10basic_pay_uom_id\x189 \x01(\x04B\a\xbaH\x042\x02(\x00H\x19R\rbasicPayUomId\x88\x01\x01\x12@\n" +
+	"\tform_data\x18F \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\a\n" +
+	"\x05_codeB\a\n" +
+	"\x05_nameB\n" +
+	"\n" +
+	"\b_role_idB\x11\n" +
+	"\x0f_mobile_role_idB\b\n" +
+	"\x06_emailB\r\n" +
+	"\v_work_emailB\b\n" +
+	"\x06_phoneB\v\n" +
+	"\t_birthdayB\x0f\n" +
+	"\r_joining_dateB\n" +
+	"\n" +
+	"\b_addressB\a\n" +
+	"\x05_cityB\b\n" +
+	"\x06_stateB\n" +
+	"\n" +
+	"\b_countryB\v\n" +
+	"\t_pin_codeB\x0e\n" +
+	"\f_blood_groupB\x11\n" +
+	"\x0f_shift_group_idB\x14\n" +
+	"\x12_attendance_uom_idB\x10\n" +
+	"\x0e_department_idB\x13\n" +
+	"\x11_payroll_group_idB\x17\n" +
+	"\x15_payroll_tax_group_idB\x16\n" +
+	"\x14_payroll_currency_idB\x13\n" +
+	"\x11_basic_pay_amountB\x13\n" +
+	"\x11_basic_pay_uom_id\"\xb9\t\n" +
 	"\x04User\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2777,119 +3688,213 @@ const file_users_scailo_proto_rawDesc = "" +
 	"\vblood_group\x18\x14 \x01(\tR\n" +
 	"bloodGroup\"-\n" +
 	"\tUsersList\x12 \n" +
-	"\x04list\x18\x01 \x03(\v2\f.Scailo.UserR\x04list\"\xad\x02\n" +
-	"\x19UsersServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\f.Scailo.UserR\x04list\"\x86\x03\n" +
+	"\x19UsersServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x8c\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x8c\x01\n" +
 	"\x1eUsersServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12&\n" +
-	"\apayload\x18\x04 \x03(\v2\f.Scailo.UserR\apayload\"\x9d\v\n" +
-	"\x15UsersServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\f.Scailo.UserR\apayload\"\x80\x11\n" +
+	"\x15UsersServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12.\n" +
-	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPER\buserType\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x123\n" +
+	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEH\bR\buserType\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\tR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x1a\n" +
-	"\busername\x18\x14 \x01(\tR\busername\x12\x12\n" +
-	"\x04name\x18\x15 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x16 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x17 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x18 \x01(\tR\x05phone\x12\x17\n" +
-	"\arole_id\x18\x19 \x01(\x04R\x06roleId\x12$\n" +
-	"\x0eshift_group_id\x18\x1a \x01(\x04R\fshiftGroupId\x12*\n" +
-	"\x11attendance_uom_id\x18\x1b \x01(\x04R\x0fattendanceUomId\x12#\n" +
-	"\rdepartment_id\x18\x1c \x01(\x04R\fdepartmentId\x12(\n" +
-	"\x10payroll_group_id\x18\x1d \x01(\x04R\x0epayrollGroupId\x12/\n" +
-	"\x14payroll_tax_group_id\x18\x1e \x01(\x04R\x11payrollTaxGroupId\x12.\n" +
-	"\x13payroll_currency_id\x18\x1f \x01(\x04R\x11payrollCurrencyId\x12'\n" +
-	"\x10basic_pay_uom_id\x18  \x01(\x04R\rbasicPayUomId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\n" +
+	"R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\vR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\fR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\rR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\x0eR\x0eapproverRoleId\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x14 \x01(\tH\x0fR\busername\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x15 \x01(\tH\x10R\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x16 \x01(\tH\x11R\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x17 \x01(\tH\x12R\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x18 \x01(\tH\x13R\x05phone\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\x19 \x01(\x04H\x14R\x06roleId\x88\x01\x01\x12)\n" +
+	"\x0eshift_group_id\x18\x1a \x01(\x04H\x15R\fshiftGroupId\x88\x01\x01\x12/\n" +
+	"\x11attendance_uom_id\x18\x1b \x01(\x04H\x16R\x0fattendanceUomId\x88\x01\x01\x12(\n" +
+	"\rdepartment_id\x18\x1c \x01(\x04H\x17R\fdepartmentId\x88\x01\x01\x12-\n" +
+	"\x10payroll_group_id\x18\x1d \x01(\x04H\x18R\x0epayrollGroupId\x88\x01\x01\x124\n" +
+	"\x14payroll_tax_group_id\x18\x1e \x01(\x04H\x19R\x11payrollTaxGroupId\x88\x01\x01\x123\n" +
+	"\x13payroll_currency_id\x18\x1f \x01(\x04H\x1aR\x11payrollCurrencyId\x88\x01\x01\x12,\n" +
+	"\x10basic_pay_uom_id\x18  \x01(\x04H\x1bR\rbasicPayUomId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"work_email\x18! \x01(\tR\tworkEmail\x12\x1b\n" +
-	"\tvendor_id\x18F \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tclient_id\x18G \x01(\x04R\bclientId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xc1\t\n" +
-	"\x14UsersServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12.\n" +
-	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPER\buserType\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"work_email\x18! \x01(\tH\x1cR\tworkEmail\x88\x01\x01\x12 \n" +
+	"\tvendor_id\x18F \x01(\x04H\x1dR\bvendorId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18G \x01(\x04H\x1eR\bclientId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1fR\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\f\n" +
+	"\n" +
+	"_user_typeB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\v\n" +
+	"\t_usernameB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\n" +
+	"\n" +
+	"\b_role_idB\x11\n" +
+	"\x0f_shift_group_idB\x14\n" +
+	"\x12_attendance_uom_idB\x10\n" +
+	"\x0e_department_idB\x13\n" +
+	"\x11_payroll_group_idB\x17\n" +
+	"\x15_payroll_tax_group_idB\x16\n" +
+	"\x14_payroll_currency_idB\x13\n" +
+	"\x11_basic_pay_uom_idB\r\n" +
+	"\v_work_emailB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_client_idB\x14\n" +
+	"\x12_include_form_data\"\xd3\x0e\n" +
+	"\x14UsersServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x123\n" +
+	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEH\x05R\buserType\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x06R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x1a\n" +
-	"\busername\x18\x14 \x01(\tR\busername\x12\x12\n" +
-	"\x04name\x18\x15 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x16 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x17 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x18 \x01(\tR\x05phone\x12\x17\n" +
-	"\arole_id\x18\x19 \x01(\x04R\x06roleId\x12$\n" +
-	"\x0eshift_group_id\x18\x1a \x01(\x04R\fshiftGroupId\x12*\n" +
-	"\x11attendance_uom_id\x18\x1b \x01(\x04R\x0fattendanceUomId\x12#\n" +
-	"\rdepartment_id\x18\x1c \x01(\x04R\fdepartmentId\x12(\n" +
-	"\x10payroll_group_id\x18\x1d \x01(\x04R\x0epayrollGroupId\x12/\n" +
-	"\x14payroll_tax_group_id\x18\x1e \x01(\x04R\x11payrollTaxGroupId\x12.\n" +
-	"\x13payroll_currency_id\x18\x1f \x01(\x04R\x11payrollCurrencyId\x12'\n" +
-	"\x10basic_pay_uom_id\x18  \x01(\x04R\rbasicPayUomId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\aR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\bR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\tR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\n" +
+	"R\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\vR\x0eapproverRoleId\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x14 \x01(\tH\fR\busername\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x15 \x01(\tH\rR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x16 \x01(\tH\x0eR\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x17 \x01(\tH\x0fR\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x18 \x01(\tH\x10R\x05phone\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\x19 \x01(\x04H\x11R\x06roleId\x88\x01\x01\x12)\n" +
+	"\x0eshift_group_id\x18\x1a \x01(\x04H\x12R\fshiftGroupId\x88\x01\x01\x12/\n" +
+	"\x11attendance_uom_id\x18\x1b \x01(\x04H\x13R\x0fattendanceUomId\x88\x01\x01\x12(\n" +
+	"\rdepartment_id\x18\x1c \x01(\x04H\x14R\fdepartmentId\x88\x01\x01\x12-\n" +
+	"\x10payroll_group_id\x18\x1d \x01(\x04H\x15R\x0epayrollGroupId\x88\x01\x01\x124\n" +
+	"\x14payroll_tax_group_id\x18\x1e \x01(\x04H\x16R\x11payrollTaxGroupId\x88\x01\x01\x123\n" +
+	"\x13payroll_currency_id\x18\x1f \x01(\x04H\x17R\x11payrollCurrencyId\x88\x01\x01\x12,\n" +
+	"\x10basic_pay_uom_id\x18  \x01(\x04H\x18R\rbasicPayUomId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"work_email\x18! \x01(\tR\tworkEmail\x12\x1b\n" +
-	"\tvendor_id\x18F \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tclient_id\x18G \x01(\x04R\bclientId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xdf\x03\n" +
-	"\x18UsersServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"work_email\x18! \x01(\tH\x19R\tworkEmail\x88\x01\x01\x12 \n" +
+	"\tvendor_id\x18F \x01(\x04H\x1aR\bvendorId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18G \x01(\x04H\x1bR\bclientId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x120\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x12.\n" +
-	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPER\buserType\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\f\n" +
+	"\n" +
+	"_user_typeB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\v\n" +
+	"\t_usernameB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\n" +
+	"\n" +
+	"\b_role_idB\x11\n" +
+	"\x0f_shift_group_idB\x14\n" +
+	"\x12_attendance_uom_idB\x10\n" +
+	"\x0e_department_idB\x13\n" +
+	"\x11_payroll_group_idB\x17\n" +
+	"\x15_payroll_tax_group_idB\x16\n" +
+	"\x14_payroll_currency_idB\x13\n" +
+	"\x11_basic_pay_uom_idB\r\n" +
+	"\v_work_emailB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_client_id\"\x9a\x05\n" +
+	"\x18UsersServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x125\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x15.Scailo.USER_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x123\n" +
+	"\tuser_type\x18\a \x01(\x0e2\x11.Scailo.USER_TYPEH\x05R\buserType\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12\x1b\n" +
-	"\tvendor_id\x18F \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tclient_id\x18G \x01(\x04R\bclientId\"\xce\x01\n" +
-	"'UsersServiceRegisterMobileDeviceRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12 \n" +
+	"search_key\x18\v \x01(\tH\aR\tsearchKey\x88\x01\x01\x12 \n" +
+	"\tvendor_id\x18F \x01(\x04H\bR\bvendorId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18G \x01(\x04H\tR\bclientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\f\n" +
+	"\n" +
+	"_user_typeB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_client_id\"\xe3\x01\n" +
+	"'UsersServiceRegisterMobileDeviceRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12 \n" +
 	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x121\n" +
 	"\tdevice_os\x18\f \x01(\tB\x14\xbaH\x11r\x0f2\r[0-9A-Za-z]+$R\bdeviceOs\x12-\n" +
 	"\fdevice_token\x18\r \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xac\x02R\vdeviceToken\"h\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xac\x02R\vdeviceTokenB\x0e\n" +
+	"\f_entity_uuid\"\x7f\n" +
 	"\x1cUsersServicePasswordResetReq\x12#\n" +
 	"\busername\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\busername\x12#\n" +
-	"\rdomain_prefix\x18\x14 \x01(\tR\fdomainPrefix*n\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\busername\x12(\n" +
+	"\rdomain_prefix\x18\x14 \x01(\tH\x00R\fdomainPrefix\x88\x01\x01B\x10\n" +
+	"\x0e_domain_prefix*n\n" +
 	"\tUSER_TYPE\x12\x1d\n" +
 	"\x19USER_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_TYPE_EMPLOYEE\x10\x01\x12\x14\n" +
@@ -3177,6 +4182,14 @@ func file_users_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_users_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[10].OneofWrappers = []any{}
+	file_users_scailo_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

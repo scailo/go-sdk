@@ -23,13 +23,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Stores all the possible references from which a sales invoice can be added
+// Enumeration of the supported source record types from which a Sales Invoice can be generated.
+// This determines the operational linkage and financial inheritance of the billing document.
 type SALES_INVOICE_REF_FROM int32
 
 const (
-	// Used only in filters
+	// @description Default behavior, ignoring the source record type. Utilized primarily within search and listing APIs.
 	SALES_INVOICE_REF_FROM_SALES_INVOICE_REF_FROM_ANY_UNSPECIFIED SALES_INVOICE_REF_FROM = 0
-	// Denotes that the sales invoice originated from a sales order
+	// @description Denotes that the sales invoice was generated directly from a fulfilled or approved Sales Order.
 	SALES_INVOICE_REF_FROM_SALES_INVOICE_REF_FROM_SALES_ORDER SALES_INVOICE_REF_FROM = 1
 )
 
@@ -72,31 +73,31 @@ func (SALES_INVOICE_REF_FROM) EnumDescriptor() ([]byte, []int) {
 	return file_sales_invoices_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting sales invoice search results.
 type SALES_INVOICE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_ID_UNSPECIFIED SALES_INVOICE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_CREATED_AT SALES_INVOICE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_MODIFIED_AT SALES_INVOICE_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_APPROVED_ON SALES_INVOICE_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_APPROVED_BY SALES_INVOICE_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_APPROVER_ROLE_ID SALES_INVOICE_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_COMPLETED_ON SALES_INVOICE_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_REFERENCE_ID SALES_INVOICE_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_FINAL_REF_NUMBER SALES_INVOICE_SORT_KEY = 11
-	// Fetch ordered results by the amendment count
+	// @description Sort by the total number of times the sales invoice has been amended.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_AMENDMENT_COUNT SALES_INVOICE_SORT_KEY = 18
-	// Fetch ordered results by the total value
+	// @description Sort by the calculated grand total value of the sales invoice.
 	SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_TOTAL_VALUE SALES_INVOICE_SORT_KEY = 30
 )
 
@@ -157,35 +158,35 @@ func (SALES_INVOICE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_sales_invoices_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting sales invoice item search results.
 type SALES_INVOICE_ITEM_SORT_KEY int32
 
 const (
-	// Fetch invoiced results by id
+	// @description Default sort behavior (by internal item sequence ID).
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_ID_UNSPECIFIED SALES_INVOICE_ITEM_SORT_KEY = 0
-	// Fetch invoiced results by the creation timestamp
+	// @description Sort by the timestamp the item record was initially created.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_CREATED_AT SALES_INVOICE_ITEM_SORT_KEY = 1
-	// Fetch invoiced results by the modified timestamp
+	// @description Sort by the timestamp the item record was last modified.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_MODIFIED_AT SALES_INVOICE_ITEM_SORT_KEY = 2
-	// Fetch invoiced results by the approved on timestamp
+	// @description Sort by the official approval timestamp of the item.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_APPROVED_ON SALES_INVOICE_ITEM_SORT_KEY = 3
-	// Fetch invoiced results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_APPROVED_BY SALES_INVOICE_ITEM_SORT_KEY = 4
-	// Fetch invoiced results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_APPROVER_ROLE_ID SALES_INVOICE_ITEM_SORT_KEY = 5
-	// Fetch invoiced results by the family ID
+	// @description Sort by the internal ID of the family.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_FAMILY_ID SALES_INVOICE_ITEM_SORT_KEY = 10
-	// Fetch invoiced results by the internal quantity
+	// @description Sort by the invoiced quantity evaluated in the internal unit of measure.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_INTERNAL_QUANTITY SALES_INVOICE_ITEM_SORT_KEY = 11
-	// Fetch invoiced results by the client unit of material ID
+	// @description Sort by the internal ID of the client's requested unit of measure.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_CLIENT_UOM_ID SALES_INVOICE_ITEM_SORT_KEY = 12
-	// Fetch invoiced results by the client quantity
+	// @description Sort by the invoiced quantity evaluated in the client's unit of measure.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_CLIENT_QUANTITY SALES_INVOICE_ITEM_SORT_KEY = 13
-	// Fetch invoiced results by the client family code
+	// @description Sort alphabetically by the client's specific family code or SKU.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_CLIENT_FAMILY_CODE SALES_INVOICE_ITEM_SORT_KEY = 14
-	// Fetch invoiced results by the unit price
+	// @description Sort by the invoiced base unit price.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_UNIT_PRICE SALES_INVOICE_ITEM_SORT_KEY = 15
-	// Fetch invoiced results by the tax group ID
+	// @description Sort by the internal ID of the assigned tax group.
 	SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_TAX_GROUP_ID SALES_INVOICE_ITEM_SORT_KEY = 16
 )
 
@@ -250,15 +251,15 @@ func (SALES_INVOICE_ITEM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_sales_invoices_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the applicable statuses of sales invoice items
+// Enum defining the applicable lifecycle and verification statuses for sales invoice items.
 type SALES_INVOICE_ITEM_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	SALES_INVOICE_ITEM_STATUS_SALES_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED SALES_INVOICE_ITEM_STATUS = 0
-	// Denotes that the sales invoice items must have been approved
+	// @description Denotes that the sales invoice item association has passed verification and is actively approved.
 	SALES_INVOICE_ITEM_STATUS_SALES_INVOICE_ITEM_STATUS_APPROVED SALES_INVOICE_ITEM_STATUS = 1
-	// Denotes that the sales invoice items must be waiting for approval
+	// @description Denotes that the sales invoice item association is pending review and waiting for administrative approval.
 	SALES_INVOICE_ITEM_STATUS_SALES_INVOICE_ITEM_STATUS_UNAPPROVED SALES_INVOICE_ITEM_STATUS = 2
 )
 
@@ -303,7 +304,11 @@ func (SALES_INVOICE_ITEM_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_sales_invoices_scailo_proto_rawDescGZIP(), []int{3}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and creating a new Sales Invoice within the system.
+// This record serves as the formal billing document issued to a buyer, encapsulating
+// the financial demands for goods or services rendered based on a source operational record
+// (like a Sales Order). It establishes the currency, payment destination (bank account),
+// and overarching financial adjustments applied at the invoice level.
 type SalesInvoicesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -315,9 +320,17 @@ type SalesInvoicesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -327,7 +340,7 @@ type SalesInvoicesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -338,25 +351,103 @@ type SalesInvoicesServiceCreateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which this invoice originates (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid SALES_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
 	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being billed).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated ID of the currency
+	// @mandatory
+	//
+	// @description The unique internal identifier of the currency used for all financial calculations and billing within this invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
+	// @mandatory
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive the payment for this invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
-	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
-	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
-	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
-	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description Any additional miscellaneous costs (e.g., late fees, freight charges) applied to the invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	MiscellaneousCost *uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat discount amount applied across the entire invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	OverallDiscount *uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount to align the final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of an excess tax group applied at the cumulative/invoice level (e.g., for specialized regional surcharges or cumulative tax brackets).
+	//
+	// @example 6
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	CumulativeExcessTaxGroupId *uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3,oneof" json:"cumulative_excess_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The monetary amount of the cumulative excess tax applied to the invoice, represented in the base currency subunit.
+	//
+	// @example 1250
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	CumulativeExcessTaxAmount *uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3,oneof" json:"cumulative_excess_tax_amount,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -393,22 +484,22 @@ func (*SalesInvoicesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -449,36 +540,36 @@ func (x *SalesInvoicesServiceCreateRequest) GetBankAccountId() uint64 {
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetCumulativeExcessTaxGroupId() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxGroupId
+	if x != nil && x.CumulativeExcessTaxGroupId != nil {
+		return *x.CumulativeExcessTaxGroupId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCreateRequest) GetCumulativeExcessTaxAmount() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxAmount
+	if x != nil && x.CumulativeExcessTaxAmount != nil {
+		return *x.CumulativeExcessTaxAmount
 	}
 	return 0
 }
@@ -490,19 +581,41 @@ func (x *SalesInvoicesServiceCreateRequest) GetFormData() []*FormFieldDatumCreat
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Sales Invoice record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the references, consignee & buyer, currency, project linkage, costs & discounts, payment terms, and other custom form fields
+// of an established Sales Invoice.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type SalesInvoicesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -512,32 +625,94 @@ type SalesInvoicesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// @mandatory
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
 	//
-	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
+	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
 	//
-	// @example "ABS-2023-001-REV"
+	// @example "ABS-2023-001"
 	//
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The associated ID of the currency
-	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
-	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
-	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
-	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
-	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// The list of dynamic forms
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial calculations and billing within this invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive the payment for this invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Any additional miscellaneous costs (e.g., late fees, freight charges) applied to the invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	MiscellaneousCost *uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat discount amount applied across the entire invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	OverallDiscount *uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount to align the final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of an excess tax group applied at the cumulative/invoice level (e.g., for specialized regional surcharges or cumulative tax brackets).
+	//
+	// @example 6
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	CumulativeExcessTaxGroupId *uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3,oneof" json:"cumulative_excess_tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The monetary amount of the cumulative excess tax applied to the invoice, represented in the base currency subunit.
+	//
+	// @example 1250
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	CumulativeExcessTaxAmount *uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3,oneof" json:"cumulative_excess_tax_amount,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -574,8 +749,8 @@ func (*SalesInvoicesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -588,71 +763,71 @@ func (x *SalesInvoicesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetCumulativeExcessTaxGroupId() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxGroupId
+	if x != nil && x.CumulativeExcessTaxGroupId != nil {
+		return *x.CumulativeExcessTaxGroupId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceUpdateRequest) GetCumulativeExcessTaxAmount() uint64 {
-	if x != nil {
-		return x.CumulativeExcessTaxAmount
+	if x != nil && x.CumulativeExcessTaxAmount != nil {
+		return *x.CumulativeExcessTaxAmount
 	}
 	return 0
 }
@@ -664,15 +839,44 @@ func (x *SalesInvoicesServiceUpdateRequest) GetFormData() []*FormFieldDatumCreat
 	return nil
 }
 
-// Describes the parameters necessary to perform an autofill request
+// Request message for triggering an autofill operation on an existing Sales Invoice.
+// This operation automatically populates the invoice with relevant line items (and optionally services)
+// by pulling them directly from the associated source document (e.g., the parent Sales Order).
+//
+// **Note:** The invoice must already be created and explicitly linked to a source reference
+// before this operation can be invoked.
 type SalesInvoicesServiceAutofillRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target sales invoice that needs to be autofilled.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores if services should also be autofilled
-	IncludeServices bool `protobuf:"varint,10,opt,name=include_services,json=includeServices,proto3" json:"include_services,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether service-type line items should also be pulled from the source document during the autofill operation (in addition to standard physical inventory goods).
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IncludeServices *bool `protobuf:"varint,10,opt,name=include_services,json=includeServices,proto3,oneof" json:"include_services,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -708,8 +912,8 @@ func (*SalesInvoicesServiceAutofillRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceAutofillRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -722,18 +926,36 @@ func (x *SalesInvoicesServiceAutofillRequest) GetUuid() string {
 }
 
 func (x *SalesInvoicesServiceAutofillRequest) GetIncludeServices() bool {
-	if x != nil {
-		return x.IncludeServices
+	if x != nil && x.IncludeServices != nil {
+		return *x.IncludeServices
 	}
 	return false
 }
 
-// Stores the UUID references of the record
+// Represents a read-only container for universally unique identifiers (UUIDs) of related external entities.
+// This message securely exposes the downstream linkages (like the source order or currency) to external
+// clients or frontend interfaces without revealing internal sequential IDs.
 type SalesInvoiceAncillaryParameters struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The UUID of the ref_id (the UUID of the associated ref_id)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the associated source document (e.g., the parent Sales Order).
+	//
+	// @example "661f9511-f39c-42d5-b827-557766551111"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	RefUuid string `protobuf:"bytes,213,opt,name=ref_uuid,json=refUuid,proto3" json:"ref_uuid,omitempty"`
-	// The UUID of the currency (the UUID of the associated currency)
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the currency used for financial calculations within this invoice.
+	//
+	// @example "772a8422-e18b-42d4-a815-446655442222"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	CurrencyUuid  string `protobuf:"bytes,214,opt,name=currency_uuid,json=currencyUuid,proto3" json:"currency_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -783,7 +1005,15 @@ func (x *SalesInvoiceAncillaryParameters) GetCurrencyUuid() string {
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a complete, finalized Sales Invoice entity within the system.
+// This message encapsulates the comprehensive state of a formal billing document issued to a buyer,
+// including its identity metadata, strict linkage to the originating operational record (e.g., Sales Order),
+// designated payment destination (bank account), financial aggregates (taxes, discounts, and round-offs),
+// approval lifecycle, audit history, and the complete collection of billed line items.
+//
+// **Note:** This payload is typically utilized in read operations (e.g., View, Search)
+// and provides frontend clients, financial dashboards, and external accounting systems with the
+// entire context needed to render, process, collect payment, and reconcile the invoice.
 type SalesInvoice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -814,31 +1044,59 @@ type SalesInvoice struct {
 	//
 	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
+	// @description The specific module or record type from which this invoice originates (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
 	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,12,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being billed).
+	//
+	// @example 1024
 	RefId uint64 `protobuf:"varint,13,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated ID of the currency
+	// @description The unique internal identifier of the currency used for all financial calculations and billing within this invoice.
+	//
+	// @example 3
 	CurrencyId uint64 `protobuf:"varint,14,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
+	// @description The unique internal identifier of the organization's bank account designated to receive the payment for this invoice.
+	//
+	// @example 15
 	BankAccountId uint64 `protobuf:"varint,15,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// Any miscellaneous cost
+	// @description Any additional miscellaneous costs (e.g., late fees, freight charges) applied to the invoice, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
 	MiscellaneousCost uint64 `protobuf:"varint,16,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The optional discount amount
+	// @description A flat discount amount applied across the entire invoice total, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
 	OverallDiscount uint64 `protobuf:"varint,17,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
+	// @description The applicable rounding adjustment amount to align the final invoice total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The excess tax group
+	// @description The unique internal identifier of an excess tax group applied at the cumulative/invoice level (e.g., for specialized regional surcharges or cumulative tax brackets).
+	//
+	// @example 6
 	CumulativeExcessTaxGroupId uint64 `protobuf:"varint,19,opt,name=cumulative_excess_tax_group_id,json=cumulativeExcessTaxGroupId,proto3" json:"cumulative_excess_tax_group_id,omitempty"`
-	// The excess tax amount
+	// @description The monetary amount of the cumulative excess tax applied to the invoice, represented in the base currency subunit.
+	//
+	// @example 1250
 	CumulativeExcessTaxAmount uint64 `protobuf:"varint,20,opt,name=cumulative_excess_tax_amount,json=cumulativeExcessTaxAmount,proto3" json:"cumulative_excess_tax_amount,omitempty"`
-	// Stores the total value of the sales invoice (as a double, which requires no adjustments)
+	// @description The calculated grand total value of the sales invoice, including all items, discounts, costs, and round-offs. Represented as a standard decimal value.
+	//
+	// @example 15250.75
+	//
+	// @format Double-precision floating-point number.
 	TotalValue float64 `protobuf:"fixed64,21,opt,name=total_value,json=totalValue,proto3" json:"total_value,omitempty"`
-	// The number of times that the sales invoice has been amended
+	// @description The number of times that this record has been amended after approval.
+	//
+	// @example 5
 	AmendmentCount uint64 `protobuf:"varint,22,opt,name=amendment_count,json=amendmentCount,proto3" json:"amendment_count,omitempty"`
-	// The list of associated sales invoice items
+	// @description The complete, aggregated list of individual line items, products, or services that constitute this sales invoice.
+	//
+	// @example []
+	//
+	// @format Repeated array of SalesOrderItem message blocks.
 	List []*SalesInvoiceItem `protobuf:"bytes,30,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,40,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1028,31 +1286,122 @@ func (x *SalesInvoice) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the parameters required to add an item to a sales invoice
+// Request message for appending a billable line item to an existing Sales Invoice.
+// This payload defines the specific family, quantities mapped between internal
+// and client-specific units of measure, and the final commercial terms (price, tax, round-offs)
+// for which the buyer is being formally billed.
 type SalesInvoicesServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales invoice ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales invoice to which this item will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being invoiced.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The invoiced quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The invoiced quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The invoiced price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket applicable to this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications associated with this billed item.
+	//
+	// @example "Billed per expedited shipping agreement."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1088,8 +1437,8 @@ func (*SalesInvoicesServiceItemCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceItemCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1130,8 +1479,8 @@ func (x *SalesInvoicesServiceItemCreateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *SalesInvoicesServiceItemCreateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1151,40 +1500,114 @@ func (x *SalesInvoicesServiceItemCreateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *SalesInvoicesServiceItemCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceItemCreateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to add an individual item as part of multiple item addition to a sales invoice
+// Represents a single line item payload within a bulk creation request.
+// Contains the exact same transactional parameters as a standard item creation request,
+// omitting the parent invoice ID which is declared once at the batch level.
 type SalesInvoicesServiceMultipleItemsSingleton struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being invoiced.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The invoiced quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The invoiced quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The invoiced price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket applicable to this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications associated with this billed item.
+	//
+	// @example "Billed per expedited shipping agreement."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1248,8 +1671,8 @@ func (x *SalesInvoicesServiceMultipleItemsSingleton) GetClientQuantity() uint64 
 }
 
 func (x *SalesInvoicesServiceMultipleItemsSingleton) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1269,27 +1692,51 @@ func (x *SalesInvoicesServiceMultipleItemsSingleton) GetTaxGroupId() uint64 {
 }
 
 func (x *SalesInvoicesServiceMultipleItemsSingleton) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceMultipleItemsSingleton) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to add multiple items to a sales invoice
+// Request message for appending multiple line items to a Sales Invoice in a single batch transaction.
+// Optimized for scenarios like invoice imports or autofill operations where dozens of items
+// are attached simultaneously to a parent record.
 type SalesInvoicesServiceMultipleItemsCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales invoice ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales invoice to which this batch of items will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// List of items
+	// @mandatory
+	//
+	// @description An array containing the individual line item payloads to be appended to the invoice.
+	//
+	// @example []
+	//
+	// @format Repeated array of SalesInvoicesServiceMultipleItemsSingleton message blocks.
 	List          []*SalesInvoicesServiceMultipleItemsSingleton `protobuf:"bytes,11,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1326,8 +1773,8 @@ func (*SalesInvoicesServiceMultipleItemsCreateRequest) Descriptor() ([]byte, []i
 }
 
 func (x *SalesInvoicesServiceMultipleItemsCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1346,29 +1793,115 @@ func (x *SalesInvoicesServiceMultipleItemsCreateRequest) GetList() []*SalesInvoi
 	return nil
 }
 
-// Describes the parameters required to update an item in a sales invoice
+// Request message for modifying the core transactional parameters of an existing billable line item within a Sales Invoice.
+// This payload supports updating billed quantities (across both internal and client-specific units of measure),
+// commercial terms (unit price, tax group, round-offs), and custom specifications.
+//
+// **Note:** These modifications are typically utilized during the draft or revision phases
+// of the billing lifecycle, ensuring the invoice accurately reflects the final financial obligations
+// before being officially approved and issued to the buyer.
 type SalesInvoicesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @mandatory
+	//
+	// @description The updated invoiced quantity represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @mandatory
+	//
+	// @description The updated unique internal identifier of the Unit of Measure (UOM) requested by the client for this item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @mandatory
+	//
+	// @description The updated invoiced quantity represented in the client's specific unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 5000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
-	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @optional
+	//
+	// @description The updated client's specific alphanumeric part number, SKU, or family code used for their internal referencing.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The updated invoiced price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The updated unique internal identifier of the tax group or tax bracket applicable to this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
-	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description The updated applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description Updated additional custom textual requirements, notes, or specifications associated with this billed item.
+	//
+	// @example "Billed per expedited shipping agreement."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1404,8 +1937,8 @@ func (*SalesInvoicesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceItemUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1439,8 +1972,8 @@ func (x *SalesInvoicesServiceItemUpdateRequest) GetClientQuantity() uint64 {
 }
 
 func (x *SalesInvoicesServiceItemUpdateRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
@@ -1460,27 +1993,54 @@ func (x *SalesInvoicesServiceItemUpdateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *SalesInvoicesServiceItemUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceItemUpdateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to update the specifications of an item in a sales invoice
+// Request message for isolating updates strictly to the textual specifications or notes
+// of a Sales Invoice line item.
+// Designed for scenarios where operational instructions change without impacting any
+// commercial terms, pricing, or quantities.
 type SalesInvoicesServiceItemSpecificationsUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target record that needs to be updated.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// The specifications that should be updated
+	// @mandatory
+	//
+	// @description The completely overwritten textual requirements, manufacturing notes, or specifications for fulfilling this item.
+	//
+	// @example "Expedite handling required. Use pallet configuration A."
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
 	Specifications string `protobuf:"bytes,21,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1517,8 +2077,8 @@ func (*SalesInvoicesServiceItemSpecificationsUpdateRequest) Descriptor() ([]byte
 }
 
 func (x *SalesInvoicesServiceItemSpecificationsUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1537,7 +2097,13 @@ func (x *SalesInvoicesServiceItemSpecificationsUpdateRequest) GetSpecifications(
 	return ""
 }
 
-// Describes the parameters that constitute an item associated to a sales invoice
+// Represents a complete, finalized Sales Invoice Item entity within the system.
+// This message encapsulates the comprehensive state of a single product or service being formally billed to a buyer,
+// including its relationship to the parent invoice, mapped quantities across internal and client units,
+// commercial terms (pricing, taxes, round-offs), and custom billing specifications.
+//
+// **Note:** This payload is utilized in read operations to provide frontend clients, downstream financial systems,
+// and accounting workflows with the exact, immutable state of an individual billed line item.
 type SalesInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1548,29 +2114,55 @@ type SalesInvoiceItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales invoice ID
+	// @description The unique internal identifier of the parent sales invoice to which this billed line item belongs.
+	//
+	// @example 1024
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the family or catalog item being formally billed.
+	//
+	// @example 505
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The quantity (in cents) being supplied in internal unit of material
+	// @description The invoiced quantity supplied, represented in the system's internal base unit of measure. Stored in subunits (cents).
+	//
+	// @example 10000
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// Stores the ID of the client's unit of material
+	// @description The unique internal identifier of the Unit of Measure (UOM) requested by the client for this item.
+	//
+	// @example 12
 	ClientUomId uint64 `protobuf:"varint,13,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the quantity (in cents) being admitted in client's unit of material
+	// @description The invoiced quantity admitted and billed, represented in the client's specific unit of measure. Stored in subunits (cents).
+	//
+	// @example 5000
 	ClientQuantity uint64 `protobuf:"varint,14,opt,name=client_quantity,json=clientQuantity,proto3" json:"client_quantity,omitempty"`
-	// The family code as represented by the client
+	// @description The client's specific alphanumeric part number, SKU, or family code used for their internal referencing on the invoice.
+	//
+	// @example "CLI-SKU-992"
 	ClientFamilyCode string `protobuf:"bytes,15,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The unit price of the item (as supplied to the client)
+	// @description The agreed-upon billed price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
 	UnitPrice uint64 `protobuf:"varint,16,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The ID of the associated tax group
+	// @description The unique internal identifier of the tax group or tax bracket applicable to this specific billed line item.
+	//
+	// @example 4
 	TaxGroupId uint64 `protobuf:"varint,17,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The applicable round off amount (optional, and can be positive or negative)
+	// @description The applicable rounding adjustment amount for this specific billed item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,18,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// Optional specifications
+	// @description Additional custom textual requirements, notes, or specifications associated with this billed item.
+	//
+	// @example "Billed per expedited shipping agreement."
 	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1711,10 +2303,10 @@ func (x *SalesInvoiceItem) GetSpecifications() string {
 	return ""
 }
 
-// Describes the message consisting of the list of sales invoices
+// Container message for a collection of Sales Invoice records.
 type SalesInvoicesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Sales Invoice records.
 	List          []*SalesInvoice `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1757,10 +2349,10 @@ func (x *SalesInvoicesList) GetList() []*SalesInvoice {
 	return nil
 }
 
-// Describes the message consisting of the list of sales invoice items
+// Container message for a collection of Sales Invoice Item records.
 type SalesInvoiceItemsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Sales Invoice Item records.
 	List          []*SalesInvoiceItem `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1803,12 +2395,29 @@ func (x *SalesInvoiceItemsList) GetList() []*SalesInvoiceItem {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Represents the request payload containing the parameter constraints required to
+// retrieve the historical audit trail and lifecycle changes of a specific sales invoice item record.
 type SalesInvoiceItemHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the sales invoice ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target sales invoice associated with the historical record.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family associated with the historical record.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1858,12 +2467,31 @@ func (x *SalesInvoiceItemHistoryRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the parameters that are required to retrieve the info of a prospective sales invoice item
+// Request message for retrieving preliminary contextual information about a prospective line item.
+// This payload is typically utilized by frontend interfaces to dynamically fetch default pricing,
+// historical terms, or tax configurations for a specific family prior to officially
+// adding it to a Sales Invoice. This ensures accurate data pre-filling during the invoice creation workflow.
 type SalesInvoiceItemProspectiveInfoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the sales invoice ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales invoice that is currently being evaluated or constructed.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being evaluated for addition to the invoice.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1913,14 +2541,42 @@ func (x *SalesInvoiceItemProspectiveInfoRequest) GetFamilyId() uint64 {
 	return 0
 }
 
-// Describes the request payload to retrieve the quantity that has already been added for the specific ref_from, ref_id and family_id
+// Represents the request payload utilized to retrieve the cumulative quantity of a specific family
+// that has already been billed (invoiced) against a given source document.
+//
+// **Note:** This query is a critical reconciliation tool used during the billing lifecycle to evaluate
+// historical fulfillment and prevent over-billing against the original constraints of a Sales Order.
 type SalesInvoicesServiceAlreadyAddedQuantityForSourceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The associated reference
+	// @mandatory
+	//
+	// @description The specific module or record type from which the invoice originates and against which the billed quantity is being checked (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid SALES_INVOICE_REF_FROM enum value.
 	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,1,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
+	// @mandatory
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being evaluated).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	RefId uint64 `protobuf:"varint,2,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The associated family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the family or catalog item being queried to determine its cumulative billed quantity.
+	//
+	// @example 505
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId      uint64 `protobuf:"varint,3,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1977,7 +2633,7 @@ func (x *SalesInvoicesServiceAlreadyAddedQuantityForSourceRequest) GetFamilyId()
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Sales Invoice records.
 type SalesInvoicesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1985,7 +2641,7 @@ type SalesInvoicesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -2005,19 +2661,23 @@ type SalesInvoicesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this sales invoice
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2053,8 +2713,8 @@ func (*SalesInvoicesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2067,34 +2727,34 @@ func (x *SalesInvoicesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *SalesInvoicesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServicePaginationReq) GetSortKey() SALES_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type SalesInvoicesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2173,7 +2833,12 @@ func (x *SalesInvoicesServicePaginationResponse) GetPayload() []*SalesInvoice {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating sales invoices using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type SalesInvoicesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2181,7 +2846,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2201,17 +2866,17 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2221,7 +2886,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2231,7 +2896,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2241,7 +2906,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2251,7 +2916,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2261,13 +2926,13 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2277,7 +2942,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2287,7 +2952,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2297,7 +2962,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2307,7 +2972,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2317,7 +2982,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2327,7 +2992,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2337,7 +3002,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2347,28 +3012,107 @@ type SalesInvoicesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The ID of the associated currency
-	CurrencyId uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the minimum value of the sales invoice (ignored if 0)
-	TotalValueMin uint64 `protobuf:"varint,70,opt,name=total_value_min,json=totalValueMin,proto3" json:"total_value_min,omitempty"`
-	// Stores the maximum value of the sales invoice (ignored if 0)
-	TotalValueMax uint64 `protobuf:"varint,71,opt,name=total_value_max,json=totalValueMax,proto3" json:"total_value_max,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which this invoice originates (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid SALES_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being billed).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial calculations and billing within this invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive the payment for this invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices where the grand total value is greater than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMin *uint64 `protobuf:"varint,70,opt,name=total_value_min,json=totalValueMin,proto3,oneof" json:"total_value_min,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices where the grand total value is less than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 1500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMax *uint64 `protobuf:"varint,71,opt,name=total_value_max,json=totalValueMax,proto3,oneof" json:"total_value_max,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -2379,7 +3123,7 @@ type SalesInvoicesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2415,8 +3159,8 @@ func (*SalesInvoicesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2429,190 +3173,190 @@ func (x *SalesInvoicesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetSortKey() SALES_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetRefFrom() SALES_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return SALES_INVOICE_REF_FROM_SALES_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetTotalValueMin() uint64 {
-	if x != nil {
-		return x.TotalValueMin
+	if x != nil && x.TotalValueMin != nil {
+		return *x.TotalValueMin
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetTotalValueMax() uint64 {
-	if x != nil {
-		return x.TotalValueMax
+	if x != nil && x.TotalValueMax != nil {
+		return *x.TotalValueMax
 	}
 	return 0
 }
@@ -2625,13 +3369,19 @@ func (x *SalesInvoicesServiceFilterReq) GetFormData() []*FormFieldDatumFilterReq
 }
 
 func (x *SalesInvoicesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting sales invoice records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type SalesInvoicesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2639,7 +3389,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2649,7 +3399,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2659,7 +3409,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2669,7 +3419,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2679,7 +3429,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2689,13 +3439,13 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2705,7 +3455,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2715,7 +3465,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2725,7 +3475,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2735,7 +3485,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2745,7 +3495,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2755,7 +3505,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2765,7 +3515,7 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2775,29 +3525,110 @@ type SalesInvoicesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The associated reference
-	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// The ID of the associated currency
-	CurrencyId uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The associated ID of the bank account
-	BankAccountId uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3" json:"bank_account_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The ID of the associated project of the linked sales order
-	ProjectId uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the minimum value of the sales invoice (ignored if 0)
-	TotalValueMin uint64 `protobuf:"varint,70,opt,name=total_value_min,json=totalValueMin,proto3" json:"total_value_min,omitempty"`
-	// Stores the maximum value of the sales invoice (ignored if 0)
-	TotalValueMax uint64 `protobuf:"varint,71,opt,name=total_value_max,json=totalValueMax,proto3" json:"total_value_max,omitempty"`
-	// The list of form data filters
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which this invoice originates (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid SALES_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being billed).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency used for all financial calculations and billing within this invoice.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,24,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the organization's bank account designated to receive the payment for this invoice.
+	//
+	// @example 15
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BankAccountId *uint64 `protobuf:"varint,25,opt,name=bank_account_id,json=bankAccountId,proto3,oneof" json:"bank_account_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices that contain at least one line item belonging to this specific family ID.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the project associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ProjectId *uint64 `protobuf:"varint,52,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices where the grand total value is greater than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMin *uint64 `protobuf:"varint,70,opt,name=total_value_min,json=totalValueMin,proto3,oneof" json:"total_value_min,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices where the grand total value is less than or equal to this amount. Evaluated in the base currency subunit (e.g., cents). Ignored if set to 0.
+	//
+	// @example 1500000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TotalValueMax *uint64 `protobuf:"varint,71,opt,name=total_value_max,json=totalValueMax,proto3,oneof" json:"total_value_max,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2834,176 +3665,176 @@ func (*SalesInvoicesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceCountReq) GetRefFrom() SALES_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return SALES_INVOICE_REF_FROM_SALES_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceCountReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetBankAccountId() uint64 {
-	if x != nil {
-		return x.BankAccountId
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetProjectId() uint64 {
-	if x != nil {
-		return x.ProjectId
+	if x != nil && x.ProjectId != nil {
+		return *x.ProjectId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetTotalValueMin() uint64 {
-	if x != nil {
-		return x.TotalValueMin
+	if x != nil && x.TotalValueMin != nil {
+		return *x.TotalValueMin
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceCountReq) GetTotalValueMax() uint64 {
-	if x != nil {
-		return x.TotalValueMax
+	if x != nil && x.TotalValueMax != nil {
+		return *x.TotalValueMax
 	}
 	return 0
 }
@@ -3015,7 +3846,13 @@ func (x *SalesInvoicesServiceCountReq) GetFormData() []*FormFieldDatumFilterRequ
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating sales invoices via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type SalesInvoicesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -3023,7 +3860,7 @@ type SalesInvoicesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -3043,17 +3880,17 @@ type SalesInvoicesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_INVOICE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3063,13 +3900,13 @@ type SalesInvoicesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -3079,16 +3916,47 @@ type SalesInvoicesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The associated reference
-	RefFrom SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM" json:"ref_from,omitempty"`
-	// The associated ID of the reference
-	RefId uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
-	// Sales Order related filters
-	// The associated consignee client ID of the linked sales order
-	ConsigneeClientId uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The associated buyer client ID of the linked sales order
-	BuyerClientId uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description The specific module or record type from which this invoice originates (e.g., Sales Order).
+	//
+	// @example "SALES_INVOICE_REF_FROM_SALES_ORDER"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid SALES_INVOICE_REF_FROM enum value. Cannot be unspecified (0).
+	RefFrom *SALES_INVOICE_REF_FROM `protobuf:"varint,22,opt,name=ref_from,json=refFrom,proto3,enum=Scailo.SALES_INVOICE_REF_FROM,oneof" json:"ref_from,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the specific referenced source document (e.g., the ID of the actual Sales Order being billed).
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	RefId *uint64 `protobuf:"varint,23,opt,name=ref_id,json=refId,proto3,oneof" json:"ref_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the consignee client associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ConsigneeClientId *uint64 `protobuf:"varint,50,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales invoices by the unique internal identifier of the buyer client (the entity financially responsible) associated with the linked source document (e.g., Sales Order).
+	//
+	// @example 1051
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	BuyerClientId *uint64 `protobuf:"varint,51,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3124,8 +3992,8 @@ func (*SalesInvoicesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3138,83 +4006,112 @@ func (x *SalesInvoicesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetSortKey() SALES_INVOICE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_INVOICE_SORT_KEY_SALES_INVOICE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetRefFrom() SALES_INVOICE_REF_FROM {
-	if x != nil {
-		return x.RefFrom
+	if x != nil && x.RefFrom != nil {
+		return *x.RefFrom
 	}
 	return SALES_INVOICE_REF_FROM_SALES_INVOICE_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetRefId() uint64 {
-	if x != nil {
-		return x.RefId
+	if x != nil && x.RefId != nil {
+		return *x.RefId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesInvoicesServiceSearchAllReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-// Describes the parameters necessary to create a sales invoice reference
+// Request message for creating and linking a Goods Dispatch reference to a Sales Invoice.
+// This operation establishes a verifiable, structural relationship between the financial billing document (Invoice)
+// and the physical fulfillment document (Goods Dispatch) that lists the physical goods dispatched from a warehouse or store.
+//
+// **Note:** Attaching this reference ensures strict traceability, proving that physical inventory has left
+// the facility to justify the financial charges being levied against the buyer.
 type SalesInvoicesServiceReferenceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales invoice ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales invoice to which this goods dispatch reference is being attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the goods dispatch ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the corresponding Goods Dispatch document, verifying the physical fulfillment of goods associated with this invoice.
+	//
+	// @example 450
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	GoodsDispatchId uint64 `protobuf:"varint,11,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -3251,8 +4148,8 @@ func (*SalesInvoicesServiceReferenceCreateRequest) Descriptor() ([]byte, []int) 
 }
 
 func (x *SalesInvoicesServiceReferenceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3271,7 +4168,9 @@ func (x *SalesInvoicesServiceReferenceCreateRequest) GetGoodsDispatchId() uint64
 	return 0
 }
 
-// Describes the parameters that constitute a sales invoice reference
+// Represents the finalized state of a reference mapping between a Sales Invoice and a Goods Dispatch.
+// This entity securely binds the physical outbound fulfillment record to the billing document,
+// maintaining an explicit audit trail that supports accounting reconciliation and resolves proof-of-delivery disputes.
 type SalesInvoiceReference struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -3282,13 +4181,29 @@ type SalesInvoiceReference struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "Attached dispatch #450 as proof of physical fulfillment."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales invoice ID
+	// @description The unique internal identifier of the parent sales invoice to which this reference belongs.
+	//
+	// @example 1024
 	SalesInvoiceId uint64 `protobuf:"varint,10,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// Stores the goods dispatch ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the mapped Goods Dispatch document that proves physical fulfillment.
+	//
+	// @example 450
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	GoodsDispatchId uint64 `protobuf:"varint,11,opt,name=goods_dispatch_id,json=goodsDispatchId,proto3" json:"goods_dispatch_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -3373,10 +4288,10 @@ func (x *SalesInvoiceReference) GetGoodsDispatchId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of sales invoice references
+// Container message for a collection of Sales Invoice Reference records.
 type SalesInvoiceReferencesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Sales Invoice Reference records.
 	List          []*SalesInvoiceReference `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3419,7 +4334,8 @@ func (x *SalesInvoiceReferencesList) GetList() []*SalesInvoiceReference {
 	return nil
 }
 
-// Describes the request payload to retrieve approved or unapproved items.
+// Request payload structure used to search and filter Sales Invoice Item records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type SalesInvoiceItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -3427,7 +4343,7 @@ type SalesInvoiceItemsSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -3447,17 +4363,17 @@ type SalesInvoiceItemsSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_INVOICE_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_ITEM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_INVOICE_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_INVOICE_ITEM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3467,29 +4383,111 @@ type SalesInvoiceItemsSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the items
-	Status SALES_INVOICE_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.SALES_INVOICE_ITEM_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
-	ApprovedOnStart uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
-	ApprovedOnEnd uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
-	ApprovedByUserId uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
-	ApproverRoleId uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The ID of the sales invoice
-	SalesInvoiceId uint64 `protobuf:"varint,20,opt,name=sales_invoice_id,json=salesInvoiceId,proto3" json:"sales_invoice_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,21,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The ID of the client's unit of material
-	ClientUomId uint64 `protobuf:"varint,23,opt,name=client_uom_id,json=clientUomId,proto3" json:"client_uom_id,omitempty"`
-	// Stores the family code as given by the client
-	ClientFamilyCode string `protobuf:"bytes,25,opt,name=client_family_code,json=clientFamilyCode,proto3" json:"client_family_code,omitempty"`
-	// The ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,27,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The field used for sorting.
+	Status *SALES_INVOICE_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.SALES_INVOICE_ITEM_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnStart *uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnEnd *uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedByUserId *uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApproverRoleId *uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific parent sales invoice.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	SalesInvoiceId *uint64 `protobuf:"varint,20,opt,name=sales_invoice_id,json=salesInvoiceId,proto3,oneof" json:"sales_invoice_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific family.
+	//
+	// @example 505
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,21,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items requesting a specific client Unit of Measure (UOM).
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ClientUomId *uint64 `protobuf:"varint,23,opt,name=client_uom_id,json=clientUomId,proto3,oneof" json:"client_uom_id,omitempty"`
+	// @optional
+	//
+	// @description Fuzzy match for the client's specific alphanumeric part number, SKU, or family code.
+	//
+	// @example "CLI-SKU-992"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	ClientFamilyCode *string `protobuf:"bytes,25,opt,name=client_family_code,json=clientFamilyCode,proto3,oneof" json:"client_family_code,omitempty"`
+	// @optional
+	//
+	// @description Filter line items mapped to a specific tax group.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TaxGroupId *uint64 `protobuf:"varint,27,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey     *string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3525,8 +4523,8 @@ func (*SalesInvoiceItemsSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3539,111 +4537,112 @@ func (x *SalesInvoiceItemsSearchRequest) GetCount() int64 {
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetSortKey() SALES_INVOICE_ITEM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_INVOICE_ITEM_SORT_KEY_SALES_INVOICE_ITEM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetStatus() SALES_INVOICE_ITEM_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return SALES_INVOICE_ITEM_STATUS_SALES_INVOICE_ITEM_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetSalesInvoiceId() uint64 {
-	if x != nil {
-		return x.SalesInvoiceId
+	if x != nil && x.SalesInvoiceId != nil {
+		return *x.SalesInvoiceId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetClientUomId() uint64 {
-	if x != nil {
-		return x.ClientUomId
+	if x != nil && x.ClientUomId != nil {
+		return *x.ClientUomId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetClientFamilyCode() string {
-	if x != nil {
-		return x.ClientFamilyCode
+	if x != nil && x.ClientFamilyCode != nil {
+		return *x.ClientFamilyCode
 	}
 	return ""
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *SalesInvoiceItemsSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Sales Invoice Item records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type SalesInvoicesServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -3722,14 +4721,37 @@ func (x *SalesInvoicesServicePaginatedItemsResponse) GetPayload() []*SalesInvoic
 	return nil
 }
 
-// Describes the dispatched statistics of the sales invoice
+// Represents the reconciliation metrics for a specific family within a Sales Invoice.
+// This message tracks the variance between the financial obligation (what the buyer is being billed for)
+// and the physical fulfillment (what has actually been shipped via linked Goods Dispatches).
+//
+// **Note:** This statistical comparison is crucial for identifying partial shipments, backorders,
+// or potential billing discrepancies before finalizing an invoice.
 type SalesInvoiceDispatchedStatistics struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the ID of the family
+	// @description The unique internal identifier of the specific family or catalog item being analyzed.
+	//
+	// @example 505
 	FamilyId uint64 `protobuf:"varint,1,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the invoiced quantity
+	// @mandatory
+	//
+	// @description The total quantity of this family that has been formally billed on the invoice. Represented in the system's internal base unit of measure (stored in subunits/cents).
+	//
+	// @example 10000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	InvoicedQuantity uint64 `protobuf:"varint,2,opt,name=invoiced_quantity,json=invoicedQuantity,proto3" json:"invoiced_quantity,omitempty"`
-	// Stores the dispatched quantity
+	// @mandatory
+	//
+	// @description The cumulative physical quantity of this family that has been successfully shipped or issued from the warehouse (aggregated across all linked Goods Dispatches). Represented in the system's internal base unit of measure (stored in subunits/cents).
+	//
+	// @example 10000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	DispatchedQuantity uint64 `protobuf:"varint,3,opt,name=dispatched_quantity,json=dispatchedQuantity,proto3" json:"dispatched_quantity,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -3786,9 +4808,14 @@ func (x *SalesInvoiceDispatchedStatistics) GetDispatchedQuantity() uint64 {
 	return 0
 }
 
-// Describes the list of dispatched statistics of the sales invoice
+// Represents the complete collection of reconciliation metrics for a Sales Invoice.
+// This container provides a holistic, item-by-item comparison of billed quantities versus
+// physically dispatched quantities across the entire invoice payload.
 type SalesInvoiceDispatchedStatisticsList struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @description The aggregated list of fulfillment versus billing metrics, grouped by individual families.
+	//
+	// @format Repeated array of SalesInvoiceDispatchedStatistics message blocks. Can be empty if no items or dispatches exist.
 	List          []*SalesInvoiceDispatchedStatistics `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3835,46 +4862,71 @@ var File_sales_invoices_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_invoices_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1bsales_invoices.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xea\x05\n" +
-	"!SalesInvoicesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x1bsales_invoices.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x15families.scailo.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xd1\a\n" +
+	"!SalesInvoicesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x129\n" +
-	"\bref_from\x18\f \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMR\arefFrom\x12\x1e\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12E\n" +
+	"\bref_from\x18\f \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12(\n" +
 	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"currencyId\x12/\n" +
-	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x126\n" +
-	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12K\n" +
-	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\x1acumulativeExcessTaxGroupId\x12H\n" +
-	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00R\x19cumulativeExcessTaxAmount\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xaa\x05\n" +
-	"!SalesInvoicesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x12;\n" +
+	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x05R\broundOff\x88\x01\x01\x12P\n" +
+	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\x1acumulativeExcessTaxGroupId\x88\x01\x01\x12M\n" +
+	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00H\aR\x19cumulativeExcessTaxAmount\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_offB!\n" +
+	"\x1f_cumulative_excess_tax_group_idB\x1f\n" +
+	"\x1d_cumulative_excess_tax_amount\"\xca\a\n" +
+	"!SalesInvoicesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12(\n" +
-	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x12/\n" +
-	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\rbankAccountId\x126\n" +
-	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12K\n" +
-	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\x1acumulativeExcessTaxGroupId\x12H\n" +
-	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00R\x19cumulativeExcessTaxAmount\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x91\x01\n" +
-	"#SalesInvoicesServiceAutofillRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
-	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12)\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\vcurrency_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00H\x04R\n" +
+	"currencyId\x88\x01\x01\x124\n" +
+	"\x0fbank_account_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\rbankAccountId\x88\x01\x01\x12;\n" +
+	"\x12miscellaneous_cost\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\aR\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\bR\broundOff\x88\x01\x01\x12P\n" +
+	"\x1ecumulative_excess_tax_group_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\tR\x1acumulativeExcessTaxGroupId\x88\x01\x01\x12M\n" +
+	"\x1ccumulative_excess_tax_amount\x18\x14 \x01(\x04B\a\xbaH\x042\x02(\x00H\n" +
+	"R\x19cumulativeExcessTaxAmount\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_offB!\n" +
+	"\x1f_cumulative_excess_tax_group_idB\x1f\n" +
+	"\x1d_cumulative_excess_tax_amount\"\xc1\x01\n" +
+	"#SalesInvoicesServiceAutofillRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
+	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12.\n" +
 	"\x10include_services\x18\n" +
-	" \x01(\bR\x0fincludeServices\"c\n" +
+	" \x01(\bH\x01R\x0fincludeServices\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x13\n" +
+	"\x11_include_services\"c\n" +
 	"\x1fSalesInvoiceAncillaryParameters\x12\x1a\n" +
 	"\bref_uuid\x18\xd5\x01 \x01(\tR\arefUuid\x12$\n" +
 	"\rcurrency_uuid\x18\xd6\x01 \x01(\tR\fcurrencyUuid\"\xf5\a\n" +
@@ -3904,56 +4956,72 @@ const file_sales_invoices_scailo_proto_rawDesc = "" +
 	"totalValue\x12'\n" +
 	"\x0famendment_count\x18\x16 \x01(\x04R\x0eamendmentCount\x12,\n" +
 	"\x04list\x18\x1e \x03(\v2\x18.Scailo.SalesInvoiceItemR\x04list\x123\n" +
-	"\tform_data\x18( \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xfe\x03\n" +
-	"%SalesInvoicesServiceItemCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
+	"\tform_data\x18( \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xdb\x04\n" +
+	"%SalesInvoicesServiceItemCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x121\n" +
 	"\x10sales_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesInvoiceId\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xad\x03\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x02R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x03R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xf4\x03\n" +
 	"*SalesInvoicesServiceMultipleItemsSingleton\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x00R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xce\x01\n" +
-	".SalesInvoicesServiceMultipleItemsCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x01R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x02R\x0especifications\x88\x01\x01B\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xe4\x01\n" +
+	".SalesInvoicesServiceMultipleItemsCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x121\n" +
 	"\x10sales_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesInvoiceId\x12F\n" +
-	"\x04list\x18\v \x03(\v22.Scailo.SalesInvoicesServiceMultipleItemsSingletonR\x04list\"\xbe\x03\n" +
-	"%SalesInvoicesServiceItemUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"\x04list\x18\v \x03(\v22.Scailo.SalesInvoicesServiceMultipleItemsSingletonR\x04listB\x0f\n" +
+	"\r_user_comment\"\x9b\x04\n" +
+	"%SalesInvoicesServiceItemUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12+\n" +
 	"\rclient_uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\vclientUomId\x120\n" +
-	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x12,\n" +
-	"\x12client_family_code\x18\x0f \x01(\tR\x10clientFamilyCode\x12&\n" +
+	"\x0fclient_quantity\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\x0eclientQuantity\x121\n" +
+	"\x12client_family_code\x18\x0f \x01(\tH\x01R\x10clientFamilyCode\x88\x01\x01\x12&\n" +
 	"\n" +
 	"unit_price\x18\x10 \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12)\n" +
 	"\ftax_group_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x12 \x01(\x03R\broundOff\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\x9e\x01\n" +
-	"3SalesInvoicesServiceItemSpecificationsUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x12 \x01(\x03H\x02R\broundOff\x88\x01\x01\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x03R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_client_family_codeB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xb4\x01\n" +
+	"3SalesInvoicesServiceItemSpecificationsUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
 	"\x04uuid\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12&\n" +
-	"\x0especifications\x18\x15 \x01(\tR\x0especifications\"\xed\x04\n" +
+	"\x0especifications\x18\x15 \x01(\tR\x0especificationsB\x0f\n" +
+	"\r_user_comment\"\xed\x04\n" +
 	"\x10SalesInvoiceItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3985,114 +5053,195 @@ const file_sales_invoices_scailo_proto_rawDesc = "" +
 	"&SalesInvoiceItemProspectiveInfoRequest\x121\n" +
 	"\x10sales_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesInvoiceId\x12$\n" +
-	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xbb\x01\n" +
-	"8SalesInvoicesServiceAlreadyAddedQuantityForSourceRequest\x129\n" +
-	"\bref_from\x18\x01 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMR\arefFrom\x12\x1e\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xc7\x01\n" +
+	"8SalesInvoicesServiceAlreadyAddedQuantityForSourceRequest\x12E\n" +
+	"\bref_from\x18\x01 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\arefFrom\x12\x1e\n" +
 	"\x06ref_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05refId\x12$\n" +
-	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\xbe\x02\n" +
-	"!SalesInvoicesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\tfamily_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\"\x97\x03\n" +
+	"!SalesInvoicesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x9c\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x9c\x01\n" +
 	"&SalesInvoicesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12.\n" +
-	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesInvoiceR\apayload\"\x95\v\n" +
-	"\x1dSalesInvoicesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesInvoiceR\apayload\"\xda\x10\n" +
+	"\x1dSalesInvoicesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x129\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vcurrency_id\x18\x18 \x01(\x04R\n" +
-	"currencyId\x12&\n" +
-	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x12>\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMH\x12R\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x13R\x05refId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x18 \x01(\x04H\x14R\n" +
+	"currencyId\x88\x01\x01\x12+\n" +
+	"\x0fbank_account_id\x18\x19 \x01(\x04H\x15R\rbankAccountId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x16R\bfamilyId\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\x17R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\x18R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x184 \x01(\x04R\tprojectId\x12&\n" +
-	"\x0ftotal_value_min\x18F \x01(\x04R\rtotalValueMin\x12&\n" +
-	"\x0ftotal_value_max\x18G \x01(\x04R\rtotalValueMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xb0\t\n" +
-	"\x1cSalesInvoicesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"project_id\x184 \x01(\x04H\x19R\tprojectId\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_min\x18F \x01(\x04H\x1aR\rtotalValueMin\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_max\x18G \x01(\x04H\x1bR\rtotalValueMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1cR\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\f\n" +
+	"\n" +
+	"_family_idB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_idB\x12\n" +
+	"\x10_total_value_minB\x12\n" +
+	"\x10_total_value_maxB\x14\n" +
+	"\x12_include_form_data\"\xa4\x0e\n" +
+	"\x1cSalesInvoicesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x129\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12\x1f\n" +
-	"\vcurrency_id\x18\x18 \x01(\x04R\n" +
-	"currencyId\x12&\n" +
-	"\x0fbank_account_id\x18\x19 \x01(\x04R\rbankAccountId\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x12>\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMH\x0fR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\x10R\x05refId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x18 \x01(\x04H\x11R\n" +
+	"currencyId\x88\x01\x01\x12+\n" +
+	"\x0fbank_account_id\x18\x19 \x01(\x04H\x12R\rbankAccountId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x13R\bfamilyId\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\x14R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\x15R\rbuyerClientId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x184 \x01(\x04R\tprojectId\x12&\n" +
-	"\x0ftotal_value_min\x18F \x01(\x04R\rtotalValueMin\x12&\n" +
-	"\x0ftotal_value_max\x18G \x01(\x04R\rtotalValueMax\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xb0\x04\n" +
-	" SalesInvoicesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"project_id\x184 \x01(\x04H\x16R\tprojectId\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_min\x18F \x01(\x04H\x17R\rtotalValueMin\x88\x01\x01\x12+\n" +
+	"\x0ftotal_value_max\x18G \x01(\x04H\x18R\rtotalValueMax\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x0e\n" +
+	"\f_currency_idB\x12\n" +
+	"\x10_bank_account_idB\f\n" +
+	"\n" +
+	"_family_idB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\r\n" +
+	"\v_project_idB\x12\n" +
+	"\x10_total_value_minB\x12\n" +
+	"\x10_total_value_max\"\x8a\x06\n" +
+	" SalesInvoicesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x129\n" +
-	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMR\arefFrom\x12\x15\n" +
-	"\x06ref_id\x18\x17 \x01(\x04R\x05refId\x12.\n" +
-	"\x13consignee_client_id\x182 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x183 \x01(\x04R\rbuyerClientId\"\xb7\x01\n" +
-	"*SalesInvoicesServiceReferenceCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x12>\n" +
+	"\bref_from\x18\x16 \x01(\x0e2\x1e.Scailo.SALES_INVOICE_REF_FROMH\aR\arefFrom\x88\x01\x01\x12\x1a\n" +
+	"\x06ref_id\x18\x17 \x01(\x04H\bR\x05refId\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x182 \x01(\x04H\tR\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x183 \x01(\x04H\n" +
+	"R\rbuyerClientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\v\n" +
+	"\t_ref_fromB\t\n" +
+	"\a_ref_idB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_id\"\xcd\x01\n" +
+	"*SalesInvoicesServiceReferenceCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x121\n" +
 	"\x10sales_invoice_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesInvoiceId\x123\n" +
-	"\x11goods_dispatch_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchId\"\xd3\x02\n" +
+	"\x11goods_dispatch_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x0fgoodsDispatchIdB\x0f\n" +
+	"\r_user_comment\"\xd3\x02\n" +
 	"\x15SalesInvoiceReference\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4104,30 +5253,49 @@ const file_sales_invoices_scailo_proto_rawDesc = "" +
 	" \x01(\x04R\x0esalesInvoiceId\x12*\n" +
 	"\x11goods_dispatch_id\x18\v \x01(\x04R\x0fgoodsDispatchId\"O\n" +
 	"\x1aSalesInvoiceReferencesList\x121\n" +
-	"\x04list\x18\x01 \x03(\v2\x1d.Scailo.SalesInvoiceReferenceR\x04list\"\xf1\x05\n" +
-	"\x1eSalesInvoiceItemsSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x1d.Scailo.SalesInvoiceReferenceR\x04list\"\xd4\b\n" +
+	"\x1eSalesInvoiceItemsSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12>\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2#.Scailo.SALES_INVOICE_ITEM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\a \x01(\x0e2!.Scailo.SALES_INVOICE_ITEM_STATUSR\x06status\x12*\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12C\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2#.Scailo.SALES_INVOICE_ITEM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\a \x01(\x0e2!.Scailo.SALES_INVOICE_ITEM_STATUSH\x05R\x06status\x88\x01\x01\x12/\n" +
 	"\x11approved_on_start\x18\n" +
-	" \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\v \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\f \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\r \x01(\x04R\x0eapproverRoleId\x12(\n" +
-	"\x10sales_invoice_id\x18\x14 \x01(\x04R\x0esalesInvoiceId\x12\x1b\n" +
-	"\tfamily_id\x18\x15 \x01(\x04R\bfamilyId\x12\"\n" +
-	"\rclient_uom_id\x18\x17 \x01(\x04R\vclientUomId\x12,\n" +
-	"\x12client_family_code\x18\x19 \x01(\tR\x10clientFamilyCode\x12 \n" +
-	"\ftax_group_id\x18\x1b \x01(\x04R\n" +
-	"taxGroupId\x12\x1d\n" +
+	" \x01(\x04H\x06R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\v \x01(\x04H\aR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\f \x01(\x04H\bR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\r \x01(\x04H\tR\x0eapproverRoleId\x88\x01\x01\x12-\n" +
+	"\x10sales_invoice_id\x18\x14 \x01(\x04H\n" +
+	"R\x0esalesInvoiceId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\x15 \x01(\x04H\vR\bfamilyId\x88\x01\x01\x12'\n" +
+	"\rclient_uom_id\x18\x17 \x01(\x04H\fR\vclientUomId\x88\x01\x01\x121\n" +
+	"\x12client_family_code\x18\x19 \x01(\tH\rR\x10clientFamilyCode\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18\x1b \x01(\x04H\x0eR\n" +
+	"taxGroupId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18( \x01(\tR\tsearchKey\"\xa4\x01\n" +
+	"search_key\x18( \x01(\tH\x0fR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x13\n" +
+	"\x11_sales_invoice_idB\f\n" +
+	"\n" +
+	"_family_idB\x10\n" +
+	"\x0e_client_uom_idB\x15\n" +
+	"\x13_client_family_codeB\x0f\n" +
+	"\r_tax_group_idB\r\n" +
+	"\v_search_key\"\xa4\x01\n" +
 	"*SalesInvoicesServicePaginatedItemsResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
@@ -4524,6 +5692,20 @@ func file_sales_invoices_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_sales_invoices_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[2].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[16].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[18].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[19].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[20].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[21].OneofWrappers = []any{}
+	file_sales_invoices_scailo_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

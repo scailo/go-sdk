@@ -77,9 +77,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each vendor
+// The VendorsService manages the full lifecycle of vendor records.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type VendorsServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
 	Create(ctx context.Context, in *VendorsServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -159,7 +172,11 @@ type VendorsServiceClient interface {
 	Restore(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -176,60 +193,125 @@ type VendorsServiceClient interface {
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Add an item to a vendor
+	// Associates a new catalog item with an existing vendor profile.
+	//
+	// **Side Effects:**
+	// - Validates item constraints including price deviation limits, tax groups, and order quantities.
+	// - Depending on system configurations, may place the new vendor item association into a pending approval state.
 	AddVendorItem(ctx context.Context, in *VendorsServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an item in a vendor
+	// Updates the configurations and metadata of an existing vendor item association.
+	//
+	// **Side Effects:**
+	// - Modifies unit pricing, catalog mappings, or order constraints.
+	// - May trigger a re-approval workflow or audit flag depending on the severity of the modifications.
 	ModifyVendorItem(ctx context.Context, in *VendorsServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve an item in a vendor
+	// Approves a pending vendor item record, finalizing its availability within the purchasing catalog.
+	//
+	// **Side Effects:**
+	// - Activates the item mapping for downstream procurement and ordering workflows.
+	// - Appends the required approval metadata and audit comment to the record history.
 	ApproveVendorItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete an item in a vendor
+	// Permanently removes or deactivates an item association from a vendor profile.
+	//
+	// **Side Effects:**
+	// - Revokes catalog visibility and prevents future orders for this specific item configuration.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteVendorItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder items in a vendor
-	// rpc ReorderVendorItems(ReorderItemsRequest) returns (IdentifierResponse);
-	// View Vendor Item by ID
+	// Retrieves the complete, granular details of a specific vendor item by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, pricing configurations, quantity constraints, and approval histories.
 	ViewVendorItemByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorItem, error)
-	// View approved vendor items for given vendor ID with pagination
+	// Lists active, approved item associations for a specific vendor using pagination controls.
+	//
+	// This read-only query is optimized for catalog browsing and procurement, returning only items that are fully authorized and available for ordering.
 	ViewPaginatedApprovedVendorItems(ctx context.Context, in *VendorItemsSearchRequest, opts ...grpc.CallOption) (*VendorsServicePaginatedItemsResponse, error)
-	// View unapproved vendor items for given vendor ID with pagination
+	// Lists pending or unapproved item associations for a specific vendor using pagination controls.
+	//
+	// This read-only query is optimized for administrative and managerial workflows to easily identify records requiring review or authorization.
 	ViewPaginatedUnapprovedVendorItems(ctx context.Context, in *VendorItemsSearchRequest, opts ...grpc.CallOption) (*VendorsServicePaginatedItemsResponse, error)
-	// View the history of the vendor item
+	// Retrieves the historical audit trail and lifecycle changes of a specific vendor item record.
+	//
+	// This read-only operation aggregates the chronological evolution of the item, allowing tracking of price shifts, limit updates, and approval state changes.
 	ViewVendorItemHistory(ctx context.Context, in *VendorItemHistoryRequest, opts ...grpc.CallOption) (*VendorItemsList, error)
-	// Search through vendor items with pagination
+	// Searches through vendor item records using filters, status flags, and pagination tokens.
+	//
+	// This read-only query is optimized for administrative data grids, supporting complex lookups, multi-attribute filtering, and explicit windowing parameters (count and offset).
 	SearchItemsWithPagination(ctx context.Context, in *VendorItemsSearchRequest, opts ...grpc.CallOption) (*VendorsServicePaginatedItemsResponse, error)
-	// Search through vendor items that are required with pagination
+	// Searches through vendor items that have explicitly requested operational quantities, utilizing filters and pagination.
+	//
+	// This read-only query pairs the base vendor item entities alongside their operational demand metadata to facilitate targeted inventory and requisition views.
 	SearchRequiredItemsWithPagination(ctx context.Context, in *VendorItemsSearchRequest, opts ...grpc.CallOption) (*VendorsServicePaginatedRequiredItemsResponse, error)
-	// CSV operations
-	// Download the CSV file with the associated line items. The same file could then be used to upload line items.
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the CSV template that could be used to upload items
+	// Retrieves a standardized CSV template used for batch uploading vendor items.
+	//
+	// This read-only operation provides a boilerplate file containing the expected column headers and formatting guidelines required by the system's ingestion engine.
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Upload items using a CSV file. Returns an error in case duplicates are found (family code and uom code are unique)
+	// Processes a batch ingestion of vendor items via a provided CSV file payload.
+	//
+	// **Side Effects:**
+	// - Parses the uploaded file and attempts to bulk-create item associations.
+	// - Validates each row against strict uniqueness constraints; actively rejects the payload and returns an error state if duplicate identifiers are detected (e.g., family code and UOM code must be unique).
 	UploadVendorItems(ctx context.Context, in *IdentifierUUIDWithFile, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Add a user
+	// Associates a new personnel user with an existing vendor.
+	//
+	// **Side Effects:**
+	// - Validates the structural relationship between the vendor and user.
+	// - Depending on system configurations, may place the new vendor user association into a pending approval state.
 	AddVendorUser(ctx context.Context, in *VendorsServiceUserCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a user
+	// Approves a pending vendor user record, finalizing their access and mapping to the vendor account.
+	//
+	// **Side Effects:**
+	// - Activates the user mapping within the vendor scope.
+	// - Appends the required approval metadata and audit comment to the record history.
 	ApproveVendorUser(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a user
+	// Permanently removes or deactivates a user association from a vendor profile.
+	//
+	// **Side Effects:**
+	// - Revokes vendor-specific context, tenancy permissions, and data access linked to this user.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteVendorUser(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a user for the given ID
+	// Retrieves the complete, granular details of a specific vendor user by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, user contexts, and approval histories.
 	ViewVendorUserByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorUser, error)
-	// View all users for given vendor ID
+	// Lists all user associations mapped to a given vendor unique internal identifier.
+	//
+	// This read-only query aggregates and returns the collection of personnel assigned to the vendor entity.
 	ViewVendorUsers(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorUsersList, error)
-	// Search through vendor users with pagination
+	// Searches through vendor user records using filters, status flags, and pagination tokens.
+	//
+	// This read-only query is optimized for administrative data grids, supporting complex lookups,
+	// multi-tenant isolation, and explicit windowing parameters (count and offset).
 	SearchVendorUsersWithPagination(ctx context.Context, in *VendorUsersSearchRequest, opts ...grpc.CallOption) (*VendorsServicePaginatedUsersResponse, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Vendor, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Vendor, error)
-	// View by Code (returns the latest record in case of duplicates)
+	// Retrieves a single record via the assigned internal code. In case duplicates are found, this method retrieves the latest record.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided internal code does not exist.
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Vendor, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*Vendor, error)
 	// Retrieves a record by UUID excluding high-volume fields like logs. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Vendor, error)
-	// View only essential components (without logs) that matches the first given email address
+	// Retrieves a vendor record using their primary email address, omitting compliance logs and non-essential metadata.
+	//
+	// This operation is tailored for fast, low-overhead lookups where only core profile traits and basic identification keys are required.
 	ViewEssentialByEmail(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Vendor, error)
-	// View only essential components (without logs) that matches the first given phone number
+	// Retrieves a vendor record using their primary phone number, omitting compliance logs and non-essential metadata.
+	//
+	// This operation is tailored for fast, low-overhead lookups where only core profile traits and basic identification keys are required.
 	ViewEssentialByPhone(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Vendor, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*VendorsList, error)
@@ -239,10 +321,21 @@ type VendorsServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VendorsList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *VendorsServicePaginationReq, opts ...grpc.CallOption) (*VendorsServicePaginationResponse, error)
-	// View vendors that have been associated with the given family ID (returns vendors that have not been approved for the family as well)
+	// Retrieves a comprehensive list of all vendor profiles associated with a specific family.
+	//
+	// This read-only query aggregates the entire supply chain footprint for a given item family.
+	// It intentionally returns all associated vendors regardless of their current lifecycle state—meaning
+	// both fully approved suppliers and those still pending authorization or review are included in the response.
+	// This is primarily utilized by procurement administrators and catalog managers to audit supplier mappings,
+	// assess sourcing redundancy, and track pending vendor linkages before they are finalized.
 	ViewVendorsForFamily(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*VendorsList, error)
-	// Other view operations
-	// Download vendor with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *VendorsServiceSearchAllReq, opts ...grpc.CallOption) (*VendorsList, error)

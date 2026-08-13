@@ -53,9 +53,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each storage
+// The StoragesService manages the full lifecycle of storages.
+// It provides standard CRUD operations alongside a robust state machine for
+// verification, manager approval, and completion.
 type StoragesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail.
 	Create(ctx context.Context, in *StoragesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -145,7 +158,12 @@ type StoragesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*Storage, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*StoragesList, error)
-	// View by storage's code (logs aren't returned)
+	// Retrieves a single record via the assigned internal code. In case duplicates are found, this method retrieves the latest record.
+	//
+	// **Note:** High-volume compliance data, audit records, and system logs are excluded from the response payload.
+	//
+	// **Errors:**
+	// - `NOT_FOUND`: If the provided internal code does not exist.
 	ViewByCode(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*Storage, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*StoragesList, error)
@@ -153,9 +171,14 @@ type StoragesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StoragesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *StoragesServicePaginationReq, opts ...grpc.CallOption) (*StoragesServicePaginationResponse, error)
-	// View storage's QR Code as image
+	// Generates and retrieves the visual QR Code asset mapped to a specific storage location.
+	//
+	// Returns a raw or base64-encoded image payload suitable for immediate frontend rendering, physical asset tag printing, or warehouse labeling.
 	ViewQRImage(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*ImageResponse, error)
-	// View storage's QR Code as string
+	// Retrieves the underlying raw alphanumeric text string embedded inside the storage unit's QR Code.
+	//
+	// This is a specialized read-only operation intended for hardware scanners, localized application decoding,
+	// deep-linking logic, or validation pipelines that require verification of the encoded URI/token before rendering.
 	ViewQRString(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StringResponse, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *StoragesServiceSearchAllReq, opts ...grpc.CallOption) (*StoragesList, error)

@@ -411,7 +411,15 @@ type MeetingsServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The associated vault folder ID
 	VaultFolderId uint64 `protobuf:"varint,8,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
@@ -425,7 +433,13 @@ type MeetingsServiceCreateRequest struct {
 	EndsAt uint64 `protobuf:"varint,12,opt,name=ends_at,json=endsAt,proto3" json:"ends_at,omitempty"`
 	// The description of the meeting
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -527,9 +541,25 @@ func (x *MeetingsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 // Describes the parameters necessary to update a record
 type MeetingsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -549,7 +579,13 @@ type MeetingsServiceUpdateRequest struct {
 	EndsAt uint64 `protobuf:"varint,12,opt,name=ends_at,json=endsAt,proto3" json:"ends_at,omitempty"`
 	// The description of the meeting
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -682,7 +718,7 @@ type Meeting struct {
 	EndsAt uint64 `protobuf:"varint,12,opt,name=ends_at,json=endsAt,proto3" json:"ends_at,omitempty"`
 	// The description of the meeting
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1453,7 +1489,9 @@ type MeetingsServiceCountReq struct {
 	AssociateId uint64 `protobuf:"varint,41,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
 	// Return all the meetings that have the following activity tag as part of the actionables
 	ActivityTagId uint64 `protobuf:"varint,42,opt,name=activity_tag_id,json=activityTagId,proto3" json:"activity_tag_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1803,7 +1841,15 @@ func (x *MeetingsServiceSearchAllReq) GetActivityTagId() uint64 {
 // Describes the parameters required to add an actionable to a meeting
 type MeetingsServiceActionableCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the meeting ID
 	MeetingId uint64 `protobuf:"varint,10,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
@@ -1885,7 +1931,15 @@ func (x *MeetingsServiceActionableCreateRequest) GetActivityTagId() uint64 {
 // Describes the parameters required to update an actionable in a meeting
 type MeetingsServiceActionableUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the record
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -2401,7 +2455,15 @@ func (x *MeetingsServicePaginatedActionablesResponse) GetPayload() []*MeetingAct
 // Describes the parameters necessary to create a meeting employee
 type MeetingsServiceEmployeeCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the meeting ID
 	MeetingId uint64 `protobuf:"varint,10,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
@@ -2613,7 +2675,15 @@ func (x *MeetingEmployeesList) GetList() []*MeetingEmployee {
 // Describes the parameters necessary to create a meeting associate
 type MeetingsServiceAssociateCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the meeting ID
 	MeetingId uint64 `protobuf:"varint,10,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
@@ -2825,7 +2895,15 @@ func (x *MeetingAssociatesList) GetList() []*MeetingAssociate {
 // Describes the data model to handle importing of employees from the given identifier representing a team or a department
 type MeetingsServiceImportEmployeesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the meeting
 	MeetingId uint64 `protobuf:"varint,2,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`

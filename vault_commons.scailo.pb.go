@@ -444,7 +444,15 @@ type VaultPermissionAddRequest struct {
 	//
 	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the UUID of the underlying file or folder that this permission if applicable for
 	RefUuid string `protobuf:"bytes,11,opt,name=ref_uuid,json=refUuid,proto3" json:"ref_uuid,omitempty"`
@@ -526,7 +534,15 @@ type VaultPermissionModifyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The UUID of the permission
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// Stores the applicable permissions
 	PermissionCode uint64 `protobuf:"varint,13,opt,name=permission_code,json=permissionCode,proto3" json:"permission_code,omitempty"`

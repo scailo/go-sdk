@@ -23,29 +23,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting location search results.
 type LOCATION_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_ID_UNSPECIFIED LOCATION_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_CREATED_AT LOCATION_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_MODIFIED_AT LOCATION_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_APPROVED_ON LOCATION_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_APPROVED_BY LOCATION_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_APPROVER_ROLE_ID LOCATION_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_NAME LOCATION_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_CODE LOCATION_SORT_KEY = 11
-	// Fetch ordered results by the email address
+	// @description Sort alphabetically by the user-provided email address.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_EMAIL LOCATION_SORT_KEY = 12
-	// Fetch ordered results by the phone number
+	// @description Sort alphabetically by the user-provided phone number.
 	LOCATION_SORT_KEY_LOCATION_SORT_KEY_PHONE LOCATION_SORT_KEY = 13
 )
 
@@ -104,7 +104,12 @@ func (LOCATION_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_locations_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating and registering a new geographic or logical Location.
+// This record tracks physical operational sites, facility hierarchies (leaf vs. non-leaf parent nodes),
+// primary contact endpoints, and tenant isolation parameters.
+//
+// **Note:** This is the primary entry point for Operations, Facilities Management, and Admins to
+// construct corporate site maps, log logistics hubs, or declare regional branch offices.
 type LocationsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -116,22 +121,82 @@ type LocationsServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The name of the location
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The official or friendly descriptive name of the location.
+	//
+	// @example "Headquarters - Building B"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the location is classified
+	// @mandatory
+	//
+	// @description The unique code or internal alphanumeric token used to classify the location for shipping, logistics, or tagging.
+	//
+	// @example "LOC-HQ-BLDGB"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the location
+	// @mandatory
+	//
+	// @description The primary communication or support email address linked specifically to this location.
+	//
+	// @example "facilities.loc1@acme.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
 	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the location
+	// @mandatory
+	//
+	// @description The primary contact or front desk telephone number for the location, typically including country and area codes.
+	//
+	// @example "+1-512-555-0144"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
 	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the associated non-leaf parent location (0, if the first location that is being created is a leaf location)
-	ParentLocationId uint64 `protobuf:"varint,14,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
-	// Stores if this is a leaf location or a non-leaf location
+	// @optional
+	//
+	// @description The unique internal identifier of the parent non-leaf location. Defaults to 0 if this is the root or top-level node in the geographic hierarchy.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ParentLocationId *uint64 `protobuf:"varint,14,opt,name=parent_location_id,json=parentLocationId,proto3,oneof" json:"parent_location_id,omitempty"`
+	// @mandatory
+	//
+	// @description Flag determining whether this location is a terminal 'leaf' node (e.g., a specific office room) or a 'non-leaf' grouping node (e.g., an entire region or campus).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
 	IsLeaf bool `protobuf:"varint,15,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -168,15 +233,15 @@ func (*LocationsServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *LocationsServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -210,8 +275,8 @@ func (x *LocationsServiceCreateRequest) GetPhone() string {
 }
 
 func (x *LocationsServiceCreateRequest) GetParentLocationId() uint64 {
-	if x != nil {
-		return x.ParentLocationId
+	if x != nil && x.ParentLocationId != nil {
+		return *x.ParentLocationId
 	}
 	return 0
 }
@@ -230,33 +295,78 @@ func (x *LocationsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateReq
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Location record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, email, phone and other custom form fields
+// of an established Location.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type LocationsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
-	// The name of the location
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// // The unique code by which the location is classified
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
+	// @optional
 	//
-	//	string code = 11 [(buf.validate.field).string = {
-	//	  // pattern:   "^[^[0-9]A-Za-z]+( [^[0-9]A-Za-z]+)*$",
-	//	  min_len: 1
-	//	}];
+	// @description The official or friendly descriptive name of the location.
 	//
-	// The primary email of the location
-	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the location
-	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The list of dynamic forms
+	// @example "Headquarters - Building B"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or support email address linked specifically to this location.
+	//
+	// @example "facilities.loc1@acme.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact or front desk telephone number for the location, typically including country and area codes.
+	//
+	// @example "+1-512-555-0144"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,13,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -293,8 +403,8 @@ func (*LocationsServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -307,29 +417,29 @@ func (x *LocationsServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *LocationsServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *LocationsServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *LocationsServiceUpdateRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *LocationsServiceUpdateRequest) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -341,7 +451,7 @@ func (x *LocationsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateReq
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Location within the system.
 type Location struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -356,19 +466,31 @@ type Location struct {
 	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,4,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
 	// @description Comprehensive audit trail of every operation performed on this record.
 	Logs []*LogbookLogConciseSLC `protobuf:"bytes,5,rep,name=logs,proto3" json:"logs,omitempty"`
-	// The name of the location
+	// @description The official or friendly descriptive name of the location.
+	//
+	// @example "Headquarters - Building B"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the location is classified
+	// @description The unique code or internal alphanumeric token used to classify the location for shipping, logistics, or tagging.
+	//
+	// @example "LOC-HQ-BLDGB"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the location
+	// @description The primary communication or support email address linked specifically to this location.
+	//
+	// @example "facilities.loc1@acme.com"
 	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the location
+	// @description The primary contact or front desk telephone number for the location, typically including country and area codes.
+	//
+	// @example "+1-512-555-0144"
 	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the associated non-leaf parent location (0, if the first location that is being created is a leaf location)
+	// @description The unique internal identifier of the parent non-leaf location. Defaults to 0 if this is the root or top-level node in the geographic hierarchy.
+	//
+	// @example 1024
 	ParentLocationId uint64 `protobuf:"varint,14,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
-	// Stores if this is a leaf location or a non-leaf location
+	// @description Flag determining whether this location is a terminal 'leaf' node (e.g., a specific office room) or a 'non-leaf' grouping node (e.g., an entire region or campus).
+	//
+	// @example true
 	IsLeaf bool `protobuf:"varint,15,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -488,10 +610,10 @@ func (x *Location) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of Location records.
 type LocationsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Location records.
 	List          []*Location `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -534,7 +656,7 @@ func (x *LocationsList) GetList() []*Location {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Location records.
 type LocationsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -542,7 +664,7 @@ type LocationsServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -562,19 +684,23 @@ type LocationsServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this location
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -610,8 +736,8 @@ func (*LocationsServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -624,34 +750,34 @@ func (x *LocationsServicePaginationReq) GetCount() int64 {
 }
 
 func (x *LocationsServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *LocationsServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *LocationsServicePaginationReq) GetSortKey() LOCATION_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return LOCATION_SORT_KEY_LOCATION_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *LocationsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type LocationsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -730,7 +856,12 @@ func (x *LocationsServicePaginationResponse) GetPayload() []*Location {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating locations using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type LocationsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -738,7 +869,7 @@ type LocationsServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -758,17 +889,17 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -778,7 +909,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -788,7 +919,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -798,7 +929,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -808,7 +939,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -818,13 +949,13 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -834,7 +965,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -844,7 +975,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -854,7 +985,7 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -864,19 +995,65 @@ type LocationsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the location
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the location is classified
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the location
-	Email string `protobuf:"bytes,22,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the location
-	Phone string `protobuf:"bytes,23,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the associated non-leaf parent location (0, if the first location that is being created is a leaf location)
-	ParentLocationId uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
-	// Stores if this is a leaf location or a non-leaf location
-	IsLeaf BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or friendly descriptive name of the location.
+	//
+	// @example "Headquarters - Building B"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or internal alphanumeric token used to classify the location for shipping, logistics, or tagging.
+	//
+	// @example "LOC-HQ-BLDGB"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or support email address linked specifically to this location.
+	//
+	// @example "facilities.loc1@acme.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,22,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact or front desk telephone number for the location, typically including country and area codes.
+	//
+	// @example "+1-512-555-0144"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,23,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent non-leaf location. Defaults to 0 if this is the root or top-level node in the geographic hierarchy.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ParentLocationId *uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3,oneof" json:"parent_location_id,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether this location is a terminal 'leaf' node (e.g., a specific office room) or a 'non-leaf' grouping node (e.g., an entire region or campus).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
+	IsLeaf *BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -887,7 +1064,7 @@ type LocationsServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -923,8 +1100,8 @@ func (*LocationsServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -937,134 +1114,134 @@ func (x *LocationsServiceFilterReq) GetCount() int64 {
 }
 
 func (x *LocationsServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *LocationsServiceFilterReq) GetSortKey() LOCATION_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return LOCATION_SORT_KEY_LOCATION_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *LocationsServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *LocationsServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *LocationsServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *LocationsServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *LocationsServiceFilterReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *LocationsServiceFilterReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *LocationsServiceFilterReq) GetParentLocationId() uint64 {
-	if x != nil {
-		return x.ParentLocationId
+	if x != nil && x.ParentLocationId != nil {
+		return *x.ParentLocationId
 	}
 	return 0
 }
 
 func (x *LocationsServiceFilterReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1077,13 +1254,19 @@ func (x *LocationsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest
 }
 
 func (x *LocationsServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting location records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type LocationsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1091,7 +1274,7 @@ type LocationsServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1101,7 +1284,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1111,7 +1294,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1121,7 +1304,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1131,7 +1314,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1141,13 +1324,13 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1157,7 +1340,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1167,7 +1350,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1177,7 +1360,7 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1187,20 +1370,68 @@ type LocationsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the location
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the location is classified
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the location
-	Email string `protobuf:"bytes,22,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the location
-	Phone string `protobuf:"bytes,23,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the associated non-leaf parent location (0, if the first location that is being created is a leaf location)
-	ParentLocationId uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
-	// Stores if this is a leaf location or a non-leaf location
-	IsLeaf BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
-	// The list of form data filters
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or friendly descriptive name of the location.
+	//
+	// @example "Headquarters - Building B"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or internal alphanumeric token used to classify the location for shipping, logistics, or tagging.
+	//
+	// @example "LOC-HQ-BLDGB"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication or support email address linked specifically to this location.
+	//
+	// @example "facilities.loc1@acme.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,22,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact or front desk telephone number for the location, typically including country and area codes.
+	//
+	// @example "+1-512-555-0144"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,23,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent non-leaf location. Defaults to 0 if this is the root or top-level node in the geographic hierarchy.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ParentLocationId *uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3,oneof" json:"parent_location_id,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether this location is a terminal 'leaf' node (e.g., a specific office room) or a 'non-leaf' grouping node (e.g., an entire region or campus).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
+	IsLeaf *BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1237,120 +1468,120 @@ func (*LocationsServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *LocationsServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *LocationsServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *LocationsServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *LocationsServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *LocationsServiceCountReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *LocationsServiceCountReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *LocationsServiceCountReq) GetParentLocationId() uint64 {
-	if x != nil {
-		return x.ParentLocationId
+	if x != nil && x.ParentLocationId != nil {
+		return *x.ParentLocationId
 	}
 	return 0
 }
 
 func (x *LocationsServiceCountReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1362,7 +1593,13 @@ func (x *LocationsServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest 
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating locations via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type LocationsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1370,7 +1607,7 @@ type LocationsServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1390,17 +1627,17 @@ type LocationsServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *LOCATION_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.LOCATION_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1410,14 +1647,14 @@ type LocationsServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// @mandatory
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -1426,11 +1663,25 @@ type LocationsServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The ID of the associated non-leaf parent location (0, if the first location that is being created is a leaf location)
-	ParentLocationId uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3" json:"parent_location_id,omitempty"`
-	// Stores if this is a leaf location or a non-leaf location
-	IsLeaf        BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent non-leaf location. Defaults to 0 if this is the root or top-level node in the geographic hierarchy.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ParentLocationId *uint64 `protobuf:"varint,24,opt,name=parent_location_id,json=parentLocationId,proto3,oneof" json:"parent_location_id,omitempty"`
+	// @optional
+	//
+	// @description Flag determining whether this location is a terminal 'leaf' node (e.g., a specific office room) or a 'non-leaf' grouping node (e.g., an entire region or campus).
+	//
+	// @example true
+	//
+	// @format Boolean value (`true` or `false`).
+	IsLeaf        *BOOL_FILTER `protobuf:"varint,25,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1466,8 +1717,8 @@ func (*LocationsServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *LocationsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1480,57 +1731,57 @@ func (x *LocationsServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *LocationsServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *LocationsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *LocationsServiceSearchAllReq) GetSortKey() LOCATION_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return LOCATION_SORT_KEY_LOCATION_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *LocationsServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *LocationsServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *LocationsServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *LocationsServiceSearchAllReq) GetParentLocationId() uint64 {
-	if x != nil {
-		return x.ParentLocationId
+	if x != nil && x.ParentLocationId != nil {
+		return *x.ParentLocationId
 	}
 	return 0
 }
 
 func (x *LocationsServiceSearchAllReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1539,28 +1790,36 @@ var File_locations_scailo_proto protoreflect.FileDescriptor
 
 const file_locations_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x16locations.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xed\x02\n" +
-	"\x1dLocationsServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12\x1b\n" +
+	"\x16locations.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\"\xb4\x03\n" +
+	"\x1dLocationsServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12\x1d\n" +
 	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
-	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x125\n" +
-	"\x12parent_location_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00R\x10parentLocationId\x12\x17\n" +
+	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12:\n" +
+	"\x12parent_location_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\x10parentLocationId\x88\x01\x01\x12\x17\n" +
 	"\ais_leaf\x18\x0f \x01(\bR\x06isLeaf\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\x9b\x02\n" +
-	"\x1dLocationsServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12\x1b\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_parent_location_id\"\xf3\x02\n" +
+	"\x1dLocationsServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x12 \n" +
 	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
-	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
-	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xe5\x03\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04name\x88\x01\x01\x12\"\n" +
+	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12\"\n" +
+	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x05phone\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\a\n" +
+	"\x05_nameB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phone\"\xe5\x03\n" +
 	"\bLocation\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -1577,83 +1836,144 @@ const file_locations_scailo_proto_rawDesc = "" +
 	"\ais_leaf\x18\x0f \x01(\bR\x06isLeaf\x123\n" +
 	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"5\n" +
 	"\rLocationsList\x12$\n" +
-	"\x04list\x18\x01 \x03(\v2\x10.Scailo.LocationR\x04list\"\xb5\x02\n" +
-	"\x1dLocationsServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x10.Scailo.LocationR\x04list\"\x8e\x03\n" +
+	"\x1dLocationsServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x124\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x94\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x94\x01\n" +
 	"\"LocationsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12*\n" +
-	"\apayload\x18\x04 \x03(\v2\x10.Scailo.LocationR\apayload\"\x98\b\n" +
-	"\x19LocationsServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x10.Scailo.LocationR\apayload\"\xff\v\n" +
+	"\x19LocationsServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x124\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x16 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x17 \x01(\tR\x05phone\x12,\n" +
-	"\x12parent_location_id\x18\x18 \x01(\x04R\x10parentLocationId\x12,\n" +
-	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xb8\x06\n" +
-	"\x18LocationsServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x16 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x17 \x01(\tR\x05phone\x12,\n" +
-	"\x12parent_location_id\x18\x18 \x01(\x04R\x10parentLocationId\x12,\n" +
-	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xd9\x03\n" +
-	"\x1cLocationsServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x0eR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x0fR\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x16 \x01(\tH\x10R\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x17 \x01(\tH\x11R\x05phone\x88\x01\x01\x121\n" +
+	"\x12parent_location_id\x18\x18 \x01(\x04H\x12R\x10parentLocationId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x13R\x06isLeaf\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x14R\x0fincludeFormData\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x124\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\x15\n" +
+	"\x13_parent_location_idB\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12,\n" +
-	"\x12parent_location_id\x18\x18 \x01(\x04R\x10parentLocationId\x12,\n" +
-	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf*\xde\x02\n" +
+	"\b_is_leafB\x14\n" +
+	"\x12_include_form_data\"\xce\t\n" +
+	"\x18LocationsServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\vR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\fR\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x16 \x01(\tH\rR\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x17 \x01(\tH\x0eR\x05phone\x88\x01\x01\x121\n" +
+	"\x12parent_location_id\x18\x18 \x01(\x04H\x0fR\x10parentLocationId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x10R\x06isLeaf\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
+	"\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\x15\n" +
+	"\x13_parent_location_idB\n" +
+	"\n" +
+	"\b_is_leaf\"\x88\x05\n" +
+	"\x1cLocationsServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x129\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x19.Scailo.LOCATION_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x121\n" +
+	"\x12parent_location_id\x18\x18 \x01(\x04H\aR\x10parentLocationId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x19 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\bR\x06isLeaf\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\x15\n" +
+	"\x13_parent_location_idB\n" +
+	"\n" +
+	"\b_is_leaf*\xde\x02\n" +
 	"\x11LOCATION_SORT_KEY\x12$\n" +
 	" LOCATION_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cLOCATION_SORT_KEY_CREATED_AT\x10\x01\x12!\n" +
@@ -1844,6 +2164,12 @@ func file_locations_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
+	file_locations_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_locations_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_locations_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_locations_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_locations_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_locations_scailo_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

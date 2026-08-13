@@ -23,27 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting project search results.
 type PROJECT_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_ID_UNSPECIFIED PROJECT_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_CREATED_AT PROJECT_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_MODIFIED_AT PROJECT_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_APPROVED_ON PROJECT_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_APPROVED_BY PROJECT_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_APPROVER_ROLE_ID PROJECT_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_COMPLETED_ON PROJECT_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_REFERENCE_ID PROJECT_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	PROJECT_SORT_KEY_PROJECT_SORT_KEY_FINAL_REF_NUMBER PROJECT_SORT_KEY = 11
 )
 
@@ -100,7 +100,12 @@ func (PROJECT_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_projects_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for creating a new project record.
+// This message encapsulates all the foundational metadata, client associations,
+// compliance details, and external system cross-references required to initialize a project.
+//
+// **Note:** This serves as the primary entry point for project provisioning, ensuring
+// that required external mapping, auditing comments, and structural configurations are set.
 type ProjectsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -112,9 +117,17 @@ type ProjectsServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -124,7 +137,7 @@ type ProjectsServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -135,11 +148,33 @@ type ProjectsServiceCreateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The optional ID of the associated client
-	ClientId uint64 `protobuf:"varint,12,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	// The description of the project
+	// @optional
+	//
+	// @description The unique identifier of the associated client.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId *uint64 `protobuf:"varint,12,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
+	// @mandatory
+	//
+	// @description The core detailed description or summary of the project.
+	//
+	// @example "This is an exploratory project for Customer A."
+	//
+	// @regex ^[0-9A-Za-z ]+$
+	//
+	// @format Alphanumeric characters and spaces only. Must not be empty.
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -176,22 +211,22 @@ func (*ProjectsServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProjectsServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *ProjectsServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -204,8 +239,8 @@ func (x *ProjectsServiceCreateRequest) GetReferenceId() string {
 }
 
 func (x *ProjectsServiceCreateRequest) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
@@ -224,19 +259,41 @@ func (x *ProjectsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Project record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the internal reference, client, description
+// of an established Project.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type ProjectsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -246,8 +303,8 @@ type ProjectsServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// @mandatory
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
 	//
 	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
 	//
@@ -256,12 +313,34 @@ type ProjectsServiceUpdateRequest struct {
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The optional ID of the associated client
-	ClientId uint64 `protobuf:"varint,12,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	// The description of the project
-	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
+	// @optional
+	//
+	// @description The unique identifier of the associated client.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId *uint64 `protobuf:"varint,12,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
+	// @optional
+	//
+	// @description The core detailed description or summary of the project.
+	//
+	// @example "This is an exploratory project for Customer A."
+	//
+	// @regex ^[0-9A-Za-z ]+$
+	//
+	// @format Alphanumeric characters and spaces only. Must not be empty.
+	Description *string `protobuf:"bytes,13,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -298,8 +377,8 @@ func (*ProjectsServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -312,36 +391,36 @@ func (x *ProjectsServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *ProjectsServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *ProjectsServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProjectsServiceUpdateRequest) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -353,7 +432,7 @@ func (x *ProjectsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Project within the system.
 type Project struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -384,11 +463,15 @@ type Project struct {
 	//
 	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The optional ID of the associated client
+	// @description The unique identifier of the associated client.
+	//
+	// @example 455
 	ClientId uint64 `protobuf:"varint,12,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	// The description of the project
+	// @description The core detailed description or summary of the project.
+	//
+	// @example "This is an exploratory project for Customer A."
 	Description string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -508,10 +591,10 @@ func (x *Project) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the message consisting of the list of records
+// Container message for a collection of Project records.
 type ProjectsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Project records.
 	List          []*Project `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -554,14 +637,22 @@ func (x *ProjectsList) GetList() []*Project {
 	return nil
 }
 
-// Describes the parameters that are part of a project's statistics payload
+// Represents a snapshot of performance and progress metrics for a project.
+// This message aggregates key performance indicators (KPIs) to provide a
+// high-level overview of project health, effort, and completion status.
 type ProjectStatistics struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the total amount of time spent on the project
+	// @description The total accumulated time spent on the project in seconds.
+	//
+	// @example 86400
 	TotalDuration uint64 `protobuf:"varint,1,opt,name=total_duration,json=totalDuration,proto3" json:"total_duration,omitempty"`
-	// Stores the cumulative completion percentage of the project
+	// @description The cumulative progress of the project expressed as a percentage. Can have a range between 0 and 10000. A fully completed project would have a value of 10000.
+	//
+	// @example 10000
 	TotalCompletionPercentage uint64 `protobuf:"varint,2,opt,name=total_completion_percentage,json=totalCompletionPercentage,proto3" json:"total_completion_percentage,omitempty"`
-	// Stores the total number of points
+	// @description The total number of points earned or assigned to the project. This is used to track effort or value delivery in agile-style workflows.
+	//
+	// @example 10000
 	TotalPoints   uint64 `protobuf:"varint,3,opt,name=total_points,json=totalPoints,proto3" json:"total_points,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -618,7 +709,7 @@ func (x *ProjectStatistics) GetTotalPoints() uint64 {
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Project records.
 type ProjectsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -626,7 +717,7 @@ type ProjectsServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -646,19 +737,23 @@ type ProjectsServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this project
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -694,8 +789,8 @@ func (*ProjectsServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -708,34 +803,34 @@ func (x *ProjectsServicePaginationReq) GetCount() int64 {
 }
 
 func (x *ProjectsServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProjectsServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProjectsServicePaginationReq) GetSortKey() PROJECT_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROJECT_SORT_KEY_PROJECT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProjectsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type ProjectsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -814,7 +909,12 @@ func (x *ProjectsServicePaginationResponse) GetPayload() []*Project {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating projects using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type ProjectsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -822,7 +922,7 @@ type ProjectsServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -842,17 +942,17 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -862,7 +962,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -872,7 +972,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -882,7 +982,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -892,7 +992,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -902,13 +1002,13 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -918,7 +1018,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -928,7 +1028,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -938,7 +1038,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -948,7 +1048,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -958,7 +1058,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -968,7 +1068,7 @@ type ProjectsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -977,8 +1077,8 @@ type ProjectsServiceFilterReq struct {
 	//
 	// @regex [0-9A-Za-z ]*$
 	//
-	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -987,22 +1087,78 @@ type ProjectsServiceFilterReq struct {
 	//
 	// @regex [0-9A-Za-z ]*$
 	//
-	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the associated client. Returns all record if it is set to -1. 0 is a valid filter too.
-	ClientId int64 `protobuf:"varint,22,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	// The ID of the associated sales order (ignored if 0)
-	SalesOrderId uint64 `protobuf:"varint,40,opt,name=sales_order_id,json=salesOrderId,proto3" json:"sales_order_id,omitempty"`
-	// The ID of the associated purchase order (ignored if 0)
-	PurchaseOrderId uint64 `protobuf:"varint,41,opt,name=purchase_order_id,json=purchaseOrderId,proto3" json:"purchase_order_id,omitempty"`
-	// The ID of the associated outward job (ignored if 0)
-	OutwardJobId uint64 `protobuf:"varint,42,opt,name=outward_job_id,json=outwardJobId,proto3" json:"outward_job_id,omitempty"`
-	// The ID of the associated inward job (ignored if 0)
-	InwardJobId uint64 `protobuf:"varint,43,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
-	// The ID of the associated production plan (ignored if 0)
-	ProductionPlanId uint64 `protobuf:"varint,44,opt,name=production_plan_id,json=productionPlanId,proto3" json:"production_plan_id,omitempty"`
-	// The ID of the associated meeting (ignored if 0)
-	MeetingId uint64 `protobuf:"varint,45,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific client. Explicitly set to `-1` to bypass this filter and return all client records. `0` acts as a valid, concrete filter ID.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format 64-bit integer that with a minimum value of -1.
+	ClientId *int64 `protobuf:"varint,22,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific sales order. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	SalesOrderId *uint64 `protobuf:"varint,40,opt,name=sales_order_id,json=salesOrderId,proto3,oneof" json:"sales_order_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific purchase order. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	PurchaseOrderId *uint64 `protobuf:"varint,41,opt,name=purchase_order_id,json=purchaseOrderId,proto3,oneof" json:"purchase_order_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific outward job. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	OutwardJobId *uint64 `protobuf:"varint,42,opt,name=outward_job_id,json=outwardJobId,proto3,oneof" json:"outward_job_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific inward job. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	InwardJobId *uint64 `protobuf:"varint,43,opt,name=inward_job_id,json=inwardJobId,proto3,oneof" json:"inward_job_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific production plan. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ProductionPlanId *uint64 `protobuf:"varint,44,opt,name=production_plan_id,json=productionPlanId,proto3,oneof" json:"production_plan_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific meeting. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	MeetingId *uint64 `protobuf:"varint,45,opt,name=meeting_id,json=meetingId,proto3,oneof" json:"meeting_id,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1013,7 +1169,7 @@ type ProjectsServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1049,8 +1205,8 @@ func (*ProjectsServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1063,169 +1219,169 @@ func (x *ProjectsServiceFilterReq) GetCount() int64 {
 }
 
 func (x *ProjectsServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProjectsServiceFilterReq) GetSortKey() PROJECT_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROJECT_SORT_KEY_PROJECT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProjectsServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProjectsServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProjectsServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProjectsServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *ProjectsServiceFilterReq) GetClientId() int64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetSalesOrderId() uint64 {
-	if x != nil {
-		return x.SalesOrderId
+	if x != nil && x.SalesOrderId != nil {
+		return *x.SalesOrderId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetPurchaseOrderId() uint64 {
-	if x != nil {
-		return x.PurchaseOrderId
+	if x != nil && x.PurchaseOrderId != nil {
+		return *x.PurchaseOrderId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetOutwardJobId() uint64 {
-	if x != nil {
-		return x.OutwardJobId
+	if x != nil && x.OutwardJobId != nil {
+		return *x.OutwardJobId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetInwardJobId() uint64 {
-	if x != nil {
-		return x.InwardJobId
+	if x != nil && x.InwardJobId != nil {
+		return *x.InwardJobId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetProductionPlanId() uint64 {
-	if x != nil {
-		return x.ProductionPlanId
+	if x != nil && x.ProductionPlanId != nil {
+		return *x.ProductionPlanId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceFilterReq) GetMeetingId() uint64 {
-	if x != nil {
-		return x.MeetingId
+	if x != nil && x.MeetingId != nil {
+		return *x.MeetingId
 	}
 	return 0
 }
@@ -1238,13 +1394,19 @@ func (x *ProjectsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest 
 }
 
 func (x *ProjectsServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting project records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type ProjectsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1252,7 +1414,7 @@ type ProjectsServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1262,7 +1424,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1272,7 +1434,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1282,7 +1444,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1292,7 +1454,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1302,13 +1464,13 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1318,7 +1480,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1328,7 +1490,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1338,7 +1500,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1348,7 +1510,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -1358,7 +1520,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -1368,7 +1530,7 @@ type ProjectsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -1377,8 +1539,8 @@ type ProjectsServiceCountReq struct {
 	//
 	// @regex [0-9A-Za-z ]*$
 	//
-	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -1387,23 +1549,81 @@ type ProjectsServiceCountReq struct {
 	//
 	// @regex [0-9A-Za-z ]*$
 	//
-	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the associated client. Returns all record if it is set to -1. 0 is a valid filter too.
-	ClientId int64 `protobuf:"varint,22,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	// The ID of the associated sales order (ignored if 0)
-	SalesOrderId uint64 `protobuf:"varint,40,opt,name=sales_order_id,json=salesOrderId,proto3" json:"sales_order_id,omitempty"`
-	// The ID of the associated purchase order (ignored if 0)
-	PurchaseOrderId uint64 `protobuf:"varint,41,opt,name=purchase_order_id,json=purchaseOrderId,proto3" json:"purchase_order_id,omitempty"`
-	// The ID of the associated outward job (ignored if 0)
-	OutwardJobId uint64 `protobuf:"varint,42,opt,name=outward_job_id,json=outwardJobId,proto3" json:"outward_job_id,omitempty"`
-	// The ID of the associated inward job (ignored if 0)
-	InwardJobId uint64 `protobuf:"varint,43,opt,name=inward_job_id,json=inwardJobId,proto3" json:"inward_job_id,omitempty"`
-	// The ID of the associated production plan (ignored if 0)
-	ProductionPlanId uint64 `protobuf:"varint,44,opt,name=production_plan_id,json=productionPlanId,proto3" json:"production_plan_id,omitempty"`
-	// The ID of the associated meeting (ignored if 0)
-	MeetingId uint64 `protobuf:"varint,45,opt,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
-	// The list of form data filters
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific client. Explicitly set to `-1` to bypass this filter and return all client records. `0` acts as a valid, concrete filter ID.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format 64-bit integer that with a minimum value of -1.
+	ClientId *int64 `protobuf:"varint,22,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific sales order. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	SalesOrderId *uint64 `protobuf:"varint,40,opt,name=sales_order_id,json=salesOrderId,proto3,oneof" json:"sales_order_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific purchase order. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	PurchaseOrderId *uint64 `protobuf:"varint,41,opt,name=purchase_order_id,json=purchaseOrderId,proto3,oneof" json:"purchase_order_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific outward job. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	OutwardJobId *uint64 `protobuf:"varint,42,opt,name=outward_job_id,json=outwardJobId,proto3,oneof" json:"outward_job_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific inward job. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	InwardJobId *uint64 `protobuf:"varint,43,opt,name=inward_job_id,json=inwardJobId,proto3,oneof" json:"inward_job_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific production plan. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ProductionPlanId *uint64 `protobuf:"varint,44,opt,name=production_plan_id,json=productionPlanId,proto3,oneof" json:"production_plan_id,omitempty"`
+	// @optional
+	//
+	// @description Filter projects assigned to a specific meeting. Ignored if set to 0.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	MeetingId *uint64 `protobuf:"varint,45,opt,name=meeting_id,json=meetingId,proto3,oneof" json:"meeting_id,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1440,155 +1660,155 @@ func (*ProjectsServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *ProjectsServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProjectsServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProjectsServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *ProjectsServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *ProjectsServiceCountReq) GetClientId() int64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetSalesOrderId() uint64 {
-	if x != nil {
-		return x.SalesOrderId
+	if x != nil && x.SalesOrderId != nil {
+		return *x.SalesOrderId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetPurchaseOrderId() uint64 {
-	if x != nil {
-		return x.PurchaseOrderId
+	if x != nil && x.PurchaseOrderId != nil {
+		return *x.PurchaseOrderId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetOutwardJobId() uint64 {
-	if x != nil {
-		return x.OutwardJobId
+	if x != nil && x.OutwardJobId != nil {
+		return *x.OutwardJobId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetInwardJobId() uint64 {
-	if x != nil {
-		return x.InwardJobId
+	if x != nil && x.InwardJobId != nil {
+		return *x.InwardJobId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetProductionPlanId() uint64 {
-	if x != nil {
-		return x.ProductionPlanId
+	if x != nil && x.ProductionPlanId != nil {
+		return *x.ProductionPlanId
 	}
 	return 0
 }
 
 func (x *ProjectsServiceCountReq) GetMeetingId() uint64 {
-	if x != nil {
-		return x.MeetingId
+	if x != nil && x.MeetingId != nil {
+		return *x.MeetingId
 	}
 	return 0
 }
@@ -1600,7 +1820,13 @@ func (x *ProjectsServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating projects via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type ProjectsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1608,7 +1834,7 @@ type ProjectsServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1628,17 +1854,17 @@ type ProjectsServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *PROJECT_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.PROJECT_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1648,13 +1874,13 @@ type ProjectsServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -1663,10 +1889,18 @@ type ProjectsServiceSearchAllReq struct {
 	//
 	// @regex .*
 	//
-	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The ID of the associated client. Returns all record if it is set to -1. 0 is a valid filter too.
-	ClientId      int64 `protobuf:"varint,21,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	// @format May contain any UTF-8 characters.
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description Search projects assigned to a specific client. Explicitly set to `-1` to bypass this filter and return all client records. `0` acts as a valid, concrete filter ID.
+	//
+	// @example 455
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format 64-bit integer that with a minimum value of -1.
+	ClientId      *int64 `protobuf:"varint,21,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1702,8 +1936,8 @@ func (*ProjectsServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1716,62 +1950,91 @@ func (x *ProjectsServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *ProjectsServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *ProjectsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *ProjectsServiceSearchAllReq) GetSortKey() PROJECT_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return PROJECT_SORT_KEY_PROJECT_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *ProjectsServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *ProjectsServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *ProjectsServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *ProjectsServiceSearchAllReq) GetClientId() int64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
-// Describes the parameters necessary to create a project contact
+// Request message for creating a new project contact association.
+// This message encapsulates the necessary identifiers to link an employee to a project,
+// along with compliance details and audit logs required for record initialization.
+//
+// **Note:** This serves as the primary entry point for managing project personnel, ensuring
+// that the relationship between the project and the internal employee is properly audited and validated.
 type ProjectsServiceContactCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the project ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique identifier of the target project to which the contact will be associated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	ProjectId uint64 `protobuf:"varint,10,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the employee ID
+	// @mandatory
+	//
+	// @description The unique identifier of the employee being assigned as the project contact.
+	//
+	// @example 5678
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	EmployeeId    uint64 `protobuf:"varint,11,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1808,8 +2071,8 @@ func (*ProjectsServiceContactCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ProjectsServiceContactCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1828,7 +2091,10 @@ func (x *ProjectsServiceContactCreateRequest) GetEmployeeId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a project contact
+// Represents a full Project Contact within the system.
+// This message encapsulates the complete state of a project contact association,
+// including organization tenancy, core entity identifiers, audit trails, and
+// granular approval workflow metadata.
 type ProjectContact struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1839,15 +2105,27 @@ type ProjectContact struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "Updated contact assignment per Q3 structural reorganization."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the project ID
+	// @description The unique internal identifier of the associated project.
+	//
+	// @example 1024
 	ProjectId uint64 `protobuf:"varint,10,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Stores the employee ID
+	// @description The unique internal identifier of the associated employee.
+	//
+	// @example 5678
 	EmployeeId uint64 `protobuf:"varint,11,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
-	// Stores the UUID of the employee
+	// @description The globally unique identifier for the employee, used for external cross-referencing and identity systems.
+	//
+	// @example "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
 	EmployeeUuid  string `protobuf:"bytes,211,opt,name=employee_uuid,json=employeeUuid,proto3" json:"employee_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1939,10 +2217,10 @@ func (x *ProjectContact) GetEmployeeUuid() string {
 	return ""
 }
 
-// Describes the message consisting of the list of project contacts
+// Container message for a collection of Project Contact records.
 type ProjectContactsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Project Contact records.
 	List          []*ProjectContact `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1989,27 +2267,39 @@ var File_projects_scailo_proto protoreflect.FileDescriptor
 
 const file_projects_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x15projects.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xe2\x02\n" +
-	"\x1cProjectsServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x15projects.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xb9\x03\n" +
+	"\x1cProjectsServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12$\n" +
-	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x12+\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12)\n" +
+	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\bclientId\x88\x01\x01\x12+\n" +
 	"\vdescription\x18\r \x01(\tB\t\xbaH\x06r\x042\x02.+R\vdescription\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xfd\x02\n" +
-	"\x1cProjectsServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\f\n" +
+	"\n" +
+	"_client_id\"\x80\x04\n" +
+	"\x1cProjectsServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x12$\n" +
-	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\bclientId\x12+\n" +
-	"\vdescription\x18\r \x01(\tB\t\xbaH\x06r\x042\x02.+R\vdescription\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xa0\x04\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x12)\n" +
+	"\tclient_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\bclientId\x88\x01\x01\x120\n" +
+	"\vdescription\x18\r \x01(\tB\t\xbaH\x06r\x042\x02.+H\x05R\vdescription\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_idB\f\n" +
+	"\n" +
+	"_client_idB\x0e\n" +
+	"\f_description\"\xa0\x04\n" +
 	"\aProject\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2030,102 +2320,172 @@ const file_projects_scailo_proto_rawDesc = "" +
 	"\x11ProjectStatistics\x12%\n" +
 	"\x0etotal_duration\x18\x01 \x01(\x04R\rtotalDuration\x12>\n" +
 	"\x1btotal_completion_percentage\x18\x02 \x01(\x04R\x19totalCompletionPercentage\x12!\n" +
-	"\ftotal_points\x18\x03 \x01(\x04R\vtotalPoints\"\xb3\x02\n" +
-	"\x1cProjectsServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\ftotal_points\x18\x03 \x01(\x04R\vtotalPoints\"\x8c\x03\n" +
+	"\x1cProjectsServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x92\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x92\x01\n" +
 	"!ProjectsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12)\n" +
-	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.ProjectR\apayload\"\xd9\n" +
+	"\apayload\x18\x04 \x03(\v2\x0f.Scailo.ProjectR\apayload\"\xe4\x0f\n" +
+	"\x18ProjectsServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"\x18ProjectsServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
-	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12-\n" +
-	"\tclient_id\x18\x16 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\bclientId\x12-\n" +
-	"\x0esales_order_id\x18( \x01(\x04B\a\xbaH\x042\x02(\x00R\fsalesOrderId\x123\n" +
-	"\x11purchase_order_id\x18) \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fpurchaseOrderId\x12-\n" +
-	"\x0eoutward_job_id\x18* \x01(\x04B\a\xbaH\x042\x02(\x00R\foutwardJobId\x12+\n" +
-	"\rinward_job_id\x18+ \x01(\x04B\a\xbaH\x042\x02(\x00R\vinwardJobId\x125\n" +
-	"\x12production_plan_id\x18, \x01(\x04B\a\xbaH\x042\x02(\x00R\x10productionPlanId\x12&\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x122\n" +
+	"\tclient_id\x18\x16 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01H\x12R\bclientId\x88\x01\x01\x122\n" +
+	"\x0esales_order_id\x18( \x01(\x04B\a\xbaH\x042\x02(\x00H\x13R\fsalesOrderId\x88\x01\x01\x128\n" +
+	"\x11purchase_order_id\x18) \x01(\x04B\a\xbaH\x042\x02(\x00H\x14R\x0fpurchaseOrderId\x88\x01\x01\x122\n" +
+	"\x0eoutward_job_id\x18* \x01(\x04B\a\xbaH\x042\x02(\x00H\x15R\foutwardJobId\x88\x01\x01\x120\n" +
+	"\rinward_job_id\x18+ \x01(\x04B\a\xbaH\x042\x02(\x00H\x16R\vinwardJobId\x88\x01\x01\x12:\n" +
+	"\x12production_plan_id\x18, \x01(\x04B\a\xbaH\x042\x02(\x00H\x17R\x10productionPlanId\x88\x01\x01\x12+\n" +
 	"\n" +
-	"meeting_id\x18- \x01(\x04B\a\xbaH\x042\x02(\x00R\tmeetingId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xfa\b\n" +
-	"\x17ProjectsServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"meeting_id\x18- \x01(\x04B\a\xbaH\x042\x02(\x00H\x18R\tmeetingId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x19R\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\f\n" +
+	"\n" +
+	"_client_idB\x11\n" +
+	"\x0f_sales_order_idB\x14\n" +
+	"\x12_purchase_order_idB\x11\n" +
+	"\x0f_outward_job_idB\x10\n" +
+	"\x0e_inward_job_idB\x15\n" +
+	"\x13_production_plan_idB\r\n" +
+	"\v_meeting_idB\x14\n" +
+	"\x12_include_form_data\"\xb4\r\n" +
+	"\x17ProjectsServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12-\n" +
-	"\tclient_id\x18\x16 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\bclientId\x12-\n" +
-	"\x0esales_order_id\x18( \x01(\x04B\a\xbaH\x042\x02(\x00R\fsalesOrderId\x123\n" +
-	"\x11purchase_order_id\x18) \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fpurchaseOrderId\x12-\n" +
-	"\x0eoutward_job_id\x18* \x01(\x04B\a\xbaH\x042\x02(\x00R\foutwardJobId\x12+\n" +
-	"\rinward_job_id\x18+ \x01(\x04B\a\xbaH\x042\x02(\x00R\vinwardJobId\x125\n" +
-	"\x12production_plan_id\x18, \x01(\x04B\a\xbaH\x042\x02(\x00R\x10productionPlanId\x12&\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x122\n" +
+	"\tclient_id\x18\x16 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01H\x0fR\bclientId\x88\x01\x01\x122\n" +
+	"\x0esales_order_id\x18( \x01(\x04B\a\xbaH\x042\x02(\x00H\x10R\fsalesOrderId\x88\x01\x01\x128\n" +
+	"\x11purchase_order_id\x18) \x01(\x04B\a\xbaH\x042\x02(\x00H\x11R\x0fpurchaseOrderId\x88\x01\x01\x122\n" +
+	"\x0eoutward_job_id\x18* \x01(\x04B\a\xbaH\x042\x02(\x00H\x12R\foutwardJobId\x88\x01\x01\x120\n" +
+	"\rinward_job_id\x18+ \x01(\x04B\a\xbaH\x042\x02(\x00H\x13R\vinwardJobId\x88\x01\x01\x12:\n" +
+	"\x12production_plan_id\x18, \x01(\x04B\a\xbaH\x042\x02(\x00H\x14R\x10productionPlanId\x88\x01\x01\x12+\n" +
 	"\n" +
-	"meeting_id\x18- \x01(\x04B\a\xbaH\x042\x02(\x00R\tmeetingId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xaa\x03\n" +
-	"\x1bProjectsServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"meeting_id\x18- \x01(\x04B\a\xbaH\x042\x02(\x00H\x15R\tmeetingId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x123\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\f\n" +
+	"\n" +
+	"_client_idB\x11\n" +
+	"\x0f_sales_order_idB\x14\n" +
+	"\x12_purchase_order_idB\x11\n" +
+	"\x0f_outward_job_idB\x10\n" +
+	"\x0e_inward_job_idB\x15\n" +
+	"\x13_production_plan_idB\r\n" +
+	"\v_meeting_id\"\xbf\x04\n" +
+	"\x1bProjectsServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x128\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x18.Scailo.PROJECT_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12-\n" +
-	"\tclient_id\x18\x15 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\bclientId\"\x9a\x01\n" +
-	"#ProjectsServiceContactCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12&\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x122\n" +
+	"\tclient_id\x18\x15 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01H\aR\bclientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\f\n" +
+	"\n" +
+	"_client_id\"\xb0\x01\n" +
+	"#ProjectsServiceContactCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12&\n" +
 	"\n" +
 	"project_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\tprojectId\x12(\n" +
 	"\vemployee_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"employeeId\"\xdc\x02\n" +
+	"employeeIdB\x0f\n" +
+	"\r_user_comment\"\xdc\x02\n" +
 	"\x0eProjectContact\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -2374,6 +2734,13 @@ func file_projects_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_projects_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_projects_scailo_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

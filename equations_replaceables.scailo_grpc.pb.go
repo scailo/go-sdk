@@ -167,7 +167,13 @@ type EquationsReplaceablesServiceClient interface {
 	//
 	// This is useful for repeating records or correcting finalized records by starting fresh.
 	Repeat(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -186,7 +192,12 @@ type EquationsReplaceablesServiceClient interface {
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Clone equation from an existing equation (denoted by the identifier)
+	// Initiates the creation of a new record by duplicating the structural properties of an existing record.
+	//
+	// **Side Effects:**
+	// - Provisions a new record populated with the metadata and configurations of the source record.
+	// - Does not clone operational transactions or historical logs of the source.
+	// - Appends an audit trail entry tracking the cloning operation and justification.
 	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Add an item to a equation replaceable
 	AddEquationReplaceableItem(ctx context.Context, in *EquationsReplaceablesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
@@ -241,9 +252,22 @@ type EquationsReplaceablesServiceClient interface {
 	ViewWithPagination(ctx context.Context, in *EquationsReplaceablesServicePaginationReq, opts ...grpc.CallOption) (*EquationsReplaceablesServicePaginationResponse, error)
 	// View the latest equation for a family (denoted by the given identifier)
 	ViewForFamilyID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*EquationReplaceable, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download equation with the given IdentifierUUID
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *EquationsReplaceablesServiceSearchAllReq, opts ...grpc.CallOption) (*EquationsReplaceablesList, error)

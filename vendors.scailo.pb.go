@@ -27,11 +27,11 @@ const (
 type VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE int32
 
 const (
-	// Denotes that price limit type be disregarded. This is used only within search/filter APIs
+	// @description Denotes that price limit type be disregarded. Used exclusively within search/filter APIs to bypass restrictions.
 	VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_ANY_UNSPECIFIED VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE = 0
-	// Denotes that the price limit type is a percentage
+	// @description Denotes that the price limit type is evaluated as a percentage.
 	VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_PERCENTAGE VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE = 1
-	// Denotes that the price limit type is an absolute value
+	// @description Denotes that the price limit type is evaluated as a fixed, absolute currency value.
 	VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_ABSOLUTE VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE = 2
 )
 
@@ -76,29 +76,29 @@ func (VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE) EnumDescriptor() ([]byte, []int) {
 	return file_vendors_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting vendor search results.
 type VENDOR_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_ID_UNSPECIFIED VENDOR_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_CREATED_AT VENDOR_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_MODIFIED_AT VENDOR_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_APPROVED_ON VENDOR_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_APPROVED_BY VENDOR_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_APPROVER_ROLE_ID VENDOR_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_NAME VENDOR_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_CODE VENDOR_SORT_KEY = 11
-	// Fetch ordered results by the email address
+	// @description Sort alphabetically by the user-provided email.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_EMAIL VENDOR_SORT_KEY = 12
-	// Fetch ordered results by the phone number
+	// @description Sort alphabetically by the user-provided phone number.
 	VENDOR_SORT_KEY_VENDOR_SORT_KEY_PHONE VENDOR_SORT_KEY = 13
 )
 
@@ -157,37 +157,37 @@ func (VENDOR_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_vendors_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting vendor item search results.
 type VENDOR_ITEM_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_ID_UNSPECIFIED VENDOR_ITEM_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_CREATED_AT VENDOR_ITEM_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_MODIFIED_AT VENDOR_ITEM_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_APPROVED_ON VENDOR_ITEM_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_APPROVED_BY VENDOR_ITEM_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_APPROVER_ROLE_ID VENDOR_ITEM_SORT_KEY = 5
-	// Fetch ordered results by the family ID
+	// @description Sort by the system ID of the associated family.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_FAMILY_ID VENDOR_ITEM_SORT_KEY = 10
-	// Fetch ordered results by the vendor family code
+	// @description Sort alphabetically by the user-provided vendor family code.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_VENDOR_FAMILY_CODE VENDOR_ITEM_SORT_KEY = 11
-	// Fetch ordered results by the unit of material ID
+	// @description Sort by the system ID of the associated unit of material.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_UOM_ID VENDOR_ITEM_SORT_KEY = 12
-	// Fetch ordered results by the tax group ID
+	// @description Sort by the system ID of the associated tax group.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_TAX_GROUP_ID VENDOR_ITEM_SORT_KEY = 13
-	// Fetch ordered results by the price
+	// @description Sort by the user-provided price.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_PRICE VENDOR_ITEM_SORT_KEY = 14
-	// Fetch ordered results by the minimum order quantity
+	// @description Sort by the user-provided minimum order quantity.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_MIN_ORDER_QTY VENDOR_ITEM_SORT_KEY = 15
-	// Fetch ordered results by the maximum order quantity
+	// @description Sort by the user-provided maximum order quantity.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_MAX_ORDER_QTY VENDOR_ITEM_SORT_KEY = 16
-	// Fetch ordered results by the step interval
+	// @description Sort by the user-provided step interval.
 	VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_STEP_INTERVAL VENDOR_ITEM_SORT_KEY = 17
 )
 
@@ -254,15 +254,15 @@ func (VENDOR_ITEM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_vendors_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the applicable statuses of vendor items
+// Enum defining the applicable lifecycle and verification statuses for vendor items.
 type VENDOR_ITEM_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	VENDOR_ITEM_STATUS_VENDOR_ITEM_STATUS_ANY_UNSPECIFIED VENDOR_ITEM_STATUS = 0
-	// Denotes that the vendor items must have been approved
+	// @description Denotes that the vendor item association has passed verification and is actively approved.
 	VENDOR_ITEM_STATUS_VENDOR_ITEM_STATUS_APPROVED VENDOR_ITEM_STATUS = 1
-	// Denotes that the vendor items must be waiting for approval
+	// @description Denotes that the vendor item association is pending review and waiting for administrative approval.
 	VENDOR_ITEM_STATUS_VENDOR_ITEM_STATUS_UNAPPROVED VENDOR_ITEM_STATUS = 2
 )
 
@@ -307,15 +307,15 @@ func (VENDOR_ITEM_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_vendors_scailo_proto_rawDescGZIP(), []int{3}
 }
 
-// Describes the applicable statuses of vendor users
+// Enum defining the applicable lifecycle and verification statuses for vendor users.
 type VENDOR_USER_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	VENDOR_USER_STATUS_VENDOR_USER_STATUS_ANY_UNSPECIFIED VENDOR_USER_STATUS = 0
-	// Denotes that the vendor items must have been approved
+	// @description Denotes that the vendor user association has passed verification and is actively approved.
 	VENDOR_USER_STATUS_VENDOR_USER_STATUS_APPROVED VENDOR_USER_STATUS = 1
-	// Denotes that the vendor items must be waiting for approval
+	// @description Denotes that the vendor user association is pending review and waiting for administrative approval.
 	VENDOR_USER_STATUS_VENDOR_USER_STATUS_UNAPPROVED VENDOR_USER_STATUS = 2
 )
 
@@ -360,7 +360,12 @@ func (VENDOR_USER_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_vendors_scailo_proto_rawDescGZIP(), []int{4}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for onboarding and creating a new Vendor profile.
+// This record tracks critical vendor metadata, unique business identifiers,
+// contact details, and custom fields associated with a target entity.
+//
+// **Note:** This is the primary entry point for Procurement, Vendor Management, and Admins
+// to register new vendor profiles or external entities for compliance and tracking.
 type VendorsServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -372,9 +377,17 @@ type VendorsServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -384,16 +397,54 @@ type VendorsServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the vendor
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @mandatory
+	//
+	// @description The official or legal name of the vendor organization or individual.
+	//
+	// @example "Acme Logistics"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the vendor is classified
+	// @mandatory
+	//
+	// @description The unique code or alphanumeric token by which the vendor is classified or categorized internally.
+	//
+	// @example "VND-ACME-001"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the vendor
+	// @mandatory
+	//
+	// @description The primary communication email address of the vendor.
+	//
+	// @example "orders@acmelogistics.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
 	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the vendor
+	// @mandatory
+	//
+	// @description The primary contact phone number of the vendor, typically including country and area codes.
+	//
+	// @example "+1-555-222-0199"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
 	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -430,22 +481,22 @@ func (*VendorsServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorsServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *VendorsServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -485,19 +536,41 @@ func (x *VendorsServiceCreateRequest) GetFormData() []*FormFieldDatumCreateReque
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Vendor record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, code, email, phone and other custom form fields
+// of an established Vendor.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type VendorsServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -507,16 +580,54 @@ type VendorsServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the vendor
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the vendor is classified
-	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the vendor
-	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the vendor
-	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The list of dynamic forms
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
+	//
+	// @description The official or legal name of the vendor organization or individual.
+	//
+	// @example "Acme Logistics"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or alphanumeric token by which the vendor is classified or categorized internally.
+	//
+	// @example "VND-ACME-001"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,11,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication email address of the vendor.
+	//
+	// @example "orders@acmelogistics.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact phone number of the vendor, typically including country and area codes.
+	//
+	// @example "+1-555-222-0199"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,13,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -553,8 +664,8 @@ func (*VendorsServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -567,43 +678,43 @@ func (x *VendorsServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *VendorsServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *VendorsServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *VendorsServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *VendorsServiceUpdateRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *VendorsServiceUpdateRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *VendorsServiceUpdateRequest) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -615,7 +726,7 @@ func (x *VendorsServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateReque
 	return nil
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a full Vendor within the system.
 type Vendor struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -634,15 +745,23 @@ type Vendor struct {
 	//
 	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the vendor
+	// @description The official or legal name of the vendor organization or individual.
+	//
+	// @example "Acme Logistics"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the vendor is classified
+	// @description The unique code or alphanumeric token by which the vendor is classified or categorized internally.
+	//
+	// @example "VND-ACME-001"
 	Code string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the vendor
+	// @description The primary communication email address of the vendor.
+	//
+	// @example "orders@acmelogistics.com"
 	Email string `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the vendor
+	// @description The primary contact phone number of the vendor, typically including country and area codes.
+	//
+	// @example "+1-555-222-0199"
 	Phone string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -755,36 +874,149 @@ func (x *Vendor) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the parameters required to add an item to a vendor
+// Represents the request payload containing the parameter constraints and validation rules
+// required to create and register a new item association under a target vendor.
 type VendorsServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the vendor ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target vendor to which the item will be associated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family to which the item belongs.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the optional family code as represented by the vendor
-	VendorFamilyCode string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3" json:"vendor_family_code,omitempty"`
-	// Stores the ID of the vendor's unit of material
+	// @optional
+	//
+	// @description Stores the optional family code string as represented internally by the vendor.
+	//
+	// @example "VEND-FAM-XYZ-01"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	VendorFamilyCode *string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3,oneof" json:"vendor_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target unit of material (UOM) associated with the item.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target tax group applied to this item.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	TaxGroupId uint64 `protobuf:"varint,14,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The unit price of the item (as supplied by the vendor)
+	// @mandatory
+	//
+	// @description The unit price of the item as supplied by the vendor, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	Price uint64 `protobuf:"varint,15,opt,name=price,proto3" json:"price,omitempty"`
-	// The relative lower limit type on the price deviation of the item
+	// @mandatory
+	//
+	// @description The relative lower limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_PERCENTAGE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE enum value string or integer.
 	PriceDeviationRelLowerLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,46,opt,name=price_deviation_rel_lower_limit_type,json=priceDeviationRelLowerLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_lower_limit_type,omitempty"`
-	// The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value)
+	// @mandatory
+	//
+	// @description The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value).
+	//
+	// @example 10
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer greater than or equal to -100.
 	PriceDeviationRelLowerLimitValue int64 `protobuf:"varint,47,opt,name=price_deviation_rel_lower_limit_value,json=priceDeviationRelLowerLimitValue,proto3" json:"price_deviation_rel_lower_limit_value,omitempty"`
-	// The relative upper limit type on the price deviation of the item
+	// @mandatory
+	//
+	// @description The relative upper limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_ABSOLUTE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE enum value string or integer.
 	PriceDeviationRelUpperLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,48,opt,name=price_deviation_rel_upper_limit_type,json=priceDeviationRelUpperLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_upper_limit_type,omitempty"`
-	// The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value)
+	// @mandatory
+	//
+	// @description The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value).
+	//
+	// @example 25
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer greater than or equal to -100.
 	PriceDeviationRelUpperLimitValue int64 `protobuf:"varint,49,opt,name=price_deviation_rel_upper_limit_value,json=priceDeviationRelUpperLimitValue,proto3" json:"price_deviation_rel_upper_limit_value,omitempty"`
-	// The minimum order quantity that needs to be placed (in cents) (0.01 is the minimum)
+	// @mandatory
+	//
+	// @description The minimum order quantity that needs to be placed, represented in cents (where a value of 1 represents the absolute minimum increment of 0.01).
+	//
+	// @example 100
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	MinOrderQty uint64 `protobuf:"varint,20,opt,name=min_order_qty,json=minOrderQty,proto3" json:"min_order_qty,omitempty"`
-	// The maximum order quantity that can be placed (in cents) (0 represents unlimited max quantity)
+	// @mandatory
+	//
+	// @description The maximum order quantity that can be placed, represented in cents. A value of 0 represents an unlimited maximum quantity.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	MaxOrderQty uint64 `protobuf:"varint,21,opt,name=max_order_qty,json=maxOrderQty,proto3" json:"max_order_qty,omitempty"`
-	// The incremental count by which the order quantity can be increased (in cents)
+	// @mandatory
+	//
+	// @description The incremental unit step count by which the order quantity can be increased, represented in cents.
+	//
+	// @example 50
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	StepInterval  uint64 `protobuf:"varint,22,opt,name=step_interval,json=stepInterval,proto3" json:"step_interval,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -821,8 +1053,8 @@ func (*VendorsServiceItemCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceItemCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -842,8 +1074,8 @@ func (x *VendorsServiceItemCreateRequest) GetFamilyId() uint64 {
 }
 
 func (x *VendorsServiceItemCreateRequest) GetVendorFamilyCode() string {
-	if x != nil {
-		return x.VendorFamilyCode
+	if x != nil && x.VendorFamilyCode != nil {
+		return *x.VendorFamilyCode
 	}
 	return ""
 }
@@ -918,34 +1150,139 @@ func (x *VendorsServiceItemCreateRequest) GetStepInterval() uint64 {
 	return 0
 }
 
-// Describes the parameters required to update an item in a vendor
+// Represents the request payload containing the parameter constraints and validation rules
+// required to update and modify an existing item association under a target vendor.
 type VendorsServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Stores the optional family code as represented by the vendor
-	VendorFamilyCode string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3" json:"vendor_family_code,omitempty"`
-	// Stores the ID of the vendor's unit of material
+	// @optional
+	//
+	// @description Stores the optional family code string as represented internally by the vendor.
+	//
+	// @example "VEND-FAM-XYZ-01"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	VendorFamilyCode *string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3,oneof" json:"vendor_family_code,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target unit of material (UOM) associated with the item.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target tax group applied to this item.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	TaxGroupId uint64 `protobuf:"varint,14,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The unit price of the item (as supplied by the vendor)
+	// @mandatory
+	//
+	// @description The unit price of the item as supplied by the vendor, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	Price uint64 `protobuf:"varint,15,opt,name=price,proto3" json:"price,omitempty"`
-	// The relative lower limit type on the price deviation of the item
+	// @mandatory
+	//
+	// @description The relative lower limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_PERCENTAGE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE enum value string or integer.
 	PriceDeviationRelLowerLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,46,opt,name=price_deviation_rel_lower_limit_type,json=priceDeviationRelLowerLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_lower_limit_type,omitempty"`
-	// The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value)
+	// @mandatory
+	//
+	// @description The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value).
+	//
+	// @example 10
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer greater than or equal to -100.
 	PriceDeviationRelLowerLimitValue int64 `protobuf:"varint,47,opt,name=price_deviation_rel_lower_limit_value,json=priceDeviationRelLowerLimitValue,proto3" json:"price_deviation_rel_lower_limit_value,omitempty"`
-	// The relative upper limit type on the price deviation of the item
+	// @mandatory
+	//
+	// @description The relative upper limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_ABSOLUTE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE enum value string or integer.
 	PriceDeviationRelUpperLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,48,opt,name=price_deviation_rel_upper_limit_type,json=priceDeviationRelUpperLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_upper_limit_type,omitempty"`
-	// The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value)
+	// @mandatory
+	//
+	// @description The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value).
+	//
+	// @example 25
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer greater than or equal to -100.
 	PriceDeviationRelUpperLimitValue int64 `protobuf:"varint,49,opt,name=price_deviation_rel_upper_limit_value,json=priceDeviationRelUpperLimitValue,proto3" json:"price_deviation_rel_upper_limit_value,omitempty"`
-	// The minimum order quantity that needs to be placed (in cents) (0.01 is the minimum)
+	// @mandatory
+	//
+	// @description The minimum order quantity that needs to be placed, represented in cents (where a value of 1 represents the absolute minimum increment of 0.01).
+	//
+	// @example 100
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	MinOrderQty uint64 `protobuf:"varint,20,opt,name=min_order_qty,json=minOrderQty,proto3" json:"min_order_qty,omitempty"`
-	// The maximum order quantity that can be placed (in cents) (0 represents unlimited max quantity)
+	// @mandatory
+	//
+	// @description The maximum order quantity that can be placed, represented in cents. A value of 0 represents an unlimited maximum quantity.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	MaxOrderQty uint64 `protobuf:"varint,21,opt,name=max_order_qty,json=maxOrderQty,proto3" json:"max_order_qty,omitempty"`
-	// The incremental count by which the order quantity can be increased (in cents)
+	// @mandatory
+	//
+	// @description The incremental unit step count by which the order quantity can be increased, represented in cents.
+	//
+	// @example 50
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	StepInterval  uint64 `protobuf:"varint,22,opt,name=step_interval,json=stepInterval,proto3" json:"step_interval,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -982,8 +1319,8 @@ func (*VendorsServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceItemUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -996,8 +1333,8 @@ func (x *VendorsServiceItemUpdateRequest) GetId() uint64 {
 }
 
 func (x *VendorsServiceItemUpdateRequest) GetVendorFamilyCode() string {
-	if x != nil {
-		return x.VendorFamilyCode
+	if x != nil && x.VendorFamilyCode != nil {
+		return *x.VendorFamilyCode
 	}
 	return ""
 }
@@ -1072,7 +1409,10 @@ func (x *VendorsServiceItemUpdateRequest) GetStepInterval() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute an item associated to a vendor
+// Represents a full Vendor Item association within the system.
+// This message encapsulates the complete state of a vendor item relationship,
+// including catalog family mappings, core entity identifiers, unit price configurations,
+// and granular deviation limit metadata alongside order quantity constraints.
 type VendorItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1083,35 +1423,67 @@ type VendorItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the vendor ID
+	// @description The unique internal identifier of the target vendor to which the item will be associated.
+	//
+	// @example 1024
 	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the target family to which the item belongs.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the optional family code as represented by the vendor
+	// @description Stores the optional family code string as represented internally by the vendor.
+	//
+	// @example "VEND-FAM-XYZ-01"
 	VendorFamilyCode string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3" json:"vendor_family_code,omitempty"`
-	// Stores the ID of the vendor's unit of material
+	// @description The unique internal identifier of the target unit of material (UOM) associated with the item.
+	//
+	// @example 12
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The ID of the associated tax group
+	// @description The unique internal identifier of the target tax group applied to this item.
+	//
+	// @example 4
 	TaxGroupId uint64 `protobuf:"varint,14,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The unit price of the item (as supplied by the vendor)
+	// @description The unit price of the item as supplied by the vendor, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
 	Price uint64 `protobuf:"varint,15,opt,name=price,proto3" json:"price,omitempty"`
-	// The relative lower limit type on the price deviation of the item
+	// @description The relative lower limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_PERCENTAGE"
 	PriceDeviationRelLowerLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,46,opt,name=price_deviation_rel_lower_limit_type,json=priceDeviationRelLowerLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_lower_limit_type,omitempty"`
-	// The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value)
+	// @description The relative lower limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final lower limit of the item is computed as (price - price_deviation_rel_lower_limit_value).
+	//
+	// @example 10
 	PriceDeviationRelLowerLimitValue int64 `protobuf:"varint,47,opt,name=price_deviation_rel_lower_limit_value,json=priceDeviationRelLowerLimitValue,proto3" json:"price_deviation_rel_lower_limit_value,omitempty"`
-	// The relative upper limit type on the price deviation of the item
+	// @description The relative upper limit type used to evaluate price deviation rules for the item.
+	//
+	// @example "VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE_ABSOLUTE"
 	PriceDeviationRelUpperLimitType VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE `protobuf:"varint,48,opt,name=price_deviation_rel_upper_limit_type,json=priceDeviationRelUpperLimitType,proto3,enum=Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPE" json:"price_deviation_rel_upper_limit_type,omitempty"`
-	// The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value)
+	// @description The relative upper limit value on the price deviation of the item (in cents). For percentage, this is the percentage value; for absolute, this is the absolute value. If set to -1, the limit is ignored. The final upper limit of the item is computed as (price + price_deviation_rel_upper_limit_value).
+	//
+	// @example 25
 	PriceDeviationRelUpperLimitValue int64 `protobuf:"varint,49,opt,name=price_deviation_rel_upper_limit_value,json=priceDeviationRelUpperLimitValue,proto3" json:"price_deviation_rel_upper_limit_value,omitempty"`
-	// The minimum order quantity that needs to be placed (in cents) (0.01 is the minimum)
+	// @description The minimum order quantity that needs to be placed, represented in cents (where a value of 1 represents the absolute minimum increment of 0.01).
+	//
+	// @example 100
 	MinOrderQty uint64 `protobuf:"varint,20,opt,name=min_order_qty,json=minOrderQty,proto3" json:"min_order_qty,omitempty"`
-	// The maximum order quantity that can be placed (in cents) (0 represents unlimited max quantity)
+	// @description The maximum order quantity that can be placed, represented in cents. A value of 0 represents an unlimited maximum quantity.
+	//
+	// @example 0
 	MaxOrderQty uint64 `protobuf:"varint,21,opt,name=max_order_qty,json=maxOrderQty,proto3" json:"max_order_qty,omitempty"`
-	// The incremental count by which the order quantity can be increased (in cents)
+	// @description The incremental unit step count by which the order quantity can be increased, represented in cents.
+	//
+	// @example 50
 	StepInterval  uint64 `protobuf:"varint,22,opt,name=step_interval,json=stepInterval,proto3" json:"step_interval,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1273,10 +1645,10 @@ func (x *VendorItem) GetStepInterval() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of vendors
+// Container message for a collection of Vendor records.
 type VendorsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Vendor records.
 	List          []*Vendor `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1319,10 +1691,10 @@ func (x *VendorsList) GetList() []*Vendor {
 	return nil
 }
 
-// Describes the message consisting of the list of vendor items
+// Container message for a collection of Vendor Item records.
 type VendorItemsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Vendor Item records.
 	List          []*VendorItem `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1365,14 +1737,39 @@ func (x *VendorItemsList) GetList() []*VendorItem {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Represents the request payload containing the parameter constraints required to
+// retrieve the historical audit trail and lifecycle changes of a specific vendor item record.
 type VendorItemHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the vendor ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target vendor associated with the historical record.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family associated with the historical record.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the ID of the vendor's unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target unit of material (UOM) associated with the historical record.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	UomId         uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1429,7 +1826,7 @@ func (x *VendorItemHistoryRequest) GetUomId() uint64 {
 	return 0
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Vendor records.
 type VendorsServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1437,7 +1834,7 @@ type VendorsServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1457,19 +1854,23 @@ type VendorsServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this vendor
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1505,8 +1906,8 @@ func (*VendorsServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1519,34 +1920,34 @@ func (x *VendorsServicePaginationReq) GetCount() int64 {
 }
 
 func (x *VendorsServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *VendorsServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *VendorsServicePaginationReq) GetSortKey() VENDOR_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return VENDOR_SORT_KEY_VENDOR_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *VendorsServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type VendorsServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1625,7 +2026,12 @@ func (x *VendorsServicePaginationResponse) GetPayload() []*Vendor {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating vendors using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type VendorsServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1633,7 +2039,7 @@ type VendorsServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1653,17 +2059,17 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1673,7 +2079,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1683,7 +2089,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1693,7 +2099,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1703,7 +2109,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1713,13 +2119,13 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -1729,7 +2135,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1739,7 +2145,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1749,7 +2155,7 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1759,17 +2165,57 @@ type VendorsServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the vendor
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the vendor is classified
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the vendor
-	Email string `protobuf:"bytes,22,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the vendor
-	Phone string `protobuf:"bytes,23,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or legal name of the vendor organization or individual.
+	//
+	// @example "Acme Logistics"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or alphanumeric token by which the vendor is classified or categorized internally.
+	//
+	// @example "VND-ACME-001"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication email address of the vendor.
+	//
+	// @example "orders@acmelogistics.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,22,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact phone number of the vendor, typically including country and area codes.
+	//
+	// @example "+1-555-222-0199"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,23,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a family. Setting this value restricts the results to only include vendors that are associated with this specific family.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1780,7 +2226,7 @@ type VendorsServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1816,8 +2262,8 @@ func (*VendorsServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1830,127 +2276,127 @@ func (x *VendorsServiceFilterReq) GetCount() int64 {
 }
 
 func (x *VendorsServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *VendorsServiceFilterReq) GetSortKey() VENDOR_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return VENDOR_SORT_KEY_VENDOR_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *VendorsServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorsServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *VendorsServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *VendorsServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *VendorsServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *VendorsServiceFilterReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *VendorsServiceFilterReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *VendorsServiceFilterReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
@@ -1963,13 +2409,19 @@ func (x *VendorsServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest {
 }
 
 func (x *VendorsServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting vendor records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type VendorsServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1977,7 +2429,7 @@ type VendorsServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1987,7 +2439,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1997,7 +2449,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2007,7 +2459,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2017,7 +2469,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2027,13 +2479,13 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2043,7 +2495,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2053,7 +2505,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2063,7 +2515,7 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2073,18 +2525,60 @@ type VendorsServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the vendor
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code by which the vendor is classified
-	Code string `protobuf:"bytes,21,opt,name=code,proto3" json:"code,omitempty"`
-	// The primary email of the vendor
-	Email string `protobuf:"bytes,22,opt,name=email,proto3" json:"email,omitempty"`
-	// The primary contact number of the vendor
-	Phone string `protobuf:"bytes,23,opt,name=phone,proto3" json:"phone,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The list of form data filters
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The official or legal name of the vendor organization or individual.
+	//
+	// @example "Acme Logistics"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique code or alphanumeric token by which the vendor is classified or categorized internally.
+	//
+	// @example "VND-ACME-001"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,21,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The primary communication email address of the vendor.
+	//
+	// @example "orders@acmelogistics.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format Must be a valid and structurally sound email address format.
+	Email *string `protobuf:"bytes,22,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @optional
+	//
+	// @description The primary contact phone number of the vendor, typically including country and area codes.
+	//
+	// @example "+1-555-222-0199"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string representing a valid phone number format.
+	Phone *string `protobuf:"bytes,23,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a family. Setting this value restricts the results to only include vendors that are associated with this specific family.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	FamilyId *uint64 `protobuf:"varint,40,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2121,113 +2615,113 @@ func (*VendorsServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *VendorsServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorsServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *VendorsServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *VendorsServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *VendorsServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *VendorsServiceCountReq) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *VendorsServiceCountReq) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
 
 func (x *VendorsServiceCountReq) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
@@ -2239,7 +2733,13 @@ func (x *VendorsServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating vendors via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type VendorsServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2247,7 +2747,7 @@ type VendorsServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2267,17 +2767,17 @@ type VendorsServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *VENDOR_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2287,14 +2787,14 @@ type VendorsServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// @mandatory
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -2303,7 +2803,7 @@ type VendorsServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey     string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	SearchKey     *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2339,8 +2839,8 @@ func (*VendorsServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2353,48 +2853,49 @@ func (x *VendorsServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *VendorsServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *VendorsServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *VendorsServiceSearchAllReq) GetSortKey() VENDOR_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return VENDOR_SORT_KEY_VENDOR_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *VendorsServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorsServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *VendorsServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the request payload to retrieve approved or unapproved items.
+// Request payload structure used to search and filter Vendor Item records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type VendorItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2402,7 +2903,7 @@ type VendorItemsSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2422,17 +2923,17 @@ type VendorItemsSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey VENDOR_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_ITEM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *VENDOR_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.VENDOR_ITEM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2442,21 +2943,73 @@ type VendorItemsSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the items
-	Status VENDOR_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.VENDOR_ITEM_STATUS" json:"status,omitempty"`
-	// The ID of the vendor
-	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// The ID of the family
-	FamilyId uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// The vendor's family code
-	VendorFamilyCode string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3" json:"vendor_family_code,omitempty"`
-	// The ID of the unit of material
-	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,14,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,20,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Filter records by their verification lifecycle state (e.g., Approved, Unapproved). Defaults to unspecified/any.
+	//
+	// @example VENDOR_ITEM_STATUS_APPROVED
+	Status *VENDOR_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.VENDOR_ITEM_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the target vendor to which the item has been associated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
+	VendorId *uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the target family to which the item belongs.
+	//
+	// @example 582
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
+	FamilyId *uint64 `protobuf:"varint,11,opt,name=family_id,json=familyId,proto3,oneof" json:"family_id,omitempty"`
+	// @optional
+	//
+	// @description Stores the optional family code string as represented internally by the vendor.
+	//
+	// @example "VEND-FAM-XYZ-01"
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	VendorFamilyCode *string `protobuf:"bytes,12,opt,name=vendor_family_code,json=vendorFamilyCode,proto3,oneof" json:"vendor_family_code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the target unit of material (UOM) associated with the item.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
+	UomId *uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the target tax group applied to this item.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
+	TaxGroupId *uint64 `protobuf:"varint,14,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description Alphanumeric key phrase or keyword token used to perform lookup matches across searchable fields like item names.
+	//
+	// @example "Item A"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	SearchKey     *string `protobuf:"bytes,20,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2492,8 +3045,8 @@ func (*VendorItemsSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorItemsSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2506,83 +3059,84 @@ func (x *VendorItemsSearchRequest) GetCount() int64 {
 }
 
 func (x *VendorItemsSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *VendorItemsSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *VendorItemsSearchRequest) GetSortKey() VENDOR_ITEM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return VENDOR_ITEM_SORT_KEY_VENDOR_ITEM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *VendorItemsSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorItemsSearchRequest) GetStatus() VENDOR_ITEM_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return VENDOR_ITEM_STATUS_VENDOR_ITEM_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *VendorItemsSearchRequest) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *VendorItemsSearchRequest) GetFamilyId() uint64 {
-	if x != nil {
-		return x.FamilyId
+	if x != nil && x.FamilyId != nil {
+		return *x.FamilyId
 	}
 	return 0
 }
 
 func (x *VendorItemsSearchRequest) GetVendorFamilyCode() string {
-	if x != nil {
-		return x.VendorFamilyCode
+	if x != nil && x.VendorFamilyCode != nil {
+		return *x.VendorFamilyCode
 	}
 	return ""
 }
 
 func (x *VendorItemsSearchRequest) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *VendorItemsSearchRequest) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *VendorItemsSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Vendor Item records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type VendorsServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2661,12 +3215,16 @@ func (x *VendorsServicePaginatedItemsResponse) GetPayload() []*VendorItem {
 	return nil
 }
 
-// Describes the vendor item that also stores the quantity that is required
+// Represents a vendor item paired with a specific required quantity.
+// This message encapsulates the base vendor item entity alongside
+// operational demand metadata, specifying the exact quantity needed.
 type VendorItemRequired struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The applicable vendor item
+	// @description The complete vendor item entity containing catalog mappings, pricing configurations, and constraint metadata.
 	Item *VendorItem `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
-	// The quantity that is required
+	// @description The exact quantity of the vendor item that is required, represented in the base currency or measurement subunit (e.g., cents).
+	//
+	// @example 500
 	RequiredQty   uint64 `protobuf:"varint,10,opt,name=required_qty,json=requiredQty,proto3" json:"required_qty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2716,7 +3274,9 @@ func (x *VendorItemRequired) GetRequiredQty() uint64 {
 	return 0
 }
 
-// Describes the response to a pagination items request for items with applicable required quantities
+// Represents a paginated response payload containing a specific slice of required vendor items.
+// This message encapsulates the requested subset of data along with standard pagination
+// metadata to facilitate offset-based traversal of large datasets.
 type VendorsServicePaginatedRequiredItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2732,6 +3292,8 @@ type VendorsServicePaginatedRequiredItemsResponse struct {
 	// @example 1250
 	Total uint64 `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
 	// @description The array of records for the current page.
+	//
+	// @example []
 	Payload       []*VendorItemRequired `protobuf:"bytes,4,rep,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2795,17 +3357,54 @@ func (x *VendorsServicePaginatedRequiredItemsResponse) GetPayload() []*VendorIte
 	return nil
 }
 
-// Describes the parameters necessary to create a vendor user
+// Request message for creating a new vendor user association.
+// This message encapsulates the necessary identifiers to link a user (and optionally an associate)
+// to a vendor, along with compliance details and audit logs required for record initialization.
+//
+// **Note:** This serves as the primary entry point for managing vendor personnel, ensuring
+// that the relationship between the vendor and the user is properly audited and validated.
 type VendorsServiceUserCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the vendor ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target vendor to which the user will be associated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the user ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the user being assigned to the vendor.
+	//
+	// @example 5678
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Stores an optional associate ID
-	AssociateId   uint64 `protobuf:"varint,12,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of an associated secondary entity or associate party, if applicable.
+	//
+	// @example 9012
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Defaults to 0 if unassigned.
+	AssociateId   *uint64 `protobuf:"varint,12,opt,name=associate_id,json=associateId,proto3,oneof" json:"associate_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2841,8 +3440,8 @@ func (*VendorsServiceUserCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorsServiceUserCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -2862,13 +3461,16 @@ func (x *VendorsServiceUserCreateRequest) GetUserId() uint64 {
 }
 
 func (x *VendorsServiceUserCreateRequest) GetAssociateId() uint64 {
-	if x != nil {
-		return x.AssociateId
+	if x != nil && x.AssociateId != nil {
+		return *x.AssociateId
 	}
 	return 0
 }
 
-// Describes the parameters that constitute a vendor user
+// Represents a full Vendor User association within the system.
+// This message encapsulates the complete state of a vendor user relationship,
+// including organization tenancy, core entity identifiers, audit trails, and
+// granular approval workflow metadata.
 type VendorUser struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -2879,15 +3481,27 @@ type VendorUser struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "Updated user relationship per customer contract renewal."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the vendor ID
+	// @description The unique internal identifier of the associated vendor.
+	//
+	// @example 1024
 	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the user ID
+	// @description The unique internal identifier of the associated user.
+	//
+	// @example 5678
 	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Stores an optional associate ID
+	// @description The unique internal identifier of the optional associated secondary entity or associate party.
+	//
+	// @example 9012
 	AssociateId   uint64 `protobuf:"varint,12,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2979,10 +3593,10 @@ func (x *VendorUser) GetAssociateId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of vendor users
+// Container message for a collection of Vendor User records.
 type VendorUsersList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Vendor User records.
 	List          []*VendorUser `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3025,7 +3639,8 @@ func (x *VendorUsersList) GetList() []*VendorUser {
 	return nil
 }
 
-// Describes the request payload to search vendor users
+// Request payload structure used to search and filter Vendor User records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type VendorUsersSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -3033,11 +3648,27 @@ type VendorUsersSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -3047,17 +3678,41 @@ type VendorUsersSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the users
-	Status VENDOR_USER_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.VENDOR_USER_STATUS" json:"status,omitempty"`
-	// Stores the vendor ID
-	VendorId uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// Stores the user ID
-	UserId uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Stores an optional associate ID
-	AssociateId uint64 `protobuf:"varint,12,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,20,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Filter records by their verification lifecycle state (e.g., Approved, Unapproved). Defaults to unspecified/any.
+	//
+	// @example VENDOR_USER_STATUS_APPROVED
+	Status *VENDOR_USER_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.VENDOR_USER_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter by a specific vendor internal ID.
+	//
+	// @example 1024
+	VendorId *uint64 `protobuf:"varint,10,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by a specific user internal ID.
+	//
+	// @example 5678
+	UserId *uint64 `protobuf:"varint,11,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by a specific associate internal ID.
+	//
+	// @example 9012
+	AssociateId *uint64 `protobuf:"varint,12,opt,name=associate_id,json=associateId,proto3,oneof" json:"associate_id,omitempty"`
+	// @optional
+	//
+	// @description Alphanumeric key phrase or keyword token used to perform lookup matches across searchable fields like names or comments.
+	//
+	// @example "John Doe"
+	//
+	// @regex .*
+	//
+	// @format String value, can be empty.
+	SearchKey     *string `protobuf:"bytes,20,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3093,8 +3748,8 @@ func (*VendorUsersSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *VendorUsersSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -3107,55 +3762,56 @@ func (x *VendorUsersSearchRequest) GetCount() int64 {
 }
 
 func (x *VendorUsersSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *VendorUsersSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *VendorUsersSearchRequest) GetStatus() VENDOR_USER_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return VENDOR_USER_STATUS_VENDOR_USER_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *VendorUsersSearchRequest) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *VendorUsersSearchRequest) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *VendorUsersSearchRequest) GetAssociateId() uint64 {
-	if x != nil {
-		return x.AssociateId
+	if x != nil && x.AssociateId != nil {
+		return *x.AssociateId
 	}
 	return 0
 }
 
 func (x *VendorUsersSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Vendor User records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type VendorsServicePaginatedUsersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -3238,29 +3894,39 @@ var File_vendors_scailo_proto protoreflect.FileDescriptor
 
 const file_vendors_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x14vendors.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xcc\x02\n" +
-	"\x1bVendorsServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
+	"\x14vendors.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x90\x03\n" +
+	"\x1bVendorsServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12\x1d\n" +
 	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
 	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xe7\x02\n" +
-	"\x1bVendorsServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_id\"\xe6\x03\n" +
+	"\x1bVendorsServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12 \n" +
 	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
-	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12\x1d\n" +
-	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x1d\n" +
-	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05phone\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xc4\x03\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x04name\x88\x01\x01\x12 \n" +
+	"\x04code\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x04code\x88\x01\x01\x12\"\n" +
+	"\x05email\x18\f \x01(\tB\a\xbaH\x04r\x02`\x01H\x05R\x05email\x88\x01\x01\x12\"\n" +
+	"\x05phone\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\x05phone\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phone\"\xc4\x03\n" +
 	"\x06Vendor\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3274,39 +3940,47 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\x04code\x18\v \x01(\tR\x04code\x12\x14\n" +
 	"\x05email\x18\f \x01(\tR\x05email\x12\x14\n" +
 	"\x05phone\x18\r \x01(\tR\x05phone\x123\n" +
-	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xf4\x06\n" +
-	"\x1fVendorsServiceItemCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\tform_data\x18\x1e \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"\xc0\a\n" +
+	"\x1fVendorsServiceItemCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tvendor_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bvendorId\x12$\n" +
-	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12,\n" +
-	"\x12vendor_family_code\x18\f \x01(\tR\x10vendorFamilyCode\x12\x1e\n" +
+	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x121\n" +
+	"\x12vendor_family_code\x18\f \x01(\tH\x01R\x10vendorFamilyCode\x88\x01\x01\x12\x1e\n" +
 	"\x06uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12)\n" +
 	"\ftax_group_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1d\n" +
-	"\x05price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12}\n" +
-	"$price_deviation_rel_lower_limit_type\x18. \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPER\x1fpriceDeviationRelLowerLimitType\x12a\n" +
-	"%price_deviation_rel_lower_limit_value\x18/ \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelLowerLimitValue\x12}\n" +
-	"$price_deviation_rel_upper_limit_type\x180 \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPER\x1fpriceDeviationRelUpperLimitType\x12a\n" +
+	"\x05price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12\x89\x01\n" +
+	"$price_deviation_rel_lower_limit_type\x18. \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x1fpriceDeviationRelLowerLimitType\x12a\n" +
+	"%price_deviation_rel_lower_limit_value\x18/ \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelLowerLimitValue\x12\x89\x01\n" +
+	"$price_deviation_rel_upper_limit_type\x180 \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x1fpriceDeviationRelUpperLimitType\x12a\n" +
 	"%price_deviation_rel_upper_limit_value\x181 \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelUpperLimitValue\x12+\n" +
 	"\rmin_order_qty\x18\x14 \x01(\x04B\a\xbaH\x042\x02 \x00R\vminOrderQty\x12+\n" +
 	"\rmax_order_qty\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00R\vmaxOrderQty\x12,\n" +
-	"\rstep_interval\x18\x16 \x01(\x04B\a\xbaH\x042\x02 \x00R\fstepInterval\"\xc1\x06\n" +
-	"\x1fVendorsServiceItemUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12,\n" +
-	"\x12vendor_family_code\x18\f \x01(\tR\x10vendorFamilyCode\x12\x1e\n" +
+	"\rstep_interval\x18\x16 \x01(\x04B\a\xbaH\x042\x02 \x00R\fstepIntervalB\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_vendor_family_code\"\x8d\a\n" +
+	"\x1fVendorsServiceItemUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x121\n" +
+	"\x12vendor_family_code\x18\f \x01(\tH\x01R\x10vendorFamilyCode\x88\x01\x01\x12\x1e\n" +
 	"\x06uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12)\n" +
 	"\ftax_group_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
 	"taxGroupId\x12\x1d\n" +
-	"\x05price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12}\n" +
-	"$price_deviation_rel_lower_limit_type\x18. \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPER\x1fpriceDeviationRelLowerLimitType\x12a\n" +
-	"%price_deviation_rel_lower_limit_value\x18/ \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelLowerLimitValue\x12}\n" +
-	"$price_deviation_rel_upper_limit_type\x180 \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPER\x1fpriceDeviationRelUpperLimitType\x12a\n" +
+	"\x05price\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12\x89\x01\n" +
+	"$price_deviation_rel_lower_limit_type\x18. \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x1fpriceDeviationRelLowerLimitType\x12a\n" +
+	"%price_deviation_rel_lower_limit_value\x18/ \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelLowerLimitValue\x12\x89\x01\n" +
+	"$price_deviation_rel_upper_limit_type\x180 \x01(\x0e2..Scailo.VENDOR_ITEM_PRICE_DEVIATION_LIMIT_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x1fpriceDeviationRelUpperLimitType\x12a\n" +
 	"%price_deviation_rel_upper_limit_value\x181 \x01(\x03B\x10\xbaH\r\"\v(\x9c\xff\xff\xff\xff\xff\xff\xff\xff\x01R priceDeviationRelUpperLimitValue\x12+\n" +
 	"\rmin_order_qty\x18\x14 \x01(\x04B\a\xbaH\x042\x02 \x00R\vminOrderQty\x12+\n" +
 	"\rmax_order_qty\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00R\vmaxOrderQty\x12,\n" +
-	"\rstep_interval\x18\x16 \x01(\x04B\a\xbaH\x042\x02 \x00R\fstepInterval\"\xda\a\n" +
+	"\rstep_interval\x18\x16 \x01(\x04B\a\xbaH\x042\x02 \x00R\fstepIntervalB\x0f\n" +
+	"\r_user_commentB\x15\n" +
+	"\x13_vendor_family_code\"\xda\a\n" +
 	"\n" +
 	"VendorItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
@@ -3338,98 +4012,170 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\tvendor_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bvendorId\x12$\n" +
 	"\tfamily_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12\x1e\n" +
-	"\x06uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\"\xb1\x02\n" +
-	"\x1bVendorsServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x06uom_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\"\x8a\x03\n" +
+	"\x1bVendorsServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x90\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x90\x01\n" +
 	" VendorsServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12(\n" +
-	"\apayload\x18\x04 \x03(\v2\x0e.Scailo.VendorR\apayload\"\xd5\a\n" +
-	"\x17VendorsServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x0e.Scailo.VendorR\apayload\"\xa2\v\n" +
+	"\x17VendorsServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x16 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x17 \x01(\tR\x05phone\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xf7\x05\n" +
-	"\x16VendorsServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x0eR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\x0fR\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x16 \x01(\tH\x10R\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x17 \x01(\tH\x11R\x05phone\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x12R\bfamilyId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x13R\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\f\n" +
+	"\n" +
+	"_family_idB\x14\n" +
+	"\x12_include_form_data\"\xf3\b\n" +
+	"\x16VendorsServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x15 \x01(\tR\x04code\x12\x14\n" +
-	"\x05email\x18\x16 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x17 \x01(\tR\x05phone\x12\x1b\n" +
-	"\tfamily_id\x18( \x01(\x04R\bfamilyId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xf9\x02\n" +
-	"\x1aVendorsServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\vR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x15 \x01(\tH\fR\x04code\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x16 \x01(\tH\rR\x05email\x88\x01\x01\x12\x19\n" +
+	"\x05phone\x18\x17 \x01(\tH\x0eR\x05phone\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18( \x01(\x04H\x0fR\bfamilyId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\f\n" +
+	"\n" +
+	"_family_id\"\xfb\x03\n" +
+	"\x1aVendorsServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.VENDOR_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\"\x96\x04\n" +
-	"\x18VendorItemsSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x127\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1c.Scailo.VENDOR_ITEM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x122\n" +
-	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.VENDOR_ITEM_STATUSR\x06status\x12\x1b\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_key\"\x80\x06\n" +
+	"\x18VendorItemsSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12<\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1c.Scailo.VENDOR_ITEM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x127\n" +
+	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.VENDOR_ITEM_STATUSH\x05R\x06status\x88\x01\x01\x12 \n" +
 	"\tvendor_id\x18\n" +
-	" \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tfamily_id\x18\v \x01(\x04R\bfamilyId\x12,\n" +
-	"\x12vendor_family_code\x18\f \x01(\tR\x10vendorFamilyCode\x12\x15\n" +
-	"\x06uom_id\x18\r \x01(\x04R\x05uomId\x12 \n" +
-	"\ftax_group_id\x18\x0e \x01(\x04R\n" +
-	"taxGroupId\x12\x1d\n" +
+	" \x01(\x04H\x06R\bvendorId\x88\x01\x01\x12 \n" +
+	"\tfamily_id\x18\v \x01(\x04H\aR\bfamilyId\x88\x01\x01\x121\n" +
+	"\x12vendor_family_code\x18\f \x01(\tH\bR\x10vendorFamilyCode\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\r \x01(\x04H\tR\x05uomId\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18\x0e \x01(\x04H\n" +
+	"R\n" +
+	"taxGroupId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\x14 \x01(\tR\tsearchKey\"\x98\x01\n" +
+	"search_key\x18\x14 \x01(\tH\vR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_family_idB\x15\n" +
+	"\x13_vendor_family_codeB\t\n" +
+	"\a_uom_idB\x0f\n" +
+	"\r_tax_group_idB\r\n" +
+	"\v_search_key\"\x98\x01\n" +
 	"$VendorsServicePaginatedItemsResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
@@ -3443,13 +4189,15 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x124\n" +
-	"\apayload\x18\x04 \x03(\v2\x1a.Scailo.VendorItemRequiredR\apayload\"\xb8\x01\n" +
-	"\x1fVendorsServiceUserCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\apayload\x18\x04 \x03(\v2\x1a.Scailo.VendorItemRequiredR\apayload\"\xe4\x01\n" +
+	"\x1fVendorsServiceUserCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tvendor_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bvendorId\x12 \n" +
-	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x12*\n" +
-	"\fassociate_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00R\vassociateId\"\xcb\x02\n" +
+	"\auser_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x06userId\x12/\n" +
+	"\fassociate_id\x18\f \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\vassociateId\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_associate_id\"\xcb\x02\n" +
 	"\n" +
 	"VendorUser\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
@@ -3463,20 +4211,31 @@ const file_vendors_scailo_proto_rawDesc = "" +
 	"\auser_id\x18\v \x01(\x04R\x06userId\x12!\n" +
 	"\fassociate_id\x18\f \x01(\x04R\vassociateId\"9\n" +
 	"\x0fVendorUsersList\x12&\n" +
-	"\x04list\x18\x01 \x03(\v2\x12.Scailo.VendorUserR\x04list\"\xe2\x02\n" +
-	"\x18VendorUsersSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x122\n" +
-	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.VENDOR_USER_STATUSR\x06status\x12\x1b\n" +
+	"\x04list\x18\x01 \x03(\v2\x12.Scailo.VendorUserR\x04list\"\xf8\x03\n" +
+	"\x18VendorUsersSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x02R\n" +
+	"entityUuid\x88\x01\x01\x127\n" +
+	"\x06status\x18\a \x01(\x0e2\x1a.Scailo.VENDOR_USER_STATUSH\x03R\x06status\x88\x01\x01\x12 \n" +
 	"\tvendor_id\x18\n" +
-	" \x01(\x04R\bvendorId\x12\x17\n" +
-	"\auser_id\x18\v \x01(\x04R\x06userId\x12!\n" +
-	"\fassociate_id\x18\f \x01(\x04R\vassociateId\x12\x1d\n" +
+	" \x01(\x04H\x04R\bvendorId\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\v \x01(\x04H\x05R\x06userId\x88\x01\x01\x12&\n" +
+	"\fassociate_id\x18\f \x01(\x04H\x06R\vassociateId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18\x14 \x01(\tR\tsearchKey\"\x98\x01\n" +
+	"search_key\x18\x14 \x01(\tH\aR\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\f\n" +
+	"\n" +
+	"_vendor_idB\n" +
+	"\n" +
+	"\b_user_idB\x0f\n" +
+	"\r_associate_idB\r\n" +
+	"\v_search_key\"\x98\x01\n" +
 	"$VendorsServicePaginatedUsersResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
@@ -3824,6 +4583,17 @@ func file_vendors_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_vendors_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[3].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[11].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[12].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[13].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[14].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[18].OneofWrappers = []any{}
+	file_vendors_scailo_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

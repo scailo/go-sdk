@@ -183,6 +183,16 @@ const (
 	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_VISITATIONS WORKFLOW_RULE_SERVICE_NAME = 2020
 	// Apply the rule for work orders service
 	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_WORK_ORDERS WORKFLOW_RULE_SERVICE_NAME = 2100
+	// Apply the rule for questionnaire templates service
+	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_TEMPLATES WORKFLOW_RULE_SERVICE_NAME = 2200
+	// Apply the rule for questionnaire option groups service
+	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_OPTION_GROUPS WORKFLOW_RULE_SERVICE_NAME = 2210
+	// Apply the rule for questionnaire sections service
+	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SECTIONS WORKFLOW_RULE_SERVICE_NAME = 2220
+	// Apply the rule for questionnaire questions service
+	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_QUESTIONS WORKFLOW_RULE_SERVICE_NAME = 2230
+	// Apply the rule for questionnaire submissions service
+	WORKFLOW_RULE_SERVICE_NAME_WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SUBMISSIONS WORKFLOW_RULE_SERVICE_NAME = 2240
 )
 
 // Enum value maps for WORKFLOW_RULE_SERVICE_NAME.
@@ -266,6 +276,11 @@ var (
 		2010: "WORKFLOW_RULE_SERVICE_NAME_VENDORS",
 		2020: "WORKFLOW_RULE_SERVICE_NAME_VISITATIONS",
 		2100: "WORKFLOW_RULE_SERVICE_NAME_WORK_ORDERS",
+		2200: "WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_TEMPLATES",
+		2210: "WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_OPTION_GROUPS",
+		2220: "WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SECTIONS",
+		2230: "WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_QUESTIONS",
+		2240: "WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SUBMISSIONS",
 	}
 	WORKFLOW_RULE_SERVICE_NAME_value = map[string]int32{
 		"WORKFLOW_RULE_SERVICE_NAME_ANY_UNSPECIFIED":                           0,
@@ -346,6 +361,11 @@ var (
 		"WORKFLOW_RULE_SERVICE_NAME_VENDORS":                                   2010,
 		"WORKFLOW_RULE_SERVICE_NAME_VISITATIONS":                               2020,
 		"WORKFLOW_RULE_SERVICE_NAME_WORK_ORDERS":                               2100,
+		"WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_TEMPLATES":                   2200,
+		"WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_OPTION_GROUPS":               2210,
+		"WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SECTIONS":                    2220,
+		"WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_QUESTIONS":                   2230,
+		"WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SUBMISSIONS":                 2240,
 	}
 )
 
@@ -572,7 +592,15 @@ type WorkflowsRulesServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -714,9 +742,25 @@ func (x *WorkflowsRulesServiceCreateRequest) GetUserPayload() []byte {
 // Describes the parameters necessary to update a record
 type WorkflowsRulesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -2380,7 +2424,7 @@ const file_workflows_rules_scailo_proto_rawDesc = "" +
 	"\x12transaction_status\x18\x14 \x01(\x0e2 .Scailo.WORKFLOW_RULE_EXECUTE_ONR\x11transactionStatus\x12/\n" +
 	"\x13transaction_payload\x18\x1e \x01(\fR\x12transactionPayload\x12!\n" +
 	"\fuser_payload\x18( \x01(\fR\vuserPayload\x12\x1a\n" +
-	"\busername\x182 \x01(\tR\busername*\xba\x1d\n" +
+	"\busername\x182 \x01(\tR\busername*\xdc\x1f\n" +
 	"\x1aWORKFLOW_RULE_SERVICE_NAME\x12.\n" +
 	"*WORKFLOW_RULE_SERVICE_NAME_ANY_UNSPECIFIED\x10\x00\x12'\n" +
 	"#WORKFLOW_RULE_SERVICE_NAME_ABSENCES\x10\n" +
@@ -2462,7 +2506,12 @@ const file_workflows_rules_scailo_proto_rawDesc = "" +
 	"*WORKFLOW_RULE_SERVICE_NAME_VENDOR_INVOICES\x10\xd0\x0f\x12'\n" +
 	"\"WORKFLOW_RULE_SERVICE_NAME_VENDORS\x10\xda\x0f\x12+\n" +
 	"&WORKFLOW_RULE_SERVICE_NAME_VISITATIONS\x10\xe4\x0f\x12+\n" +
-	"&WORKFLOW_RULE_SERVICE_NAME_WORK_ORDERS\x10\xb4\x10*~\n" +
+	"&WORKFLOW_RULE_SERVICE_NAME_WORK_ORDERS\x10\xb4\x10\x127\n" +
+	"2WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_TEMPLATES\x10\x98\x11\x12;\n" +
+	"6WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_OPTION_GROUPS\x10\xa2\x11\x126\n" +
+	"1WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SECTIONS\x10\xac\x11\x127\n" +
+	"2WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_QUESTIONS\x10\xb6\x11\x129\n" +
+	"4WORKFLOW_RULE_SERVICE_NAME_QUESTIONNAIRE_SUBMISSIONS\x10\xc0\x11*~\n" +
 	"\x14WORKFLOW_RULE_MOMENT\x12(\n" +
 	"$WORKFLOW_RULE_MOMENT_ANY_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aWORKFLOW_RULE_MOMENT_BEGIN\x10\x01\x12\x1c\n" +

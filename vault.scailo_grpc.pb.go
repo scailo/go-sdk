@@ -40,6 +40,7 @@ const (
 	VaultService_DoesFileExist_FullMethodName                      = "/Scailo.VaultService/DoesFileExist"
 	VaultService_ViewFileVersions_FullMethodName                   = "/Scailo.VaultService/ViewFileVersions"
 	VaultService_ViewFileAccessLogs_FullMethodName                 = "/Scailo.VaultService/ViewFileAccessLogs"
+	VaultService_CreateMagicLinkForFile_FullMethodName             = "/Scailo.VaultService/CreateMagicLinkForFile"
 	VaultService_AddFolder_FullMethodName                          = "/Scailo.VaultService/AddFolder"
 	VaultService_MoveFolder_FullMethodName                         = "/Scailo.VaultService/MoveFolder"
 	VaultService_RenameFolder_FullMethodName                       = "/Scailo.VaultService/RenameFolder"
@@ -145,6 +146,10 @@ type VaultServiceClient interface {
 	ViewFileVersions(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VaultFileVersionsList, error)
 	// View access logs of file
 	ViewFileAccessLogs(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*VaultAccessLogsList, error)
+	// Generates a magic link for temporary, authenticated access to the resource.
+	//
+	// This enables non-system users (or users without active sessions) to view specific details.
+	CreateMagicLinkForFile(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
 	// Add folder
 	AddFolder(ctx context.Context, in *VaultFolderAddRequest, opts ...grpc.CallOption) (*IdentifierUUID, error)
 	// Move folder
@@ -472,6 +477,16 @@ func (c *vaultServiceClient) ViewFileAccessLogs(ctx context.Context, in *Identif
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VaultAccessLogsList)
 	err := c.cc.Invoke(ctx, VaultService_ViewFileAccessLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) CreateMagicLinkForFile(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MagicLink)
+	err := c.cc.Invoke(ctx, VaultService_CreateMagicLinkForFile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

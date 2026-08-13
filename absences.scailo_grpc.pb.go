@@ -69,7 +69,7 @@ type AbsencesServiceClient interface {
 	//
 	// **Errors:**
 	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
-	// - `ALREADY_EXISTS`: If the `reference_id` or `final_ref_number` is already taken.
+	// - `ALREADY_EXISTS`: If the `reference_id` is already taken.
 	Create(ctx context.Context, in *AbsencesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//

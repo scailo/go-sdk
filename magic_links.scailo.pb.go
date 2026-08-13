@@ -135,6 +135,8 @@ const (
 	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE MAGIC_LINK_RESOURCE_TYPE = 1600
 	// Denotes that the magic link was created for requesting a user's password reset email
 	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL MAGIC_LINK_RESOURCE_TYPE = 1610
+	// Denotes that the magic link was created for a vault file
+	MAGIC_LINK_RESOURCE_TYPE_MAGIC_LINK_RESOURCE_TYPE_VAULT_FILE MAGIC_LINK_RESOURCE_TYPE = 2000
 )
 
 // Enum value maps for MAGIC_LINK_RESOURCE_TYPE.
@@ -194,6 +196,7 @@ var (
 		1500: "MAGIC_LINK_RESOURCE_TYPE_EXPENSE",
 		1600: "MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE",
 		1610: "MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL",
+		2000: "MAGIC_LINK_RESOURCE_TYPE_VAULT_FILE",
 	}
 	MAGIC_LINK_RESOURCE_TYPE_value = map[string]int32{
 		"MAGIC_LINK_RESOURCE_TYPE_ANY_UNSPECIFIED":                        0,
@@ -250,6 +253,7 @@ var (
 		"MAGIC_LINK_RESOURCE_TYPE_EXPENSE":                                1500,
 		"MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE":                         1600,
 		"MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL":              1610,
+		"MAGIC_LINK_RESOURCE_TYPE_VAULT_FILE":                             2000,
 	}
 )
 
@@ -595,7 +599,15 @@ type MagicLinksServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the resource
 	ResourceUuid string `protobuf:"bytes,10,opt,name=resource_uuid,json=resourceUuid,proto3" json:"resource_uuid,omitempty"`
@@ -702,7 +714,15 @@ func (x *MagicLinksServiceCreateRequest) GetDomainPrefix() string {
 // Describes the necessary data structure for creation of a magic link. This data structure is used within other services, while creating magic links for the given resource
 type MagicLinksServiceCreateRequestForSpecificResource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The UUID of the resource
 	ResourceUuid string `protobuf:"bytes,10,opt,name=resource_uuid,json=resourceUuid,proto3" json:"resource_uuid,omitempty"`
@@ -793,7 +813,15 @@ func (x *MagicLinksServiceCreateRequestForSpecificResource) GetDomainPrefix() st
 // Describes the data structure to perform the update (draft/revision) operation on a magic link
 type MagicLinksServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// The ID of the magic link that needs to be updated
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1812,7 +1840,7 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x0e \x01(\tR\tuserAgent\"I\n" +
 	"\x17MagicLinkAccessLogsList\x12.\n" +
-	"\x04list\x18\x01 \x03(\v2\x1a.Scailo.MagicLinkAccessLogR\x04list*\xe6\x13\n" +
+	"\x04list\x18\x01 \x03(\v2\x1a.Scailo.MagicLinkAccessLogR\x04list*\x90\x14\n" +
 	"\x18MAGIC_LINK_RESOURCE_TYPE\x12,\n" +
 	"(MAGIC_LINK_RESOURCE_TYPE_ANY_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fMAGIC_LINK_RESOURCE_TYPE_VENDOR\x10\n" +
@@ -1868,7 +1896,8 @@ const file_magic_links_scailo_proto_rawDesc = "" +
 	"#MAGIC_LINK_RESOURCE_TYPE_VISITATION\x10\xce\t\x12%\n" +
 	" MAGIC_LINK_RESOURCE_TYPE_EXPENSE\x10\xdc\v\x12,\n" +
 	"'MAGIC_LINK_RESOURCE_TYPE_USER_SIGNATURE\x10\xc0\f\x127\n" +
-	"2MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL\x10\xca\f*\xaa\x01\n" +
+	"2MAGIC_LINK_RESOURCE_TYPE_USER_PASSWORD_RESET_EMAIL\x10\xca\f\x12(\n" +
+	"#MAGIC_LINK_RESOURCE_TYPE_VAULT_FILE\x10\xd0\x0f*\xaa\x01\n" +
 	"\x13MAGIC_LINK_SORT_KEY\x12&\n" +
 	"\"MAGIC_LINK_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eMAGIC_LINK_SORT_KEY_CREATED_AT\x10\x01\x12#\n" +

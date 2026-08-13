@@ -23,17 +23,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available options that a associate can be associated with
+// Defines the available organizational entity types that an associate can be mapped or linked to.
+//
+// This enumeration is primarily utilized across filtering workflows, search indices,
+// and relationship routing matrices to classify an associate's organizational alignment.
 type ASSOCIATE_ORG_REF_FROM int32
 
 const (
-	// Useful only in filter and search requests
+	// Default fallback value. Evaluates to any or all types during broad filter queries.
+	//
+	// This option is reserved exclusively for wide-scope search criteria and should not
+	// be used as a permanent state value on a persisted record.
 	ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED ASSOCIATE_ORG_REF_FROM = 0
-	// When the associate has no association
+	// Indicates that the associate currently maintains no organizational mapping.
+	//
+	// Use this state to locate unassigned, orphaned, or standalone associate profiles.
 	ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_EMPTY ASSOCIATE_ORG_REF_FROM = 1
-	// When the associate has been associated to a client
+	// Indicates that the associate is officially linked to an external Client profile.
+	//
+	// This mapping governs relevant customer-facing workflows, access permissions, and billing routing.
 	ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_CLIENT ASSOCIATE_ORG_REF_FROM = 2
-	// When the associate has been associated to a vendor
+	// Indicates that the associate is officially linked to an external Vendor or Supplier profile.
+	//
+	// This mapping governs supply chain linkages, procurement authorization, and fulfillment tracking.
 	ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_VENDOR ASSOCIATE_ORG_REF_FROM = 3
 )
 
@@ -80,25 +92,25 @@ func (ASSOCIATE_ORG_REF_FROM) EnumDescriptor() ([]byte, []int) {
 	return file_associates_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the available sort keys for retrieving associates
+// Enumeration of fields available for sorting associate search results.
 type ASSOCIATE_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_ID_UNSPECIFIED ASSOCIATE_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_CREATED_AT ASSOCIATE_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_MODIFIED_AT ASSOCIATE_SORT_KEY = 2
-	// Fetch ordered results by first name
+	// @description Sort alphabetically by the user-provided first name.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_FIRST_NAME ASSOCIATE_SORT_KEY = 10
-	// Fetch ordered results by middle name
+	// @description Sort alphabetically by the user-provided middle name.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_MIDDLE_NAME ASSOCIATE_SORT_KEY = 11
-	// Fetch ordered results by last name
+	// @description Sort alphabetically by the user-provided last name.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_LAST_NAME ASSOCIATE_SORT_KEY = 12
-	// Fetch ordered results by organization name
+	// @description Sort alphabetically by the user-provided organization name.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_ORG_NAME ASSOCIATE_SORT_KEY = 13
-	// Fetch ordered results by job title
+	// @description Sort alphabetically by the user-provided job title.
 	ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_JOB_TITLE ASSOCIATE_SORT_KEY = 14
 )
 
@@ -153,48 +165,80 @@ func (ASSOCIATE_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_associates_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the data structure of each associate on the platform
+// Represents a full Associate within the system.
 type Associate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
 	//
 	// @example "550e8400-e29b-41d4-a716-446655440000"
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores the metadata of this resource
+	// @description Standard employee and record metadata including timestamps.
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Link to the document storage folder.
 	//
 	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The first name of the associate
+	// @description The legal first name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "John"
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	// The middle name of the associate
+	// @description The legal middle name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Fitzgerald"
 	MiddleName string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
-	// The last name of the associate
+	// @description The legal last name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Doe"
 	LastName string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	// The association with a vendor or a client
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
 	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
 	OrgRefId uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
-	// The name of the organization that the associate works in. Will be autofilled if the associate is associated with either a client or a vendor
+	// @description The display name of the organization the associate represents.
+	//
+	// @example "Acme Inc"
+	//
+	// @note If an explicit `org_ref_id` is supplied, this field will be automatically overwritten and populated by the backend.
 	OrgName string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
-	// The job title of the associate
+	// @description The professional job title held by the associate.
+	//
+	// @example "Operations Manager"
 	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	// The department that the associates works in
+	// @description The corporate department or division to which the associate is assigned.
+	//
+	// @example "Field Operations"
 	Department string `protobuf:"bytes,17,opt,name=department,proto3" json:"department,omitempty"`
-	// The work phone number of the associate
+	// @description The primary work or corporate telephone number for contacting the associate.
+	//
+	// @example "+12125550123"
 	WorkPhone string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
-	// The work email address of the associate
+	// @description The primary business-related email address for the associate.
+	//
+	// @example "j.doe@corporate-hub.com"
 	WorkEmail string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The personal phone number of the associate
+	// @description The personal or secondary mobile phone number for the associate.
+	//
+	// @example "+12125550123"
 	PersonalPhone string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3" json:"personal_phone,omitempty"`
-	// The personal email address of the associate
+	// @description The personal or non-work email address for the associate.
+	//
+	// @example "j.doe@personal.com"
 	PersonalEmail string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3" json:"personal_email,omitempty"`
-	// The associate's birthday
+	// @description The calendar date of birth of the associate.
+	//
+	// @example "Mon Jan 02 2006"
 	Birthday string `protobuf:"bytes,22,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The associate's anniversary
+	// @description The corporate or employment start anniversary date of the associate.
+	//
+	// @example "Mon Jan 02 2016"
 	Anniversary string `protobuf:"bytes,23,opt,name=anniversary,proto3" json:"anniversary,omitempty"`
-	// A short description of the associate
+	// @description A comprehensive text description, biography, or operational notes regarding the associate.
+	//
+	// @example "This is a longer description about the associate"
 	Description   string `protobuf:"bytes,24,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -356,10 +400,10 @@ func (x *Associate) GetDescription() string {
 	return ""
 }
 
-// Describes the data structure that stores a list of associates
+// Container message for a collection of Associate records.
 type AssociatesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of associates
+	// @description An array of Associate records.
 	List          []*Associate `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -402,7 +446,7 @@ func (x *AssociatesList) GetList() []*Associate {
 	return nil
 }
 
-// Describes the data structure that responds to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type AssociatePaginationResp struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -481,7 +525,9 @@ func (x *AssociatePaginationResp) GetPayload() []*Associate {
 	return nil
 }
 
-// Describes the necessary data structure during creation of a associate
+// Represents the structured payload required to initialize and create an associate record.
+// Contains primary profile attributes, contact information, organizational mapping data,
+// and operational metadata.
 type AssociatesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -493,9 +539,17 @@ type AssociatesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -505,37 +559,157 @@ type AssociatesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The first name of the associate
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @mandatory
+	//
+	// @description The legal first name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "John"
+	//
+	// @regex ^[0-9A-Za-z]+$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
 	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	// The middle name of the associate
-	MiddleName string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
-	// The last name of the associate
-	LastName string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	// The association with a vendor or a client
+	// @optional
+	//
+	// @description The legal middle name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Fitzgerald"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	MiddleName *string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
+	// @optional
+	//
+	// @description The legal last name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Doe"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	LastName *string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	// @mandatory
+	//
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
+	//
+	// @format Must align with valid states within the ASSOCIATE_ORG_REF_FROM enum definition.
 	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
-	OrgRefId uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
-	// The name of the organization that the associate works in. Will be autofilled if the associate is associated with either a client or a vendor
-	OrgName string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
-	// The job title of the associate
-	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	// The department that the associates works in
-	Department string `protobuf:"bytes,17,opt,name=department,proto3" json:"department,omitempty"`
-	// The work phone number of the associate
-	WorkPhone string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
-	// The work email address of the associate
-	WorkEmail string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"` // [(buf.validate.field).string.email = true];
-	// The personal phone number of the associate
-	PersonalPhone string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3" json:"personal_phone,omitempty"`
-	// The personal email address of the associate
-	PersonalEmail string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3" json:"personal_email,omitempty"` // [(buf.validate.field).string.email = true];
-	// The associate's birthday
-	Birthday string `protobuf:"bytes,22,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The associate's anniversary
-	Anniversary string `protobuf:"bytes,23,opt,name=anniversary,proto3" json:"anniversary,omitempty"`
-	// A short description of the associate
-	Description   string `protobuf:"bytes,24,opt,name=description,proto3" json:"description,omitempty"`
+	// @optional
+	//
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Evaluated and validated in conjunction with the `org_ref_from` selector.
+	OrgRefId *uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3,oneof" json:"org_ref_id,omitempty"`
+	// @optional
+	//
+	// @description The display name of the organization the associate represents.
+	//
+	// @example "Acme Inc"
+	//
+	// @note If an explicit `org_ref_id` is supplied, this field will be automatically overwritten and populated by the backend.
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	OrgName *string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3,oneof" json:"org_name,omitempty"`
+	// @optional
+	//
+	// @description The professional job title held by the associate.
+	//
+	// @example "Operations Manager"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	JobTitle *string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3,oneof" json:"job_title,omitempty"`
+	// @optional
+	//
+	// @description The corporate department or division to which the associate is assigned.
+	//
+	// @example "Field Operations"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	Department *string `protobuf:"bytes,17,opt,name=department,proto3,oneof" json:"department,omitempty"`
+	// @optional
+	//
+	// @description The primary work or corporate telephone number for contacting the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	WorkPhone *string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3,oneof" json:"work_phone,omitempty"`
+	// @optional
+	//
+	// @description The primary business-related email address for the associate.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description The personal or secondary mobile phone number for the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	PersonalPhone *string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3,oneof" json:"personal_phone,omitempty"`
+	// @optional
+	//
+	// @description The personal or non-work email address for the associate.
+	//
+	// @example "j.doe@personal.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	PersonalEmail *string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3,oneof" json:"personal_email,omitempty"`
+	// @optional
+	//
+	// @description The calendar date of birth of the associate.
+	//
+	// @example "Mon Jan 02 2006"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Birthday *string `protobuf:"bytes,22,opt,name=birthday,proto3,oneof" json:"birthday,omitempty"`
+	// @optional
+	//
+	// @description The corporate or employment start anniversary date of the associate.
+	//
+	// @example "Mon Jan 02 2016"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Anniversary *string `protobuf:"bytes,23,opt,name=anniversary,proto3,oneof" json:"anniversary,omitempty"`
+	// @optional
+	//
+	// @description A comprehensive text description, biography, or operational notes regarding the associate.
+	//
+	// @example "This is a longer description about the associate"
+	//
+	// @regex .*
+	//
+	// @format Supports free-form UTF-8 text representation.
+	Description   *string `protobuf:"bytes,24,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -571,22 +745,22 @@ func (*AssociatesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -599,15 +773,15 @@ func (x *AssociatesServiceCreateRequest) GetFirstName() string {
 }
 
 func (x *AssociatesServiceCreateRequest) GetMiddleName() string {
-	if x != nil {
-		return x.MiddleName
+	if x != nil && x.MiddleName != nil {
+		return *x.MiddleName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetLastName() string {
-	if x != nil {
-		return x.LastName
+	if x != nil && x.LastName != nil {
+		return *x.LastName
 	}
 	return ""
 }
@@ -620,78 +794,78 @@ func (x *AssociatesServiceCreateRequest) GetOrgRefFrom() ASSOCIATE_ORG_REF_FROM 
 }
 
 func (x *AssociatesServiceCreateRequest) GetOrgRefId() uint64 {
-	if x != nil {
-		return x.OrgRefId
+	if x != nil && x.OrgRefId != nil {
+		return *x.OrgRefId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCreateRequest) GetOrgName() string {
-	if x != nil {
-		return x.OrgName
+	if x != nil && x.OrgName != nil {
+		return *x.OrgName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetJobTitle() string {
-	if x != nil {
-		return x.JobTitle
+	if x != nil && x.JobTitle != nil {
+		return *x.JobTitle
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetDepartment() string {
-	if x != nil {
-		return x.Department
+	if x != nil && x.Department != nil {
+		return *x.Department
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetWorkPhone() string {
-	if x != nil {
-		return x.WorkPhone
+	if x != nil && x.WorkPhone != nil {
+		return *x.WorkPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetPersonalPhone() string {
-	if x != nil {
-		return x.PersonalPhone
+	if x != nil && x.PersonalPhone != nil {
+		return *x.PersonalPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetPersonalEmail() string {
-	if x != nil {
-		return x.PersonalEmail
+	if x != nil && x.PersonalEmail != nil {
+		return *x.PersonalEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetBirthday() string {
-	if x != nil {
-		return x.Birthday
+	if x != nil && x.Birthday != nil {
+		return *x.Birthday
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetAnniversary() string {
-	if x != nil {
-		return x.Anniversary
+	if x != nil && x.Anniversary != nil {
+		return *x.Anniversary
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -699,8 +873,16 @@ func (x *AssociatesServiceCreateRequest) GetDescription() string {
 // Describes the necessary data structure to import a list of associates
 type AssociatesServiceImportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// The list of associates that need to be imported
 	List          []*AssociatesServiceCreateRequest `protobuf:"bytes,10,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -738,8 +920,8 @@ func (*AssociatesServiceImportRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceImportRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -754,9 +936,25 @@ func (x *AssociatesServiceImportRequest) GetList() []*AssociatesServiceCreateReq
 // Describes the data structure to perform the update (draft/revision) operation on a associate
 type AssociatesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the associate that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -767,37 +965,157 @@ type AssociatesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The first name of the associate
-	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	// The middle name of the associate
-	MiddleName string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
-	// The last name of the associate
-	LastName string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	// The association with a vendor or a client
-	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
-	OrgRefId uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
-	// The name of the organization that the associate works in. Will be autofilled if the associate is associated with either a client or a vendor
-	OrgName string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
-	// The job title of the associate
-	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	// The department that the associates works in
-	Department string `protobuf:"bytes,17,opt,name=department,proto3" json:"department,omitempty"`
-	// The work phone number of the associate
-	WorkPhone string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
-	// The work email address of the associate
-	WorkEmail string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"` // [(buf.validate.field).string.email = true];
-	// The personal phone number of the associate
-	PersonalPhone string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3" json:"personal_phone,omitempty"`
-	// The personal email address of the associate
-	PersonalEmail string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3" json:"personal_email,omitempty"` // [(buf.validate.field).string.email = true];
-	// The associate's birthday
-	Birthday string `protobuf:"bytes,22,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	// The associate's anniversary
-	Anniversary string `protobuf:"bytes,23,opt,name=anniversary,proto3" json:"anniversary,omitempty"`
-	// A short description of the associate
-	Description   string `protobuf:"bytes,24,opt,name=description,proto3" json:"description,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
+	//
+	// @description The legal first name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "John"
+	//
+	// @regex ^[0-9A-Za-z]+$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	FirstName *string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	// @optional
+	//
+	// @description The legal middle name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Fitzgerald"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	MiddleName *string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
+	// @optional
+	//
+	// @description The legal last name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Doe"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	LastName *string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	// @optional
+	//
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
+	//
+	// @format Must align with valid states within the ASSOCIATE_ORG_REF_FROM enum definition.
+	OrgRefFrom *ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM,oneof" json:"org_ref_from,omitempty"`
+	// @optional
+	//
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Evaluated and validated in conjunction with the `org_ref_from` selector.
+	OrgRefId *uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3,oneof" json:"org_ref_id,omitempty"`
+	// @optional
+	//
+	// @description The display name of the organization the associate represents.
+	//
+	// @example "Acme Inc"
+	//
+	// @note If an explicit `org_ref_id` is supplied, this field will be automatically overwritten and populated by the backend.
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	OrgName *string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3,oneof" json:"org_name,omitempty"`
+	// @optional
+	//
+	// @description The professional job title held by the associate.
+	//
+	// @example "Operations Manager"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	JobTitle *string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3,oneof" json:"job_title,omitempty"`
+	// @optional
+	//
+	// @description The corporate department or division to which the associate is assigned.
+	//
+	// @example "Field Operations"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	Department *string `protobuf:"bytes,17,opt,name=department,proto3,oneof" json:"department,omitempty"`
+	// @optional
+	//
+	// @description The primary work or corporate telephone number for contacting the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	WorkPhone *string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3,oneof" json:"work_phone,omitempty"`
+	// @optional
+	//
+	// @description The primary business-related email address for the associate.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description The personal or secondary mobile phone number for the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	PersonalPhone *string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3,oneof" json:"personal_phone,omitempty"`
+	// @optional
+	//
+	// @description The personal or non-work email address for the associate.
+	//
+	// @example "j.doe@personal.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	PersonalEmail *string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3,oneof" json:"personal_email,omitempty"`
+	// @optional
+	//
+	// @description The calendar date of birth of the associate.
+	//
+	// @example "Mon Jan 02 2006"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Birthday *string `protobuf:"bytes,22,opt,name=birthday,proto3,oneof" json:"birthday,omitempty"`
+	// @optional
+	//
+	// @description The corporate or employment start anniversary date of the associate.
+	//
+	// @example "Mon Jan 02 2016"
+	//
+	// @regex .*
+	//
+	// @format Must follow the specific string syntax format: `Day Month Date Year`.
+	Anniversary *string `protobuf:"bytes,23,opt,name=anniversary,proto3,oneof" json:"anniversary,omitempty"`
+	// @optional
+	//
+	// @description A comprehensive text description, biography, or operational notes regarding the associate.
+	//
+	// @example "This is a longer description about the associate"
+	//
+	// @regex .*
+	//
+	// @format Supports free-form UTF-8 text representation.
+	Description   *string `protobuf:"bytes,24,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -833,8 +1151,8 @@ func (*AssociatesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -847,118 +1165,118 @@ func (x *AssociatesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *AssociatesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceUpdateRequest) GetFirstName() string {
-	if x != nil {
-		return x.FirstName
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetMiddleName() string {
-	if x != nil {
-		return x.MiddleName
+	if x != nil && x.MiddleName != nil {
+		return *x.MiddleName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetLastName() string {
-	if x != nil {
-		return x.LastName
+	if x != nil && x.LastName != nil {
+		return *x.LastName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetOrgRefFrom() ASSOCIATE_ORG_REF_FROM {
-	if x != nil {
-		return x.OrgRefFrom
+	if x != nil && x.OrgRefFrom != nil {
+		return *x.OrgRefFrom
 	}
 	return ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *AssociatesServiceUpdateRequest) GetOrgRefId() uint64 {
-	if x != nil {
-		return x.OrgRefId
+	if x != nil && x.OrgRefId != nil {
+		return *x.OrgRefId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceUpdateRequest) GetOrgName() string {
-	if x != nil {
-		return x.OrgName
+	if x != nil && x.OrgName != nil {
+		return *x.OrgName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetJobTitle() string {
-	if x != nil {
-		return x.JobTitle
+	if x != nil && x.JobTitle != nil {
+		return *x.JobTitle
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetDepartment() string {
-	if x != nil {
-		return x.Department
+	if x != nil && x.Department != nil {
+		return *x.Department
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetWorkPhone() string {
-	if x != nil {
-		return x.WorkPhone
+	if x != nil && x.WorkPhone != nil {
+		return *x.WorkPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetPersonalPhone() string {
-	if x != nil {
-		return x.PersonalPhone
+	if x != nil && x.PersonalPhone != nil {
+		return *x.PersonalPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetPersonalEmail() string {
-	if x != nil {
-		return x.PersonalEmail
+	if x != nil && x.PersonalEmail != nil {
+		return *x.PersonalEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetBirthday() string {
-	if x != nil {
-		return x.Birthday
+	if x != nil && x.Birthday != nil {
+		return *x.Birthday
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetAnniversary() string {
-	if x != nil {
-		return x.Anniversary
+	if x != nil && x.Anniversary != nil {
+		return *x.Anniversary
 	}
 	return ""
 }
 
 func (x *AssociatesServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Associate records.
 type AssociatesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -966,7 +1284,7 @@ type AssociatesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -986,17 +1304,17 @@ type AssociatesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey       ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey       *ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1032,8 +1350,8 @@ func (*AssociatesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1046,27 +1364,32 @@ func (x *AssociatesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *AssociatesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AssociatesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AssociatesServicePaginationReq) GetSortKey() ASSOCIATE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_ID_UNSPECIFIED
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating associates using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type AssociatesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1074,7 +1397,7 @@ type AssociatesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1094,17 +1417,17 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1114,7 +1437,7 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1124,7 +1447,7 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1134,7 +1457,7 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1144,7 +1467,7 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1154,35 +1477,147 @@ type AssociatesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The first name of the associate
-	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	// The middle name of the associate
-	MiddleName string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
-	// The last name of the associate
-	LastName string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	// The association with a vendor or a client
-	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
-	OrgRefId uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
-	// The name of the organization that the associate works in. Will be autofilled if the associate is associated with either a client or a vendor
-	OrgName string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
-	// The job title of the associate
-	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	// The department that the associates works in
-	Department string `protobuf:"bytes,17,opt,name=department,proto3" json:"department,omitempty"`
-	// The work phone number of the associate
-	WorkPhone string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
-	// The work email address of the associate
-	WorkEmail string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The personal phone number of the associate
-	PersonalPhone string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3" json:"personal_phone,omitempty"`
-	// The personal email address of the associate
-	PersonalEmail string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3" json:"personal_email,omitempty"`
-	// The vendor ID of the associate (if this is used, then org_ref_from and org_ref_id combination is not necessary)
-	VendorId uint64 `protobuf:"varint,50,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// The client ID of the associate (if this is used, then org_ref_from and org_ref_id combination is not necessary)
-	ClientId      uint64 `protobuf:"varint,60,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The legal first name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "John"
+	//
+	// @regex ^[0-9A-Za-z]+$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	FirstName *string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	// @optional
+	//
+	// @description The legal middle name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Fitzgerald"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	MiddleName *string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
+	// @optional
+	//
+	// @description The legal last name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Doe"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	LastName *string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	// @optional
+	//
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
+	//
+	// @format Must align with valid states within the ASSOCIATE_ORG_REF_FROM enum definition.
+	OrgRefFrom *ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM,oneof" json:"org_ref_from,omitempty"`
+	// @optional
+	//
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Evaluated and validated in conjunction with the `org_ref_from` selector.
+	OrgRefId *uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3,oneof" json:"org_ref_id,omitempty"`
+	// @optional
+	//
+	// @description The display name of the organization the associate represents.
+	//
+	// @example "Acme Inc"
+	//
+	// @note If an explicit `org_ref_id` is supplied, this field will be automatically overwritten and populated by the backend.
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	OrgName *string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3,oneof" json:"org_name,omitempty"`
+	// @optional
+	//
+	// @description The professional job title held by the associate.
+	//
+	// @example "Operations Manager"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	JobTitle *string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3,oneof" json:"job_title,omitempty"`
+	// @optional
+	//
+	// @description The corporate department or division to which the associate is assigned.
+	//
+	// @example "Field Operations"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	Department *string `protobuf:"bytes,17,opt,name=department,proto3,oneof" json:"department,omitempty"`
+	// @optional
+	//
+	// @description The primary work or corporate telephone number for contacting the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	WorkPhone *string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3,oneof" json:"work_phone,omitempty"`
+	// @optional
+	//
+	// @description The primary business-related email address for the associate.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description The personal or secondary mobile phone number for the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	PersonalPhone *string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3,oneof" json:"personal_phone,omitempty"`
+	// @optional
+	//
+	// @description The personal or non-work email address for the associate.
+	//
+	// @example "j.doe@personal.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	PersonalEmail *string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3,oneof" json:"personal_email,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the associates associated with or belonging to a specific Vendor.
+	//
+	// @example 5402
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	VendorId *uint64 `protobuf:"varint,50,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the associates associated with or belonging to a specific Client.
+	//
+	// @example 9107
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId      *uint64 `protobuf:"varint,60,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1218,8 +1653,8 @@ func (*AssociatesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1232,160 +1667,166 @@ func (x *AssociatesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *AssociatesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AssociatesServiceFilterReq) GetSortKey() ASSOCIATE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *AssociatesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetFirstName() string {
-	if x != nil {
-		return x.FirstName
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetMiddleName() string {
-	if x != nil {
-		return x.MiddleName
+	if x != nil && x.MiddleName != nil {
+		return *x.MiddleName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetLastName() string {
-	if x != nil {
-		return x.LastName
+	if x != nil && x.LastName != nil {
+		return *x.LastName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetOrgRefFrom() ASSOCIATE_ORG_REF_FROM {
-	if x != nil {
-		return x.OrgRefFrom
+	if x != nil && x.OrgRefFrom != nil {
+		return *x.OrgRefFrom
 	}
 	return ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *AssociatesServiceFilterReq) GetOrgRefId() uint64 {
-	if x != nil {
-		return x.OrgRefId
+	if x != nil && x.OrgRefId != nil {
+		return *x.OrgRefId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetOrgName() string {
-	if x != nil {
-		return x.OrgName
+	if x != nil && x.OrgName != nil {
+		return *x.OrgName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetJobTitle() string {
-	if x != nil {
-		return x.JobTitle
+	if x != nil && x.JobTitle != nil {
+		return *x.JobTitle
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetDepartment() string {
-	if x != nil {
-		return x.Department
+	if x != nil && x.Department != nil {
+		return *x.Department
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetWorkPhone() string {
-	if x != nil {
-		return x.WorkPhone
+	if x != nil && x.WorkPhone != nil {
+		return *x.WorkPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetPersonalPhone() string {
-	if x != nil {
-		return x.PersonalPhone
+	if x != nil && x.PersonalPhone != nil {
+		return *x.PersonalPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetPersonalEmail() string {
-	if x != nil {
-		return x.PersonalEmail
+	if x != nil && x.PersonalEmail != nil {
+		return *x.PersonalEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceFilterReq) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceFilterReq) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting associate records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type AssociatesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1393,7 +1834,7 @@ type AssociatesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1403,7 +1844,7 @@ type AssociatesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1413,7 +1854,7 @@ type AssociatesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1423,7 +1864,7 @@ type AssociatesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1433,7 +1874,7 @@ type AssociatesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1443,35 +1884,147 @@ type AssociatesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The first name of the associate
-	FirstName string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	// The middle name of the associate
-	MiddleName string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
-	// The last name of the associate
-	LastName string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	// The association with a vendor or a client
-	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
-	OrgRefId uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
-	// The name of the organization that the associate works in. Will be autofilled if the associate is associated with either a client or a vendor
-	OrgName string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
-	// The job title of the associate
-	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	// The department that the associates works in
-	Department string `protobuf:"bytes,17,opt,name=department,proto3" json:"department,omitempty"`
-	// The work phone number of the associate
-	WorkPhone string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
-	// The work email address of the associate
-	WorkEmail string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
-	// The personal phone number of the associate
-	PersonalPhone string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3" json:"personal_phone,omitempty"`
-	// The personal email address of the associate
-	PersonalEmail string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3" json:"personal_email,omitempty"`
-	// The vendor ID of the associate (if this is used, then org_ref_from and org_ref_id combination is not necessary)
-	VendorId uint64 `protobuf:"varint,50,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	// The client ID of the associate (if this is used, then org_ref_from and org_ref_id combination is not necessary)
-	ClientId      uint64 `protobuf:"varint,60,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The legal first name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "John"
+	//
+	// @regex ^[0-9A-Za-z]+$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	FirstName *string `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	// @optional
+	//
+	// @description The legal middle name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Fitzgerald"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	MiddleName *string `protobuf:"bytes,11,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
+	// @optional
+	//
+	// @description The legal last name of the associate. Space characters are strictly prohibited.
+	//
+	// @example "Doe"
+	//
+	// @regex ^[0-9A-Za-z]*$
+	//
+	// @format Alphanumeric characters only. Maximum length of 256 characters.
+	LastName *string `protobuf:"bytes,12,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	// @optional
+	//
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
+	//
+	// @format Must align with valid states within the ASSOCIATE_ORG_REF_FROM enum definition.
+	OrgRefFrom *ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM,oneof" json:"org_ref_from,omitempty"`
+	// @optional
+	//
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Evaluated and validated in conjunction with the `org_ref_from` selector.
+	OrgRefId *uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3,oneof" json:"org_ref_id,omitempty"`
+	// @optional
+	//
+	// @description The display name of the organization the associate represents.
+	//
+	// @example "Acme Inc"
+	//
+	// @note If an explicit `org_ref_id` is supplied, this field will be automatically overwritten and populated by the backend.
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	OrgName *string `protobuf:"bytes,15,opt,name=org_name,json=orgName,proto3,oneof" json:"org_name,omitempty"`
+	// @optional
+	//
+	// @description The professional job title held by the associate.
+	//
+	// @example "Operations Manager"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	JobTitle *string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3,oneof" json:"job_title,omitempty"`
+	// @optional
+	//
+	// @description The corporate department or division to which the associate is assigned.
+	//
+	// @example "Field Operations"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces allowed. Maximum length of 256 characters.
+	Department *string `protobuf:"bytes,17,opt,name=department,proto3,oneof" json:"department,omitempty"`
+	// @optional
+	//
+	// @description The primary work or corporate telephone number for contacting the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	WorkPhone *string `protobuf:"bytes,18,opt,name=work_phone,json=workPhone,proto3,oneof" json:"work_phone,omitempty"`
+	// @optional
+	//
+	// @description The primary business-related email address for the associate.
+	//
+	// @example "j.doe@corporate-hub.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	WorkEmail *string `protobuf:"bytes,19,opt,name=work_email,json=workEmail,proto3,oneof" json:"work_email,omitempty"`
+	// @optional
+	//
+	// @description The personal or secondary mobile phone number for the associate.
+	//
+	// @example "+12125550123"
+	//
+	// @regex .+
+	//
+	// @format Non-empty string; adoption of standard international E.164 formats is highly recommended.
+	PersonalPhone *string `protobuf:"bytes,20,opt,name=personal_phone,json=personalPhone,proto3,oneof" json:"personal_phone,omitempty"`
+	// @optional
+	//
+	// @description The personal or non-work email address for the associate.
+	//
+	// @example "j.doe@personal.com"
+	//
+	// @regex ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+	//
+	// @format If provided, must be a valid email address string.
+	PersonalEmail *string `protobuf:"bytes,21,opt,name=personal_email,json=personalEmail,proto3,oneof" json:"personal_email,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the associates associated with or belonging to a specific Vendor.
+	//
+	// @example 5402
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	VendorId *uint64 `protobuf:"varint,50,opt,name=vendor_id,json=vendorId,proto3,oneof" json:"vendor_id,omitempty"`
+	// @optional
+	//
+	// @description Filter results to retrieve only the associates associated with or belonging to a specific Client.
+	//
+	// @example 9107
+	//
+	// @regex ^[0-9]*$
+	//
+	// @format Non-negative 64-bit integer.
+	ClientId      *uint64 `protobuf:"varint,60,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1507,146 +2060,152 @@ func (*AssociatesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *AssociatesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetFirstName() string {
-	if x != nil {
-		return x.FirstName
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetMiddleName() string {
-	if x != nil {
-		return x.MiddleName
+	if x != nil && x.MiddleName != nil {
+		return *x.MiddleName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetLastName() string {
-	if x != nil {
-		return x.LastName
+	if x != nil && x.LastName != nil {
+		return *x.LastName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetOrgRefFrom() ASSOCIATE_ORG_REF_FROM {
-	if x != nil {
-		return x.OrgRefFrom
+	if x != nil && x.OrgRefFrom != nil {
+		return *x.OrgRefFrom
 	}
 	return ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *AssociatesServiceCountReq) GetOrgRefId() uint64 {
-	if x != nil {
-		return x.OrgRefId
+	if x != nil && x.OrgRefId != nil {
+		return *x.OrgRefId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetOrgName() string {
-	if x != nil {
-		return x.OrgName
+	if x != nil && x.OrgName != nil {
+		return *x.OrgName
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetJobTitle() string {
-	if x != nil {
-		return x.JobTitle
+	if x != nil && x.JobTitle != nil {
+		return *x.JobTitle
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetDepartment() string {
-	if x != nil {
-		return x.Department
+	if x != nil && x.Department != nil {
+		return *x.Department
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetWorkPhone() string {
-	if x != nil {
-		return x.WorkPhone
+	if x != nil && x.WorkPhone != nil {
+		return *x.WorkPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetWorkEmail() string {
-	if x != nil {
-		return x.WorkEmail
+	if x != nil && x.WorkEmail != nil {
+		return *x.WorkEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetPersonalPhone() string {
-	if x != nil {
-		return x.PersonalPhone
+	if x != nil && x.PersonalPhone != nil {
+		return *x.PersonalPhone
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetPersonalEmail() string {
-	if x != nil {
-		return x.PersonalEmail
+	if x != nil && x.PersonalEmail != nil {
+		return *x.PersonalEmail
 	}
 	return ""
 }
 
 func (x *AssociatesServiceCountReq) GetVendorId() uint64 {
-	if x != nil {
-		return x.VendorId
+	if x != nil && x.VendorId != nil {
+		return *x.VendorId
 	}
 	return 0
 }
 
 func (x *AssociatesServiceCountReq) GetClientId() uint64 {
-	if x != nil {
-		return x.ClientId
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
 	}
 	return 0
 }
 
-// Describes the request payload for performing a generic search operation on associates
+// Broad-spectrum search and lookup request for locating and paginating associates via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type AssociatesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1654,15 +2213,37 @@ type AssociatesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
-	// The number of records that need to be sent in the response. Returns all records if it is set to -1
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
+	// @mandatory
+	//
+	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
+	//
+	// @example 100
+	//
+	// @regex ^(?:-1|0|[1-9][0-9]*)$
+	//
+	// @format Must be -1 or any non-negative integer (>= -1).
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	// The number that need to be offset by before fetching the records
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// The sort order that is to be used to fetch the pagination response
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
-	// The sort key that is to be used to fetch the response
-	SortKey ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Number of records to skip (offset) for pagination.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
+	// @optional
+	//
+	// @description Sort direction.
+	//
+	// @example DESCENDING
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
+	// @optional
+	//
+	// @description The field used for sorting.
+	SortKey *ASSOCIATE_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.ASSOCIATE_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1672,13 +2253,35 @@ type AssociatesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey string `protobuf:"bytes,10,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The association with a vendor or a client
-	OrgRefFrom ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM" json:"org_ref_from,omitempty"`
-	// The ID of the associated vendor or client
-	OrgRefId      uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3" json:"org_ref_id,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @mandatory
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey *string `protobuf:"bytes,10,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description Identifies the type of external organization mapping (e.g., Client, Vendor, or None).
+	//
+	// @example ASSOCIATE_ORG_REF_FROM_EMPTY
+	//
+	// @format Must align with valid states within the ASSOCIATE_ORG_REF_FROM enum definition.
+	OrgRefFrom *ASSOCIATE_ORG_REF_FROM `protobuf:"varint,13,opt,name=org_ref_from,json=orgRefFrom,proto3,enum=Scailo.ASSOCIATE_ORG_REF_FROM,oneof" json:"org_ref_from,omitempty"`
+	// @optional
+	//
+	// @description The numeric sequence identifier matching the targeted external Client or Vendor entity.
+	//
+	// @example 8923
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer. Evaluated and validated in conjunction with the `org_ref_from` selector.
+	OrgRefId      *uint64 `protobuf:"varint,14,opt,name=org_ref_id,json=orgRefId,proto3,oneof" json:"org_ref_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1714,8 +2317,8 @@ func (*AssociatesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *AssociatesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1728,50 +2331,50 @@ func (x *AssociatesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *AssociatesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *AssociatesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *AssociatesServiceSearchAllReq) GetSortKey() ASSOCIATE_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return ASSOCIATE_SORT_KEY_ASSOCIATE_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *AssociatesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *AssociatesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *AssociatesServiceSearchAllReq) GetOrgRefFrom() ASSOCIATE_ORG_REF_FROM {
-	if x != nil {
-		return x.OrgRefFrom
+	if x != nil && x.OrgRefFrom != nil {
+		return *x.OrgRefFrom
 	}
 	return ASSOCIATE_ORG_REF_FROM_ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED
 }
 
 func (x *AssociatesServiceSearchAllReq) GetOrgRefId() uint64 {
-	if x != nil {
-		return x.OrgRefId
+	if x != nil && x.OrgRefId != nil {
+		return *x.OrgRefId
 	}
 	return 0
 }
@@ -1816,158 +2419,270 @@ const file_associates_scailo_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12+\n" +
-	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xce\x06\n" +
-	"\x1eAssociatesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x126\n" +
+	"\apayload\x18\x04 \x03(\v2\x11.Scailo.AssociateR\apayload\"\xb9\t\n" +
+	"\x1eAssociatesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x126\n" +
 	"\n" +
 	"first_name\x18\n" +
-	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$R\tfirstName\x128\n" +
-	"\vmiddle_name\x18\v \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$R\n" +
-	"middleName\x124\n" +
-	"\tlast_name\x18\f \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$R\blastName\x12@\n" +
-	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMR\n" +
-	"orgRefFrom\x12%\n" +
+	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$R\tfirstName\x12=\n" +
+	"\vmiddle_name\x18\v \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$H\x03R\n" +
+	"middleName\x88\x01\x01\x129\n" +
+	"\tlast_name\x18\f \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$H\x04R\blastName\x88\x01\x01\x12L\n" +
+	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
+	"orgRefFrom\x12*\n" +
 	"\n" +
-	"org_ref_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00R\borgRefId\x123\n" +
-	"\borg_name\x18\x0f \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\aorgName\x125\n" +
-	"\tjob_title\x18\x10 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\bjobTitle\x128\n" +
+	"org_ref_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00H\x05R\borgRefId\x88\x01\x01\x128\n" +
+	"\borg_name\x18\x0f \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\x06R\aorgName\x88\x01\x01\x12:\n" +
+	"\tjob_title\x18\x10 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\aR\bjobTitle\x88\x01\x01\x12=\n" +
 	"\n" +
-	"department\x18\x11 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\n" +
-	"department\x12(\n" +
+	"department\x18\x11 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\bR\n" +
+	"department\x88\x01\x01\x12-\n" +
 	"\n" +
-	"work_phone\x18\x12 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14R\tworkPhone\x12\x1d\n" +
+	"work_phone\x18\x12 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14H\tR\tworkPhone\x88\x01\x01\x12+\n" +
 	"\n" +
-	"work_email\x18\x13 \x01(\tR\tworkEmail\x120\n" +
-	"\x0epersonal_phone\x18\x14 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14R\rpersonalPhone\x12%\n" +
-	"\x0epersonal_email\x18\x15 \x01(\tR\rpersonalEmail\x12\x1a\n" +
-	"\bbirthday\x18\x16 \x01(\tR\bbirthday\x12 \n" +
-	"\vanniversary\x18\x17 \x01(\tR\vanniversary\x12 \n" +
-	"\vdescription\x18\x18 \x01(\tR\vdescription\"\x7f\n" +
-	"\x1eAssociatesServiceImportRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12:\n" +
+	"work_email\x18\x13 \x01(\tB\a\xbaH\x04r\x02`\x01H\n" +
+	"R\tworkEmail\x88\x01\x01\x125\n" +
+	"\x0epersonal_phone\x18\x14 \x01(\tB\t\xbaH\x06r\x04\x10\x00\x18\x14H\vR\rpersonalPhone\x88\x01\x01\x123\n" +
+	"\x0epersonal_email\x18\x15 \x01(\tB\a\xbaH\x04r\x02`\x01H\fR\rpersonalEmail\x88\x01\x01\x12\x1f\n" +
+	"\bbirthday\x18\x16 \x01(\tH\rR\bbirthday\x88\x01\x01\x12%\n" +
+	"\vanniversary\x18\x17 \x01(\tH\x0eR\vanniversary\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x18 \x01(\tH\x0fR\vdescription\x88\x01\x01B\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x0e\n" +
+	"\f_middle_nameB\f\n" +
+	"\n" +
+	"_last_nameB\r\n" +
+	"\v_org_ref_idB\v\n" +
+	"\t_org_nameB\f\n" +
+	"\n" +
+	"_job_titleB\r\n" +
+	"\v_departmentB\r\n" +
+	"\v_work_phoneB\r\n" +
+	"\v_work_emailB\x11\n" +
+	"\x0f_personal_phoneB\x11\n" +
+	"\x0f_personal_emailB\v\n" +
+	"\t_birthdayB\x0e\n" +
+	"\f_anniversaryB\x0e\n" +
+	"\f_description\"\x95\x01\n" +
+	"\x1eAssociatesServiceImportRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12:\n" +
 	"\x04list\x18\n" +
-	" \x03(\v2&.Scailo.AssociatesServiceCreateRequestR\x04list\"\xe0\x06\n" +
-	"\x1eAssociatesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x126\n" +
+	" \x03(\v2&.Scailo.AssociatesServiceCreateRequestR\x04listB\x0f\n" +
+	"\r_user_comment\"\xe0\t\n" +
+	"\x1eAssociatesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\rvaultFolderId\x88\x01\x01\x12;\n" +
 	"\n" +
 	"first_name\x18\n" +
-	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$R\tfirstName\x128\n" +
-	"\vmiddle_name\x18\v \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$R\n" +
-	"middleName\x124\n" +
-	"\tlast_name\x18\f \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$R\blastName\x12@\n" +
-	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMR\n" +
-	"orgRefFrom\x12%\n" +
+	" \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]+$H\x02R\tfirstName\x88\x01\x01\x12=\n" +
+	"\vmiddle_name\x18\v \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$H\x03R\n" +
+	"middleName\x88\x01\x01\x129\n" +
+	"\tlast_name\x18\f \x01(\tB\x17\xbaH\x14r\x12\x18\x80\x022\r[0-9A-Za-z]*$H\x04R\blastName\x88\x01\x01\x12Q\n" +
+	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\n" +
+	"orgRefFrom\x88\x01\x01\x12*\n" +
 	"\n" +
-	"org_ref_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00R\borgRefId\x123\n" +
-	"\borg_name\x18\x0f \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\aorgName\x125\n" +
-	"\tjob_title\x18\x10 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\bjobTitle\x128\n" +
+	"org_ref_id\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\borgRefId\x88\x01\x01\x128\n" +
+	"\borg_name\x18\x0f \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\aR\aorgName\x88\x01\x01\x12:\n" +
+	"\tjob_title\x18\x10 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\bR\bjobTitle\x88\x01\x01\x12=\n" +
 	"\n" +
-	"department\x18\x11 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$R\n" +
-	"department\x125\n" +
+	"department\x18\x11 \x01(\tB\x18\xbaH\x15r\x13\x18\x80\x022\x0e[0-9A-Za-z ]*$H\tR\n" +
+	"department\x88\x01\x01\x12:\n" +
 	"\n" +
-	"work_phone\x18\x12 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$R\tworkPhone\x12\x1d\n" +
+	"work_phone\x18\x12 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$H\n" +
+	"R\tworkPhone\x88\x01\x01\x12+\n" +
 	"\n" +
-	"work_email\x18\x13 \x01(\tR\tworkEmail\x12=\n" +
-	"\x0epersonal_phone\x18\x14 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$R\rpersonalPhone\x12%\n" +
-	"\x0epersonal_email\x18\x15 \x01(\tR\rpersonalEmail\x12\x1a\n" +
-	"\bbirthday\x18\x16 \x01(\tR\bbirthday\x12 \n" +
-	"\vanniversary\x18\x17 \x01(\tR\vanniversary\x12 \n" +
-	"\vdescription\x18\x18 \x01(\tR\vdescription\"\xfc\x01\n" +
-	"\x1eAssociatesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"work_email\x18\x13 \x01(\tB\a\xbaH\x04r\x02`\x01H\vR\tworkEmail\x88\x01\x01\x12B\n" +
+	"\x0epersonal_phone\x18\x14 \x01(\tB\x16\xbaH\x13r\x11\x10\x00\x18\x0f2\v^\\+?[0-9]*$H\fR\rpersonalPhone\x88\x01\x01\x123\n" +
+	"\x0epersonal_email\x18\x15 \x01(\tB\a\xbaH\x04r\x02`\x01H\rR\rpersonalEmail\x88\x01\x01\x12\x1f\n" +
+	"\bbirthday\x18\x16 \x01(\tH\x0eR\bbirthday\x88\x01\x01\x12%\n" +
+	"\vanniversary\x18\x17 \x01(\tH\x0fR\vanniversary\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x18 \x01(\tH\x10R\vdescription\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\r\n" +
+	"\v_first_nameB\x0e\n" +
+	"\f_middle_nameB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x125\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYR\asortKey\"\xed\a\n" +
-	"\x1aAssociatesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"_last_nameB\x0f\n" +
+	"\r_org_ref_fromB\r\n" +
+	"\v_org_ref_idB\v\n" +
+	"\t_org_nameB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x125\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x12\x1d\n" +
+	"_job_titleB\r\n" +
+	"\v_departmentB\r\n" +
+	"\v_work_phoneB\r\n" +
+	"\v_work_emailB\x11\n" +
+	"\x0f_personal_phoneB\x11\n" +
+	"\x0f_personal_emailB\v\n" +
+	"\t_birthdayB\x0e\n" +
+	"\f_anniversaryB\x0e\n" +
+	"\f_description\"\xc5\x02\n" +
+	"\x1eAssociatesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"first_name\x18\n" +
-	" \x01(\tR\tfirstName\x12\x1f\n" +
-	"\vmiddle_name\x18\v \x01(\tR\n" +
-	"middleName\x12\x1b\n" +
-	"\tlast_name\x18\f \x01(\tR\blastName\x12@\n" +
-	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMR\n" +
-	"orgRefFrom\x12\x1c\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12:\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYH\x03R\asortKey\x88\x01\x01B\f\n" +
 	"\n" +
-	"org_ref_id\x18\x0e \x01(\x04R\borgRefId\x12\x19\n" +
-	"\borg_name\x18\x0f \x01(\tR\aorgName\x12\x1b\n" +
-	"\tjob_title\x18\x10 \x01(\tR\bjobTitle\x12\x1e\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_key\"\xf4\v\n" +
+	"\x1aAssociatesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"department\x18\x11 \x01(\tR\n" +
-	"department\x12\x1d\n" +
-	"\n" +
-	"work_phone\x18\x12 \x01(\tR\tworkPhone\x12\x1d\n" +
-	"\n" +
-	"work_email\x18\x13 \x01(\tR\tworkEmail\x12%\n" +
-	"\x0epersonal_phone\x18\x14 \x01(\tR\rpersonalPhone\x12%\n" +
-	"\x0epersonal_email\x18\x15 \x01(\tR\rpersonalEmail\x12\x1b\n" +
-	"\tvendor_id\x182 \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tclient_id\x18< \x01(\x04R\bclientId\"\xb9\x06\n" +
-	"\x19AssociatesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x12\x1d\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12:\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"first_name\x18\n" +
-	" \x01(\tR\tfirstName\x12\x1f\n" +
-	"\vmiddle_name\x18\v \x01(\tR\n" +
-	"middleName\x12\x1b\n" +
-	"\tlast_name\x18\f \x01(\tR\blastName\x12@\n" +
-	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMR\n" +
-	"orgRefFrom\x12\x1c\n" +
+	" \x01(\tH\tR\tfirstName\x88\x01\x01\x12$\n" +
+	"\vmiddle_name\x18\v \x01(\tH\n" +
+	"R\n" +
+	"middleName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\f \x01(\tH\vR\blastName\x88\x01\x01\x12E\n" +
+	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMH\fR\n" +
+	"orgRefFrom\x88\x01\x01\x12!\n" +
 	"\n" +
-	"org_ref_id\x18\x0e \x01(\x04R\borgRefId\x12\x19\n" +
-	"\borg_name\x18\x0f \x01(\tR\aorgName\x12\x1b\n" +
-	"\tjob_title\x18\x10 \x01(\tR\bjobTitle\x12\x1e\n" +
+	"org_ref_id\x18\x0e \x01(\x04H\rR\borgRefId\x88\x01\x01\x12\x1e\n" +
+	"\borg_name\x18\x0f \x01(\tH\x0eR\aorgName\x88\x01\x01\x12 \n" +
+	"\tjob_title\x18\x10 \x01(\tH\x0fR\bjobTitle\x88\x01\x01\x12#\n" +
 	"\n" +
-	"department\x18\x11 \x01(\tR\n" +
-	"department\x12\x1d\n" +
+	"department\x18\x11 \x01(\tH\x10R\n" +
+	"department\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"work_phone\x18\x12 \x01(\tR\tworkPhone\x12\x1d\n" +
+	"work_phone\x18\x12 \x01(\tH\x11R\tworkPhone\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"work_email\x18\x13 \x01(\tR\tworkEmail\x12%\n" +
-	"\x0epersonal_phone\x18\x14 \x01(\tR\rpersonalPhone\x12%\n" +
-	"\x0epersonal_email\x18\x15 \x01(\tR\rpersonalEmail\x12\x1b\n" +
-	"\tvendor_id\x182 \x01(\x04R\bvendorId\x12\x1b\n" +
-	"\tclient_id\x18< \x01(\x04R\bclientId\"\xa4\x03\n" +
-	"\x1dAssociatesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"work_email\x18\x13 \x01(\tH\x12R\tworkEmail\x88\x01\x01\x12*\n" +
+	"\x0epersonal_phone\x18\x14 \x01(\tH\x13R\rpersonalPhone\x88\x01\x01\x12*\n" +
+	"\x0epersonal_email\x18\x15 \x01(\tH\x14R\rpersonalEmail\x88\x01\x01\x12 \n" +
+	"\tvendor_id\x182 \x01(\x04H\x15R\bvendorId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18< \x01(\x04H\x16R\bclientId\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x125\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x12\x1d\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\r\n" +
+	"\v_first_nameB\x0e\n" +
+	"\f_middle_nameB\f\n" +
+	"\n" +
+	"_last_nameB\x0f\n" +
+	"\r_org_ref_fromB\r\n" +
+	"\v_org_ref_idB\v\n" +
+	"\t_org_nameB\f\n" +
+	"\n" +
+	"_job_titleB\r\n" +
+	"\v_departmentB\r\n" +
+	"\v_work_phoneB\r\n" +
+	"\v_work_emailB\x11\n" +
+	"\x0f_personal_phoneB\x11\n" +
+	"\x0f_personal_emailB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_client_id\"\x8a\n" +
+	"\n" +
+	"\x19AssociatesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"first_name\x18\n" +
+	" \x01(\tH\x06R\tfirstName\x88\x01\x01\x12$\n" +
+	"\vmiddle_name\x18\v \x01(\tH\aR\n" +
+	"middleName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\f \x01(\tH\bR\blastName\x88\x01\x01\x12E\n" +
+	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMH\tR\n" +
+	"orgRefFrom\x88\x01\x01\x12!\n" +
+	"\n" +
+	"org_ref_id\x18\x0e \x01(\x04H\n" +
+	"R\borgRefId\x88\x01\x01\x12\x1e\n" +
+	"\borg_name\x18\x0f \x01(\tH\vR\aorgName\x88\x01\x01\x12 \n" +
+	"\tjob_title\x18\x10 \x01(\tH\fR\bjobTitle\x88\x01\x01\x12#\n" +
+	"\n" +
+	"department\x18\x11 \x01(\tH\rR\n" +
+	"department\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"work_phone\x18\x12 \x01(\tH\x0eR\tworkPhone\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"work_email\x18\x13 \x01(\tH\x0fR\tworkEmail\x88\x01\x01\x12*\n" +
+	"\x0epersonal_phone\x18\x14 \x01(\tH\x10R\rpersonalPhone\x88\x01\x01\x12*\n" +
+	"\x0epersonal_email\x18\x15 \x01(\tH\x11R\rpersonalEmail\x88\x01\x01\x12 \n" +
+	"\tvendor_id\x182 \x01(\x04H\x12R\bvendorId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18< \x01(\x04H\x13R\bclientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\r\n" +
+	"\v_first_nameB\x0e\n" +
+	"\f_middle_nameB\f\n" +
+	"\n" +
+	"_last_nameB\x0f\n" +
+	"\r_org_ref_fromB\r\n" +
+	"\v_org_ref_idB\v\n" +
+	"\t_org_nameB\f\n" +
+	"\n" +
+	"_job_titleB\r\n" +
+	"\v_departmentB\r\n" +
+	"\v_work_phoneB\r\n" +
+	"\v_work_emailB\x11\n" +
+	"\x0f_personal_phoneB\x11\n" +
+	"\x0f_personal_emailB\f\n" +
+	"\n" +
+	"_vendor_idB\f\n" +
+	"\n" +
+	"_client_id\"\xc0\x04\n" +
+	"\x1dAssociatesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12:\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1a.Scailo.ASSOCIATE_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"search_key\x18\n" +
-	" \x01(\tR\tsearchKey\x12@\n" +
-	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMR\n" +
-	"orgRefFrom\x12\x1c\n" +
+	" \x01(\tH\x05R\tsearchKey\x88\x01\x01\x12E\n" +
+	"\forg_ref_from\x18\r \x01(\x0e2\x1e.Scailo.ASSOCIATE_ORG_REF_FROMH\x06R\n" +
+	"orgRefFrom\x88\x01\x01\x12!\n" +
 	"\n" +
-	"org_ref_id\x18\x0e \x01(\x04R\borgRefId*\xac\x01\n" +
+	"org_ref_id\x18\x0e \x01(\x04H\aR\borgRefId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\r\n" +
+	"\v_search_keyB\x0f\n" +
+	"\r_org_ref_fromB\r\n" +
+	"\v_org_ref_id*\xac\x01\n" +
 	"\x16ASSOCIATE_ORG_REF_FROM\x12*\n" +
 	"&ASSOCIATE_ORG_REF_FROM_ANY_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cASSOCIATE_ORG_REF_FROM_EMPTY\x10\x01\x12!\n" +
@@ -2134,6 +2849,13 @@ func file_associates_scailo_proto_init() {
 	}
 	file_base_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_associates_scailo_proto_msgTypes[3].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[7].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_associates_scailo_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

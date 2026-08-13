@@ -82,9 +82,29 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each sales enquiry
+// The SalesEnquiriesService acts as the primary entry point for managing inbound leads and prospective customer requests.
+// This service handles the complete lifecycle of a Sales Enquiry—from initial ingestion (e.g., via website contact forms,
+// CRM integrations, or direct communication) through qualification, internal review, and final conversion into formal
+// Sales Quotations or Sales Orders.
+//
+// It provides a comprehensive suite of RPCs to mutate core prospect parameters, track requested line items (which uniquely
+// utilize free-text descriptors prior to strict catalog mapping), orchestrate multi-stage approval workflows, and execute
+// advanced, paginated lookups. This service is architected to give sales and business development teams actionable
+// visibility into the earliest stages of the outbound sales pipeline.
 type SalesEnquiriesServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
+	// - `ALREADY_EXISTS`: If the `reference_id` is already taken.
 	Create(ctx context.Context, in *SalesEnquiriesServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -169,13 +189,29 @@ type SalesEnquiriesServiceClient interface {
 	// **Side Effects:**
 	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Duplicates an existing operational record (e.g., an order, schedule, or requisition) to create a new, distinct entity with a specified delivery date.
+	//
+	// **Side Effects:**
+	// - Provisions a completely new record that inherits the core attributes, line items, and configurations of the source record identified by the UUID.
+	// - Overrides the original delivery schedule with the newly provided `delivery_date` and assigns the newly provided external `reference_id`.
+	// - Appends an audit trail entry linking the new record to its original source, tracking the duplication event and justification comment.
+	// - Returns the internal identifier and UUID of the newly generated record.
 	Repeat(ctx context.Context, in *RepeatWithDeliveryDate, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -188,58 +224,133 @@ type SalesEnquiriesServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Amend the sales enquiry and send for revision
+	// Initiates a formal amendment process for a specific record, transitioning it into a structured revision workflow.
+	//
+	// This API is utilized when substantive modifications are required for an already finalized or approved record.
+	// Rather than mutating the active data directly, it explicitly triggers a compliance-driven revision cycle,
+	// ensuring that all proposed changes are tracked and undergo standard review and authorization procedures.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The record's internal amendment count property is strictly incremented by 1.
+	// * The record is placed into a pending revision state, typically preserving the availability of the currently approved version until the amendment is finalized.
+	// * The optional user comment is permanently appended to the record's audit log as the formal justification for initiating the change.
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Add an item to a sales enquiry
+	// Appends a single requested product or service line item to an existing Sales Enquiry.
+	//
+	// **Side Effects:**
+	// - Captures the prospect's preliminary interest, expected quantities, and proposed pricing.
+	// - Attaches the new line item to the parent enquiry, identifying the product via a free-text name rather than a strict catalog ID.
+	// - Appends an audit trail entry tracking the creation and user justification.
 	AddSalesEnquiryItem(ctx context.Context, in *SalesEnquiriesServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Modify an item in a sales enquiry
+	// Modifies the core parameters of an existing requested line item.
+	//
+	// **Side Effects:**
+	// - Overwrites the previously requested quantities, proposed terms, and specifications as the lead is qualified and client requirements become clearer.
+	// - Triggers a recalculation of the parent sales enquiry's prospective grand total.
+	// - May reset the item's approval status, requiring re-authorization.
+	// - Appends an audit trail entry tracking the modifications.
 	ModifySalesEnquiryItem(ctx context.Context, in *SalesEnquiriesServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve an item in a sales enquiry
+	// Approves a pending line item, finalizing its active status within the sales enquiry.
+	//
+	// **Side Effects:**
+	// - Activates the requested line item, validating its inclusion in the prospect's profile.
+	// - Appends the required approval metadata, timestamp, and audit comment to the record's history.
 	ApproveSalesEnquiryItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete an item in a sales enquiry
+	// Permanently removes or deactivates a requested line item from the sales enquiry.
+	//
+	// **Side Effects:**
+	// - Revokes the item from the enquiry, subtracting its prospective value from the grand total.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteSalesEnquiryItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder items in a sales enquiry
+	// Reorders the numerical sequence of requested line items within the sales enquiry.
+	//
+	// **Side Effects:**
+	// - Mutates the display sequence (`sort_order`) of the specified items in bulk.
+	// - Directly affects how the requested items are visually arranged in UI tables for sales representatives.
 	ReorderSalesEnquiryItems(ctx context.Context, in *ReorderItemsRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View Sales Enquiry Item by ID
+	// Retrieves the complete, finalized details of a specific requested line item by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, approval histories, and calculated prospective financial values.
 	ViewSalesEnquiryItemByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesEnquiryItem, error)
-	// View approved sales enquiry items for given sales enquiry ID
+	// Lists all active, fully approved requested line items mapped to a specific sales enquiry ID.
+	//
+	// This read-only query is optimized for rendering the finalized lead summary on frontend interfaces before conversion to a quotation.
 	ViewApprovedSalesEnquiryItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesEnquiriesItemsList, error)
-	// View unapproved sales enquiry items for given sales enquiry ID
+	// Lists pending or unapproved requested line items mapped to a specific sales enquiry ID.
+	//
+	// This read-only query is utilized primarily by administrative dashboards to quickly identify prospect requests awaiting initial review.
 	ViewUnapprovedSalesEnquiryItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesEnquiriesItemsList, error)
-	// View the history of the sales enquiry item
+	// Retrieves the historical audit trail and lifecycle changes of a specific requested line item.
+	//
+	// This read-only operation aggregates the chronological evolution of the item based on its free-text name and parent enquiry ID, tracking parameter adjustments and state changes throughout the qualification phase.
 	ViewSalesEnquiryItemHistory(ctx context.Context, in *SalesEnquiryItemHistoryRequest, opts ...grpc.CallOption) (*SalesEnquiriesItemsList, error)
-	// View approved sales enquiry items for given sales enquiry ID with pagination
+	// Lists active, approved requested line items using robust pagination controls.
+	//
+	// This read-only query is optimized for rendering large inbound requests in frontend data tables, supporting explicit windowing parameters.
 	ViewPaginatedApprovedSalesEnquiryItems(ctx context.Context, in *SalesEnquiryItemsSearchRequest, opts ...grpc.CallOption) (*SalesEnquiriesServicePaginatedItemsResponse, error)
-	// View unapproved sales enquiry items for given sales enquiry ID with pagination
+	// Lists pending or unapproved requested line items using robust pagination controls.
+	//
+	// This read-only query is optimized for administrative review dashboards handling high volumes of unapproved prospect requests.
 	ViewPaginatedUnapprovedSalesEnquiryItems(ctx context.Context, in *SalesEnquiryItemsSearchRequest, opts ...grpc.CallOption) (*SalesEnquiriesServicePaginatedItemsResponse, error)
-	// Search through sales enquiry items with pagination
+	// Searches through all requested line items using advanced filters, status flags, fuzzy text matching, and pagination.
+	//
+	// This read-only query is the primary entry point for complex lookups across massive lists of inbound leads.
 	SearchItemsWithPagination(ctx context.Context, in *SalesEnquiryItemsSearchRequest, opts ...grpc.CallOption) (*SalesEnquiriesServicePaginatedItemsResponse, error)
-	// CSV operations
-	// Download the CSV file with the associated line items. The same file could then be used to upload line items.
+	// Exports the current list of requested line items for a specific sales enquiry into a downloadable CSV file.
+	//
+	// This read-only operation is used by sales representatives to review large prospects offline, or as a baseline to modify requested items locally before executing a bulk upload.
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the CSV template that could be used to upload items
+	// Generates and downloads a blank, structurally compliant CSV template.
+	//
+	// This read-only operation provides clients with the exact column headers required to successfully perform a bulk line-item upload.
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Upload items using a CSV file. This is an idempotent operation. All the existing items are deleted before adding the items from the file.
+	// Processes a bulk ingestion of requested line items for a specific sales enquiry via a CSV file upload.
+	//
+	// **Side Effects:**
+	// - **CRITICAL:** This is an idempotent, destructive operation. It automatically deletes all existing line items currently mapped to the sales enquiry before applying the new items from the CSV.
+	// - Wipes the current active list and replaces it entirely with the parsed file contents.
+	// - Triggers recalculations of prospective totals and appends creation audit logs for the newly imported items.
 	UploadSalesEnquiryItems(ctx context.Context, in *IdentifierUUIDWithFile, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Add a contact
+	// Assigns a designated prospect associate (contact person) to the sales enquiry.
+	//
+	// **Side Effects:**
+	// - Creates a linkage identifying the specific individual who submitted the request or is acting as the primary point of contact for the lead.
+	// - Appends an audit trail entry tracking the assignment.
 	AddSalesEnquiryContact(ctx context.Context, in *SalesEnquiriesServiceContactCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a contact
+	// Approves a pending prospect contact assignment, finalizing their visibility on the enquiry.
+	//
+	// **Side Effects:**
+	// - Activates the contact linkage, allowing the associate's details to be used for formal follow-ups.
+	// - Appends an approval audit trail entry.
 	ApproveSalesEnquiryContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a contact
+	// Removes a designated prospect associate from the sales enquiry.
+	//
+	// **Side Effects:**
+	// - Severs the linkage between the enquiry and the individual.
+	// - Appends a deletion justification to the audit log.
 	DeleteSalesEnquiryContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a contact for the given ID
+	// Retrieves the complete details of a specific contact mapping by its internal ID.
+	//
+	// This read-only query fetches the associate linkage data and workflow state.
 	ViewSalesEnquiryContactByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesEnquiryContact, error)
-	// View all contacts for given sales enquiry UUID
+	// Lists all designated client contacts (associates) assigned to a specific sales enquiry by its UUID.
+	//
+	// This read-only query is utilized to populate the "Points of Contact" section in frontend lead management views.
 	ViewSalesEnquiryContacts(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesEnquiryContactsList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesEnquiry, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesEnquiry, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*SalesEnquiry, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesEnquiry, error)
@@ -247,7 +358,10 @@ type SalesEnquiriesServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesEnquiry, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*SalesEnquiriesList, error)
-	// View the ancillary parameters (UUIDs of the internal references) by UUID
+	// Retrieves the globally unique identifiers (UUIDs) of a Sales Enquiry's core relational dependencies.
+	//
+	// This is a read-only query designed to fetch essential parameter references—such as the buyer, consignee, and currency — without exposing the system's internal sequential integer IDs.
+	// Client applications and external integrations utilize this endpoint to securely reference linked records while actively mitigating the risk of ID-based data enumeration.
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesEnquiryAncillaryParameters, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*SalesEnquiriesList, error)
@@ -255,13 +369,36 @@ type SalesEnquiriesServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesEnquiriesList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *SalesEnquiriesServicePaginationReq, opts ...grpc.CallOption) (*SalesEnquiriesServicePaginationResponse, error)
-	// View all the amendments made
+	// Retrieves the comprehensive, chronological history of formal amendments applied to a specific record.
+	//
+	// This read-only query exposes the complete audit trail of revision workflows that the entity has undergone.
+	// It is explicitly designed to support compliance checks, historical tracking, and administrative reviews by
+	// detailing exactly how and when a record evolved over its lifecycle.
+	//
+	// **Side Effects & Lifecycle:**
+	// * This is a strictly read-only operation; the underlying record and its current lifecycle state remain entirely unchanged.
+	// * Aggregates and returns a sequential log of amendment events, which typically include revision counts, initiation timestamps, and the justification comments provided when the amendments were triggered.
 	ViewAmendments(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AmendmentLogsList, error)
-	// View all sales orders IDs that are associated with the given sales enquiry ID
+	// Retrieves a list of internal identifiers for all Sales Orders that were generated from or linked to a specific Sales Enquiry.
+	//
+	// This read-only query is typically utilized by frontend interfaces to display the conversion history of an inbound lead. It allows users to quickly track how an initial prospect request materialized into active fulfillment records and facilitates seamless navigation between the pre-sales lead management and order fulfillment modules.
 	ViewAssociatedSalesOrdersIDs(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download sales enquiry with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *SalesEnquiriesServiceSearchAllReq, opts ...grpc.CallOption) (*SalesEnquiriesList, error)

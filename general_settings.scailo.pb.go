@@ -82,7 +82,7 @@ type GeneralSettings struct {
 	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
 	// Stores the name of the organization that holds the license
 	LicensedTo string `protobuf:"bytes,100,opt,name=licensed_to,json=licensedTo,proto3" json:"licensed_to,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,200,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -377,7 +377,13 @@ type GeneralSettingsServiceCreateRequest struct {
 	AutoReqVerifyOnExitRecordEntry bool `protobuf:"varint,72,opt,name=auto_req_verify_on_exit_record_entry,json=autoReqVerifyOnExitRecordEntry,proto3" json:"auto_req_verify_on_exit_record_entry,omitempty"`
 	// Stores the base64 encoded logo of the organization
 	Logo string `protobuf:"bytes,80,opt,name=logo,proto3" json:"logo,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,200,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

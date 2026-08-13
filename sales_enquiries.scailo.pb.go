@@ -23,31 +23,31 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting sales enquiry item search results.
 type SALES_ENQUIRY_ITEM_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal item sequence ID).
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_ID_UNSPECIFIED SALES_ENQUIRY_ITEM_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the item record was initially created.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_CREATED_AT SALES_ENQUIRY_ITEM_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the item record was last modified.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_MODIFIED_AT SALES_ENQUIRY_ITEM_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp of the item.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_APPROVED_ON SALES_ENQUIRY_ITEM_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_APPROVED_BY SALES_ENQUIRY_ITEM_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_APPROVER_ROLE_ID SALES_ENQUIRY_ITEM_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user provided item name.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_NAME SALES_ENQUIRY_ITEM_SORT_KEY = 10
-	// Fetch ordered results by the internal quantity
+	// @description Sort by the ordered quantity evaluated in the internal unit of measure.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_INTERNAL_QUANTITY SALES_ENQUIRY_ITEM_SORT_KEY = 11
-	// Fetch ordered results by the unit price
+	// @description Sort by the base unit price.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_UNIT_PRICE SALES_ENQUIRY_ITEM_SORT_KEY = 12
-	// Fetch ordered results by the discount
+	// @description Sort by the percentage discount applied to the item.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_DISCOUNT SALES_ENQUIRY_ITEM_SORT_KEY = 13
-	// Fetch ordered results by the delivery date
+	// @description Sort chronologically by the target delivery date for the item.
 	SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_DELIVERY_DATE SALES_ENQUIRY_ITEM_SORT_KEY = 14
 )
 
@@ -108,15 +108,15 @@ func (SALES_ENQUIRY_ITEM_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_sales_enquiries_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Describes the applicable statuses of sales enquiry items
+// Enum defining the applicable lifecycle and verification statuses for sales enquiry items.
 type SALES_ENQUIRY_ITEM_STATUS int32
 
 const (
-	// Denotes that status be disregarded. This is used only within search APIs
+	// @description Denotes that the status filter should be disregarded. Used exclusively within search APIs to bypass status restrictions.
 	SALES_ENQUIRY_ITEM_STATUS_SALES_ENQUIRY_ITEM_STATUS_ANY_UNSPECIFIED SALES_ENQUIRY_ITEM_STATUS = 0
-	// Denotes that the sales enquiry items must have been approved
+	// @description Denotes that the sales enquiry item association has passed verification and is actively approved.
 	SALES_ENQUIRY_ITEM_STATUS_SALES_ENQUIRY_ITEM_STATUS_APPROVED SALES_ENQUIRY_ITEM_STATUS = 1
-	// Denotes that the sales enquiry items must be waiting for approval
+	// @description Denotes that the sales enquiry item association is pending review and waiting for administrative approval.
 	SALES_ENQUIRY_ITEM_STATUS_SALES_ENQUIRY_ITEM_STATUS_UNAPPROVED SALES_ENQUIRY_ITEM_STATUS = 2
 )
 
@@ -161,35 +161,33 @@ func (SALES_ENQUIRY_ITEM_STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_sales_enquiries_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting sales enquiry search results.
 type SALES_ENQUIRY_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_ID_UNSPECIFIED SALES_ENQUIRY_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_CREATED_AT SALES_ENQUIRY_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_MODIFIED_AT SALES_ENQUIRY_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_APPROVED_ON SALES_ENQUIRY_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_APPROVED_BY SALES_ENQUIRY_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_APPROVER_ROLE_ID SALES_ENQUIRY_SORT_KEY = 5
-	// Fetch ordered results by the approver's completed on timestamp
+	// @description Sort by the timestamp of record completion.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_COMPLETED_ON SALES_ENQUIRY_SORT_KEY = 6
-	// Fetch ordered results by the reference ID
+	// @description Sort alphabetically by the user-provided reference ID.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_REFERENCE_ID SALES_ENQUIRY_SORT_KEY = 10
-	// Fetch ordered results by the final ref number
+	// @description Sort alphabetically by the system-generated reference number.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_FINAL_REF_NUMBER SALES_ENQUIRY_SORT_KEY = 11
-	// Fetch ordered results by the consignee client ID
+	// @description Sort by the internal ID of the consignee client.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_CONSIGNEE_CLIENT_ID SALES_ENQUIRY_SORT_KEY = 12
-	// Fetch ordered results by the buyer client ID
+	// @description Sort by the internal ID of the buyer client.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID SALES_ENQUIRY_SORT_KEY = 13
-	// Fetch ordered results by the priority
-	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_PRIORITY SALES_ENQUIRY_SORT_KEY = 14
-	// Fetch ordered results by the amendment count
+	// @description Sort by the total number of times the sales enquiry has been amended.
 	SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT SALES_ENQUIRY_SORT_KEY = 15
 )
 
@@ -207,7 +205,6 @@ var (
 		11: "SALES_ENQUIRY_SORT_KEY_FINAL_REF_NUMBER",
 		12: "SALES_ENQUIRY_SORT_KEY_CONSIGNEE_CLIENT_ID",
 		13: "SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID",
-		14: "SALES_ENQUIRY_SORT_KEY_PRIORITY",
 		15: "SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT",
 	}
 	SALES_ENQUIRY_SORT_KEY_value = map[string]int32{
@@ -222,7 +219,6 @@ var (
 		"SALES_ENQUIRY_SORT_KEY_FINAL_REF_NUMBER":    11,
 		"SALES_ENQUIRY_SORT_KEY_CONSIGNEE_CLIENT_ID": 12,
 		"SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID":     13,
-		"SALES_ENQUIRY_SORT_KEY_PRIORITY":            14,
 		"SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT":     15,
 	}
 )
@@ -254,7 +250,14 @@ func (SALES_ENQUIRY_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_sales_enquiries_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and creating a new Sales Enquiry within the system.
+// A Sales Enquiry represents an inbound request or lead from a prospective or existing customer
+// (e.g., submitted via a website contact form or direct communication). It captures the initial
+// interest in products or services, allowing sales teams to track, analyze, and subsequently respond
+// to the prospect.
+//
+// **Note:** This record serves as the earliest stage in the outbound sales pipeline, often acting
+// as the precursor to a formal Sales Quotation or Sales Order.
 type SalesEnquiriesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -266,9 +269,17 @@ type SalesEnquiriesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -278,7 +289,7 @@ type SalesEnquiriesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
 	// @mandatory
 	//
 	// @description A unique external reference ID for the record. Must be alphanumeric (spaces allowed). Used for cross-referencing with external systems.
@@ -289,23 +300,83 @@ type SalesEnquiriesServiceCreateRequest struct {
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
 	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The ID of the consignee
+	// @mandatory
+	//
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	ConsigneeClientId uint64 `protobuf:"varint,12,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
+	// @mandatory
+	//
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	BuyerClientId uint64 `protobuf:"varint,13,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The priority of the sales enquiry. Possible values are "low", "medium", "high".
-	Priority string `protobuf:"bytes,14,opt,name=priority,proto3" json:"priority,omitempty"`
-	// The ID of the currency
+	// @mandatory
+	//
+	// @description The unique internal identifier of the currency associated with the enquiry, used to frame any prospective financial discussions or quotes.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	CurrencyId uint64 `protobuf:"varint,15,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The description of the sales enquiry
-	Description string `protobuf:"bytes,16,opt,name=description,proto3" json:"description,omitempty"`
-	// The miscellaneous cost (in cents)
-	MiscellaneousCost uint64 `protobuf:"varint,17,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The overall discount (in cents)
-	OverallDiscount uint64 `protobuf:"varint,18,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The round off amount (in cents) (both positive and negative values are allowed)
-	RoundOff int64 `protobuf:"varint,19,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A textual summary detailing the specific products, services, or information the lead is requesting.
+	//
+	// @example "Looking for bulk pricing on industrial copper wiring"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	Description *string `protobuf:"bytes,16,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Any additional miscellaneous costs (e.g., estimated handling or freight charges) tentatively associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	MiscellaneousCost *uint64 `protobuf:"varint,17,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat target discount amount associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	OverallDiscount *uint64 `protobuf:"varint,18,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for prospective financial totals. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,19,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -342,22 +413,22 @@ func (*SalesEnquiriesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -383,13 +454,6 @@ func (x *SalesEnquiriesServiceCreateRequest) GetBuyerClientId() uint64 {
 	return 0
 }
 
-func (x *SalesEnquiriesServiceCreateRequest) GetPriority() string {
-	if x != nil {
-		return x.Priority
-	}
-	return ""
-}
-
 func (x *SalesEnquiriesServiceCreateRequest) GetCurrencyId() uint64 {
 	if x != nil {
 		return x.CurrencyId
@@ -398,29 +462,29 @@ func (x *SalesEnquiriesServiceCreateRequest) GetCurrencyId() uint64 {
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
@@ -432,19 +496,41 @@ func (x *SalesEnquiriesServiceCreateRequest) GetFormData() []*FormFieldDatumCrea
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Sales Enquiry record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the references, consignee & buyer, currency, costs & discounts, and other custom form fields
+// of an established Sales Enquiry.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type SalesEnquiriesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
 	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
 	//
 	// @example true
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -454,8 +540,8 @@ type SalesEnquiriesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// @mandatory
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
 	//
 	// @description Updated alphanumeric reference ID. Must contain at least 1 character.
 	//
@@ -464,24 +550,84 @@ type SalesEnquiriesServiceUpdateRequest struct {
 	// @regex "[0-9A-Za-z ]+$"
 	//
 	// @format Alphanumeric characters and spaces only. No special symbols or punctuation allowed.
-	ReferenceId string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
-	// The ID of the consignee
-	ConsigneeClientId uint64 `protobuf:"varint,12,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
-	BuyerClientId uint64 `protobuf:"varint,13,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The priority of the sales enquiry. Possible values are "low", "medium", "high".
-	Priority string `protobuf:"bytes,14,opt,name=priority,proto3" json:"priority,omitempty"`
-	// The ID of the currency
-	CurrencyId uint64 `protobuf:"varint,15,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The description of the sales enquiry
-	Description string `protobuf:"bytes,16,opt,name=description,proto3" json:"description,omitempty"`
-	// The miscellaneous cost (in cents)
-	MiscellaneousCost uint64 `protobuf:"varint,17,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The overall discount (in cents)
-	OverallDiscount uint64 `protobuf:"varint,18,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The round off amount (in cents) (both positive and negative values are allowed)
-	RoundOff int64 `protobuf:"varint,19,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The list of dynamic forms
+	ReferenceId *string `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	ConsigneeClientId *uint64 `protobuf:"varint,12,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BuyerClientId *uint64 `protobuf:"varint,13,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency associated with the enquiry, used to frame any prospective financial discussions or quotes.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,15,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description A textual summary detailing the specific products, services, or information the lead is requesting.
+	//
+	// @example "Looking for bulk pricing on industrial copper wiring"
+	//
+	// @regex ^[0-9A-Za-z ]*$
+	//
+	// @format Alphanumeric characters and spaces only. Can be left empty.
+	Description *string `protobuf:"bytes,16,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description Any additional miscellaneous costs (e.g., estimated handling or freight charges) tentatively associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	MiscellaneousCost *uint64 `protobuf:"varint,17,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3,oneof" json:"miscellaneous_cost,omitempty"`
+	// @optional
+	//
+	// @description A flat target discount amount associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	OverallDiscount *uint64 `protobuf:"varint,18,opt,name=overall_discount,json=overallDiscount,proto3,oneof" json:"overall_discount,omitempty"`
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for prospective financial totals. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,19,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -518,8 +664,8 @@ func (*SalesEnquiriesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -532,78 +678,71 @@ func (x *SalesEnquiriesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-func (x *SalesEnquiriesServiceUpdateRequest) GetPriority() string {
-	if x != nil {
-		return x.Priority
-	}
-	return ""
-}
-
 func (x *SalesEnquiriesServiceUpdateRequest) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetMiscellaneousCost() uint64 {
-	if x != nil {
-		return x.MiscellaneousCost
+	if x != nil && x.MiscellaneousCost != nil {
+		return *x.MiscellaneousCost
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetOverallDiscount() uint64 {
-	if x != nil {
-		return x.OverallDiscount
+	if x != nil && x.OverallDiscount != nil {
+		return *x.OverallDiscount
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
@@ -615,14 +754,29 @@ func (x *SalesEnquiriesServiceUpdateRequest) GetFormData() []*FormFieldDatumCrea
 	return nil
 }
 
-// Stores the UUID references of the record
+// Represents the external-facing, unique identifiers (UUIDs) of a Sales Enquiry's core dependencies.
+// By exposing UUIDs instead of internal sequential integer IDs, this message allows
+// external clients and frontend applications to securely reference underlying entities
+// (such as clients, locations, and currencies) without risking data enumeration or leaking system architecture.
 type SalesEnquiryAncillaryParameters struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The UUID of the consignee client (the UUID of the associated consignee_client_id)
+	// @description The globally unique identifier (UUID) of the consignee client, correlating to the internal `consignee_client_id`.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	ConsigneeClientUuid string `protobuf:"bytes,212,opt,name=consignee_client_uuid,json=consigneeClientUuid,proto3" json:"consignee_client_uuid,omitempty"`
-	// The UUID of the buyer client (the UUID of the associated buyer_client_id)
+	// @description The globally unique identifier (UUID) of the buyer client, correlating to the internal `buyer_client_id`.
+	//
+	// @example "661f9511-f39c-42d5-b827-557766551111"
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	BuyerClientUuid string `protobuf:"bytes,213,opt,name=buyer_client_uuid,json=buyerClientUuid,proto3" json:"buyer_client_uuid,omitempty"`
-	// The UUID of the currency (the UUID of the associated currency)
+	// @description The globally unique identifier (UUID) of the associated currency, correlating to the internal `currency_id`.
+	//
+	// @example "883b1733-b51e-64f7-d049-779988773333"
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	CurrencyUuid  string `protobuf:"bytes,215,opt,name=currency_uuid,json=currencyUuid,proto3" json:"currency_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -679,7 +833,14 @@ func (x *SalesEnquiryAncillaryParameters) GetCurrencyUuid() string {
 	return ""
 }
 
-// Describes the parameters that are part of a standard response
+// Represents a complete Sales Enquiry entity within the system.
+// This message encapsulates the comprehensive state of an inbound lead or prospective customer request,
+// including identity metadata, prospective client mapping, preliminary financial aggregates,
+// approval lifecycle, audit history, and the complete collection of requested line items.
+//
+// **Note:** This payload is typically returned in read operations (e.g., View, Search)
+// and provides frontend clients or external CRMs with the entire context needed to review,
+// analyze, and ultimately convert the lead into a formal Sales Quotation or Sales Order.
 type SalesEnquiry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -710,29 +871,51 @@ type SalesEnquiry struct {
 	//
 	// @example "ABS-2023-X9Z2"
 	FinalRefNumber string `protobuf:"bytes,11,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the consignee
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
 	ConsigneeClientId uint64 `protobuf:"varint,12,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
 	BuyerClientId uint64 `protobuf:"varint,13,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The priority of the sales enquiry. Possible values are "low", "medium", "high".
-	Priority string `protobuf:"bytes,14,opt,name=priority,proto3" json:"priority,omitempty"`
-	// The ID of the currency
+	// @description The unique internal identifier of the currency associated with the enquiry, used to frame any prospective financial discussions or quotes.
+	//
+	// @example 3
 	CurrencyId uint64 `protobuf:"varint,15,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The description of the sales enquiry
+	// @description A textual summary detailing the specific products, services, or information the lead is requesting.
+	//
+	// @example "Looking for bulk pricing on industrial copper wiring"
 	Description string `protobuf:"bytes,16,opt,name=description,proto3" json:"description,omitempty"`
-	// The miscellaneous cost (in cents)
+	// @description Any additional miscellaneous costs (e.g., estimated handling or freight charges) tentatively associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1500
 	MiscellaneousCost uint64 `protobuf:"varint,17,opt,name=miscellaneous_cost,json=miscellaneousCost,proto3" json:"miscellaneous_cost,omitempty"`
-	// The overall discount (in cents)
+	// @description A flat target discount amount associated with the enquiry, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 500
 	OverallDiscount uint64 `protobuf:"varint,18,opt,name=overall_discount,json=overallDiscount,proto3" json:"overall_discount,omitempty"`
-	// The round off amount (in cents)
+	// @description The applicable rounding adjustment amount for prospective financial totals. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,19,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The number of times that the sales enquiry has been amended
+	// @description The number of times that this record has been amended after approval.
+	//
+	// @example 5
 	AmendmentCount uint64 `protobuf:"varint,20,opt,name=amendment_count,json=amendmentCount,proto3" json:"amendment_count,omitempty"`
-	// The list of associated sales enquiry items
+	// @description The complete, aggregated list of individual line items, products, or services that constitute this sales enquiry.
+	//
+	// @example []
+	//
+	// @format Repeated array of SalesEnquiryItem message blocks.
 	List []*SalesEnquiryItem `protobuf:"bytes,30,rep,name=list,proto3" json:"list,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData []*FormFieldDatum `protobuf:"bytes,40,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
-	// The total price of the sales enquiry
+	// @description The calculated grand total value of the sales enquiry, including all items, discounts, costs, and round-offs. Represented as a standard decimal value.
+	//
+	// @example 15250.75
+	//
+	// @format Double-precision floating-point number.
 	TotalPrice    float64 `protobuf:"fixed64,50,opt,name=total_price,json=totalPrice,proto3" json:"total_price,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -845,13 +1028,6 @@ func (x *SalesEnquiry) GetBuyerClientId() uint64 {
 	return 0
 }
 
-func (x *SalesEnquiry) GetPriority() string {
-	if x != nil {
-		return x.Priority
-	}
-	return ""
-}
-
 func (x *SalesEnquiry) GetCurrencyId() uint64 {
 	if x != nil {
 		return x.CurrencyId
@@ -915,31 +1091,124 @@ func (x *SalesEnquiry) GetTotalPrice() float64 {
 	return 0
 }
 
-// Describes the parameters required to add an item to a sales enquiry
+// Request message for appending a requested product or service line item to a Sales Enquiry.
+// This payload captures the prospect's preliminary interest, requested quantities, proposed pricing,
+// and delivery expectations before a formal quotation is generated.
+//
+// **Note:** During the initial enquiry phase, exact catalog matches might not be known;
+// therefore, the item is primarily identified by a free-text `name` rather than a strict product family ID.
 type SalesEnquiriesServiceItemCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales enquiry ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales enquiry to which this requested item will be attached.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesEnquiryId uint64 `protobuf:"varint,10,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// Stores the name of the item
+	// @mandatory
+	//
+	// @description The descriptive name of the requested product or service. Free-text is used here as the exact catalog item may not be definitively identified during the initial lead phase.
+	//
+	// @example "Industrial Copper Wiring - 12 AWG"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
-	// The quantity being offered (in cents)
+	// @mandatory
+	//
+	// @description The prospective quantity requested, represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// The ID of the associated unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) applicable to this requested item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The unit price
+	// @mandatory
+	//
+	// @description The proposed or target price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,14,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The discount percentage (in cents)
+	// @mandatory
+	//
+	// @description The proposed discount percentage applied to this specific item, represented in subunits (e.g., 1500 for 15.00%).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Discount uint64 `protobuf:"varint,15,opt,name=discount,proto3" json:"discount,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket tentatively applicable to this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,16,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The round off (in cents) (both positive and negative values are allowed)
-	RoundOff int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The delivery date
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @mandatory
+	//
+	// @description The specific prospective target delivery date requested or proposed for this line item.
+	//
+	// @example "2023-11-15"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string. Expected to follow the standard date format (e.g., YYYY-MM-DD).
 	DeliveryDate string `protobuf:"bytes,18,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
-	// The specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications requested by the prospect for this item.
+	//
+	// @example "Requires double-reinforced packaging for international transit."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -975,8 +1244,8 @@ func (*SalesEnquiriesServiceItemCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceItemCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1031,8 +1300,8 @@ func (x *SalesEnquiriesServiceItemCreateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *SalesEnquiriesServiceItemCreateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
@@ -1045,37 +1314,127 @@ func (x *SalesEnquiriesServiceItemCreateRequest) GetDeliveryDate() string {
 }
 
 func (x *SalesEnquiriesServiceItemCreateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters required to update an item in a sales enquiry
+// Request message for modifying the core parameters of an existing Sales Enquiry line item.
+// Supports updating requested quantities, proposed commercial terms, delivery dates, and specifications
+// as the lead is qualified and requirements become clearer.
 type SalesEnquiriesServiceItemUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Stores the name of the item
+	// @mandatory
+	//
+	// @description The descriptive name of the requested product or service. Free-text is used here as the exact catalog item may not be definitively identified during the initial lead phase.
+	//
+	// @example "Industrial Copper Wiring - 12 AWG"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
-	// The quantity being offered (in cents)
+	// @mandatory
+	//
+	// @description The prospective quantity requested, represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// The ID of the associated unit of material
+	// @mandatory
+	//
+	// @description The unique internal identifier of the Unit of Measure (UOM) applicable to this requested item.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The unit price
+	// @mandatory
+	//
+	// @description The proposed or target price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	UnitPrice uint64 `protobuf:"varint,14,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The discount percentage (in cents)
+	// @mandatory
+	//
+	// @description The proposed discount percentage applied to this specific item, represented in subunits (e.g., 1500 for 15.00%).
+	//
+	// @example 1500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Discount uint64 `protobuf:"varint,15,opt,name=discount,proto3" json:"discount,omitempty"`
-	// The ID of the associated tax group
+	// @mandatory
+	//
+	// @description The unique internal identifier of the tax group or tax bracket tentatively applicable to this specific line item.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,16,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The round off (in cents) (both positive and negative values are allowed)
-	RoundOff int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The delivery date
+	// @optional
+	//
+	// @description The applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
+	//
+	// @regex ^-?[0-9]+$
+	//
+	// @format Signed 64-bit integer.
+	RoundOff *int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3,oneof" json:"round_off,omitempty"`
+	// @mandatory
+	//
+	// @description The specific prospective target delivery date requested or proposed for this line item.
+	//
+	// @example "2023-11-15"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string. Expected to follow the standard date format (e.g., YYYY-MM-DD).
 	DeliveryDate string `protobuf:"bytes,18,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
-	// The specifications
-	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
+	// @optional
+	//
+	// @description Additional custom textual requirements, notes, or specifications requested by the prospect for this item.
+	//
+	// @example "Requires double-reinforced packaging for international transit."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	Specifications *string `protobuf:"bytes,19,opt,name=specifications,proto3,oneof" json:"specifications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1111,8 +1470,8 @@ func (*SalesEnquiriesServiceItemUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceItemUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -1167,8 +1526,8 @@ func (x *SalesEnquiriesServiceItemUpdateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *SalesEnquiriesServiceItemUpdateRequest) GetRoundOff() int64 {
-	if x != nil {
-		return x.RoundOff
+	if x != nil && x.RoundOff != nil {
+		return *x.RoundOff
 	}
 	return 0
 }
@@ -1181,13 +1540,20 @@ func (x *SalesEnquiriesServiceItemUpdateRequest) GetDeliveryDate() string {
 }
 
 func (x *SalesEnquiriesServiceItemUpdateRequest) GetSpecifications() string {
-	if x != nil {
-		return x.Specifications
+	if x != nil && x.Specifications != nil {
+		return *x.Specifications
 	}
 	return ""
 }
 
-// Describes the parameters that constitute an item associated to a sales enquiry
+// Represents a complete, finalized Sales Enquiry Item entity within the system.
+// This message encapsulates the comprehensive state of a single product or service requested by a prospect,
+// including its relationship to the parent enquiry, requested quantities, proposed commercial terms (pricing, taxes, discounts),
+// delivery expectations, and derived financial calculations.
+//
+// **Note:** This payload is utilized in read operations to provide clients and downstream systems
+// with the exact, immutable state of an individual line item during the lead qualification phase,
+// prior to its formal conversion into a quotation or order.
 type SalesEnquiryItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -1198,31 +1564,59 @@ type SalesEnquiryItem struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales enquiry ID
+	// @description The unique internal identifier of the parent sales enquiry to which this requested item will be attached.
+	//
+	// @example 1024
 	SalesEnquiryId uint64 `protobuf:"varint,10,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// Stores the name of the item
+	// @description The descriptive name of the requested product or service. Free-text is used here as the exact catalog item may not be definitively identified during the initial lead phase.
+	//
+	// @example "Industrial Copper Wiring - 12 AWG"
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
-	// The quantity being offered (in cents)
+	// @description The prospective quantity requested, represented in the system's internal base unit of measure. Stored in subunits (cents) to maintain fractional precision.
+	//
+	// @example 10000
 	InternalQuantity uint64 `protobuf:"varint,12,opt,name=internal_quantity,json=internalQuantity,proto3" json:"internal_quantity,omitempty"`
-	// The ID of the associated unit of material
+	// @description The unique internal identifier of the Unit of Measure (UOM) applicable to this requested item.
+	//
+	// @example 12
 	UomId uint64 `protobuf:"varint,13,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The unit price
+	// @description The proposed or target price per unit for this item, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2500
 	UnitPrice uint64 `protobuf:"varint,14,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
-	// The discount percentage (in cents)
+	// @description The proposed discount percentage applied to this specific item, represented in subunits (e.g., 1500 for 15.00%).
+	//
+	// @example 1500
 	Discount uint64 `protobuf:"varint,15,opt,name=discount,proto3" json:"discount,omitempty"`
-	// The ID of the associated tax group
+	// @description The unique internal identifier of the tax group or tax bracket tentatively applicable to this specific line item.
+	//
+	// @example 4
 	TaxGroupId uint64 `protobuf:"varint,16,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The round off (in cents)
+	// @description The applicable rounding adjustment amount for this specific item's financial total. Can be positive or negative, represented in the base currency subunit.
+	//
+	// @example -15
 	RoundOff int64 `protobuf:"varint,17,opt,name=round_off,json=roundOff,proto3" json:"round_off,omitempty"`
-	// The delivery date
+	// @description The specific prospective target delivery date requested or proposed for this line item.
+	//
+	// @example "2023-11-15"
 	DeliveryDate string `protobuf:"bytes,18,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
-	// The specifications
+	// @description Additional custom textual requirements, notes, or specifications requested by the prospect for this item.
+	//
+	// @example "Requires double-reinforced packaging for international transit."
 	Specifications string `protobuf:"bytes,19,opt,name=specifications,proto3" json:"specifications,omitempty"`
-	// Stores the unit price after factoring in the discount
+	// @description The system-calculated net proposed price per unit after the applied discount has been subtracted from the base unit price. Represented in the base currency subunit (e.g., cents).
+	//
+	// @example 2125
 	DiscountedUnitPrice uint64 `protobuf:"varint,30,opt,name=discounted_unit_price,json=discountedUnitPrice,proto3" json:"discounted_unit_price,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1370,10 +1764,10 @@ func (x *SalesEnquiryItem) GetDiscountedUnitPrice() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of sales enquiries
+// Container message for a collection of Sales Enquiry records.
 type SalesEnquiriesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Sales Enquiry records.
 	List          []*SalesEnquiry `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1416,10 +1810,10 @@ func (x *SalesEnquiriesList) GetList() []*SalesEnquiry {
 	return nil
 }
 
-// Describes the message consisting of the list of sales enquiry items
+// Container message for a collection of Sales Enquiry Item records.
 type SalesEnquiriesItemsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array of Sales Enquiry Item records.
 	List          []*SalesEnquiryItem `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1462,12 +1856,29 @@ func (x *SalesEnquiriesItemsList) GetList() []*SalesEnquiryItem {
 	return nil
 }
 
-// Describes the parameters that are required to retrieve the history of the record
+// Represents the request payload containing the parameter constraints required to
+// retrieve the historical audit trail and lifecycle changes of a specific sales enquiry item record.
 type SalesEnquiryItemHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the sales enquiry ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target sales enquiry associated with the historical record.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer greater than zero.
 	SalesEnquiryId uint64 `protobuf:"varint,10,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// Stores the name of the item
+	// @mandatory
+	//
+	// @description The exact descriptive name of the requested product or service. Because enquiry items are tracked via free-text names instead of strict catalog IDs, this string acts as the secondary identifier for fetching the specific item's historical audit trail.
+	//
+	// @example "Industrial Copper Wiring - 12 AWG"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
 	Name          string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1517,7 +1928,8 @@ func (x *SalesEnquiryItemHistoryRequest) GetName() string {
 	return ""
 }
 
-// Describes the request payload to retrieve approved or unapproved items.
+// Request payload structure used to search and filter Sales Enquiry Item records.
+// Supports pagination controls, tenancy isolation, status grouping, and text-based matching.
 type SalesEnquiryItemsSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1525,7 +1937,7 @@ type SalesEnquiryItemsSearchRequest struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1545,17 +1957,17 @@ type SalesEnquiryItemsSearchRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_ENQUIRY_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_ITEM_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_ENQUIRY_ITEM_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_ITEM_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1565,31 +1977,121 @@ type SalesEnquiryItemsSearchRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// The status of the items
-	Status SALES_ENQUIRY_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.SALES_ENQUIRY_ITEM_STATUS" json:"status,omitempty"`
-	// The start range of approved timestamp
-	ApprovedOnStart uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
-	// The end range of approved timestamp
-	ApprovedOnEnd uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
-	// The ID of the approver
-	ApprovedByUserId uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
-	// The role ID of the approver
-	ApproverRoleId uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// Stores the sales enquiry ID
-	SalesEnquiryId uint64 `protobuf:"varint,20,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// The ID of the unit of material
-	UomId uint64 `protobuf:"varint,21,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// The ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,22,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// The exact delivery date of the item in the sales enquiry
-	DeliveryDateExact string `protobuf:"bytes,28,opt,name=delivery_date_exact,json=deliveryDateExact,proto3" json:"delivery_date_exact,omitempty"`
-	// The start delivery date of the item in the sales enquiry
-	DeliveryDateStart string `protobuf:"bytes,29,opt,name=delivery_date_start,json=deliveryDateStart,proto3" json:"delivery_date_start,omitempty"`
-	// The end delivery date of the item in the sales enquiry
-	DeliveryDateEnd string `protobuf:"bytes,30,opt,name=delivery_date_end,json=deliveryDateEnd,proto3" json:"delivery_date_end,omitempty"`
-	// Describes the key with which the search operation needs to be performed
-	SearchKey     string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description The field used for sorting.
+	Status *SALES_ENQUIRY_ITEM_STATUS `protobuf:"varint,7,opt,name=status,proto3,enum=Scailo.SALES_ENQUIRY_ITEM_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or AFTER this UNIX timestamp.
+	//
+	// @example 1672531200
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnStart *uint64 `protobuf:"varint,10,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
+	// @optional
+	//
+	// @description Filter records approved ON or BEFORE this UNIX timestamp.
+	//
+	// @example 1704067199
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedOnEnd *uint64 `protobuf:"varint,11,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
+	// @optional
+	//
+	// @description Filter by the specific user ID who approved the records.
+	//
+	// @example 501
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApprovedByUserId *uint64 `protobuf:"varint,12,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the role ID of the approver.
+	//
+	// @example 5
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ApproverRoleId *uint64 `protobuf:"varint,13,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items belonging to a specific parent sales enquiry.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	SalesEnquiryId *uint64 `protobuf:"varint,20,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3,oneof" json:"sales_enquiry_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items requesting a specific Unit of Measure (UOM).
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	UomId *uint64 `protobuf:"varint,21,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items mapped to a specific tax group.
+	//
+	// @example 4
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	TaxGroupId *uint64 `protobuf:"varint,22,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description Filter line items scheduled for exact delivery on this specific date.
+	//
+	// @example "2023-11-15"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateExact *string `protobuf:"bytes,28,opt,name=delivery_date_exact,json=deliveryDateExact,proto3,oneof" json:"delivery_date_exact,omitempty"`
+	// @optional
+	//
+	// @description Filter line items scheduled for delivery ON or AFTER this specific date.
+	//
+	// @example "2023-11-01"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateStart *string `protobuf:"bytes,29,opt,name=delivery_date_start,json=deliveryDateStart,proto3,oneof" json:"delivery_date_start,omitempty"`
+	// @optional
+	//
+	// @description Filter line items scheduled for delivery ON or BEFORE this specific date.
+	//
+	// @example "2023-11-30"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateEnd *string `protobuf:"bytes,30,opt,name=delivery_date_end,json=deliveryDateEnd,proto3,oneof" json:"delivery_date_end,omitempty"`
+	// @optional
+	//
+	// @description The search string to match against reference IDs.
+	//
+	// @example "Medical 2023"
+	//
+	// @regex .*
+	//
+	// @format: May contain any UTF-8 characters.
+	SearchKey     *string `protobuf:"bytes,40,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1625,8 +2127,8 @@ func (*SalesEnquiryItemsSearchRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1639,118 +2141,119 @@ func (x *SalesEnquiryItemsSearchRequest) GetCount() int64 {
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetSortKey() SALES_ENQUIRY_ITEM_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_ENQUIRY_ITEM_SORT_KEY_SALES_ENQUIRY_ITEM_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetStatus() SALES_ENQUIRY_ITEM_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return SALES_ENQUIRY_ITEM_STATUS_SALES_ENQUIRY_ITEM_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetSalesEnquiryId() uint64 {
-	if x != nil {
-		return x.SalesEnquiryId
+	if x != nil && x.SalesEnquiryId != nil {
+		return *x.SalesEnquiryId
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetDeliveryDateExact() string {
-	if x != nil {
-		return x.DeliveryDateExact
+	if x != nil && x.DeliveryDateExact != nil {
+		return *x.DeliveryDateExact
 	}
 	return ""
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetDeliveryDateStart() string {
-	if x != nil {
-		return x.DeliveryDateStart
+	if x != nil && x.DeliveryDateStart != nil {
+		return *x.DeliveryDateStart
 	}
 	return ""
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetDeliveryDateEnd() string {
-	if x != nil {
-		return x.DeliveryDateEnd
+	if x != nil && x.DeliveryDateEnd != nil {
+		return *x.DeliveryDateEnd
 	}
 	return ""
 }
 
 func (x *SalesEnquiryItemsSearchRequest) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
-// Describes the response to a pagination items request
+// Paginated response packet containing a subset of Sales Enquiry Item records.
+// Includes complete operational state parameters for rendering frontend data grids and tables.
 type SalesEnquiriesServicePaginatedItemsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1829,7 +2332,7 @@ func (x *SalesEnquiriesServicePaginatedItemsResponse) GetPayload() []*SalesEnqui
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Sales Enquiry records.
 type SalesEnquiriesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1837,7 +2340,7 @@ type SalesEnquiriesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1857,19 +2360,23 @@ type SalesEnquiriesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this sales enquiry
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1905,8 +2412,8 @@ func (*SalesEnquiriesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1919,34 +2426,34 @@ func (x *SalesEnquiriesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *SalesEnquiriesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServicePaginationReq) GetSortKey() SALES_ENQUIRY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type SalesEnquiriesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -2025,7 +2532,12 @@ func (x *SalesEnquiriesServicePaginationResponse) GetPayload() []*SalesEnquiry {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating sales enquiries using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type SalesEnquiriesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2033,7 +2545,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2053,17 +2565,17 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2073,7 +2585,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2083,7 +2595,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2093,7 +2605,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2103,7 +2615,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2113,13 +2625,13 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2129,7 +2641,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2139,7 +2651,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2149,7 +2661,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2159,7 +2671,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2169,7 +2681,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2179,7 +2691,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2189,7 +2701,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2199,21 +2711,67 @@ type SalesEnquiriesServiceFilterReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the consignee
-	ConsigneeClientId uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
-	BuyerClientId uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The priority of the sales enquiry. Possible values are "low", "medium", "high".
-	Priority string `protobuf:"bytes,24,opt,name=priority,proto3" json:"priority,omitempty"`
-	// The ID of the currency
-	CurrencyId uint64 `protobuf:"varint,25,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The exact delivery date of the item in the sales enquiry
-	DeliveryDateExact string `protobuf:"bytes,41,opt,name=delivery_date_exact,json=deliveryDateExact,proto3" json:"delivery_date_exact,omitempty"`
-	// The start delivery date of the item in the sales enquiry
-	DeliveryDateStart string `protobuf:"bytes,42,opt,name=delivery_date_start,json=deliveryDateStart,proto3" json:"delivery_date_start,omitempty"`
-	// The end delivery date of the item in the sales enquiry
-	DeliveryDateEnd string `protobuf:"bytes,43,opt,name=delivery_date_end,json=deliveryDateEnd,proto3" json:"delivery_date_end,omitempty"`
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	ConsigneeClientId *uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BuyerClientId *uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency associated with the enquiry, used to frame any prospective financial discussions or quotes.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,25,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for exact delivery on this specific date.
+	//
+	// @example "2023-11-15"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateExact *string `protobuf:"bytes,41,opt,name=delivery_date_exact,json=deliveryDateExact,proto3,oneof" json:"delivery_date_exact,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for delivery ON or AFTER this specific date.
+	//
+	// @example "2023-11-01"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateStart *string `protobuf:"bytes,42,opt,name=delivery_date_start,json=deliveryDateStart,proto3,oneof" json:"delivery_date_start,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for delivery ON or BEFORE this specific date.
+	//
+	// @example "2023-11-30"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateEnd *string `protobuf:"bytes,43,opt,name=delivery_date_end,json=deliveryDateEnd,proto3,oneof" json:"delivery_date_end,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -2224,7 +2782,7 @@ type SalesEnquiriesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2260,8 +2818,8 @@ func (*SalesEnquiriesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2274,169 +2832,162 @@ func (x *SalesEnquiriesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetSortKey() SALES_ENQUIRY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-func (x *SalesEnquiriesServiceFilterReq) GetPriority() string {
-	if x != nil {
-		return x.Priority
-	}
-	return ""
-}
-
 func (x *SalesEnquiriesServiceFilterReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetDeliveryDateExact() string {
-	if x != nil {
-		return x.DeliveryDateExact
+	if x != nil && x.DeliveryDateExact != nil {
+		return *x.DeliveryDateExact
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetDeliveryDateStart() string {
-	if x != nil {
-		return x.DeliveryDateStart
+	if x != nil && x.DeliveryDateStart != nil {
+		return *x.DeliveryDateStart
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetDeliveryDateEnd() string {
-	if x != nil {
-		return x.DeliveryDateEnd
+	if x != nil && x.DeliveryDateEnd != nil {
+		return *x.DeliveryDateEnd
 	}
 	return ""
 }
@@ -2449,13 +3000,19 @@ func (x *SalesEnquiriesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRe
 }
 
 func (x *SalesEnquiriesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the base request payload of a count search
+// Target filter request for counting sales enquiry records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type SalesEnquiriesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2463,7 +3020,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -2473,7 +3030,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -2483,7 +3040,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -2493,7 +3050,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -2503,7 +3060,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2513,13 +3070,13 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or AFTER this UNIX timestamp.
@@ -2529,7 +3086,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -2539,7 +3096,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -2549,7 +3106,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -2559,7 +3116,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or AFTER this UNIX timestamp.
@@ -2569,7 +3126,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnStart uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3" json:"completed_on_start,omitempty"`
+	CompletedOnStart *uint64 `protobuf:"varint,15,opt,name=completed_on_start,json=completedOnStart,proto3,oneof" json:"completed_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records completed ON or BEFORE this UNIX timestamp.
@@ -2579,7 +3136,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CompletedOnEnd uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3" json:"completed_on_end,omitempty"`
+	CompletedOnEnd *uint64 `protobuf:"varint,16,opt,name=completed_on_end,json=completedOnEnd,proto3,oneof" json:"completed_on_end,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the user-defined reference ID.
@@ -2589,7 +3146,7 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	ReferenceId string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
+	ReferenceId *string `protobuf:"bytes,20,opt,name=reference_id,json=referenceId,proto3,oneof" json:"reference_id,omitempty"`
 	// @optional
 	//
 	// @description Fuzzy match for the system-generated ref number.
@@ -2599,22 +3156,70 @@ type SalesEnquiriesServiceCountReq struct {
 	// @regex [0-9A-Za-z ]*$
 	//
 	// @format: Alphanumeric characters and spaces only. Can be left empty.
-	FinalRefNumber string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3" json:"final_ref_number,omitempty"`
-	// The ID of the consignee
-	ConsigneeClientId uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
-	BuyerClientId uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
-	// The priority of the sales enquiry. Possible values are "low", "medium", "high".
-	Priority string `protobuf:"bytes,24,opt,name=priority,proto3" json:"priority,omitempty"`
-	// The ID of the currency
-	CurrencyId uint64 `protobuf:"varint,25,opt,name=currency_id,json=currencyId,proto3" json:"currency_id,omitempty"`
-	// The exact delivery date of the item in the sales enquiry
-	DeliveryDateExact string `protobuf:"bytes,41,opt,name=delivery_date_exact,json=deliveryDateExact,proto3" json:"delivery_date_exact,omitempty"`
-	// The start delivery date of the item in the sales enquiry
-	DeliveryDateStart string `protobuf:"bytes,42,opt,name=delivery_date_start,json=deliveryDateStart,proto3" json:"delivery_date_start,omitempty"`
-	// The end delivery date of the item in the sales enquiry
-	DeliveryDateEnd string `protobuf:"bytes,43,opt,name=delivery_date_end,json=deliveryDateEnd,proto3" json:"delivery_date_end,omitempty"`
-	// The list of form data filters
+	FinalRefNumber *string `protobuf:"bytes,21,opt,name=final_ref_number,json=finalRefNumber,proto3,oneof" json:"final_ref_number,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	ConsigneeClientId *uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BuyerClientId *uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the currency associated with the enquiry, used to frame any prospective financial discussions or quotes.
+	//
+	// @example 3
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	CurrencyId *uint64 `protobuf:"varint,25,opt,name=currency_id,json=currencyId,proto3,oneof" json:"currency_id,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for exact delivery on this specific date.
+	//
+	// @example "2023-11-15"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateExact *string `protobuf:"bytes,41,opt,name=delivery_date_exact,json=deliveryDateExact,proto3,oneof" json:"delivery_date_exact,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for delivery ON or AFTER this specific date.
+	//
+	// @example "2023-11-01"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateStart *string `protobuf:"bytes,42,opt,name=delivery_date_start,json=deliveryDateStart,proto3,oneof" json:"delivery_date_start,omitempty"`
+	// @optional
+	//
+	// @description Filter sales enquiries containing line items scheduled for delivery ON or BEFORE this specific date.
+	//
+	// @example "2023-11-30"
+	//
+	// @regex .*
+	//
+	// @format String following the standard date format (e.g., YYYY-MM-DD).
+	DeliveryDateEnd *string `protobuf:"bytes,43,opt,name=delivery_date_end,json=deliveryDateEnd,proto3,oneof" json:"delivery_date_end,omitempty"`
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2651,155 +3256,148 @@ func (*SalesEnquiriesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetCompletedOnStart() uint64 {
-	if x != nil {
-		return x.CompletedOnStart
+	if x != nil && x.CompletedOnStart != nil {
+		return *x.CompletedOnStart
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetCompletedOnEnd() uint64 {
-	if x != nil {
-		return x.CompletedOnEnd
+	if x != nil && x.CompletedOnEnd != nil {
+		return *x.CompletedOnEnd
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
+	if x != nil && x.ReferenceId != nil {
+		return *x.ReferenceId
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetFinalRefNumber() string {
-	if x != nil {
-		return x.FinalRefNumber
+	if x != nil && x.FinalRefNumber != nil {
+		return *x.FinalRefNumber
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-func (x *SalesEnquiriesServiceCountReq) GetPriority() string {
-	if x != nil {
-		return x.Priority
-	}
-	return ""
-}
-
 func (x *SalesEnquiriesServiceCountReq) GetCurrencyId() uint64 {
-	if x != nil {
-		return x.CurrencyId
+	if x != nil && x.CurrencyId != nil {
+		return *x.CurrencyId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetDeliveryDateExact() string {
-	if x != nil {
-		return x.DeliveryDateExact
+	if x != nil && x.DeliveryDateExact != nil {
+		return *x.DeliveryDateExact
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetDeliveryDateStart() string {
-	if x != nil {
-		return x.DeliveryDateStart
+	if x != nil && x.DeliveryDateStart != nil {
+		return *x.DeliveryDateStart
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceCountReq) GetDeliveryDateEnd() string {
-	if x != nil {
-		return x.DeliveryDateEnd
+	if x != nil && x.DeliveryDateEnd != nil {
+		return *x.DeliveryDateEnd
 	}
 	return ""
 }
@@ -2811,7 +3409,13 @@ func (x *SalesEnquiriesServiceCountReq) GetFormData() []*FormFieldDatumFilterReq
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating sales enquiries via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type SalesEnquiriesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2819,7 +3423,7 @@ type SalesEnquiriesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2839,17 +3443,17 @@ type SalesEnquiriesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *SALES_ENQUIRY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.SALES_ENQUIRY_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2859,13 +3463,13 @@ type SalesEnquiriesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	// @mandatory
 	//
 	// @description The search string to match against reference IDs.
@@ -2875,11 +3479,27 @@ type SalesEnquiriesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The ID of the consignee
-	ConsigneeClientId uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3" json:"consignee_client_id,omitempty"`
-	// The ID of the buyer
-	BuyerClientId uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3" json:"buyer_client_id,omitempty"`
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective consignee client (the entity inquiring about receiving the goods or services).
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	ConsigneeClientId *uint64 `protobuf:"varint,22,opt,name=consignee_client_id,json=consigneeClientId,proto3,oneof" json:"consignee_client_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the prospective buyer client (the entity that would be financially responsible for the requested order).
+	//
+	// @example 1051
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	BuyerClientId *uint64 `protobuf:"varint,23,opt,name=buyer_client_id,json=buyerClientId,proto3,oneof" json:"buyer_client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2915,8 +3535,8 @@ func (*SalesEnquiriesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2929,69 +3549,95 @@ func (x *SalesEnquiriesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetSortKey() SALES_ENQUIRY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return SALES_ENQUIRY_SORT_KEY_SALES_ENQUIRY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetConsigneeClientId() uint64 {
-	if x != nil {
-		return x.ConsigneeClientId
+	if x != nil && x.ConsigneeClientId != nil {
+		return *x.ConsigneeClientId
 	}
 	return 0
 }
 
 func (x *SalesEnquiriesServiceSearchAllReq) GetBuyerClientId() uint64 {
-	if x != nil {
-		return x.BuyerClientId
+	if x != nil && x.BuyerClientId != nil {
+		return *x.BuyerClientId
 	}
 	return 0
 }
 
-// Describes the parameters necessary to create a sales enquiry contact
+// Request message for assigning a specific contact person (associate) to a Sales Enquiry.
+// This operation creates a linkage between the enquiry and a designated individual belonging
+// to the customer, explicitly identifying who is in charge of or accountable for the sales enquiry from the client's side.
 type SalesEnquiriesServiceContactCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales enquiry ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the parent sales enquiry to which this contact is being assigned.
+	//
+	// @example 1024
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SalesEnquiryId uint64 `protobuf:"varint,10,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// Stores the associate ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the associate being assigned to the enquiry.
+	//
+	// @example 55
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	AssociateId   uint64 `protobuf:"varint,11,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3028,8 +3674,8 @@ func (*SalesEnquiriesServiceContactCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *SalesEnquiriesServiceContactCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3048,7 +3694,10 @@ func (x *SalesEnquiriesServiceContactCreateRequest) GetAssociateId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a sales enquiry contact
+// Represents the finalized state of a Sales Enquiry Contact mapping.
+// This entity securely binds a designated associate (the client's point of contact)
+// to the parent enquiry, tracking accountability, approval workflows, and providing
+// both internal IDs and unpredictable UUIDs for secure downstream referencing.
 type SalesEnquiryContact struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -3059,15 +3708,29 @@ type SalesEnquiryContact struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "Assigned primary warehouse manager as the main contact."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the sales enquiry ID
+	// @description The unique internal identifier of the parent sales enquiry to which this contact belongs.
+	//
+	// @example 1024
 	SalesEnquiryId uint64 `protobuf:"varint,10,opt,name=sales_enquiry_id,json=salesEnquiryId,proto3" json:"sales_enquiry_id,omitempty"`
-	// Stores the associate ID
+	// @description The unique internal identifier of the associate acting as the point of contact.
+	//
+	// @example 55
 	AssociateId uint64 `protobuf:"varint,11,opt,name=associate_id,json=associateId,proto3" json:"associate_id,omitempty"`
-	// Stores the UUID of the associate
+	// @description The globally unique identifier (UUID) of the associate, used for secure external referencing without exposing sequential internal IDs.
+	//
+	// @example "661f9511-f39c-42d5-b827-557766551111"
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	AssociateUuid string `protobuf:"bytes,211,opt,name=associate_uuid,json=associateUuid,proto3" json:"associate_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3159,10 +3822,14 @@ func (x *SalesEnquiryContact) GetAssociateUuid() string {
 	return ""
 }
 
-// Describes the message consisting of the list of sales enquiry contacts
+// Represents a consolidated collection of designated contacts mapped to a Sales Enquiry.
 type SalesEnquiryContactsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the individual associate contact records linked to the enquiry.
+	//
+	// @example []
+	//
+	// @format Repeated array of SalesEnquiryContact message blocks.
 	List          []*SalesEnquiryContact `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3209,45 +3876,64 @@ var File_sales_enquiries_scailo_proto protoreflect.FileDescriptor
 
 const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\n" +
-	"\x1csales_enquiries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\xa3\x05\n" +
-	"\"SalesEnquiriesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"\x1csales_enquiries.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x18magic_links.scailo.proto\x1a\x1avault_folders.scailo.proto\"\x8d\x06\n" +
+	"\"SalesEnquiriesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x128\n" +
 	"\freference_id\x18\n" +
 	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x127\n" +
 	"\x13consignee_client_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x11consigneeClientId\x12/\n" +
-	"\x0fbuyer_client_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\rbuyerClientId\x126\n" +
-	"\bpriority\x18\x0e \x01(\tB\x1a\xbaH\x17r\x15R\x00R\x03lowR\x06mediumR\x04highR\bpriority\x12(\n" +
+	"\x0fbuyer_client_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\rbuyerClientId\x12(\n" +
 	"\vcurrency_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x127\n" +
-	"\vdescription\x18\x10 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$R\vdescription\x126\n" +
-	"\x12miscellaneous_cost\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x13 \x01(\x03R\broundOff\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xbe\x05\n" +
-	"\"SalesEnquiriesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x128\n" +
+	"currencyId\x12<\n" +
+	"\vdescription\x18\x10 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$H\x03R\vdescription\x88\x01\x01\x12;\n" +
+	"\x12miscellaneous_cost\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00H\x05R\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x13 \x01(\x03H\x06R\broundOff\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x0e\n" +
+	"\f_descriptionB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_off\"\x8a\a\n" +
+	"\"SalesEnquiriesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12=\n" +
 	"\freference_id\x18\n" +
-	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$R\vreferenceId\x127\n" +
-	"\x13consignee_client_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x11consigneeClientId\x12/\n" +
-	"\x0fbuyer_client_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\rbuyerClientId\x126\n" +
-	"\bpriority\x18\x0e \x01(\tB\x1a\xbaH\x17r\x15R\x00R\x03lowR\x06mediumR\x04highR\bpriority\x12(\n" +
-	"\vcurrency_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"currencyId\x127\n" +
-	"\vdescription\x18\x10 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$R\vdescription\x126\n" +
-	"\x12miscellaneous_cost\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00R\x11miscellaneousCost\x122\n" +
-	"\x10overall_discount\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0foverallDiscount\x12\x1b\n" +
-	"\tround_off\x18\x13 \x01(\x03R\broundOff\x12@\n" +
-	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xa9\x01\n" +
+	" \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]+$H\x03R\vreferenceId\x88\x01\x01\x12<\n" +
+	"\x13consignee_client_id\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00H\x04R\x11consigneeClientId\x88\x01\x01\x124\n" +
+	"\x0fbuyer_client_id\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00H\x05R\rbuyerClientId\x88\x01\x01\x12-\n" +
+	"\vcurrency_id\x18\x0f \x01(\x04B\a\xbaH\x042\x02 \x00H\x06R\n" +
+	"currencyId\x88\x01\x01\x12<\n" +
+	"\vdescription\x18\x10 \x01(\tB\x15\xbaH\x12r\x102\x0e[0-9A-Za-z ]*$H\aR\vdescription\x88\x01\x01\x12;\n" +
+	"\x12miscellaneous_cost\x18\x11 \x01(\x04B\a\xbaH\x042\x02(\x00H\bR\x11miscellaneousCost\x88\x01\x01\x127\n" +
+	"\x10overall_discount\x18\x12 \x01(\x04B\a\xbaH\x042\x02(\x00H\tR\x0foverallDiscount\x88\x01\x01\x12 \n" +
+	"\tround_off\x18\x13 \x01(\x03H\n" +
+	"R\broundOff\x88\x01\x01\x12@\n" +
+	"\tform_data\x18\x1e \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\x0f\n" +
+	"\r_reference_idB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\x0e\n" +
+	"\f_currency_idB\x0e\n" +
+	"\f_descriptionB\x15\n" +
+	"\x13_miscellaneous_costB\x13\n" +
+	"\x11_overall_discountB\f\n" +
+	"\n" +
+	"_round_off\"\xa9\x01\n" +
 	"\x1fSalesEnquiryAncillaryParameters\x123\n" +
 	"\x15consignee_client_uuid\x18\xd4\x01 \x01(\tR\x13consigneeClientUuid\x12+\n" +
 	"\x11buyer_client_uuid\x18\xd5\x01 \x01(\tR\x0fbuyerClientUuid\x12$\n" +
-	"\rcurrency_uuid\x18\xd7\x01 \x01(\tR\fcurrencyUuid\"\x8c\a\n" +
+	"\rcurrency_uuid\x18\xd7\x01 \x01(\tR\fcurrencyUuid\"\xf0\x06\n" +
 	"\fSalesEnquiry\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3261,8 +3947,7 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	" \x01(\tR\vreferenceId\x12(\n" +
 	"\x10final_ref_number\x18\v \x01(\tR\x0efinalRefNumber\x12.\n" +
 	"\x13consignee_client_id\x18\f \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18\r \x01(\x04R\rbuyerClientId\x12\x1a\n" +
-	"\bpriority\x18\x0e \x01(\tR\bpriority\x12\x1f\n" +
+	"\x0fbuyer_client_id\x18\r \x01(\x04R\rbuyerClientId\x12\x1f\n" +
 	"\vcurrency_id\x18\x0f \x01(\x04R\n" +
 	"currencyId\x12 \n" +
 	"\vdescription\x18\x10 \x01(\tR\vdescription\x12-\n" +
@@ -3273,9 +3958,9 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x04list\x18\x1e \x03(\v2\x18.Scailo.SalesEnquiryItemR\x04list\x123\n" +
 	"\tform_data\x18( \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\x12\x1f\n" +
 	"\vtotal_price\x182 \x01(\x01R\n" +
-	"totalPrice\"\xdc\x03\n" +
-	"&SalesEnquiriesServiceItemCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
+	"totalPrice\"\x9d\x04\n" +
+	"&SalesEnquiriesServiceItemCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x121\n" +
 	"\x10sales_enquiry_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesEnquiryId\x12\x1b\n" +
 	"\x04name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x124\n" +
@@ -3285,12 +3970,16 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"unit_price\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12#\n" +
 	"\bdiscount\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12)\n" +
 	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x11 \x01(\x03R\broundOff\x12,\n" +
-	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xc2\x03\n" +
-	"&SalesEnquiriesServiceItemUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x11 \x01(\x03H\x01R\broundOff\x88\x01\x01\x12,\n" +
+	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x02R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\x83\x04\n" +
+	"&SalesEnquiriesServiceItemUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
 	"\x04name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x124\n" +
 	"\x11internal_quantity\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x10internalQuantity\x12\x1e\n" +
@@ -3299,10 +3988,14 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"unit_price\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00R\tunitPrice\x12#\n" +
 	"\bdiscount\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\bdiscount\x12)\n" +
 	"\ftax_group_id\x18\x10 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1b\n" +
-	"\tround_off\x18\x11 \x01(\x03R\broundOff\x12,\n" +
-	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12&\n" +
-	"\x0especifications\x18\x13 \x01(\tR\x0especifications\"\xf5\x04\n" +
+	"taxGroupId\x12 \n" +
+	"\tround_off\x18\x11 \x01(\x03H\x01R\broundOff\x88\x01\x01\x12,\n" +
+	"\rdelivery_date\x18\x12 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fdeliveryDate\x12+\n" +
+	"\x0especifications\x18\x13 \x01(\tH\x02R\x0especifications\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\f\n" +
+	"\n" +
+	"_round_offB\x11\n" +
+	"\x0f_specifications\"\xf5\x04\n" +
 	"\x10SalesEnquiryItem\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3331,130 +4024,213 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x1eSalesEnquiryItemHistoryRequest\x121\n" +
 	"\x10sales_enquiry_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesEnquiryId\x12\x1b\n" +
-	"\x04name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\xa5\x06\n" +
-	"\x1eSalesEnquiryItemsSearchRequest\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\xa7\t\n" +
+	"\x1eSalesEnquiryItemsSearchRequest\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x12>\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2#.Scailo.SALES_ENQUIRY_ITEM_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\a \x01(\x0e2!.Scailo.SALES_ENQUIRY_ITEM_STATUSR\x06status\x12*\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12C\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2#.Scailo.SALES_ENQUIRY_ITEM_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\a \x01(\x0e2!.Scailo.SALES_ENQUIRY_ITEM_STATUSH\x05R\x06status\x88\x01\x01\x12/\n" +
 	"\x11approved_on_start\x18\n" +
-	" \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\v \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\f \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\r \x01(\x04R\x0eapproverRoleId\x12(\n" +
-	"\x10sales_enquiry_id\x18\x14 \x01(\x04R\x0esalesEnquiryId\x12\x15\n" +
-	"\x06uom_id\x18\x15 \x01(\x04R\x05uomId\x12 \n" +
-	"\ftax_group_id\x18\x16 \x01(\x04R\n" +
-	"taxGroupId\x12.\n" +
-	"\x13delivery_date_exact\x18\x1c \x01(\tR\x11deliveryDateExact\x12.\n" +
-	"\x13delivery_date_start\x18\x1d \x01(\tR\x11deliveryDateStart\x12*\n" +
-	"\x11delivery_date_end\x18\x1e \x01(\tR\x0fdeliveryDateEnd\x12\x1d\n" +
+	" \x01(\x04H\x06R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\v \x01(\x04H\aR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\f \x01(\x04H\bR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\r \x01(\x04H\tR\x0eapproverRoleId\x88\x01\x01\x12-\n" +
+	"\x10sales_enquiry_id\x18\x14 \x01(\x04H\n" +
+	"R\x0esalesEnquiryId\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\x15 \x01(\x04H\vR\x05uomId\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18\x16 \x01(\x04H\fR\n" +
+	"taxGroupId\x88\x01\x01\x123\n" +
+	"\x13delivery_date_exact\x18\x1c \x01(\tH\rR\x11deliveryDateExact\x88\x01\x01\x123\n" +
+	"\x13delivery_date_start\x18\x1d \x01(\tH\x0eR\x11deliveryDateStart\x88\x01\x01\x12/\n" +
+	"\x11delivery_date_end\x18\x1e \x01(\tH\x0fR\x0fdeliveryDateEnd\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"search_key\x18( \x01(\tR\tsearchKey\"\xa5\x01\n" +
+	"search_key\x18( \x01(\tH\x10R\tsearchKey\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x13\n" +
+	"\x11_sales_enquiry_idB\t\n" +
+	"\a_uom_idB\x0f\n" +
+	"\r_tax_group_idB\x16\n" +
+	"\x14_delivery_date_exactB\x16\n" +
+	"\x14_delivery_date_startB\x14\n" +
+	"\x12_delivery_date_endB\r\n" +
+	"\v_search_key\"\xa5\x01\n" +
 	"+SalesEnquiriesServicePaginatedItemsResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x122\n" +
-	"\apayload\x18\x04 \x03(\v2\x18.Scailo.SalesEnquiryItemR\apayload\"\xbf\x02\n" +
-	"\"SalesEnquiriesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x18.Scailo.SalesEnquiryItemR\apayload\"\x98\x03\n" +
+	"\"SalesEnquiriesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x9d\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x9d\x01\n" +
 	"'SalesEnquiriesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12.\n" +
-	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesEnquiryR\apayload\"\xb8\n" +
+	"\apayload\x18\x04 \x03(\v2\x14.Scailo.SalesEnquiryR\apayload\"\xa2\x0f\n" +
+	"\x1eSalesEnquiriesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"\x1eSalesEnquiriesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
-	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12.\n" +
-	"\x13consignee_client_id\x18\x16 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18\x17 \x01(\x04R\rbuyerClientId\x12\x1a\n" +
-	"\bpriority\x18\x18 \x01(\tR\bpriority\x12\x1f\n" +
-	"\vcurrency_id\x18\x19 \x01(\x04R\n" +
-	"currencyId\x12.\n" +
-	"\x13delivery_date_exact\x18) \x01(\tR\x11deliveryDateExact\x12.\n" +
-	"\x13delivery_date_start\x18* \x01(\tR\x11deliveryDateStart\x12*\n" +
-	"\x11delivery_date_end\x18+ \x01(\tR\x0fdeliveryDateEnd\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\xd3\b\n" +
-	"\x1dSalesEnquiriesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12,\n" +
-	"\x12completed_on_start\x18\x0f \x01(\x04R\x10completedOnStart\x12(\n" +
-	"\x10completed_on_end\x18\x10 \x01(\x04R\x0ecompletedOnEnd\x12!\n" +
-	"\freference_id\x18\x14 \x01(\tR\vreferenceId\x12(\n" +
-	"\x10final_ref_number\x18\x15 \x01(\tR\x0efinalRefNumber\x12.\n" +
-	"\x13consignee_client_id\x18\x16 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18\x17 \x01(\x04R\rbuyerClientId\x12\x1a\n" +
-	"\bpriority\x18\x18 \x01(\tR\bpriority\x12\x1f\n" +
-	"\vcurrency_id\x18\x19 \x01(\x04R\n" +
-	"currencyId\x12.\n" +
-	"\x13delivery_date_exact\x18) \x01(\tR\x11deliveryDateExact\x12.\n" +
-	"\x13delivery_date_start\x18* \x01(\tR\x11deliveryDateStart\x12*\n" +
-	"\x11delivery_date_end\x18+ \x01(\tR\x0fdeliveryDateEnd\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\xdf\x03\n" +
-	"!SalesEnquiriesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\x0eR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\x0fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\x10R\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x11R\x0efinalRefNumber\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x18\x16 \x01(\x04H\x12R\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x18\x17 \x01(\x04H\x13R\rbuyerClientId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x19 \x01(\x04H\x14R\n" +
+	"currencyId\x88\x01\x01\x123\n" +
+	"\x13delivery_date_exact\x18) \x01(\tH\x15R\x11deliveryDateExact\x88\x01\x01\x123\n" +
+	"\x13delivery_date_start\x18* \x01(\tH\x16R\x11deliveryDateStart\x88\x01\x01\x12/\n" +
+	"\x11delivery_date_end\x18+ \x01(\tH\x17R\x0fdeliveryDateEnd\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x18R\x0fincludeFormData\x88\x01\x01B\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x129\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\x0e\n" +
+	"\f_currency_idB\x16\n" +
+	"\x14_delivery_date_exactB\x16\n" +
+	"\x14_delivery_date_startB\x14\n" +
+	"\x12_delivery_date_endB\x14\n" +
+	"\x12_include_form_data\"\xec\f\n" +
+	"\x1dSalesEnquiriesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12\x1d\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x121\n" +
+	"\x12completed_on_start\x18\x0f \x01(\x04H\vR\x10completedOnStart\x88\x01\x01\x12-\n" +
+	"\x10completed_on_end\x18\x10 \x01(\x04H\fR\x0ecompletedOnEnd\x88\x01\x01\x12&\n" +
+	"\freference_id\x18\x14 \x01(\tH\rR\vreferenceId\x88\x01\x01\x12-\n" +
+	"\x10final_ref_number\x18\x15 \x01(\tH\x0eR\x0efinalRefNumber\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x18\x16 \x01(\x04H\x0fR\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x18\x17 \x01(\x04H\x10R\rbuyerClientId\x88\x01\x01\x12$\n" +
+	"\vcurrency_id\x18\x19 \x01(\x04H\x11R\n" +
+	"currencyId\x88\x01\x01\x123\n" +
+	"\x13delivery_date_exact\x18) \x01(\tH\x12R\x11deliveryDateExact\x88\x01\x01\x123\n" +
+	"\x13delivery_date_start\x18* \x01(\tH\x13R\x11deliveryDateStart\x88\x01\x01\x12/\n" +
+	"\x11delivery_date_end\x18+ \x01(\tH\x14R\x0fdeliveryDateEnd\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x12.\n" +
-	"\x13consignee_client_id\x18\x16 \x01(\x04R\x11consigneeClientId\x12&\n" +
-	"\x0fbuyer_client_id\x18\x17 \x01(\x04R\rbuyerClientId\"\xad\x01\n" +
-	")SalesEnquiriesServiceContactCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x121\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\x15\n" +
+	"\x13_completed_on_startB\x13\n" +
+	"\x11_completed_on_endB\x0f\n" +
+	"\r_reference_idB\x13\n" +
+	"\x11_final_ref_numberB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_idB\x0e\n" +
+	"\f_currency_idB\x16\n" +
+	"\x14_delivery_date_exactB\x16\n" +
+	"\x14_delivery_date_startB\x14\n" +
+	"\x12_delivery_date_end\"\x97\x05\n" +
+	"!SalesEnquiriesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x12>\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x1e.Scailo.SALES_ENQUIRY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x123\n" +
+	"\x13consignee_client_id\x18\x16 \x01(\x04H\aR\x11consigneeClientId\x88\x01\x01\x12+\n" +
+	"\x0fbuyer_client_id\x18\x17 \x01(\x04H\bR\rbuyerClientId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\x16\n" +
+	"\x14_consignee_client_idB\x12\n" +
+	"\x10_buyer_client_id\"\xc3\x01\n" +
+	")SalesEnquiriesServiceContactCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x121\n" +
 	"\x10sales_enquiry_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esalesEnquiryId\x12*\n" +
-	"\fassociate_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\vassociateId\"\xf0\x02\n" +
+	"\fassociate_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\vassociateIdB\x0f\n" +
+	"\r_user_comment\"\xf0\x02\n" +
 	"\x13SalesEnquiryContact\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3484,7 +4260,7 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x19SALES_ENQUIRY_ITEM_STATUS\x12-\n" +
 	")SALES_ENQUIRY_ITEM_STATUS_ANY_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"SALES_ENQUIRY_ITEM_STATUS_APPROVED\x10\x01\x12(\n" +
-	"$SALES_ENQUIRY_ITEM_STATUS_UNAPPROVED\x10\x02*\xbb\x04\n" +
+	"$SALES_ENQUIRY_ITEM_STATUS_UNAPPROVED\x10\x02*\x96\x04\n" +
 	"\x16SALES_ENQUIRY_SORT_KEY\x12)\n" +
 	"%SALES_ENQUIRY_SORT_KEY_ID_UNSPECIFIED\x10\x00\x12%\n" +
 	"!SALES_ENQUIRY_SORT_KEY_CREATED_AT\x10\x01\x12&\n" +
@@ -3497,8 +4273,7 @@ const file_sales_enquiries_scailo_proto_rawDesc = "" +
 	"\x12+\n" +
 	"'SALES_ENQUIRY_SORT_KEY_FINAL_REF_NUMBER\x10\v\x12.\n" +
 	"*SALES_ENQUIRY_SORT_KEY_CONSIGNEE_CLIENT_ID\x10\f\x12*\n" +
-	"&SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID\x10\r\x12#\n" +
-	"\x1fSALES_ENQUIRY_SORT_KEY_PRIORITY\x10\x0e\x12*\n" +
+	"&SALES_ENQUIRY_SORT_KEY_BUYER_CLIENT_ID\x10\r\x12*\n" +
 	"&SALES_ENQUIRY_SORT_KEY_AMENDMENT_COUNT\x10\x0f2\x88&\n" +
 	"\x15SalesEnquiriesService\x12P\n" +
 	"\x06Create\x12*.Scailo.SalesEnquiriesServiceCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
@@ -3805,6 +4580,16 @@ func file_sales_enquiries_scailo_proto_init() {
 	file_forms_fields_data_scailo_proto_init()
 	file_magic_links_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_sales_enquiries_scailo_proto_msgTypes[0].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[4].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[5].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[10].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[12].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[14].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[15].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[16].OneofWrappers = []any{}
+	file_sales_enquiries_scailo_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -99,9 +99,37 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Describes the common methods applicable on each sales order
+// Core service for managing the complete operational and approval lifecycle of Sales Orders.
+//
+// A Sales Order represents a formally negotiated agreement between the organization and a buyer
+// for the sale of specific goods or services. As the foundational document in the sales pipeline,
+// it acts as the authoritative source of truth for negotiated pricing, requested quantities,
+// client specifications, and overall commercial terms.
+//
+// **Lifecycle & Workflow:**
+// This service strictly enforces the state machine of a Sales Order:
+// - **Drafting:** Creating initial drafts with relaxed validation to allow iterative data entry.
+// - **Verification:** Submitting the order through internal review gates to ensure technical and commercial accuracy.
+// - **Approval:** Finalizing the order into a `STANDING` state, legally locking in the commercial terms and generating the final reference number.
+//
+// **Downstream Impact:**
+// Once a Sales Order reaches the approved (`STANDING`) state, it unlocks downstream workflows—authorizing
+// warehouse teams to physically fulfill the order (Goods Dispatches) and finance teams to generate preliminary
+// or finalized billing documents (Proforma and Sales Invoices) against the constrained quantities.
 type SalesOrdersServiceClient interface {
-	// Create and send for verification
+	// Creates a new record and immediately moves it to the verification workflow.
+	//
+	// This method validates all required fields.
+	// The record is created with a `STANDARD_LIFECYCLE_STATUS.PREVERIFY` status.
+	//
+	// **Side Effects:**
+	// - Generates a unique system UUID.
+	// - Records an audit log for the "Create" action.
+	// - May trigger automated verification workflows.
+	//
+	// **Errors:**
+	// - `INVALID_ARGUMENT`: If validation rules fail (e.g., negative quantity, invalid timestamps).
+	// - `ALREADY_EXISTS`: If the `reference_id` is already taken.
 	Create(ctx context.Context, in *SalesOrdersServiceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Saves a new record as a draft without triggering side effects.
 	//
@@ -186,13 +214,29 @@ type SalesOrdersServiceClient interface {
 	// **Side Effects:**
 	// - Locks the record from further modification.
 	Complete(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Repeat
+	// Duplicates an existing operational record (e.g., an order, schedule, or requisition) to create a new, distinct entity with a specified delivery date.
+	//
+	// **Side Effects:**
+	// - Provisions a completely new record that inherits the core attributes, line items, and configurations of the source record identified by the UUID.
+	// - Overrides the original delivery schedule with the newly provided `delivery_date` and assigns the newly provided external `reference_id`.
+	// - Appends an audit trail entry linking the new record to its original source, tracking the duplication event and justification comment.
+	// - Returns the internal identifier and UUID of the newly generated record.
 	Repeat(ctx context.Context, in *RepeatWithDeliveryDate, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reopen
+	// Reopens a finalized or closed record for further modifications.
+	//
+	// **Status Transition:** -> `REVISION`
+	//
+	// **Side Effects:**
+	// - Unlocks the record to allow edits.
+	// - Logs the required user comment into the audit trail for compliance tracking.
 	Reopen(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Adds an audit comment to the record's history without changing its current lifecycle status.
 	CommentAdd(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Send Email
+	// Triggers an automated email notification related to the record.
+	//
+	// **Side Effects:**
+	// - Dispatches a structured email to the designated recipients based on the provided attributes.
+	// - Appends an entry to the system communication logs for auditing purposes.
 	SendEmail(ctx context.Context, in *IdentifierWithEmailAttributes, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Attaches a specified folder directly to a record without requiring a full revision workflow.
 	//
@@ -205,78 +249,191 @@ type SalesOrdersServiceClient interface {
 	// * The record's modification timestamp is automatically updated to the current time.
 	// * An entry is appended to the record's audit log tracking this attachment.
 	AttachVaultFolder(ctx context.Context, in *VaultFolderAttachRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Autofill the sales order
+	// Automatically populates a record with line items and configurations derived from its linked references.
+	//
+	// **Side Effects:**
+	// - Queries the target record (identified by its UUID) for any attached operational constraints or references.
+	// - Dynamically generates and attaches the corresponding line items to the record based on the sourced data, minimizing manual data entry.
+	// - Appends an audit trail entry tracking the execution of the autofill operation and the provided justification comment.
 	Autofill(ctx context.Context, in *SalesOrdersServiceAutofillRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Amend the sales order and send for revision
+	// Initiates a formal amendment process for a specific record, transitioning it into a structured revision workflow.
+	//
+	// This API is utilized when substantive modifications are required for an already finalized or approved record.
+	// Rather than mutating the active data directly, it explicitly triggers a compliance-driven revision cycle,
+	// ensuring that all proposed changes are tracked and undergo standard review and authorization procedures.
+	//
+	// **Side Effects & Lifecycle:**
+	// * The record's internal amendment count property is strictly incremented by 1.
+	// * The record is placed into a pending revision state, typically preserving the availability of the currently approved version until the amendment is finalized.
+	// * The optional user comment is permanently appended to the record's audit log as the formal justification for initiating the change.
 	Amend(ctx context.Context, in *IdentifierUUIDWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
 	// Generates a magic link for temporary, authenticated access to the resource.
 	//
 	// This enables non-system users (or users without active sessions) to view specific details.
 	CreateMagicLink(ctx context.Context, in *MagicLinksServiceCreateRequestForSpecificResource, opts ...grpc.CallOption) (*MagicLink, error)
-	// Add multiple items to a sales order
+	// Appends multiple line items to an existing Sales Order in a single batch transaction.
+	//
+	// **Side Effects:**
+	// - Dynamically calculates base pricing, discounts, and taxes for each item in the batch.
+	// - Attaches the newly created line items to the parent sales order.
+	// - May place the items into a pending approval state depending on system configuration.
+	// - Appends a unified audit trail entry tracking the batch creation event.
 	AddMultipleSalesOrderItems(ctx context.Context, in *SalesOrdersServiceMultipleItemsCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Add an item to a sales order
+	// Appends a single line item to an existing Sales Order.
+	//
+	// **Side Effects:**
+	// - Validates product family eligibility and calculates financial totals for the requested quantities.
+	// - Attaches the new line item to the parent order.
+	// - Appends an audit trail entry tracking the creation and user justification.
 	AddSalesOrderItem(ctx context.Context, in *SalesOrdersServiceItemCreateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Modify an item in a sales order
+	// Modifies the core transactional parameters (including quantities and client units) of an existing line item.
+	//
+	// **Side Effects:**
+	// - Overwrites the previous quantities, terms, and specifications of the item.
+	// - Triggers a recalculation of the parent sales order's grand total.
+	// - May reset the item's approval status, requiring re-authorization.
+	// - Appends an audit trail entry tracking the modifications.
 	ModifySalesOrderItem(ctx context.Context, in *SalesOrdersServiceItemUpdateRequest, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Update Price, Discount, Tax Group, Delivery Date and Specifications of an item in a sales order. This can safely be done even after the item may have been dispatched
+	// Updates strictly the commercial terms (Price, Discount, Tax Group) and operational metadata (Delivery Date, Specifications) of a line item.
+	//
+	// **Side Effects:**
+	// - Safely applies financial and scheduling adjustments without modifying underlying ordered quantities.
+	// - Designed specifically to be executed even after an item has been partially or fully dispatched.
+	// - Appends an audit trail entry tracking the financial or scheduling adjustments.
 	UpdateSalesOrderItemTerms(ctx context.Context, in *SalesOrdersServiceItemTermsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Update specifications of an item in a sales order
+	// Isolates updates strictly to the textual specifications or manufacturing notes of a line item.
+	//
+	// **Side Effects:**
+	// - Modifies operational instructions without impacting any commercial terms, pricing, or quantities.
+	// - Appends an audit trail entry tracking the specification change.
 	UpdateSalesOrderItemSpecifications(ctx context.Context, in *SalesOrdersServiceItemSpecificationsUpdateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve an item in a sales order
+	// Approves a pending line item, finalizing its active status within the sales order.
+	//
+	// **Side Effects:**
+	// - Activates the line item, making it eligible for dispatch and invoicing workflows.
+	// - Appends the required approval metadata, timestamp, and audit comment to the record's history.
 	ApproveSalesOrderItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete an item in a sales order
+	// Permanently removes or deactivates a line item from the sales order.
+	//
+	// **Side Effects:**
+	// - Revokes the item from the order, subtracting its value from the grand total.
+	// - Logs the deletion justification comment into the system compliance log.
 	DeleteSalesOrderItem(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Reorder items in a sales order
+	// Reorders the numerical sequence of line items within the sales order.
+	//
+	// **Side Effects:**
+	// - Mutates the display sequence (`sort_order`) of the specified items in bulk.
+	// - Directly affects how the items are visually arranged in UI tables and on printed PDF documents.
 	ReorderSalesOrderItems(ctx context.Context, in *ReorderItemsRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View Sales Order Item by ID
+	// Retrieves the complete, finalized details of a specific line item by its internal sequence ID.
+	//
+	// This is a read-only operation that fetches full metadata, approval histories, and calculated financial values.
 	ViewSalesOrderItemByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrderItem, error)
-	// View Sales Order Item's price after factoring in the discount
+	// Calculates and returns the prospective net price of a line item after factoring in the requested discounts and tax groups.
+	//
+	// This read-only query is typically utilized by frontend interfaces to dynamically display "live" price previews to users as they adjust discount fields, prior to officially saving the item.
 	ViewSalesOrderItemPrice(ctx context.Context, in *SalesOrderItemProspectiveInfoRequest, opts ...grpc.CallOption) (*PriceResponse, error)
-	// View approved sales order items for given sales order ID
+	// Lists all active, fully approved line items mapped to a specific sales order ID.
+	//
+	// This read-only query is optimized for rendering the finalized order summary on frontend interfaces and printed invoices.
 	ViewApprovedSalesOrderItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesOrderItemsList, error)
-	// View unapproved sales order items for given sales order ID
+	// Lists pending or unapproved line items mapped to a specific sales order ID.
+	//
+	// This read-only query is utilized primarily by administrative dashboards to quickly identify order lines awaiting financial or operational authorization.
 	ViewUnapprovedSalesOrderItems(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*SalesOrderItemsList, error)
-	// View the history of the sales order item
+	// Retrieves the historical audit trail and lifecycle changes of a specific line item.
+	//
+	// This read-only operation aggregates the chronological evolution of the item, tracking term adjustments, specification updates, and state changes.
 	ViewSalesOrderItemHistory(ctx context.Context, in *SalesOrderItemHistoryRequest, opts ...grpc.CallOption) (*SalesOrderItemsList, error)
-	// View approved sales order items for given sales order ID with pagination
+	// Lists active, approved line items using robust pagination controls.
+	//
+	// This read-only query is optimized for rendering extremely large orders in frontend data tables, supporting explicit windowing parameters.
 	ViewPaginatedApprovedSalesOrderItems(ctx context.Context, in *SalesOrderItemsSearchRequest, opts ...grpc.CallOption) (*SalesOrdersServicePaginatedItemsResponse, error)
-	// View unapproved sales order items for given sales order ID with pagination
+	// Lists pending or unapproved line items using robust pagination controls.
+	//
+	// This read-only query is optimized for administrative review dashboards handling high volumes of unapproved items.
 	ViewPaginatedUnapprovedSalesOrderItems(ctx context.Context, in *SalesOrderItemsSearchRequest, opts ...grpc.CallOption) (*SalesOrdersServicePaginatedItemsResponse, error)
-	// Search through sales order items with pagination
+	// Searches through all line items using advanced filters, status flags, fuzzy text matching, and pagination.
+	//
+	// This read-only query is the primary entry point for complex lookups across massive order catalogs.
 	SearchItemsWithPagination(ctx context.Context, in *SalesOrderItemsSearchRequest, opts ...grpc.CallOption) (*SalesOrdersServicePaginatedItemsResponse, error)
-	// CSV operations
-	// Download the CSV file with the associated line items. The same file could then be used to upload line items.
+	// Exports the current list of line items for a specific sales order into a downloadable CSV file.
+	//
+	// This read-only operation is used by administrators to audit large orders offline, or as a baseline to modify items locally before executing a bulk upload.
 	DownloadItemsAsCSV(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
-	// Download the CSV template that could be used to upload items
+	// Generates and downloads a blank, structurally compliant CSV template.
+	//
+	// This read-only operation provides clients with the exact column headers required to successfully perform a bulk line-item upload.
 	DownloadItemsTemplateAsCSV(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*StandardFile, error)
-	// Upload items using a CSV file. This is an idempotent operation. All the existing items are deleted before adding the items from the file.
+	// Processes a bulk ingestion of line items for a specific sales order via a CSV file upload.
+	//
+	// **Side Effects:**
+	// - **CRITICAL:** This is an idempotent, destructive operation. It automatically deletes all existing line items currently mapped to the sales order before applying the new items from the CSV.
+	// - Wipes the current active list and replaces it entirely with the parsed file contents.
+	// - Triggers recalculations of order totals and appends creation audit logs for the newly imported items.
 	UploadSalesOrderItems(ctx context.Context, in *IdentifierUUIDWithFile, opts ...grpc.CallOption) (*IdentifiersList, error)
-	// Add a contact
+	// Assigns a designated client associate (contact person) to the sales order.
+	//
+	// **Side Effects:**
+	// - Creates a linkage identifying the specific individual in charge of or accountable for the order on the client's side.
+	// - Appends an audit trail entry tracking the assignment.
 	AddSalesOrderContact(ctx context.Context, in *SalesOrdersServiceContactCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a contact
+	// Approves a pending client contact assignment, finalizing their visibility on the order.
+	//
+	// **Side Effects:**
+	// - Activates the contact linkage, allowing the associate's details to appear on formal documents.
+	// - Appends an approval audit trail entry.
 	ApproveSalesOrderContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a contact
+	// Removes a designated client associate from the sales order.
+	//
+	// **Side Effects:**
+	// - Severs the linkage between the order and the individual.
+	// - Appends a deletion justification to the audit log.
 	DeleteSalesOrderContact(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a contact for the given ID
+	// Retrieves the complete details of a specific contact mapping by its internal ID.
+	//
+	// This read-only query fetches the associate linkage data and workflow state.
 	ViewSalesOrderContactByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrderContact, error)
-	// View all contacts for given sales order UUID
+	// Lists all designated client associates (contacts) assigned to a specific sales order by its UUID.
+	//
+	// This read-only query is utilized to populate the "Points of Contact" section in frontend order views.
 	ViewSalesOrderContacts(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderContactsList, error)
-	// Add a reference
+	// Links an external or internal source document (e.g., Sales Quotation, Inward Job) to the sales order as an operational constraint.
+	//
+	// **Side Effects:**
+	// - Establishes a strict data relationship that can drive downstream automation (like Autofill operations).
+	// - Appends an audit trail entry tracking the reference linkage.
 	AddSalesOrderReference(ctx context.Context, in *SalesOrdersServiceReferenceCreateRequest, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Approve a reference
+	// Approves a pending reference linkage, formalizing its constraint on the order.
+	//
+	// **Side Effects:**
+	// - Activates the reference, making it eligible for use in automated workflows (e.g., pulling line items from the approved quotation).
+	// - Appends an approval audit trail entry.
 	ApproveSalesOrderReference(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// Delete a reference
+	// Removes a previously linked source document reference from the sales order.
+	//
+	// **Side Effects:**
+	// - Severs the constraint linkage, meaning the order is no longer bound by the source document.
+	// - Appends a deletion justification to the audit log.
 	DeleteSalesOrderReference(ctx context.Context, in *IdentifierWithUserComment, opts ...grpc.CallOption) (*IdentifierResponse, error)
-	// View a reference for the given ID
+	// Retrieves the complete details of a specific constraint reference mapping by its internal ID.
+	//
+	// This read-only query fetches the context, document type, and underlying source document ID.
 	ViewSalesOrderReferenceByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrderReference, error)
-	// View all references for given sales order ID
+	// Lists all source document references and constraints attached to a specific sales order.
+	//
+	// This read-only query is utilized by frontend interfaces to display linked documents (e.g., "Generated from Quotation Q-400").
 	ViewSalesOrderReferences(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrderReferencesList, error)
 	// Retrieves a single record by its internal numeric ID. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrder, error)
 	// Retrieves a single record by its globally unique UUID. This is intended for public-facing interfaces, since record identifiers aren't sequential and thus cannot be predicted.
 	ViewByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrder, error)
-	// View by Reference ID (returns the latest record in case of duplicates)
+	// Retrieves a single record based on its user-defined, external reference ID.
+	//
+	// This read-only operation is utilized for targeted lookups using human-readable identifiers (e.g., "REF-2023-001") rather than internal system IDs or unpredictable UUIDs.
+	// Because external reference IDs might occasionally be duplicated across a tenant's dataset (due to legacy data imports, external CRM syncing overlaps, or manual entry overrides),
+	// this query guarantees a deterministic response. In the event of a collision, it automatically resolves the conflict by returning only the most recently created or modified record
+	// that matches the requested reference string.
 	ViewByReferenceID(ctx context.Context, in *SimpleSearchReq, opts ...grpc.CallOption) (*SalesOrder, error)
 	// Retrieves a record by ID excluding high-volume fields like logs for performance. This operation is optimized for high-performance internal system logic and backend-to-backend communication
 	ViewEssentialByID(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*SalesOrder, error)
@@ -284,7 +441,10 @@ type SalesOrdersServiceClient interface {
 	ViewEssentialByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrder, error)
 	// Retrieves a list of records matching the provided array of internal IDs.
 	ViewFromIDs(ctx context.Context, in *IdentifiersList, opts ...grpc.CallOption) (*SalesOrdersList, error)
-	// View the ancillary parameters (UUIDs of the internal references) by UUID
+	// Retrieves the globally unique identifiers (UUIDs) of a Sales Order's core relational dependencies.
+	//
+	// This is a read-only query designed to fetch essential parameter references—such as the buyer, consignee, location, and currency — without exposing the system's internal sequential integer IDs.
+	// Client applications and external integrations utilize this endpoint to securely reference linked records while actively mitigating the risk of ID-based data enumeration.
 	ViewAncillaryParametersByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderAncillaryParameters, error)
 	// Returns all records filtered by their active status.
 	ViewAll(ctx context.Context, in *ActiveStatus, opts ...grpc.CallOption) (*SalesOrdersList, error)
@@ -292,25 +452,60 @@ type SalesOrdersServiceClient interface {
 	ViewAllForEntityUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrdersList, error)
 	// Retrieves a paginated list of records based on status, sort keys, and offsets.
 	ViewWithPagination(ctx context.Context, in *SalesOrdersServicePaginationReq, opts ...grpc.CallOption) (*SalesOrdersServicePaginationResponse, error)
-	// View all the amendments made
+	// Retrieves the comprehensive, chronological history of formal amendments applied to a specific record.
+	//
+	// This read-only query exposes the complete audit trail of revision workflows that the entity has undergone.
+	// It is explicitly designed to support compliance checks, historical tracking, and administrative reviews by
+	// detailing exactly how and when a record evolved over its lifecycle.
+	//
+	// **Side Effects & Lifecycle:**
+	// * This is a strictly read-only operation; the underlying record and its current lifecycle state remain entirely unchanged.
+	// * Aggregates and returns a sequential log of amendment events, which typically include revision counts, initiation timestamps, and the justification comments provided when the amendments were triggered.
 	ViewAmendments(ctx context.Context, in *Identifier, opts ...grpc.CallOption) (*AmendmentLogsList, error)
-	// View Inventory Statistics of Sales Order
+	// Retrieves the aggregated inventory fulfillment statistics for a specific Sales Order.
+	//
+	// This is a read-only analytics query that calculates the cumulative ordered, dispatched, and returned quantities across the entire order. It is primarily utilized by frontend dashboard widgets to visualize real-time warehouse fulfillment progress.
 	ViewInventoryStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderInventoryStatistics, error)
-	// View Billing Statistics of Sales Order
+	// Retrieves the aggregated billing and financial statistics for a specific Sales Order.
+	//
+	// This is a read-only analytics query that calculates the cumulative ordered, invoiced, and credited quantities across the entire order. It provides finance and order management teams with a high-level summary of the order's commercial lifecycle and outstanding unbilled quantities.
 	ViewBillingStatistics(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderBillingStatistics, error)
-	// View Inventory Match of all the families within a Sales Order
+	// Generates a highly granular, cumulative inventory reconciliation report, aggregated by family across the entire Sales Order.
+	//
+	// This read-only diagnostic query dynamically groups multiple downstream transactions (e.g., staggered shipments, split returns, partial invoices) into a unified, family-level view. It maps every cumulative item lifecycle stage (ordered, dispatched, invoiced, returned, credited) against both internal primary and client-requested secondary units of measure. It is a critical endpoint used by operational teams to spot quantity discrepancies and ensure tight inventory accounting.
 	ViewInventoryMatch(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderInventoryMatchList, error)
-	// View Price Match of all the families within a Sales Order (between the sales order, and the corresponding sales invoices, and any corresponding credit notes)
+	// Generates a comprehensive, cumulative financial price match report, comparing expected revenue against all downstream invoicing and adjustments.
+	//
+	// This read-only diagnostic query dynamically aggregates data for every family on the Sales Order. It cross-references the cumulative ordered values against the actual realized revenue (aggregated across multiple sales invoices) and any issued refunds (aggregated across multiple credit notes). It guarantees airtight financial reconciliation prior to order closure.
 	ViewPriceMatch(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*SalesOrderPriceMatchList, error)
-	// View prospective families for the given sales order
+	// Retrieves a broad list of families that are eligible to be added to the specified sales order.
+	//
+	// This read-only query is used to populate dropdowns or catalog views when a user begins the process of adding new line items to an order.
 	ViewProspectiveFamilies(ctx context.Context, in *IdentifierWithSearchKey, opts ...grpc.CallOption) (*FamiliesList, error)
-	// Filter prospective families for the record represented by the given UUID identifier
+	// Executes an advanced, filtered search against the families eligible to be added to a sales order.
+	//
+	// This read-only query allows users to narrow down large product catalogs based on specific metadata or categories before selecting an item.
 	FilterProspectiveFamilies(ctx context.Context, in *FilterFamiliesReqForIdentifier, opts ...grpc.CallOption) (*FamiliesList, error)
-	// View prospective sales order item info for the given family ID and sales order ID
+	// Generates a fully populated, default line item creation payload for a specific product family.
+	//
+	// This read-only query acts as a "template builder." It fetches the default pricing, historical client units of measure, and default tax groups for the family, returning a pre-filled `SalesOrdersServiceItemCreateRequest` payload. Frontend clients use this to instantly auto-fill the "Add Item" form.
 	ViewProspectiveSalesOrderItem(ctx context.Context, in *SalesOrderItemProspectiveInfoRequest, opts ...grpc.CallOption) (*SalesOrdersServiceItemCreateRequest, error)
-	// Checks if the record is downloadable (checks if the custom download function has been implemented)
+	// Evaluates the download eligibility of a specific record using its universally unique identifier (UUID).
+	//
+	// This endpoint serves as a lightweight precursor to the actual file retrieval process. It verifies
+	// whether the target record supports file extraction by checking if a custom download function has
+	// been implemented for the underlying asset. By utilizing this check, client applications can
+	// preemptively determine file availability and dynamically adjust user interface elements
+	// (e.g., enabling or disabling a download button) without initiating a full, potentially heavy
+	// download request.
 	IsDownloadable(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*BooleanResponse, error)
-	// Download sales order with the given IdentifierUUID (can be used to allow public downloads)
+	// Retrieves the underlying file or document payload associated with a specific entity
+	// using its universally unique identifier (UUID).
+	//
+	// This endpoint is designed for versatile resource retrieval and is commonly utilized
+	// to facilitate direct, secure, or public-facing downloads. By relying on an obscure
+	// UUID rather than predictable internal sequential IDs, it ensures that external
+	// download links remain unguessable and safe for broad distribution.
 	DownloadByUUID(ctx context.Context, in *IdentifierUUID, opts ...grpc.CallOption) (*StandardFile, error)
 	// Performs a free-text search across records using a search key.
 	SearchAll(ctx context.Context, in *SalesOrdersServiceSearchAllReq, opts ...grpc.CallOption) (*SalesOrdersList, error)
@@ -320,7 +515,9 @@ type SalesOrdersServiceClient interface {
 	CountInStatus(ctx context.Context, in *CountInSLCStatusRequest, opts ...grpc.CallOption) (*CountResponse, error)
 	// Returns the total count of records matching the given complex filter criteria.
 	Count(ctx context.Context, in *SalesOrdersServiceCountReq, opts ...grpc.CallOption) (*CountResponse, error)
-	// Returns the sum of the total value of all the records that match the given criteria
+	// Calculates and returns the aggregate monetary sum of all sales orders matching the provided search criteria.
+	//
+	// This read-only analytics query is utilized by financial dashboards to dynamically generate real-time metrics, such as "Total Value of Active Orders" or "Total Revenue for Client X in Q3."
 	AccruedValue(ctx context.Context, in *SalesOrdersServiceCountReq, opts ...grpc.CallOption) (*SumResponse, error)
 	// CSV operations
 	// Download the CSV file that consists of the list of records according to the given filter request. The same file could also be used as a template for uploading records

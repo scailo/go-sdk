@@ -852,7 +852,12 @@ func (x *ActionsCodesServicePaginationResponse) GetPayload() []*ActionCode {
 	return nil
 }
 
-// Advanced filter request for searching action codes using multiple logical criteria.
+// Advanced filter request for searching and paginating action codes using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type ActionsCodesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional

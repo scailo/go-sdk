@@ -125,7 +125,15 @@ type AttendancesServiceCreateRequest struct {
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
 	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
 	// @optional
 	//
@@ -155,7 +163,13 @@ type AttendancesServiceCreateRequest struct {
 	ExitTimestamp uint64 `protobuf:"varint,13,opt,name=exit_timestamp,json=exitTimestamp,proto3" json:"exit_timestamp,omitempty"`
 	// The description of the attendance
 	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -257,9 +271,25 @@ func (x *AttendancesServiceCreateRequest) GetFormData() []*FormFieldDatumCreateR
 // Describes the parameters necessary to update a record
 type AttendancesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
 	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// @optional
 	//
@@ -293,7 +323,13 @@ type AttendancesServiceUpdateRequest struct {
 	ExitTimestamp uint64 `protobuf:"varint,13,opt,name=exit_timestamp,json=exitTimestamp,proto3" json:"exit_timestamp,omitempty"`
 	// The description of the attendance
 	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -494,7 +530,15 @@ func (x *AttendancesServiceImageEntryRequest) GetEntryLongitude() float64 {
 // Describes the message payload that is necessary to create an exit record. This will most likely be called only from mobile devices.
 type AttendancesServiceImageExitRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the record that needs to be updated
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	// The raw image content of the exit image
 	ExitImage []byte `protobuf:"bytes,13,opt,name=exit_image,json=exitImage,proto3" json:"exit_image,omitempty"`
@@ -612,7 +656,7 @@ type Attendance struct {
 	ExitTimestamp uint64 `protobuf:"varint,14,opt,name=exit_timestamp,json=exitTimestamp,proto3" json:"exit_timestamp,omitempty"`
 	// The description of the attendance
 	Description string `protobuf:"bytes,15,opt,name=description,proto3" json:"description,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,30,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1555,7 +1599,9 @@ type AttendancesServiceCountReq struct {
 	ExitTimestampStart uint64 `protobuf:"varint,26,opt,name=exit_timestamp_start,json=exitTimestampStart,proto3" json:"exit_timestamp_start,omitempty"`
 	// The end range of "to timestamp"
 	ExitTimestampEnd uint64 `protobuf:"varint,27,opt,name=exit_timestamp_end,json=exitTimestampEnd,proto3" json:"exit_timestamp_end,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description Count based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

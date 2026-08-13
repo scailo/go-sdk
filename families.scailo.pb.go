@@ -23,25 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Stores the available family types
+// Defines the core classification categories for a family within the catalog.
+// These types dictate the operational lifecycle, permitted transactions (e.g., buy, sell, manufacture),
+// and the general purpose of the associated items.
 type FAMILY_TYPE int32
 
 const (
-	// Denotes any family type (only used for filter and search queries, when family type needs to be disregarded)
+	// @description Denotes that the family type filter should be disregarded. Used exclusively within search/filter APIs to bypass type restrictions.
 	FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED FAMILY_TYPE = 0
-	// Denotes a component (a family that can be sold, bought, and manufactured - this is a general purpose family)
+	// @description Denotes a component. This is a general-purpose family of items that can be dynamically sold, bought, and manufactured.
 	FAMILY_TYPE_FAMILY_TYPE_COMPONENT FAMILY_TYPE = 1
-	// Denotes equipment (a family that can be used within manufacturing process as a capex item, such as machines)
+	// @description Denotes equipment. Represents a capital expenditure (CapEx) item utilized within the manufacturing process (e.g., machinery, assembly tools).
 	FAMILY_TYPE_FAMILY_TYPE_EQUIPMENT FAMILY_TYPE = 2
-	// Denotes feedstock (a family that will be used as raw material within manufacturing process, and will be consumed)
+	// @description Denotes feedstock. Represents raw materials that will be consumed and transformed during the manufacturing process.
 	FAMILY_TYPE_FAMILY_TYPE_FEEDSTOCK FAMILY_TYPE = 3
-	// Denotes infrastructure (a family that can be used for any non-manufacturing purpose. Examples include cars, rtubelights, computers, etc.)
+	// @description Denotes infrastructure. Represents non-manufacturing items utilized for general operational purposes (e.g., vehicles, computers, lighting/tubelights).
 	FAMILY_TYPE_FAMILY_TYPE_INFRASTRUCTURE FAMILY_TYPE = 4
-	// Denotes merchandise (a family that can only be bought and sold, and will not be a part of any value addition processes)
+	// @description Denotes merchandise. Represents goods that are strictly procured and resold without undergoing any internal value-addition processes.
 	FAMILY_TYPE_FAMILY_TYPE_MERCHANDISE FAMILY_TYPE = 5
-	// Denotes product (a family that is the final outcome of a manufacturing process. Can only be sold, but not purchased)
+	// @description Denotes a product. Represents the final, finished outcome of a manufacturing process. Products can only be sold, not directly purchased.
 	FAMILY_TYPE_FAMILY_TYPE_PRODUCT FAMILY_TYPE = 6
-	// Denotes service (a family that deals exclusively with services, and no goods)
+	// @description Denotes a service. Represents intangible offerings, labor, or digital services, completely excluding physical goods.
 	FAMILY_TYPE_FAMILY_TYPE_SERVICE FAMILY_TYPE = 7
 )
 
@@ -96,23 +98,24 @@ func (FAMILY_TYPE) EnumDescriptor() ([]byte, []int) {
 	return file_families_scailo_proto_rawDescGZIP(), []int{0}
 }
 
-// Stores the available consumption sequences
+// Defines the inventory depletion strategy and consumption prioritization rules for stored items.
+// These sequences determine the exact order in which stock is utilized, fulfilled, or depleted based on temporal or lifecycle attributes.
 type CONSUMPTION_SEQUENCE int32
 
 const (
-	// Denotes any consumption sequence (only used for filter and search queries, when consumption sequence needs to be disregarded)
+	// @description Denotes that the consumption sequence should be disregarded. Used exclusively within search/filter APIs to bypass sequencing restrictions.
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_ANY_UNSPECIFIED CONSUMPTION_SEQUENCE = 0
-	// Denotes first-in-first-out according to the intake timestamp
+	// @description Denotes a First-In-First-Out (FIFO) prioritization strictly based on the physical intake or receiving timestamp.
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_FIFO_INTAKE CONSUMPTION_SEQUENCE = 1
-	// Denotes first-in-first-out according to the shelf life
+	// @description Denotes a First-In-First-Out (FIFO) prioritization based on the expiration or shelf-life timeline (earliest to expire is consumed first).
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_FIFO_SHELF_LIFE CONSUMPTION_SEQUENCE = 2
-	// Denotes first-in-first-out according to the warranty
+	// @description Denotes a First-In-First-Out (FIFO) prioritization based on the warranty expiration timeline (earliest warranty end is consumed first).
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_FIFO_WARRANTY CONSUMPTION_SEQUENCE = 3
-	// Denotes last-in-first-out according to the intake timestamp
+	// @description Denotes a Last-In-First-Out (LIFO) prioritization strictly based on the physical intake or receiving timestamp (newest arrivals consumed first).
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_LIFO_INTAKE CONSUMPTION_SEQUENCE = 4
-	// Denotes last-in-first-out according to the shelf life
+	// @description Denotes a Last-In-First-Out (LIFO) prioritization based on the expiration or shelf-life timeline (latest to expire is consumed first).
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_LIFO_SHELF_LIFE CONSUMPTION_SEQUENCE = 5
-	// Denotes last-in-first-out according to the warranty
+	// @description Denotes a Last-In-First-Out (LIFO) prioritization based on the warranty expiration timeline (latest warranty end is consumed first).
 	CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_LIFO_WARRANTY CONSUMPTION_SEQUENCE = 6
 )
 
@@ -165,31 +168,31 @@ func (CONSUMPTION_SEQUENCE) EnumDescriptor() ([]byte, []int) {
 	return file_families_scailo_proto_rawDescGZIP(), []int{1}
 }
 
-// Describes the available sort keys
+// Enumeration of fields available for sorting vendor search results.
 type FAMILY_SORT_KEY int32
 
 const (
-	// Fetch ordered results by id
+	// @description Default sort behavior (by internal ID).
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_ID_UNSPECIFIED FAMILY_SORT_KEY = 0
-	// Fetch ordered results by the creation timestamp
+	// @description Sort by the timestamp the record was initially created.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_CREATED_AT FAMILY_SORT_KEY = 1
-	// Fetch ordered results by the modified timestamp
+	// @description Sort by the timestamp the record was last modified.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_MODIFIED_AT FAMILY_SORT_KEY = 2
-	// Fetch ordered results by the approved on timestamp
+	// @description Sort by the official approval timestamp.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_APPROVED_ON FAMILY_SORT_KEY = 3
-	// Fetch ordered results by the approved by field
+	// @description Sort by the system ID of the approving user.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_APPROVED_BY FAMILY_SORT_KEY = 4
-	// Fetch ordered results by the approver's role ID
+	// @description Sort by the security role ID used by the approver.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_APPROVER_ROLE_ID FAMILY_SORT_KEY = 5
-	// Fetch ordered results by the name
+	// @description Sort alphabetically by the user-provided name.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_NAME FAMILY_SORT_KEY = 10
-	// Fetch ordered results by the code
+	// @description Sort alphabetically by the user-provided code.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_CODE FAMILY_SORT_KEY = 12
-	// Fetch ordered results by the unit quantity
+	// @description Sort by the user-provided unit quantity.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_UNIT_QUANTITY FAMILY_SORT_KEY = 13
-	// Fetch ordered results by the price
+	// @description Sort by the user-provided price.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_PRICE FAMILY_SORT_KEY = 14
-	// Fetch ordered results by the amendment count
+	// @description Sort by the user-provided amendment count.
 	FAMILY_SORT_KEY_FAMILY_SORT_KEY_AMENDMENT_COUNT FAMILY_SORT_KEY = 15
 )
 
@@ -250,10 +253,17 @@ func (FAMILY_SORT_KEY) EnumDescriptor() ([]byte, []int) {
 	return file_families_scailo_proto_rawDescGZIP(), []int{2}
 }
 
-// Describes the message consisting of the list of family types
+// Represents a collection payload encapsulating multiple family type classifications.
+// This message is commonly utilized in bulk retrieval responses or as a multi-select filter array.
 type FamilyTypesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of family types
+	// @optional
+	//
+	// @description An array containing one or more specific family type classifications.
+	//
+	// @example ["FAMILY_TYPE_COMPONENT", "FAMILY_TYPE_MERCHANDISE"]
+	//
+	// @format Repeated array of valid FAMILY_TYPE enum strings or integer values.
 	List          []FAMILY_TYPE `protobuf:"varint,1,rep,packed,name=list,proto3,enum=Scailo.FAMILY_TYPE" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -296,7 +306,12 @@ func (x *FamilyTypesList) GetList() []FAMILY_TYPE {
 	return nil
 }
 
-// Describes the parameters necessary to create a record
+// Request message for defining and creating a new Family profile within the catalog.
+// This record tracks critical hierarchical metadata, classification types, taxation codes,
+// pricing configurations, and inventory consumption rules associated with a target entity.
+//
+// **Note:** This is the primary entry point for Inventory Managers, Catalog Administrators,
+// and Procurement to register new item families and structural classifications for inventory tracking and compliance.
 type FamiliesServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -308,9 +323,17 @@ type FamiliesServiceCreateRequest struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
+	EntityUuid *string `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,2,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
 	// @optional
 	//
 	// @description The ID of the associated vault folder for storing documents. Defaults to 0 if no specific folder is assigned.
@@ -320,38 +343,164 @@ type FamiliesServiceCreateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the family
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @mandatory
+	//
+	// @description The primary, human-readable name of the family.
+	//
+	// @example "Industrial Fasteners"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the family that is to be used on prints
+	// @mandatory
+	//
+	// @description The designated name of the family utilized for external-facing documents, invoices, and printed reports.
+	//
+	// @example "Ind. Fasteners"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	PrintName string `protobuf:"bytes,11,opt,name=print_name,json=printName,proto3" json:"print_name,omitempty"`
-	// The unique code that represents the family
+	// @mandatory
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the family.
+	//
+	// @example "FAM-IND-FST-01"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
 	Code string `protobuf:"bytes,12,opt,name=code,proto3" json:"code,omitempty"`
-	// The description of the family
-	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The type of the family
+	// @optional
+	//
+	// @description A detailed text description outlining the characteristics, specifications, and purpose of the family.
+	//
+	// @example "Heavy duty industrial fasteners suitable for high-stress applications."
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
+	Description *string `protobuf:"bytes,14,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @mandatory
+	//
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product).
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid FAMILY_TYPE enum value string or integer.
 	FamilyType FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// The HSN/SAC code of the family
-	HsnSacCode string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
-	// Stores the ID of the associated unit of material
+	// @optional
+	//
+	// @description The Harmonized System of Nomenclature (HSN) or Service Accounting Code (SAC) applied for taxation and regulatory compliance.
+	//
+	// @example "73181500"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
+	HsnSacCode *string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3,oneof" json:"hsn_sac_code,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the unit of material (UOM) used to measure items within this family.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UomId uint64 `protobuf:"varint,17,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the unit quantity
+	// @mandatory
+	//
+	// @description The standard batch or unit quantity multiplier for items within this family, represented in base subunits.
+	//
+	// @example 100
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UnitQuantity uint64 `protobuf:"varint,18,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the parent family
-	ParentId uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Stores if the family is a leaf family
+	// @optional
+	//
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	ParentId *uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// @mandatory
+	//
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families).
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
 	IsLeaf bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// Stores the ID of the ledger
-	LedgerId uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
-	// Stores the ID of the tax group
+	// @optional
+	//
+	// @description The unique internal identifier of the accounting ledger associated with this family for financial tracking. A value of 0 typically denotes no specific ledger assignment.
+	//
+	// @example 452
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	LedgerId *uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3,oneof" json:"ledger_id,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the default tax group applied to items nested under this family.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	TaxGroupId uint64 `protobuf:"varint,23,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Stores the unit price
-	Price uint64 `protobuf:"varint,26,opt,name=price,proto3" json:"price,omitempty"`
-	// Stores the minimum stock to maintain
-	MinStockToMaintain uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3" json:"min_stock_to_maintain,omitempty"`
-	// Stores the consumption sequence
+	// @optional
+	//
+	// @description The default base unit price for items in this family, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	Price *uint64 `protobuf:"varint,26,opt,name=price,proto3,oneof" json:"price,omitempty"`
+	// @optional
+	//
+	// @description The minimum inventory threshold required to be maintained for items within this family, commonly used to trigger automated restock alerts.
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	MinStockToMaintain *uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3,oneof" json:"min_stock_to_maintain,omitempty"`
+	// @mandatory
+	//
+	// @description The default inventory depletion sequence applied to items within this family (e.g., FIFO based on intake, LIFO based on shelf life).
+	//
+	// @example "CONSUMPTION_SEQUENCE_FIFO_INTAKE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid CONSUMPTION_SEQUENCE enum value string or integer.
 	ConsumptionSequence CONSUMPTION_SEQUENCE `protobuf:"varint,28,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE" json:"consumption_sequence,omitempty"`
-	// The list of dynamic forms
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,50,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -388,22 +537,22 @@ func (*FamiliesServiceCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceCreateRequest) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCreateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
@@ -430,8 +579,8 @@ func (x *FamiliesServiceCreateRequest) GetCode() string {
 }
 
 func (x *FamiliesServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -444,8 +593,8 @@ func (x *FamiliesServiceCreateRequest) GetFamilyType() FAMILY_TYPE {
 }
 
 func (x *FamiliesServiceCreateRequest) GetHsnSacCode() string {
-	if x != nil {
-		return x.HsnSacCode
+	if x != nil && x.HsnSacCode != nil {
+		return *x.HsnSacCode
 	}
 	return ""
 }
@@ -465,8 +614,8 @@ func (x *FamiliesServiceCreateRequest) GetUnitQuantity() uint64 {
 }
 
 func (x *FamiliesServiceCreateRequest) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return 0
 }
@@ -479,8 +628,8 @@ func (x *FamiliesServiceCreateRequest) GetIsLeaf() bool {
 }
 
 func (x *FamiliesServiceCreateRequest) GetLedgerId() uint64 {
-	if x != nil {
-		return x.LedgerId
+	if x != nil && x.LedgerId != nil {
+		return *x.LedgerId
 	}
 	return 0
 }
@@ -493,15 +642,15 @@ func (x *FamiliesServiceCreateRequest) GetTaxGroupId() uint64 {
 }
 
 func (x *FamiliesServiceCreateRequest) GetPrice() uint64 {
-	if x != nil {
-		return x.Price
+	if x != nil && x.Price != nil {
+		return *x.Price
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCreateRequest) GetMinStockToMaintain() uint64 {
-	if x != nil {
-		return x.MinStockToMaintain
+	if x != nil && x.MinStockToMaintain != nil {
+		return *x.MinStockToMaintain
 	}
 	return 0
 }
@@ -520,15 +669,41 @@ func (x *FamiliesServiceCreateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters necessary to update a record
+// Request message for updating an existing Family record.
+// Only applicable for records in `DRAFT` or `REVISION` states.
+// This message allows for modifying the name, print name, description, hsn sac code, uom id, unit quantity, ledger id, tax group id, price, min stock to maintain, consumption sequence and other custom form fields
+// of an established Family.
+//
+// **Note:** Only fields provided in the request will typically be updated.
+// The unique system ID is required to locate the target record.
 type FamiliesServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional boolean value that denotes if a notification needs to be sent to users about the update to the record. This is useful when a subsequent operation needs to be performed immediately (such as send to verification after updating the revision)
-	NotifyUsers bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3" json:"notify_users,omitempty"`
+	// @optional
+	//
+	// @description Flag to trigger system notifications to relevant users upon update. Set to true if subsequent workflows (like verification) depend on this change.
+	//
+	// @example true
+	NotifyUsers *bool `protobuf:"varint,3,opt,name=notify_users,json=notifyUsers,proto3,oneof" json:"notify_users,omitempty"`
 	// @optional
 	//
 	// @description Updated vault folder ID for documentation storage.
@@ -538,30 +713,124 @@ type FamiliesServiceUpdateRequest struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the family
-	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the family that is to be used on prints
-	PrintName string `protobuf:"bytes,11,opt,name=print_name,json=printName,proto3" json:"print_name,omitempty"`
-	// The description of the family
-	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The HSN/SAC code of the family
-	HsnSacCode string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
-	// Stores the ID of the associated unit of material
-	UomId uint64 `protobuf:"varint,17,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the unit quantity
-	UnitQuantity uint64 `protobuf:"varint,18,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the ledger
-	LedgerId uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
-	// Stores the ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,23,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Stores the unit price
-	Price uint64 `protobuf:"varint,26,opt,name=price,proto3" json:"price,omitempty"`
-	// Stores the minimum stock to maintain
-	MinStockToMaintain uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3" json:"min_stock_to_maintain,omitempty"`
-	// Stores the consumption sequence
-	ConsumptionSequence CONSUMPTION_SEQUENCE `protobuf:"varint,28,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE" json:"consumption_sequence,omitempty"`
-	// The list of dynamic forms
+	VaultFolderId *uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3,oneof" json:"vault_folder_id,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the family.
+	//
+	// @example "Industrial Fasteners"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,10,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The designated name of the family utilized for external-facing documents, invoices, and printed reports.
+	//
+	// @example "Ind. Fasteners"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	PrintName *string `protobuf:"bytes,11,opt,name=print_name,json=printName,proto3,oneof" json:"print_name,omitempty"`
+	// @optional
+	//
+	// @description A detailed text description outlining the characteristics, specifications, and purpose of the family.
+	//
+	// @example "Heavy duty industrial fasteners suitable for high-stress applications."
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Description *string `protobuf:"bytes,14,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// @optional
+	//
+	// @description The Harmonized System of Nomenclature (HSN) or Service Accounting Code (SAC) applied for taxation and regulatory compliance.
+	//
+	// @example "73181500"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	HsnSacCode *string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3,oneof" json:"hsn_sac_code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the unit of material (UOM) used to measure items within this family.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UomId *uint64 `protobuf:"varint,17,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
+	// @optional
+	//
+	// @description The standard batch or unit quantity multiplier for items within this family, represented in base subunits.
+	//
+	// @example 100
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UnitQuantity *uint64 `protobuf:"varint,18,opt,name=unit_quantity,json=unitQuantity,proto3,oneof" json:"unit_quantity,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the accounting ledger associated with this family for financial tracking. A value of 0 typically denotes no specific ledger assignment.
+	//
+	// @example 452
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	LedgerId *uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3,oneof" json:"ledger_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the default tax group applied to items nested under this family.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	TaxGroupId *uint64 `protobuf:"varint,23,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The default base unit price for items in this family, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	Price *uint64 `protobuf:"varint,26,opt,name=price,proto3,oneof" json:"price,omitempty"`
+	// @optional
+	//
+	// @description The minimum inventory threshold required to be maintained for items within this family, commonly used to trigger automated restock alerts.
+	//
+	// @example 500
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	MinStockToMaintain *uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3,oneof" json:"min_stock_to_maintain,omitempty"`
+	// @optional
+	//
+	// @description The default inventory depletion sequence applied to items within this family (e.g., FIFO based on intake, LIFO based on shelf life).
+	//
+	// @example "CONSUMPTION_SEQUENCE_FIFO_INTAKE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid CONSUMPTION_SEQUENCE enum value string or integer.
+	ConsumptionSequence *CONSUMPTION_SEQUENCE `protobuf:"varint,28,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE,oneof" json:"consumption_sequence,omitempty"`
+	// @optional
+	//
+	// @description A collection of dynamic form fields for organization-specific data.
+	//
+	// @example []
+	//
+	// @format An array/list of FormFieldDatumCreateRequest entries. Can be left empty if no custom attributes are needed.
 	FormData      []*FormFieldDatumCreateRequest `protobuf:"bytes,50,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -598,8 +867,8 @@ func (*FamiliesServiceUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -612,92 +881,92 @@ func (x *FamiliesServiceUpdateRequest) GetId() uint64 {
 }
 
 func (x *FamiliesServiceUpdateRequest) GetNotifyUsers() bool {
-	if x != nil {
-		return x.NotifyUsers
+	if x != nil && x.NotifyUsers != nil {
+		return *x.NotifyUsers
 	}
 	return false
 }
 
 func (x *FamiliesServiceUpdateRequest) GetVaultFolderId() uint64 {
-	if x != nil {
-		return x.VaultFolderId
+	if x != nil && x.VaultFolderId != nil {
+		return *x.VaultFolderId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *FamiliesServiceUpdateRequest) GetPrintName() string {
-	if x != nil {
-		return x.PrintName
+	if x != nil && x.PrintName != nil {
+		return *x.PrintName
 	}
 	return ""
 }
 
 func (x *FamiliesServiceUpdateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
 
 func (x *FamiliesServiceUpdateRequest) GetHsnSacCode() string {
-	if x != nil {
-		return x.HsnSacCode
+	if x != nil && x.HsnSacCode != nil {
+		return *x.HsnSacCode
 	}
 	return ""
 }
 
 func (x *FamiliesServiceUpdateRequest) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetUnitQuantity() uint64 {
-	if x != nil {
-		return x.UnitQuantity
+	if x != nil && x.UnitQuantity != nil {
+		return *x.UnitQuantity
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetLedgerId() uint64 {
-	if x != nil {
-		return x.LedgerId
+	if x != nil && x.LedgerId != nil {
+		return *x.LedgerId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetPrice() uint64 {
-	if x != nil {
-		return x.Price
+	if x != nil && x.Price != nil {
+		return *x.Price
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetMinStockToMaintain() uint64 {
-	if x != nil {
-		return x.MinStockToMaintain
+	if x != nil && x.MinStockToMaintain != nil {
+		return *x.MinStockToMaintain
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateRequest) GetConsumptionSequence() CONSUMPTION_SEQUENCE {
-	if x != nil {
-		return x.ConsumptionSequence
+	if x != nil && x.ConsumptionSequence != nil {
+		return *x.ConsumptionSequence
 	}
 	return CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_ANY_UNSPECIFIED
 }
@@ -709,21 +978,78 @@ func (x *FamiliesServiceUpdateRequest) GetFormData() []*FormFieldDatumCreateRequ
 	return nil
 }
 
-// Describes the parameters necessary to update the identity of a family
+// Request message for modifying the foundational identity and structural classification of an existing Family.
+// This payload specifically targets core attributes that define the record's base operational behavior—such as
+// the unique alphanumeric code, structural hierarchy (parent mapping and leaf status), and the primary family type.
+//
+// **Critical Constraint:** Because these fields dictate core catalog integrity and transactional rules, consumers
+// must use this request strictly **prior to the first approval** of the family record. Once a family has been
+// approved, its identity attributes are permanently locked and cannot be mutated via this operation.
+//
+// **Note:** This is typically utilized by Catalog Administrators or Inventory Managers during the initial onboarding,
+// draft, or review phases to correct structural mappings before finalizing the catalog entry.
 type FamiliesServiceUpdateIdentityRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record that needs to be updated
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// The unique code that represents the family (can be updated only prior to the first approval)
-	Code string `protobuf:"bytes,12,opt,name=code,proto3" json:"code,omitempty"`
-	// The type of the family (can be updated only prior to the first approval)
-	FamilyType FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// Stores the ID of the parent family (can be updated only prior to the first approval)
-	ParentId uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Stores if the family is a leaf family (can be updated only prior to the first approval)
-	IsLeaf        bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the family. Can be updated only prior to the first approval.
+	//
+	// @example "FAM-IND-FST-01"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,12,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product). Can be updated only prior to the first approval.
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid FAMILY_TYPE enum value string or integer.
+	FamilyType *FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE,oneof" json:"family_type,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family. Can be updated only prior to the first approval.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	ParentId *uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families). Can be updated only prior to the first approval.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IsLeaf        *bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3,oneof" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -759,8 +1085,8 @@ func (*FamiliesServiceUpdateIdentityRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceUpdateIdentityRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -773,34 +1099,34 @@ func (x *FamiliesServiceUpdateIdentityRequest) GetId() uint64 {
 }
 
 func (x *FamiliesServiceUpdateIdentityRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *FamiliesServiceUpdateIdentityRequest) GetFamilyType() FAMILY_TYPE {
-	if x != nil {
-		return x.FamilyType
+	if x != nil && x.FamilyType != nil {
+		return *x.FamilyType
 	}
 	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceUpdateIdentityRequest) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceUpdateIdentityRequest) GetIsLeaf() bool {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return false
 }
 
-// Describes the parameters that are part of a family structure
+// Represents a full Family within the system.
 type Family struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -819,39 +1145,71 @@ type Family struct {
 	//
 	// @example 15234
 	VaultFolderId uint64 `protobuf:"varint,9,opt,name=vault_folder_id,json=vaultFolderId,proto3" json:"vault_folder_id,omitempty"`
-	// The name of the family
+	// @description The primary, human-readable name of the family.
+	//
+	// @example "Industrial Fasteners"
 	Name string `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the family that is to be used on prints
+	// @description The designated name of the family utilized for external-facing documents, invoices, and printed reports.
+	//
+	// @example "Ind. Fasteners"
 	PrintName string `protobuf:"bytes,11,opt,name=print_name,json=printName,proto3" json:"print_name,omitempty"`
-	// The unique code that represents the family
+	// @description The unique alphanumeric code used to internally classify and represent the family.
+	//
+	// @example "FAM-IND-FST-01"
 	Code string `protobuf:"bytes,12,opt,name=code,proto3" json:"code,omitempty"`
-	// The description of the family
+	// @description A detailed text description outlining the characteristics, specifications, and purpose of the family.
+	//
+	// @example "Heavy duty industrial fasteners suitable for high-stress applications."
 	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	// The type of the family
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product).
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
 	FamilyType FAMILY_TYPE `protobuf:"varint,15,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// The HSN/SAC code of the family
+	// @description The Harmonized System of Nomenclature (HSN) or Service Accounting Code (SAC) applied for taxation and regulatory compliance.
+	//
+	// @example "73181500"
 	HsnSacCode string `protobuf:"bytes,16,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
-	// Stores the ID of the associated unit of material
+	// @description The unique internal identifier of the unit of material (UOM) used to measure items within this family.
+	//
+	// @example 12
 	UomId uint64 `protobuf:"varint,17,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the unit quantity
+	// @description The standard batch or unit quantity multiplier for items within this family, represented in base subunits.
+	//
+	// @example 100
 	UnitQuantity uint64 `protobuf:"varint,18,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the parent family
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family.
+	//
+	// @example 0
 	ParentId uint64 `protobuf:"varint,19,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Stores if the family is a leaf family
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families).
+	//
+	// @example true
 	IsLeaf bool `protobuf:"varint,20,opt,name=is_leaf,json=isLeaf,proto3" json:"is_leaf,omitempty"`
-	// Stores the ID of the ledger
+	// @description The unique internal identifier of the accounting ledger associated with this family for financial tracking. A value of 0 typically denotes no specific ledger assignment.
+	//
+	// @example 452
 	LedgerId uint64 `protobuf:"varint,21,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
-	// Stores the ID of the tax group
+	// @description The unique internal identifier of the default tax group applied to items nested under this family.
+	//
+	// @example 4
 	TaxGroupId uint64 `protobuf:"varint,23,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Stores the unit price
+	// @description The default base unit price for items in this family, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1550
 	Price uint64 `protobuf:"varint,26,opt,name=price,proto3" json:"price,omitempty"`
-	// Stores the minimum stock to maintain
+	// @description The minimum inventory threshold required to be maintained for items within this family, commonly used to trigger automated restock alerts.
+	//
+	// @example 500
 	MinStockToMaintain uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3" json:"min_stock_to_maintain,omitempty"`
-	// Stores the consumption sequence
+	// @description The default inventory depletion sequence applied to items within this family (e.g., FIFO based on intake, LIFO based on shelf life).
+	//
+	// @example "CONSUMPTION_SEQUENCE_FIFO_INTAKE"
 	ConsumptionSequence CONSUMPTION_SEQUENCE `protobuf:"varint,29,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE" json:"consumption_sequence,omitempty"`
-	// The number of times that the family has been amended
+	// @description The number of times that this record has been amended after approval.
+	//
+	// @example 5
 	AmendmentCount uint64 `protobuf:"varint,40,opt,name=amendment_count,json=amendmentCount,proto3" json:"amendment_count,omitempty"`
-	// The list of dynamic forms
+	// @description Collection of organization-specific dynamic data.
 	FormData      []*FormFieldDatum `protobuf:"bytes,50,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1048,10 +1406,10 @@ func (x *Family) GetFormData() []*FormFieldDatum {
 	return nil
 }
 
-// Describes the message consisting of the list of families
+// Container message for a collection of Family records.
 type FamiliesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of families
+	// @description An array of Family records.
 	List          []*Family `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1094,7 +1452,7 @@ func (x *FamiliesList) GetList() []*Family {
 	return nil
 }
 
-// Describes a pagination request to retrieve records
+// Pagination request for retrieving slices of Family records.
 type FamiliesServicePaginationReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1102,7 +1460,7 @@ type FamiliesServicePaginationReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to return per page.
@@ -1122,19 +1480,23 @@ type FamiliesServicePaginationReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The specific field key to sort the results by.
-	SortKey FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY" json:"sort_key,omitempty"`
-	// The status of this family
-	Status        STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
+	SortKey *FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY,oneof" json:"sort_key,omitempty"`
+	// @optional
+	//
+	// @description Filter results by a specific lifecycle status.
+	//
+	// @example STANDING
+	Status        *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,6,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1170,8 +1532,8 @@ func (*FamiliesServicePaginationReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServicePaginationReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1184,34 +1546,34 @@ func (x *FamiliesServicePaginationReq) GetCount() int64 {
 }
 
 func (x *FamiliesServicePaginationReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *FamiliesServicePaginationReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *FamiliesServicePaginationReq) GetSortKey() FAMILY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return FAMILY_SORT_KEY_FAMILY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *FamiliesServicePaginationReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
 
-// Describes the response to a pagination request
+// Response message for paginated queries, including total counts for UI elements.
 type FamiliesServicePaginationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description Number of records returned in the current response slice.
@@ -1290,7 +1652,12 @@ func (x *FamiliesServicePaginationResponse) GetPayload() []*Family {
 	return nil
 }
 
-// Describes the base request payload of a filter search
+// Advanced filter request for searching and paginating families using multiple logical criteria.
+// This message encapsulates pagination controls, sorting keys, lifecycle status filters,
+// timestamp ranges, and entity references.
+//
+// **Note:** This is the primary message layout used by the frontend and external API clients
+// to build robust data-table queries, reporting views, and targeted record lookups.
 type FamiliesServiceFilterReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1298,7 +1665,7 @@ type FamiliesServiceFilterReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -1318,17 +1685,17 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1338,7 +1705,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1348,7 +1715,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1358,7 +1725,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1368,7 +1735,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1378,14 +1745,20 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Filter with the given multiple statuses (if the list is not empty). All the records that match any of the statuses will be returned
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple lifecycle statuses simultaneously. Returns records that match any of the provided statuses (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["DRAFT", "STANDING"]
+	//
+	// @format Repeated array of valid STANDARD_LIFECYCLE_STATUS enum strings or integer values.
 	MultiStatus []STANDARD_LIFECYCLE_STATUS `protobuf:"varint,100,rep,packed,name=multi_status,json=multiStatus,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"multi_status,omitempty"`
 	// @optional
 	//
@@ -1396,7 +1769,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1406,7 +1779,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1416,7 +1789,7 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1426,37 +1799,155 @@ type FamiliesServiceFilterReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the family
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code that represents the family
-	Code string `protobuf:"bytes,22,opt,name=code,proto3" json:"code,omitempty"`
-	// The type of the family
-	FamilyType FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// Filter from any of the given family types. All the records that match any of the family types will be returned
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the family.
+	//
+	// @example "Industrial Fasteners"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the family. Can be updated only prior to the first approval.
+	//
+	// @example "FAM-IND-FST-01"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,22,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product). Can be updated only prior to the first approval.
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid FAMILY_TYPE enum value string or integer.
+	FamilyType *FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE,oneof" json:"family_type,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple family classification types simultaneously. Returns records that match any of the provided types (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["FAMILY_TYPE_COMPONENT", "FAMILY_TYPE_EQUIPMENT"]
+	//
+	// @format Repeated array of valid FAMILY_TYPE enum strings or integer values.
 	MultiFamilyType []FAMILY_TYPE `protobuf:"varint,250,rep,packed,name=multi_family_type,json=multiFamilyType,proto3,enum=Scailo.FAMILY_TYPE" json:"multi_family_type,omitempty"`
-	// The HSN/SAC code of the family
-	HsnSacCode string `protobuf:"bytes,26,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
-	// Stores the ID of the associated unit of material
-	UomId uint64 `protobuf:"varint,27,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the unit quantity
-	UnitQuantity uint64 `protobuf:"varint,28,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the parent family
-	ParentId uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Filter with the given leaf property
-	IsLeaf BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
-	// Stores the ID of the ledger
-	LedgerId uint64 `protobuf:"varint,31,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
-	// Stores the ID of the QC group
-	QcGroupId uint64 `protobuf:"varint,32,opt,name=qc_group_id,json=qcGroupId,proto3" json:"qc_group_id,omitempty"`
-	// Stores the ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,33,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Stores the consumption sequence
-	ConsumptionSequence CONSUMPTION_SEQUENCE `protobuf:"varint,39,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE" json:"consumption_sequence,omitempty"`
-	// Filter by families that are present in the given parent storage ID (and all the corresponding child storage IDs)
-	ParentStorageId uint64 `protobuf:"varint,50,opt,name=parent_storage_id,json=parentStorageId,proto3" json:"parent_storage_id,omitempty"`
-	// Filter by families that have the given label ID
-	LabelId uint64 `protobuf:"varint,60,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
+	// @optional
+	//
+	// @description The Harmonized System of Nomenclature (HSN) or Service Accounting Code (SAC) applied for taxation and regulatory compliance.
+	//
+	// @example "73181500"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	HsnSacCode *string `protobuf:"bytes,26,opt,name=hsn_sac_code,json=hsnSacCode,proto3,oneof" json:"hsn_sac_code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the unit of material (UOM) used to measure items within this family.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UomId *uint64 `protobuf:"varint,27,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
+	// @optional
+	//
+	// @description The standard batch or unit quantity multiplier for items within this family, represented in base subunits.
+	//
+	// @example 100
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UnitQuantity *uint64 `protobuf:"varint,28,opt,name=unit_quantity,json=unitQuantity,proto3,oneof" json:"unit_quantity,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family. Can be updated only prior to the first approval.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	ParentId *uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families). Can be updated only prior to the first approval.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IsLeaf *BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the accounting ledger associated with this family for financial tracking. A value of 0 typically denotes no specific ledger assignment.
+	//
+	// @example 452
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	LedgerId *uint64 `protobuf:"varint,31,opt,name=ledger_id,json=ledgerId,proto3,oneof" json:"ledger_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of the Quality Control (QC) group associated with the family.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	QcGroupId *uint64 `protobuf:"varint,32,opt,name=qc_group_id,json=qcGroupId,proto3,oneof" json:"qc_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the default tax group applied to items nested under this family.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	TaxGroupId *uint64 `protobuf:"varint,33,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The default inventory depletion sequence applied to items within this family (e.g., FIFO based on intake, LIFO based on shelf life).
+	//
+	// @example "CONSUMPTION_SEQUENCE_FIFO_INTAKE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid CONSUMPTION_SEQUENCE enum value string or integer.
+	ConsumptionSequence *CONSUMPTION_SEQUENCE `protobuf:"varint,39,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE,oneof" json:"consumption_sequence,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a parent storage location. Returns all families physically located within this storage node or any of its nested child storage locations.
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ParentStorageId *uint64 `protobuf:"varint,50,opt,name=parent_storage_id,json=parentStorageId,proto3,oneof" json:"parent_storage_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a categorization label applied to the family.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	LabelId *uint64 `protobuf:"varint,60,opt,name=label_id,json=labelId,proto3,oneof" json:"label_id,omitempty"`
 	// @optional
 	//
 	// @description Filter based on dynamic form field values.
@@ -1467,7 +1958,7 @@ type FamiliesServiceFilterReq struct {
 	// Set to `false` to improve performance when form data is not needed.
 	//
 	// @example true
-	IncludeFormData bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3" json:"include_form_data,omitempty"`
+	IncludeFormData *bool `protobuf:"varint,501,opt,name=include_form_data,json=includeFormData,proto3,oneof" json:"include_form_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1503,8 +1994,8 @@ func (*FamiliesServiceFilterReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceFilterReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -1517,64 +2008,64 @@ func (x *FamiliesServiceFilterReq) GetCount() int64 {
 }
 
 func (x *FamiliesServiceFilterReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *FamiliesServiceFilterReq) GetSortKey() FAMILY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return FAMILY_SORT_KEY_FAMILY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *FamiliesServiceFilterReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *FamiliesServiceFilterReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
@@ -1587,50 +2078,50 @@ func (x *FamiliesServiceFilterReq) GetMultiStatus() []STANDARD_LIFECYCLE_STATUS 
 }
 
 func (x *FamiliesServiceFilterReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *FamiliesServiceFilterReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *FamiliesServiceFilterReq) GetFamilyType() FAMILY_TYPE {
-	if x != nil {
-		return x.FamilyType
+	if x != nil && x.FamilyType != nil {
+		return *x.FamilyType
 	}
 	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
 }
@@ -1643,78 +2134,78 @@ func (x *FamiliesServiceFilterReq) GetMultiFamilyType() []FAMILY_TYPE {
 }
 
 func (x *FamiliesServiceFilterReq) GetHsnSacCode() string {
-	if x != nil {
-		return x.HsnSacCode
+	if x != nil && x.HsnSacCode != nil {
+		return *x.HsnSacCode
 	}
 	return ""
 }
 
 func (x *FamiliesServiceFilterReq) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetUnitQuantity() uint64 {
-	if x != nil {
-		return x.UnitQuantity
+	if x != nil && x.UnitQuantity != nil {
+		return *x.UnitQuantity
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceFilterReq) GetLedgerId() uint64 {
-	if x != nil {
-		return x.LedgerId
+	if x != nil && x.LedgerId != nil {
+		return *x.LedgerId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetQcGroupId() uint64 {
-	if x != nil {
-		return x.QcGroupId
+	if x != nil && x.QcGroupId != nil {
+		return *x.QcGroupId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetConsumptionSequence() CONSUMPTION_SEQUENCE {
-	if x != nil {
-		return x.ConsumptionSequence
+	if x != nil && x.ConsumptionSequence != nil {
+		return *x.ConsumptionSequence
 	}
 	return CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceFilterReq) GetParentStorageId() uint64 {
-	if x != nil {
-		return x.ParentStorageId
+	if x != nil && x.ParentStorageId != nil {
+		return *x.ParentStorageId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceFilterReq) GetLabelId() uint64 {
-	if x != nil {
-		return x.LabelId
+	if x != nil && x.LabelId != nil {
+		return *x.LabelId
 	}
 	return 0
 }
@@ -1727,13 +2218,19 @@ func (x *FamiliesServiceFilterReq) GetFormData() []*FormFieldDatumFilterRequest 
 }
 
 func (x *FamiliesServiceFilterReq) GetIncludeFormData() bool {
-	if x != nil {
-		return x.IncludeFormData
+	if x != nil && x.IncludeFormData != nil {
+		return *x.IncludeFormData
 	}
 	return false
 }
 
-// Describes the request to count all families with the given criteria
+// Target filter request for counting family records matching specific logical criteria.
+// This message encapsulates lifecycle status filters, timestamp ranges, workflow markers,
+// and entity references to determine the total size of a targeted dataset.
+//
+// **Note:** This is the primary message layout used by backend calculation engines, reporting
+// services, and frontend pagination headers to evaluate total record matches dynamically
+// before or alongside retrieving paginated results.
 type FamiliesServiceCountReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -1741,7 +2238,7 @@ type FamiliesServiceCountReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or AFTER this UNIX timestamp.
@@ -1751,7 +2248,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampStart uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3" json:"creation_timestamp_start,omitempty"`
+	CreationTimestampStart *uint64 `protobuf:"varint,101,opt,name=creation_timestamp_start,json=creationTimestampStart,proto3,oneof" json:"creation_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records created ON or BEFORE this UNIX timestamp.
@@ -1761,7 +2258,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	CreationTimestampEnd uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3" json:"creation_timestamp_end,omitempty"`
+	CreationTimestampEnd *uint64 `protobuf:"varint,102,opt,name=creation_timestamp_end,json=creationTimestampEnd,proto3,oneof" json:"creation_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or AFTER this UNIX timestamp.
@@ -1771,7 +2268,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampStart uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3" json:"modification_timestamp_start,omitempty"`
+	ModificationTimestampStart *uint64 `protobuf:"varint,103,opt,name=modification_timestamp_start,json=modificationTimestampStart,proto3,oneof" json:"modification_timestamp_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records modified ON or BEFORE this UNIX timestamp.
@@ -1781,7 +2278,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ModificationTimestampEnd uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3" json:"modification_timestamp_end,omitempty"`
+	ModificationTimestampEnd *uint64 `protobuf:"varint,104,opt,name=modification_timestamp_end,json=modificationTimestampEnd,proto3,oneof" json:"modification_timestamp_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -1791,14 +2288,20 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,8,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Filter with the given multiple statuses (if the list is not empty). All the records that match any of the statuses will be returned
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple lifecycle statuses simultaneously. Returns records that match any of the provided statuses (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["DRAFT", "STANDING"]
+	//
+	// @format Repeated array of valid STANDARD_LIFECYCLE_STATUS enum strings or integer values.
 	MultiStatus []STANDARD_LIFECYCLE_STATUS `protobuf:"varint,100,rep,packed,name=multi_status,json=multiStatus,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"multi_status,omitempty"`
 	// @optional
 	//
@@ -1809,7 +2312,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnStart uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3" json:"approved_on_start,omitempty"`
+	ApprovedOnStart *uint64 `protobuf:"varint,11,opt,name=approved_on_start,json=approvedOnStart,proto3,oneof" json:"approved_on_start,omitempty"`
 	// @optional
 	//
 	// @description Filter records approved ON or BEFORE this UNIX timestamp.
@@ -1819,7 +2322,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedOnEnd uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3" json:"approved_on_end,omitempty"`
+	ApprovedOnEnd *uint64 `protobuf:"varint,12,opt,name=approved_on_end,json=approvedOnEnd,proto3,oneof" json:"approved_on_end,omitempty"`
 	// @optional
 	//
 	// @description Filter by the specific user ID who approved the records.
@@ -1829,7 +2332,7 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApprovedByUserId uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3" json:"approved_by_user_id,omitempty"`
+	ApprovedByUserId *uint64 `protobuf:"varint,13,opt,name=approved_by_user_id,json=approvedByUserId,proto3,oneof" json:"approved_by_user_id,omitempty"`
 	// @optional
 	//
 	// @description Filter by the role ID of the approver.
@@ -1839,38 +2342,158 @@ type FamiliesServiceCountReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	ApproverRoleId uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3" json:"approver_role_id,omitempty"`
-	// The name of the family
-	Name string `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
-	// The unique code that represents the family
-	Code string `protobuf:"bytes,22,opt,name=code,proto3" json:"code,omitempty"`
-	// The type of the family
-	FamilyType FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// Filter from any of the given family types. All the records that match any of the family types will be returned
+	ApproverRoleId *uint64 `protobuf:"varint,14,opt,name=approver_role_id,json=approverRoleId,proto3,oneof" json:"approver_role_id,omitempty"`
+	// @optional
+	//
+	// @description The primary, human-readable name of the family.
+	//
+	// @example "Industrial Fasteners"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	Name *string `protobuf:"bytes,20,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// @optional
+	//
+	// @description The unique alphanumeric code used to internally classify and represent the family. Can be updated only prior to the first approval.
+	//
+	// @example "FAM-IND-FST-01"
+	//
+	// @regex .+
+	//
+	// @format Must be a non-empty string.
+	Code *string `protobuf:"bytes,22,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	// @optional
+	//
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product). Can be updated only prior to the first approval.
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid FAMILY_TYPE enum value string or integer.
+	FamilyType *FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE,oneof" json:"family_type,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple family classification types simultaneously. Returns records that match any of the provided types (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["FAMILY_TYPE_COMPONENT", "FAMILY_TYPE_EQUIPMENT"]
+	//
+	// @format Repeated array of valid FAMILY_TYPE enum strings or integer values.
 	MultiFamilyType []FAMILY_TYPE `protobuf:"varint,250,rep,packed,name=multi_family_type,json=multiFamilyType,proto3,enum=Scailo.FAMILY_TYPE" json:"multi_family_type,omitempty"`
-	// The HSN/SAC code of the family
-	HsnSacCode string `protobuf:"bytes,26,opt,name=hsn_sac_code,json=hsnSacCode,proto3" json:"hsn_sac_code,omitempty"`
-	// Stores the ID of the associated unit of material
-	UomId uint64 `protobuf:"varint,27,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the unit quantity
-	UnitQuantity uint64 `protobuf:"varint,28,opt,name=unit_quantity,json=unitQuantity,proto3" json:"unit_quantity,omitempty"`
-	// Stores the ID of the parent family
-	ParentId uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Filter with the given leaf property
-	IsLeaf BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
-	// Stores the ID of the ledger
-	LedgerId uint64 `protobuf:"varint,31,opt,name=ledger_id,json=ledgerId,proto3" json:"ledger_id,omitempty"`
-	// Stores the ID of the QC group
-	QcGroupId uint64 `protobuf:"varint,32,opt,name=qc_group_id,json=qcGroupId,proto3" json:"qc_group_id,omitempty"`
-	// Stores the ID of the tax group
-	TaxGroupId uint64 `protobuf:"varint,33,opt,name=tax_group_id,json=taxGroupId,proto3" json:"tax_group_id,omitempty"`
-	// Stores the consumption sequence
-	ConsumptionSequence CONSUMPTION_SEQUENCE `protobuf:"varint,39,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE" json:"consumption_sequence,omitempty"`
-	// Filter by families that are present in the given parent storage ID (and all the corresponding child storage IDs)
-	ParentStorageId uint64 `protobuf:"varint,50,opt,name=parent_storage_id,json=parentStorageId,proto3" json:"parent_storage_id,omitempty"`
-	// Filter by families that have the given label ID
-	LabelId uint64 `protobuf:"varint,60,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
-	// The list of form data filters
+	// @optional
+	//
+	// @description The Harmonized System of Nomenclature (HSN) or Service Accounting Code (SAC) applied for taxation and regulatory compliance.
+	//
+	// @example "73181500"
+	//
+	// @regex .*
+	//
+	// @format Must be a non-empty string.
+	HsnSacCode *string `protobuf:"bytes,26,opt,name=hsn_sac_code,json=hsnSacCode,proto3,oneof" json:"hsn_sac_code,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the unit of material (UOM) used to measure items within this family.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UomId *uint64 `protobuf:"varint,27,opt,name=uom_id,json=uomId,proto3,oneof" json:"uom_id,omitempty"`
+	// @optional
+	//
+	// @description The standard batch or unit quantity multiplier for items within this family, represented in base subunits.
+	//
+	// @example 100
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	UnitQuantity *uint64 `protobuf:"varint,28,opt,name=unit_quantity,json=unitQuantity,proto3,oneof" json:"unit_quantity,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family. Can be updated only prior to the first approval.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	ParentId *uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families). Can be updated only prior to the first approval.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IsLeaf *BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the accounting ledger associated with this family for financial tracking. A value of 0 typically denotes no specific ledger assignment.
+	//
+	// @example 452
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	LedgerId *uint64 `protobuf:"varint,31,opt,name=ledger_id,json=ledgerId,proto3,oneof" json:"ledger_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of the Quality Control (QC) group associated with the family.
+	//
+	// @example 88
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	QcGroupId *uint64 `protobuf:"varint,32,opt,name=qc_group_id,json=qcGroupId,proto3,oneof" json:"qc_group_id,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the default tax group applied to items nested under this family.
+	//
+	// @example 4
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
+	TaxGroupId *uint64 `protobuf:"varint,33,opt,name=tax_group_id,json=taxGroupId,proto3,oneof" json:"tax_group_id,omitempty"`
+	// @optional
+	//
+	// @description The default inventory depletion sequence applied to items within this family (e.g., FIFO based on intake, LIFO based on shelf life).
+	//
+	// @example "CONSUMPTION_SEQUENCE_FIFO_INTAKE"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid CONSUMPTION_SEQUENCE enum value string or integer.
+	ConsumptionSequence *CONSUMPTION_SEQUENCE `protobuf:"varint,39,opt,name=consumption_sequence,json=consumptionSequence,proto3,enum=Scailo.CONSUMPTION_SEQUENCE,oneof" json:"consumption_sequence,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a parent storage location. Returns all families physically located within this storage node or any of its nested child storage locations.
+	//
+	// @example 1050
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	ParentStorageId *uint64 `protobuf:"varint,50,opt,name=parent_storage_id,json=parentStorageId,proto3,oneof" json:"parent_storage_id,omitempty"`
+	// @optional
+	//
+	// @description Filter by the unique internal identifier of a categorization label applied to the family.
+	//
+	// @example 12
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
+	LabelId *uint64 `protobuf:"varint,60,opt,name=label_id,json=labelId,proto3,oneof" json:"label_id,omitempty"`
+	// @optional
+	//
+	// @description Filter based on dynamic form field values.
 	FormData      []*FormFieldDatumFilterRequest `protobuf:"bytes,500,rep,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1907,50 +2530,50 @@ func (*FamiliesServiceCountReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceCountReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceCountReq) GetCreationTimestampStart() uint64 {
-	if x != nil {
-		return x.CreationTimestampStart
+	if x != nil && x.CreationTimestampStart != nil {
+		return *x.CreationTimestampStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetCreationTimestampEnd() uint64 {
-	if x != nil {
-		return x.CreationTimestampEnd
+	if x != nil && x.CreationTimestampEnd != nil {
+		return *x.CreationTimestampEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetModificationTimestampStart() uint64 {
-	if x != nil {
-		return x.ModificationTimestampStart
+	if x != nil && x.ModificationTimestampStart != nil {
+		return *x.ModificationTimestampStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetModificationTimestampEnd() uint64 {
-	if x != nil {
-		return x.ModificationTimestampEnd
+	if x != nil && x.ModificationTimestampEnd != nil {
+		return *x.ModificationTimestampEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCountReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
@@ -1963,50 +2586,50 @@ func (x *FamiliesServiceCountReq) GetMultiStatus() []STANDARD_LIFECYCLE_STATUS {
 }
 
 func (x *FamiliesServiceCountReq) GetApprovedOnStart() uint64 {
-	if x != nil {
-		return x.ApprovedOnStart
+	if x != nil && x.ApprovedOnStart != nil {
+		return *x.ApprovedOnStart
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetApprovedOnEnd() uint64 {
-	if x != nil {
-		return x.ApprovedOnEnd
+	if x != nil && x.ApprovedOnEnd != nil {
+		return *x.ApprovedOnEnd
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetApprovedByUserId() uint64 {
-	if x != nil {
-		return x.ApprovedByUserId
+	if x != nil && x.ApprovedByUserId != nil {
+		return *x.ApprovedByUserId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetApproverRoleId() uint64 {
-	if x != nil {
-		return x.ApproverRoleId
+	if x != nil && x.ApproverRoleId != nil {
+		return *x.ApproverRoleId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCountReq) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCountReq) GetFamilyType() FAMILY_TYPE {
-	if x != nil {
-		return x.FamilyType
+	if x != nil && x.FamilyType != nil {
+		return *x.FamilyType
 	}
 	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
 }
@@ -2019,78 +2642,78 @@ func (x *FamiliesServiceCountReq) GetMultiFamilyType() []FAMILY_TYPE {
 }
 
 func (x *FamiliesServiceCountReq) GetHsnSacCode() string {
-	if x != nil {
-		return x.HsnSacCode
+	if x != nil && x.HsnSacCode != nil {
+		return *x.HsnSacCode
 	}
 	return ""
 }
 
 func (x *FamiliesServiceCountReq) GetUomId() uint64 {
-	if x != nil {
-		return x.UomId
+	if x != nil && x.UomId != nil {
+		return *x.UomId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetUnitQuantity() uint64 {
-	if x != nil {
-		return x.UnitQuantity
+	if x != nil && x.UnitQuantity != nil {
+		return *x.UnitQuantity
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceCountReq) GetLedgerId() uint64 {
-	if x != nil {
-		return x.LedgerId
+	if x != nil && x.LedgerId != nil {
+		return *x.LedgerId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetQcGroupId() uint64 {
-	if x != nil {
-		return x.QcGroupId
+	if x != nil && x.QcGroupId != nil {
+		return *x.QcGroupId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetTaxGroupId() uint64 {
-	if x != nil {
-		return x.TaxGroupId
+	if x != nil && x.TaxGroupId != nil {
+		return *x.TaxGroupId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetConsumptionSequence() CONSUMPTION_SEQUENCE {
-	if x != nil {
-		return x.ConsumptionSequence
+	if x != nil && x.ConsumptionSequence != nil {
+		return *x.ConsumptionSequence
 	}
 	return CONSUMPTION_SEQUENCE_CONSUMPTION_SEQUENCE_ANY_UNSPECIFIED
 }
 
 func (x *FamiliesServiceCountReq) GetParentStorageId() uint64 {
-	if x != nil {
-		return x.ParentStorageId
+	if x != nil && x.ParentStorageId != nil {
+		return *x.ParentStorageId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceCountReq) GetLabelId() uint64 {
-	if x != nil {
-		return x.LabelId
+	if x != nil && x.LabelId != nil {
+		return *x.LabelId
 	}
 	return 0
 }
@@ -2102,7 +2725,13 @@ func (x *FamiliesServiceCountReq) GetFormData() []*FormFieldDatumFilterRequest {
 	return nil
 }
 
-// Describes the request payload for performing a generic search operation on records
+// Broad-spectrum search and lookup request for locating and paginating families via text matching.
+// This message encapsulates full-text query parameters, pagination controls, sorting keys,
+// lifecycle status constraints, and other core references.
+//
+// **Note:** This is the primary message layout used for global search bars, fast-filtering dashboard
+// inputs, and omni-box search utilities where users need to match loose textual terms against
+// records while retaining structural pagination.
 type FamiliesServiceSearchAllReq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @optional
@@ -2110,7 +2739,7 @@ type FamiliesServiceSearchAllReq struct {
 	// @description Filter by active status. If `true`, then returns only active records. If `false`, then returns only inactive records.
 	//
 	// @example ANY
-	IsActive BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER" json:"is_active,omitempty"`
+	IsActive *BOOL_FILTER `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_active,omitempty"`
 	// @mandatory
 	//
 	// @description Number of records to fetch. **Critical:** Use `-1` to retrieve all records. A value of `0` will return no results. Default is `0`.
@@ -2130,17 +2759,17 @@ type FamiliesServiceSearchAllReq struct {
 	// @regex ^[0-9]+$
 	//
 	// @format Non-negative integer.
-	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Offset *uint64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
 	// @optional
 	//
 	// @description Sort direction.
 	//
 	// @example DESCENDING
-	SortOrder SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER" json:"sort_order,omitempty"`
+	SortOrder *SORT_ORDER `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3,enum=Scailo.SORT_ORDER,oneof" json:"sort_order,omitempty"`
 	// @optional
 	//
 	// @description The field used for sorting.
-	SortKey FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY" json:"sort_key,omitempty"`
+	SortKey *FAMILY_SORT_KEY `protobuf:"varint,5,opt,name=sort_key,json=sortKey,proto3,enum=Scailo.FAMILY_SORT_KEY,oneof" json:"sort_key,omitempty"`
 	// @optional
 	//
 	// @description Filter by the organization UUID.
@@ -2150,16 +2779,22 @@ type FamiliesServiceSearchAllReq struct {
 	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
 	//
 	// @format If provided, must be a valid v4 UUID in canonical hyphenated form.
-	EntityUuid string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	EntityUuid *string `protobuf:"bytes,6,opt,name=entity_uuid,json=entityUuid,proto3,oneof" json:"entity_uuid,omitempty"`
 	// @optional
 	//
 	// @description Filter by lifecycle status (e.g., DRAFT, STANDING).
 	//
 	// @example STANDING
-	Status STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"status,omitempty"`
-	// Filter with the given multiple statuses (if the list is not empty). All the records that match any of the statuses will be returned
+	Status *STANDARD_LIFECYCLE_STATUS `protobuf:"varint,10,opt,name=status,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS,oneof" json:"status,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple lifecycle statuses simultaneously. Returns records that match any of the provided statuses (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["DRAFT", "STANDING"]
+	//
+	// @format Repeated array of valid STANDARD_LIFECYCLE_STATUS enum strings or integer values.
 	MultiStatus []STANDARD_LIFECYCLE_STATUS `protobuf:"varint,100,rep,packed,name=multi_status,json=multiStatus,proto3,enum=Scailo.STANDARD_LIFECYCLE_STATUS" json:"multi_status,omitempty"`
-	// @mandatory
+	// @optional
 	//
 	// @description The search string to match against reference IDs.
 	//
@@ -2168,15 +2803,45 @@ type FamiliesServiceSearchAllReq struct {
 	// @regex .*
 	//
 	// @format: May contain any UTF-8 characters.
-	SearchKey string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3" json:"search_key,omitempty"`
-	// The type of the family
-	FamilyType FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE" json:"family_type,omitempty"`
-	// Filter from any of the given family types. All the records that match any of the family types will be returned
+	SearchKey *string `protobuf:"bytes,11,opt,name=search_key,json=searchKey,proto3,oneof" json:"search_key,omitempty"`
+	// @optional
+	//
+	// @description The classification type of the family, dictating its operational lifecycle and valid transaction types (e.g., equipment, feedstock, product). Can be updated only prior to the first approval.
+	//
+	// @example "FAMILY_TYPE_COMPONENT"
+	//
+	// @regex ^[A-Z_]+$
+	//
+	// @format Valid FAMILY_TYPE enum value string or integer.
+	FamilyType *FAMILY_TYPE `protobuf:"varint,25,opt,name=family_type,json=familyType,proto3,enum=Scailo.FAMILY_TYPE,oneof" json:"family_type,omitempty"`
+	// @optional
+	//
+	// @description Filter by multiple family classification types simultaneously. Returns records that match any of the provided types (logical OR). If the list is empty, this filter is disregarded.
+	//
+	// @example ["FAMILY_TYPE_COMPONENT", "FAMILY_TYPE_EQUIPMENT"]
+	//
+	// @format Repeated array of valid FAMILY_TYPE enum strings or integer values.
 	MultiFamilyType []FAMILY_TYPE `protobuf:"varint,250,rep,packed,name=multi_family_type,json=multiFamilyType,proto3,enum=Scailo.FAMILY_TYPE" json:"multi_family_type,omitempty"`
-	// The ID of the associated non-leaf parent family
-	ParentId uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Filter with the given leaf property
-	IsLeaf        BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER" json:"is_leaf,omitempty"`
+	// @optional
+	//
+	// @description The unique internal identifier of the parent family. A value of 0 indicates this is a top-level root family. Can be updated only prior to the first approval.
+	//
+	// @example 0
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
+	ParentId *uint64 `protobuf:"varint,29,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// @optional
+	//
+	// @description A boolean flag indicating whether this family is a leaf node in the hierarchy (i.e., it cannot contain nested sub-families). Can be updated only prior to the first approval.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
+	IsLeaf        *BOOL_FILTER `protobuf:"varint,30,opt,name=is_leaf,json=isLeaf,proto3,enum=Scailo.BOOL_FILTER,oneof" json:"is_leaf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2212,8 +2877,8 @@ func (*FamiliesServiceSearchAllReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceSearchAllReq) GetIsActive() BOOL_FILTER {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
@@ -2226,36 +2891,36 @@ func (x *FamiliesServiceSearchAllReq) GetCount() int64 {
 }
 
 func (x *FamiliesServiceSearchAllReq) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
+	if x != nil && x.Offset != nil {
+		return *x.Offset
 	}
 	return 0
 }
 
 func (x *FamiliesServiceSearchAllReq) GetSortOrder() SORT_ORDER {
-	if x != nil {
-		return x.SortOrder
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
 	}
 	return SORT_ORDER_ASCENDING_UNSPECIFIED
 }
 
 func (x *FamiliesServiceSearchAllReq) GetSortKey() FAMILY_SORT_KEY {
-	if x != nil {
-		return x.SortKey
+	if x != nil && x.SortKey != nil {
+		return *x.SortKey
 	}
 	return FAMILY_SORT_KEY_FAMILY_SORT_KEY_ID_UNSPECIFIED
 }
 
 func (x *FamiliesServiceSearchAllReq) GetEntityUuid() string {
-	if x != nil {
-		return x.EntityUuid
+	if x != nil && x.EntityUuid != nil {
+		return *x.EntityUuid
 	}
 	return ""
 }
 
 func (x *FamiliesServiceSearchAllReq) GetStatus() STANDARD_LIFECYCLE_STATUS {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return STANDARD_LIFECYCLE_STATUS_ANY_UNSPECIFIED
 }
@@ -2268,15 +2933,15 @@ func (x *FamiliesServiceSearchAllReq) GetMultiStatus() []STANDARD_LIFECYCLE_STAT
 }
 
 func (x *FamiliesServiceSearchAllReq) GetSearchKey() string {
-	if x != nil {
-		return x.SearchKey
+	if x != nil && x.SearchKey != nil {
+		return *x.SearchKey
 	}
 	return ""
 }
 
 func (x *FamiliesServiceSearchAllReq) GetFamilyType() FAMILY_TYPE {
-	if x != nil {
-		return x.FamilyType
+	if x != nil && x.FamilyType != nil {
+		return *x.FamilyType
 	}
 	return FAMILY_TYPE_FAMILY_TYPE_ANY_UNSPECIFIED
 }
@@ -2289,25 +2954,42 @@ func (x *FamiliesServiceSearchAllReq) GetMultiFamilyType() []FAMILY_TYPE {
 }
 
 func (x *FamiliesServiceSearchAllReq) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return 0
 }
 
 func (x *FamiliesServiceSearchAllReq) GetIsLeaf() BOOL_FILTER {
-	if x != nil {
-		return x.IsLeaf
+	if x != nil && x.IsLeaf != nil {
+		return *x.IsLeaf
 	}
 	return BOOL_FILTER_BOOL_FILTER_ANY_UNSPECIFIED
 }
 
-// Describes the parameters that are required to filter the prospective families for a record represented by the given UUID
+// Request message for filtering and retrieving prospective families applicable to a specific transactional record.
+// This payload combines a universally unique identifier (UUID) for a target resource (e.g., a Purchase Order, Sales Order, or Production Plan)
+// with standard catalog filtering criteria to narrow down eligible families that can be associated with that resource.
+//
+// **Note:** This is commonly used by frontend interfaces to populate context-aware dropdowns or selection grids,
+// ensuring users only see families that are legally or operationally valid for the specified document.
 type FilterFamiliesReqForIdentifier struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// UUID of the resource
+	// @mandatory
+	//
+	// @description The globally unique identifier of the target resource (e.g., Purchase Order, Sales Order) for which prospective families are being evaluated and filtered.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Must be a valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// The families filter to apply
+	// @mandatory
+	//
+	// @description The advanced filtering criteria used to narrow down the list of prospective families. Encapsulates pagination, sorting, and attribute-based constraints.
+	//
+	// @format Nested FamiliesServiceFilterReq message block.
 	Filter        *FamiliesServiceFilterReq `protobuf:"bytes,10,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2357,14 +3039,39 @@ func (x *FilterFamiliesReqForIdentifier) GetFilter() *FamiliesServiceFilterReq {
 	return nil
 }
 
-// Describes the parameters necessary to create a family label
+// Request message for associating a categorization label with a specific family.
+// This mapping is primarily used to tag families for reporting, targeted filtering, or localized taxonomy without altering their core identity.
 type FamiliesServiceLabelCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the label ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target label to attach to the family.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	LabelId       uint64 `protobuf:"varint,11,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2401,8 +3108,8 @@ func (*FamiliesServiceLabelCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceLabelCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -2421,7 +3128,8 @@ func (x *FamiliesServiceLabelCreateRequest) GetLabelId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a family label
+// Represents the finalized association between a family and a categorization label.
+// Encapsulates the core entity mapping along with standard lifecycle and compliance metadata.
 type FamilyLabel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -2432,13 +3140,23 @@ type FamilyLabel struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the associated family.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the label ID
+	// @description The unique internal identifier of the associated label.
+	//
+	// @example 12
 	LabelId       uint64 `protobuf:"varint,11,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2523,10 +3241,13 @@ func (x *FamilyLabel) GetLabelId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of family labels
+// Represents a collection payload encapsulating multiple family label associations.
+// Used for bulk retrieval or data-grid population.
 type FamilyLabelsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the requested family label association records.
+	//
+	// @format Repeated array of FamilyLabel message blocks.
 	List          []*FamilyLabel `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2569,14 +3290,39 @@ func (x *FamilyLabelsList) GetList() []*FamilyLabel {
 	return nil
 }
 
-// Describes the parameters necessary to create a family storage
+// Request message for associating a physical or logical storage location with a specific family.
+// This instructs the inventory management system where items within this family are permitted to be stored.
 type FamiliesServiceStorageCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the storage ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target storage location to associate with the family.
+	//
+	// @example 1050
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	StorageId     uint64 `protobuf:"varint,11,opt,name=storage_id,json=storageId,proto3" json:"storage_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2613,8 +3359,8 @@ func (*FamiliesServiceStorageCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceStorageCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -2633,7 +3379,7 @@ func (x *FamiliesServiceStorageCreateRequest) GetStorageId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a family storage
+// Represents the finalized association between a family and an authorized storage location.
 type FamilyStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -2644,13 +3390,23 @@ type FamilyStorage struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the associated family.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the storage ID
+	// @description The unique internal identifier of the associated storage location.
+	//
+	// @example 1050
 	StorageId     uint64 `protobuf:"varint,11,opt,name=storage_id,json=storageId,proto3" json:"storage_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2735,10 +3491,12 @@ func (x *FamilyStorage) GetStorageId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of family storages
+// Represents a collection payload encapsulating multiple family storage location assignments.
 type FamilyStoragesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the requested family storage association records.
+	//
+	// @format Repeated array of FamilyStorage message blocks.
 	List          []*FamilyStorage `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2781,12 +3539,29 @@ func (x *FamilyStoragesList) GetList() []*FamilyStorage {
 	return nil
 }
 
-// Describes the parameters necessary to check if a family unit conversion is available
+// Request message to verify the existence or availability of a specific unit of material (UOM) conversion rule for a given family.
+// Used defensively by client applications before allowing orders in alternate units.
 type FamiliesServiceUnitConversionPresenceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores the family ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the unit of material ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target alternate unit of material (UOM).
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UomId         uint64 `protobuf:"varint,11,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2836,18 +3611,59 @@ func (x *FamiliesServiceUnitConversionPresenceRequest) GetUomId() uint64 {
 	return 0
 }
 
-// Describes the parameters necessary to create a family unit conversion
+// Request message for creating a mathematical conversion rule between a family's base unit of material and an alternate unit.
+// Used to support multi-unit procurement and manufacturing (e.g., converting base 'Pieces' to alternate 'Boxes').
 type FamiliesServiceUnitConversionCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the unit of material ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the alternate unit of material (UOM) being mapped.
+	//
+	// @example 12
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	UomId uint64 `protobuf:"varint,11,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the factor
+	// @mandatory
+	//
+	// @description The mathematical multiplication factor applied to calculate the conversion (Base Unit * Factor / Divisor = Alternate Unit).
+	//
+	// @example 10
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	Factor uint64 `protobuf:"varint,12,opt,name=factor,proto3" json:"factor,omitempty"`
-	// Stores the divisor
+	// @mandatory
+	//
+	// @description The mathematical division factor applied to calculate the conversion.
+	//
+	// @example 1
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	Divisor       uint64 `protobuf:"varint,13,opt,name=divisor,proto3" json:"divisor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2884,8 +3700,8 @@ func (*FamiliesServiceUnitConversionCreateRequest) Descriptor() ([]byte, []int) 
 }
 
 func (x *FamiliesServiceUnitConversionCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -2918,7 +3734,7 @@ func (x *FamiliesServiceUnitConversionCreateRequest) GetDivisor() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a family unit conversion
+// Represents a mathematical conversion rule mapped to a specific family, facilitating transactions in multiple units of material.
 type FamilyUnitConversion struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -2929,17 +3745,31 @@ type FamilyUnitConversion struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the associated family.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the unit of material ID
+	// @description The unique internal identifier of the alternate unit of material (UOM).
+	//
+	// @example 12
 	UomId uint64 `protobuf:"varint,11,opt,name=uom_id,json=uomId,proto3" json:"uom_id,omitempty"`
-	// Stores the factor
+	// @description The mathematical multiplication factor for the conversion.
+	//
+	// @example 10
 	Factor uint64 `protobuf:"varint,12,opt,name=factor,proto3" json:"factor,omitempty"`
-	// Stores the divisor
+	// @description The mathematical division factor for the conversion.
+	//
+	// @example 1
 	Divisor       uint64 `protobuf:"varint,13,opt,name=divisor,proto3" json:"divisor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3038,10 +3868,12 @@ func (x *FamilyUnitConversion) GetDivisor() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of family unit conversions
+// Represents a collection payload encapsulating multiple family unit conversion rules.
 type FamilyUnitConversionsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the requested family unit conversion records.
+	//
+	// @format Repeated array of FamilyUnitConversion message blocks.
 	List          []*FamilyUnitConversion `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3084,14 +3916,39 @@ func (x *FamilyUnitConversionsList) GetList() []*FamilyUnitConversion {
 	return nil
 }
 
-// Describes the parameters necessary to create a family qc group
+// Request message for associating a Quality Control (QC) group with a specific family.
+// This determines the specific inspection and compliance workflows required for items within this family upon intake or production.
 type FamiliesServiceQCGroupCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the qc group ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the QC group to associate with the family.
+	//
+	// @example 88
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	QcGroupId     uint64 `protobuf:"varint,11,opt,name=qc_group_id,json=qcGroupId,proto3" json:"qc_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3128,8 +3985,8 @@ func (*FamiliesServiceQCGroupCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceQCGroupCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3148,7 +4005,7 @@ func (x *FamiliesServiceQCGroupCreateRequest) GetQcGroupId() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a family qc group
+// Represents the finalized association between a family and a Quality Control (QC) compliance group.
 type FamilyQCGroup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -3159,13 +4016,23 @@ type FamilyQCGroup struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the associated family.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the qc group ID
+	// @description The unique internal identifier of the associated QC group.
+	//
+	// @example 88
 	QcGroupId     uint64 `protobuf:"varint,11,opt,name=qc_group_id,json=qcGroupId,proto3" json:"qc_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3250,10 +4117,12 @@ func (x *FamilyQCGroup) GetQcGroupId() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of family qc groups
+// Represents a collection payload encapsulating multiple family QC group assignments.
 type FamilyQCGroupsList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the requested family QC group association records.
+	//
+	// @format Repeated array of FamilyQCGroup message blocks.
 	List          []*FamilyQCGroup `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3296,18 +4165,59 @@ func (x *FamilyQCGroupsList) GetList() []*FamilyQCGroup {
 	return nil
 }
 
-// Describes the parameters necessary to create a family image
+// Request message for attaching an image or visual asset to a specific family.
+// This binds a previously uploaded document vault file to the family for use in catalogs or technical references.
 type FamiliesServiceImageCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target family.
+	//
+	// @example 582
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the vault file ID
+	// @mandatory
+	//
+	// @description The unique internal identifier of the uploaded image file within Vault.
+	//
+	// @example 15234
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	VaultFileId uint64 `protobuf:"varint,11,opt,name=vault_file_id,json=vaultFileId,proto3" json:"vault_file_id,omitempty"`
-	// Denotes if the image is public
+	// @mandatory
+	//
+	// @description A boolean flag indicating whether the image is publicly accessible (e.g., on external catalogs) or restricted to internal users.
+	//
+	// @example true
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
 	IsPublic bool `protobuf:"varint,12,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
-	// Stores the sequence number
+	// @mandatory
+	//
+	// @description The ordering or display sequence of the image relative to other images in the family gallery.
+	//
+	// @example 1
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SequenceNumber uint64 `protobuf:"varint,13,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -3344,8 +4254,8 @@ func (*FamiliesServiceImageCreateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceImageCreateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3378,16 +4288,48 @@ func (x *FamiliesServiceImageCreateRequest) GetSequenceNumber() uint64 {
 	return 0
 }
 
-// Describes the parameters necessary to update a family image
+// Request message for modifying the metadata (such as visibility or display order) of an existing family image attachment.
 type FamiliesServiceImageUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The ID of the record
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The unique internal identifier of the target record that needs to be updated.
+	//
+	// @example 1024
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Non-negative integer.
 	Id uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Denotes if the image is public
+	// @mandatory
+	//
+	// @description A boolean flag indicating whether the image is publicly accessible (e.g., on external catalogs) or restricted to internal users.
+	//
+	// @example false
+	//
+	// @regex ^(?:true|false)$
+	//
+	// @format Boolean true or false.
 	IsPublic bool `protobuf:"varint,12,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
-	// Stores the sequence number
+	// @mandatory
+	//
+	// @description The updated ordering or display sequence of the image relative to other images in the family gallery.
+	//
+	// @example 2
+	//
+	// @regex ^[1-9][0-9]*$
+	//
+	// @format Unsigned 64-bit integer greater than 0.
 	SequenceNumber uint64 `protobuf:"varint,13,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -3424,8 +4366,8 @@ func (*FamiliesServiceImageUpdateRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceImageUpdateRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3451,7 +4393,7 @@ func (x *FamiliesServiceImageUpdateRequest) GetSequenceNumber() uint64 {
 	return 0
 }
 
-// Describes the parameters that constitute a family image
+// Represents a visual asset association tied to a family, dictating its presentation order and access visibility.
 type FamilyImage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @description The organization's globally unique identifier.
@@ -3462,17 +4404,31 @@ type FamilyImage struct {
 	Metadata *EmployeeMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// @description Detailed approval workflow state (Approver ID, Role, and Timestamps).
 	ApprovalMetadata *ApprovalMetadata `protobuf:"bytes,3,opt,name=approval_metadata,json=approvalMetadata,proto3" json:"approval_metadata,omitempty"`
-	// @description The approval state of the record
+	// @description A boolean flag indicating whether this specific record requires further administrative approval.
+	//
+	// @example false
+	//
+	// @format Boolean true or false.
 	NeedApproval bool `protobuf:"varint,4,opt,name=need_approval,json=needApproval,proto3" json:"need_approval,omitempty"`
-	// Stores any comment that the user might have added during an operation
+	// @description Audit log comment or justification captured during the last modification or transactional operation.
+	//
+	// @example "This is a comment for audit purposes."
 	UserComment string `protobuf:"bytes,5,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// Stores the family ID
+	// @description The unique internal identifier of the associated family.
+	//
+	// @example 582
 	FamilyId uint64 `protobuf:"varint,10,opt,name=family_id,json=familyId,proto3" json:"family_id,omitempty"`
-	// Stores the vault file ID
+	// @description The unique internal identifier of the vault file acting as the image source.
+	//
+	// @example 15234
 	VaultFileId uint64 `protobuf:"varint,11,opt,name=vault_file_id,json=vaultFileId,proto3" json:"vault_file_id,omitempty"`
-	// Denotes if the image is public
+	// @description A boolean flag indicating if the image is publicly accessible.
+	//
+	// @example true
 	IsPublic bool `protobuf:"varint,12,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
-	// Stores the sequence number
+	// @description The sequential display order of the image.
+	//
+	// @example 1
 	SequenceNumber uint64 `protobuf:"varint,13,opt,name=sequence_number,json=sequenceNumber,proto3" json:"sequence_number,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -3571,10 +4527,12 @@ func (x *FamilyImage) GetSequenceNumber() uint64 {
 	return 0
 }
 
-// Describes the message consisting of the list of family images
+// Represents a collection payload encapsulating multiple family image associations.
 type FamilyImagesList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of records
+	// @description An array containing the requested family image association records.
+	//
+	// @format Repeated array of FamilyImage message blocks.
 	List          []*FamilyImage `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3617,14 +4575,39 @@ func (x *FamilyImagesList) GetList() []*FamilyImage {
 	return nil
 }
 
-// Describes the parameters necessary to update a family's price
+// Request message for updating the standard base unit price of an existing family.
+// This isolates price mutations from deeper structural updates, enabling rapid pricing adjustments while maintaining catalog integrity.
 type FamiliesServiceUpdatePriceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the family
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target family.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,10,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores the unit price
+	// @mandatory
+	//
+	// @description The new base unit price for items in this family, represented in the base currency subunit (e.g., cents).
+	//
+	// @example 1750
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	Price         uint64 `protobuf:"varint,26,opt,name=price,proto3" json:"price,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3661,8 +4644,8 @@ func (*FamiliesServiceUpdatePriceRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *FamiliesServiceUpdatePriceRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3681,14 +4664,39 @@ func (x *FamiliesServiceUpdatePriceRequest) GetPrice() uint64 {
 	return 0
 }
 
-// Describes the parameters necessary to update a family's min stock to maintain
+// Request message for updating the minimum inventory threshold (safety stock) of an existing family.
+// This triggers operational rules within the inventory system to automate restock alerts when physical stock dips below this value.
 type FamiliesServiceUpdateMinStockToMaintainRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stores any comment that the user might add during this operation
-	UserComment string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3" json:"user_comment,omitempty"`
-	// The UUID of the family
+	// @optional
+	//
+	// @description Audit log comment or justification for creating this record. This is stored in the record's history for compliance purposes.
+	//
+	// @example "This is a comment for audit purposes."
+	//
+	// @regex .*
+	//
+	// @format May contain any UTF-8 characters or be left empty.
+	UserComment *string `protobuf:"bytes,1,opt,name=user_comment,json=userComment,proto3,oneof" json:"user_comment,omitempty"`
+	// @mandatory
+	//
+	// @description The globally unique identifier (UUID) of the target family.
+	//
+	// @example "550e8400-e29b-41d4-a716-446655440000"
+	//
+	// @regex ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+	//
+	// @format Valid v4 UUID in canonical hyphenated form.
 	Uuid string `protobuf:"bytes,10,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Stores the minimum stock to maintain
+	// @mandatory
+	//
+	// @description The updated minimum inventory threshold required to be maintained for items within this family.
+	//
+	// @example 1000
+	//
+	// @regex ^[0-9]+$
+	//
+	// @format Unsigned 64-bit integer greater than or equal to 0.
 	MinStockToMaintain uint64 `protobuf:"varint,27,opt,name=min_stock_to_maintain,json=minStockToMaintain,proto3" json:"min_stock_to_maintain,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -3725,8 +4733,8 @@ func (*FamiliesServiceUpdateMinStockToMaintainRequest) Descriptor() ([]byte, []i
 }
 
 func (x *FamiliesServiceUpdateMinStockToMaintainRequest) GetUserComment() string {
-	if x != nil {
-		return x.UserComment
+	if x != nil && x.UserComment != nil {
+		return *x.UserComment
 	}
 	return ""
 }
@@ -3751,62 +4759,100 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\n" +
 	"\x15families.scailo.proto\x12\x06Scailo\x1a\x11base.scailo.proto\x1a\x1bbuf/validate/validate.proto\x1a\x1eforms_fields_data.scailo.proto\x1a\x1avault_folders.scailo.proto\":\n" +
 	"\x0fFamilyTypesList\x12'\n" +
-	"\x04list\x18\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x04list\"\xcd\x06\n" +
-	"\x1cFamiliesServiceCreateRequest\x12\x1f\n" +
-	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12!\n" +
-	"\fuser_comment\x18\x02 \x01(\tR\vuserComment\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
+	"\x04list\x18\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x04list\"\xa8\b\n" +
+	"\x1cFamiliesServiceCreateRequest\x12$\n" +
+	"\ventity_uuid\x18\x01 \x01(\tH\x00R\n" +
+	"entityUuid\x88\x01\x01\x12&\n" +
+	"\fuser_comment\x18\x02 \x01(\tH\x01R\vuserComment\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12&\n" +
 	"\n" +
 	"print_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tprintName\x12\x1b\n" +
-	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12)\n" +
-	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x124\n" +
-	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12)\n" +
-	"\fhsn_sac_code\x18\x10 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"hsnSacCode\x12\x1e\n" +
+	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x12.\n" +
+	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\vdescription\x88\x01\x01\x12@\n" +
+	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
+	"familyType\x12.\n" +
+	"\fhsn_sac_code\x18\x10 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\n" +
+	"hsnSacCode\x88\x01\x01\x12\x1e\n" +
 	"\x06uom_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12,\n" +
-	"\runit_quantity\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00R\funitQuantity\x12$\n" +
-	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bparentId\x12\x17\n" +
-	"\ais_leaf\x18\x14 \x01(\bR\x06isLeaf\x12$\n" +
-	"\tledger_id\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00R\bledgerId\x12)\n" +
+	"\runit_quantity\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00R\funitQuantity\x12)\n" +
+	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\x05R\bparentId\x88\x01\x01\x12\x17\n" +
+	"\ais_leaf\x18\x14 \x01(\bR\x06isLeaf\x12)\n" +
+	"\tledger_id\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00H\x06R\bledgerId\x88\x01\x01\x12)\n" +
 	"\ftax_group_id\x18\x17 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1d\n" +
-	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12:\n" +
-	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintain\x12O\n" +
-	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12@\n" +
-	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xd6\x05\n" +
-	"\x1cFamiliesServiceUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12!\n" +
-	"\fnotify_users\x18\x03 \x01(\bR\vnotifyUsers\x12/\n" +
-	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R\rvaultFolderId\x12\x1b\n" +
-	"\x04name\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12&\n" +
+	"taxGroupId\x12\"\n" +
+	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00H\aR\x05price\x88\x01\x01\x12?\n" +
+	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00H\bR\x12minStockToMaintain\x88\x01\x01\x12[\n" +
+	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x13consumptionSequence\x12@\n" +
+	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0e\n" +
+	"\f_entity_uuidB\x0f\n" +
+	"\r_user_commentB\x12\n" +
+	"\x10_vault_folder_idB\x0e\n" +
+	"\f_descriptionB\x0f\n" +
+	"\r_hsn_sac_codeB\f\n" +
 	"\n" +
-	"print_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tprintName\x12)\n" +
-	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12)\n" +
-	"\fhsn_sac_code\x18\x10 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"hsnSacCode\x12\x1e\n" +
-	"\x06uom_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12,\n" +
-	"\runit_quantity\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00R\funitQuantity\x12$\n" +
-	"\tledger_id\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00R\bledgerId\x12)\n" +
-	"\ftax_group_id\x18\x17 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"taxGroupId\x12\x1d\n" +
-	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\x12:\n" +
-	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintain\x12O\n" +
-	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12@\n" +
-	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformData\"\xf4\x01\n" +
-	"$FamiliesServiceUpdateIdentityRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
-	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
-	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04code\x124\n" +
-	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12$\n" +
-	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00R\bparentId\x12\x17\n" +
-	"\ais_leaf\x18\x14 \x01(\bR\x06isLeaf\"\xa5\a\n" +
+	"_parent_idB\f\n" +
+	"\n" +
+	"_ledger_idB\b\n" +
+	"\x06_priceB\x18\n" +
+	"\x16_min_stock_to_maintain\"\x90\b\n" +
+	"\x1cFamiliesServiceUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
+	"\fnotify_users\x18\x03 \x01(\bH\x01R\vnotifyUsers\x88\x01\x01\x124\n" +
+	"\x0fvault_folder_id\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\rvaultFolderId\x88\x01\x01\x12 \n" +
+	"\x04name\x18\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x04name\x88\x01\x01\x12+\n" +
+	"\n" +
+	"print_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\tprintName\x88\x01\x01\x12.\n" +
+	"\vdescription\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\vdescription\x88\x01\x01\x12.\n" +
+	"\fhsn_sac_code\x18\x10 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
+	"hsnSacCode\x88\x01\x01\x12#\n" +
+	"\x06uom_id\x18\x11 \x01(\x04B\a\xbaH\x042\x02 \x00H\aR\x05uomId\x88\x01\x01\x121\n" +
+	"\runit_quantity\x18\x12 \x01(\x04B\a\xbaH\x042\x02 \x00H\bR\funitQuantity\x88\x01\x01\x12)\n" +
+	"\tledger_id\x18\x15 \x01(\x04B\a\xbaH\x042\x02(\x00H\tR\bledgerId\x88\x01\x01\x12.\n" +
+	"\ftax_group_id\x18\x17 \x01(\x04B\a\xbaH\x042\x02 \x00H\n" +
+	"R\n" +
+	"taxGroupId\x88\x01\x01\x12\"\n" +
+	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00H\vR\x05price\x88\x01\x01\x12?\n" +
+	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00H\fR\x12minStockToMaintain\x88\x01\x01\x12`\n" +
+	"\x14consumption_sequence\x18\x1c \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\rR\x13consumptionSequence\x88\x01\x01\x12@\n" +
+	"\tform_data\x182 \x03(\v2#.Scailo.FormFieldDatumCreateRequestR\bformDataB\x0f\n" +
+	"\r_user_commentB\x0f\n" +
+	"\r_notify_usersB\x12\n" +
+	"\x10_vault_folder_idB\a\n" +
+	"\x05_nameB\r\n" +
+	"\v_print_nameB\x0e\n" +
+	"\f_descriptionB\x0f\n" +
+	"\r_hsn_sac_codeB\t\n" +
+	"\a_uom_idB\x10\n" +
+	"\x0e_unit_quantityB\f\n" +
+	"\n" +
+	"_ledger_idB\x0f\n" +
+	"\r_tax_group_idB\b\n" +
+	"\x06_priceB\x18\n" +
+	"\x16_min_stock_to_maintainB\x17\n" +
+	"\x15_consumption_sequence\"\xdd\x02\n" +
+	"$FamiliesServiceUpdateIdentityRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
+	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12 \n" +
+	"\x04code\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04code\x88\x01\x01\x12E\n" +
+	"\vfamily_type\x18\x0f \x01(\x0e2\x13.Scailo.FAMILY_TYPEB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\n" +
+	"familyType\x88\x01\x01\x12)\n" +
+	"\tparent_id\x18\x13 \x01(\x04B\a\xbaH\x042\x02(\x00H\x03R\bparentId\x88\x01\x01\x12\x1c\n" +
+	"\ais_leaf\x18\x14 \x01(\bH\x04R\x06isLeaf\x88\x01\x01B\x0f\n" +
+	"\r_user_commentB\a\n" +
+	"\x05_codeB\x0e\n" +
+	"\f_family_typeB\f\n" +
+	"\n" +
+	"_parent_idB\n" +
+	"\n" +
+	"\b_is_leaf\"\xa5\a\n" +
 	"\x06Family\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3838,123 +4884,206 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x0famendment_count\x18( \x01(\x04R\x0eamendmentCount\x123\n" +
 	"\tform_data\x182 \x03(\v2\x16.Scailo.FormFieldDatumR\bformData\"2\n" +
 	"\fFamiliesList\x12\"\n" +
-	"\x04list\x18\x01 \x03(\v2\x0e.Scailo.FamilyR\x04list\"\xb2\x02\n" +
-	"\x1cFamiliesServicePaginationReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12\x1d\n" +
-	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x0e.Scailo.FamilyR\x04list\"\x8b\x03\n" +
+	"\x1cFamiliesServicePaginationReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYR\asortKey\x129\n" +
-	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\"\x91\x01\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x04R\x06status\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\t\n" +
+	"\a_status\"\x91\x01\n" +
 	"!FamiliesServicePaginationResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x04R\x05count\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x04R\x05total\x12(\n" +
-	"\apayload\x18\x04 \x03(\v2\x0e.Scailo.FamilyR\apayload\"\xeb\v\n" +
-	"\x18FamiliesServiceFilterReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"\apayload\x18\x04 \x03(\v2\x0e.Scailo.FamilyR\apayload\"\x86\x11\n" +
+	"\x18FamiliesServiceFilterReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYR\asortKey\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x04R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x05R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x06R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\aR\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\bR\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12D\n" +
-	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x16 \x01(\tR\x04code\x124\n" +
-	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12@\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\tR\x06status\x88\x01\x01\x12D\n" +
+	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\n" +
+	"R\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\vR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\fR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\rR\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\x0eR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x16 \x01(\tH\x0fR\x04code\x88\x01\x01\x129\n" +
+	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPEH\x10R\n" +
+	"familyType\x88\x01\x01\x12@\n" +
+	"\x11multi_family_type\x18\xfa\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x0fmultiFamilyType\x12%\n" +
+	"\fhsn_sac_code\x18\x1a \x01(\tH\x11R\n" +
+	"hsnSacCode\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\x1b \x01(\x04H\x12R\x05uomId\x88\x01\x01\x12(\n" +
+	"\runit_quantity\x18\x1c \x01(\x04H\x13R\funitQuantity\x88\x01\x01\x12 \n" +
+	"\tparent_id\x18\x1d \x01(\x04H\x14R\bparentId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x15R\x06isLeaf\x88\x01\x01\x12 \n" +
+	"\tledger_id\x18\x1f \x01(\x04H\x16R\bledgerId\x88\x01\x01\x12#\n" +
+	"\vqc_group_id\x18  \x01(\x04H\x17R\tqcGroupId\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18! \x01(\x04H\x18R\n" +
+	"taxGroupId\x88\x01\x01\x12T\n" +
+	"\x14consumption_sequence\x18' \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCEH\x19R\x13consumptionSequence\x88\x01\x01\x12/\n" +
+	"\x11parent_storage_id\x182 \x01(\x04H\x1aR\x0fparentStorageId\x88\x01\x01\x12\x1e\n" +
+	"\blabel_id\x18< \x01(\x04H\x1bR\alabelId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x120\n" +
+	"\x11include_form_data\x18\xf5\x03 \x01(\bH\x1cR\x0fincludeFormData\x88\x01\x01B\f\n" +
+	"\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0e\n" +
+	"\f_family_typeB\x0f\n" +
+	"\r_hsn_sac_codeB\t\n" +
+	"\a_uom_idB\x10\n" +
+	"\x0e_unit_quantityB\f\n" +
+	"\n" +
+	"_parent_idB\n" +
+	"\n" +
+	"\b_is_leafB\f\n" +
+	"\n" +
+	"_ledger_idB\x0e\n" +
+	"\f_qc_group_idB\x0f\n" +
+	"\r_tax_group_idB\x17\n" +
+	"\x15_consumption_sequenceB\x14\n" +
+	"\x12_parent_storage_idB\v\n" +
+	"\t_label_idB\x14\n" +
+	"\x12_include_form_data\"\xd7\x0e\n" +
+	"\x17FamiliesServiceCountReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12=\n" +
+	"\x18creation_timestamp_start\x18e \x01(\x04H\x01R\x16creationTimestampStart\x88\x01\x01\x129\n" +
+	"\x16creation_timestamp_end\x18f \x01(\x04H\x02R\x14creationTimestampEnd\x88\x01\x01\x12E\n" +
+	"\x1cmodification_timestamp_start\x18g \x01(\x04H\x03R\x1amodificationTimestampStart\x88\x01\x01\x12A\n" +
+	"\x1amodification_timestamp_end\x18h \x01(\x04H\x04R\x18modificationTimestampEnd\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\b \x01(\tH\x05R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x06R\x06status\x88\x01\x01\x12D\n" +
+	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12/\n" +
+	"\x11approved_on_start\x18\v \x01(\x04H\aR\x0fapprovedOnStart\x88\x01\x01\x12+\n" +
+	"\x0fapproved_on_end\x18\f \x01(\x04H\bR\rapprovedOnEnd\x88\x01\x01\x122\n" +
+	"\x13approved_by_user_id\x18\r \x01(\x04H\tR\x10approvedByUserId\x88\x01\x01\x12-\n" +
+	"\x10approver_role_id\x18\x0e \x01(\x04H\n" +
+	"R\x0eapproverRoleId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x14 \x01(\tH\vR\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x16 \x01(\tH\fR\x04code\x88\x01\x01\x129\n" +
+	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPEH\rR\n" +
+	"familyType\x88\x01\x01\x12@\n" +
+	"\x11multi_family_type\x18\xfa\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x0fmultiFamilyType\x12%\n" +
+	"\fhsn_sac_code\x18\x1a \x01(\tH\x0eR\n" +
+	"hsnSacCode\x88\x01\x01\x12\x1a\n" +
+	"\x06uom_id\x18\x1b \x01(\x04H\x0fR\x05uomId\x88\x01\x01\x12(\n" +
+	"\runit_quantity\x18\x1c \x01(\x04H\x10R\funitQuantity\x88\x01\x01\x12 \n" +
+	"\tparent_id\x18\x1d \x01(\x04H\x11R\bparentId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x12R\x06isLeaf\x88\x01\x01\x12 \n" +
+	"\tledger_id\x18\x1f \x01(\x04H\x13R\bledgerId\x88\x01\x01\x12#\n" +
+	"\vqc_group_id\x18  \x01(\x04H\x14R\tqcGroupId\x88\x01\x01\x12%\n" +
+	"\ftax_group_id\x18! \x01(\x04H\x15R\n" +
+	"taxGroupId\x88\x01\x01\x12T\n" +
+	"\x14consumption_sequence\x18' \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCEH\x16R\x13consumptionSequence\x88\x01\x01\x12/\n" +
+	"\x11parent_storage_id\x182 \x01(\x04H\x17R\x0fparentStorageId\x88\x01\x01\x12\x1e\n" +
+	"\blabel_id\x18< \x01(\x04H\x18R\alabelId\x88\x01\x01\x12A\n" +
+	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformDataB\f\n" +
+	"\n" +
+	"_is_activeB\x1b\n" +
+	"\x19_creation_timestamp_startB\x19\n" +
+	"\x17_creation_timestamp_endB\x1f\n" +
+	"\x1d_modification_timestamp_startB\x1d\n" +
+	"\x1b_modification_timestamp_endB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\x14\n" +
+	"\x12_approved_on_startB\x12\n" +
+	"\x10_approved_on_endB\x16\n" +
+	"\x14_approved_by_user_idB\x13\n" +
+	"\x11_approver_role_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_codeB\x0e\n" +
+	"\f_family_typeB\x0f\n" +
+	"\r_hsn_sac_codeB\t\n" +
+	"\a_uom_idB\x10\n" +
+	"\x0e_unit_quantityB\f\n" +
+	"\n" +
+	"_parent_idB\n" +
+	"\n" +
+	"\b_is_leafB\f\n" +
+	"\n" +
+	"_ledger_idB\x0e\n" +
+	"\f_qc_group_idB\x0f\n" +
+	"\r_tax_group_idB\x17\n" +
+	"\x15_consumption_sequenceB\x14\n" +
+	"\x12_parent_storage_idB\v\n" +
+	"\t_label_id\"\xbe\x06\n" +
+	"\x1bFamiliesServiceSearchAllReq\x125\n" +
+	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERH\x00R\bisActive\x88\x01\x01\x12&\n" +
+	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12$\n" +
+	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x06offset\x88\x01\x01\x126\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERH\x02R\tsortOrder\x88\x01\x01\x127\n" +
+	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYH\x03R\asortKey\x88\x01\x01\x12$\n" +
+	"\ventity_uuid\x18\x06 \x01(\tH\x04R\n" +
+	"entityUuid\x88\x01\x01\x12>\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSH\x05R\x06status\x88\x01\x01\x12D\n" +
+	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12\"\n" +
+	"\n" +
+	"search_key\x18\v \x01(\tH\x06R\tsearchKey\x88\x01\x01\x129\n" +
+	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPEH\aR\n" +
+	"familyType\x88\x01\x01\x12@\n" +
 	"\x11multi_family_type\x18\xfa\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x0fmultiFamilyType\x12 \n" +
-	"\fhsn_sac_code\x18\x1a \x01(\tR\n" +
-	"hsnSacCode\x12\x15\n" +
-	"\x06uom_id\x18\x1b \x01(\x04R\x05uomId\x12#\n" +
-	"\runit_quantity\x18\x1c \x01(\x04R\funitQuantity\x12\x1b\n" +
-	"\tparent_id\x18\x1d \x01(\x04R\bparentId\x12,\n" +
-	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\x12\x1b\n" +
-	"\tledger_id\x18\x1f \x01(\x04R\bledgerId\x12\x1e\n" +
-	"\vqc_group_id\x18  \x01(\x04R\tqcGroupId\x12 \n" +
-	"\ftax_group_id\x18! \x01(\x04R\n" +
-	"taxGroupId\x12O\n" +
-	"\x14consumption_sequence\x18' \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12*\n" +
-	"\x11parent_storage_id\x182 \x01(\x04R\x0fparentStorageId\x12\x19\n" +
-	"\blabel_id\x18< \x01(\x04R\alabelId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\x12+\n" +
-	"\x11include_form_data\x18\xf5\x03 \x01(\bR\x0fincludeFormData\"\x8d\n" +
+	"\tparent_id\x18\x1d \x01(\x04H\bR\bparentId\x88\x01\x01\x121\n" +
+	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERH\tR\x06isLeaf\x88\x01\x01B\f\n" +
 	"\n" +
-	"\x17FamiliesServiceCountReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x128\n" +
-	"\x18creation_timestamp_start\x18e \x01(\x04R\x16creationTimestampStart\x124\n" +
-	"\x16creation_timestamp_end\x18f \x01(\x04R\x14creationTimestampEnd\x12@\n" +
-	"\x1cmodification_timestamp_start\x18g \x01(\x04R\x1amodificationTimestampStart\x12<\n" +
-	"\x1amodification_timestamp_end\x18h \x01(\x04R\x18modificationTimestampEnd\x12\x1f\n" +
-	"\ventity_uuid\x18\b \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12D\n" +
-	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12*\n" +
-	"\x11approved_on_start\x18\v \x01(\x04R\x0fapprovedOnStart\x12&\n" +
-	"\x0fapproved_on_end\x18\f \x01(\x04R\rapprovedOnEnd\x12-\n" +
-	"\x13approved_by_user_id\x18\r \x01(\x04R\x10approvedByUserId\x12(\n" +
-	"\x10approver_role_id\x18\x0e \x01(\x04R\x0eapproverRoleId\x12\x12\n" +
-	"\x04name\x18\x14 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x16 \x01(\tR\x04code\x124\n" +
-	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12@\n" +
-	"\x11multi_family_type\x18\xfa\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x0fmultiFamilyType\x12 \n" +
-	"\fhsn_sac_code\x18\x1a \x01(\tR\n" +
-	"hsnSacCode\x12\x15\n" +
-	"\x06uom_id\x18\x1b \x01(\x04R\x05uomId\x12#\n" +
-	"\runit_quantity\x18\x1c \x01(\x04R\funitQuantity\x12\x1b\n" +
-	"\tparent_id\x18\x1d \x01(\x04R\bparentId\x12,\n" +
-	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\x12\x1b\n" +
-	"\tledger_id\x18\x1f \x01(\x04R\bledgerId\x12\x1e\n" +
-	"\vqc_group_id\x18  \x01(\x04R\tqcGroupId\x12 \n" +
-	"\ftax_group_id\x18! \x01(\x04R\n" +
-	"taxGroupId\x12O\n" +
-	"\x14consumption_sequence\x18' \x01(\x0e2\x1c.Scailo.CONSUMPTION_SEQUENCER\x13consumptionSequence\x12*\n" +
-	"\x11parent_storage_id\x182 \x01(\x04R\x0fparentStorageId\x12\x19\n" +
-	"\blabel_id\x18< \x01(\x04R\alabelId\x12A\n" +
-	"\tform_data\x18\xf4\x03 \x03(\v2#.Scailo.FormFieldDatumFilterRequestR\bformData\"\x83\x05\n" +
-	"\x1bFamiliesServiceSearchAllReq\x120\n" +
-	"\tis_active\x18\x01 \x01(\x0e2\x13.Scailo.BOOL_FILTERR\bisActive\x12&\n" +
-	"\x05count\x18\x02 \x01(\x03B\x10\xbaH\r\"\v(\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01R\x05count\x12\x1f\n" +
-	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\x121\n" +
+	"_is_activeB\t\n" +
+	"\a_offsetB\r\n" +
+	"\v_sort_orderB\v\n" +
+	"\t_sort_keyB\x0e\n" +
+	"\f_entity_uuidB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_search_keyB\x0e\n" +
+	"\f_family_typeB\f\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x0e2\x12.Scailo.SORT_ORDERR\tsortOrder\x122\n" +
-	"\bsort_key\x18\x05 \x01(\x0e2\x17.Scailo.FAMILY_SORT_KEYR\asortKey\x12\x1f\n" +
-	"\ventity_uuid\x18\x06 \x01(\tR\n" +
-	"entityUuid\x129\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\x06status\x12D\n" +
-	"\fmulti_status\x18d \x03(\x0e2!.Scailo.STANDARD_LIFECYCLE_STATUSR\vmultiStatus\x12\x1d\n" +
+	"_parent_idB\n" +
 	"\n" +
-	"search_key\x18\v \x01(\tR\tsearchKey\x124\n" +
-	"\vfamily_type\x18\x19 \x01(\x0e2\x13.Scailo.FAMILY_TYPER\n" +
-	"familyType\x12@\n" +
-	"\x11multi_family_type\x18\xfa\x01 \x03(\x0e2\x13.Scailo.FAMILY_TYPER\x0fmultiFamilyType\x12\x1b\n" +
-	"\tparent_id\x18\x1d \x01(\x04R\bparentId\x12,\n" +
-	"\ais_leaf\x18\x1e \x01(\x0e2\x13.Scailo.BOOL_FILTERR\x06isLeaf\"x\n" +
+	"\b_is_leaf\"x\n" +
 	"\x1eFilterFamiliesReqForIdentifier\x12\x1c\n" +
 	"\x04uuid\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x128\n" +
 	"\x06filter\x18\n" +
-	" \x01(\v2 .Scailo.FamiliesServiceFilterReqR\x06filter\"\x90\x01\n" +
-	"!FamiliesServiceLabelCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	" \x01(\v2 .Scailo.FamiliesServiceFilterReqR\x06filter\"\xa6\x01\n" +
+	"!FamiliesServiceLabelCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12\"\n" +
-	"\blabel_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\alabelId\"\xab\x02\n" +
+	"\blabel_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\alabelIdB\x0f\n" +
+	"\r_user_comment\"\xab\x02\n" +
 	"\vFamilyLabel\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3966,13 +5095,14 @@ const file_families_scailo_proto_rawDesc = "" +
 	" \x01(\x04R\bfamilyId\x12\x19\n" +
 	"\blabel_id\x18\v \x01(\x04R\alabelId\";\n" +
 	"\x10FamilyLabelsList\x12'\n" +
-	"\x04list\x18\x01 \x03(\v2\x13.Scailo.FamilyLabelR\x04list\"\x96\x01\n" +
-	"#FamiliesServiceStorageCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\x04list\x18\x01 \x03(\v2\x13.Scailo.FamilyLabelR\x04list\"\xac\x01\n" +
+	"#FamiliesServiceStorageCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12&\n" +
 	"\n" +
-	"storage_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\tstorageId\"\xb1\x02\n" +
+	"storage_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\tstorageIdB\x0f\n" +
+	"\r_user_comment\"\xb1\x02\n" +
 	"\rFamilyStorage\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -3989,14 +5119,15 @@ const file_families_scailo_proto_rawDesc = "" +
 	",FamiliesServiceUnitConversionPresenceRequest\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12\x1e\n" +
-	"\x06uom_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\"\xd9\x01\n" +
-	"*FamiliesServiceUnitConversionCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\x06uom_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\"\xef\x01\n" +
+	"*FamiliesServiceUnitConversionCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12\x1e\n" +
 	"\x06uom_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\x05uomId\x12\x1f\n" +
 	"\x06factor\x18\f \x01(\x04B\a\xbaH\x042\x02 \x00R\x06factor\x12!\n" +
-	"\adivisor\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\adivisor\"\xe2\x02\n" +
+	"\adivisor\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\adivisorB\x0f\n" +
+	"\r_user_comment\"\xe2\x02\n" +
 	"\x14FamilyUnitConversion\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4010,12 +5141,13 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x06factor\x18\f \x01(\x04R\x06factor\x12\x18\n" +
 	"\adivisor\x18\r \x01(\x04R\adivisor\"M\n" +
 	"\x19FamilyUnitConversionsList\x120\n" +
-	"\x04list\x18\x01 \x03(\v2\x1c.Scailo.FamilyUnitConversionR\x04list\"\x97\x01\n" +
-	"#FamiliesServiceQCGroupCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\x04list\x18\x01 \x03(\v2\x1c.Scailo.FamilyUnitConversionR\x04list\"\xad\x01\n" +
+	"#FamiliesServiceQCGroupCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12'\n" +
-	"\vqc_group_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\tqcGroupId\"\xb2\x02\n" +
+	"\vqc_group_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\tqcGroupIdB\x0f\n" +
+	"\r_user_comment\"\xb2\x02\n" +
 	"\rFamilyQCGroup\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4027,19 +5159,21 @@ const file_families_scailo_proto_rawDesc = "" +
 	" \x01(\x04R\bfamilyId\x12\x1e\n" +
 	"\vqc_group_id\x18\v \x01(\x04R\tqcGroupId\"?\n" +
 	"\x12FamilyQCGroupsList\x12)\n" +
-	"\x04list\x18\x01 \x03(\v2\x15.Scailo.FamilyQCGroupR\x04list\"\xe8\x01\n" +
-	"!FamiliesServiceImageCreateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12$\n" +
+	"\x04list\x18\x01 \x03(\v2\x15.Scailo.FamilyQCGroupR\x04list\"\xfe\x01\n" +
+	"!FamiliesServiceImageCreateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12$\n" +
 	"\tfamily_id\x18\n" +
 	" \x01(\x04B\a\xbaH\x042\x02 \x00R\bfamilyId\x12+\n" +
 	"\rvault_file_id\x18\v \x01(\x04B\a\xbaH\x042\x02 \x00R\vvaultFileId\x12\x1b\n" +
 	"\tis_public\x18\f \x01(\bR\bisPublic\x120\n" +
-	"\x0fsequence_number\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esequenceNumber\"\xae\x01\n" +
-	"!FamiliesServiceImageUpdateRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x17\n" +
+	"\x0fsequence_number\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esequenceNumberB\x0f\n" +
+	"\r_user_comment\"\xc4\x01\n" +
+	"!FamiliesServiceImageUpdateRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x17\n" +
 	"\x02id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
 	"\tis_public\x18\f \x01(\bR\bisPublic\x120\n" +
-	"\x0fsequence_number\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esequenceNumber\"\xfa\x02\n" +
+	"\x0fsequence_number\x18\r \x01(\x04B\a\xbaH\x042\x02 \x00R\x0esequenceNumberB\x0f\n" +
+	"\r_user_comment\"\xfa\x02\n" +
 	"\vFamilyImage\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x124\n" +
@@ -4053,17 +5187,19 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\tis_public\x18\f \x01(\bR\bisPublic\x12'\n" +
 	"\x0fsequence_number\x18\r \x01(\x04R\x0esequenceNumber\";\n" +
 	"\x10FamilyImagesList\x12'\n" +
-	"\x04list\x18\x01 \x03(\v2\x13.Scailo.FamilyImageR\x04list\"\x83\x01\n" +
-	"!FamiliesServiceUpdatePriceRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x04list\x18\x01 \x03(\v2\x13.Scailo.FamilyImageR\x04list\"\x99\x01\n" +
+	"!FamiliesServiceUpdatePriceRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
 	"\x04uuid\x18\n" +
 	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12\x1d\n" +
-	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05price\"\xad\x01\n" +
-	".FamiliesServiceUpdateMinStockToMaintainRequest\x12!\n" +
-	"\fuser_comment\x18\x01 \x01(\tR\vuserComment\x12\x1c\n" +
+	"\x05price\x18\x1a \x01(\x04B\a\xbaH\x042\x02(\x00R\x05priceB\x0f\n" +
+	"\r_user_comment\"\xc3\x01\n" +
+	".FamiliesServiceUpdateMinStockToMaintainRequest\x12&\n" +
+	"\fuser_comment\x18\x01 \x01(\tH\x00R\vuserComment\x88\x01\x01\x12\x1c\n" +
 	"\x04uuid\x18\n" +
 	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x04uuid\x12:\n" +
-	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintain*\xee\x01\n" +
+	"\x15min_stock_to_maintain\x18\x1b \x01(\x04B\a\xbaH\x042\x02(\x00R\x12minStockToMaintainB\x0f\n" +
+	"\r_user_comment*\xee\x01\n" +
 	"\vFAMILY_TYPE\x12\x1f\n" +
 	"\x1bFAMILY_TYPE_ANY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15FAMILY_TYPE_COMPONENT\x10\x01\x12\x19\n" +
@@ -4114,9 +5250,7 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\vUpdatePrice\x12).Scailo.FamiliesServiceUpdatePriceRequest\x1a\x1a.Scailo.IdentifierResponse\x12A\n" +
 	"\fUploadPrices\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsList\x12n\n" +
 	"\x18UpdateMinStockToMaintain\x126.Scailo.FamiliesServiceUpdateMinStockToMaintainRequest\x1a\x1a.Scailo.IdentifierResponse\x12M\n" +
-	"\x18UploadMinStockToMaintain\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsList\x12G\n" +
-	"\rDownloadAsCSV\x12 .Scailo.FamiliesServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
-	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsList\x12U\n" +
+	"\x18UploadMinStockToMaintain\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsList\x12U\n" +
 	"\n" +
 	"AddStorage\x12+.Scailo.FamiliesServiceStorageCreateRequest\x1a\x1a.Scailo.IdentifierResponse\x12O\n" +
 	"\x0eApproveStorage\x12!.Scailo.IdentifierWithUserComment\x1a\x1a.Scailo.IdentifierResponse\x12N\n" +
@@ -4172,7 +5306,9 @@ const file_families_scailo_proto_rawDesc = "" +
 	"\x1cSearchForEquationReplaceable\x12\x17.Scailo.SimpleSearchReq\x1a\x14.Scailo.FamiliesList\"\x03\x88\x02\x01\x12R\n" +
 	"\x1cSearchForEquationSalesBundle\x12\x17.Scailo.SimpleSearchReq\x1a\x14.Scailo.FamiliesList\"\x03\x88\x02\x01\x12G\n" +
 	"\rCountInStatus\x12\x1f.Scailo.CountInSLCStatusRequest\x1a\x15.Scailo.CountResponse\x12?\n" +
-	"\x05Count\x12\x1f.Scailo.FamiliesServiceCountReq\x1a\x15.Scailo.CountResponseBm\n" +
+	"\x05Count\x12\x1f.Scailo.FamiliesServiceCountReq\x1a\x15.Scailo.CountResponse\x12G\n" +
+	"\rDownloadAsCSV\x12 .Scailo.FamiliesServiceFilterReq\x1a\x14.Scailo.StandardFile\x12B\n" +
+	"\rImportFromCSV\x12\x14.Scailo.StandardFile\x1a\x1b.Scailo.IdentifierUUIDsListBm\n" +
 	"\x0ecom.scailo.sdkB\x13FamiliesScailoProtoP\x01Z\n" +
 	"Scailo/sdk\xa2\x02\x03SXX\xaa\x02\n" +
 	"Scailo.Sdk\xca\x02\x06Scailo\xe2\x02\x12Scailo\\GPBMetadata\xea\x02\x06Scailob\x06proto3"
@@ -4332,59 +5468,59 @@ var file_families_scailo_proto_depIdxs = []int32{
 	45,  // 78: Scailo.FamiliesService.UploadPrices:input_type -> Scailo.StandardFile
 	33,  // 79: Scailo.FamiliesService.UpdateMinStockToMaintain:input_type -> Scailo.FamiliesServiceUpdateMinStockToMaintainRequest
 	45,  // 80: Scailo.FamiliesService.UploadMinStockToMaintain:input_type -> Scailo.StandardFile
-	11,  // 81: Scailo.FamiliesService.DownloadAsCSV:input_type -> Scailo.FamiliesServiceFilterReq
-	45,  // 82: Scailo.FamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
-	18,  // 83: Scailo.FamiliesService.AddStorage:input_type -> Scailo.FamiliesServiceStorageCreateRequest
-	46,  // 84: Scailo.FamiliesService.ApproveStorage:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 85: Scailo.FamiliesService.DeleteStorage:input_type -> Scailo.IdentifierWithUserComment
-	47,  // 86: Scailo.FamiliesService.ViewStorageByID:input_type -> Scailo.Identifier
-	47,  // 87: Scailo.FamiliesService.ViewStorages:input_type -> Scailo.Identifier
-	15,  // 88: Scailo.FamiliesService.AddLabel:input_type -> Scailo.FamiliesServiceLabelCreateRequest
-	46,  // 89: Scailo.FamiliesService.ApproveLabel:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 90: Scailo.FamiliesService.DeleteLabel:input_type -> Scailo.IdentifierWithUserComment
-	47,  // 91: Scailo.FamiliesService.ViewLabelByID:input_type -> Scailo.Identifier
-	47,  // 92: Scailo.FamiliesService.ViewLabels:input_type -> Scailo.Identifier
-	48,  // 93: Scailo.FamiliesService.ViewLabelsForFamilyIDs:input_type -> Scailo.IdentifiersList
-	22,  // 94: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
-	46,  // 95: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 96: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
-	47,  // 97: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
-	47,  // 98: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
-	21,  // 99: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
-	25,  // 100: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
-	46,  // 101: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 102: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
-	47,  // 103: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
-	47,  // 104: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
-	28,  // 105: Scailo.FamiliesService.AddImage:input_type -> Scailo.FamiliesServiceImageCreateRequest
-	29,  // 106: Scailo.FamiliesService.UpdateImage:input_type -> Scailo.FamiliesServiceImageUpdateRequest
-	46,  // 107: Scailo.FamiliesService.ApproveImage:input_type -> Scailo.IdentifierWithUserComment
-	46,  // 108: Scailo.FamiliesService.DeleteImage:input_type -> Scailo.IdentifierWithUserComment
-	47,  // 109: Scailo.FamiliesService.ViewImageByID:input_type -> Scailo.Identifier
-	47,  // 110: Scailo.FamiliesService.ViewImages:input_type -> Scailo.Identifier
-	47,  // 111: Scailo.FamiliesService.ViewPublicImages:input_type -> Scailo.Identifier
-	47,  // 112: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
-	49,  // 113: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
-	47,  // 114: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
-	50,  // 115: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
-	49,  // 116: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
-	48,  // 117: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
-	51,  // 118: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
-	49,  // 119: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
-	9,   // 120: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
-	3,   // 121: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
-	47,  // 122: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
-	13,  // 123: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
-	11,  // 124: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
-	50,  // 125: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
-	50,  // 126: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
-	50,  // 127: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
-	50,  // 128: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
-	50,  // 129: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
-	50,  // 130: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
-	50,  // 131: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
-	52,  // 132: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
-	12,  // 133: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
+	18,  // 81: Scailo.FamiliesService.AddStorage:input_type -> Scailo.FamiliesServiceStorageCreateRequest
+	46,  // 82: Scailo.FamiliesService.ApproveStorage:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 83: Scailo.FamiliesService.DeleteStorage:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 84: Scailo.FamiliesService.ViewStorageByID:input_type -> Scailo.Identifier
+	47,  // 85: Scailo.FamiliesService.ViewStorages:input_type -> Scailo.Identifier
+	15,  // 86: Scailo.FamiliesService.AddLabel:input_type -> Scailo.FamiliesServiceLabelCreateRequest
+	46,  // 87: Scailo.FamiliesService.ApproveLabel:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 88: Scailo.FamiliesService.DeleteLabel:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 89: Scailo.FamiliesService.ViewLabelByID:input_type -> Scailo.Identifier
+	47,  // 90: Scailo.FamiliesService.ViewLabels:input_type -> Scailo.Identifier
+	48,  // 91: Scailo.FamiliesService.ViewLabelsForFamilyIDs:input_type -> Scailo.IdentifiersList
+	22,  // 92: Scailo.FamiliesService.AddUnitConversion:input_type -> Scailo.FamiliesServiceUnitConversionCreateRequest
+	46,  // 93: Scailo.FamiliesService.ApproveUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 94: Scailo.FamiliesService.DeleteUnitConversion:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 95: Scailo.FamiliesService.ViewUnitConversionByID:input_type -> Scailo.Identifier
+	47,  // 96: Scailo.FamiliesService.ViewUnitConversions:input_type -> Scailo.Identifier
+	21,  // 97: Scailo.FamiliesService.ViewUnitConversionFor:input_type -> Scailo.FamiliesServiceUnitConversionPresenceRequest
+	25,  // 98: Scailo.FamiliesService.AddQCGroup:input_type -> Scailo.FamiliesServiceQCGroupCreateRequest
+	46,  // 99: Scailo.FamiliesService.ApproveQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 100: Scailo.FamiliesService.DeleteQCGroup:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 101: Scailo.FamiliesService.ViewQCGroupByID:input_type -> Scailo.Identifier
+	47,  // 102: Scailo.FamiliesService.ViewQCGroups:input_type -> Scailo.Identifier
+	28,  // 103: Scailo.FamiliesService.AddImage:input_type -> Scailo.FamiliesServiceImageCreateRequest
+	29,  // 104: Scailo.FamiliesService.UpdateImage:input_type -> Scailo.FamiliesServiceImageUpdateRequest
+	46,  // 105: Scailo.FamiliesService.ApproveImage:input_type -> Scailo.IdentifierWithUserComment
+	46,  // 106: Scailo.FamiliesService.DeleteImage:input_type -> Scailo.IdentifierWithUserComment
+	47,  // 107: Scailo.FamiliesService.ViewImageByID:input_type -> Scailo.Identifier
+	47,  // 108: Scailo.FamiliesService.ViewImages:input_type -> Scailo.Identifier
+	47,  // 109: Scailo.FamiliesService.ViewPublicImages:input_type -> Scailo.Identifier
+	47,  // 110: Scailo.FamiliesService.ViewByID:input_type -> Scailo.Identifier
+	49,  // 111: Scailo.FamiliesService.ViewByUUID:input_type -> Scailo.IdentifierUUID
+	47,  // 112: Scailo.FamiliesService.ViewEssentialByID:input_type -> Scailo.Identifier
+	50,  // 113: Scailo.FamiliesService.ViewEssentialByCode:input_type -> Scailo.SimpleSearchReq
+	49,  // 114: Scailo.FamiliesService.ViewEssentialByUUID:input_type -> Scailo.IdentifierUUID
+	48,  // 115: Scailo.FamiliesService.ViewFromIDs:input_type -> Scailo.IdentifiersList
+	51,  // 116: Scailo.FamiliesService.ViewAll:input_type -> Scailo.ActiveStatus
+	49,  // 117: Scailo.FamiliesService.ViewAllForEntityUUID:input_type -> Scailo.IdentifierUUID
+	9,   // 118: Scailo.FamiliesService.ViewWithPagination:input_type -> Scailo.FamiliesServicePaginationReq
+	3,   // 119: Scailo.FamiliesService.ViewAllRequirable:input_type -> Scailo.FamilyTypesList
+	47,  // 120: Scailo.FamiliesService.ViewAmendments:input_type -> Scailo.Identifier
+	13,  // 121: Scailo.FamiliesService.SearchAll:input_type -> Scailo.FamiliesServiceSearchAllReq
+	11,  // 122: Scailo.FamiliesService.Filter:input_type -> Scailo.FamiliesServiceFilterReq
+	50,  // 123: Scailo.FamiliesService.SearchForPurchase:input_type -> Scailo.SimpleSearchReq
+	50,  // 124: Scailo.FamiliesService.SearchForSale:input_type -> Scailo.SimpleSearchReq
+	50,  // 125: Scailo.FamiliesService.SearchForProduction:input_type -> Scailo.SimpleSearchReq
+	50,  // 126: Scailo.FamiliesService.SearchForReplaceables:input_type -> Scailo.SimpleSearchReq
+	50,  // 127: Scailo.FamiliesService.SearchForEquationFamily:input_type -> Scailo.SimpleSearchReq
+	50,  // 128: Scailo.FamiliesService.SearchForEquationReplaceable:input_type -> Scailo.SimpleSearchReq
+	50,  // 129: Scailo.FamiliesService.SearchForEquationSalesBundle:input_type -> Scailo.SimpleSearchReq
+	52,  // 130: Scailo.FamiliesService.CountInStatus:input_type -> Scailo.CountInSLCStatusRequest
+	12,  // 131: Scailo.FamiliesService.Count:input_type -> Scailo.FamiliesServiceCountReq
+	11,  // 132: Scailo.FamiliesService.DownloadAsCSV:input_type -> Scailo.FamiliesServiceFilterReq
+	45,  // 133: Scailo.FamiliesService.ImportFromCSV:input_type -> Scailo.StandardFile
 	53,  // 134: Scailo.FamiliesService.Create:output_type -> Scailo.IdentifierResponse
 	53,  // 135: Scailo.FamiliesService.Draft:output_type -> Scailo.IdentifierResponse
 	53,  // 136: Scailo.FamiliesService.DraftUpdate:output_type -> Scailo.IdentifierResponse
@@ -4404,59 +5540,59 @@ var file_families_scailo_proto_depIdxs = []int32{
 	54,  // 150: Scailo.FamiliesService.UploadPrices:output_type -> Scailo.IdentifierUUIDsList
 	53,  // 151: Scailo.FamiliesService.UpdateMinStockToMaintain:output_type -> Scailo.IdentifierResponse
 	54,  // 152: Scailo.FamiliesService.UploadMinStockToMaintain:output_type -> Scailo.IdentifierUUIDsList
-	45,  // 153: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
-	54,  // 154: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
-	53,  // 155: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
-	53,  // 156: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
-	53,  // 157: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
-	19,  // 158: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
-	20,  // 159: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
-	53,  // 160: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
-	53,  // 161: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
-	53,  // 162: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
-	16,  // 163: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
-	17,  // 164: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
-	17,  // 165: Scailo.FamiliesService.ViewLabelsForFamilyIDs:output_type -> Scailo.FamilyLabelsList
-	53,  // 166: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
-	53,  // 167: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
-	53,  // 168: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
-	23,  // 169: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
-	24,  // 170: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
-	23,  // 171: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
-	53,  // 172: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
-	53,  // 173: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
-	53,  // 174: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
-	26,  // 175: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
-	27,  // 176: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
-	53,  // 177: Scailo.FamiliesService.AddImage:output_type -> Scailo.IdentifierResponse
-	53,  // 178: Scailo.FamiliesService.UpdateImage:output_type -> Scailo.IdentifierResponse
-	53,  // 179: Scailo.FamiliesService.ApproveImage:output_type -> Scailo.IdentifierResponse
-	53,  // 180: Scailo.FamiliesService.DeleteImage:output_type -> Scailo.IdentifierResponse
-	30,  // 181: Scailo.FamiliesService.ViewImageByID:output_type -> Scailo.FamilyImage
-	31,  // 182: Scailo.FamiliesService.ViewImages:output_type -> Scailo.FamilyImagesList
-	31,  // 183: Scailo.FamiliesService.ViewPublicImages:output_type -> Scailo.FamilyImagesList
-	7,   // 184: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
-	7,   // 185: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
-	7,   // 186: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
-	7,   // 187: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
-	7,   // 188: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
-	8,   // 189: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
-	8,   // 190: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
-	8,   // 191: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
-	10,  // 192: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
-	8,   // 193: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
-	55,  // 194: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
-	8,   // 195: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
-	8,   // 196: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
-	8,   // 197: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
-	8,   // 198: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
-	8,   // 199: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
-	8,   // 200: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
-	8,   // 201: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
-	8,   // 202: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
-	8,   // 203: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
-	56,  // 204: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
-	56,  // 205: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
+	53,  // 153: Scailo.FamiliesService.AddStorage:output_type -> Scailo.IdentifierResponse
+	53,  // 154: Scailo.FamiliesService.ApproveStorage:output_type -> Scailo.IdentifierResponse
+	53,  // 155: Scailo.FamiliesService.DeleteStorage:output_type -> Scailo.IdentifierResponse
+	19,  // 156: Scailo.FamiliesService.ViewStorageByID:output_type -> Scailo.FamilyStorage
+	20,  // 157: Scailo.FamiliesService.ViewStorages:output_type -> Scailo.FamilyStoragesList
+	53,  // 158: Scailo.FamiliesService.AddLabel:output_type -> Scailo.IdentifierResponse
+	53,  // 159: Scailo.FamiliesService.ApproveLabel:output_type -> Scailo.IdentifierResponse
+	53,  // 160: Scailo.FamiliesService.DeleteLabel:output_type -> Scailo.IdentifierResponse
+	16,  // 161: Scailo.FamiliesService.ViewLabelByID:output_type -> Scailo.FamilyLabel
+	17,  // 162: Scailo.FamiliesService.ViewLabels:output_type -> Scailo.FamilyLabelsList
+	17,  // 163: Scailo.FamiliesService.ViewLabelsForFamilyIDs:output_type -> Scailo.FamilyLabelsList
+	53,  // 164: Scailo.FamiliesService.AddUnitConversion:output_type -> Scailo.IdentifierResponse
+	53,  // 165: Scailo.FamiliesService.ApproveUnitConversion:output_type -> Scailo.IdentifierResponse
+	53,  // 166: Scailo.FamiliesService.DeleteUnitConversion:output_type -> Scailo.IdentifierResponse
+	23,  // 167: Scailo.FamiliesService.ViewUnitConversionByID:output_type -> Scailo.FamilyUnitConversion
+	24,  // 168: Scailo.FamiliesService.ViewUnitConversions:output_type -> Scailo.FamilyUnitConversionsList
+	23,  // 169: Scailo.FamiliesService.ViewUnitConversionFor:output_type -> Scailo.FamilyUnitConversion
+	53,  // 170: Scailo.FamiliesService.AddQCGroup:output_type -> Scailo.IdentifierResponse
+	53,  // 171: Scailo.FamiliesService.ApproveQCGroup:output_type -> Scailo.IdentifierResponse
+	53,  // 172: Scailo.FamiliesService.DeleteQCGroup:output_type -> Scailo.IdentifierResponse
+	26,  // 173: Scailo.FamiliesService.ViewQCGroupByID:output_type -> Scailo.FamilyQCGroup
+	27,  // 174: Scailo.FamiliesService.ViewQCGroups:output_type -> Scailo.FamilyQCGroupsList
+	53,  // 175: Scailo.FamiliesService.AddImage:output_type -> Scailo.IdentifierResponse
+	53,  // 176: Scailo.FamiliesService.UpdateImage:output_type -> Scailo.IdentifierResponse
+	53,  // 177: Scailo.FamiliesService.ApproveImage:output_type -> Scailo.IdentifierResponse
+	53,  // 178: Scailo.FamiliesService.DeleteImage:output_type -> Scailo.IdentifierResponse
+	30,  // 179: Scailo.FamiliesService.ViewImageByID:output_type -> Scailo.FamilyImage
+	31,  // 180: Scailo.FamiliesService.ViewImages:output_type -> Scailo.FamilyImagesList
+	31,  // 181: Scailo.FamiliesService.ViewPublicImages:output_type -> Scailo.FamilyImagesList
+	7,   // 182: Scailo.FamiliesService.ViewByID:output_type -> Scailo.Family
+	7,   // 183: Scailo.FamiliesService.ViewByUUID:output_type -> Scailo.Family
+	7,   // 184: Scailo.FamiliesService.ViewEssentialByID:output_type -> Scailo.Family
+	7,   // 185: Scailo.FamiliesService.ViewEssentialByCode:output_type -> Scailo.Family
+	7,   // 186: Scailo.FamiliesService.ViewEssentialByUUID:output_type -> Scailo.Family
+	8,   // 187: Scailo.FamiliesService.ViewFromIDs:output_type -> Scailo.FamiliesList
+	8,   // 188: Scailo.FamiliesService.ViewAll:output_type -> Scailo.FamiliesList
+	8,   // 189: Scailo.FamiliesService.ViewAllForEntityUUID:output_type -> Scailo.FamiliesList
+	10,  // 190: Scailo.FamiliesService.ViewWithPagination:output_type -> Scailo.FamiliesServicePaginationResponse
+	8,   // 191: Scailo.FamiliesService.ViewAllRequirable:output_type -> Scailo.FamiliesList
+	55,  // 192: Scailo.FamiliesService.ViewAmendments:output_type -> Scailo.AmendmentLogsList
+	8,   // 193: Scailo.FamiliesService.SearchAll:output_type -> Scailo.FamiliesList
+	8,   // 194: Scailo.FamiliesService.Filter:output_type -> Scailo.FamiliesList
+	8,   // 195: Scailo.FamiliesService.SearchForPurchase:output_type -> Scailo.FamiliesList
+	8,   // 196: Scailo.FamiliesService.SearchForSale:output_type -> Scailo.FamiliesList
+	8,   // 197: Scailo.FamiliesService.SearchForProduction:output_type -> Scailo.FamiliesList
+	8,   // 198: Scailo.FamiliesService.SearchForReplaceables:output_type -> Scailo.FamiliesList
+	8,   // 199: Scailo.FamiliesService.SearchForEquationFamily:output_type -> Scailo.FamiliesList
+	8,   // 200: Scailo.FamiliesService.SearchForEquationReplaceable:output_type -> Scailo.FamiliesList
+	8,   // 201: Scailo.FamiliesService.SearchForEquationSalesBundle:output_type -> Scailo.FamiliesList
+	56,  // 202: Scailo.FamiliesService.CountInStatus:output_type -> Scailo.CountResponse
+	56,  // 203: Scailo.FamiliesService.Count:output_type -> Scailo.CountResponse
+	45,  // 204: Scailo.FamiliesService.DownloadAsCSV:output_type -> Scailo.StandardFile
+	54,  // 205: Scailo.FamiliesService.ImportFromCSV:output_type -> Scailo.IdentifierUUIDsList
 	134, // [134:206] is the sub-list for method output_type
 	62,  // [62:134] is the sub-list for method input_type
 	62,  // [62:62] is the sub-list for extension type_name
@@ -4472,6 +5608,21 @@ func file_families_scailo_proto_init() {
 	file_base_scailo_proto_init()
 	file_forms_fields_data_scailo_proto_init()
 	file_vault_folders_scailo_proto_init()
+	file_families_scailo_proto_msgTypes[1].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[2].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[3].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[6].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[8].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[9].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[10].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[12].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[15].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[19].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[22].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[25].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[26].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[29].OneofWrappers = []any{}
+	file_families_scailo_proto_msgTypes[30].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
